@@ -1,8 +1,6 @@
 'use strict';
 /* Application Configration */
 
-var Config = angular.module('Config', []);
-
-Config.constant('API', {
+var Config = {
   path:'http://localhost:5000'
-});
+};
