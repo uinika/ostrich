@@ -1,0 +1,39 @@
+{
+  "name": "autumn",
+  "version": "1.0.0",
+  "description": "A Template Project for Traditional Front-end.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uinika/autumn.git"
+  },
+  "author": "Hank",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/uinika/autumn/issues"
+  },
+  "homepage": "https://github.com/uinika/autumn#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "body-parser": "^1.15.0",
+    "del": "^2.2.0",
+    "express": "^4.13.4",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-connect": "^2.3.1",
+    "gulp-csso": "^1.1.0",
+    "gulp-express": "^0.3.5",
+    "gulp-less": "^3.0.5",
+    "gulp-livereload": "^3.8.1",
+    "gulp-nodemon": "^2.0.6",
+    "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.5.3",
+    "load-json-file": "^1.1.0",
+    "mongodb": "^2.1.7",
+    "q": "^1.4.1"
+  }
+}
