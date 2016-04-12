@@ -38,7 +38,7 @@ gulp.task('livereload', ['less'], function() {
 });
 // Watch Client
 gulp.task('watch', function() {
-  gulp.watch(['./client/scripts/**/*.*', './client/styles/**/*.*', './client/partials/**/*.html', './client/*.html'], ['livereload']);
+  gulp.watch(['./client/scripts/**/*.*', './client/styles/**/*.*', './client/views/**/*.html', './client/*.html'], ['livereload']);
 })
 
 
@@ -85,12 +85,12 @@ gulp.task('styles', function() {
 gulp.task('htmls', function(){
   gulp.src(['./client/**/*.html'])
     .pipe(gulp.dest('./build'));
-  gulp.src(['./client/partials/*'])
-    .pipe(gulp.dest('./build/partials'));
+  gulp.src(['./client/views/*'])
+    .pipe(gulp.dest('./build/views'));
 })
 
 
 /**------------------ gulp clean ------------------*/
 gulp.task('clean', function() {
-  del(['./build/partials','./build/scripts','./build/styles', './build/*.html']);
+  del(['./build/views','./build/scripts','./build/styles', './build/*.html']);
 });
