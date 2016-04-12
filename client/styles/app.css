@@ -5,6 +5,13 @@ body {
   height: 100%;
   width: 100%;
 }
+#login {
+  background: #DADADA;
+  position: relative;
+  top: 20%;
+  font-size: 14px;
+  line-height: 1.4285em;
+}
 #login .grid {
   height: 100%;
 }
