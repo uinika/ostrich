@@ -27,7 +27,3 @@ App.all('*', function(req, res, next) {
 });
 App.listen(5000);
 console.info('http-server[express] listening on 5000');
-
-/** login user */
-var login_user = require('./api/login-user');
-App.use('/api', login_user);
