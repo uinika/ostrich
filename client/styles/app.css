@@ -5,6 +5,14 @@ body {
   height: 100%;
   width: 100%;
 }
+/* Define UI View */
+#ui-view-login {
+  height: 100%;
+  width: 100%;
+}
+#ui-view-main {
+  margin: 6px 8px;
+}
 #login {
   background: #DADADA;
   position: relative;
