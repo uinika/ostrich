@@ -5,3 +5,12 @@ body {
   height: 100%;
   width: 100%;
 }
+#login .grid {
+  height: 100%;
+}
+#login .image {
+  margin-top: -100px;
+}
+#login .column {
+  max-width: 450px;
+}
