@@ -14,18 +14,115 @@ body {
   margin: 6px 8px;
 }
 #login {
-  background: #DADADA;
-  position: relative;
-  top: 20%;
-  font-size: 14px;
-  line-height: 1.4285em;
-}
-#login .grid {
+  position: absolute;
+  top: 0;
+  padding: 0;
+  margin: 0;
   height: 100%;
+  width: 100%;
 }
-#login .image {
-  margin-top: -100px;
+#login .login-cover {
+  background: url('images/main/login_bg2.jpg');
+  background-size: 100% 100%;
+  height: 100%;
+  opacity: 0.37;
+  filter: alpha(opacity=57);
+  z-index: -1;
+  position: absolute;
+  width: 100%;
 }
-#login .column {
-  max-width: 450px;
+#login .login-box {
+  width: 380px;
+  margin: 0 auto;
+  padding-top: 7%;
+}
+#login .login-box .login-content {
+  background: rgba(255, 255, 255, 0.6);
+  padding: 30px 10px;
+}
+#login .login-box .login-content .login-logo {
+  font-size: 24px;
+  text-align: center;
+  font-weight: 300;
+  color: #333;
+  padding: 10px 0;
+}
+#login .login-box .login-content .login-body {
+  overflow: hidden;
+  padding: 20px;
+  border-top: 0;
+  color: #333;
+}
+#login .login-box .login-content .login-body .login-title {
+  margin: 0;
+  text-align: center;
+  padding: 0 20px 20px;
+}
+#login .login-box .login-content .login-body .has-icon {
+  position: relative;
+}
+#login .login-box .login-content .login-body .has-icon i.fa {
+  position: absolute;
+  right: 2px;
+  top: 0;
+  padding: 10px;
+  width: 35px;
+  height: 35px;
+}
+#main .panel-row-one {
+  height: 290px;
+  overflow: hidden;
+}
+#main .panel-heading {
+  overflow: hidden;
+}
+#main .depart-logos {
+  padding: 24px 20px;
+}
+#department-main .panel-heading {
+  overflow: hidden;
+}
+#department-main .panel-footer {
+  font-size: 12px;
+}
+#department-main .panel-green {
+  border-color: #5cb85c;
+}
+#department-main .panel-green .panel-heading {
+  border-color: #5cb85c;
+  color: #fff;
+  background-color: #5cb85c;
+}
+#department-main .panel-green .panel-footer {
+  color: #5cb85c;
+}
+#department-main .panel-yellow {
+  border-color: #f0ad4e;
+}
+#department-main .panel-yellow .panel-heading {
+  border-color: #f0ad4e;
+  color: #fff;
+  background-color: #f0ad4e;
+}
+#department-main .panel-yellow .panel-footer {
+  color: #f0ad4e;
+}
+#department-main .panel-red {
+  border-color: #d9534f;
+}
+#department-main .panel-red .panel-heading {
+  border-color: #d9534f;
+  color: #fff;
+  background-color: #d9534f;
+}
+#department-main .panel-red .panel-footer {
+  color: #d9534f;
+  height: 38px;
+}
+#department-main .sidebar {
+  position: absolute;
+  width: 250px;
+}
+#department-main .department-main {
+  margin-left: 250px;
 }
