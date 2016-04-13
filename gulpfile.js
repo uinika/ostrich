@@ -27,7 +27,7 @@ gulp.task('less', function() {
 gulp.task('connect', function() {
   connect.server({
     root: './client/',
-    port: 8000,
+    port: 8001,
     livereload: true
   });
 });
