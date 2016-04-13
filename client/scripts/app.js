@@ -23,6 +23,13 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         url: '/main',
         templateUrl: 'views/main.html'
       })
-
+      .state('main.dashboard', {
+        url: '/dashboard',
+        templateUrl: 'views/dashboard.html'
+      })
+      .state('main.inventory', {
+        url: '/inventory',
+        templateUrl: 'views/inventory/main.html'
+      })
   }
 ]);

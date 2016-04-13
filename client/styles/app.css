@@ -1,7 +1,7 @@
 @charset "utf-8";
 /* Reset Global */
-html,
-body {
+body,
+html {
   height: 100%;
   width: 100%;
 }
@@ -12,6 +12,29 @@ body {
 }
 #ui-view-main {
   margin: 6px 8px;
+}
+/* Xulan */
+.margin-bottom25 {
+  margin-bottom: 25px;
+}
+.font-40 {
+  font-size: 40px;
+}
+.sidebar {
+  position: absolute;
+  width: 180px;
+}
+.font-50 {
+  font-size: 50px;
+}
+.font-18 {
+  font-size: 18px;
+}
+.font-13 {
+  font-size: 13px;
+}
+.margin-top14 {
+  margin-top: 14px;
 }
 #login {
   position: absolute;
@@ -124,4 +147,67 @@ body {
 }
 #department-main .department-main {
   margin-left: 250px;
+}
+#inventory-main .indicator-main {
+  margin-left: 180px;
+  padding: 0 0 0 25px;
+}
+#inventory-main .indicator-main .indicator-order {
+  overflow: hidden;
+  border-bottom: 1px solid #777;
+}
+#inventory-main .indicator-main .indicator-filter {
+  margin: 5px 10px 0;
+  border-bottom: 1px solid #CCC;
+  font-size: 13px;
+}
+#inventory-main .indicator-main .indicator-filter .filter-title {
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 10px;
+}
+#inventory-main .indicator-main .indicator-filter .filter-list {
+  display: inline-block;
+}
+#inventory-main .indicator-main .indicator-list .list-box {
+  padding: 15px 0 0;
+  list-style: none;
+}
+#inventory-main .indicator-main .indicator-list .list-box .item-heading {
+  overflow: hidden;
+  padding: 5px 25px 5px 10px;
+  font-size: 12px;
+  color: #777;
+}
+#inventory-main .indicator-main .indicator-list .list-box .item-icon {
+  padding: 8px 20px;
+}
+#inventory-main .indicator-main .indicator-list .list-box .media-body {
+  position: relative;
+}
+#inventory-main .indicator-main .indicator-list .list-box .media-body .main-heading {
+  line-height: 28px;
+}
+#inventory-main .indicator-main .indicator-list .list-box .media-body .item-label {
+  position: absolute;
+  right: 15px;
+  top: 5px;
+}
+#inventory-main .indicator-main .indicator-list .list-box .media-body .item-label label {
+  display: inline-block;
+  width: 80px;
+  height: 24px;
+  border: 1px solid;
+  text-align: center;
+  font-size: 13px;
+  line-height: 24px;
+  font-weight: normal;
+}
+#inventory-main .indicator-main .indicator-list .list-box .media-body .item-label .border-primary {
+  border-color: #337ab7;
+  color: #337ab7;
+}
+#inventory-main .indicator-main .indicator-list .list-box .media-body .item-label .border-info {
+  border-color: #5cb85c;
+  color: #5cb85c;
 }
