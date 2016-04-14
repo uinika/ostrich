@@ -1,165 +1,90 @@
-<!-- BEGIN MAIN -->
-<section>
-  <div class='container'>
-    <div class='row'>
-      <div class='col-sm-6'>
-        <div class='panel panel-default panel-row-one'>
-          <div class='panel-body '>
-            <div class='input-group input-group-sm'>
-              <span class='input-group-addon' id='sizing-addon3'>
-                <span class='glyphicon glyphicon-search'></span>
-              </span>
-              <input type='text' class='form-control' placeholder='快捷检索...'>
-            </div>
-            <div class='row depart-logos'>
-              <div class='col-xs-6 col-md-3'>
-                <a href='#' class='thumbnail'>
-                  <img src='#' alt='#'>
-                </a>
-              </div>
-              <div class='col-xs-6 col-md-3'>
-                <a href='#' class='thumbnail'>
-                  <img src='#' alt='#'>
-                </a>
-              </div>
-              <div class='col-xs-6 col-md-3'>
-                <a href='#' class='thumbnail'>
-                  <img src='#' alt='#'>
-                </a>
-              </div>
-              <div class='col-xs-6 col-md-3'>
-                <a href='#' class='thumbnail'>
-                  <img src='#' alt='#'>
-                </a>
-              </div>
-              <div class='col-xs-6 col-md-3'>
-                <a href='#' class='thumbnail'>
-                  <img src='#' alt='#'>
-                </a>
-              </div>
-              <div class='col-xs-6 col-md-3'>
-                <a href='#' class='thumbnail'>
-                  <img src='#' alt='#'>
-                </a>
-              </div>
-              <div class='col-xs-6 col-md-3'>
-                <a href='#' class='thumbnail'>
-                  <img src='#' alt='#'>
-                </a>
-              </div>
-              <div class='col-xs-6 col-md-3'>
-                <a href='#' class='thumbnail'>
-                  <img src='#' alt='#'>
-                </a>
-              </div>
-              <div class='col-xs-6 col-md-3'>
-                <a href='#' class='thumbnail'>
-                  <img src='#' alt='#'>
-                </a>
-              </div>
-              <div class='col-xs-6 col-md-3'>
-                <a href='#' class='thumbnail'>
-                  <img src='#' alt='#'>
-                </a>
-              </div>
-              <div class='col-xs-6 col-md-3'>
-                <a href='#' class='thumbnail'>
-                  <img src='#' alt='#'>
-                </a>
-              </div>
-              <div class='col-xs-6 col-md-3'>
-                <a href='#' class='thumbnail'>
-                  <img src='#' alt='#'>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class='col-sm-6'>
-        <div class='panel panel-default panel-row-one'>
-          <div class='panel-body'>
-            清单总览，需求总览
+<div id='dashboard' class='container'>
+  <section class='row'>
+    <div class='left col-md-6'>
+      <div class="panel panel-default">
+        <div class="panel-heading"><i class="fa fa-home"> 部门列表</i></div>
+        <div class="panel-body">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <span class="glyphicon glyphicon-search"></span>
+
+            </span>
+            <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+            <span class="input-group-addon">快速检索</span>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
-
-<section>
-  <div class='container'>
-    <div class='row'>
-      <div class='col-sm-6'>
-        <div class='panel panel-default'>
-          <div class='panel-heading'>
-            <div class='pull-left'>最新资源</div>
-            <div class='pull-right'>更多#</div>
-          </div>
-
-          <!-- Table -->
-          <table class='table table-hover table-striped'>
-            <thead>
-              <tr>
-                <th>发布日期</th>
-                <th>清单名称</th>
-                <th>提供单位</th>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- <tr ng-repeat='ResourceCatalog in ResourceCatalogs'>
-              <td>{{ResourceCatalog.categoryName}}</td>
-              <td>{{ResourceCatalog.catalogName}}</td>
-              <td>{{ResourceCatalog.catalogCode}}</td>
-            </tr> -->
-            </tbody>
-          </table>
+    <div class='right col-md-6'>
+      <div class="panel panel-default">
+        <div class="panel-heading"><i class="fa fa-inbox"> 资源总览</i></div>
+        <div class="panel-body">
+          Panel content
         </div>
-
       </div>
-      <div class='col-sm-6'>
-        <div class='panel panel-default'>
-          <div class='panel-heading'>
-            <div class='pull-left'>最新需求</div>
-            <div class='pull-right'>更多#</div>
-          </div>
-          <!-- Table -->
-          <table class='table'>
-            <table class='table table-hover table-striped'>
-              <thead>
-                <tr>
-                  <th>发布日期</th>
-                  <th>需求内容</th>
-                  <th>需求单位</th>
-                </tr>
-              </thead>
-              <tbody>
-                <!-- <tr ng-repeat='ResourceCatalog in ResourceCatalogs'>
-                <td>{{ResourceCatalog.categoryName}}</td>
-                <td>{{ResourceCatalog.catalogName}}</td>
-                <td>{{ResourceCatalog.catalogCode}}</td>
-              </tr> -->
-              </tbody>
-            </table>
-          </div>
+    </div>
+  </section>
+  <section class='row'>
+    <div class='left col-md-6'>
+      <div class="panel panel-default">
+        <div class="panel-heading"><i class="fa fa-cart-arrow-down"> 最新资源</i></div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>发布日期</th>
+              <th>清单名称</th>
+              <th>提供单位</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2016-04-15</td>
+              <td>科技项目交换指标</td>
+              <td>省地税局</td>
+            </tr>
+            <tr>
+              <td>2013-11-29</td>
+              <td>科技成果交换指标</td>
+              <td>省科技厅</td>
+            </tr>
+          </tbody>
         </table>
       </div>
     </div>
-  </div>
-</section>
-
-<section>
-  <div class='container'>
-    <div class='row '>
-      <div class='col-sm-12'>
-        <div class=' panel panel-default'>
-          <div class='panel-body'>
-            部门共享统计清单(单位：个)
-          </div>
-        </div>
+    <div class='right col-md-6'>
+      <div class="panel panel-default">
+        <div class="panel-heading"><i class="fa fa-pencil-square-o"> 最新需求</i></div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>发布日期</th>
+              <th>需求内容</th>
+              <th>需求单位</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2016-04-15</td>
+              <td>科技项目交换指标</td>
+              <td>省地税局</td>
+            </tr>
+            <tr>
+              <td>2013-11-29</td>
+              <td>科技成果交换指标</td>
+              <td>省科技厅</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+  <section class='row'>
+    <div class="panel panel-default">
+      <div class="panel-heading"><i class="fa fa-bar-chart"> 部门共享清单统计</i></div>
+      <div class="panel-body">
+        Panel content
+      </div>
+    </div>
+  </section>
+
 </div>
-<!-- END MAIN -->

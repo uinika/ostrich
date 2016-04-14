@@ -90,6 +90,14 @@ html {
 #main .depart-logos {
   padding: 24px 20px;
 }
+#dashboard .left {
+  padding-left: 0;
+  padding-right: 8px;
+}
+#dashboard .right {
+  padding-right: 0;
+  padding-left: 8px;
+}
 #department-main .sidebar {
   position: absolute;
   width: 140px;
