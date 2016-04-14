@@ -1,25 +1,29 @@
-<div id='login'>
-  <div class='login-cover'></div>
-  <div class='login-box'>
-    <div class='login-content'>
-      <div class='login-logo'>
-        四川省数据注册发布平台
+<div id='login' class="container-fluid">
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="login-main col-md-4">
+      <div class='login-head'>
+        <div class='logo'></div>
+        <h4 class='title'>四川省数据注册发布平台</h4>
       </div>
       <div class='login-body'>
         <form>
-          <div class='form-group has-icon margin-bottom25'>
-            <input type='text' class='form-control' placeholder='请输入用户名'/>
-            <i class='fa fa-user'></i>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <span class="glyphicon glyphicon-user"></span>
+            </span>
+            <input type="text" class="form-control" placeholder="用户名">
           </div>
-          <div class='form-group has-icon margin-bottom25'>
-            <input type='text' class='form-control' placeholder='请输入密码'/>
-            <i class='fa fa-key'></i>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <span class="glyphicon glyphicon-info-sign"></span>
+            </span>
+            <input type="password" class="form-control" placeholder="密码">
           </div>
-          <div margin-bottom25>
-            <button ng-click='login.submit()' class='btn btn-success col-xs-12'>登&nbsp;&nbsp;录</button>
-          </div>
+          <button ng-click='login.submit()' class='btn btn-info'>登录</button>
         </form>
       </div>
     </div>
+    <div class="col-md-4"></div>
   </div>
 </div>

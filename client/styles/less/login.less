@@ -1,55 +1,45 @@
 #login {
   position: absolute;
-  top: 0;
-  padding: 0;
-  margin: 0;
-  height: 100%;
   width: 100%;
-  .login-cover {
-    background-size: 100% 100%;
-    height: 100%;
-    opacity: 0.37;
-    filter:alpha(opacity=57);
-    z-index: -1;
-    position: absolute;
-    width: 100%;
-  }
-  .login-box {
-    width: 380px;
-    margin: 0 auto;
-    padding-top: 7%;
-    .login-content {
-      background: rgba(255,255,255,.6);
-      padding: 30px 10px;
-      .login-logo {
-        font-size: 24px;
-        text-align: center;
-        font-weight: 300;
-        color: #333;
-        padding: 10px 0;
+  height: 100%;
+  background: #DADADA;
+  .login-main{
+    position: relative;
+    top:15rem;
+    .login-head {
+      .logo{
+
       }
-      .login-body {
-        overflow: hidden;
-        padding: 20px;
-        border-top: 0;
-        color: #333;
-        .login-title {
-          margin: 0;
-          text-align: center;
-          padding: 0 20px 20px;
-        }
-        .has-icon {
-          position: relative;
-          i.fa {
-            position: absolute;
-            right: 2px;
-            top: 0;
-            padding: 10px;
-            width: 35px;
-            height: 35px;
-          }
-        }
+      .title{
+        font-weight: bold;
+        color: #555555;
+      }
+      text-align: center;
+      margin: 1em 0;
+      background: #f8f8f9;
+      padding: 0.5em 1em;
+      line-height: 1.4285em;
+      color: rgba(0, 0, 0, 0.87);
+      -webkit-transition: opacity 0.1s ease, color 0.1s ease, background 0.1s ease, box-shadow 0.1s ease;
+      transition: opacity 0.1s ease, color 0.1s ease, background 0.1s ease, box-shadow 0.1s ease;
+      border-radius: 0.28571429rem;
+      box-shadow: 0 0 0 1px rgba(34, 36, 38, 0.22) inset, 0 0 0 0 rgba(0, 0, 0, 0);
+    }
+    .login-body {
+      background: #ffffff;
+      box-shadow: 0 1px 2px 0 rgba(34, 36, 38, 0.15);
+      padding: 1em;
+      border-radius: 0.28571429rem;
+      border: 1px solid rgba(34, 36, 38, 0.15);
+      .input-group{
+        margin-bottom: 1em;
+      }
+      button{
+        position: relative;
+        left: 23px;
+        width: 90%;
       }
     }
   }
+
 }
