@@ -1,6 +1,6 @@
 <div id='dashboard' class='container'>
   <section class='first-section row'>
-    <div class='left col-md-6'>
+    <div class='left col-md-4'>
       <div class='panel panel-default'>
         <div class='panel-heading'>
           <i class='fa fa-home'> 部门列表</i>
@@ -14,7 +14,7 @@
             <span class='input-group-addon'>快速检索</span>
           </div>
           <div class='bureau-list'>
-            <div ng-repeat='logo in Bureaus.logo' class='bureau-item col-md-2'>
+            <div ng-repeat='logo in Bureaus.logo' class='bureau-item col-md-3'>
               <a href='' class='thumbnail'>
                 <img ng-src='../styles/images/bureau/{{logo}}.png'>
               </a>
@@ -23,10 +23,20 @@
         </div>
       </div>
     </div>
-    <div class='right col-md-6'>
+    <div class='right col-md-4'>
       <div class='panel panel-default'>
         <div class='panel-heading'>
-          <i class='fa fa-inbox'> 资源总览</i>
+          <i class='fa fa-inbox'> 清单总览</i>
+        </div>
+        <div class='panel-body'>
+          <wiserv-overview-chart/>
+        </div>
+      </div>
+    </div>
+    <div class='right col-md-4'>
+      <div class='panel panel-default'>
+        <div class='panel-heading'>
+          <i class='fa fa-book'> 需求总览</i>
         </div>
         <div class='panel-body'>
           <wiserv-overview-chart/>
@@ -98,7 +108,7 @@
         <i class='fa fa-bar-chart'> 部门共享清单统计</i>
       </div>
       <div class='panel-body'>
-        Panel content
+        <wiserv-statistic-chart/>
       </div>
     </div>
   </section>

@@ -27,3 +27,7 @@ App.all('*', function(req, res, next) {
 });
 App.listen(5001);
 console.info('http-server[express] listening on 5001');
+
+/** test */
+var auth = require('./api/dashboard');
+App.use('/api', auth);
