@@ -43,5 +43,13 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         url: '/detail',
         templateUrl: 'views/requirement/detail.html'
       })
+      .state('main.department', {
+        url: '/department',
+        templateUrl: 'views/department/main.html'
+      })
+      .state('main.department.inventory', {
+        url: '/inventory',
+        templateUrl: 'views/department/inventory.html'
+      })
   }
 ]);

@@ -90,6 +90,13 @@ html {
 #main .depart-logos {
   padding: 24px 20px;
 }
+#department-main .sidebar {
+  position: absolute;
+  width: 140px;
+}
+#department-main .department-main {
+  margin-left: 170px;
+}
 #department-main .panel-heading {
   overflow: hidden;
 }
@@ -130,12 +137,80 @@ html {
   color: #d9534f;
   height: 38px;
 }
-#department-main .sidebar {
-  position: absolute;
-  width: 250px;
+#department-inventory {
+  margin-left: 180px;
+  padding: 0 0 0 25px;
 }
-#department-main .department-main {
-  margin-left: 250px;
+#department-inventory .indicator-order {
+  overflow: hidden;
+  border-bottom: 1px solid #777;
+}
+#department-inventory .indicator-filter {
+  margin: 5px 10px 0;
+  border-bottom: 1px solid #CCC;
+  font-size: 13px;
+}
+#department-inventory .indicator-filter .filter-title {
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 10px;
+}
+#department-inventory .indicator-filter .filter-list {
+  display: inline-block;
+}
+#department-inventory .indicator-list .list-box {
+  padding: 15px 0 0;
+  list-style: none;
+}
+#department-inventory .indicator-list .list-box .item-heading {
+  overflow: hidden;
+  padding: 5px 25px 5px 10px;
+  font-size: 12px;
+  color: #777;
+}
+#department-inventory .indicator-list .list-box .item-heading .options {
+  padding-left: 86px;
+  font-size: 14px;
+}
+#department-inventory .indicator-list .list-box .item-heading .options a {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+  padding: 0 5px;
+  cursor: pointer;
+}
+#department-inventory .indicator-list .list-box .item-icon {
+  padding: 8px 20px;
+}
+#department-inventory .indicator-list .list-box .media-body {
+  position: relative;
+}
+#department-inventory .indicator-list .list-box .media-body .main-heading {
+  line-height: 28px;
+}
+#department-inventory .indicator-list .list-box .media-body .item-label {
+  position: absolute;
+  right: 15px;
+  top: 5px;
+}
+#department-inventory .indicator-list .list-box .media-body .item-label label {
+  display: inline-block;
+  width: 80px;
+  height: 24px;
+  border: 1px solid;
+  text-align: center;
+  font-size: 13px;
+  line-height: 24px;
+  font-weight: normal;
+}
+#department-inventory .indicator-list .list-box .media-body .item-label .border-primary {
+  border-color: #337ab7;
+  color: #337ab7;
+}
+#department-inventory .indicator-list .list-box .media-body .item-label .border-info {
+  border-color: #5cb85c;
+  color: #5cb85c;
 }
 #inventory-main .indicator-main {
   margin-left: 180px;

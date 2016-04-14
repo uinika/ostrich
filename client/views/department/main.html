@@ -1,227 +1,177 @@
-<!DOCTYPE html>
-<html lang='zh-CN'>
-  <head>
-    <meta charset='utf-8'/>
-    <title>四川省数据注册发布平台</title>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'/>
-    <meta name='viewport' content='width=device-width, initial-scale=1'/>
-    <link rel='icon' href='/styles/images/favicon.ico' type='image/png'/>
-    <link href='libraries/bootstrap/css/bootstrap.min.css' rel='stylesheet'/>
-    <link href='libraries/bootstrap/css/bootstrap-theme.min.css' rel='stylesheet'/>
-    <link href='libraries/font-awesome/css/font-awesome.min.css' rel='stylesheet'/>
-    <link href='./styles/app.css' rel='stylesheet'/>
-  </head>
-  <body>
-
-    <!-- Libraries -->
-    <script src='libraries/jquery/jquery.min.js'></script>
-    <script src='libraries/bootstrap/js/bootstrap.min.js'></script>
-    <script src='libraries/lodash/lodash.core.js'></script>
-    <script src='libraries/angular/angular.min.js'></script>
-    <script src='libraries/angular/angular-route.min.js'></script>
-    <!-- Entry Point -->
-    <script src='scripts/app.js'></script>
-    <script src='scripts/config.js'></script>
-    <!-- Commons -->
-    <script src='scripts/common/global.js'></script>
-    <script src='scripts/common/login.js'></script>
-    <script src='scripts/common/main.js'></script>
-    <!-- Customs -->
-    <div id='department-main'>
-      <!-- BEGIN HEADER -->
-      <nav class="navbar navbar-default">
-        <div class="container">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="#">四川省数据注册发布平台</a>
-          </div>
-
-          <div class="collapse navbar-collapse">
-            <div class="navbar-right dropdown">
-              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                欢迎你，XXX
-                <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                <li>
-                  <a href="#">退出</a>
-                </li>
-              </ul>
+<div id='department-main'>
+  <!-- BEGIN MAIN -->
+  <div class='container'>
+    <div class='row'>
+      <!-- BEGIN SIDEBAR -->
+      <aside class='sidebar'>
+        <div class='body'>
+          <ul class="list-group">
+            <li class="list-group-item">
+              部门首页
+            </li>
+            <li class="list-group-item">
+              <a ui-sref='main.department.inventory'>部门清单</a>
+            </li>
+            <li class="list-group-item">
+              <a ui-sref='main.department.share'>共享清单</a>
+            </li>
+            <li class="list-group-item">
+              <a ui-sref='main.department.requirement'>需求清单</a>
+            </li>
+            <li class="list-group-item"></li>
+            <li class="list-group-item">
+              审核
+            </li>
+            <li class="list-group-item">
+              <a ui-sref='main.department'>开放审核</a>
+            </li>
+            <li class="list-group-item">
+              <a ui-sref='main.department'>用户管理</a>
+            </li>
+          </ul>
+        </div>
+      </aside>
+      <!-- END SIDEBAR -->
+      <!-- UI Router -->
+      <div id='ui-view-department' ui-view>
+        <div class='department-main'>
+          <div class='row'>
+            <div class='col-lg-3 col-md-6'>
+              <div class='panel panel-primary'>
+                <div class='panel-heading'>
+                  <div class='row'>
+                    <div class='col-xs-3'>
+                      <i class='fa fa-comments fa-3x'></i>
+                    </div>
+                    <div class='col-xs-9 text-right'>
+                      <div class='font-16'>20</div>
+                      <div>部门清单</div>
+                    </div>
+                  </div>
+                </div>
+                <div class='panel-footer'>
+                  本月新增 +10
+                </div>
+              </div>
             </div>
 
-            <ul class="nav  nav-pills navbar-right" style='padding-right:130px;margin:8px 0;'>
-              <li role="presentation" class="active">
-                <a href="#">首页</a>
-              </li>
-              <li role="presentation">
-                <a href="#">目录清单</a>
-              </li>
-              <li role="presentation">
-                <a href="#">需求清单</a>
-              </li>
-            </ul>
+            <div class='col-lg-3 col-md-6'>
+              <div class='panel panel-green'>
+                <div class='panel-heading'>
+                  <div class='row'>
+                    <div class='col-xs-3'>
+                      <i class='fa fa-tasks fa-3x'></i>
+                    </div>
+                    <div class='col-xs-9 text-right'>
+                      <div class='font-16'>10</div>
+                      <div>共享授权清单</div>
+                    </div>
+                  </div>
+                </div>
+                <div class='panel-footer'>
+                  本月新增 +10
+                </div>
+              </div>
+            </div>
 
+            <div class='col-lg-3 col-md-6'>
+              <div class='panel panel-yellow'>
+                <div class='panel-heading'>
+                  <div class='row'>
+                    <div class='col-xs-3'>
+                      <i class='fa fa-support fa-3x'></i>
+                    </div>
+                    <div class='col-xs-9 text-right'>
+                      <div class='font-16'>10</div>
+                      <div>需求清单</div>
+                    </div>
+                  </div>
+                </div>
+                <div class='panel-footer'>
+                  本月新增 +10
+                </div>
+              </div>
+            </div>
+
+            <div class='col-lg-3 col-md-6'>
+              <div class='panel panel-red'>
+                <div class='panel-heading'>
+                  <div class='row'>
+                    <div class='col-xs-3'>
+                      <i class='fa fa-bar-chart fa-3x'></i>
+                    </div>
+                    <div class='col-xs-9 text-right'>
+                      <div class='font-16'>10</div>
+                      <div>待审核清单</div>
+                    </div>
+                  </div>
+                </div>
+                <div class='panel-footer'></div>
+              </div>
+            </div>
           </div>
-        </div>
-      </nav>
 
-      <!-- END HEADER -->
-
-      <!-- BEGIN MAIN -->
-        <div class='container'>
-          <div class='row'>
-            <!-- BEGIN SIDEBAR -->
-            <aside class='sidebar'>
-              <div class='body'>
-                <ul id='menu'>
-                  <li>
-                    <a></a>
-                  </li>
-                </ul>
-              </div>
-            </aside>
-            <!-- END SIDEBAR -->
-
-            <div class='department-main'>
-              <div class='row'>
-                <div class='col-lg-3 col-md-6'>
-                  <div class='panel panel-primary'>
-                    <div class='panel-heading'>
-                      <div class='row'>
-                        <div class='col-xs-3'>
-                          <i class='fa fa-comments fa-3x'></i>
-                        </div>
-                        <div class='col-xs-9 text-right'>
-                          <div class='font-16'>20</div>
-                          <div>部门清单</div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class='panel-footer'>
-                      本月新增 +10
-                    </div>
-                  </div>
+          <div class='row '>
+            <div class='col-sm-6'>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <div class='pull-left'>待审核清单（10）</div>
+                  <div class='pull-right'>更多...</div>
                 </div>
 
-                <div class='col-lg-3 col-md-6'>
-                  <div class='panel panel-green'>
-                    <div class='panel-heading'>
-                      <div class='row'>
-                        <div class='col-xs-3'>
-                          <i class='fa fa-tasks fa-3x'></i>
-                        </div>
-                        <div class='col-xs-9 text-right'>
-                          <div class='font-16'>10</div>
-                          <div>共享授权清单</div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class='panel-footer'>
-                      本月新增 +10
-                    </div>
-                  </div>
-                </div>
-
-                <div class='col-lg-3 col-md-6'>
-                  <div class='panel panel-yellow'>
-                    <div class='panel-heading'>
-                      <div class='row'>
-                        <div class='col-xs-3'>
-                          <i class='fa fa-support fa-3x'></i>
-                        </div>
-                        <div class='col-xs-9 text-right'>
-                          <div class='font-16'>10</div>
-                          <div>需求清单</div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class='panel-footer'>
-                      本月新增 +10
-                    </div>
-                  </div>
-                </div>
-
-                <div class='col-lg-3 col-md-6'>
-                  <div class='panel panel-red'>
-                    <div class='panel-heading'>
-                      <div class='row'>
-                        <div class='col-xs-3'>
-                          <i class='fa fa-bar-chart fa-3x'></i>
-                        </div>
-                        <div class='col-xs-9 text-right'>
-                          <div class='font-16'>10</div>
-                          <div>待审核清单</div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class='panel-footer'>
-
-                    </div>
-                  </div>
-                </div>
+                <!-- Table -->
+                <table class='table table-hover table-striped'>
+                  <thead>
+                    <tr>
+                      <th>申请日期</th>
+                      <th>指标名称</th>
+                      <th>申请单位</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- <tr ng-repeat='ResourceCatalog in ResourceCatalogs'>
+                <td>{{ResourceCatalog.categoryName}}</td>
+                <td>{{ResourceCatalog.catalogName}}</td>
+                <td>{{ResourceCatalog.catalogCode}}</td>
+              </tr> -->
+                  </tbody>
+                </table>
               </div>
 
-              <div class='row '>
-                <div class='col-sm-6'>
-                  <div class="panel panel-default">
-                    <div class="panel-heading">
-                      <div class='pull-left'>待审核清单（10）</div>
-                      <div class='pull-right'>更多...</div>
-                    </div>
-
-                    <!-- Table -->
-                    <table class='table table-hover table-striped'>
-                      <thead>
-                        <tr>
-                          <th>申请日期</th>
-                          <th>指标名称</th>
-                          <th>申请单位</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <!-- <tr ng-repeat='ResourceCatalog in ResourceCatalogs'>
-                      <td>{{ResourceCatalog.categoryName}}</td>
-                      <td>{{ResourceCatalog.catalogName}}</td>
-                      <td>{{ResourceCatalog.catalogCode}}</td>
-                    </tr> -->
-                      </tbody>
-                    </table>
-                  </div>
-
+            </div>
+            <div class='col-sm-6'>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <div class='pull-left'>需求响应列表（10）</div>
+                  <div class='pull-right'>更多...</div>
                 </div>
-                <div class='col-sm-6'>
-                  <div class="panel panel-default">
-                    <div class="panel-heading">
-                      <div class='pull-left'>需求响应列表（10）</div>
-                      <div class='pull-right'>更多...</div>
-                    </div>
-                    <!-- Table -->
-                    <table class="table">
-                      <table class='table table-hover table-striped'>
-                        <thead>
-                          <tr>
-                            <th>响应日期</th>
-                            <th>需求发布日期</th>
-                            <th>需求名称</th>
-                            <th>响应单位</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <!-- <tr ng-repeat='ResourceCatalog in ResourceCatalogs'>
-                        <td>{{ResourceCatalog.categoryName}}</td>
-                        <td>{{ResourceCatalog.catalogName}}</td>
-                        <td>{{ResourceCatalog.catalogCode}}</td>
-                        <td>{{ResourceCatalog.catalogCode}}</td>
-                      </tr> -->
-                        </tbody>
-                      </table>
-                    </div>
+                <!-- Table -->
+                <table class="table">
+                  <table class='table table-hover table-striped'>
+                    <thead>
+                      <tr>
+                        <th>响应日期</th>
+                        <th>需求发布日期</th>
+                        <th>需求名称</th>
+                        <th>响应单位</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <!-- <tr ng-repeat='ResourceCatalog in ResourceCatalogs'>
+                  <td>{{ResourceCatalog.categoryName}}</td>
+                  <td>{{ResourceCatalog.catalogName}}</td>
+                  <td>{{ResourceCatalog.catalogCode}}</td>
+                  <td>{{ResourceCatalog.catalogCode}}</td>
+                </tr> -->
+                    </tbody>
                   </table>
                 </div>
-              </div>
+              </table>
             </div>
           </div>
         </div>
+      </div>
     </div>
-    <!-- END MAIN -->
-  </body>
-</html>
+  </div>
+</div>
+</div>
