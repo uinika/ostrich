@@ -4,7 +4,9 @@ var app = angular.module('app', [
   'Config',
   'ui.router',
   'ui.bootstrap',
-  'Login'
+  'Login',
+  'Dashboard'
+
 ]);
 
 app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
@@ -25,7 +27,8 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
       })
       .state('main.dashboard', {
         url: '/dashboard',
-        templateUrl: 'views/dashboard.html'
+        templateUrl: 'views/dashboard.html',
+        controller: 'Dashboard.Controller.Main'
       })
       .state('main.inventory', {
         url: '/inventory',
