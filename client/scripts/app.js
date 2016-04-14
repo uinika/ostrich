@@ -31,5 +31,17 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         url: '/inventory',
         templateUrl: 'views/inventory/main.html'
       })
+      .state('main.inventory.detail', {
+        url: '/detail',
+        templateUrl: 'views/inventory/detail.html'
+      })
+      .state('main.requirement', {
+        url: '/requirement',
+        templateUrl: 'views/requirement/main.html'
+      })
+      .state('main.requirement.detail', {
+        url: '/detail',
+        templateUrl: 'views/requirement/detail.html'
+      })
   }
 ]);

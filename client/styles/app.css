@@ -17,6 +17,9 @@ html {
 .margin-bottom25 {
   margin-bottom: 25px;
 }
+.font-80 {
+  font-size: 80px;
+}
 .font-40 {
   font-size: 40px;
 }
@@ -210,4 +213,123 @@ html {
 #inventory-main .indicator-main .indicator-list .list-box .media-body .item-label .border-info {
   border-color: #5cb85c;
   color: #5cb85c;
+}
+#indicator-detail .indicator-main {
+  padding: 0 0 0 25px;
+}
+#indicator-detail .indicator-main .indicator-list .list-box {
+  padding: 15px 0 0;
+  list-style: none;
+}
+#indicator-detail .indicator-main .indicator-list .list-box .item-icon {
+  padding: 0px 30px;
+}
+#indicator-detail .indicator-main .indicator-list .list-box .media-body {
+  position: relative;
+  vertical-align: middle;
+}
+#indicator-detail .indicator-main .indicator-list .list-box .media-body .main-heading {
+  line-height: 28px;
+}
+#indicator-detail .indicator-main .indicator-list .list-box .media-body .item-label {
+  position: absolute;
+  right: 20px;
+  top: 30px;
+}
+#indicator-detail .indicator-main .indicator-list .list-box .media-body .item-label label {
+  display: inline-block;
+  width: 80px;
+  height: 24px;
+  border: 1px solid;
+  text-align: center;
+  font-size: 13px;
+  line-height: 24px;
+  font-weight: normal;
+}
+#indicator-detail .indicator-main .indicator-list .list-box .media-body .item-label .border-primary {
+  border-color: #337ab7;
+  color: #337ab7;
+}
+#indicator-detail .indicator-main .indicator-list .list-box .media-body .item-label .border-info {
+  border-color: #5cb85c;
+  color: #5cb85c;
+}
+#requirement-main .requirement-main {
+  padding: 0 0 0 25px;
+}
+#requirement-main .requirement-main .requirement-info {
+  overflow: hidden;
+  border-bottom: 1px solid #777;
+}
+#requirement-main .requirement-main .requirement-info .breadcrumb {
+  margin-bottom: 0;
+  background: none;
+}
+#requirement-main .requirement-main .requirement-info .nav-pills li {
+  padding-right: 10px;
+}
+#requirement-main .requirement-main .requirement-filter {
+  margin: 5px 10px 0;
+  border-bottom: 1px solid #CCC;
+  font-size: 13px;
+}
+#requirement-main .requirement-main .requirement-filter .filter-title {
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 10px;
+}
+#requirement-main .requirement-main .requirement-filter .filter-list {
+  display: inline-block;
+}
+#requirement-main .requirement-main .requirement-list .list-box {
+  padding: 15px 0 0;
+  list-style: none;
+}
+#requirement-main .requirement-main .requirement-list .list-box .item-heading {
+  overflow: hidden;
+  padding: 5px 25px 5px 10px;
+  font-size: 12px;
+  color: #777;
+}
+#requirement-main .requirement-main .requirement-list .list-box .item-icon {
+  padding: 8px 20px;
+}
+#requirement-main .requirement-main .requirement-list .list-box .media-body {
+  position: relative;
+}
+#requirement-main .requirement-main .requirement-list .list-box .media-body .main-heading {
+  line-height: 28px;
+}
+#requirement-main .requirement-main .requirement-list .list-box .media-body .item-label {
+  position: absolute;
+  right: 15px;
+  top: 5px;
+}
+#requirement-main .requirement-main .requirement-list .list-box .media-body .item-label label {
+  display: inline-block;
+  width: 80px;
+  height: 24px;
+  border: 1px solid;
+  text-align: center;
+  font-size: 13px;
+  line-height: 24px;
+  font-weight: normal;
+}
+#requirement-main .requirement-main .requirement-list .list-box .media-body .item-label .border-primary {
+  border-color: #337ab7;
+  color: #337ab7;
+}
+#requirement-main .requirement-main .requirement-list .list-box .media-body .item-label .border-info {
+  border-color: #5cb85c;
+  color: #5cb85c;
+}
+#requirement-detail .response-items {
+  clear: right;
+  margin-top: 74px;
+}
+#requirement-detail .response-items .response-item {
+  overflow: hidden;
+  padding: 15px 0;
+  border-top: 1px solid #CCC;
+  margin-top: 16px;
 }
