@@ -39,6 +39,10 @@ html {
 .margin-top14 {
   margin-top: 14px;
 }
+.require-sign {
+  color: red;
+  padding: 4px;
+}
 #login {
   position: absolute;
   width: 100%;
@@ -202,6 +206,44 @@ html {
   position: absolute;
   right: 15px;
   top: 5px;
+}
+#inventory-publish {
+  margin-left: 170px;
+}
+#inventory-publish .navbar .nav-pills li a {
+  background-color: #fff !important;
+  background-image: none !important;
+  filter: none !important;
+  border: 0;
+  box-shadow: none !important;
+}
+#inventory-publish .navbar .nav-pills li a .number {
+  background-color: #eee;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 300;
+  padding: 8px 15px !important;
+  margin-right: 10px;
+  -webkit-border-radius: 50% !important;
+  -moz-border-radius: 50% !important;
+  border-radius: 50% !important;
+  color: #777;
+}
+#inventory-publish .navbar .nav-pills li a .desc {
+  display: inline-block;
+  font-size: 14px;
+  color: #777;
+}
+#inventory-publish .navbar .nav-pills li.active a .number {
+  background-color: #35aa47;
+  color: #fff;
+}
+#inventory-publish .navbar .nav-pills li.active a .desc {
+  color: #333;
+}
+#inventory-publish .indicator-add-modal .help-info {
+  font-size: 12px;
+  color: #777;
 }
 #inventory-main .indicator-main {
   margin-left: 180px;

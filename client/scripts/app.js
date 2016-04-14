@@ -51,5 +51,9 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         url: '/inventory',
         templateUrl: 'views/department/inventory.html'
       })
+      .state('main.department.inventory.publish', {
+        url: '/publish',
+        templateUrl: 'views/department/publish.html'
+      })
   }
 ]);
