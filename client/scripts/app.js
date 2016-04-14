@@ -55,5 +55,13 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         url: '/publish',
         templateUrl: 'views/department/publish.html'
       })
+      .state('main.department.share', {
+        url: '/share',
+        templateUrl: 'views/department/share.html'
+      })
+      .state('main.department.requirement', {
+        url: '/requirement',
+        templateUrl: 'views/department/requirement.html'
+      })
   }
 ]);
