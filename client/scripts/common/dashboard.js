@@ -5,6 +5,7 @@ var Dashboard = angular.module('Dashboard', ['ui.router']);
 Dashboard.controller('Dashboard.Controller.Main', ['$scope',
   function($scope) {
     $scope.Bureaus = {};
+    $scope.Echarts = {};
     $scope.Bureaus.logo = [
       'anjianju',
       'canlian',
@@ -27,16 +28,16 @@ Dashboard.controller('Dashboard.Controller.Main', ['$scope',
       'sifaju',
       'tongjiju'
     ];
-
+    $scope.Echarts.overview = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"];
+    $scope.Echarts.statistic = [];
   }
 ])
-
 
 /** Dashboard Directive */
 Dashboard.directive('wiservOverviewChart', [
   function() {
     return {
-      restrict: 'ACE',
+      restrict: 'AE',
       template: "<div style='width:300;height:150px;'></div>",
       link: function(scope, element, attr) {
         var myChart = echarts.init((element.find('div'))[0]);
@@ -46,7 +47,7 @@ Dashboard.directive('wiservOverviewChart', [
             data: ['销量']
           },
           xAxis: {
-            data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+            data: scope.Echarts.overview
           },
           yAxis: {},
           series: [{
@@ -55,10 +56,7 @@ Dashboard.directive('wiservOverviewChart', [
             data: [5, 20, 36, 10, 10, 20]
           }]
         };
-
-        // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
-
       }
     };
   }
