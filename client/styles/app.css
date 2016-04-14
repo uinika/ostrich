@@ -172,8 +172,7 @@ html {
   height: 38px;
 }
 #department-inventory {
-  margin-left: 180px;
-  padding: 0 0 0 25px;
+  margin-left: 170px;
 }
 #department-inventory .indicator-order {
   overflow: hidden;
@@ -216,7 +215,10 @@ html {
   cursor: pointer;
 }
 #department-inventory .indicator-list .list-box .item-icon {
-  padding: 8px 20px;
+  padding: 8px 20px 0 4px;
+}
+#department-inventory .indicator-list .list-box .item-icon img {
+  width: 100px;
 }
 #department-inventory .indicator-list .list-box .media-body {
   position: relative;
@@ -268,8 +270,7 @@ html {
   color: #777;
 }
 #department-share {
-  margin-left: 180px;
-  padding: 0 0 0 25px;
+  margin-left: 170px;
 }
 #department-share .indicator-order {
   overflow: hidden;
@@ -312,7 +313,10 @@ html {
   cursor: pointer;
 }
 #department-share .indicator-list .list-box .item-icon {
-  padding: 8px 20px;
+  padding: 8px 20px 0 4px;
+}
+#department-share .indicator-list .list-box .item-icon img {
+  width: 100px;
 }
 #department-share .indicator-list .list-box .media-body {
   position: relative;
@@ -327,11 +331,10 @@ html {
 }
 #department-share .indicator-list .list-box .media-body .audit-info {
   position: absolute;
-  top: 34px;
+  top: 18px;
 }
 #department-requirement {
-  margin-left: 180px;
-  padding: 0 0 0 25px;
+  margin-left: 170px;
 }
 #department-requirement .indicator-order {
   overflow: hidden;
@@ -362,7 +365,10 @@ html {
   cursor: pointer;
 }
 #department-requirement .indicator-list .list-box .item-icon {
-  padding: 8px 20px;
+  padding: 8px 20px 0 4px;
+}
+#department-requirement .indicator-list .list-box .item-icon img {
+  width: 100px;
 }
 #department-requirement .indicator-list .list-box .media-body {
   position: relative;
@@ -390,8 +396,7 @@ html {
   margin-left: 170px;
 }
 #department-audit {
-  margin-left: 180px;
-  padding: 0 0 0 25px;
+  margin-left: 170px;
 }
 #department-audit .indicator-order {
   overflow: hidden;
@@ -434,7 +439,10 @@ html {
   cursor: pointer;
 }
 #department-audit .indicator-list .list-box .item-icon {
-  padding: 8px 20px;
+  padding: 8px 20px 0 4px;
+}
+#department-audit .indicator-list .list-box .item-icon img {
+  width: 100px;
 }
 #department-audit .indicator-list .list-box .media-body {
   position: relative;
@@ -477,6 +485,11 @@ html {
 #department-user .user-list {
   clear: right;
 }
+#inventory-main .sidebar li.active {
+  background: #3AC0EB;
+  border-color: #3AC0EB;
+  color: #FFF;
+}
 #inventory-main .indicator-main {
   margin-left: 180px;
   padding: 0 0 0 25px;
@@ -509,7 +522,10 @@ html {
   color: #777;
 }
 #inventory-main .indicator-main .indicator-list .list-box .item-icon {
-  padding: 8px 20px;
+  padding: 8px 20px 0 4px;
+}
+#inventory-main .indicator-main .indicator-list .list-box .item-icon img {
+  width: 100px;
 }
 #inventory-main .indicator-main .indicator-list .list-box .media-body {
   position: relative;
@@ -521,6 +537,11 @@ html {
   position: absolute;
   right: 15px;
   top: 5px;
+}
+#inventory-main .indicator-main .indicator-list .list-box .media-body .label-apply {
+  position: absolute;
+  right: 15px;
+  top: 35px;
 }
 #indicator-detail .indicator-main {
   padding: 0 0 0 25px;
