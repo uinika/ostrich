@@ -32,3 +32,25 @@ Dashboard.controller('Dashboard.Controller.Main', ['$scope',
 
   }
 ])
+
+
+/** Dashboard Directive */
+Dashboard.directive('wiservOverviewChart', [
+  function() {
+    return {
+      link: function(scope, element, attr) {
+
+      }
+    };
+  }
+]);
+
+Dashboard.directive('wiservStatisticChart', [
+  function() {
+    return {
+      link: function(scope, element, attr) {
+
+      }
+    };
+  }
+]);
