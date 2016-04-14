@@ -370,6 +370,25 @@ html {
 #department-requirement .indicator-list .list-box .media-body .main-heading {
   line-height: 28px;
 }
+#department-requirement-detail {
+  margin-left: 170px;
+}
+#department-requirement-detail .dl-horizontal dt,
+#department-requirement-detail .dl-horizontal dd {
+  line-height: 35px;
+}
+#department-requirement-detail .response-items {
+  clear: right;
+}
+#department-requirement-detail .response-items .response-item {
+  overflow: hidden;
+  padding: 15px 0;
+  border-top: 1px solid #CCC;
+  margin-top: 16px;
+}
+#department-requirement-publish {
+  margin-left: 170px;
+}
 #inventory-main .indicator-main {
   margin-left: 180px;
   padding: 0 0 0 25px;
@@ -492,6 +511,10 @@ html {
   position: absolute;
   right: 15px;
   top: 5px;
+}
+#requirement-detail .dl-horizontal dt,
+#requirement-detail .dl-horizontal dd {
+  line-height: 35px;
 }
 #requirement-detail .response-items {
   clear: right;

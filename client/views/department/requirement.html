@@ -1,3 +1,5 @@
+<!-- UI Router -->
+<div id='ui-view-department-requirement' ui-view>
   <div id='department-requirement'>
     <div class='indicator-order'>
       <div class='pull-left'>
@@ -21,7 +23,7 @@
     <!-- indicator inventory list -->
     <div class='indicator-list'>
       <div class='pull-right'>
-        <a class='btn btn-primary' ui-sref='main.department.inventory.publish'>发布需求</a>
+        <a class='btn btn-primary' ui-sref='main.department.requirement.publish'>发布需求</a>
       </div>
       <ul class='list-box'>
         <li>
@@ -48,8 +50,8 @@
                   </a>
                 </div>
                 <div class="media-body">
-                  <h4 class="media-heading main-heading">科技交换指标
-                  </h4>
+                  <a ui-sref='main.department.requirement.detail'><h4 class="media-heading main-heading">科技交换指标
+                  </h4></a>
                   <h5>摘要：四川省21个地市州，2015年科技项目交换指标</h5>
                   <div class='row font-13 margin-top14'>
                     <div class='col-sm-3'>来源：四川省科技局</div>
@@ -66,3 +68,4 @@
     </div>
 
   </div>
+</div>

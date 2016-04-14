@@ -56,7 +56,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
       })
       .state('main.department.inventory.publish', {
         url: '/publish',
-        templateUrl: 'views/department/publish.html'
+        templateUrl: 'views/department/inventory-publish.html'
       })
       .state('main.department.share', {
         url: '/share',
@@ -65,6 +65,14 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
       .state('main.department.requirement', {
         url: '/requirement',
         templateUrl: 'views/department/requirement.html'
+      })
+      .state('main.department.requirement.publish', {
+        url: '/publish',
+        templateUrl: 'views/department/requirement-publish.html'
+      })
+      .state('main.department.requirement.detail', {
+        url: '/detail',
+        templateUrl: 'views/department/requirement-detail.html'
       })
   }
 ]);
