@@ -146,7 +146,7 @@ html {
   border-bottom: 1px solid #777;
 }
 #department-inventory .indicator-filter {
-  margin: 5px 10px 0;
+  margin: 5px 10px 5px 0;
   border-bottom: 1px solid #CCC;
   font-size: 13px;
 }
@@ -159,6 +159,7 @@ html {
   display: inline-block;
 }
 #department-inventory .indicator-list .list-box {
+  clear: right;
   padding: 15px 0 0;
   list-style: none;
 }
