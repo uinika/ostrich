@@ -608,7 +608,10 @@ html {
   color: #777;
 }
 #requirement-main .requirement-main .requirement-list .list-box .item-icon {
-  padding: 8px 20px;
+  padding: 8px 20px 0 4px;
+}
+#requirement-main .requirement-main .requirement-list .list-box .item-icon img {
+  width: 100px;
 }
 #requirement-main .requirement-main .requirement-list .list-box .media-body {
   position: relative;
