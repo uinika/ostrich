@@ -78,5 +78,9 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         url: '/audit',
         templateUrl: 'views/department/audit.html'
       })
+      .state('main.department.audit.info', {
+        url: '/info',
+        templateUrl: 'views/department/audit-info.html'
+      })
   }
 ]);

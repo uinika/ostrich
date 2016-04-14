@@ -443,6 +443,30 @@ html {
   line-height: 28px;
   font-size: 14px;
 }
+#department-audit-info {
+  margin-left: 170px;
+}
+#department-audit-info .audit-wrap {
+  padding: 48px;
+}
+#department-audit-info .audit-wrap .audit-box {
+  border: 1px solid #CCC;
+  padding: 15px;
+}
+#department-audit-info .audit-wrap .audit-box .item-icon {
+  padding: 0 40px;
+}
+#department-audit-info .audit-wrap .audit-box .item-label {
+  padding: 7px 0;
+}
+#department-audit-info .audit-wrap .audit-box .dl-inline-block dt,
+#department-audit-info .audit-wrap .audit-box .dl-inline-block dd {
+  line-height: 35px;
+  display: inline-block;
+}
+#department-audit-info .audit-wrap .audit-box .apply-dept {
+  padding: 7px 13px;
+}
 #inventory-main .indicator-main {
   margin-left: 180px;
   padding: 0 0 0 25px;
