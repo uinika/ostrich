@@ -467,6 +467,16 @@ html {
 #department-audit-info .audit-wrap .audit-box .apply-dept {
   padding: 7px 13px;
 }
+#department-user {
+  margin-left: 170px;
+}
+#department-user .user-wrap {
+  overflow: hidden;
+  padding: 15px;
+}
+#department-user .user-list {
+  clear: right;
+}
 #inventory-main .indicator-main {
   margin-left: 180px;
   padding: 0 0 0 25px;
