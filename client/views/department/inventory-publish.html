@@ -31,67 +31,125 @@
         </ul>
       </div>
       <div class="progress">
-        <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%">
+        <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: {{progress}}%">
           <span class="sr-only">完成25%</span>
         </div>
       </div>
 
-      <!--Step 1-->
-      <div id='indicator-profile'>
-        <form class="form-horizontal">
-          <div class="form-group">
-            <label for="" class="col-sm-2 control-label">清单名称
-              <span class='require-sign'>*</span>:</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control">
+        <!--Step 1-->
+        <div id='indicator-profile' name='step1' ng-show='step1.show'>
+          <form name='dataInfoForm' ng-submit='submitForm(dataInfoForm.$valid)' novalidate class="form-horizontal">
+            <div class="form-group">
+              <label for="" class="col-sm-2 control-label">清单名称
+                <span class='require-sign'>*</span>:</label>
+              <div class="col-sm-10">
+                <input type="text" name='dataName' ng-model='dataInfo.dataName' required class="form-control">
+              </div>
             </div>
-          </div>
-          <div class="form-group">
-            <label for="" class="col-sm-2 control-label">摘要
-              <span class='require-sign'>*</span>:</label>
-            <div class="col-sm-10">
-              <textarea class="form-control" cols='5'></textarea>
+            <div class="form-group">
+              <label for="" class="col-sm-2 control-label">摘要
+                <span class='require-sign'>*</span>:</label>
+              <div class="col-sm-10">
+                <textarea class="form-control" name='dataSummary' ng-model='dataInfo.dataSummary' required cols='5'></textarea>
+              </div>
             </div>
-          </div>
-          <div class="form-group">
-            <label for="" class="col-sm-2 control-label">提供部门
-              <span class='require-sign'>*</span>:</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control">
+            <div class="form-group">
+              <label for="" class="col-sm-2 control-label">提供部门
+                <span class='require-sign'>*</span>:</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control">
+              </div>
             </div>
-          </div>
-          <div class="form-group">
-            <label for="" class="col-sm-2 control-label">联系人
-              <span class='require-sign'>*</span>:</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control">
+            <div class="form-group">
+              <label for="" class="col-sm-2 control-label">联系人
+                <span class='require-sign'>*</span>:</label>
+              <div class="col-sm-10">
+                <input type="text" name='linkman' ng-model='dataInfo.linkman' required class="form-control">
+              </div>
             </div>
-          </div>
-          <div class="form-group">
-            <label for="" class="col-sm-2 control-label">联系电话
-              <span class='require-sign'>*</span>:</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control">
+            <div class="form-group">
+              <label for="" class="col-sm-2 control-label">联系电话
+                <span class='require-sign'>*</span>:</label>
+              <div class="col-sm-10">
+                <input type="text" name='contactPhone' ng-model='dataInfo.contactPhone' required class="form-control">
+              </div>
             </div>
-          </div>
-          <div class="form-group">
-            <label for="" class="col-sm-2 control-label">发布日期：</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control">
+            <div class="form-group">
+              <label for="" class="col-sm-2 control-label">发布日期：</label>
+              <div class="col-sm-10">
+                <input type="text" name='createTime' ng-model='dataInfo.createTime' required class="form-control">
+              </div>
             </div>
-          </div>
 
-          <div class="form-group ">
-            <div class="col-sm-offset-2 col-sm-10">
-              <button class="btn btn-default pull-right">下一步</button>
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button type='submit' class="btn btn-default pull-right" ng-click='toStep2()'>下一步</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <!-- /.Step 1 -->
+
+        <!-- Step 2-->
+        <div id='indicator-attribute' name='step2' ng-show='step2.show'>
+          <div>
+            <div class="btn-group">
+              <button class="btn btn-primary ">
+                <i class='fa fa-plus'></i>&nbsp;新增</button>
+            </div>
+            <div class="btn-group">
+              <button class="btn btn-default ">
+                <i class='fa fa-trash'></i>&nbsp;删除</button>
             </div>
           </div>
-        </form>
-      </div>
-      <!-- /.Step 1 -->
+          <!-- Table -->
+          <table class='table table-hover table-striped'>
+            <thead>
+              <tr>
+                <th><input type='checkbox'/></th>
+                <th>序号</th>
+                <th>指标名称</th>
+                <th>指标别称</th>
+                <th>计量单位</th>
+                <th>指标详细解释</th>
+                <th>计算方法</th>
+                <th>共享频率</th>
+                <th>空间范围</th>
+                <th>分地区数据级别</th>
+                <th>来源部门</th>
+                <th>共享级别</th>
+                <th>数据存储类型</th>
+                <th>数据精度</th>
+                <th>数据长度</th>
+                <th>创建时间</th>
+                <th>数据表示格式</th>
+                <th>是否涉密</th>
+                <th>联系人</th>
+                <th>联系电话</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- <tr ng-repeat='ResourceCatalog in ResourceCatalogs'>
+        <td>{{ResourceCatalog.categoryName}}</td>
+        <td>{{ResourceCatalog.catalogName}}</td>
+        <td>{{ResourceCatalog.catalogCode}}</td>
+        </tr> -->
+            </tbody>
+          </table>
+          <div class="pull-right">
+            <div class="btn btn-group">
+              <button class="btn btn-default " ng-click='backToStep1()'>上一步</button>
+            </div>
+            <div class="btn btn-group">
+              <button class="btn btn-default " ng-click='toStep3()'>下一步</button>
+            </div>
+          </div>
+        </div>
 
-      <!-- Step 2-->
-      <div id='indicator-attribute' style='display:none'>
+      <!-- /.Step 2-->
+
+      <!-- Step 3-->
+      <div id='indicator-examp' name='step3' ng-show='step3.show'>
         <div>
           <div class="btn-group">
             <button class="btn btn-primary ">
@@ -108,359 +166,301 @@
             <tr>
               <th><input type='checkbox'/></th>
               <th>序号</th>
-              <th>指标名称</th>
-              <th>指标别称</th>
-              <th>计量单位</th>
-              <th>指标详细解释</th>
-              <th>计算方法</th>
-              <th>共享频率</th>
-              <th>空间范围</th>
-              <th>分地区数据级别</th>
-              <th>来源部门</th>
-              <th>共享级别</th>
-              <th>数据存储类型</th>
-              <th>数据精度</th>
-              <th>数据长度</th>
-              <th>创建时间</th>
-              <th>数据表示格式</th>
-              <th>是否涉密</th>
-              <th>联系人</th>
-              <th>联系电话</th>
+              <th>成果名称</th>
+              <th>成果密级代码</th>
+              <th>成果推荐单位</th>
+              <th>成果属性代码</th>
+              <th>成果体现形成代码</th>
+              <th>成果学科分类</th>
             </tr>
           </thead>
           <tbody>
             <!-- <tr ng-repeat='ResourceCatalog in ResourceCatalogs'>
-      <td>{{ResourceCatalog.categoryName}}</td>
-      <td>{{ResourceCatalog.catalogName}}</td>
-      <td>{{ResourceCatalog.catalogCode}}</td>
-    </tr> -->
+        <td>{{ResourceCatalog.categoryName}}</td>
+        <td>{{ResourceCatalog.catalogName}}</td>
+        <td>{{ResourceCatalog.catalogCode}}</td>
+        </tr> -->
           </tbody>
         </table>
-
-        <div class='pull-right'>
-          <div class="btn-group">
-            <button class="btn btn-default ">上一步</button>
+        <div class="pull-right">
+          <div class="btn btn-group">
+            <button class="btn btn-default " ng-click='backToStep2()'>上一步</button>
           </div>
-          <div class="btn-group">
-            <button class="btn btn-default ">下一步</button>
+          <div class="btn btn-group">
+            <button class="btn btn-default " ng-click='toStep4()'>下一步</button>
           </div>
         </div>
       </div>
+    <!-- /.Step 3-->
+
+    <!-- Step 4-->
+    <div id='indicator-other' name='step4' ng-show='step4.show'>
+      <form class="form-horizontal ">
+        <div class="form-group">
+          <label for="" class="col-sm-2 control-label">数据接入方式
+            <span class='require-sign'>*</span>:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="" class="col-sm-2 control-label">技术支持:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="" class="col-sm-2 control-label">成果推荐单位:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="" class="col-sm-2 control-label">联系人:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="" class="col-sm-2 control-label">联系电话:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="" class="col-sm-2 control-label">邮箱:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control">
+          </div>
+        </div>
+        <div class="pull-right">
+          <div class="btn btn-group">
+            <button class="btn btn-default " ng-click='backToStep3()'>上一步</button>
+          </div>
+          <div class="btn btn-group">
+            <button class="btn btn-default " >提交</button>
+          </div>
+        </div>
+      </form>
     </div>
-    <!-- /.Step 2-->
-
-    <!-- Step 3-->
-    <div id='indicator-examp' style='display:none'>
-      <div>
-        <div class="btn-group">
-          <button class="btn btn-primary ">
-            <i class='fa fa-plus'></i>&nbsp;新增</button>
-        </div>
-        <div class="btn-group">
-          <button class="btn btn-default ">
-            <i class='fa fa-trash'></i>&nbsp;删除</button>
-        </div>
-      </div>
-      <!-- Table -->
-      <table class='table table-hover table-striped'>
-        <thead>
-          <tr>
-            <th><input type='checkbox'/></th>
-            <th>序号</th>
-            <th>成果名称</th>
-            <th>成果密级代码</th>
-            <th>成果推荐单位</th>
-            <th>成果属性代码</th>
-            <th>成果体现形成代码</th>
-            <th>成果学科分类</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- <tr ng-repeat='ResourceCatalog in ResourceCatalogs'>
-    <td>{{ResourceCatalog.categoryName}}</td>
-    <td>{{ResourceCatalog.catalogName}}</td>
-    <td>{{ResourceCatalog.catalogCode}}</td>
-  </tr> -->
-        </tbody>
-      </table>
-
-      <div class='pull-right'>
-        <div class="btn-group">
-          <button class="btn btn-default ">上一步</button>
-        </div>
-        <div class="btn-group">
-          <button class="btn btn-default ">下一步</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- /.Step 3-->
-
-  <!-- Step 4-->
-  <div id='indicator-other' style='display:none'>
-    <form class="form-horizontal ">
-      <div class="form-group">
-        <label for="" class="col-sm-2 control-label">数据接入方式
-          <span class='require-sign'>*</span>:</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control">
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="" class="col-sm-2 control-label">技术支持:</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control">
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="" class="col-sm-2 control-label">成果推荐单位:</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control">
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="" class="col-sm-2 control-label">联系人:</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control">
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="" class="col-sm-2 control-label">联系电话:</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control">
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="" class="col-sm-2 control-label">邮箱:</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control">
-        </div>
-      </div>
-      <div class='pull-right'>
-        <div class="btn-group">
-          <button class="btn btn-default ">上一步</button>
-        </div>
-      </div>
-    </form>
-  </div>
-  <!-- /.Step 4-->
-
+    <!-- /.Step 4-->
 </div>
+
 </div>
 </div>
 
 <!-- Add indicator modal -->
 <script type='text/ng-template' id='add-indicator-modal.html'>
 <div class='modal-header'>
-<i class="fa fa-server"></i>
-新增指标
-<button type='button' class='close' data-dismiss='modal'>&times;</button>
+  <i class="fa fa-server"></i>
+  新增指标
+  <button type='button' class='close' data-dismiss='modal'>&times;</button>
 </div>
 <div class='modal-body'>
-<form class="form-horizontal indicator-add-modal">
-  <div class="form-group">
-    <label for="" class="col-sm-2 control-label">指标名称
-      <span class='require-sign'>*</span>:</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control">
-      <span class='help-info'>部门统计报表制度中对指标名称的全称</span>
+  <form class="form-horizontal indicator-add-modal">
+    <div class="form-group">
+      <label for="" class="col-sm-2 control-label">指标名称
+        <span class='require-sign'>*</span>:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control">
+        <span class='help-info'>部门统计报表制度中对指标名称的全称</span>
+      </div>
     </div>
-  </div>
-  <div class="form-group">
-    <label for="" class="col-sm-2 control-label">指标别称
-      <span class='require-sign'>*</span>:</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control">
-      <span class='help-info'>提供部门的内部名称或英文名称及简称等</span>
+    <div class="form-group">
+      <label for="" class="col-sm-2 control-label">指标别称
+        <span class='require-sign'>*</span>:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control">
+        <span class='help-info'>提供部门的内部名称或英文名称及简称等</span>
+      </div>
     </div>
-  </div>
-  <div class="form-group">
-    <label for="" class="col-sm-2 control-label">计量单位:</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control">
-      <span class='help-info'>反映指标某一具体数值的实际度量单位</span>
+    <div class="form-group">
+      <label for="" class="col-sm-2 control-label">计量单位:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control">
+        <span class='help-info'>反映指标某一具体数值的实际度量单位</span>
+      </div>
     </div>
-  </div>
-  <div class="form-group">
-    <label for="" class="col-sm-2 control-label">指标详细解释
-      <span class='require-sign'>*</span>:</label>
-    <div class="col-sm-10">
-      <textarea class="form-control" cols='5'></textarea>
-      <span class='help-info'>统计制度上对指标的详细解释</span>
+    <div class="form-group">
+      <label for="" class="col-sm-2 control-label">指标详细解释
+        <span class='require-sign'>*</span>:</label>
+      <div class="col-sm-10">
+        <textarea class="form-control" cols='5'></textarea>
+        <span class='help-info'>统计制度上对指标的详细解释</span>
+      </div>
     </div>
-  </div>
-  <div class="form-group">
-    <label for="" class="col-sm-2 control-label">计算方法:</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control">
-      <span class='help-info'>是指为求得统计指标具体数值需要采用的算法。一般用计算公式表示，也可以用文字表述。</span>
+    <div class="form-group">
+      <label for="" class="col-sm-2 control-label">计算方法:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control">
+        <span class='help-info'>是指为求得统计指标具体数值需要采用的算法。一般用计算公式表示，也可以用文字表述。</span>
+      </div>
     </div>
-  </div>
-  <div class="form-group">
-    <label for="" class="col-sm-2 control-label">共享频率
-      <span class='require-sign'>*</span>:</label>
-    <div class="col-sm-10">
-      <input type="checkbox">年度
-      <input type="checkbox">季度
-      <input type="checkbox">月度
-      <input type="checkbox">每日
-      <input type="checkbox">实时
+    <div class="form-group">
+      <label for="" class="col-sm-2 control-label">共享频率
+        <span class='require-sign'>*</span>:</label>
+      <div class="col-sm-10">
+        <input type="checkbox">年度
+        <input type="checkbox">季度
+        <input type="checkbox">月度
+        <input type="checkbox">每日
+        <input type="checkbox">实时
+      </div>
     </div>
-  </div>
-  <div class="form-group">
-    <label for="" class="col-sm-2 control-label">空间范围:</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control">
-      <span class='help-info'>
-        可取得数据的地区名称，如全国，四川省，各省等。
-      </span>
+    <div class="form-group">
+      <label for="" class="col-sm-2 control-label">空间范围:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control">
+        <span class='help-info'>
+          可取得数据的地区名称，如全国，四川省，各省等。
+        </span>
+      </div>
     </div>
-  </div>
-  <div class="form-group">
-    <label for="" class="col-sm-2 control-label">分地区数据级别
-      <span class='require-sign'>*</span>:</label>
-    <div class="col-sm-10">
-      <input type="checkbox">省级数据
-      <input type="checkbox">市级数据
-      <input type="checkbox">县级数据
-      <input type="checkbox">乡级数据
-      <input type="checkbox">村级数据
-      <input type="checkbox">全国数据
-      <input type="checkbox">分省数据
+    <div class="form-group">
+      <label for="" class="col-sm-2 control-label">分地区数据级别
+        <span class='require-sign'>*</span>:</label>
+      <div class="col-sm-10">
+        <input type="checkbox">省级数据
+        <input type="checkbox">市级数据
+        <input type="checkbox">县级数据
+        <input type="checkbox">乡级数据
+        <input type="checkbox">村级数据
+        <input type="checkbox">全国数据
+        <input type="checkbox">分省数据
+      </div>
     </div>
-  </div>
-  <div class="form-group">
-    <label for="" class="col-sm-2 control-label">来源部门:</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control">
-      <span class='help-info'>
-        可取得数据的地区名称，如全国，四川省，各省等。
-      </span>
+    <div class="form-group">
+      <label for="" class="col-sm-2 control-label">来源部门:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control">
+        <span class='help-info'>
+          可取得数据的地区名称，如全国，四川省，各省等。
+        </span>
+      </div>
     </div>
-  </div>
-  <div class="form-group">
-    <label for="" class="col-sm-2 control-label">共享级别
-      <span class='require-sign'>*</span>:</label>
-    <div class="col-sm-10">
-      <select >
-        <option value=''>全省开放</option>
-        <option value=''>政务云开放</option>
-        <option value=''>指定部门开放</option>
-        <option value=''>暂不开放</option>
-      </select>
-      指定部门名称：
-      <select >
-        <option value=''>省国税局</option>
-        <option value=''>省地税局</option>
-        <option value=''>省工商局</option>
-        <option value=''>省公安局</option>
-      </select>
+    <div class="form-group">
+      <label for="" class="col-sm-2 control-label">共享级别
+        <span class='require-sign'>*</span>:</label>
+      <div class="col-sm-10">
+        <select >
+          <option value=''>全省开放</option>
+          <option value=''>政务云开放</option>
+          <option value=''>指定部门开放</option>
+          <option value=''>暂不开放</option>
+        </select>
+        指定部门名称：
+        <select >
+          <option value=''>省国税局</option>
+          <option value=''>省地税局</option>
+          <option value=''>省工商局</option>
+          <option value=''>省公安局</option>
+        </select>
+      </div>
     </div>
-  </div>
-  <div class="form-group">
-    <label for="" class="col-sm-2 control-label">指标类型
-      <span class='require-sign'>*</span>:</label>
-    <div class="col-sm-10">
-      <select >
-        <option value=''>1.文本</option>
-        <option value=''>2.数值</option>
-        <option value=''>3.日期</option>
-        <option value=''>4.图片</option>
-        <option value=''>5.音频</option>
-        <option value=''>6.视频</option>
-        <option value=''>7.其他</option>
-      </select>
-      备注：
-      <input type='text'/>
-      <span class='help-info'>
-        指标类型如选择9.其他，请在备注中说明。
-      </span>
+    <div class="form-group">
+      <label for="" class="col-sm-2 control-label">指标类型
+        <span class='require-sign'>*</span>:</label>
+      <div class="col-sm-10">
+        <select >
+          <option value=''>1.文本</option>
+          <option value=''>2.数值</option>
+          <option value=''>3.日期</option>
+          <option value=''>4.图片</option>
+          <option value=''>5.音频</option>
+          <option value=''>6.视频</option>
+          <option value=''>7.其他</option>
+        </select>
+        备注：
+        <input type='text'/>
+        <span class='help-info'>
+          指标类型如选择9.其他，请在备注中说明。
+        </span>
+      </div>
     </div>
-  </div>
-  <div class="form-group">
-    <label for="" class="col-sm-2 control-label">数据精度
-      <span class='require-sign'>*</span>:</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control">
-      <span class='help-info'>
-        数值型指标数据定义的数据存储的小数位数。如：小数点后取2位
-      </span>
+    <div class="form-group">
+      <label for="" class="col-sm-2 control-label">数据精度
+        <span class='require-sign'>*</span>:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control">
+        <span class='help-info'>
+          数值型指标数据定义的数据存储的小数位数。如：小数点后取2位
+        </span>
+      </div>
     </div>
-  </div>
-  <div class="form-group">
-    <label for="" class="col-sm-2 control-label">数据长度
-      <span class='require-sign'>*</span>:</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control">
-      <span class='help-info'>
-        指标数据的最大长度。如：小于9位
-      </span>
+    <div class="form-group">
+      <label for="" class="col-sm-2 control-label">数据长度
+        <span class='require-sign'>*</span>:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control">
+        <span class='help-info'>
+          指标数据的最大长度。如：小于9位
+        </span>
+      </div>
     </div>
-  </div>
-  <div class="form-group">
-    <label for="" class="col-sm-2 control-label">数据表示格式
-      <span class='require-sign'>*</span>:</label>
-    <div class="col-sm-10">
-      <select >
-        <option value=''>11.文本</option>
-        <option value=''>21.整数</option>
-        <option value=''>22.小数</option>
-        <option value=''>23.分数</option>
-        <option value=''>24.百分数</option>
-        <option value=''>31.YYYY年</option>
-        <option value=''>32.YYYY年MM月</option>
-        <option value=''>33.YYYY年MM月DD日</option>
-        <option value=''>34.YYYY/MM/DD</option>
-        <option value=''>35.DD/MM/YYYY</option>
-        <option value=''>36.MM/DD/YYYY</option>
-        <option value=''>41.图片</option>
-        <option value=''>51.音频</option>
-        <option value=''>61.视频</option>
-        <option value=''>99.其他</option>
-      </select>
-      备注：
-      <input type='text'/>
-      <span class='help-info'>
-        展示页面上指标数据类型的具体表现形式。如选择99.其他，请在备注中说明。
-      </span>
+    <div class="form-group">
+      <label for="" class="col-sm-2 control-label">数据表示格式
+        <span class='require-sign'>*</span>:</label>
+      <div class="col-sm-10">
+        <select >
+          <option value=''>11.文本</option>
+          <option value=''>21.整数</option>
+          <option value=''>22.小数</option>
+          <option value=''>23.分数</option>
+          <option value=''>24.百分数</option>
+          <option value=''>31.YYYY年</option>
+          <option value=''>32.YYYY年MM月</option>
+          <option value=''>33.YYYY年MM月DD日</option>
+          <option value=''>34.YYYY/MM/DD</option>
+          <option value=''>35.DD/MM/YYYY</option>
+          <option value=''>36.MM/DD/YYYY</option>
+          <option value=''>41.图片</option>
+          <option value=''>51.音频</option>
+          <option value=''>61.视频</option>
+          <option value=''>99.其他</option>
+        </select>
+        备注：
+        <input type='text'/>
+        <span class='help-info'>
+          展示页面上指标数据类型的具体表现形式。如选择99.其他，请在备注中说明。
+        </span>
+      </div>
     </div>
-  </div>
-  <div class="form-group">
-    <label for="" class="col-sm-2 control-label">是否涉密:</label>
-    <div class="col-sm-10">
-      <select >
-        <option value=''>1.涉密</option>
-        <option value=''>2.不涉密</option>
-      </select>
-      <span class='help-info'>指标数据是否为涉密数据。</span>
+    <div class="form-group">
+      <label for="" class="col-sm-2 control-label">是否涉密:</label>
+      <div class="col-sm-10">
+        <select >
+          <option value=''>1.涉密</option>
+          <option value=''>2.不涉密</option>
+        </select>
+        <span class='help-info'>指标数据是否为涉密数据。</span>
+      </div>
     </div>
-  </div>
-  <div class="form-group">
-    <label for="" class="col-sm-2 control-label">联系人
-      <span class='require-sign'>*</span>:</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control">
-      <span class='help-info'>
-        具有指标解释权的联系人名字。
-      </span>
+    <div class="form-group">
+      <label for="" class="col-sm-2 control-label">联系人
+        <span class='require-sign'>*</span>:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control">
+        <span class='help-info'>
+          具有指标解释权的联系人名字。
+        </span>
+      </div>
     </div>
-  </div>
-  <div class="form-group">
-    <label for="" class="col-sm-2 control-label">联系电话
-      <span class='require-sign'>*</span>:</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control">
-      <span class='help-info'>
-        具有指标解释权的联系部门或联系人电话。
-      </span>
+    <div class="form-group">
+      <label for="" class="col-sm-2 control-label">联系电话
+        <span class='require-sign'>*</span>:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control">
+        <span class='help-info'>
+          具有指标解释权的联系部门或联系人电话。
+        </span>
+      </div>
     </div>
-  </div>
-</form>
+  </form>
 </div>
 <div class='modal-footer'>
-<button class='btn btn-primary' type='button'>提交</button>
-<button class='btn btn-default' type='button'>关闭</button>
+  <button class='btn btn-primary' type='button'>提交</button>
+  <button class='btn btn-default' type='button'>关闭</button>
 </div>
 </div>
 </script>
@@ -474,43 +474,43 @@
 </div>
 <div class='modal-body'>
 <form class="form-horizontal example-add-modal">
-<div class="form-group">
-  <label for="" class="col-sm-2 control-label">成果名称:</label>
-  <div class="col-sm-10">
-    <input type="text" class="form-control">
+  <div class="form-group">
+    <label for="" class="col-sm-2 control-label">成果名称:</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control">
+    </div>
   </div>
-</div>
 
-<div class="form-group">
-  <label for="" class="col-sm-2 control-label">成果密级代码:</label>
-  <div class="col-sm-10">
-    <input type="text" class="form-control">
+  <div class="form-group">
+    <label for="" class="col-sm-2 control-label">成果密级代码:</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control">
+    </div>
   </div>
-</div>
-<div class="form-group">
-  <label for="" class="col-sm-2 control-label">成果推荐单位:</label>
-  <div class="col-sm-10">
-    <input type="text" class="form-control">
+  <div class="form-group">
+    <label for="" class="col-sm-2 control-label">成果推荐单位:</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control">
+    </div>
   </div>
-</div>
-<div class="form-group">
-  <label for="" class="col-sm-2 control-label">成果属性代码:</label>
-  <div class="col-sm-10">
-    <input type="text" class="form-control">
+  <div class="form-group">
+    <label for="" class="col-sm-2 control-label">成果属性代码:</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control">
+    </div>
   </div>
-</div>
-<div class="form-group">
-  <label for="" class="col-sm-2 control-label">成果体现形成代码:</label>
-  <div class="col-sm-10">
-    <input type="text" class="form-control">
+  <div class="form-group">
+    <label for="" class="col-sm-2 control-label">成果体现形成代码:</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control">
+    </div>
   </div>
-</div>
-<div class="form-group">
-  <label for="" class="col-sm-2 control-label">成果学科分类:</label>
-  <div class="col-sm-10">
-    <input type="text" class="form-control">
+  <div class="form-group">
+    <label for="" class="col-sm-2 control-label">成果学科分类:</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control">
+    </div>
   </div>
-</div>
 </form>
 </div>
 <div class='modal-footer'>

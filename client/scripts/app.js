@@ -6,7 +6,9 @@ var app = angular.module('app', [
   'ui.bootstrap',
   'Login',
   'Main',
-  'Dashboard'
+  'Dashboard',
+  'Department',
+  'Department.Inventory'
 
 ]);
 
@@ -50,15 +52,18 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
       })
       .state('main.department', {
         url: '/department',
-        templateUrl: 'views/department/main.html'
+        templateUrl: 'views/department/main.html',
+        controller: 'Department.Controller.Main'
       })
       .state('main.department.inventory', {
         url: '/inventory',
-        templateUrl: 'views/department/inventory.html'
+        templateUrl: 'views/department/inventory.html',
+        controller: 'Department.Inventory.Controller.Main'
       })
       .state('main.department.inventory.publish', {
         url: '/publish',
-        templateUrl: 'views/department/inventory-publish.html'
+        templateUrl: 'views/department/inventory-publish.html',
+        controller: 'Department.Inventory.Controller.publish'
       })
       .state('main.department.share', {
         url: '/share',
