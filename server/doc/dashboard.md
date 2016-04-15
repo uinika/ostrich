@@ -34,10 +34,10 @@
 >（2016-04-01 00:00:00）
 
 #### Result:
-* allDataNum清单总数
-* allDepNum清单部门总数
-* thisMonthDataNum本月新增清单数量
-* thisMonthDepNum本月新增清单部门数量
+* INVENTORY_NUM 清单总数
+* MONTH_INVENTORY_NUM 本月新增清单数量
+* INVENTORY_DEPT_NUM 清单部门总数
+* MONTH_INVENTORY_DEPT_NUM 本月新增清单部门数量
 
 -------------
 
@@ -69,10 +69,10 @@ skip & limit
 > (2016-04-01 00:00:00)
 
 #### Result:
-* allDataNum需求总数
-* allDepNum需求部门总数
-* thisMonthDataNum本月新增需求数量
-* thisMonthDepNum本月新增需求部门数量
+* REQUIREMENT_NUM 需求总数
+* MONTH_REQUIREMENT_NUM  本月新增需求数量
+* REQUIREMENT_DEPT_NUM 需求部门总数
+* MONTH_REQUIREMENT_DEPT_NUM  本月新增需求部门数量
 
 -------------
 
@@ -84,7 +84,7 @@ skip & limit
 
 #### Result:
     {
-      departmen: [],
-      inventory: [],
-      requirement: []
+      REQUIREMENT: [],
+      INVENTORY: [],
+      REQUIREMENT: []
     }
