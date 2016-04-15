@@ -81,15 +81,18 @@ html {
   left: 23px;
   width: 90%;
 }
-#main .panel-row-one {
-  height: 290px;
-  overflow: hidden;
+#main .logo {
+  display: inline-block;
+  margin: 14px 40px auto 10px;
+  font-size: 20px;
 }
-#main .panel-heading {
-  overflow: hidden;
+#main .nav-tabs {
+  position: relative;
+  bottom: -8px;
 }
-#main .depart-logos {
-  padding: 24px 20px;
+#main .btn-login {
+  position: relative;
+  top: 7px;
 }
 #dashboard .left {
   padding-left: 0;
