@@ -551,7 +551,7 @@ html {
   list-style: none;
 }
 #indicator-detail .indicator-main .indicator-list .list-box .item-icon {
-  padding: 0px 30px;
+  padding: 0px 0px 0px 20px;
 }
 #indicator-detail .indicator-main .indicator-list .list-box .media-body {
   position: relative;
