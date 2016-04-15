@@ -85,7 +85,7 @@ html {
   display: inline-block;
   width: 310px;
   height: 40px;
-  margin: 3px 40px 0 -15px;
+  margin: 3px 30px 0 -15px;
   background: url('images/logo.png') no-repeat;
   background-size: 310px 40px;
 }
