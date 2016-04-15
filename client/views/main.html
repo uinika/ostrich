@@ -6,16 +6,16 @@
       </h1>
       <ul class='nav nav-tabs pull-left'>
         <li class='active'>
-          <a ui-sref='main.dashboard'>首页</a>
+          <a ng-click='Tab.switcher()' ui-sref='main.dashboard'>首页</a>
         </li>
         <li>
-          <a ui-sref='main.inventory'>目录清单</a>
+          <a ng-click='Tab.switcher()' ui-sref='main.inventory'>目录清单</a>
         </li>
         <li>
-          <a ui-sref='main.requirement'>需求清单</a>
+          <a ng-click='Tab.switcher()' ui-sref='main.requirement'>需求清单</a>
         </li>
         <li>
-          <a ui-sref='main.department'>部门主页</a>
+          <a ng-click='Tab.switcher()' ui-sref='main.department'>部门主页</a>
         </li>
       </ul>
       <button type="button" class="btn btn-info pull-right btn-login">

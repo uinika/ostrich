@@ -5,6 +5,7 @@ var app = angular.module('app', [
   'ui.router',
   'ui.bootstrap',
   'Login',
+  'Main',
   'Dashboard'
 
 ]);
@@ -23,7 +24,8 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
       })
       .state('main', {
         url: '/main',
-        templateUrl: 'views/main.html'
+        templateUrl: 'views/main.html',
+        controller: 'Main.Controller.Main'
       })
       .state('main.dashboard', {
         url: '/dashboard',
