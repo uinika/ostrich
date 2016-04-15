@@ -19,4 +19,4 @@ Main.controller('Main.Controller.Main', ['$scope',
     };
     $scope.Tab.active = 'active';
   }
-])
+]);

@@ -83,8 +83,11 @@ html {
 }
 #main .logo {
   display: inline-block;
-  margin: 14px 40px auto 10px;
-  font-size: 20px;
+  width: 310px;
+  height: 40px;
+  margin: 3px 40px 0 -15px;
+  background: url('images/logo.png') no-repeat;
+  background-size: 310px 40px;
 }
 #main .nav-tabs {
   position: relative;

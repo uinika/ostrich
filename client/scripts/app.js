@@ -19,17 +19,17 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
     $stateProvider
       .state('login', {
         url: '/login',
-        templateUrl: 'views/login.html',
+        templateUrl: 'views/common/login.html',
         controller: 'Login.Controller.Main'
       })
       .state('main', {
         url: '/main',
-        templateUrl: 'views/main.html',
+        templateUrl: 'views/common/main.html',
         controller: 'Main.Controller.Main'
       })
       .state('main.dashboard', {
         url: '/dashboard',
-        templateUrl: 'views/dashboard.html',
+        templateUrl: 'views/common/dashboard.html',
         controller: 'Dashboard.Controller.Main'
       })
       .state('main.inventory', {
