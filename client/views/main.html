@@ -5,7 +5,7 @@
         四川省数据注册发布平台
       </h1>
       <ul class='nav nav-tabs pull-left'>
-        <li ng-click="Tab.switcher('dashboard')" class='{{Tab.Actived.dashboard}}'>
+        <li ng-click="Tab.switcher('dashboard')" ng-init="Tab.Actived.dashboard='active'" class='{{Tab.Actived.dashboard}}'>
           <a ui-sref='main.dashboard'>首页</a>
         </li>
         <li ng-click="Tab.switcher('inventory')" class='{{Tab.Actived.inventory}}'>

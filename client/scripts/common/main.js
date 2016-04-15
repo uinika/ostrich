@@ -20,14 +20,3 @@ Main.controller('Main.Controller.Main', ['$scope',
     $scope.Tab.active = 'active';
   }
 ])
-
-/** Main Directive */
-Main.directive('wiservNavTabSwitcher', [
-  function() {
-    return{
-      link: function(){
-
-      }
-    }
-  }
-])
