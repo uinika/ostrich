@@ -2,8 +2,8 @@
 var Dashboard = angular.module('Dashboard', ['ui.router']);
 
 /** Dashboard Controller */
-Dashboard.controller('Dashboard.Controller.Main', ['$scope',
-  function($scope) {
+Dashboard.controller('Dashboard.Controller.Main', ['$scope', 'Dashboard.Service.Http',
+  function($scope, Http) {
     $scope.Bureaus = {};
     $scope.Echarts = {};
     $scope.Bureaus.logo = [
@@ -30,8 +30,44 @@ Dashboard.controller('Dashboard.Controller.Main', ['$scope',
     ];
     $scope.Echarts.overview = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"];
     $scope.Echarts.statistic = [];
+    Http.getInventory('').then(function(result){
+      console.log(result);
+    });
   }
 ])
+
+/* HTTP Factory */
+Dashboard.factory('Dashboard.Service.Http', ['$http', 'API',
+  function($http, API) {
+    var path = API.path;
+    function getInventory(params) {
+      return $http.get(
+        path + '/inventory', {params: params}
+      )
+    };
+    function getInventoryOverview(params) {
+      return $http.get(
+        path + '/inventory/overview', {params: params}
+      )
+    };
+    function getRequirement(params){
+      return $http.get(
+        path + '/requirement', {params: params}
+      )
+    };
+    function getRequirementOverview(params){
+      return $http.put(
+        path + '/requirement/overview', {params: params}
+      )
+    };
+    return {
+      getInventory: getInventory,
+      getInventoryOverview: getInventoryOverview,
+      getRequirement: getRequirement,
+      getRequirementOverview: getRequirementOverview
+    }
+  }
+]);
 
 /** Dashboard Directive */
 Dashboard.directive('wiservOverviewChart', [

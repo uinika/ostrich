@@ -12,10 +12,31 @@ var app = angular.module('app', [
 
 ]);
 
-app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
-  function($stateProvider, $urlRouterProvider, $locationProvider) {
+app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider',
+  function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     /** URL Location Mode */
     $locationProvider.html5Mode(false);
+    /** HTTP Interceptor */
+    $httpProvider.interceptors.push(['$q',
+      function($q) {
+        return {
+          'request': function(config) {
+            config.withCredentials = true;
+            return config;
+          },
+          'requestError': function(rejection) {
+            return response;
+          },
+          'response': function(response) {
+            console.log(response);
+            return response;
+          },
+          'responseError': function(rejection) {
+            return rejection;
+          }
+        };
+      }
+    ]);
     /** Config Router */
     $urlRouterProvider.otherwise('/login');
     $stateProvider
