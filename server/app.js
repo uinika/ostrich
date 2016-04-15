@@ -1,6 +1,7 @@
 'use strict';
 const Express = require('express'),
       App = Express(),
+      Config = require('./config'),
       bodyParser = require('body-parser');
 
 App.use(bodyParser.json());
@@ -11,7 +12,7 @@ App.use(bodyParser.json());
 // app.use(express.static(client));
 App.all('*', function(req, res, next) {
   // 指定一个允许向该服务器提交请求的URI.
-  res.header('Access-Control-Allow-Origin', 'http://localhost:8000');
+  res.header('Access-Control-Allow-Origin', Config.cors);
   // 指定服务器可以接收的HTTP请求方式，该响应头信息在客户端发出Option预检请求时会被返回
   res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
   // 设置浏览器可以读取服务器响应回来的Credential信息

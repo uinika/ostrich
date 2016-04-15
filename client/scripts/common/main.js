@@ -5,15 +5,15 @@ var Main = angular.module('Main', ['ui.router']);
 Main.controller('Main.Controller.Main', ['$scope',
   function($scope) {
     $scope.Tab = {};
-    $scope.Tab.switcher = function(){
-      console.log('test');
+    $scope.Tab.switcher = function(event){
+      console.log(event);
+      $scope.Tab.active = 'active';
     };
-    $scope.Tab.active = '';
+    $scope.Tab.active = 'active';
   }
 ])
 
-
-/** Main Controller */
+/** Main Directive */
 Main.directive('wiservNavTabSwitcher', [
   function() {
     return{
