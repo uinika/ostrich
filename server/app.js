@@ -40,3 +40,25 @@ App.use('/api', login);
 /** dict */
 var dict = require('./api/common/dict');
 App.use('/api', dict);
+
+/** department */
+var dep = require('./api/department/dep');
+App.use('/api', dep);
+
+var inventory = require('./api/department/inventory');
+App.use('/api', inventory);
+
+var response = require('./api/department/response');
+App.use('/api', response);
+
+var inventory_total = require('./api/department/inventoryTotal');
+App.use('/api', inventory_total);
+
+var share_total = require('./api/department/shareTotal');
+App.use('/api', share_total);
+
+var requirement_total = require('./api/department/requirementTotal');
+App.use('/api', requirement_total);
+
+var unaudit_total = require('./api/department/unauditTotal');
+App.use('/api', unaudit_total);

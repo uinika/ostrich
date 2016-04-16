@@ -1,0 +1,35 @@
+{
+  "head": {
+    "status": 200,
+    "total": 38,
+    "token": "97F11BD90EE59D0195CFDFEE08BD268F"
+  },
+  "body": [{
+    "ID": "2502a67d-02f0-11e6-a52a-5cf9dd40ad7e",
+    "DICT_CATEGORY": "3",
+    "DICT_CODE": "2",
+    "DICT_NAME": "省政务云平台开放",
+    "PARENT_CODE": "0",
+    "DICT_DESC": "共享级别",
+    "DICT_ORD": 2,
+    "ACTIVE_FLAG": "1"
+  }, {
+    "ID": "250375bd-02f0-11e6-a52a-5cf9dd40ad7e",
+    "DICT_CATEGORY": "3",
+    "DICT_CODE": "3",
+    "DICT_NAME": "授权开放",
+    "PARENT_CODE": "0",
+    "DICT_DESC": "共享级别",
+    "DICT_ORD": 3,
+    "ACTIVE_FLAG": "1"
+  }, {
+    "ID": "250446dc-02f0-11e6-a52a-5cf9dd40ad7e",
+    "DICT_CATEGORY": "3",
+    "DICT_CODE": "4",
+    "DICT_NAME": "暂不开放",
+    "PARENT_CODE": "0",
+    "DICT_DESC": "共享级别",
+    "DICT_ORD": 4,
+    "ACTIVE_FLAG": "1"
+  }]
+}

@@ -43,7 +43,7 @@
             <label for="" class="col-sm-2 control-label">清单名称
               <span class='require-sign'>*</span>:</label>
             <div class="col-sm-10">
-              <input type="text" name='dataName' ng-model='dataInfo.dataName' required class="form-control">
+              <input type="text" name='dataName' ng-model='dataInfo.DATA_NAME' required class="form-control">
             </div>
           </div>
           <div class="form-group">
@@ -82,6 +82,44 @@
           </div>
 
           <div class="form-group">
+            <label for="" class="col-sm-2 control-label">共享频率
+              <span class='require-sign'>*</span>:</label>
+            <div class="col-sm-10">
+              <span ng-repeat="sfItem in  shareFrequencyList">
+                <input type="checkbox"  value="{{sfItem.ID}}" ng-checked="shareFreqSelection.indexOf(sfItem.DICT_NAME) > -1" ng-click="toggleShareFreqSelection(sfItem.ID)">
+                {{sfItem.DICT_NAME}}
+              </span>
+            </div>
+            <input type="hidden" ng-model='dataInfo.shareFrequency'>
+          </div>
+
+          <div class="form-group">
+            <label for="" class="col-sm-2 control-label">分地区数据级别
+              <span class='require-sign'>*</span>:</label>
+            <div class="col-sm-10">
+              <span ng-repeat="dataLevel in  dataLevelList">
+                <input type="checkbox"  value="{{dataLevel.ID}}" ng-checked="dataLevelSelection.indexOf(dataLevel.DICT_NAME) > -1" ng-click="toggleDataLevelSelection(dataLevel.ID)">
+                {{dataLevel.DICT_NAME}}
+                </span>
+            </div>
+            <input type='hidden' ng-model='dataInfo.dataAreaLevel'/>
+          </div>
+
+          <div class="form-group">
+            <label for="" class="col-sm-2 control-label">共享级别
+              <span class='require-sign'>*</span>:</label>
+            <div class="col-sm-10">
+              <select name='shareLevelOpt' ng-model='dataInfo.shareLevel'>
+                <option ng-repeat="shareLevel in  shareLevelList" value='{{shareLevel.ID}}'>{{shareLevel.DICT_NAME}}</option>
+              </select>
+              指定部门名称：
+              <select ng-show='shareLevelOpt.$value == 3'>
+                <option ng-repeat="dep in  deptList" value='{{dep.ID}}'>{{dep.DEP_NAME}}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
               <button type='submit' class="btn btn-default pull-right">下一步</button>
             </div>
@@ -113,11 +151,8 @@
               <th>计量单位</th>
               <th>指标详细解释</th>
               <th>计算方法</th>
-              <th>共享频率</th>
               <th>空间范围</th>
-              <th>分地区数据级别</th>
               <th>来源部门</th>
-              <th>共享级别</th>
               <th>数据存储类型</th>
               <th>数据精度</th>
               <th>数据长度</th>
@@ -137,11 +172,8 @@
               <td>{{inventoryAttr.meterUnit}}</td>
               <td>{{inventoryAttr.quotaDetail}}</td>
               <td>{{inventoryAttr.caculateMethod}}</td>
-              <td>{{inventoryAttr.shareFrequency}}</td>
               <td>{{inventoryAttr.areaPeriod}}</td>
-              <td>{{inventoryAttr.dataAreaLevel}}</td>
               <td>{{inventoryAttr.departId}}</td>
-              <td>{{inventoryAttr.shareLevel}}</td>
               <td>{{inventoryAttr.quatoType}}</td>
               <td>{{inventoryAttr.dataPrecision}}</td>
               <td>{{inventoryAttr.dataLength}}</td>
@@ -183,7 +215,7 @@
             <tr >
               <th><input type='checkbox'/></th>
               <th>序号</th>
-              <th ng-repeat='exampTitle in exampTitles'>{{exampTitle.name}}</th>
+              <th ng-repeat='exampTitle in exampTitles'>{{exampTitle}}</th>
             </tr>
           </thead>
           <tbody>
@@ -266,7 +298,7 @@
     <div class='modal-header'>
       <i class="fa fa-server"></i>
       {{Modal.type}}指标
-      <button type='button' class='close' data-dismiss='modal'>&times;</button>
+      <button type='button' ng-click='Modal.cancel()' class='close' data-dismiss='modal'>&times;</button>
     </div>
     <div class='modal-body'>
 
@@ -308,15 +340,7 @@
           <span class='help-info'>是指为求得统计指标具体数值需要采用的算法。一般用计算公式表示，也可以用文字表述。</span>
         </div>
       </div>
-      <div class="form-group">
-        <label for="" class="col-sm-2 control-label">共享频率
-          <span class='require-sign'>*</span>:</label>
-        <div class="col-sm-10">
-          <span ng-repeat="sfItem in  shareFrequencyList">
-            <input type="checkbox" value='{{sfItem.ID}}'>{{sfItem.DICT_NAME}}</span>
-        </div>
-        <input type="hidden" ng-model='Modal.Quota.shareFrequency'>
-      </div>
+
       <div class="form-group">
         <label for="" class="col-sm-2 control-label">空间范围:</label>
         <div class="col-sm-10">
@@ -326,15 +350,7 @@
           </span>
         </div>
       </div>
-      <div class="form-group">
-        <label for="" class="col-sm-2 control-label">分地区数据级别
-          <span class='require-sign'>*</span>:</label>
-        <div class="col-sm-10">
-          <span ng-repeat="dataLevel in  dataLevelList">
-            <input type="checkbox" value='{{dataLevel.ID}}'>{{dataLevel.DICT_NAME}}</span>
-        </div>
-        <input type='hidden' ng-model='Modal.Quota.dataAreaLevel'/>
-      </div>
+
       <div class="form-group">
         <label for="" class="col-sm-2 control-label">来源部门:</label>
         <div class="col-sm-10">
@@ -344,19 +360,7 @@
           </span>
         </div>
       </div>
-      <div class="form-group">
-        <label for="" class="col-sm-2 control-label">共享级别
-          <span class='require-sign'>*</span>:</label>
-        <div class="col-sm-10">
-          <select name='shareLevelOpt' ng-model='Modal.Quota.shareLevel'>
-            <option ng-repeat="shareLevel in  shareLevelList" value='{{shareLevel.ID}}'>{{shareLevel.DICT_NAME}}</option>
-          </select>
-          指定部门名称：
-          <select ng-show='shareLevelOpt.$value == 3'>
-            <option ng-repeat="secretFlag in  secretFlagList" value='{{secretFlag.ID}}'>{{secretFlag.DICT_NAME}}</option>
-          </select>
-        </div>
-      </div>
+
       <div class="form-group">
         <label for="" class="col-sm-2 control-label">指标类型
           <span class='require-sign'>*</span>:</label>
@@ -449,14 +453,14 @@
 <div class='modal-header'>
   <i class="fa fa-server"></i>
   {{Modal.type}}指标
-  <button type='button' class='close' data-dismiss='modal'>&times;</button>
+  <button type='button' ng-click='Modal.cancel()' class='close' data-dismiss='modal'>&times;</button>
 </div>
 <div class='modal-body'>
   <form class="form-horizontal example-add-modal">
     <div class="form-group" ng-repeat='formTitle in exampTitles'>
-      <label for="" class="col-sm-2 control-label">{{formTitle.name}}:</label>
+      <label for="" class="col-sm-2 control-label">{{formTitle}}:</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" >
+        <input type="text" class="form-control" ng-model='formTitle'>
       </div>
     </div>
 

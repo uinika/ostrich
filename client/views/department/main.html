@@ -43,13 +43,13 @@
                       <i class='fa fa-comments fa-3x'></i>
                     </div>
                     <div class='col-xs-9 text-right'>
-                      <div class='font-16'>{{inventoryTotal}}</div>
+                      <div class='font-16'>{{InvtTotal.inventoryTotal}}</div>
                       <div>部门清单</div>
                     </div>
                   </div>
                 </div>
                 <div class='panel-footer'>
-                  本月新增 +{{inventoryMonthTotal}}
+                  本月新增 +{{InvtTotal.inventoryMonthTotal}}
                 </div>
               </div>
             </div>
@@ -62,13 +62,13 @@
                       <i class='fa fa-tasks fa-3x'></i>
                     </div>
                     <div class='col-xs-9 text-right'>
-                      <div class='font-16'>10</div>
+                      <div class='font-16'>{{ShareTotal.shareTotal}}</div>
                       <div>共享授权清单</div>
                     </div>
                   </div>
                 </div>
                 <div class='panel-footer'>
-                  本月新增 +10
+                  本月新增 +{{ShareTotal.shareMonthTotal}}
                 </div>
               </div>
             </div>
@@ -81,13 +81,13 @@
                       <i class='fa fa-support fa-3x'></i>
                     </div>
                     <div class='col-xs-9 text-right'>
-                      <div class='font-16'>10</div>
+                      <div class='font-16'>{{ReqTotal.requirementTotal}}</div>
                       <div>需求清单</div>
                     </div>
                   </div>
                 </div>
                 <div class='panel-footer'>
-                  本月新增 +10
+                  本月新增 +{{ReqTotal.requirementMonthTotal}}
                 </div>
               </div>
             </div>
@@ -100,7 +100,7 @@
                       <i class='fa fa-bar-chart fa-3x'></i>
                     </div>
                     <div class='col-xs-9 text-right'>
-                      <div class='font-16'>10</div>
+                      <div class='font-16'>{{UnauditTotal.unauditTotal}}</div>
                       <div>待审核清单</div>
                     </div>
                   </div>
@@ -114,7 +114,7 @@
             <div class='col-sm-6'>
               <div class="panel panel-default">
                 <div class="panel-heading">
-                  <div class='pull-left'>待审核清单（10）</div>
+                  <div class='pull-left'>待审核清单（{{UnauditTotal.unauditTotal}}）</div>
                   <div class='pull-right'>更多...</div>
                 </div>
 
@@ -128,11 +128,11 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <!-- <tr ng-repeat='ResourceCatalog in ResourceCatalogs'>
-                <td>{{ResourceCatalog.categoryName}}</td>
-                <td>{{ResourceCatalog.catalogName}}</td>
-                <td>{{ResourceCatalog.catalogCode}}</td>
-              </tr> -->
+                    <tr ng-repeat='invtItem in unauditInventoryList'>
+                      <td>{{invtItem.APPLY_TIME}}</td>
+                      <td>{{invtItem.DATA_NAME}}</td>
+                      <td>{{invtItem.DEP_NAME}}</td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
@@ -141,7 +141,7 @@
             <div class='col-sm-6'>
               <div class="panel panel-default">
                 <div class="panel-heading">
-                  <div class='pull-left'>需求响应列表（10）</div>
+                  <div class='pull-left'>需求响应列表（{{responseTotal}}）</div>
                   <div class='pull-right'>更多...</div>
                 </div>
                 <!-- Table -->
@@ -156,12 +156,12 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <!-- <tr ng-repeat='ResourceCatalog in ResourceCatalogs'>
-                  <td>{{ResourceCatalog.categoryName}}</td>
-                  <td>{{ResourceCatalog.catalogName}}</td>
-                  <td>{{ResourceCatalog.catalogCode}}</td>
-                  <td>{{ResourceCatalog.catalogCode}}</td>
-                </tr> -->
+                      <tr ng-repeat='resItem in responseList'>
+                        <td>{{resItem.RESPONSE_TIME}}</td>
+                        <td>{{resItem.CREATE_TIME}}</td>
+                        <td>{{resItem.REQUIEMENT_NAME}}</td>
+                        <td>{{resItem.DEP_NAME}}</td>
+                      </tr>
                     </tbody>
                   </table>
                 </div>
