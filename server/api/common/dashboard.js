@@ -27,4 +27,10 @@ Router.route('/requirement/overview')
     response.json(datas);
   });
 
+Router.route('/requirement/overview')
+  .get(function(request, response) {
+    let datas = JsonLoader.sync(Config.path + 'dashboard/getRequirementOverview.json');
+    response.json(datas);
+  });
+
 module.exports = Router;
