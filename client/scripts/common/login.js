@@ -30,7 +30,7 @@ Login.controller('Login.Controller.Main', ['$scope', '$state', 'Login.Service.Ht
 /* HTTP Factory */
 Login.factory('Login.Service.Http', ['$http', 'API',
   function($http, API) {
-    var path = API.test;
+    var path = API.path;
 
     function login(params) {
       return $http.get(

@@ -1,7 +1,7 @@
 'use strict';
 const Router = require('express').Router(),
       JsonLoader = require('load-json-file'),
-      Config = require('../config');
+      Config = require('../../config');
 
 Router.route('/dashboard')
   .get(function(request, response) {

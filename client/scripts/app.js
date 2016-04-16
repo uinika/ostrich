@@ -11,33 +11,30 @@ var app = angular.module('app', [
   'Department.Inventory'
 ]);
 
-app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider',
-  function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
+app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider', '$provide',
+  function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $provide) {
     /** URL Location Mode */
     $locationProvider.html5Mode(false);
     /** HTTP Interceptor */
-    $httpProvider.interceptors.push(['$q',
-      function($q) {
+    $provide.factory('authInterceptor', ['$q', '$location',
+      function($q , $location) {
         return {
           'request': function(config) {
-            config.withCredentials = true;
             return config;
           },
           'requestError': function(rejection) {
-            return response;
+            return $q.reject(rejection);
           },
           'response': function(response) {
-            if(response.data && response.data.head){
-              console.log(response.data.head.status);
-            }
             return response;
           },
           'responseError': function(rejection) {
-            return rejection;
+            return $q.reject(rejection);
           }
         };
       }
     ]);
+    $httpProvider.interceptors.push('authInterceptor');
     /** Config Router */
     $urlRouterProvider.otherwise('/login');
     $stateProvider
