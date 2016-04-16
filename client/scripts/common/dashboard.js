@@ -246,7 +246,6 @@ Dashboard.directive('wiservStatisticChart', [
           var DEPARTMENT = result.data.body[0];
           var INVENTORY = result.data.body[1];
           var REQUIREMENT = result.data.body[2];
-          console.log( INVENTORY );
           var myChart = echarts.init((element.find('div'))[0]);
           var option = {
             tooltip: {

@@ -27,7 +27,6 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
             return response;
           },
           'response': function(response) {
-            console.log(response);
             return response;
           },
           'responseError': function(rejection) {
