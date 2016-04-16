@@ -16,25 +16,26 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
     /** URL Location Mode */
     $locationProvider.html5Mode(false);
     /** HTTP Interceptor */
-    $provide.factory('authInterceptor', ['$q', '$location',
-      function($q , $location) {
+    $httpProvider.interceptors.push(['$q',
+      function($q) {
         return {
           'request': function(config) {
+            config.withCredentials = true;
             return config;
           },
           'requestError': function(rejection) {
-            return $q.reject(rejection);
+            return response;
           },
           'response': function(response) {
+            console.log(response);
             return response;
           },
           'responseError': function(rejection) {
-            return $q.reject(rejection);
+            return rejection;
           }
         };
       }
     ]);
-    $httpProvider.interceptors.push('authInterceptor');
     /** Config Router */
     $urlRouterProvider.otherwise('/login');
     $stateProvider
