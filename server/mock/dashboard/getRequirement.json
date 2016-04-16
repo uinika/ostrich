@@ -15,7 +15,7 @@
     "UPDATE_USER": "gongshangju",
     "UPDATE_TIME": 1460704942000,
     "person_name": "工商局用户",
-    "dep_name": "工商局"
+    "DEP_NAME": "工商局"
   }, {
     "ID": "aaac1242-0146-11e6-8bab-5cf9dd40ad7e",
     "REQUIEMENT_NAME": "需求企业工商项目交换指标",
@@ -27,7 +27,7 @@
     "UPDATE_USER": null,
     "UPDATE_TIME": null,
     "person_name": "公安局用户",
-    "dep_name": "公安局"
+    "DEP_NAME": "公安局"
   }, {
     "ID": "aaaac84d-0146-11e6-8bab-5cf9dd40ad7e",
     "REQUIEMENT_NAME": "需求公安项目交换指标",
@@ -39,6 +39,6 @@
     "UPDATE_USER": null,
     "UPDATE_TIME": null,
     "person_name": "工商局用户",
-    "dep_name": "工商局"
+    "DEP_NAME": "工商局"
   }]
 }

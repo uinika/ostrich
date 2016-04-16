@@ -4,9 +4,7 @@ var Dashboard = angular.module('Dashboard', ['ui.router']);
 /** Dashboard Controller */
 Dashboard.controller('Dashboard.Controller.Main', ['$scope', 'Dashboard.Service.Http',
   function($scope, Http) {
-    $scope.Bureaus = {};
-    $scope.Echarts = {};
-
+    // Datas List
     Http.getInventory({
       skip: 0,
       limit: 6
@@ -15,8 +13,37 @@ Dashboard.controller('Dashboard.Controller.Main', ['$scope', 'Dashboard.Service.
          $scope.Inventories = result.data.body;
       }
     });
-
-    $scope.Bureaus.logo = [
+    Http.getRequirement({
+      skip: 0, limit: 7
+    }).then(function(result) {
+      if(200 == result.data.head.status){
+         $scope.Requirements = result.data.body;
+      }
+    });
+    // Echarts Graph
+    Http.getInventoryOverview({
+      endTime: 0, endTime: 10
+    }).then(function(result) {
+      if(200 == result.data.head.status){
+         $scope.InventoryOverview = result.data.body;
+      }
+    });
+    Http.getRequirementOverview({
+      startTime: 0, endTime: 10
+    }).then(function(result) {
+      if(200 == result.data.head.status){
+         $scope.RequirementOverview = result.data.body;
+      }
+    });
+    Http.getInventoryStatistic({
+      skip: 0, limit: 10
+    }).then(function(result) {
+      if(200 == result.data.head.status){
+         $scope.InventoryStatistic = result.data.body;
+      }
+    });
+    // Bureaus logo grid
+    $scope.Bureaus = [
       'anjianju',
       'canlian',
       'chengguanju',
@@ -38,8 +65,7 @@ Dashboard.controller('Dashboard.Controller.Main', ['$scope', 'Dashboard.Service.
       'sifaju',
       'tongjiju'
     ];
-    $scope.Echarts.overview = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"];
-    $scope.Echarts.statistic = [];
+
 
 
 
@@ -67,21 +93,27 @@ Dashboard.factory('Dashboard.Service.Http', ['$http', 'API',
       )
     };
     function getRequirementOverview(params){
-      return $http.put(
+      return $http.get(
         path + '/requirement/overview', {params: params}
+      )
+    };
+    function getInventoryStatistic(params){
+      return $http.get(
+        path + '/inventory/statistic', {params: params}
       )
     };
     return {
       getInventory: getInventory,
       getInventoryOverview: getInventoryOverview,
       getRequirement: getRequirement,
-      getRequirementOverview: getRequirementOverview
+      getRequirementOverview: getRequirementOverview,
+      getInventoryStatistic: getInventoryStatistic
     }
   }
 ]);
 
 /** Dashboard Directive */
-Dashboard.directive('wiservOverviewChart', [
+Dashboard.directive('wiservInventoryOverviewChart', [
   function() {
     return {
       restrict: 'AE',
@@ -93,10 +125,60 @@ Dashboard.directive('wiservOverviewChart', [
             trigger: 'item',
             formatter: "{a} <br/>{b}: {c} ({d}%)"
           },
-          legend: {
-            orient: 'vertical',
-            x: 'left',
-            data: ['直达', '营销广告']
+          series: [{
+            name: '清单提供部门',
+            type: 'pie',
+            selectedMode: 'single',
+            radius: [0, '30%'],
+            label: {
+              normal: {
+                position: 'inner'
+              }
+            },
+            labelLine: {
+              normal: {
+                show: false
+              }
+            },
+            data: [{
+              value: 335,
+              name: '清单提供部门'
+            }, {
+              value: 679,
+              name: '本月新增',
+              selected: true
+            }]
+          }, {
+            name: '清单总数',
+            type: 'pie',
+            radius: ['40%', '55%'],
+            data: [{
+              value: 335,
+              name: '清单总数'
+            }, {
+              value: 310,
+              name: '本月新增',
+              selected: true
+            }]
+          }]
+        };
+        myChart.setOption(option);
+      }
+    };
+  }
+]);
+
+Dashboard.directive('wiservRequirementOverviewChart', [
+  function() {
+    return {
+      restrict: 'AE',
+      template: "<div style='width:300;height:240px;'></div>",
+      link: function(scope, element, attr) {
+        var myChart = echarts.init((element.find('div'))[0]);
+        var option = {
+          tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b}: {c} ({d}%)"
           },
           series: [{
             name: '清单提供部门',

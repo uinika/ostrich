@@ -14,7 +14,7 @@
             <span class='input-group-addon'>检索</span>
           </div>
           <div class='bureau-list'>
-            <div ng-repeat='logo in Bureaus.logo' class='bureau-item col-md-3'>
+            <div ng-repeat='logo in Bureaus' class='bureau-item col-md-3'>
               <a href='' class='thumbnail'>
                 <img ng-src='../styles/images/bureau/{{logo}}.png'>
               </a>
@@ -29,7 +29,7 @@
           <i class='fa fa-server'> 清单总览</i>
         </div>
         <div class='panel-body'>
-          <wiserv-overview-chart/>
+          <wiserv-inventory-overview-chart/>
         </div>
       </div>
     </div>
@@ -39,7 +39,7 @@
           <i class='fa fa-share-alt'> 需求总览</i>
         </div>
         <div class='panel-body'>
-          <wiserv-overview-chart/>
+          <wiserv-requirement-overview-chart/>
         </div>
       </div>
     </div>
@@ -82,15 +82,10 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>2016-04-15</td>
-              <td>科技项目交换指标</td>
-              <td>省地税局</td>
-            </tr>
-            <tr>
-              <td>2013-11-29</td>
-              <td>科技成果交换指标</td>
-              <td>省科技厅</td>
+            <tr ng-repeat='requirement in Requirements'>
+              <td>{{requirement.CREATE_TIME}}</td>
+              <td>{{requirement.REQUIEMENT_DESC}}</td>
+              <td>{{requirement.DEP_NAME}}</td>
             </tr>
           </tbody>
         </table>
