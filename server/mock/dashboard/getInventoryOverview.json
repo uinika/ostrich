@@ -1,0 +1,13 @@
+{
+  "head": {
+    "status": 200,
+    "total": 1,
+    "token": "1gzzwuj7ibw0k1oqqfwrguyr7b"
+  },
+  "body": [{
+    "INVENTORY_NUM": 3,
+    "INVENTORY_DEPT_NUM": 2,
+    "MONTH_INVENTORY_NUM": 2,
+    "MONTH_INVENTORY_DEPT_NUM": 1
+  }]
+}

@@ -5,25 +5,25 @@ const Router = require('express').Router(),
 
 Router.route('/inventory')
   .get(function(request, response) {
-    let datas = JsonLoader.sync(Config.path + 'dashboard/overview.json');
+    let datas = JsonLoader.sync(Config.path + 'dashboard/getInventory.json');
     response.json(datas);
   });
 
 Router.route('/inventory/overview')
   .get(function(request, response) {
-    let datas = JsonLoader.sync(Config.path + 'dashboard/overview.json');
+    let datas = JsonLoader.sync(Config.path + 'dashboard/getInventoryOverview.json');
     response.json(datas);
   });
 
 Router.route('/requirement')
   .get(function(request, response) {
-    let datas = JsonLoader.sync(Config.path + 'dashboard/overview.json');
+    let datas = JsonLoader.sync(Config.path + 'dashboard/getRequirement.json');
     response.json(datas);
   });
 
 Router.route('/requirement/overview')
   .get(function(request, response) {
-    let datas = JsonLoader.sync(Config.path + 'dashboard/overview.json');
+    let datas = JsonLoader.sync(Config.path + 'dashboard/getRequirementOverview.json');
     response.json(datas);
   });
 
