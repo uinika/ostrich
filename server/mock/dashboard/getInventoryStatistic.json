@@ -1,0 +1,14 @@
+{
+  "head": {
+    "status": 200,
+    "total": 3,
+    "token": "1gzzwuj7ibw0k1oqqfwrguyr7b"
+  },
+  "body": [{
+    "DEPARTMENT": ["残联局", "公安局"]
+  }, {
+    "INVENTORY": [2, 1]
+  }, {
+    "REQUIREMENT": [0, 1]
+  }]
+}

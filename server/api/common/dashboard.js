@@ -27,9 +27,9 @@ Router.route('/requirement/overview')
     response.json(datas);
   });
 
-Router.route('/requirement/overview')
+Router.route('/inventory/statistic')
   .get(function(request, response) {
-    let datas = JsonLoader.sync(Config.path + 'dashboard/getRequirementOverview.json');
+    let datas = JsonLoader.sync(Config.path + 'dashboard/getInventoryStatistic.json');
     response.json(datas);
   });
 
