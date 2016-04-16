@@ -9,7 +9,6 @@ var app = angular.module('app', [
   'Dashboard',
   'Department',
   'Department.Inventory'
-
 ]);
 
 app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider',
@@ -28,7 +27,9 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
             return response;
           },
           'response': function(response) {
-            console.log(response);
+            if(response.data && response.data.head){
+              console.log(response.data.head.status);
+            }
             return response;
           },
           'responseError': function(rejection) {

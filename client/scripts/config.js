@@ -4,5 +4,6 @@
 var Config = angular.module('Config', []);
 
 Config.constant('API', {
-  path:'http://172.16.7.64:8080/drrp'
+  path:'http://localhost:5001/api',
+  test: 'http://172.16.1.77:8080/api'
 });
