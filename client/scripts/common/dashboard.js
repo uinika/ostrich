@@ -6,6 +6,16 @@ Dashboard.controller('Dashboard.Controller.Main', ['$scope', 'Dashboard.Service.
   function($scope, Http) {
     $scope.Bureaus = {};
     $scope.Echarts = {};
+
+    Http.getInventory({
+      skip: 0,
+      limit: 6
+    }).then(function(result) {
+      if(200 == result.data.head.status){
+         $scope.Inventories = result.data.body;
+      }
+    });
+
     $scope.Bureaus.logo = [
       'anjianju',
       'canlian',
@@ -31,14 +41,7 @@ Dashboard.controller('Dashboard.Controller.Main', ['$scope', 'Dashboard.Service.
     $scope.Echarts.overview = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"];
     $scope.Echarts.statistic = [];
 
-    Http.getInventory({
-      skip: 0,
-      limit: 6
-    }).then(function(result) {
-      if(200 == result.data.head.status){
-         $scope.Inventory = result.data.body;
-      }
-    });
+
 
 
   }

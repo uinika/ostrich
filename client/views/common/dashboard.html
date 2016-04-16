@@ -50,7 +50,7 @@
         <div class='panel-heading'>
           <i class='fa fa-cart-arrow-down'> 最新资源</i>
         </div>
-        <table class='table'>
+        <table class='table table-hover table-condensed table-striped'>
           <thead>
             <tr>
               <th>发布日期</th>
@@ -59,15 +59,10 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>2016-04-15</td>
-              <td>科技项目交换指标</td>
-              <td>省地税局</td>
-            </tr>
-            <tr>
-              <td>2013-11-29</td>
-              <td>科技成果交换指标</td>
-              <td>省科技厅</td>
+            <tr ng-repeat='inventory in Inventories'>
+              <td>{{inventory.CREATE_TIME}}</td>
+              <td>{{inventory.DATA_NAME}}</td>
+              <td>{{inventory.DEP_NAME}}</td>
             </tr>
           </tbody>
         </table>
@@ -78,7 +73,7 @@
         <div class='panel-heading'>
           <i class='fa fa-pencil-square-o'> 最新需求</i>
         </div>
-        <table class='table'>
+        <table class='table table-hover table-condensed table-striped'>
           <thead>
             <tr>
               <th>发布日期</th>

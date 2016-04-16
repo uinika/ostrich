@@ -16,7 +16,7 @@
     "UPDATE_USER": null,
     "UPDATE_TIME": null,
     "VISIT_COUNT": 0,
-    "dep_name": "残联局"
+    "DEP_NAME": "残联局"
   }, {
     "ID": "24b68a24-011d-11e6-8bab-5cf9dd40ad7e",
     "DATA_NAME": "企业注册信息清单",
@@ -29,7 +29,7 @@
     "UPDATE_USER": null,
     "UPDATE_TIME": null,
     "VISIT_COUNT": 0,
-    "dep_name": "残联局"
+    "DEP_NAME": "残联局"
   }, {
     "ID": "75cfebdf-011d-11e6-8bab-5cf9dd40ad7e",
     "DATA_NAME": "各区犯罪率统计清单",
@@ -42,6 +42,58 @@
     "UPDATE_USER": null,
     "UPDATE_TIME": null,
     "VISIT_COUNT": 0,
-    "dep_name": "公安局"
+    "DEP_NAME": "公安局"
+  }, {
+    "ID": "75cfebdf-011d-11e6-8bab-5cf9dd40ad7e",
+    "DATA_NAME": "各区犯罪率统计清单",
+    "DATA_SUMMARY": "犯罪率统计",
+    "DEP_ID": "7",
+    "LINKMAN": "李嘉盛",
+    "CONTACT_PHONE": "13677776666",
+    "CREATE_USER": "gonganju",
+    "CREATE_TIME": 1457835272000,
+    "UPDATE_USER": null,
+    "UPDATE_TIME": null,
+    "VISIT_COUNT": 0,
+    "DEP_NAME": "公安局"
+  }, {
+    "ID": "75cfebdf-011d-11e6-8bab-5cf9dd40ad7e",
+    "DATA_NAME": "各区犯罪率统计清单",
+    "DATA_SUMMARY": "犯罪率统计",
+    "DEP_ID": "7",
+    "LINKMAN": "李嘉盛",
+    "CONTACT_PHONE": "13677776666",
+    "CREATE_USER": "gonganju",
+    "CREATE_TIME": 1457835272000,
+    "UPDATE_USER": null,
+    "UPDATE_TIME": null,
+    "VISIT_COUNT": 0,
+    "DEP_NAME": "公安局"
+  }, {
+    "ID": "75cfebdf-011d-11e6-8bab-5cf9dd40ad7e",
+    "DATA_NAME": "各区犯罪率统计清单",
+    "DATA_SUMMARY": "犯罪率统计",
+    "DEP_ID": "7",
+    "LINKMAN": "李嘉盛",
+    "CONTACT_PHONE": "13677776666",
+    "CREATE_USER": "gonganju",
+    "CREATE_TIME": 1457835272000,
+    "UPDATE_USER": null,
+    "UPDATE_TIME": null,
+    "VISIT_COUNT": 0,
+    "DEP_NAME": "公安局"
+  }, {
+    "ID": "75cfebdf-011d-11e6-8bab-5cf9dd40ad7e",
+    "DATA_NAME": "各区犯罪率统计清单",
+    "DATA_SUMMARY": "犯罪率统计",
+    "DEP_ID": "7",
+    "LINKMAN": "李嘉盛",
+    "CONTACT_PHONE": "13677776666",
+    "CREATE_USER": "gonganju",
+    "CREATE_TIME": 1457835272000,
+    "UPDATE_USER": null,
+    "UPDATE_TIME": null,
+    "VISIT_COUNT": 0,
+    "DEP_NAME": "公安局"
   }]
 }
