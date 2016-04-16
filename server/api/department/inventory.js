@@ -16,4 +16,10 @@ Router.route('/inventory/department')
     response.json(datas);
   });
 
+  Router.route('/inventoryTotal')
+    .get(function(request, response) {
+      let head = {}, body = {};
+      let datas = JsonLoader.sync(Config.path + 'department/getInventoryTotal.json');
+      response.json(datas);
+    });
 module.exports = Router;

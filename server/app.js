@@ -36,3 +36,7 @@ App.use('/api', auth);
 /** Login */
 var login = require('./api/common/login');
 App.use('/api', login);
+
+/** dict */
+var dict = require('./api/common/dict');
+App.use('/api', dict);
