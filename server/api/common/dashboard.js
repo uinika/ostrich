@@ -1,17 +1,28 @@
 'use strict';
 const Router = require('express').Router(),
-      JsonLoader = require('load-json-file'),
-      Config = require('../../config');
+  JsonLoader = require('load-json-file'),
+  Config = require('../../config');
 
-Router.route('/dashboard')
+Router.route('/inventory')
   .get(function(request, response) {
-    let head = {}, body = {};
-
+    let datas = JsonLoader.sync(Config.path + 'dashboard/overview.json');
+    response.json(datas);
   });
 
-Router.route('/dashboard/overview')
+Router.route('/inventory/overview')
   .get(function(request, response) {
-    let head = {}, body = {};
+    let datas = JsonLoader.sync(Config.path + 'dashboard/overview.json');
+    response.json(datas);
+  });
+
+Router.route('/requirement')
+  .get(function(request, response) {
+    let datas = JsonLoader.sync(Config.path + 'dashboard/overview.json');
+    response.json(datas);
+  });
+
+Router.route('/requirement/overview')
+  .get(function(request, response) {
     let datas = JsonLoader.sync(Config.path + 'dashboard/overview.json');
     response.json(datas);
   });

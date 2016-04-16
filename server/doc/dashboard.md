@@ -84,7 +84,7 @@ skip & limit
 
 #### Result:
     {
-      REQUIREMENT: [],
+      DEPARTMENT: [],
       INVENTORY: [],
       REQUIREMENT: []
     }
