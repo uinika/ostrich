@@ -102,6 +102,7 @@ html {
 #main .btn-login {
   position: relative;
   top: 7px;
+  right: -15px;
 }
 #dashboard .left {
   padding: 0;
@@ -510,7 +511,7 @@ html {
   overflow-y: scroll;
 }
 #inventory-main .left .department-list .list-group a {
-  font-size: 13px;
+  font-size: 14px;
   text-overflow: clip;
 }
 #inventory-main .right {
@@ -522,10 +523,13 @@ html {
   margin-right: -10px;
 }
 #inventory-main .right .filter {
-  font-size: 12px;
+  font-size: 11px !important;
 }
 #inventory-main .right .filter .pager {
   margin: 0 0 15px 0;
+}
+#inventory-main .right .filter .pager .badge {
+  background: #337AB7;
 }
 #inventory-main .right .filter a {
   padding: 3px 8px;

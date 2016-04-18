@@ -12,13 +12,19 @@
         <li ng-click="Tab.switcher('requirement')" class='{{Tab.Actived.requirement}}'>
           <a ui-sref='main.requirement'>需求清单</a>
         </li>
-        <li ng-click="Tab.switcher('department')" class='{{Tab.Actived.department}}'>
-          <a ui-sref='main.department'>部门主页</a>
-        </li>
       </ul>
-      <button type="button" class="btn btn-info pull-right btn-login">
-        <i class="fa fa-user"> 用户信息</i>
-      </button>
+
+      <div class="btn-group pull-right btn-login">
+        <button type="button" class="btn btn-info"><i class="fa fa-user"> 用户信息</i></button>
+        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a ui-sref='main.department'>部门主页</a></li>
+        </ul>
+      </div>
+
+
     </div>
   </nav>
   <div id='ui-view-main' ui-view></div>
