@@ -516,6 +516,29 @@ html {
 #inventory-main .filter .shared-range .pager {
   margin: 0;
 }
+#inventory-main .content .icon.test {
+  height: 60px;
+  width: 90px;
+  margin-top: 5px;
+}
+#inventory-main .content .organization {
+  background-image: url('images/indicator/indicator-organization.png');
+  background-size: 90px 60px;
+  background-repeat: no-repeat;
+}
+#inventory-main .content .project {
+  background-image: url('images/indicator/indicator-project.png');
+  background-size: 90px 60px;
+  background-repeat: no-repeat;
+}
+#inventory-main .content .achievement {
+  background-image: url('images/indicator/indicator-achievement.png');
+  background-size: 90px 60px;
+  background-repeat: no-repeat;
+}
+#inventory-main .content .information {
+  margin-left: 10px;
+}
 #inventory-main .content .information h1 {
   font-size: 15px;
   font-weight: bold;
