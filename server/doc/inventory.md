@@ -24,6 +24,7 @@
 ### Type: GET
 
 #### Parameter:
+* DEP_ID  部门ID
 
 #### Result:
 * SYS_DICT_ID      属性的ID值
@@ -39,6 +40,7 @@
 ### Type: GET
 
 #### Parameter:
+* DEP_ID  部门ID
 
 #### Result:
 * SYS_DICT_ID      属性的ID值
