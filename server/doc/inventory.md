@@ -104,6 +104,33 @@
 
 -------------
 
+## /inventory/getInventoryDetail
+
+### Type: GET
+
+#### Parameter:
+ID	 清单ID
+
+#### Result:
+   ID                   varchar(36) not null comment 'ID',
+   DATA_NAME            varchar(256) comment '数据名称',
+   DATA_SUMMARY         varchar(1000) comment '数据摘要',
+   DEP_ID               varchar(36) comment '所属部门',
+   LINKMAN              varchar(64) comment '联系人',
+   CONTACT_PHONE        varchar(64) comment '联系电话',
+   PUBLISH_TIME         datetime comment '发布时间',
+   CREATE_USER          varchar(36) comment '发布人',
+   CREATE_TIME          datetime comment '上传时间',
+   UPDATE_USER          varchar(36) comment '更新人',
+   UPDATE_TIME          datetime comment '更新时间',
+   VISIT_COUNT          decimal comment '浏览次数',
+   SHARE_LEVEL          varchar(36) comment '共享级别',
+   SHARE_DEPS           varchar(256) comment '共享指定部门',
+   AREA_PERIOD          varchar(256) comment '空间范围',
+   DEP_NAME	 部门的名称
+
+-------------
+
 ## /indicator/indicatorList
 
 ### Type: GET

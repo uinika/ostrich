@@ -3,25 +3,23 @@
   <div class='panel panel-default'>
     <div class='panel-heading'>
       <i class='fa fa-clone'>
-        上传日期：{{inventory.CREATE_TIME}}</i>
-      <span class='pull-right'>浏览：{{inventory.VISIT_COUNT}}</span>
+        上传日期：{{InventoryDetail.detail.CREATE_TIME}}</i>
+      <span class='pull-right'>浏览：{{InventoryDetail.detail.VISIT_COUNT}}</span>
     </div>
     <div class='panel-body'>
       <div class='content'>
-        <a ui-sref='main.inventory.detail({inventoryID:inventory.ID})'>
-          <div class='icon organization test pull-left'></div>
-          <div class='information pull-left'>
-            <h1>{{inventory.DATA_NAME}}</h3>
-            <h2>{{inventory.DATA_SUMMARY}}</h5>
-            <ul class='list-inline'>
-              <li>提供部门：{{inventory.DEP_NAME}}</li>
-              <li>联系人：{{inventory.LINKMAN}}</li>
-              <li>联系方式：{{inventory.CONTACT_PHONE}}</li>
-              <li>发布日期：{{inventory.PUBLISH_TIME}}</li>
-              <li>上传日期：{{inventory.UPDATE_TIME}}</li>
-            </ul>
-          </div>
-        </a>
+        <div class='icon organization test pull-left'></div>
+        <div class='information pull-left'>
+          <h1>{{InventoryDetail.detail.DATA_NAME}}</h3>
+          <h2>{{InventoryDetail.detail.DATA_SUMMARY}}</h5>
+          <ul class='list-inline'>
+            <li>提供部门：{{InventoryDetail.detail.DEP_NAME}}</li>
+            <li>联系人：{{InventoryDetail.detail.LINKMAN}}</li>
+            <li>联系方式：{{InventoryDetail.detail.CONTACT_PHONE}}</li>
+            <li>发布日期：{{InventoryDetail.detail.PUBLISH_TIME}}</li>
+            <li>上传日期：{{InventoryDetail.detail.UPDATE_TIME}}</li>
+          </ul>
+        </div>
         <div class='operation pull-right'>
           <span class='label label-success'>{{inventory.DICT_NAME}}</span>
         </div>
@@ -52,14 +50,29 @@
             <th>来源部门</th>
             <th>共享级别</th>
             <th>创建时间</th>
-            <th>指标种类一</th>
-            <th>指标种类二</th>
-            <th>指标种类三</th>
             <th>联系人</th>
             <th>联系电话</th>
           </tr>
         </thead>
-        <tbody></tbody>
+        <tbody>
+          <tr ng-repeat='indicator in InventoryDetail.indicators'>
+            <td>{{$index}}</td>
+            <td>{{indicator.QUOTA_NAME}}</td>
+            <td>{{indicator.ALIAS}}</td>
+            <td>{{indicator.QUOTA_TYPE}}</td>
+            <td>{{indicator.DATA_LENGTH}}</td>
+            <td>{{indicator.METER_UNIT}}</td>
+            <td>{{indicator.QUOTA_DETAIL}}</td>
+            <td>{{indicator.CALCULATE_METHOD}}</td>
+            <td>{{}}</td>
+            <td>{{}}</td>
+            <td>{{indicator.DEP_ID}}</td>
+            <td>{{indicator.SHARE_LEVEL}}</td>
+            <td>{{indicator.CREATE_TIME}}</td>
+            <td>{{indicator.LINKMAN}}</td>
+            <td>{{indicator.CONTACT_PHONE}}</td>
+          </tr>
+        </tbody>
       </table>
     </table>
   </div>

@@ -633,6 +633,9 @@ html {
 #indicator-detail .content .information ul li {
   color: #777777;
 }
+#indicator-detail .table {
+  font-size: 12px;
+}
 #requirement-main {
   padding: 0;
 }
