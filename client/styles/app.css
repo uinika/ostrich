@@ -596,59 +596,44 @@ html {
   right: 20px;
   top: 30px;
 }
-#requirement-main .requirement-main {
-  padding: 0 0 0 25px;
-}
-#requirement-main .requirement-main .requirement-info {
-  overflow: hidden;
-  border-bottom: 1px solid #777;
-}
-#requirement-main .requirement-main .requirement-info .breadcrumb {
-  margin-bottom: 0;
-  background: none;
-}
-#requirement-main .requirement-main .requirement-info .nav-pills li {
-  padding-right: 10px;
-}
-#requirement-main .requirement-main .requirement-filter {
-  margin: 5px 10px 0;
-  border-bottom: 1px solid #CCC;
-  font-size: 13px;
-}
-#requirement-main .requirement-main .requirement-filter .filter-title {
-  display: inline-block;
-  vertical-align: top;
-  margin-top: 10px;
-}
-#requirement-main .requirement-main .requirement-filter .filter-list {
-  display: inline-block;
-}
-#requirement-main .requirement-main .requirement-list .list-box {
-  padding: 15px 0 0;
-  list-style: none;
-}
-#requirement-main .requirement-main .requirement-list .list-box .item-heading {
-  overflow: hidden;
-  padding: 5px 25px 5px 10px;
-  font-size: 12px;
-  color: #777;
-}
-#requirement-main .requirement-main .requirement-list .list-box .item-icon {
-  padding: 8px 20px 0 4px;
-}
-#requirement-main .requirement-main .requirement-list .list-box .item-icon img {
-  width: 100px;
-}
-#requirement-main .requirement-main .requirement-list .list-box .media-body {
+#requirement-main .breadcrumb section {
   position: relative;
+  top: -5px;
+  right: -15px;
 }
-#requirement-main .requirement-main .requirement-list .list-box .media-body .main-heading {
-  line-height: 28px;
+#requirement-main .content .organization {
+  background-image: url('images/indicator/indicator-organization.png');
+  background-size: 90px 60px;
+  background-repeat: no-repeat;
 }
-#requirement-main .requirement-main .requirement-list .list-box .media-body .item-label {
-  position: absolute;
-  right: 15px;
-  top: 5px;
+#requirement-main .content .project {
+  background-image: url('images/indicator/indicator-project.png');
+  background-size: 90px 60px;
+  background-repeat: no-repeat;
+}
+#requirement-main .content .achievement {
+  background-image: url('images/indicator/indicator-achievement.png');
+  background-size: 90px 60px;
+  background-repeat: no-repeat;
+}
+#requirement-main .content .information {
+  margin-left: 10px;
+}
+#requirement-main .content .information h1 {
+  font-size: 15px;
+  font-weight: bold;
+  margin: 6px 20px 10px;
+}
+#requirement-main .content .information h2 {
+  font-size: 13px;
+  margin: 7px 20px;
+}
+#requirement-main .content .information ul {
+  margin: 0px 15px;
+  font-size: 12px;
+}
+#requirement-main .content .information ul li {
+  color: #777777;
 }
 #requirement-detail .dl-horizontal dt,
 #requirement-detail .dl-horizontal dd {

@@ -1,131 +1,41 @@
-<!-- UI Router -->
-<div id='ui-view-requirement' ui-view>
-  <div id='requirement-main'>
-    <!-- BEGIN MAIN -->
-    <div class='container'>
-      <div class='row'>
+<div ui-view id='requirement-main' class='container'>
 
-        <div class='requirement-main'>
-          <div class='requirement-info'>
-            <div class='pull-left'>
-              <ol class="breadcrumb font-13">
-                <li>
-                  主页
-                </li>
-                <li class="active">需求清单</li>
-              </ol>
-            </div>
-            <div class='pull-right'>
-              <ul class="nav nav-pills">
-                <li role="presentation">
-                  需求清单总计（100）
-                </li>
-                <li role="presentation">
-                  需求部门（10）
-                </li>
-                <li role="presentation">
-                  需求已响应（10）
-                </li>
-              </ul>
-            </div>
-          </div>
+  <ol class="breadcrumb">
+    <li><i class="fa fa-calendar-check-o"> 需求清单</i></li>
+    <section class='pull-right'>
+      <button class='btn btn-default btn-sm'>需求清单总计
+        <span class='badge'>14</span>
+      </button>
+      <button class='btn btn-default btn-sm'>需求部门
+        <span class='badge'>14</span>
+      </button>
+      <button class='btn btn-default btn-sm'>需求已响应
+        <span class='badge'>14</span>
+      </button>
+    </section>
+  </ol>
 
-          <!-- requirement inventory list -->
-          <div class='requirement-list'>
-            <ul class='list-box'>
-              <li>
-                <div class="panel panel-default ">
-                  <div class="panel-heading item-heading">
-                    <div class='pull-left'>发布日期：2016-04-16</div>
-                  </div>
-                  <div class="panel-body">
-                    <div class="media">
-                      <div class="media-left item-icon">
-                        <img ng-src='../../styles/images/department/jigou.png'/>
-                      </div>
-                      <div class="media-body">
-                        <a ui-sref='main.requirement.detail'>
-                          <h4 class="media-heading main-heading">科技机构交换指标
-                          </h4>
-                        </a>
-                        <h5>摘要：四川省21个地市州，2015年科技项目交换指标</h5>
-                        <div class='item-label'>
-                          <img ng-src='../../styles/images/main/responded.png'/>
-                        </div>
-                        <div class='row font-13 margin-top14'>
-                          <div class='col-sm-3'>来源：四川省科技局</div>
-                          <div class='col-sm-3'>联系人：李一</div>
-                          <div class='col-sm-3'>联系电话：028-86524152</div>
-                          <div class='col-sm-3'>邮箱：liyi@123.com</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div class="panel panel-default ">
-                  <div class="panel-heading item-heading">
-                    <div class='pull-left'>发布日期：2016-04-16</div>
-                  </div>
-                  <div class="panel-body">
-                    <div class="media">
-                      <div class="media-left item-icon">
-                        <img ng-src='../../styles/images/department/chengguo.png'/>
-                      </div>
-                      <div class="media-body">
-                        <a ui-sref='main.requirement.detail'>
-                          <h4 class="media-heading main-heading">科技成果交换指标
-                          </h4>
-                        </a>
-                        <h5>摘要：四川省21个地市州，2015年科技项目交换指标</h5>
-                        <div class='item-label'>
-                          <label class='label label-success'>需求已响应</label>
-                        </div>
-                        <div class='row font-13 margin-top14'>
-                          <div class='col-sm-3'>来源：四川省科技局</div>
-                          <div class='col-sm-3'>联系人：李一</div>
-                          <div class='col-sm-3'>联系电话：028-86524152</div>
-                          <div class='col-sm-3'>邮箱：liyi@123.com</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div class="panel panel-default ">
-                  <div class="panel-heading item-heading">
-                    <div class='pull-left'>发布日期：2016-04-16</div>
-                  </div>
-                  <div class="panel-body">
-                    <div class="media">
-                      <div class="media-left item-icon">
-                        <img ng-src='../../styles/images/department/xiangmu.png'/>
-                      </div>
-                      <div class="media-body">
-                        <a ui-sref='main.requirement.detail'>
-                          <h4 class="media-heading main-heading">科技项目交换指标
-                          </h4>
-                        </a>
-                        <h5>摘要：四川省21个地市州，2015年科技项目交换指标</h5>
-                        <div class='item-label'>
-                          <label class='label label-success'>需求已响应</label>
-                        </div>
-                        <div class='row font-13 margin-top14'>
-                          <div class='col-sm-3'>来源：四川省科技局</div>
-                          <div class='col-sm-3'>联系人：李一</div>
-                          <div class='col-sm-3'>联系电话：028-86524152</div>
-                          <div class='col-sm-3'>邮箱：liyi@123.com</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </li>
+  <div class='panel panel-default'>
+    <div class='panel-heading'>
+      <i class='fa fa-minus-square-o'> 上传日期：2016-04-16</i>
+    </div>
+    <div class='panel-body'>
+      <div class='content'>
+        <a ui-sref='main.inventory.detail'>
+          <div class='icon organization test pull-left'></div>
+          <div class='information pull-left'>
+            <h1>科技成果交换指标</h3>
+            <h2>摘要：四川省21个地市州 2015年科技项目交换指标</h5>
+            <ul class='list-inline'>
+              <li>提供部门：四川省科技局</li>
+              <li>联系人：李一</li>
+              <li>联系方式：028-8783887</li>
+              <li>发布日期：2016-02-13</li>
             </ul>
           </div>
-
+        </a>
+        <div class='operation pull-right'>
+          需求已响应
         </div>
       </div>
     </div>

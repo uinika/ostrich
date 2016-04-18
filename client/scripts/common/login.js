@@ -13,6 +13,7 @@ Login.controller('Login.Controller.Main', ['$scope', '$state', 'Login.Service.Ht
         USERNAME: username,
         PASSWORD: password
       }).then(function(result) {
+        console.log(result.data);
         if(200 == result.data.head.status){
           $state.go("main.dashboard");
         }

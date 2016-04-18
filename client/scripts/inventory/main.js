@@ -12,18 +12,18 @@ Inventory.controller('Inventory.Controller.Main', ['$scope', '$state', 'Inventor
     });
 
     $scope.Inventory.switcher = function(target){
-      console.log(target);
-      Http.getShareDictWithInventoryNum().then(function(result) {
+      var httpParams = {DEP_ID: target}
+      Http.getShareDictWithInventoryNum(httpParams).then(function(result) {
         if(200 == result.data.head.status){
           $scope.Inventory.shareDict = result.data.body;
         }
       });
-      Http.getAreaDictWithInventoryNum().then(function(result) {
+      Http.getAreaDictWithInventoryNum(httpParams).then(function(result) {
         if(200 == result.data.head.status){
           $scope.Inventory.areaDict = result.data.body;
         }
       });
-      Http.inventoryList().then(function(result) {
+      Http.inventoryList(httpParams).then(function(result) {
         if(200 == result.data.head.status){
           $scope.Inventory.shareDict = result.data.body;
         }
@@ -40,27 +40,27 @@ Inventory.factory('Inventory.Service.Http', ['$http', 'API',
     var path = API.path;
     function getDepWithInventoryNum(params) {
       return $http.get(
-        path + '/getDepWithInventoryNum', {params: params}
+        path + '/inventory/getDepWithInventoryNum'
       )
     };
     function getShareDictWithInventoryNum(params) {
       return $http.get(
-        path + '/getDepWithInventoryNum', {params: params}
+        path + '/inventory/getShareDictWithInventoryNum', {params: params}
       )
     };
     function getAreaDictWithInventoryNum(params) {
       return $http.get(
-        path + '/getDepWithInventoryNum', {params: params}
+        path + '/inventory/getAreaDictWithInventoryNum', {params: params}
       )
     };
     function inventoryList(params) {
       return $http.get(
-        path + '/getDepWithInventoryNum', {params: params}
+        path + '/inventory/inventoryList', {params: params}
       )
     };
     function updateVisitCount(params) {
       return $http.put(
-        path + '/getDepWithInventoryNum', {data: data}
+        path + '/inventory/updateVisitCount', {data: data}
       )
     };
     return {

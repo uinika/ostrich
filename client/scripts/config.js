@@ -5,5 +5,5 @@ var Config = angular.module('Config', []);
 
 Config.constant('API', {
   path:'http://localhost:5001/api'
-  // path: 'http://172.16.1.78:8080/api'
+   //path: 'http://172.16.1.78:8080/api'
 });

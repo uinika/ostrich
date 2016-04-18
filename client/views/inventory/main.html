@@ -1,4 +1,4 @@
-<div id='inventory-main' class='container'>
+<div ui-view id='inventory-main' class='container'>
   <div class='row'>
     <div class='col-md-2'>
       <div class='department-list panel panel-default'>
@@ -56,17 +56,19 @@
           </div>
           <div class='panel-body'>
             <div class='content'>
-              <div class='icon organization test pull-left'></div>
-              <div class='information pull-left'>
-                <h1>科技成果交换指标</h3>
-                <h2>摘要：四川省21个地市州 2015年科技项目交换指标</h5>
-                <ul class='list-inline'>
-                  <li>提供部门：四川省科技局</li>
-                  <li>联系人：李一</li>
-                  <li>联系方式：028-8783887</li>
-                  <li>发布日期：2016-02-13</li>
-                </ul>
-              </div>
+              <a ui-sref='main.inventory.detail'>
+                <div class='icon organization test pull-left'></div>
+                <div class='information pull-left'>
+                  <h1>科技成果交换指标</h3>
+                  <h2>摘要：四川省21个地市州 2015年科技项目交换指标</h5>
+                  <ul class='list-inline'>
+                    <li>提供部门：四川省科技局</li>
+                    <li>联系人：李一</li>
+                    <li>联系方式：028-8783887</li>
+                    <li>发布日期：2016-02-13</li>
+                  </ul>
+                </div>
+              </a>
               <div class='operation pull-right'>
                 <span class='label label-primary'>省级指标</span>
                 <span class='label label-success'>全开放</span>
