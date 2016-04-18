@@ -598,7 +598,7 @@ html {
 }
 #requirement-main .breadcrumb section {
   position: relative;
-  top: -5px;
+  top: -2px;
   right: -15px;
 }
 #requirement-main .content .icon.test {

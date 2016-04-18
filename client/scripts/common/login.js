@@ -2,8 +2,8 @@
 var Login = angular.module('Login', ['ui.router']);
 
 /** Main Controller */
-Login.controller('Login.Controller.Main', ['$scope', '$state', 'Login.Service.Http',
-  function($scope, $state, Http) {
+Login.controller('Login.Controller.Main', ['$rootScope', '$scope', '$state', 'Login.Service.Http',
+  function($rootScope, $scope, $state, Http) {
     $scope.Login = {};
 
     $scope.Login.submit = function() {
@@ -13,7 +13,7 @@ Login.controller('Login.Controller.Main', ['$scope', '$state', 'Login.Service.Ht
         USERNAME: username,
         PASSWORD: password
       }).then(function(result) {
-        console.log(result.data);
+        $rootScope.User = result.data.body;
         if(200 == result.data.head.status){
           $state.go("main.dashboard");
         }
