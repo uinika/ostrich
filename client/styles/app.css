@@ -118,6 +118,9 @@ html {
   width: 95%;
   margin-left: 15px;
 }
+#dashboard .first-section .bureau-filter .input-group-addon {
+  cursor: pointer;
+}
 #dashboard .first-section .bureau-list {
   margin-top: 1.2rem;
   height: 195px;
