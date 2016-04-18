@@ -9,6 +9,7 @@ var app = angular.module('app', [
   'Main',
   'Dashboard',
   'Department',
+  'Inventory',
   'Department.Inventory',
   'Department.Audit',
   'Department.SystemUser'
@@ -58,7 +59,8 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
       })
       .state('main.inventory', {
         url: '/inventory',
-        templateUrl: 'views/inventory/main.html'
+        templateUrl: 'views/inventory/main.html',
+        controller: 'Inventory.Controller.Main'
       })
       .state('main.inventory.detail', {
         url: '/detail',

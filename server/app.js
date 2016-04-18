@@ -37,9 +37,13 @@ App.use('/api', auth);
 var login = require('./api/common/login');
 App.use('/api', login);
 
-/** dict */
+/** Dictionary */
 var dict = require('./api/common/dict');
 App.use('/api', dict);
+
+/** Inventory */
+var inventoryList = require('./api/inventory/inventoryList');
+App.use('/api', inventoryList);
 
 /** department */
 var dep = require('./api/department/dep');
