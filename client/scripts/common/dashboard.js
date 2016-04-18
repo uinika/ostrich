@@ -263,7 +263,7 @@ Dashboard.directive('wiservStatisticChart', [
               type: 'value',
               name: '单位',
               min: 0,
-              max: 250,
+              max: 30,
               interval: 30,
               axisLabel: {
                 formatter: '{value} 个'
