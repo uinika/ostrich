@@ -594,32 +594,44 @@ html {
 #inventory-main .right .content .information ul li {
   color: #777777;
 }
-#indicator-detail .indicator-main {
-  padding: 0 0 0 25px;
+#indicator-detail .content .icon.test {
+  height: 60px;
+  width: 90px;
+  margin-top: 5px;
 }
-#indicator-detail .indicator-main .indicator-list .list-box {
-  padding: 15px 0 0;
-  list-style: none;
+#indicator-detail .content .organization {
+  background-image: url('images/indicator/indicator-organization.png');
+  background-size: 90px 60px;
+  background-repeat: no-repeat;
 }
-#indicator-detail .indicator-main .indicator-list .list-box .item-icon {
-  padding: 0px 0px 0px 20px;
+#indicator-detail .content .project {
+  background-image: url('images/indicator/indicator-project.png');
+  background-size: 90px 60px;
+  background-repeat: no-repeat;
 }
-#indicator-detail .indicator-main .indicator-list .list-box .media-body {
-  position: relative;
-  vertical-align: middle;
-  padding: 0 30px;
+#indicator-detail .content .achievement {
+  background-image: url('images/indicator/indicator-achievement.png');
+  background-size: 90px 60px;
+  background-repeat: no-repeat;
 }
-#indicator-detail .indicator-main .indicator-list .list-box .media-body {
-  position: relative;
-  vertical-align: middle;
+#indicator-detail .content .information {
+  margin-left: 10px;
 }
-#indicator-detail .indicator-main .indicator-list .list-box .media-body .main-heading {
-  line-height: 28px;
+#indicator-detail .content .information h1 {
+  font-size: 15px;
+  font-weight: bold;
+  margin: 6px 20px 10px;
 }
-#indicator-detail .indicator-main .indicator-list .list-box .media-body .item-label {
-  position: absolute;
-  right: 20px;
-  top: 30px;
+#indicator-detail .content .information h2 {
+  font-size: 13px;
+  margin: 7px 20px;
+}
+#indicator-detail .content .information ul {
+  margin: 0px 15px;
+  font-size: 12px;
+}
+#indicator-detail .content .information ul li {
+  color: #777777;
 }
 #requirement-main {
   padding: 0;
