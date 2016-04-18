@@ -26,7 +26,7 @@
           <a href="javascript:;">全部</a>
         </li>
         <li role="presentation" ng-repeat='shareLevel in shareLevelList'>
-          <a href="javascript:;" ng-click='getAuListBySl(shareLevel)' >{{shareLevel.name}}[{{shareLevel.total}}]</a>
+          <a ng-class="{true: 'active', false: 'inactive'}[shareLvSelection.indexOf(shareLevel.DICTID) > -1]" href="javascript:;" ng-click='getAuListBySl(shareLevel)' >{{shareLevel.DICT_NAME}}[{{shareLevel.NUMBER}}]</a>
         </li>
       </ul>
     </div>
@@ -37,7 +37,7 @@
           <a href="javascript:;">全部</a>
         </li>
         <li role="presentation" ng-repeat='areaPeriod in areaPeriodList'>
-          <a href="javascript:;">{{areaPeriod.name}}[{{areaPeriod.total}}]</a>
+          <a ng-class="{true: 'active', false: 'inactive'}[areaSelection.indexOf(areaPeriod.DICTID) > -1]" ng-checked="areaSelection.indexOf(areaPeriod.DICTID) > -1"  ng-click='getAuListByAP(areaPeriod)' href="javascript:;">{{areaPeriod.DICT_NAME}}[{{areaPeriod.NUMBER}}]</a>
         </li>
       </ul>
     </div>
@@ -49,7 +49,7 @@
           <a href="javascript:;">全部</a>
         </li>
         <li role="presentation" ng-repeat='auditStatus in auditStatusList'>
-          <a href="javascript:;">{{auditStatus.name}}[{{auditStatus.total}}]</a>
+          <a ng-class="{true: 'active', false: 'inactive'}[statusSelection.indexOf(auditStatus.AUDIT_NAME) > -1]" ng-click='getAuListBySta(auditStatus)' href="javascript:;">{{auditStatus.AUDIT_NAME}}[{{auditStatus.NUMBER}}]</a>
         </li>
       </ul>
     </div>
@@ -62,14 +62,14 @@
             <div class="panel-heading item-heading">
               <div class='pull-left'>
                 <span>上传日期：{{auditInfo.CREATE_TIME}}</span>
-                <span class='options'>
+                <!-- <span class='options'>
                   <a title='修改'>
                     <i class='fa fa-pencil'></i>
                   </a>
                   <a title='删除'>
                     <i class='fa fa-trash'></i>
                   </a>
-                </span>
+                </span> -->
               </div>
               <div class='pull-right'>浏览：{{auditInfo.VIEW_TIMES}}</div>
             </div>

@@ -419,6 +419,12 @@ html {
   border-bottom: 1px solid #CCC;
   font-size: 13px;
 }
+#department-audit .indicator-filter ul > li > a.active {
+  background: #DDD;
+}
+#department-audit .indicator-filter ul > li > a.inactive {
+  background: #FFF;
+}
 #department-audit .indicator-filter .filter-title {
   display: inline-block;
   vertical-align: top;

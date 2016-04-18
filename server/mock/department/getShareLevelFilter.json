@@ -5,20 +5,20 @@
     "token": "1gzzwuj7ibw0k1oqqfwrguyr7b"
   },
   "body": [{
-    "name": "全开放",
-    "ID": "1234",
-    "total":10
+    "DICT_NAME": "全开放",
+    "DICTID": "1234",
+    "NUMBER":10
   },{
-    "name": "政务云开放",
-    "ID": "12s34",
-    "total":0
+    "DICT_NAME": "政务云开放",
+    "DICTID": "12s34",
+    "NUMBER":0
   },{
-    "name": "授权开放",
+    "DICT_NAME": "授权开放",
     "ID": "12as34",
-    "total":13
+    "NUMBER":13
   },{
-    "name": "暂不开放",
-    "ID": "12ss34",
-    "total":6
+    "DICT_NAME": "暂不开放",
+    "DICTID": "12ss34",
+    "NUMBER":6
   }]
 }
