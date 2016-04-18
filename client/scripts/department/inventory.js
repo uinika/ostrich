@@ -54,7 +54,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$scope', '$q'
 
     $scope.toggleDataLevelSelection = function toggleDataLevelSelection(item) {
       var idx = $scope.dataLevelSelection.indexOf(item);
-
+      var idxModal = $scope.Modal.dataLevelSelection.indexOf(item);
       // is currently selected
       if (idx > -1) {
         $scope.dataLevelSelection.splice(idx, 1);
@@ -63,6 +63,15 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$scope', '$q'
       // is newly selected
       else {
         $scope.dataLevelSelection.push(item);
+      }
+
+      if (idxModal > -1) {
+        $scope.Modal.dataLevelSelection.splice(idx, 1);
+      }
+
+      // is newly selected
+      else {
+        $scope.Modal.dataLevelSelection.push(item);
       }
     };
 
@@ -146,9 +155,6 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$scope', '$q'
         $scope.step1.show = false;
         $scope.progress = 50;
 
-
-        window.console.log($scope.outputDeptList);
-
         $scope.step1_data = {};
         var data_info_add_configs = [];
 
@@ -161,7 +167,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$scope', '$q'
         });
 
         var shareDeps = [];
-        if($scope.dataInfo.shareLevel == '250375bd-02f0-11e6-a52a-5cf9dd40ad7e') {// 指定部门开放
+        if($scope.dataInfo.shareLevel == LEVEL_AUTH) {// 指定部门开放
           shareDeps = _.map($scope.outputDeptList, 'ID');
           $scope.dataInfo = _.assign($scope.dataInfo, {'shareDeps': shareDeps});
         }
@@ -176,6 +182,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$scope', '$q'
     $scope.popAttrAddModal = function() {
       $scope.Modal = {}; // Clean scope of modal
       $scope.Modal.Quota = {}; // Clean scope of modal
+      $scope.Modal.dataLevelSelection = [];
 
       // Get system dict
       Http.getSystemDictByCatagory({
@@ -196,10 +203,18 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$scope', '$q'
 
 
       Component.popModal($scope, '添加', 'add-indicator-modal').result.then(function() {
-        $scope.inventoryAttrList.push($scope.Modal.Quota);
+        var shareDeps = [];
+        if($scope.Modal.Quota.shareLevel == LEVEL_AUTH) {// 指定部门开放
+          shareDeps = _.map($scope.outputModalDeptList, 'ID');
+        }
+
+        var invntModalData = _.assign({"areaDataLevel": $scope.Modal.dataLevelSelection}, {"shareDeps":shareDeps} ,$scope.Modal.Quota);
+
+        $scope.inventoryAttrList.push(invntModalData);
 
         $scope.step2_data = {};
         $scope.dataQuota = [];
+
 
         _.forEach($scope.inventoryAttrList, function(item,index) {
           var step2_obj =_.assign({ 'dataInfoId': $scope.dataInfo.dataName }, item,{'showOrder' : index+1});

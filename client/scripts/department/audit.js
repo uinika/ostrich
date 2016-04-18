@@ -125,12 +125,20 @@ Audit.controller('Department.Audit.Controller.info', ['$scope', '$q','Department
   function($scope, $q ,Http ,$stateParams) {
     // login Department
     $scope.depName = '??';
-
+    var auditId = $stateParams.AUDITID;
     Http.getAuditDetail({
-      "AUDITID":$stateParams.AUDITID
+      "AUDITID": auditId
     }).then(function(result) {
       $scope.AuditDetail = result.data.body[0];
-    })
+    });
+
+    $scope.submitAudit = function() {
+      var AUDITOR = '??';
+      var auditInfo = _.assign($scope.AuditInfo, {"AUDITOR": AUDITOR}, {"ID": auditId});
+      Http.updateAuditDetail(auditInfo).then(function(result) {
+        console.log(result);
+      });
+    }
   }])
 
 /* HTTP */
@@ -188,13 +196,22 @@ Audit.factory('Department.Audit.Service.Http', ['$http', '$q', 'API',
         }
       )
     }
+
+    function updateAuditDetail(data) {
+      return $http.put(
+        path + '/openInventory/updateAuditStatus', {
+          data:data
+        }
+      )
+    }
     return {
       getAuditTotal: getAuditTotal,
       getShareLevelFilter: getShareLevelFilter,
       getSpatialFilter: getSpatialFilter,
       getAuditStatusFilter: getAuditStatusFilter,
       getAuditList: getAuditList,
-      getAuditDetail: getAuditDetail
+      getAuditDetail: getAuditDetail,
+      updateAuditDetail: updateAuditDetail
     }
   }
 ]);

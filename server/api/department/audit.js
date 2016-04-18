@@ -46,4 +46,19 @@ Router.route('/openInventory/inventoryList')
     let datas = JsonLoader.sync(Config.path + 'department/getAuditList.json');
     response.json(datas);
   });
+
+Router.route('/openInventory/openInventoryInfo')
+  .get(function(request, response) {
+    let head = {},
+      body = {};
+    let datas = JsonLoader.sync(Config.path + 'department/getOpenInventoryInfo.json');
+    response.json(datas);
+  });
+Router.route('/openInventory/updateAuditStatus')
+  .put(function(request, response) {
+    let head = {},
+      body = {};
+    let datas = JsonLoader.sync(Config.path + 'department/updateAuditStatus.json');
+    response.json(datas);
+  });
 module.exports = Router;

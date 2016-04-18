@@ -48,10 +48,10 @@
                 <dd>{{AuditDetail.CREATE_TIME}}</dd>
               </div>
 
-              <div>
+              <!-- <div>
                 <dt>上传日期：</dt>
                 <dd>{{AuditDetail.PUBLISH_TIME}}</dd>
-              </div>
+              </div> -->
             </dl>
           </div>
         </div>
@@ -68,8 +68,8 @@
               <label for="" class="col-sm-2 control-label">审核
                 <span class='require-sign'>*</span>:</label>
               <div class="col-sm-10">
-                <select class="form-control" ng-model='auditStatus'>
-                  <option value='1'>通过</option>
+                <select class="form-control" ng-model='AuditInfo.AUDIT_STATUS' >
+                  <option value='1' selected>通过</option>
                   <option value='2'>不通过</option>
                 </select>
               </div>
@@ -77,7 +77,7 @@
             <div class="form-group">
               <label for="" class="col-sm-2 control-label">审核意见</label>
               <div class="col-sm-10">
-                <textarea class="col-sm-12" rows='3'></textarea>
+                <textarea ng-model='AuditInfo.AUDIT_OPINION' class="col-sm-12" rows='3'></textarea>
               </div>
             </div>
           </form>
@@ -87,7 +87,7 @@
 
     <div class='pull-right'>
       <div class="btn-group">
-        <button type="button" class="btn btn-success">提交</button>
+        <button type="button" class="btn btn-success" ng-click='submitAudit()'>提交</button>
       </div>
     </div>
 

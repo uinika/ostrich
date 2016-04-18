@@ -4,33 +4,45 @@ var Department = angular.module('Department', ['ui.router']);
 /** Main Controller */
 Department.controller('Department.Controller.Main', ['$scope', '$q','Department.Service.Http',
   function($scope, $q ,Http) {
-    var starTime = "";
-    var endTime = "";
+    var starTime = getFirstDayMonth();
+    var endTime = getNowDate();
     var depId = 1;
+
+    // get current month
+    function getFirstDayMonth() {
+      var now = new Date();
+      return now.getFullYear() + "-" + (now.getMonth() + 1) + "-01";
+    }
+    function getNowDate() {
+      var now = new Date();
+      return now.getFullYear() + "-" + (now.getMonth() + 1) + "-" + now.getDate();
+    }
+
     Http.getInventoryTotal().then(function(result) {
-      $scope.inventoryTotal = result.data.body[0].total;
+      $scope.inventoryTotal = result.data.body[0].TOTAL;
     });
 
     Http.getInventoryTotal({
       starTime: starTime,
       endTime: endTime
     }).then(function(result) {
-      $scope.inventoryMonthTotal = result.data.body[0].total;
+      $scope.inventoryMonthTotal = result.data.body[0].TOTAL;
     });
 
     Http.getShareTotal().then(function(result) {
-      $scope.shareTotal = result.data.body[0].total;
+      $scope.shareTotal = result.data.body[0].TOTAL;
     });
 
     Http.getShareTotal({
       starTime: starTime,
       endTime: endTime
     }).then(function(result) {
-      $scope.shareMonthTotal = result.data.body[0].total
+      $scope.shareMonthTotal = result.data.body[0].TOTAL
     });
 
     Http.getRequirementTotal().then(function(result) {
-      $scope.requirementTotal = result.data.body[0].total
+      console.log(result);
+      $scope.requirementTotal = result.data.body[0].TOTAL
     });
 
     Http.getRequirementTotal({
