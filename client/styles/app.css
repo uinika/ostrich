@@ -601,6 +601,11 @@ html {
   top: -5px;
   right: -15px;
 }
+#requirement-main .content .icon.test {
+  height: 60px;
+  width: 90px;
+  margin-top: 5px;
+}
 #requirement-main .content .organization {
   background-image: url('images/indicator/indicator-organization.png');
   background-size: 90px 60px;
