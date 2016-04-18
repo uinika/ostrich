@@ -1,0 +1,53 @@
+{
+  "head": {
+    "status": 200,
+    "total": 3,
+    "token": "15ruc93c0lr151peuds3h27xla"
+  },
+  "body": [{
+    "ID": "24b68a24-011d-11e6-8bab-5cf9dd40ad7e",
+    "DATA_NAME": "企业注册信息清单",
+    "DATA_SUMMARY": "各企业信息",
+    "DEP_ID": "6",
+    "LINKMAN": "王平",
+    "CONTACT_PHONE": "13677778888",
+    "CREATE_USER": "gongshangju",
+    "CREATE_TIME": 1460340736000,
+    "UPDATE_USER": null,
+    "UPDATE_TIME": null,
+    "VISIT_COUNT": 0,
+    "SHARE_LEVEL": "2501e32c-02f0-11e6-a52a-5cf9dd40ad7e",
+    "SHOW_BUTTON": "false",
+    "DICT_NAME": "全开放"
+  }, {
+    "ID": "75ce8cec-011d-11e6-8bab-5cf9dd40ad7e",
+    "DATA_NAME": "残疾补助等级清单",
+    "DATA_SUMMARY": "残疾补助",
+    "DEP_ID": "2",
+    "LINKMAN": "张秋",
+    "CONTACT_PHONE": "13677779999",
+    "CREATE_USER": "canlianju",
+    "CREATE_TIME": 1460513672000,
+    "UPDATE_USER": null,
+    "UPDATE_TIME": null,
+    "VISIT_COUNT": 0,
+    "SHARE_LEVEL": "250446dc-02f0-11e6-a52a-5cf9dd40ad7e",
+    "SHOW_BUTTON": "true",
+    "DICT_NAME": "暂不开放"
+  }, {
+    "ID": "75cfebdf-011d-11e6-8bab-5cf9dd40ad7e",
+    "DATA_NAME": "各区犯罪率统计清单",
+    "DATA_SUMMARY": "犯罪率统计",
+    "DEP_ID": "7",
+    "LINKMAN": "李嘉盛",
+    "CONTACT_PHONE": "13677776666",
+    "CREATE_USER": "gonganju",
+    "CREATE_TIME": 1457835272000,
+    "UPDATE_USER": null,
+    "UPDATE_TIME": null,
+    "VISIT_COUNT": 0,
+    "SHARE_LEVEL": "250375bd-02f0-11e6-a52a-5cf9dd40ad7e",
+    "SHOW_BUTTON": "true",
+    "DICT_NAME": "授权开放"
+  }]
+}
