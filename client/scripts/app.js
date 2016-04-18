@@ -69,7 +69,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
         controller: 'Inventory.Controller.Main'
       })
       .state('main.inventory.detail', {
-        url: '/detail',
+        url: '/detail/:inventoryID',
         templateUrl: 'views/inventory/detail.html',
         controller: 'InventoryDetail.Controller.Main'
       })
