@@ -13,7 +13,7 @@ Login.controller('Login.Controller.Main', ['$rootScope', '$scope', '$state', 'Lo
         USERNAME: username,
         PASSWORD: password
       }).then(function(result) {
-        $rootScope.User = result.data.body;
+        $rootScope.User = result.data.body[0];
         if(200 == result.data.head.status){
           $state.go("main.dashboard");
         }
