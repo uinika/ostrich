@@ -610,6 +610,9 @@ html {
   right: 20px;
   top: 30px;
 }
+#requirement-main {
+  padding: 0;
+}
 #requirement-main .breadcrumb section {
   position: relative;
   top: -2px;
