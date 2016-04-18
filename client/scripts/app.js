@@ -13,7 +13,9 @@ var app = angular.module('app', [
   'InventoryDetail',
   'Department.Inventory',
   'Department.Audit',
-  'Department.SystemUser'
+  'Department.SystemUser',
+  'RequirementMain',
+  'RequirementDetail'
 ]);
 
 app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider', '$provide',
@@ -75,11 +77,13 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
       })
       .state('main.requirement', {
         url: '/requirement',
-        templateUrl: 'views/requirement/main.html'
+        templateUrl: 'views/requirement/main.html',
+        controller: 'RequirementMain.Controller.Main'
       })
       .state('main.requirement.detail', {
         url: '/detail',
-        templateUrl: 'views/requirement/detail.html'
+        templateUrl: 'views/requirement/detail.html',
+        controller: 'RequirementDetail.Controller.Main'
       })
       .state('main.department', {
         url: '/department',
