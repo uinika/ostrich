@@ -91,7 +91,7 @@
                     </div>
                     <div class='col-sm-4'>
                       <span class='col-sm-7'>申请部门：{{auditInfo.APPLY_DEPNAME}}</span>
-                      <a ng-class="{true: 'ng-show', false: 'ng-hide'}[auditInfo.SHOW_BUTTON]" ui-sref='main.department.audit.info({AUDITID:auditInfo.AUDITID})' class=' btn btn-sm btn-info'>我要审核</a>
+                      <a ng-class="{true: 'ng-show', false: 'ng-hide'}[{{auditInfo.SHOW_BUTTON}}]" ui-sref='main.department.audit.info({AUDITID:auditInfo.AUDITID})' class=' btn btn-sm btn-info'>我要审核</a>
                     </div>
                   </div>
                   <h5>摘要：{{auditInfo.DATA_SUMMARY}}</h5>
@@ -99,7 +99,7 @@
                     <div class='col-sm-3'>数据来源：{{auditInfo.DEPNAME}}</div>
                     <div class='col-sm-3'>联系人：{{auditInfo.LINKMAN}}</div>
                     <div class='col-sm-3'>联系电话：{{auditInfo.CONTACT_PHONE}}</div>
-                    <div class='col-sm-3'>发布日期：{{auditInfo.CREATE_TIME}}</div>
+                    <div class='col-sm-3'>发布日期：{{auditInfo.PUBLISH_TIME}}</div>
                   </div>
                 </div>
               </div>

@@ -2,27 +2,71 @@
 var SystemUser = angular.module('Department.SystemUser', ['ui.router']);
 
 /** Main Controller */
-SystemUser.controller('Department.SystemUser.Controller.Main', ['$scope', '$q','Department.SystemUser.Service.Http', 'Department.SystemUser.Service.Component', '$uibModal',
-  function($scope, $q ,Http, Component, $uibModal) {
-    Http.getUserList().then(function(result) {
-      $scope.users = result.data.body;
+SystemUser.controller('Department.SystemUser.Controller.Main', ['$scope', '$q', 'Department.SystemUser.Service.Http', 'Department.SystemUser.Service.Component', '$uibModal',
+  function($scope, $q, Http, Component, $uibModal) {
+    $scope.Modal = {}; // Clean scope of modal
+    $scope.deptList = [];
+
+    function getUserList() {
+      Http.getUserList().then(function(result) {
+        $scope.users = result.data.body;
+      });
+    }
+    Http.getDepartmentList().then(function(result) {
+      $scope.deptList = result.data.body;
     });
 
-    // add user
-    $scope.addUserModal= function() {
-      $scope.Modal = {}; // Clean scope of modal
-      $scope.Modal.user = {}; // Clean scope of modal
-      Http.getDepartmentList().then(function(result) {
-        $scope.deptList = result.data.body;
-        Component.popModal($scope, '添加', 'add-user-modal').result.then(function() {
-          Http.saveUser($scope.user).then(function(result) {
-            if (200 == result.data.head.status) {
-              alert('添加成功');
-            }
-          })
-        });
-      })
+    // init
+    getUserList();
 
+    // add user
+    $scope.addUserModal = function() {
+      $scope.Modal = {}; // Clean scope of modal
+      $scope.sysUser = {}; // Clean scope of modal
+
+      Component.popModal($scope, '添加', 'add-user-modal').result.then(function() {
+        Http.saveUser($scope.sysUser).then(function(result) {
+          if (200 == result.data.head.status) {
+            alert('添加成功');
+            getUserList();
+          }
+          else{
+            alert('添加失败');
+          }
+        })
+      });
+
+    }
+
+    $scope.updateUser = function(user) {
+      user.DEP_NAME = null;
+      $scope.sysUser = user;
+      Component.popModal($scope, '修改', 'add-user-modal').result.then(function() {
+        Http.updateUser($scope.sysUser).then(function(result) {
+          if (200 == result.data.head.status) {
+            alert('修改成功');
+            getUserList();
+          }
+          else{
+            alert('修改失败');
+          }
+        })
+      });
+    }
+
+    $scope.deleteUser = function(user) {
+      console.log(user);
+      Http.deleteUser(user).then(function(result) {
+        console.log(result.data);
+        if (200 == result.data.head.status) {
+          alert('删除成功');
+          getUserList();
+        }
+        else{
+          alert('删除失败！');
+        }
+        getUserList();
+      })
     }
 
 
@@ -43,7 +87,7 @@ SystemUser.factory('Department.SystemUser.Service.Http', ['$http', '$q', 'API',
 
     function saveUser(data) {
       return $http.post(
-        path + '/user',{
+        path + '/user', {
           data: data
         }
       )
@@ -54,10 +98,28 @@ SystemUser.factory('Department.SystemUser.Service.Http', ['$http', '$q', 'API',
         path + '/dep/'
       )
     }
+
+    function updateUser(data) {
+      return $http.put(
+        path + '/user/' , {
+          data: data
+        }
+      )
+    }
+
+    function deleteUser(data) {
+      return $http.delete(
+        path + '/user', {
+            data: {"ID":data.ID}
+        }
+      )
+    }
     return {
       getUserList: getUserList,
       saveUser: saveUser,
-      getDepartmentList: getDepartmentList
+      getDepartmentList: getDepartmentList,
+      updateUser: updateUser,
+      deleteUser: deleteUser
     }
   }
 ]);

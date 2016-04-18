@@ -8,8 +8,8 @@ DInventory.controller('Department.Inventory.Controller.Main', ['$scope', '$q', '
   }
 ])
 
-DInventory.controller('Department.Inventory.Controller.publish', ['$scope', '$q', '$uibModal', 'Department.Inventory.Service.Component', 'Department.Inventory.Service.Http',
-  function($scope, $q, $uibModal, Component, Http) {
+DInventory.controller('Department.Inventory.Controller.publish', ['$rootScope', '$scope', '$q', '$uibModal', 'Department.Inventory.Service.Component', 'Department.Inventory.Service.Http',
+  function($rootScope, $scope, $q, $uibModal, Component, Http) {
     $scope.step1 = {};
     $scope.step2 = {};
     $scope.step3 = {};
@@ -19,6 +19,8 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$scope', '$q'
     $scope.step3.show = false;
     $scope.step4.show = false;
     $scope.progress = 25;
+    $scope.loginUser = $rootScope.User;
+
 
     const SHARE_FREQUENCY = 1;
     const DATA_LEVEL = 2;
@@ -34,27 +36,63 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$scope', '$q'
 
     $scope.submitObject = {};
 
+    Date.prototype.format = function(fmt) { //author: meizz
+      var o = {
+        "%m": this.getMonth() + 1 + '', //月份
+        "%d": this.getDate() + '', //日
+        "%H": this.getHours() + '', //小时
+        "%M": this.getMinutes() + '', //分
+        "%S": this.getSeconds() + '', //秒
+        //"q+" : Math.floor((this.getMonth()+3)/3), //季度
+      };
+      // 年份  2015
+      if (/(%Y)/.test(fmt))
+        fmt = fmt.replace(RegExp.$1, (this.getFullYear() + ""));
+
+      // 两位年份  15
+      if (/(%y)/.test(fmt))
+        fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(2));
+
+      //getTime返回的是以毫秒为单位的，转为秒
+      if (/(%s)/.test(fmt))
+      //fmt=fmt.replace(RegExp.$1, this.getTime()/1);
+        fmt = fmt.replace(RegExp.$1, (this.getTime() + '').slice(0, 10));
+
+      for (var k in o)
+        if (new RegExp("(" + k + ")").test(fmt)) {
+          fmt = fmt.replace(RegExp.$1, (o[k].length == 2 ? o[k] : '0' + o[k]));
+        }
+      return fmt;
+    }
+
     // init
     $scope.shareFreqSelection = [];
     $scope.dataLevelSelection = [];
+    $scope.shareFreqArrShow = [];
     // toggle selection for a given item by name
-    $scope.toggleShareFreqSelection = function toggleShareFreqSelection(item) {
-      var idx = $scope.shareFreqSelection.indexOf(item);
+    $scope.toggleShareFreqSelection = function toggleShareFreqSelection(itemId, itemName) {
+      var idx = $scope.shareFreqSelection.indexOf(itemId);
 
       // is currently selected
       if (idx > -1) {
-        $scope.shareFreqSelection.splice(idx, 1);
+        $scope.shareFreqSelection.splice(itemId, 1);
+        $scope.shareFreqArrShow.splice(itemName, 1);
       }
 
       // is newly selected
       else {
-        $scope.shareFreqSelection.push(item);
+        $scope.shareFreqSelection.push(itemId);
+        $scope.shareFreqArrShow.push(itemName);
       }
     };
 
+    $scope.Modal = {};
+    $scope.Modal.Quota = {};
+    $scope.Modal.Quota.dataLevelSelection = [];
+
     $scope.toggleDataLevelSelection = function toggleDataLevelSelection(item) {
-      var idx = $scope.dataLevelSelection.indexOf(item);
-      var idxModal = $scope.Modal.dataLevelSelection.indexOf(item);
+      var idx = $scope.dataLevelSelection.indexOf(item.ID);
+      var idxModal = $scope.Modal.Quota.dataLevelSelection.indexOf(item.DICT_NAME);
       // is currently selected
       if (idx > -1) {
         $scope.dataLevelSelection.splice(idx, 1);
@@ -62,16 +100,16 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$scope', '$q'
 
       // is newly selected
       else {
-        $scope.dataLevelSelection.push(item);
+        $scope.dataLevelSelection.push(item.ID);
       }
 
       if (idxModal > -1) {
-        $scope.Modal.dataLevelSelection.splice(idx, 1);
+        $scope.Modal.Quota.dataLevelSelection.splice(idx, 1);
       }
 
       // is newly selected
       else {
-        $scope.Modal.dataLevelSelection.push(item);
+        $scope.Modal.Quota.dataLevelSelection.push(item.DICT_NAME);
       }
     };
 
@@ -95,13 +133,22 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$scope', '$q'
 
     Http.getDepartmentList().then(function(result) {
       $scope.deptList = result.data.body;
+      $scope.deptListModal = result.data.body;
     });
 
     // show or hide department
     $scope.depShow = false;
+    $scope.depShowModal = false;
     $scope.showHideDeps = function(ev) {
-      if(LEVEL_AUTH == $scope.dataInfo.shareLevel) {
+      if (LEVEL_AUTH == $scope.dataInfo.shareLevel) {
         $scope.depShow = true;
+      } else {
+        $scope.depShow = false;
+      }
+      if ('授权开放' == $scope.Modal.Quota.shareLevel) {
+        $scope.depShowModal = true;
+      } else {
+        $scope.depShowModal = false;
       }
       console.log($scope.depShow);
     }
@@ -158,6 +205,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$scope', '$q'
         $scope.step1_data = {};
         var data_info_add_configs = [];
 
+
         var sys_dicts = _.union($scope.shareFreqSelection, $scope.dataLevelSelection);
         _(sys_dicts).forEach(function(value) {
           var sys_dict = {};
@@ -167,12 +215,26 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$scope', '$q'
         });
 
         var shareDeps = [];
-        if($scope.dataInfo.shareLevel == LEVEL_AUTH) {// 指定部门开放
+        if ($scope.dataInfo.shareLevel == LEVEL_AUTH) { // 指定部门开放
           shareDeps = _.map($scope.outputDeptList, 'ID');
-          $scope.dataInfo = _.assign($scope.dataInfo, {'shareDeps': shareDeps});
+        }
+        if (shareDeps.length == 0) {
+          shareDeps = "0";
         }
 
-        $scope.step1_data = _.assign({'dataInfo':$scope.dataInfo}, {'dataInfoAddConfigs': data_info_add_configs});
+        $scope.dataInfo.publishTime = $scope.dataInfo.publishTime.format('%Y-%m-%d');
+
+        $scope.dataInfo = _.assign($scope.dataInfo, {
+          'shareDeps': shareDeps
+        }, {
+          'depId': $rootScope.User.DEP_ID
+        });
+
+        $scope.step1_data = _.assign({
+          'dataInfo': $scope.dataInfo
+        }, {
+          'dataInfoAddConfigs': data_info_add_configs
+        });
 
         window.console.log($scope.step1_data);
       }
@@ -182,7 +244,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$scope', '$q'
     $scope.popAttrAddModal = function() {
       $scope.Modal = {}; // Clean scope of modal
       $scope.Modal.Quota = {}; // Clean scope of modal
-      $scope.Modal.dataLevelSelection = [];
+      $scope.Modal.Quota.dataLevelSelection = [];
 
       // Get system dict
       Http.getSystemDictByCatagory({
@@ -204,11 +266,24 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$scope', '$q'
 
       Component.popModal($scope, '添加', 'add-indicator-modal').result.then(function() {
         var shareDeps = [];
-        if($scope.Modal.Quota.shareLevel == LEVEL_AUTH) {// 指定部门开放
+        if ($scope.Modal.Quota.shareLevel == LEVEL_AUTH) { // 指定部门开放
           shareDeps = _.map($scope.outputModalDeptList, 'ID');
         }
+        if (shareDeps.length == 0) {
+          shareDeps = "0";
+        }
 
-        var invntModalData = _.assign({"areaDataLevel": $scope.Modal.dataLevelSelection}, {"shareDeps":shareDeps} ,$scope.Modal.Quota);
+        // format areaDataLevel to string
+        var areaDataLevelStr = '';
+        _.forEach($scope.Modal.Quota.dataLevelSelection,function(value) {
+            areaDataLevelStr = areaDataLevelStr + value + ",";
+        })
+
+        var invntModalData = _.assign({
+          "areaDataLevel": areaDataLevelStr
+        }, {
+          "shareDeps": shareDeps
+        }, $scope.Modal.Quota);
 
         $scope.inventoryAttrList.push(invntModalData);
 
@@ -216,8 +291,13 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$scope', '$q'
         $scope.dataQuota = [];
 
 
-        _.forEach($scope.inventoryAttrList, function(item,index) {
-          var step2_obj =_.assign({ 'dataInfoId': $scope.dataInfo.dataName }, item,{'showOrder' : index+1});
+        _.forEach($scope.inventoryAttrList, function(item, index) {
+          item.dataLevelSelection = null;
+          var step2_obj = _.assign({
+            'dataInfoId': $scope.dataInfo.dataName
+          }, item, {
+            'showOrder': index + 1
+          });
           $scope.dataQuota.push(step2_obj);
         });
         $scope.step2_data.dataQuota = $scope.dataQuota;
@@ -236,10 +316,16 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$scope', '$q'
 
       Component.popModal($scope, '添加', 'add-example-modal').result.then(function() {
         window.console.log($scope.step2_data.dataQuota);
-        _.forEach($scope.step2_data.dataQuota, function(item,index) {
-            var dataObj = _.assign({'rowKey':item.showOrder}, {'dataQuotaValue':item.dataValue},{'dataQuotaId':item.quotaName})
-            $scope.rowDatas.push(dataObj);
-            $scope.dataCells.push(dataObj);
+        _.forEach($scope.step2_data.dataQuota, function(item, index) {
+          var dataObj = _.assign({
+            'rowKey': item.showOrder
+          }, {
+            'dataQuotaValue': item.dataValue
+          }, {
+            'dataQuotaId': item.quotaName
+          })
+          $scope.rowDatas.push(dataObj);
+          $scope.dataCells.push(dataObj);
         })
         $scope.ExampDatas.push($scope.rowDatas);
 
@@ -251,19 +337,29 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$scope', '$q'
     $scope.addFormSubmit = function() {
       $scope.step4_data = {};
       $scope.step4_data.dataOtherInfo =
-      _.assign({ 'dataInfoId': $scope.dataInfo.dataName }, $scope.DataOtherInfo);
+        _.assign({
+          'dataInfoId': $scope.dataInfo.dataName
+        }, $scope.DataOtherInfo);
 
-      $scope.submitObject = _.assign($scope.step1_data,$scope.step2_data,$scope.step3_data,$scope.step4_data);
+      $scope.submitObject = _.assign($scope.step1_data, $scope.step2_data, $scope.step3_data, $scope.step4_data);
 
       console.log($scope.submitObject);
-
-      Http.saveInventory($scope.submitObject).then(function(result){
+      // $scope.submitObject.dataLevelSelection = null;
+      Http.saveInventory($scope.submitObject).then(function(result) {
         console.log(result.data.head);
         if (200 == result.data.head.status) {
           alert('添加成功');
         }
       })
     }
+
+    // Datepicker
+    $scope.popup2 = {
+      opened: false
+    };
+    $scope.openDatePicker = function() {
+      $scope.popup2.opened = true;
+    };
   }
 ])
 
@@ -271,9 +367,10 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$scope', '$q'
 DInventory.factory('Department.Inventory.Service.Http', ['$http', '$q', 'API',
   function($http, $q, API) {
     var path = API.path;
+
     function saveInventory(data) {
       return $http.post(
-        path + '/inventory/department', {
+        path + '/inventory', {
           data: data
         }
       )

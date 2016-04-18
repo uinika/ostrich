@@ -57,9 +57,7 @@
             <label for="" class="col-sm-2 control-label">提供部门
               <span class='require-sign'>*</span>:</label>
             <div class="col-sm-10">
-              <select ng-model='dataInfo.depId' class='form-control'>
-                <option ng-repeat="dep in  deptList" value='{{dep.ID}}'>{{dep.DEP_NAME}}</option>
-              </select>
+              {{loginUser.DEP_NAME}}
             </div>
           </div>
           <div class="form-group">
@@ -78,9 +76,17 @@
           </div>
           <div class="form-group">
             <label for="" class="col-sm-2 control-label">发布日期：</label>
-            <div class="col-sm-10">
-              <input type="text" name='createTime' ng-model='dataInfo.createTime' class="form-control">
+            <div class="col-md-4">
+              <p class="input-group">
+                <input type="text" class="form-control" uib-datepicker-popup ng-model='dataInfo.publishTime' is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close"/>
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="openDatePicker()">
+                    <i class="glyphicon glyphicon-calendar"></i>
+                  </button>
+                </span>
+              </p>
             </div>
+
           </div>
 
           <div class="form-group">
@@ -88,7 +94,7 @@
               <span class='require-sign'>*</span>:</label>
             <div class="col-sm-10">
               <span ng-repeat="sfItem in  shareFrequencyList">
-                <input type="checkbox" value="{{sfItem.ID}}" ng-checked="shareFreqSelection.indexOf(sfItem.DICT_NAME) > -1" ng-click="toggleShareFreqSelection(sfItem.ID)">
+                <input type="checkbox" value="{{sfItem.ID}}" ng-checked="shareFreqSelection.indexOf(sfItem.DICT_NAME) > -1" ng-click="toggleShareFreqSelection(sfItem.ID,sfItem.DICT_NAME)">
                 {{sfItem.DICT_NAME}}
               </span>
             </div>
@@ -110,11 +116,10 @@
               <span class='require-sign'>*</span>:</label>
             <div class="col-sm-10">
               <span ng-repeat="dataLevel in  dataLevelList">
-                <input type="checkbox" value="{{dataLevel.ID}}" ng-checked="dataLevelSelection.indexOf(dataLevel.DICT_NAME) > -1" ng-click="toggleDataLevelSelection(dataLevel.ID)">
+                <input type="checkbox" value="{{dataLevel.ID}}" ng-checked="dataLevelSelection.indexOf(dataLevel.DICT_NAME) > -1" ng-click="toggleDataLevelSelection(dataLevel)">
                 {{dataLevel.DICT_NAME}}
               </span>
             </div>
-            <input type='hidden' ng-model='dataInfo.dataAreaLevel'/>
           </div>
 
           <div class="form-group">
@@ -124,9 +129,9 @@
               <select name='shareLevelOpt' ng-change='showHideDeps()' class='form-control' style='display: inline-block !important;width: auto;' ng-model='dataInfo.shareLevel'>
                 <option ng-repeat="shareLevel in  shareLevelList" value='{{shareLevel.ID}}'>{{shareLevel.DICT_NAME}}</option>
               </select>
-              <span  ng-class="{true: 'ng-show', false: 'ng-hide'}[depShow]">指定部门名称：
-              <div style='display:inline-block' isteven-multi-select input-model="deptList" output-model="outputDeptList" button-label="DEP_NAME" item-label="DEP_NAME" tick-property="ticked"></div>
-            </span>
+              <span ng-class="{true: 'ng-show', false: 'ng-hide'}[depShow]">指定部门名称：
+                <div style='display:inline-block' isteven-multi-select input-model="deptList" output-model="outputDeptList" button-label="DEP_NAME" item-label="DEP_NAME" tick-property="ticked"></div>
+              </span>
             </div>
           </div>
 
@@ -162,7 +167,11 @@
               <th>计量单位</th>
               <th>指标详细解释</th>
               <th>计算方法</th>
+              <th>共享频率</th>
+              <th>空间范围</th>
+              <th>分地区数据级别</th>
               <th>来源部门</th>
+              <th>共享级别</th>
               <th>数据存储类型</th>
               <th>数据精度</th>
               <th>数据长度</th>
@@ -182,13 +191,41 @@
               <td>{{inventoryAttr.meterUnit}}</td>
               <td>{{inventoryAttr.quotaDetail}}</td>
               <td>{{inventoryAttr.calculateMethod}}</td>
-              <td>{{inventoryAttr.departId}}</td>
-              <td>{{inventoryAttr.quotaType}}</td>
+              <td>
+                {{shareFreqArrShow}}
+              </td>
+              <td>
+                {{dataInfo.areaPeriod}}
+              </td>
+              <td>{{inventoryAttr.areaDataLevel}}</td>
+              <td>{{loginUser.DEP_NAME}}</td>
+              <td>
+                {{inventoryAttr.shareLevel}}
+              </td>
+              <td>
+                <div ng-repeat="qtype in  quotaTypeList">
+                  <div ng-if="qtype.ID == inventoryAttr.quotaType">
+                    {{qtype.DICT_NAME}}
+                  </div>
+                </div>
+              </td>
               <td>{{inventoryAttr.dataPrecision}}</td>
               <td>{{inventoryAttr.dataLength}}</td>
-              <td>??</td>
-              <td>{{inventoryAttr.dataShowFormat}}</td>
-              <td>{{inventoryAttr.secretFlag}}</td>
+              <td>{{inventoryAttr.createTime}}</td>
+              <td>
+                <div ng-repeat="dataFormat in dataShowFormatList">
+                  <div ng-if="dataFormat.ID == inventoryAttr.dataShowFormat">
+                    {{dataFormat.DICT_NAME}}
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div ng-repeat="qsflag in  secretFlagList">
+                  <div ng-if="qsflag.ID == inventoryAttr.secretFlag">
+                    {{qsflag.DICT_NAME}}
+                  </div>
+                </div>
+              </td>
               <td>{{inventoryAttr.linkman}}</td>
               <td>{{inventoryAttr.contactPhone}}</td>
             </tr>
@@ -352,22 +389,9 @@
           <span class='require-sign'>*</span>:</label>
         <div class="col-sm-10">
           <span ng-repeat="dataLevel in  dataLevelList">
-            <input type="checkbox" value="{{dataLevel.ID}}" ng-checked="Modal.dataLevelSelection.indexOf(dataLevel.DICT_NAME) > -1" ng-click="toggleDataLevelSelection(dataLevel.ID)">
+            <input type="checkbox" value="{{dataLevel.ID}}" ng-checked="Modal.dataLevelSelection.indexOf(dataLevel.DICT_NAME) > -1" ng-click="toggleDataLevelSelection(dataLevel)">
             {{dataLevel.DICT_NAME}}
           </span>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="" class="col-sm-2 control-label">共享级别
-          <span class='require-sign'>*</span>:</label>
-        <div class="col-sm-10">
-          <select name='shareLevelOpt' ng-change='showHideDeps()' class='form-control' style='display: inline-block !important;width: auto;'  ng-model='Modal.Quota.shareLevel'>
-            <option ng-repeat="shareLevel in  shareLevelList" value='{{shareLevel.ID}}'>{{shareLevel.DICT_NAME}}</option>
-          </select>
-          <span  ng-class="{true: 'ng-show', false: 'ng-hide'}[depShow]">指定部门名称：
-          <div style='display:inline-block' isteven-multi-select input-model="deptList" output-model="outputModalDeptList" button-label="DEP_NAME" item-label="DEP_NAME" tick-property="ticked"></div>
-        </span>
         </div>
       </div>
 
@@ -379,6 +403,19 @@
           </select>
           <span class='help-info'>
             可取得数据的地区名称，如全国，四川省，各省等。
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">共享级别
+          <span class='require-sign'>*</span>:</label>
+        <div class="col-sm-10">
+          <select name='shareLevelOpt' ng-change='showHideDeps()' class='form-control' style='display: inline-block !important;width: auto;' ng-model='Modal.Quota.shareLevel'>
+            <option ng-repeat="shareLevel in  shareLevelList" value='{{shareLevel.DICT_NAME}}'>{{shareLevel.DICT_NAME}}</option>
+          </select>
+          <span ng-class="{true: 'ng-show', false: 'ng-hide'}[depShowModal]">指定部门名称：
+            <div style='display:inline-block' isteven-multi-select input-model="deptListModal" output-model="outputModalDeptList" button-label="DEP_NAME" item-label="DEP_NAME" tick-property="ticked"></div>
           </span>
         </div>
       </div>

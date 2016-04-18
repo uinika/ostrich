@@ -2,11 +2,15 @@
 var Audit = angular.module('Department.Audit', ['ui.router']);
 
 /** Main Controller */
-Audit.controller('Department.Audit.Controller.Main', ['$scope', '$q','Department.Audit.Service.Http',
-  function($scope, $q ,Http) {
+Audit.controller('Department.Audit.Controller.Main', ['$rootScope', '$scope', '$q','Department.Audit.Service.Http',
+  function($rootScope, $scope, $q ,Http) {
     var _httpParams = {};
-    var depId = 6;
+    console.log($rootScope.User);
+    var depId = $rootScope.User.DEP_ID;
     _httpParams.DEP_ID = depId;
+
+    // init
+    getAuditList(_httpParams);
 
     Http.getAuditTotal({
       "DEP_ID":depId
@@ -121,10 +125,10 @@ Audit.controller('Department.Audit.Controller.Main', ['$scope', '$q','Department
 ])
 
 
-Audit.controller('Department.Audit.Controller.info', ['$scope', '$q','Department.Audit.Service.Http', '$stateParams',
-  function($scope, $q ,Http ,$stateParams) {
+Audit.controller('Department.Audit.Controller.info', ['$rootScope' ,'$scope', '$q','Department.Audit.Service.Http', '$stateParams',
+  function($rootScope, $scope, $q ,Http ,$stateParams) {
     // login Department
-    $scope.depName = '??';
+    $scope.depName = $rootScope.User.DEP_NAME;
     var auditId = $stateParams.AUDITID;
     Http.getAuditDetail({
       "AUDITID": auditId
@@ -133,10 +137,17 @@ Audit.controller('Department.Audit.Controller.info', ['$scope', '$q','Department
     });
 
     $scope.submitAudit = function() {
-      var AUDITOR = '??';
+      var AUDITOR = $rootScope.User.PERSON_NAME;
       var auditInfo = _.assign($scope.AuditInfo, {"AUDITOR": AUDITOR}, {"ID": auditId});
+      console.log(auditInfo);
       Http.updateAuditDetail(auditInfo).then(function(result) {
-        console.log(result);
+        if (200 == result.data.head.status) {
+          alert('修改成功');
+          getUserList();
+        }
+        else{
+          alert('修改失败');
+        }
       });
     }
   }])

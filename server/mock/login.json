@@ -11,6 +11,7 @@
     "DEP_ID": "7",
     "PERSON_NAME": "公安局用户",
     "PHONE": null,
-    "EMAIL": null
+    "EMAIL": null,
+    "DEP_NAME" : "公安局"
   }]
 }

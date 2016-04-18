@@ -6,60 +6,54 @@ Department.controller('Department.Controller.Main', ['$scope', '$q','Department.
   function($scope, $q ,Http) {
     var starTime = getFirstDayMonth();
     var endTime = getNowDate();
-    var depId = 1;
 
     // get current month
     function getFirstDayMonth() {
       var now = new Date();
-      return now.getFullYear() + "-" + (now.getMonth() + 1) + "-01";
+      return "" + now.getFullYear() + "-" + (now.getMonth() + 1) + '-01 00:00:00';
     }
     function getNowDate() {
       var now = new Date();
-      return now.getFullYear() + "-" + (now.getMonth() + 1) + "-" + now.getDate();
+      return "" + now.getFullYear() + "-" + (now.getMonth() + 1) + "-" + now.getDate() + ' 23:59:59';
     }
 
-    Http.getInventoryTotal().then(function(result) {
+    Http.getInventoryTotal(null).then(function(result) {
       $scope.inventoryTotal = result.data.body[0].TOTAL;
     });
-
     Http.getInventoryTotal({
-      starTime: starTime,
-      endTime: endTime
+      startDate: starTime,
+      endDate: endTime
     }).then(function(result) {
       $scope.inventoryMonthTotal = result.data.body[0].TOTAL;
     });
 
     Http.getShareTotal().then(function(result) {
-      $scope.shareTotal = result.data.body[0].TOTAL;
+      $scope.shareTotal = result.data.body[0].TOTAL
     });
-
     Http.getShareTotal({
-      starTime: starTime,
-      endTime: endTime
+      startDate: starTime,
+      endDate: endTime
     }).then(function(result) {
       $scope.shareMonthTotal = result.data.body[0].TOTAL
     });
 
     Http.getRequirementTotal().then(function(result) {
-      console.log(result);
-      $scope.requirementTotal = result.data.body[0].TOTAL
+      $scope.requirementTotal = result.data.body[0].TOTAL;
     });
-
     Http.getRequirementTotal({
-      starTime: starTime,
-      endTime: endTime
+      startDate: starTime,
+      endDate: endTime
     }).then(function(result) {
-      $scope.requirementMonthTotal = result.data.body[0].total;
+      $scope.requirementMonthTotal = result.data.body[0].TOTAL;
     });
 
     Http.getUnauditTotal().then(function(result) {
-      $scope.unauditTotal = result.data.body[0].total;
+      $scope.unauditTotal = result.data.body[0].TOTAL;
     });
 
     Http.getInventoryList({
       skip: 0,
-      limit: 6,
-      status: 0 // 未审核状态
+      limit: 6
     }).then(function(result) {
       $scope.unauditInventoryList = result.data.body;
     })
@@ -87,21 +81,23 @@ Department.factory('Department.Service.Http', ['$http', '$q', 'API',
       )
     };
 
-    function getShareTotal() {
+    function getShareTotal(params) {
       return $http.get(
-        path + '/shareTotal/department'
+        path + '/shareTotal/department',
+        {params: params}
       )
     };
 
-    function getRequirementTotal() {
+    function getRequirementTotal(params) {
       return $http.get(
-        path + '/requirementTotal/department'
+        path + '/requirementTotal/department',
+        {params: params}
       )
     }
 
     function getUnauditTotal(){
       return $http.get(
-        path + '/unauditTotal/department'
+        path + '/dataAuditInfoTotal/department'
       )
     }
 
@@ -113,7 +109,7 @@ Department.factory('Department.Service.Http', ['$http', '$q', 'API',
 
     function getResponseList(params) {
       return $http.get(
-        path + '/response/department', {params: params}
+        path + '/requirementResponse/department', {params: params}
       )
     }
     return {
