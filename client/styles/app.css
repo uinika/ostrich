@@ -104,8 +104,7 @@ html {
   top: 7px;
 }
 #dashboard .left {
-  padding-left: 0;
-  padding-right: 8px;
+  padding: 0;
 }
 #dashboard .right {
   padding-right: 0;
@@ -503,70 +502,81 @@ html {
 #department-user .user-list {
   clear: right;
 }
-#inventory-main .department-list .list-group {
+#inventory-main .left {
+  padding: 0;
+}
+#inventory-main .left .department-list .list-group {
   height: 50rem;
   overflow-y: scroll;
 }
-#inventory-main .filter-condition {
+#inventory-main .left .department-list .list-group a {
+  font-size: 13px;
+  text-overflow: clip;
+}
+#inventory-main .right {
+  padding-right: 0;
+  padding-left: 10px;
+}
+#inventory-main .right .filter-condition {
   margin-top: -5px;
   margin-right: -10px;
 }
-#inventory-main .filter {
+#inventory-main .right .filter {
   font-size: 12px;
 }
-#inventory-main .filter .pager {
+#inventory-main .right .filter .pager {
   margin: 0 0 15px 0;
 }
-#inventory-main .filter a {
+#inventory-main .right .filter a {
   padding: 3px 8px;
   margin-left: 6px;
 }
-#inventory-main .filter .shared-level {
+#inventory-main .right .filter .shared-level {
   display: block;
 }
-#inventory-main .filter .shared-range {
+#inventory-main .right .filter .shared-range {
   display: block;
 }
-#inventory-main .filter .shared-range .pager {
+#inventory-main .right .filter .shared-range .pager {
   margin: 0;
 }
-#inventory-main .content .icon.test {
+#inventory-main .right .content .icon.test {
   height: 60px;
   width: 90px;
   margin-top: 5px;
 }
-#inventory-main .content .organization {
+#inventory-main .right .content .organization {
   background-image: url('images/indicator/indicator-organization.png');
   background-size: 90px 60px;
   background-repeat: no-repeat;
 }
-#inventory-main .content .project {
+#inventory-main .right .content .project {
   background-image: url('images/indicator/indicator-project.png');
   background-size: 90px 60px;
   background-repeat: no-repeat;
 }
-#inventory-main .content .achievement {
+#inventory-main .right .content .achievement {
   background-image: url('images/indicator/indicator-achievement.png');
   background-size: 90px 60px;
   background-repeat: no-repeat;
 }
-#inventory-main .content .information {
+#inventory-main .right .content .information {
   margin-left: 10px;
 }
-#inventory-main .content .information h1 {
+#inventory-main .right .content .information h1 {
   font-size: 15px;
   font-weight: bold;
   margin: 6px 20px 10px;
 }
-#inventory-main .content .information h2 {
+#inventory-main .right .content .information h2 {
   font-size: 13px;
   margin: 7px 20px;
 }
-#inventory-main .content .information ul {
+#inventory-main .right .content .information ul {
   margin: 0px 15px;
   font-size: 12px;
 }
-#inventory-main .content .information ul li {
+#inventory-main .right .content .information ul li {
   color: #777777;
 }
 #indicator-detail .indicator-main {

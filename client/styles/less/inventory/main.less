@@ -1,73 +1,85 @@
 #inventory-main {
-  .department-list{
-    .list-group{
-      height: 50rem;
-      overflow-y: scroll;
-    }
-  }
-  .filter-condition{
-    margin-top: -5px;
-    margin-right: -10px;
-  }
-  .filter{
-    font-size: 12px;
-    .pager{
-      margin: 0 0 15px 0;
-    }
-    a{
-      padding: 3px 8px;
-      margin-left: 6px;
-    }
-    .shared-level{
-      display: block;
-    }
-    .shared-range{
-      display: block;
-      .pager{
-        margin: 0;
-      }
-    }
-  }
-  .content{
-    .icon.test{
-      height: 60px;
-      width: 90px;
-      margin-top: 5px;
-    }
-    .organization{
-      background-image: url('images/indicator/indicator-organization.png');
-      background-size: 90px 60px;
-      background-repeat: no-repeat;
-    }
-    .project{
-      background-image: url('images/indicator/indicator-project.png');
-      background-size: 90px 60px;
-      background-repeat: no-repeat;
-    }
-    .achievement{
-      background-image: url('images/indicator/indicator-achievement.png');
-      background-size: 90px 60px;
-      background-repeat: no-repeat;
-    }
-    .information{
-      margin-left: 10px;
-      h1 {
-        font-size: 15px;
-        font-weight: bold;
-        margin: 6px 20px 10px;
-      }
-      h2 {
-        font-size: 13px;
-        margin: 7px 20px;
-      }
-      ul{
-
-        margin: 0px 15px;
-        font-size: 12px;
-        li{
-          color: #777777;
+  .left{
+    padding: 0;
+    .department-list{
+      .list-group{
+        height: 50rem;
+        overflow-y: scroll;
+        a {
+          font-size: 13px;
+          text-overflow: clip;
         }
       }
     }
   }
+  .right{
+    padding-right: 0;
+    padding-left: 10px;
+    .filter-condition{
+      margin-top: -5px;
+      margin-right: -10px;
+    }
+    .filter{
+      font-size: 12px;
+      .pager{
+        margin: 0 0 15px 0;
+      }
+      a{
+        padding: 3px 8px;
+        margin-left: 6px;
+      }
+      .shared-level{
+        display: block;
+      }
+      .shared-range{
+        display: block;
+        .pager{
+          margin: 0;
+        }
+      }
+    }
+    .content{
+      .icon.test{
+        height: 60px;
+        width: 90px;
+        margin-top: 5px;
+      }
+      .organization{
+        background-image: url('images/indicator/indicator-organization.png');
+        background-size: 90px 60px;
+        background-repeat: no-repeat;
+      }
+      .project{
+        background-image: url('images/indicator/indicator-project.png');
+        background-size: 90px 60px;
+        background-repeat: no-repeat;
+      }
+      .achievement{
+        background-image: url('images/indicator/indicator-achievement.png');
+        background-size: 90px 60px;
+        background-repeat: no-repeat;
+      }
+      .information{
+        margin-left: 10px;
+        h1 {
+          font-size: 15px;
+          font-weight: bold;
+          margin: 6px 20px 10px;
+        }
+        h2 {
+          font-size: 13px;
+          margin: 7px 20px;
+        }
+        ul{
+
+          margin: 0px 15px;
+          font-size: 12px;
+          li{
+            color: #777777;
+          }
+        }
+      }
+    }
+  }
+
 }
