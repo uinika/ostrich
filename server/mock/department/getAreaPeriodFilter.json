@@ -1,0 +1,24 @@
+{
+  "head": {
+    "status": 200,
+    "total": 1,
+    "token": "1gzzwuj7ibw0k1oqqfwrguyr7b"
+  },
+  "body": [{
+    "name": "省级数据",
+    "ID": "1as234",
+    "total":10
+  },{
+    "name": "地市州",
+    "ID": "1sds234",
+    "total":6
+  },{
+    "name": "分乡数据",
+    "ID": "123sds4",
+    "total":3
+  },{
+    "name": "分县数据",
+    "ID": "123sds4",
+    "total":9
+  }]
+}

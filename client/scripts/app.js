@@ -8,7 +8,9 @@ var app = angular.module('app', [
   'Main',
   'Dashboard',
   'Department',
-  'Department.Inventory'
+  'Department.Inventory',
+  'Department.Audit',
+  'Department.SystemUser'
 ]);
 
 app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider', '$provide',
@@ -102,15 +104,17 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
       })
       .state('main.department.audit', {
         url: '/audit',
-        templateUrl: 'views/department/audit.html'
+        templateUrl: 'views/department/audit.html',
+        controller: 'Department.Audit.Controller.Main'
       })
       .state('main.department.audit.info', {
         url: '/info',
         templateUrl: 'views/department/audit-info.html'
       })
       .state('main.department.user', {
-        url: '/info',
-        templateUrl: 'views/department/user.html'
+        url: '/user',
+        templateUrl: 'views/department/user.html',
+        controller: 'Department.SystemUser.Controller.Main'
       })
   }
 ]);

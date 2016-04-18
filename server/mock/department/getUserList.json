@@ -1,0 +1,27 @@
+{
+  "head": {
+    "status": 200,
+    "total": 1,
+    "token": "1gzzwuj7ibw0k1oqqfwrguyr7b"
+  },
+  "body": [{
+    "USERNAME": "Henry",
+    "DEP_NAME": "城管局",
+    "PERSON_NAME":"张2",
+    "PHONE":"13894049848",
+    "EMAIL":"sdfhisdfi@dd.com"
+  },
+  {
+    "USERNAME": "lim",
+    "DEP_NAME": "城管局",
+    "PERSON_NAME":"张三",
+    "PHONE":"13894049848",
+    "EMAIL":"sdfhisdfi@dd.com"
+  },{
+    "USERNAME": "Tom",
+    "DEP_NAME": "城管局",
+    "PERSON_NAME":"张三",
+    "PHONE":"13894049848",
+    "EMAIL":"sdfhisdfi@dd.com"
+  }]
+}

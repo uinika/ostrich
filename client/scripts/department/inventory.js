@@ -23,11 +23,11 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$scope', '$q'
     const SHARE_FREQUENCY = 1;
     const DATA_LEVEL = 2;
     const SHARE_LEVEL = 3;
-    const QUATO_TYPE = 4;
+    const QUOTA_TYPE = 4;
     const DATA_SHOW_FORMAT = 6;
     const SECRET_FLAG = 5;
-
     $scope.inventoryAttrList = [];
+    $scope.DataExamps = [];
 
     $scope.exampTitles = [];
 
@@ -84,7 +84,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$scope', '$q'
     });
 
     Http.getDepartmentList().then(function(result) {
-      $scope.deptList = result.data;
+      $scope.deptList = result.data.body;
     });
 
     $scope.backToStep1 = function() {
@@ -102,8 +102,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$scope', '$q'
       $scope.step2.show = false;
       $scope.progress = 75;
 
-      window.console.log($scope.inventoryAttrList);
-
+      $scope.DataExamps = $scope.inventoryAttrList;
     }
 
     $scope.backToStep2 = function() {
@@ -120,6 +119,8 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$scope', '$q'
       $scope.step4.show = true;
       $scope.step3.show = false;
       $scope.progress = 100;
+
+
     }
 
     $scope.backToStep3 = function() {
@@ -135,24 +136,28 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$scope', '$q'
         $scope.progress = 50;
 
 
-        window.console.log($scope.dataInfo);
-        window.console.log($scope.shareFreqSelection);
-        window.console.log($scope.dataLevelSelection);
+        window.console.log($scope.outputDeptList);
 
-        var step1_data = {};
+        $scope.step1_data = {};
         var data_info_add_configs = [];
 
         var sys_dicts = _.union($scope.shareFreqSelection, $scope.dataLevelSelection);
         _(sys_dicts).forEach(function(value) {
           var sys_dict = {};
-          sys_dict.DATA_INFO_ID = $scope.dataInfo.dataName
-          sys_dict.SYS_DICT_ID = value;
+          sys_dict.dataInfoId = $scope.dataInfo.dataName
+          sys_dict.sysDictId = value;
           data_info_add_configs.push(sys_dict);
         });
 
-        step1_data = _.assign({'dataInfo':$scope.dataInfo}, {'data_info_add_configs': data_info_add_configs});
+        var shareDeps = [];
+        if($scope.dataInfo.shareLevel == '250375bd-02f0-11e6-a52a-5cf9dd40ad7e') {// 指定部门开放
+          shareDeps = _.map($scope.outputDeptList, 'ID');
+          $scope.dataInfo = _.assign($scope.dataInfo, {'shareDeps': shareDeps});
+        }
 
-        window.console.log(step1_data);
+        $scope.step1_data = _.assign({'dataInfo':$scope.dataInfo}, {'dataInfoAddConfigs': data_info_add_configs});
+
+        window.console.log($scope.step1_data);
       }
     };
 
@@ -163,9 +168,9 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$scope', '$q'
 
       // Get system dict
       Http.getSystemDictByCatagory({
-        'DICT_CATEGORY': QUATO_TYPE
+        'DICT_CATEGORY': QUOTA_TYPE
       }).then(function(result) {
-        $scope.quatoTypeList = result.data.body;
+        $scope.quotaTypeList = result.data.body;
       });
       Http.getSystemDictByCatagory({
         'DICT_CATEGORY': DATA_SHOW_FORMAT
@@ -182,33 +187,55 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$scope', '$q'
       Component.popModal($scope, '添加', 'add-indicator-modal').result.then(function() {
         $scope.inventoryAttrList.push($scope.Modal.Quota);
 
-        $scope.exampTitles = _.map($scope.inventoryAttrList, 'quotaName');
+        $scope.step2_data = {};
+        $scope.dataQuota = [];
 
-        var step2_data = [];
-
-        _.forEach($scope.inventoryAttrList, function(item) {
-          var step2_obj =_.assign({ 'DATA_ID': $scope.dataInfo.DATA_NAME }, item);
-          step2_data.push(step2_obj);
+        _.forEach($scope.inventoryAttrList, function(item,index) {
+          var step2_obj =_.assign({ 'dataId': $scope.dataInfo.dataName }, item,{'showOrder' : index+1});
+          $scope.dataQuota.push(step2_obj);
         });
-        console.log(step2_data);
-
-
-        // $scope.exampTitles = _.zip($scope.exampTitles, uuids);
-        // console.log($scope.exampTitles);
-        //
-        // $scope.exampTitles = _.map($scope.exampTitles, function(item) {
-        //   return _.extend({
-        //     name: item[0],
-        //     uuid: item[1]
-        //   }, item);
-        // });
+        $scope.step2_data.dataQuota = $scope.dataQuota;
       });
     }
 
+    $scope.ExampDatas = [];
+    $scope.dataCells = [];
+    $scope.step3_data = {};
     $scope.addExampData = function() {
       $scope.ExampModal = {}; // Clean scope of modal
       $scope.ExampModal.ExampData = {}; // Clean scope of modal
-      Component.popModal($scope, '添加', 'add-example-modal').result.then(function() {});
+
+      $scope.rowDatas = [];
+
+
+      Component.popModal($scope, '添加', 'add-example-modal').result.then(function() {
+        window.console.log($scope.step2_data.dataQuota);
+        _.forEach($scope.step2_data.dataQuota, function(item,index) {
+            var dataObj = _.assign({'rowKey':item.showOrder}, {'dataQuotaValue':item.dataValue},{'dataQuotaId':item.quotaName})
+            $scope.rowDatas.push(dataObj);
+            $scope.dataCells.push(dataObj);
+        })
+        $scope.ExampDatas.push($scope.rowDatas);
+
+        $scope.step3_data.dataExamples = $scope.dataCells;
+      });
+    }
+
+    // total submit
+    $scope.addFormSubmit = function() {
+      $scope.step4_data = {};
+      $scope.step4_data.dataOtherInfo = $scope.DataOtherInfo;
+
+      $scope.submitObject = _.assign($scope.step1_data,$scope.step2_data,$scope.step3_data,$scope.step4_data);
+
+      console.log($scope.submitObject);
+
+      Http.saveInventory($scope.submitObject).then(function(result){
+        console.log(result.data.head);
+        if (200 == result.data.head.status) {
+          alert('添加成功');
+        }
+      })
     }
   }
 ])
@@ -243,29 +270,10 @@ DInventory.factory('Department.Inventory.Service.Http', ['$http', '$q', 'API',
         path + '/dep/'
       )
     }
-    // function findResourceCatalogbyID(id){
-    //   return $http.get(
-    //     path + '/api/resource-catalog/' + id
-    //   )
-    // };
-    // function updateResourceCatalogbyID(data){
-    //   return $http.put(
-    //     path + '/api/resource-catalog/' + data.id, {data: data}
-    //   )
-    // };
-    // function deleteResourceCatalogByIDs(data){
-    //   return $http.delete(
-    //     path + '/api/resource-catalog/', {data: data}
-    //   )
-    // };
     return {
       saveInventory: saveInventory,
       getSystemDictByCatagory: getSystemDictByCatagory,
       getDepartmentList: getDepartmentList
-        // saveResourceCatalog: saveResourceCatalog,
-        // findResourceCatalogbyID: findResourceCatalogbyID,
-        // updateResourceCatalogbyID: updateResourceCatalogbyID,
-        // deleteResourceCatalogByIDs: deleteResourceCatalogByIDs
     }
   }
 ]);

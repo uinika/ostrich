@@ -62,3 +62,10 @@ App.use('/api', requirement_total);
 
 var unaudit_total = require('./api/department/unauditTotal');
 App.use('/api', unaudit_total);
+
+var audit = require('./api/department/audit');
+App.use('/api', audit);
+
+/** user */
+var user = require('./api/department/user');
+App.use('/api', user);
