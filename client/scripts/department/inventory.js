@@ -26,6 +26,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$scope', '$q'
     const QUOTA_TYPE = 4;
     const DATA_SHOW_FORMAT = 6;
     const SECRET_FLAG = 5;
+    const LEVEL_AUTH = '250375bd-02f0-11e6-a52a-5cf9dd40ad7e';
     $scope.inventoryAttrList = [];
     $scope.DataExamps = [];
 
@@ -86,6 +87,16 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$scope', '$q'
     Http.getDepartmentList().then(function(result) {
       $scope.deptList = result.data.body;
     });
+
+    // show or hide department
+    $scope.depShow = false;
+    $scope.showHideDeps = function(ev) {
+      if(LEVEL_AUTH == $scope.dataInfo.shareLevel) {
+        $scope.depShow = true;
+      }
+      console.log($scope.depShow);
+    }
+
 
     $scope.backToStep1 = function() {
       $scope.step1.show = true;
@@ -245,11 +256,6 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$scope', '$q'
 DInventory.factory('Department.Inventory.Service.Http', ['$http', '$q', 'API',
   function($http, $q, API) {
     var path = API.path;
-    // function fetchResourceCatalog(params) {
-    //   return $http.get(
-    //     path + '/api/inventory', {params: params}
-    //   )
-    // };
     function saveInventory(data) {
       return $http.post(
         path + '/inventory/department', {

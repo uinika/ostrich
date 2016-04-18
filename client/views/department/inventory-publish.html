@@ -57,7 +57,7 @@
             <label for="" class="col-sm-2 control-label">提供部门
               <span class='require-sign'>*</span>:</label>
             <div class="col-sm-10">
-              <select ng-model='dataInfo.depId'>
+              <select ng-model='dataInfo.depId' class='form-control'>
                 <option ng-repeat="dep in  deptList" value='{{dep.ID}}'>{{dep.DEP_NAME}}</option>
               </select>
             </div>
@@ -88,7 +88,7 @@
               <span class='require-sign'>*</span>:</label>
             <div class="col-sm-10">
               <span ng-repeat="sfItem in  shareFrequencyList">
-                <input type="checkbox"  value="{{sfItem.ID}}" ng-checked="shareFreqSelection.indexOf(sfItem.DICT_NAME) > -1" ng-click="toggleShareFreqSelection(sfItem.ID)">
+                <input type="checkbox" value="{{sfItem.ID}}" ng-checked="shareFreqSelection.indexOf(sfItem.DICT_NAME) > -1" ng-click="toggleShareFreqSelection(sfItem.ID)">
                 {{sfItem.DICT_NAME}}
               </span>
             </div>
@@ -110,9 +110,9 @@
               <span class='require-sign'>*</span>:</label>
             <div class="col-sm-10">
               <span ng-repeat="dataLevel in  dataLevelList">
-                <input type="checkbox"  value="{{dataLevel.ID}}" ng-checked="dataLevelSelection.indexOf(dataLevel.DICT_NAME) > -1" ng-click="toggleDataLevelSelection(dataLevel.ID)">
+                <input type="checkbox" value="{{dataLevel.ID}}" ng-checked="dataLevelSelection.indexOf(dataLevel.DICT_NAME) > -1" ng-click="toggleDataLevelSelection(dataLevel.ID)">
                 {{dataLevel.DICT_NAME}}
-                </span>
+              </span>
             </div>
             <input type='hidden' ng-model='dataInfo.dataAreaLevel'/>
           </div>
@@ -121,22 +121,12 @@
             <label for="" class="col-sm-2 control-label">共享级别
               <span class='require-sign'>*</span>:</label>
             <div class="col-sm-10">
-              <select name='shareLevelOpt' ng-model='dataInfo.shareLevel'>
+              <select name='shareLevelOpt' ng-change='showHideDeps()' class='form-control' style='display: inline-block !important;width: auto;' ng-model='dataInfo.shareLevel'>
                 <option ng-repeat="shareLevel in  shareLevelList" value='{{shareLevel.ID}}'>{{shareLevel.DICT_NAME}}</option>
               </select>
-              指定部门名称：
-              <div style='display:inline-block;'
-      isteven-multi-select
-      input-model="deptList"
-      output-model="outputDeptList"
-      button-label="DEP_NAME"
-      item-label="DEP_NAME"
-      tick-property="ticked"
-  >
-  </div>
-              <!-- <select  ng-model='dataInfo.shareDeps' ng-multiple='true'>
-                <option ng-repeat="dep in  deptList" value='{{dep.ID}}'>{{dep.DEP_NAME}}</option>
-              </select> -->
+              <span  ng-class="{true: 'ng-show', false: 'ng-hide'}[depShow]">指定部门名称：
+              <div style='display:inline-block' isteven-multi-select input-model="deptList" output-model="outputDeptList" button-label="DEP_NAME" item-label="DEP_NAME" tick-property="ticked"></div>
+            </span>
             </div>
           </div>
 
@@ -468,10 +458,9 @@
     <div class="form-group" ng-repeat='dataExamp in step2_data.dataQuota'>
       <label for="" class="col-sm-2 control-label">{{dataExamp.quotaName}}:</label>
       <div class="col-sm-10">
-        <input type="text"   class="form-control" ng-model='dataExamp.dataValue' />
+        <input type="text" class="form-control" ng-model='dataExamp.dataValue'/>
       </div>
     </div>
-
 
   </form>
 </div>
