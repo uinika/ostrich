@@ -133,6 +133,7 @@ html {
 #dashboard .first-section .bureau-list .bureau-item .caption {
   height: 16px;
   font-size: 12px;
+  text-align: center;
 }
 #dashboard .second-section .panel {
   height: 291px;
