@@ -23,7 +23,7 @@
       <label class='filter-title'>共享级别</label>
       <ul class="nav nav-pills filter-list">
         <li role="presentation" >
-          <a href="javascript:;">全部</a>
+          <a ng-class="{true: 'active', false: 'inactive'}[shareLvSelection.length == 0]" href="javascript:;" ng-click='getShareLevelAll()'>全部</a>
         </li>
         <li role="presentation" ng-repeat='shareLevel in shareLevelList'>
           <a ng-class="{true: 'active', false: 'inactive'}[shareLvSelection.indexOf(shareLevel.DICTID) > -1]" href="javascript:;" ng-click='getAuListBySl(shareLevel)' >{{shareLevel.DICT_NAME}}[{{shareLevel.NUMBER}}]</a>
@@ -34,7 +34,7 @@
       <label class='filter-title'>空间范围</label>
       <ul class="nav nav-pills filter-list">
         <li role="presentation">
-          <a href="javascript:;">全部</a>
+          <a href="javascript:;" ng-class="{true: 'active', false: 'inactive'}[areaSelection.length == 0]" href="javascript:;" ng-click='getSpatialAll()'>全部</a>
         </li>
         <li role="presentation" ng-repeat='areaPeriod in areaPeriodList'>
           <a ng-class="{true: 'active', false: 'inactive'}[areaSelection.indexOf(areaPeriod.DICTID) > -1]" ng-checked="areaSelection.indexOf(areaPeriod.DICTID) > -1"  ng-click='getAuListByAP(areaPeriod)' href="javascript:;">{{areaPeriod.DICT_NAME}}[{{areaPeriod.NUMBER}}]</a>
@@ -46,10 +46,10 @@
       <label class='filter-title'>审核状态</label>
       <ul class="nav nav-pills filter-list">
         <li role="presentation">
-          <a href="javascript:;">全部</a>
+          <a href="javascript:;" ng-class="{true: 'active', false: 'inactive'}[statusSelection.length == 0]" href="javascript:;" ng-click='getStatusAll()'>全部</a>
         </li>
         <li role="presentation" ng-repeat='auditStatus in auditStatusList'>
-          <a ng-class="{true: 'active', false: 'inactive'}[statusSelection.indexOf(auditStatus.AUDIT_NAME) > -1]" ng-click='getAuListBySta(auditStatus)' href="javascript:;">{{auditStatus.AUDIT_NAME}}[{{auditStatus.NUMBER}}]</a>
+          <a ng-class="{true: 'active', false: 'inactive'}[statusSelection.indexOf(auditStatus.AUDITNAME) > -1]" ng-click='getAuListBySta(auditStatus)' href="javascript:;">{{auditStatus.AUDITNAME}}[{{auditStatus.NUMBER}}]</a>
         </li>
       </ul>
     </div>
@@ -71,7 +71,7 @@
                   </a>
                 </span> -->
               </div>
-              <div class='pull-right'>浏览：{{auditInfo.VIEW_TIMES}}</div>
+              <div class='pull-right'>浏览：{{auditInfo.VISIT_COUNT}}</div>
             </div>
             <div class="panel-body">
               <div class="media">
@@ -81,25 +81,25 @@
                 <div class="media-body">
                   <div class="row media-heading main-heading">
                     <div class='col-sm-4'>
-                      <h4>{{auditInfo.QUOTA_NAME}}</h4>
+                      <h4>{{auditInfo.DATA_NAME}}</h4>
                     </div>
                     <div class='col-sm-4'>
                       <div class='item-label'>
-                        <label class='label label-primary'>{{auditInfo.AREA_PERIOD}}</label>
-                        <label class='label label-info'>{{auditInfo.SHARE_LEVEL}}</label>
+                        <!-- <label class='label label-primary'>{{auditInfo.AREA_PERIOD}}</label> -->
+                        <label class='label label-info'>{{auditInfo.DICT_NAME}}</label>
                       </div>
                     </div>
                     <div class='col-sm-4'>
-                      <span class='col-sm-7'>申请部门：{{auditInfo.APPLY_DEP}}</span>
-                      <a ui-sref='main.department.audit.info' class=' btn btn-sm btn-info'>我要审核</a>
+                      <span class='col-sm-7'>申请部门：{{auditInfo.APPLY_DEPNAME}}</span>
+                      <a ng-class="{true: 'ng-show', false: 'ng-hide'}[auditInfo.SHOW_BUTTON]" ui-sref='main.department.audit.info({AUDITID:auditInfo.AUDITID})' class=' btn btn-sm btn-info'>我要审核</a>
                     </div>
                   </div>
-                  <h5>摘要：{{auditInfo.SUMMARY}}</h5>
+                  <h5>摘要：{{auditInfo.DATA_SUMMARY}}</h5>
                   <div class='row font-13 margin-top14'>
-                    <div class='col-sm-3'>数据来源：{{auditInfo.DATA_PROVIDER}}</div>
+                    <div class='col-sm-3'>数据来源：{{auditInfo.DEPNAME}}</div>
                     <div class='col-sm-3'>联系人：{{auditInfo.LINKMAN}}</div>
                     <div class='col-sm-3'>联系电话：{{auditInfo.CONTACT_PHONE}}</div>
-                    <div class='col-sm-3'>发布日期：{{auditInfo.PUBLISH_TIME}}</div>
+                    <div class='col-sm-3'>发布日期：{{auditInfo.CREATE_TIME}}</div>
                   </div>
                 </div>
               </div>

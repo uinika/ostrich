@@ -1,16 +1,20 @@
 {
   "head": {
     "status": 200,
-    "total": 1,
-    "token": "1gzzwuj7ibw0k1oqqfwrguyr7b"
+    "total": 3,
+    "token": "40CE023EF518C86D9DDAFCA3772A0AB3"
   },
   "body": [{
-    "AUDIT_NAME": "审核通过",
-    "AUDIT_STATUS": 0,
-    "NUMBER":20
-  },{
-    "AUDIT_NAME": "审核未通过",
-    "AUDIT_STATUS": 1,
-    "NUMBER":6
+    "AUDIT_STATUS": "0",
+    "AUDITNAME": "待审核",
+    "NUMBER": 10
+  }, {
+    "AUDIT_STATUS": "1",
+    "AUDITNAME": "审核通过",
+    "NUMBER": 13
+  }, {
+    "AUDIT_STATUS": "2",
+    "AUDITNAME": "审核未通过",
+    "NUMBER": 2
   }]
 }

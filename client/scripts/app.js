@@ -111,8 +111,9 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
         controller: 'Department.Audit.Controller.Main'
       })
       .state('main.department.audit.info', {
-        url: '/info',
-        templateUrl: 'views/department/audit-info.html'
+        url: '/info?AUDITID',
+        templateUrl: 'views/department/audit-info.html',
+        controller: 'Department.Audit.Controller.info'
       })
       .state('main.department.user', {
         url: '/user',

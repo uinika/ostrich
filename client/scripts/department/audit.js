@@ -5,7 +5,8 @@ var Audit = angular.module('Department.Audit', ['ui.router']);
 Audit.controller('Department.Audit.Controller.Main', ['$scope', '$q','Department.Audit.Service.Http',
   function($scope, $q ,Http) {
     var _httpParams = {};
-    var depId = 1;
+    var depId = 6;
+    _httpParams.DEP_ID = depId;
 
     Http.getAuditTotal({
       "DEP_ID":depId
@@ -48,7 +49,7 @@ Audit.controller('Department.Audit.Controller.Main', ['$scope', '$q','Department
       else {
         $scope.shareLvSelection = item.DICTID;
       }
-      _httpParams.shareLevel = item.DICTID;
+      _httpParams.SHARE_LEVEL = item.DICTID;
       _httpParams.limit = 10;
       _httpParams.skip = 0;
       getAuditList(_httpParams);
@@ -67,10 +68,8 @@ Audit.controller('Department.Audit.Controller.Main', ['$scope', '$q','Department
         $scope.areaSelection.push(item.DICTID);
       }
       console.log($scope.areaSelection);
-      _.forEach($scope.areaSelection,function(value){
-        _httpParams.DICT_ID = value;
-      })
-      _httpParams.spatial = item.DICTID;
+
+      _httpParams.AREA_DATA_LEVEL = $scope.areaSelection;
       _httpParams.limit = 10;
       _httpParams.skip = 0;
       getAuditList(_httpParams);
@@ -79,14 +78,41 @@ Audit.controller('Department.Audit.Controller.Main', ['$scope', '$q','Department
     // filter by audit status
     $scope.statusSelection = [];
     $scope.getAuListBySta = function(item) {
-      var idx = $scope.statusSelection.indexOf(item.AUDIT_NAME);
+      var idx = $scope.statusSelection.indexOf(item.AUDITNAME);
       if (idx > -1) {
         $scope.statusSelection.splice(idx, 1);
       }
       else {
-        $scope.statusSelection = item.AUDIT_NAME;
+        $scope.statusSelection = item.AUDITNAME;
       }
-      _httpParams.status = item.AUDIT_STATUS;
+      _httpParams.AUDIT_STATUS = item.AUDIT_STATUS;
+      _httpParams.limit = 10;
+      _httpParams.skip = 0;
+      getAuditList(_httpParams);
+    }
+
+    // share level all
+    $scope.getShareLevelAll = function() {
+      $scope.shareLvSelection = [];
+      _httpParams.SHARE_LEVEL = null;
+      _httpParams.limit = 10;
+      _httpParams.skip = 0;
+      getAuditList(_httpParams);
+    }
+
+    // get spatial all
+    $scope.getSpatialAll = function() {
+      $scope.areaSelection = [];
+      _httpParams.AREA_DATA_LEVEL = null;
+      _httpParams.limit = 10;
+      _httpParams.skip = 0;
+      getAuditList(_httpParams);
+    }
+
+    // get status all
+    $scope.getStatusAll = function() {
+      $scope.statusSelection = [];
+      _httpParams.AUDIT_STATUS = null;
       _httpParams.limit = 10;
       _httpParams.skip = 0;
       getAuditList(_httpParams);
@@ -94,6 +120,18 @@ Audit.controller('Department.Audit.Controller.Main', ['$scope', '$q','Department
   }
 ])
 
+
+Audit.controller('Department.Audit.Controller.info', ['$scope', '$q','Department.Audit.Service.Http', '$stateParams',
+  function($scope, $q ,Http ,$stateParams) {
+    // login Department
+    $scope.depName = '??';
+
+    Http.getAuditDetail({
+      "AUDITID":$stateParams.AUDITID
+    }).then(function(result) {
+      $scope.AuditDetail = result.data.body[0];
+    })
+  }])
 
 /* HTTP */
 Audit.factory('Department.Audit.Service.Http', ['$http', '$q', 'API',
@@ -142,12 +180,21 @@ Audit.factory('Department.Audit.Service.Http', ['$http', '$q', 'API',
         }
       )
     }
+
+    function getAuditDetail(params) {
+      return $http.get(
+        path + '/openInventory/openInventoryInfo', {
+          params:params
+        }
+      )
+    }
     return {
       getAuditTotal: getAuditTotal,
       getShareLevelFilter: getShareLevelFilter,
       getSpatialFilter: getSpatialFilter,
       getAuditStatusFilter: getAuditStatusFilter,
-      getAuditList: getAuditList
+      getAuditList: getAuditList,
+      getAuditDetail: getAuditDetail
     }
   }
 ]);

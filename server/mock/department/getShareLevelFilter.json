@@ -1,24 +1,24 @@
 {
   "head": {
     "status": 200,
-    "total": 1,
-    "token": "1gzzwuj7ibw0k1oqqfwrguyr7b"
+    "total": 4,
+    "token": "40CE023EF518C86D9DDAFCA3772A0AB3"
   },
   "body": [{
+    "DICTID": "2501e32c-02f0-11e6-a52a-5cf9dd40ad7e",
     "DICT_NAME": "全开放",
-    "DICTID": "1234",
-    "NUMBER":10
-  },{
-    "DICT_NAME": "政务云开放",
-    "DICTID": "12s34",
-    "NUMBER":0
-  },{
+    "NUMBER": 10
+  }, {
+    "DICTID": "250375bd-02f0-11e6-a52a-5cf9dd40ad7e",
     "DICT_NAME": "授权开放",
-    "ID": "12as34",
-    "NUMBER":13
-  },{
+    "NUMBER": 5
+  }, {
+    "DICTID": "250446dc-02f0-11e6-a52a-5cf9dd40ad7e",
     "DICT_NAME": "暂不开放",
-    "DICTID": "12ss34",
-    "NUMBER":6
+    "NUMBER": 7
+  }, {
+    "DICTID": "2502a67d-02f0-11e6-a52a-5cf9dd40ad7e",
+    "DICT_NAME": "省政务云平台开放",
+    "NUMBER": 0
   }]
 }
