@@ -27,23 +27,14 @@
                 <ul class='pager'>
                   共享级别
                   <li><a>全部</a></li>
-                  <li><a>全开放 <span class='badge'>14</span></a></li>
-                  <li><a>政务云开放 <span class='badge'>14</span></a></li>
-                  <li><a>授权开放 <span class='badge'>14</span></a></li>
-                  <li><a>暂不开放 <span class='badge'>14</span></a></li>
+                  <li ng-repeat='dict in Inventory.shareDict'><a>{{dict.DICT_NAME}} <span class='badge'>{{dict.INVENTORY_NUM}}</span></a></li>
                 </ul>
               </nav>
               <nav class='shared-range pull-left'>
                 <ul class='pager'>
                   空间范围
                   <li><a>全部</a></li>
-                  <li><a>省级数据 <span class='badge'>14</span></a></li>
-                  <li><a>分地/市/州数据 <span class='badge'>14</span></a></li>
-                  <li><a>分县数据 <span class='badge'>14</span></a></li>
-                  <li><a>分乡数据 <span class='badge'>14</span></a></li>
-                  <li><a>分村数据 <span class='badge'>14</span></a></li>
-                  <li><a>全国数据 <span class='badge'>14</span></a></li>
-                  <li><a>分省数据 <span class='badge'>14</span></a></li>
+                  <li ng-repeat='dict in Inventory.areaDict'><a>{{dict.DICT_NAME}} <span class='badge'>{{dict.INVENTORY_NUM}}</span></a></li>
                 </ul>
               </nav>
             </div>

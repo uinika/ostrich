@@ -5,14 +5,8 @@ var Inventory = angular.module('Inventory', ['ui.router']);
 Inventory.controller('Inventory.Controller.Main', ['$scope', '$state', 'Inventory.Service.Http',
   function($scope, $state, Http) {
     $scope.Inventory = {};
-    Http.getDepWithInventoryNum().then(function(result) {
-      if(200 == result.data.head.status){
-        $scope.Inventory.departments = result.data.body;
-      }
-    });
 
-    $scope.Inventory.switcher = function(target){
-      var httpParams = {DEP_ID: target}
+    function getAll(httpParams){
       Http.getShareDictWithInventoryNum(httpParams).then(function(result) {
         if(200 == result.data.head.status){
           $scope.Inventory.shareDict = result.data.body;
@@ -23,12 +17,25 @@ Inventory.controller('Inventory.Controller.Main', ['$scope', '$state', 'Inventor
           $scope.Inventory.areaDict = result.data.body;
         }
       });
-      Http.inventoryList(httpParams).then(function(result) {
+      Http.getShareDictWithInventoryNum(httpParams).then(function(result) {
         if(200 == result.data.head.status){
           $scope.Inventory.shareDict = result.data.body;
         }
       });
+    };
+
+    Http.getDepWithInventoryNum().then(function(result) {
+      if(200 == result.data.head.status){
+        $scope.Inventory.departments = result.data.body;
+      }
+    });
+
+    getAll();
+    $scope.Inventory.switcher = function(target){
+      var httpParams = {DEP_ID: target}
+      getAll(httpParams);
     }
+
 
 
   }
