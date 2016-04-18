@@ -47,7 +47,7 @@ Audit.controller('Department.Audit.Controller.Main', ['$scope', '$q','Department
 
 
 /* HTTP */
-Department.factory('Department.Audit.Service.Http', ['$http', '$q', 'API',
+Audit.factory('Department.Audit.Service.Http', ['$http', '$q', 'API',
   function($http, $q, API) {
     var path = API.path;
 

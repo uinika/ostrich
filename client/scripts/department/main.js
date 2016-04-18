@@ -8,40 +8,40 @@ Department.controller('Department.Controller.Main', ['$scope', '$q','Department.
     var endTime = "";
     var depId = 1;
     Http.getInventoryTotal().then(function(result) {
-      $scope.inventoryTotal = result.data.body[0];
+      $scope.inventoryTotal = result.data.body[0].total;
     });
 
     Http.getInventoryTotal({
       starTime: starTime,
       endTime: endTime
     }).then(function(result) {
-      $scope.inventoryMonthTotal = result.data.body[0];
+      $scope.inventoryMonthTotal = result.data.body[0].total;
     });
 
     Http.getShareTotal().then(function(result) {
-      $scope.shareTotal = result.data.body[0];
+      $scope.shareTotal = result.data.body[0].total;
     });
 
     Http.getShareTotal({
       starTime: starTime,
       endTime: endTime
     }).then(function(result) {
-      $scope.shareMonthTotal = result.data.body[0];
+      $scope.shareMonthTotal = result.data.body[0].total
     });
 
     Http.getRequirementTotal().then(function(result) {
-      $scope.requirementTotal = result.data.body[0];
+      $scope.requirementTotal = result.data.body[0].total
     });
 
     Http.getRequirementTotal({
       starTime: starTime,
       endTime: endTime
     }).then(function(result) {
-      $scope.requirementMonthTotal = result.data.body[0];
+      $scope.requirementMonthTotal = result.data.body[0].total;
     });
 
     Http.getUnauditTotal().then(function(result) {
-      $scope.UnauditTotal = result.data.body[0];
+      $scope.unauditTotal = result.data.body[0].total;
     });
 
     Http.getInventoryList({
