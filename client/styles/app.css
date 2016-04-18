@@ -124,8 +124,15 @@ html {
   width: 99%;
   overflow-y: scroll;
 }
-#dashboard .first-section .bureau-list .thumbnail {
-  margin-bottom: 10px;
+#dashboard .first-section .bureau-list .bureau-item {
+  display: inline-block;
+}
+#dashboard .first-section .bureau-list .bureau-item .thumbnail {
+  margin-bottom: 3px;
+}
+#dashboard .first-section .bureau-list .bureau-item .caption {
+  height: 16px;
+  font-size: 12px;
 }
 #dashboard .second-section .panel {
   height: 291px;

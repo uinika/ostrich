@@ -14,10 +14,13 @@
             <span class='input-group-addon'>检索</span>
           </div>
           <div class='bureau-list'>
-            <div ng-repeat='logo in Bureaus' class='bureau-item col-md-3'>
-              <a href='' class='thumbnail'>
-                <img ng-src='../styles/images/bureau/{{logo}}.png'>
+            <div ng-repeat='bureau in Bureaus' class='bureau-item col-md-3'>
+              <a ui-sref='main.department' class='thumbnail'>
+                <img ng-src='../styles/images/bureau/{{::bureau.DEP_EN_NAME}}.png' title='{{::bureau.DEP_NAME}}'>
               </a>
+              <div class="caption">
+                {{bureau.DEP_NAME}}
+              </div>
             </div>
           </div>
         </div>

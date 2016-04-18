@@ -35,28 +35,11 @@ Dashboard.controller('Dashboard.Controller.Main', ['$scope', 'Dashboard.Service.
       limit: 10
     });
     // Bureaus logo grid
-    $scope.Bureaus = [
-      'anjianju',
-      'canlian',
-      'chengguanju',
-      'dishuiju',
-      'fagaiju',
-      'gonganju',
-      'gongshangju',
-      'guihuaju',
-      'guoshuiju',
-      'guotuju',
-      'huanbaoju',
-      'jianchaju',
-      'jiaotongju',
-      'jiaoyuju',
-      'jishengju',
-      'minzhengju',
-      'shichangju',
-      'shijianju',
-      'sifaju',
-      'tongjiju'
-    ];
+    Http.getDepartments().then(function(result) {
+      if (200 == result.data.head.status) {
+        $scope.Bureaus = result.data.body;
+      }
+    });
 
   }
 ])
@@ -65,52 +48,43 @@ Dashboard.controller('Dashboard.Controller.Main', ['$scope', 'Dashboard.Service.
 Dashboard.factory('Dashboard.Service.Http', ['$http', 'API',
   function($http, API) {
     var path = API.path;
-
     function getInventory(params) {
       return $http.get(
-        path + '/inventory', {
-          params: params
-        }
+        path + '/inventory', {params: params}
       )
     };
-
     function getInventoryOverview(params) {
       return $http.get(
-        path + '/inventory/overview', {
-          params: params
-        }
+        path + '/inventory/overview', {params: params}
       )
     };
-
     function getRequirement(params) {
       return $http.get(
-        path + '/requirement', {
-          params: params
-        }
+        path + '/requirement', {params: params}
       )
     };
-
     function getRequirementOverview(params) {
       return $http.get(
-        path + '/requirement/overview', {
-          params: params
-        }
+        path + '/requirement/overview', {params: params}
       )
     };
-
     function getInventoryStatistic(params) {
       return $http.get(
-        path + '/inventory/statistic', {
-          params: params
-        }
+        path + '/inventory/statistic', {params: params}
       )
     };
+    function getDepartments() {
+      return $http.get(
+        path + '/dep'
+      )
+    }
     return {
       getInventory: getInventory,
       getInventoryOverview: getInventoryOverview,
       getRequirement: getRequirement,
       getRequirementOverview: getRequirementOverview,
-      getInventoryStatistic: getInventoryStatistic
+      getInventoryStatistic: getInventoryStatistic,
+      getDepartments: getDepartments
     }
   }
 ]);
