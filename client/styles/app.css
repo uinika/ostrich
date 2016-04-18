@@ -497,63 +497,40 @@ html {
 #department-user .user-list {
   clear: right;
 }
-#inventory-main .sidebar li.active {
-  background: #3AC0EB;
-  border-color: #3AC0EB;
-  color: #FFF;
-}
-#inventory-main .indicator-main {
-  margin-left: 180px;
-  padding: 0 0 0 25px;
-}
-#inventory-main .indicator-main .indicator-order {
-  overflow: hidden;
-  border-bottom: 1px solid #777;
-}
-#inventory-main .indicator-main .indicator-filter {
-  margin: 5px 10px 0;
-  border-bottom: 1px solid #CCC;
-  font-size: 13px;
-}
-#inventory-main .indicator-main .indicator-filter .filter-title {
-  display: inline-block;
-  vertical-align: top;
-  margin-top: 10px;
-}
-#inventory-main .indicator-main .indicator-filter .filter-list {
-  display: inline-block;
-}
-#inventory-main .indicator-main .indicator-list .list-box {
-  padding: 15px 0 0;
-  list-style: none;
-}
-#inventory-main .indicator-main .indicator-list .list-box .item-heading {
-  overflow: hidden;
-  padding: 5px 25px 5px 10px;
+#inventory-main .filter {
   font-size: 12px;
-  color: #777;
 }
-#inventory-main .indicator-main .indicator-list .list-box .item-icon {
-  padding: 8px 20px 0 4px;
+#inventory-main .filter .pager {
+  margin: 0 0 15px 0;
 }
-#inventory-main .indicator-main .indicator-list .list-box .item-icon img {
-  width: 100px;
+#inventory-main .filter a {
+  padding: 3px 8px;
+  margin-left: 6px;
 }
-#inventory-main .indicator-main .indicator-list .list-box .media-body {
-  position: relative;
+#inventory-main .filter .shared-level {
+  display: block;
 }
-#inventory-main .indicator-main .indicator-list .list-box .media-body .main-heading {
-  line-height: 28px;
+#inventory-main .filter .shared-range {
+  display: block;
 }
-#inventory-main .indicator-main .indicator-list .list-box .media-body .item-label {
-  position: absolute;
-  right: 15px;
-  top: 5px;
+#inventory-main .filter .shared-range .pager {
+  margin: 0;
 }
-#inventory-main .indicator-main .indicator-list .list-box .media-body .label-apply {
-  position: absolute;
-  right: 15px;
-  top: 35px;
+#inventory-main .content .information h1 {
+  font-size: 15px;
+  font-weight: bold;
+  margin: 6px 20px 10px;
+}
+#inventory-main .content .information h2 {
+  font-size: 13px;
+  margin: 7px 20px;
+}
+#inventory-main .content .information ul {
+  margin: 0px 15px;
+  font-size: 12px;
+}
+#inventory-main .content .information ul li {
+  color: #777777;
 }
 #indicator-detail .indicator-main {
   padding: 0 0 0 25px;

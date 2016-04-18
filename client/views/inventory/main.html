@@ -1,217 +1,95 @@
-<!-- UI Router -->
-<div id='ui-view-requirement' ui-view>
-  <div id='inventory-main'>
-    <!-- BEGIN MAIN -->
-    <div class='container'>
-      <div class='row'>
-        <!-- BEGIN SIDEBAR -->
-        <aside class='sidebar'>
-          <div class='body'>
-            <h4>目录清单</h4>
-            <ul class="list-group">
-              <li class="list-group-item active">
-                <span class="badge">14</span>
-                科技局
-              </li>
-              <li class="list-group-item">
-                <span class="badge">14</span>
-                科技局
-              </li>
-              <li class="list-group-item">
-                <span class="badge">14</span>
-                科技局
-              </li>
-              <li class="list-group-item">
-                <span class="badge">14</span>
-                科技局
-              </li>
-              <li class="list-group-item">
-                <span class="badge">14</span>
-                科技局
-              </li>
-              <li class="list-group-item">
-                <span class="badge">14</span>
-                科技局
-              </li>
-            </ul>
-          </div>
-        </aside>
-        <!-- END SIDEBAR -->
-        <div class='indicator-main'>
-          <div class='indicator-order'>
-            <div class='pull-left'>
-              <p class='font-18'>科技局 [10]</p>
-            </div>
-            <div class='pull-right'>
-              <ul class="nav nav-pills">
-                <li role="presentation">
-                  <a href="javascript:;">默认排序</a>
-                </li>
-                <li role="presentation">
-                  <a href="javascript:;">最新指标</a>
-                </li>
-                <li role="presentation">
-                  <a href="javascript:;">浏览量</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class='indicator-filter'>
-            <label class='filter-title'>共享级别</label>
-            <ul class="nav nav-pills filter-list">
-              <li role="presentation">
-                <a href="javascript:;">全部</a>
-              </li>
-              <li role="presentation">
-                <a href="javascript:;">全开放[10]</a>
-              </li>
-              <li role="presentation">
-                <a href="javascript:;">政务云开放</a>
-              </li>
-              <li role="presentation">
-                <a href="javascript:;">授权开放[10]</a>
-              </li>
-              <li role="presentation">
-                <a href="javascript:;">暂不开放[20]</a>
-              </li>
-            </ul>
-          </div>
-          <div class='indicator-filter'>
-            <label class='filter-title'>空间范围</label>
-            <ul class="nav nav-pills filter-list">
-              <li role="presentation">
-                <a href="javascript:;">全部</a>
-              </li>
-              <li role="presentation">
-                <a href="javascript:;">省级数据[10]</a>
-              </li>
-              <li role="presentation">
-                <a href="javascript:;">分地/市/州数据</a>
-              </li>
-              <li role="presentation">
-                <a href="javascript:;">分县数据[10]</a>
-              </li>
-              <li role="presentation">
-                <a href="javascript:;">分乡数据[20]</a>
-              </li>
-              <li role="presentation">
-                <a href="javascript:;">分村数据[20]</a>
-              </li>
-              <li role="presentation">
-                <a href="javascript:;">全国数据[20]</a>
-              </li>
-              <li role="presentation">
-                <a href="javascript:;">分省数据[20]</a>
-              </li>
-            </ul>
-          </div>
-          <!-- indicator inventory list -->
-          <div class='indicator-list'>
-            <ul class='list-box'>
-              <li>
-                <div class="panel panel-default ">
-                  <div class="panel-heading item-heading">
-                    <div class='pull-left'>上传日期：2016-04-16</div>
-                    <div class='pull-right'>浏览：10</div>
-                  </div>
-                  <div class="panel-body">
-                    <div class="media">
-                      <div class="media-left item-icon">
-                        <img ng-src='../../styles/images/department/jigou.png'/>
-                      </div>
-                      <div class="media-body">
-                        <a ui-sref='main.inventory.detail'>
-                          <h4 class="media-heading main-heading">科技机构交换指标
-                          </h4>
-                        </a>
-                        <h5>摘要：四川省21个地市州，2015年科技项目交换指标</h5>
-                        <div class='item-label'>
-                          <span class="label label-primary">省级指标</span>
-                          <span class="label label-success">全开放</span>
-                        </div>
-                        <div class='row font-13 margin-top14'>
-                          <div class='col-sm-3'>提供部门：四川省科技局</div>
-                          <div class='col-sm-3'>联系人：李一</div>
-                          <div class='col-sm-3'>联系方式：028-86524152</div>
-                          <div class='col-sm-3'>发布日期：2016-02-10</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div class="panel panel-default ">
-                  <div class="panel-heading item-heading">
-                    <div class='pull-left'>上传日期：2016-04-16</div>
-                    <div class='pull-right'>浏览：10</div>
-                  </div>
-                  <div class="panel-body">
-                    <div class="media">
-                      <div class="media-left item-icon">
-                        <img ng-src='../../styles/images/department/chengguo.png'/>
-                      </div>
-                      <div class="media-body">
-                        <a ui-sref='main.inventory.detail'>
-                          <h4 class="media-heading main-heading">科技成果交换指标
-                          </h4>
-                        </a>
-                        <h5>摘要：四川省21个地市州，2015年科技项目交换指标</h5>
-                        <div class='item-label'>
-                          <span class="label label-primary">省级指标</span>
-                          <span class="label label-success">全开放</span>
-                        </div>
-                        <div class='label-apply'>
-                          <button class="btn btn-sm btn-primary">申请查看</button>
-                        </div>
-                        <div class='row font-13 margin-top14'>
-                          <div class='col-sm-3'>提供部门：四川省科技局</div>
-                          <div class='col-sm-3'>联系人：李一</div>
-                          <div class='col-sm-3'>联系方式：028-86524152</div>
-                          <div class='col-sm-3'>发布日期：2016-02-10</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div class="panel panel-default ">
-                  <div class="panel-heading item-heading">
-                    <div class='pull-left'>上传日期：2016-04-16</div>
-                    <div class='pull-right'>浏览：10</div>
-                  </div>
-                  <div class="panel-body">
-                    <div class="media">
-                      <div class="media-left item-icon">
-                        <img ng-src='../../styles/images/department/xiangmu.png'/>
-                      </div>
-                      <div class="media-body">
-                        <a ui-sref='main.inventory.detail'>
-                          <h4 class="media-heading main-heading">科技项目交换指标
-                          </h4>
-                        </a>
-                        <h5>摘要：四川省21个地市州，2015年科技项目交换指标</h5>
-                        <div class='item-label'>
-                          <span class="label label-primary">省级指标</span>
-                          <span class="label label-success">全开放</span>
-                        </div>
-                        <div class='row font-13 margin-top14'>
-                          <div class='col-sm-3'>提供部门：四川省科技局</div>
-                          <div class='col-sm-3'>联系人：李一</div>
-                          <div class='col-sm-3'>联系方式：028-86524152</div>
-                          <div class='col-sm-3'>发布日期：2016-02-10</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
+<div id='inventory-main' class='container'>
+  <div class='row'>
+    <div class='col-md-2'>
 
+      <div class='panel panel-default'>
+        <div class='panel-heading'><i class='fa fa-bars'> 指标清单</i></div>
+        <div class='list-group'>
+          <a class='list-group-item'>科技局</a>
+          <a class='list-group-item'>科技局</a>
+          <a class='list-group-item'>科技局</a>
+          <a class='list-group-item'>科技局</a>
+          <a class='list-group-item'>科技局</a>
         </div>
       </div>
+    </div>
+    <div class='col-md-10'>
+      <div class='panel panel-default'>
+        <div class='panel-heading'>
+          <span class=''>
+            <i class='fa fa-bookmark-o'> 科技局</i>
+          </span>
+          <span class='pull-right'>
+            <button>默认排序</button>
+            <button>最新指标</button>
+            <button>浏览量</button>
+          </span>
+        </div>
+
+        <div class='panel-body'>
+          <div class='filter'>
+            <nav class='shared-level pull-left'>
+              <ul class='pager'>
+                共享级别
+                <li><a>全部</a></li>
+                <li><a>全开放 <span class='badge'>14</span></a></li>
+                <li><a>政务云开放 <span class='badge'>14</span></a></li>
+                <li><a>授权开放 <span class='badge'>14</span></a></li>
+                <li><a>暂不开放 <span class='badge'>14</span></a></li>
+              </ul>
+            </nav>
+            <nav class='shared-range pull-left'>
+              <ul class='pager'>
+                空间范围
+                <li><a>全部</a></li>
+                <li><a>省级数据 <span class='badge'>14</span></a></li>
+                <li><a>分地/市/州数据 <span class='badge'>14</span></a></li>
+                <li><a>分县数据 <span class='badge'>14</span></a></li>
+                <li><a>分乡数据 <span class='badge'>14</span></a></li>
+                <li><a>分村数据 <span class='badge'>14</span></a></li>
+                <li><a>全国数据 <span class='badge'>14</span></a></li>
+                <li><a>分省数据 <span class='badge'>14</span></a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+
+
+      <div class='panel panel-default'>
+        <div class='panel-heading'>
+          <i class='fa fa-clone'> 上传日期：2016-04-16</i>
+          <span class='pull-right'>浏览：20</span>
+        </div>
+        <div class='panel-body'>
+          <div class='content'>
+            <div class='pull-left'>
+              dfsaf
+            </div>
+
+            <div class='information pull-left'>
+              <h1>科技成果交换指标</h3>
+              <h2>摘要：四川省21个地市州 2015年科技项目交换指标</h5>
+              <ul class='list-inline'>
+                <li>提供部门：四川省科技局</li>
+                <li>联系人：李一</li>
+                <li>联系方式：028-8783887</li>
+                <li>发布日期：2016-02-13</li>
+              </ul>
+            </div>
+
+            <div class='operation pull-right'>
+              <span class='label label-primary'>省级指标</span>
+              <span class='label label-success'>全开放</span>
+              &nbsp &nbsp
+              <button class='btn btn-info btn-sm'>申请查看</button>
+              <div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
     </div>
   </div>
 </div>
