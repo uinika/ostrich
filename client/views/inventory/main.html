@@ -40,29 +40,28 @@
             </div>
           </div>
         </div>
-        <div class='panel panel-default'>
+        <div ng-repeat='inventory in Inventory.inventoryList' class='panel panel-default'>
           <div class='panel-heading'>
-            <i class='fa fa-clone'> 上传日期：2016-04-16</i>
-            <span class='pull-right'>浏览：20</span>
+            <i class='fa fa-clone'> 上传日期：{{inventory.CREATE_TIME}}</i>
+            <span class='pull-right'>浏览：{{inventory.VISIT_COUNT}}</span>
           </div>
           <div class='panel-body'>
             <div class='content'>
               <a ui-sref='main.inventory.detail'>
                 <div class='icon organization test pull-left'></div>
                 <div class='information pull-left'>
-                  <h1>科技成果交换指标</h3>
-                  <h2>摘要：四川省21个地市州 2015年科技项目交换指标</h5>
+                  <h1>{{inventory.DATA_NAME}}</h3>
+                  <h2>{{inventory.DATA_SUMMARY}}</h5>
                   <ul class='list-inline'>
                     <li>提供部门：四川省科技局</li>
-                    <li>联系人：李一</li>
-                    <li>联系方式：028-8783887</li>
-                    <li>发布日期：2016-02-13</li>
+                    <li>联系人：{{inventory.LINKMAN}}</li>
+                    <li>联系方式：{{inventory.CONTACT_PHONE}}</li>
+                    <li>发布日期：{{inventory.UPDATE_TIME}}</li>
                   </ul>
                 </div>
               </a>
               <div class='operation pull-right'>
-                <span class='label label-primary'>省级指标</span>
-                <span class='label label-success'>全开放</span>
+                <span class='label label-success'>{{inventory.DICT_NAME}}</span>
                 &nbsp &nbsp
                 <button class='btn btn-info btn-sm'>申请查看</button>
               </div>
