@@ -191,7 +191,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$scope', '$q'
         $scope.dataQuota = [];
 
         _.forEach($scope.inventoryAttrList, function(item,index) {
-          var step2_obj =_.assign({ 'dataId': $scope.dataInfo.dataName }, item,{'showOrder' : index+1});
+          var step2_obj =_.assign({ 'dataInfoId': $scope.dataInfo.dataName }, item,{'showOrder' : index+1});
           $scope.dataQuota.push(step2_obj);
         });
         $scope.step2_data.dataQuota = $scope.dataQuota;
@@ -224,7 +224,8 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$scope', '$q'
     // total submit
     $scope.addFormSubmit = function() {
       $scope.step4_data = {};
-      $scope.step4_data.dataOtherInfo = $scope.DataOtherInfo;
+      $scope.step4_data.dataOtherInfo =
+      _.assign({ 'dataInfoId': $scope.dataInfo.dataName }, $scope.DataOtherInfo);
 
       $scope.submitObject = _.assign($scope.step1_data,$scope.step2_data,$scope.step3_data,$scope.step4_data);
 

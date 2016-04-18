@@ -4,16 +4,40 @@ var Department = angular.module('Department', ['ui.router']);
 /** Main Controller */
 Department.controller('Department.Controller.Main', ['$scope', '$q','Department.Service.Http',
   function($scope, $q ,Http) {
+    var starTime = "";
+    var endTime = "";
+    var depId = 1;
     Http.getInventoryTotal().then(function(result) {
-      $scope.InvtTotal = result.data.body[0];
+      $scope.inventoryTotal = result.data.body[0];
+    });
+
+    Http.getInventoryTotal({
+      starTime: starTime,
+      endTime: endTime
+    }).then(function(result) {
+      $scope.inventoryMonthTotal = result.data.body[0];
     });
 
     Http.getShareTotal().then(function(result) {
-      $scope.ShareTotal = result.data.body[0];
+      $scope.shareTotal = result.data.body[0];
+    });
+
+    Http.getShareTotal({
+      starTime: starTime,
+      endTime: endTime
+    }).then(function(result) {
+      $scope.shareMonthTotal = result.data.body[0];
     });
 
     Http.getRequirementTotal().then(function(result) {
-      $scope.ReqTotal = result.data.body[0];
+      $scope.requirementTotal = result.data.body[0];
+    });
+
+    Http.getRequirementTotal({
+      starTime: starTime,
+      endTime: endTime
+    }).then(function(result) {
+      $scope.requirementMonthTotal = result.data.body[0];
     });
 
     Http.getUnauditTotal().then(function(result) {
@@ -23,7 +47,7 @@ Department.controller('Department.Controller.Main', ['$scope', '$q','Department.
     Http.getInventoryList({
       skip: 0,
       limit: 6,
-      statue: 0 // 未审核状态
+      status: 0 // 未审核状态
     }).then(function(result) {
       $scope.unauditInventoryList = result.data.body;
     })
@@ -44,9 +68,10 @@ Department.factory('Department.Service.Http', ['$http', '$q', 'API',
   function($http, $q, API) {
     var path = API.path;
 
-    function getInventoryTotal() {
+    function getInventoryTotal(params) {
       return $http.get(
-        path + '/inventoryTotal/department'
+        path + '/inventoryTotal/department',
+        {params: params}
       )
     };
 

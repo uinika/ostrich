@@ -12,14 +12,17 @@ SystemUser.controller('Department.SystemUser.Controller.Main', ['$scope', '$q','
     $scope.addUserModal= function() {
       $scope.Modal = {}; // Clean scope of modal
       $scope.Modal.user = {}; // Clean scope of modal
+      Http.getDepartmentList().then(function(result) {
+        $scope.deptList = result.data.body;
+        Component.popModal($scope, '添加', 'add-user-modal').result.then(function() {
+          Http.saveUser($scope.user).then(function(result) {
+            if (200 == result.data.head.status) {
+              alert('添加成功');
+            }
+          })
+        });
+      })
 
-      Component.popModal($scope, '添加', 'add-user-modal').result.then(function() {
-        Http.saveUser($scope.user).then(function(result) {
-          if (200 == result.data.head.status) {
-            alert('添加成功');
-          }
-        })
-      });
     }
 
 
@@ -46,9 +49,15 @@ SystemUser.factory('Department.SystemUser.Service.Http', ['$http', '$q', 'API',
       )
     };
 
+    function getDepartmentList() {
+      return $http.get(
+        path + '/dep/'
+      )
+    }
     return {
       getUserList: getUserList,
-      saveUser: saveUser
+      saveUser: saveUser,
+      getDepartmentList: getDepartmentList
     }
   }
 ]);

@@ -5,7 +5,6 @@
     "token": "1gzzwuj7ibw0k1oqqfwrguyr7b"
   },
   "body": [{
-    "requirementTotal": 30,
-    "requirementMonthTotal": 15
+    "total": 30
   }]
 }
