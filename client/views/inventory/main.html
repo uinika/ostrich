@@ -4,7 +4,7 @@
       <div class='department-list panel panel-default'>
         <div class='panel-heading'><i class='fa fa-bars'> 指标清单</i></div>
         <div class='list-group'>
-          <a ng-repeat='department in Inventory.departments' ng-click=Inventory.switcher(department.ID) class='list-group-item'>{{department.DEP_NAME}} <span class='badge'>{{department.INVENTORY_NUM}}</span></a>
+          <a ng-repeat='department in Inventory.departments' ng-click=Inventory.switcher(department.ID) class='list-group-item'>{{department.DEP_SHORT_NAME}} <span class='badge'>{{department.INVENTORY_NUM}}</span></a>
         </div>
       </div>
     </div>
@@ -13,7 +13,7 @@
         <div class='panel panel-default'>
           <div class='panel-heading'>
             <span>
-              <i class='fa fa-bookmark-o'> 科技局</i>
+              <i class='fa fa-bookmark-o'> 查看方式</i>
             </span>
             <span class='filter-condition pull-right'>
               <button class='btn btn-default btn-sm'>默认排序</button>

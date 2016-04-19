@@ -1,37 +1,50 @@
 'use strict';
-var DepartmentShare = angular.module('Department.Share', ['ui.router']);
+var DepartmentShare = angular.module('DepartmentShare', ['ui.router']);
 
 /** InventoryDetail Controller */
-DepartmentShare.controller('Department.Share.Controller.Main', ['$rootScope', '$scope', '$stateParams', 'Department.Share.Service.Http',
+DepartmentShare.controller('DepartmentShare.Controller.Main', ['$rootScope', '$scope', '$stateParams', 'DepartmentShare.Service.Http',
   function($rootScope, $scope, $stateParams, Http) {
-    $scope.InventoryDetail = {};
-
+    $scope.DepartmentShare = {};
+    Http.countAll({DEP_ID: $rootScope.User.DEP_ID}).then(function(result) {
+      if(200 == result.data.head.status){
+        $scope.DepartmentShare.countAll = result.data.body[0].NUMBER;
+      }
+    });
+    Http.countByShareLevel({DEP_ID: $rootScope.User.DEP_ID}).then(function(result) {
+  
+    });
   }
 ])
 
 /* HTTP Factory */
-DepartmentShare.Share.factory('Department.Share.Service.Http', ['$http', 'API',
+DepartmentShare.factory('DepartmentShare.Service.Http', ['$http', 'API',
   function($http, API) {
     var path = API.path;
-    function getInventoryDetail(params) {
+    function countAll(params) {
       return $http.get(
-        path + '/inventory/getInventoryDetail', {params: params}
+        path + '/shareInventory/countAll', {params: params}
       )
     };
-    function indicatorList(params) {
+    function countByShareLevel(params) {
       return $http.get(
-        path + '/indicator/indicatorList', {params: params}
+        path + '/shareInventory/countByShareLevel', {params: params}
       )
     };
-    function examplesList(params) {
+    function countBySpatial(params) {
       return $http.get(
-        path + '/examples/examplesList', {params: params}
+        path + '/shareInventory/countBySpatial', {params: params}
+      )
+    };
+    function inventoryList(params) {
+      return $http.get(
+        path + '/shareInventory/inventoryList', {params: params}
       )
     };
     return {
-      getInventoryDetail: getInventoryDetail,
-      indicatorList: indicatorList,
-      examplesList: examplesList
+      countAll: countAll,
+      countByShareLevel: countByShareLevel,
+      countBySpatial: countBySpatial,
+      inventoryList: inventoryList
     }
   }
 ]);

@@ -18,6 +18,23 @@ RequirementDetail.controller('RequirementDetail.Controller.Main', ['$rootScope',
       }
     });
 
+    $scope.RequirementDetail.pushResponse = function(){
+      if($scope.RequirementDetail.response){
+        var postParams = {REQUIREMENT_ID: $stateParams.requirementID, RESPONSE_CONTENT: $scope.RequirementDetail.response};
+        Http.addRequireResponse(postParams).then(function(result) {
+          if(200 == result.data.head.status){
+            Http.requireResponseList({REQUIREMENT_ID: $stateParams.requirementID}).then(function(result) {
+              if(200 == result.data.head.status){
+                $scope.RequirementDetail.list = result.data.body;
+              }
+            });
+          }
+        });
+      }
+      else{
+        alert('请输入回复内容！');
+      }
+    }
   }
 ])
 

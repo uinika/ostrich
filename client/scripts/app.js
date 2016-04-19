@@ -16,7 +16,8 @@ var app = angular.module('app', [
   'Department.SystemUser',
   'Department.Requirement',
   'RequirementMain',
-  'RequirementDetail'
+  'RequirementDetail',
+  'DepartmentShare'
 ]);
 
 app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider', '$provide',
@@ -103,7 +104,8 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
       })
       .state('main.department.share', {
         url: '/share',
-        templateUrl: 'views/department/share.html'
+        templateUrl: 'views/department/share.html',
+        controller: 'DepartmentShare.Controller.Main'
       })
       .state('main.department.requirement', {
         url: '/requirement',

@@ -39,9 +39,9 @@
       <i class="fa fa-globe"> 需求响应</i>
     </div>
     <div class="panel-body">
-      <textarea placeholder='请输入响应内容...' class="form-control" rows="4"></textarea>
+      <textarea ng-model='RequirementDetail.response' placeholder='请输入响应内容...' class="form-control" rows="4"></textarea>
       <br />
-      <button class='btn btn-info btn-sm pull-right'>提 交</button>
+      <button ng-click='RequirementDetail.pushResponse()' class='btn btn-info btn-sm pull-right'>提 交</button>
       <div class='split'></div>
       <button class='btn btn-default btn-sm pull-right'>关 注</button>
     </div>

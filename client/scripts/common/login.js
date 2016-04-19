@@ -14,6 +14,7 @@ Login.controller('Login.Controller.Main', ['$rootScope', '$scope', '$state', 'Lo
         PASSWORD: password
       }).then(function(result) {
         $rootScope.User = result.data.body[0];
+        console.log(result.data.body[0]);
         if(200 == result.data.head.status){
           $state.go("main.dashboard");
         }
