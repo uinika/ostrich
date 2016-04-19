@@ -67,6 +67,23 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$rootScope'
   }
 ])
 
+/** DepartmentReq Controller */
+DepartmentReq.controller('Department.Requirement.Controller.detail', ['$scope', '$stateParams', 'Department.Requirement.Service.Http',
+  function( $scope, $stateParams, Http) {
+    console.log($stateParams.ID);
+    Http.getReqDetail({
+      "ID": $stateParams.ID
+    }).then(function(result) {
+      $scope.ReqDetail = result.data.body[0];
+    }).then(function(){
+      Http.getResponseList({
+        "REQUIREMENT_ID": $stateParams.ID
+      }).then(function(result) {
+        $scope.responseList = result.data.body;
+      })
+    })
+  }])
+
 /* HTTP Factory */
 DepartmentReq.factory('Department.Requirement.Service.Http', ['$http', 'API',
   function($http, API) {
@@ -103,11 +120,29 @@ DepartmentReq.factory('Department.Requirement.Service.Http', ['$http', 'API',
         }
       )
     }
+
+    function getReqDetail(params) {
+      return $http.get(
+        path + '/requirement/requireDetail', {
+          params: params
+        }
+      )
+    }
+
+    function getResponseList(params) {
+      return $http.get(
+        path + '/requirement/requireResponseList', {
+          params: params
+        }
+      )
+    }
     return {
       getDepartmentRequirementList: getDepartmentRequirementList,
       publishReq: publishReq,
       updateReq: updateReq,
-      deleteReq: deleteReq
+      deleteReq: deleteReq,
+      getReqDetail: getReqDetail,
+      getResponseList: getResponseList
     }
   }
 ]);
