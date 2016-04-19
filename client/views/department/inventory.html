@@ -22,20 +22,11 @@
     <div class='indicator-filter'>
       <label class='filter-title'>共享级别</label>
       <ul class="nav nav-pills filter-list">
-        <li role="presentation">
-          <a href="javascript:;">全部</a>
+        <li role="presentation" >
+          <a ng-class="{true: 'active', false: 'inactive'}[shareLvSelection.length == 0]" href="javascript:;" ng-click='getShareLevelAll()'>全部</a>
         </li>
-        <li role="presentation">
-          <a href="javascript:;">全开放[10]</a>
-        </li>
-        <li role="presentation">
-          <a href="javascript:;">政务云开放</a>
-        </li>
-        <li role="presentation">
-          <a href="javascript:;">授权开放[10]</a>
-        </li>
-        <li role="presentation">
-          <a href="javascript:;">暂不开放[20]</a>
+        <li role="presentation" ng-repeat='shareLevel in shareLevelList'>
+          <a ng-class="{true: 'active', false: 'inactive'}[shareLvSelection.indexOf(shareLevel.SYS_DICT_ID) > -1]" href="javascript:;" ng-click='getIvntListBySl(shareLevel)' >{{shareLevel.DICT_NAME}}[{{shareLevel.INVENTORY_NUM}}]</a>
         </li>
       </ul>
     </div>
@@ -43,28 +34,10 @@
       <label class='filter-title'>空间范围</label>
       <ul class="nav nav-pills filter-list">
         <li role="presentation">
-          <a href="javascript:;">全部</a>
+          <a href="javascript:;" ng-class="{true: 'active', false: 'inactive'}[areaSelection.length == 0]" href="javascript:;" ng-click='getSpatialAll()'>全部</a>
         </li>
-        <li role="presentation">
-          <a href="javascript:;">省级数据[10]</a>
-        </li>
-        <li role="presentation">
-          <a href="javascript:;">分地/市/州数据</a>
-        </li>
-        <li role="presentation">
-          <a href="javascript:;">分县数据[10]</a>
-        </li>
-        <li role="presentation">
-          <a href="javascript:;">分乡数据[20]</a>
-        </li>
-        <li role="presentation">
-          <a href="javascript:;">分村数据[20]</a>
-        </li>
-        <li role="presentation">
-          <a href="javascript:;">全国数据[20]</a>
-        </li>
-        <li role="presentation">
-          <a href="javascript:;">分省数据[20]</a>
+        <li role="presentation" ng-repeat='areaPeriod in areaPeriodList'>
+          <a ng-class="{true: 'active', false: 'inactive'}[areaSelection.indexOf(areaPeriod.SYS_DICT_ID) > -1]" ng-checked="areaSelection.indexOf(areaPeriod.SYS_DICT_ID) > -1"  ng-click='getIvntListByAP(areaPeriod)' href="javascript:;">{{areaPeriod.DICT_NAME}}[{{areaPeriod.INVENTORY_NUM}}]</a>
         </li>
       </ul>
     </div>
@@ -75,101 +48,21 @@
         <a class='btn btn-primary' ui-sref='main.department.inventory.publish'>我要发布</a>
       </div>
       <ul class='list-box'>
-        <li>
+        <li ng-repeat='depIvnt in depIvntList'>
           <div class="panel panel-default ">
             <div class="panel-heading item-heading">
               <div class='pull-left'>
-                <span>上传日期：2016-04-16</span>
-                <span class='options'>
+                <span>上传日期：{{depIvnt.CREATE_TIME}}</span>
+                <!-- <span class='options'>
                   <a title='修改'>
                     <i class='fa fa-pencil'></i>
                   </a>
                   <a title='删除'>
                     <i class='fa fa-trash'></i>
                   </a>
-                </span>
+                </span> -->
               </div>
-              <div class='pull-right'>浏览：10</div>
-            </div>
-            <div class="panel-body">
-              <div class="media">
-                <div class="media-left item-icon">
-                  <img ng-src='../../styles/images/department/jigou.png'/>
-                </div>
-                <div class="media-body">
-                  <h4 class="media-heading main-heading">科技机构交换指标
-                  </h4>
-                  <h5>摘要：四川省21个地市州，2015年科技项目交换指标</h5>
-                  <div class='item-label'>
-                    <label class='label label-primary'>省级指标</label>
-                    <label class='label label-info'>全开放</label>
-                  </div>
-                  <div class='row font-13 margin-top14'>
-                    <div class='col-sm-3'>提供部门：四川省科技局</div>
-                    <div class='col-sm-3'>联系人：李一</div>
-                    <div class='col-sm-3'>联系方式：028-86524152</div>
-                    <div class='col-sm-3'>发布日期：2016-02-10</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="panel panel-default ">
-            <div class="panel-heading item-heading">
-              <div class='pull-left'>
-                <span>上传日期：2016-04-16</span>
-                <span class='options'>
-                  <a title='修改'>
-                    <i class='fa fa-pencil'></i>
-                  </a>
-                  <a title='删除'>
-                    <i class='fa fa-trash'></i>
-                  </a>
-                </span>
-              </div>
-              <div class='pull-right'>浏览：10</div>
-            </div>
-            <div class="panel-body">
-              <div class="media">
-                <div class="media-left item-icon">
-                  <img ng-src='../../styles/images/department/chengguo.png'/>
-                </div>
-                <div class="media-body">
-                  <h4 class="media-heading main-heading">科技成果交换指标
-                  </h4>
-                  <h5>摘要：四川省21个地市州，2015年科技项目交换指标</h5>
-                  <div class='item-label'>
-                    <label class='label label-primary'>省级指标</label>
-                    <label class='label label-info'>全开放</label>
-                  </div>
-                  <div class='row font-13 margin-top14'>
-                    <div class='col-sm-3'>提供部门：四川省科技局</div>
-                    <div class='col-sm-3'>联系人：李一</div>
-                    <div class='col-sm-3'>联系方式：028-86524152</div>
-                    <div class='col-sm-3'>发布日期：2016-02-10</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="panel panel-default ">
-            <div class="panel-heading item-heading">
-              <div class='pull-left'>
-                <span>上传日期：2016-04-16</span>
-                <span class='options'>
-                  <a title='修改'>
-                    <i class='fa fa-pencil'></i>
-                  </a>
-                  <a title='删除'>
-                    <i class='fa fa-trash'></i>
-                  </a>
-                </span>
-              </div>
-              <div class='pull-right'>浏览：10</div>
+              <div class='pull-right'>浏览：{{depIvnt.VISIT_COUNT}}</div>
             </div>
             <div class="panel-body">
               <div class="media">
@@ -177,60 +70,23 @@
                   <img ng-src='../../styles/images/department/xiangmu.png'/>
                 </div>
                 <div class="media-body">
-                  <h4 class="media-heading main-heading">科技项目交换指标
-                  </h4>
-                  <h5>摘要：四川省21个地市州，2015年科技项目交换指标</h5>
-                  <div class='item-label'>
-                    <label class='label label-primary'>省级指标</label>
-                    <label class='label label-info'>全开放</label>
+                  <div class="row media-heading main-heading">
+                    <div class='col-sm-4'>
+                      <h4>{{depIvnt.DATA_NAME}}</h4>
+                    </div>
+                    <div class='col-sm-4'>
+                      <div class='item-label'>
+                        <!-- <label class='label label-primary'>{{depIvnt.AREA_PERIOD}}</label> -->
+                        <label class='label label-info'>{{depIvnt.DICT_NAME}}</label>
+                      </div>
+                    </div>
                   </div>
+                  <h5>摘要：{{depIvnt.DATA_SUMMARY}}</h5>
                   <div class='row font-13 margin-top14'>
-                    <div class='col-sm-3'>提供部门：四川省科技局</div>
-                    <div class='col-sm-3'>联系人：李一</div>
-                    <div class='col-sm-3'>联系方式：028-86524152</div>
-                    <div class='col-sm-3'>发布日期：2016-02-10</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="panel panel-default ">
-            <div class="panel-heading item-heading">
-              <div class='pull-left'>
-                <span>上传日期：2016-04-16</span>
-                <span class='options'>
-                  <a title='修改'>
-                    <i class='fa fa-pencil'></i>
-                  </a>
-                  <a title='删除'>
-                    <i class='fa fa-trash'></i>
-                  </a>
-                </span>
-              </div>
-              <div class='pull-right'>浏览：10</div>
-            </div>
-            <div class="panel-body">
-              <div class="media">
-                <div class="media-left item-icon">
-                  <a href="#">
-                    <img ng-src='../../styles/images/department/jigou.png'/>
-                  </a>
-                </div>
-                <div class="media-body">
-                  <h4 class="media-heading main-heading">科技机构交换指标
-                  </h4>
-                  <h5>摘要：四川省21个地市州，2015年科技项目交换指标</h5>
-                  <div class='item-label'>
-                    <label class='label label-primary'>省级指标</label>
-                    <label class='label label-info'>全开放</label>
-                  </div>
-                  <div class='row font-13 margin-top14'>
-                    <div class='col-sm-3'>提供部门：四川省科技局</div>
-                    <div class='col-sm-3'>联系人：李一</div>
-                    <div class='col-sm-3'>联系方式：028-86524152</div>
-                    <div class='col-sm-3'>发布日期：2016-02-10</div>
+                    <div class='col-sm-3'>提供部门：{{depIvnt.DEPNAME}}</div>
+                    <div class='col-sm-3'>联系人：{{depIvnt.LINKMAN}}</div>
+                    <div class='col-sm-3'>联系电话：{{depIvnt.CONTACT_PHONE}}</div>
+                    <div class='col-sm-3'>发布日期：{{depIvnt.PUBLISH_TIME}}</div>
                   </div>
                 </div>
               </div>

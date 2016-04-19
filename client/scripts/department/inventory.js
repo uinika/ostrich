@@ -2,8 +2,89 @@
 var DInventory = angular.module('Department.Inventory', ['ui.router']);
 
 /** Inventory Controller */
-DInventory.controller('Department.Inventory.Controller.Main', ['$scope', '$q', '$uibModal', 'Department.Inventory.Service.Http',
+DInventory.controller('Department.Inventory.Controller.Main', ['$scope', '$q', 'Department.Inventory.Service.Http',
   function($scope, $q, Http) {
+    var _httpParams = {};
+    _httpParams.limit = 10;
+    _httpParams.skip = 0;
+
+    // init
+    getDepartmentInvntList(_httpParams);
+
+    // Http.getAuditTotal().then(function(result) {
+    //   $scope.depIvntList = result.data.body[0].NUMBER;
+    // });
+
+    Http.getShareLevelFilter().then(function(result) {
+      $scope.shareLevelList = result.data.body;
+    });
+
+    Http.getSpatialFilter().then(function(result) {
+      $scope.areaPeriodList = result.data.body;
+    });
+
+
+    function getDepartmentInvntList(_httpParams) {
+      Http.getDepartInvntList(_httpParams).then(function(result){
+        $scope.auditList = result.data.body;
+      //  $scope.Paging.totalItems = data.head.total;
+      });
+    }
+
+    // filter by share level
+    $scope.shareLvSelection = [];
+    $scope.getIvntListBySl = function(item) {
+      var idx = $scope.shareLvSelection.indexOf(item.SYS_DICT_ID);
+      if (idx > -1) {
+        $scope.shareLvSelection.splice(idx, 1);
+      }
+      else {
+        $scope.shareLvSelection = item.SYS_DICT_ID;
+      }
+      _httpParams.SHARE_LEVEL = item.SYS_DICT_ID;
+      _httpParams.limit = 10;
+      _httpParams.skip = 0;
+      getDepartmentInvntList(_httpParams);
+    }
+
+    // filter by partial
+    $scope.areaSelection = [];
+    $scope.getIvntListByAP = function(item) {
+      var idx = $scope.areaSelection.indexOf(item.SYS_DICT_ID);
+      // is currently selected
+      if (idx > -1) {
+        $scope.areaSelection.splice(idx, 1);
+      }
+      // is newly selected
+      else {
+        $scope.areaSelection.push(item.SYS_DICT_ID);
+      }
+      console.log($scope.areaSelection);
+
+      _httpParams.AREA_DATA_LEVEL = $scope.areaSelection;
+      _httpParams.limit = 10;
+      _httpParams.skip = 0;
+      getDepartmentInvntList(_httpParams);
+    }
+
+    // share level all
+    $scope.getShareLevelAll = function() {
+      $scope.shareLvSelection = [];
+      _httpParams.SHARE_LEVEL = null;
+      _httpParams.limit = 10;
+      _httpParams.skip = 0;
+      getDepartmentInvntList(_httpParams);
+    }
+
+    // get spatial all
+    $scope.getSpatialAll = function() {
+      $scope.areaSelection = [];
+      _httpParams.AREA_DATA_LEVEL = null;
+      _httpParams.limit = 10;
+      _httpParams.skip = 0;
+      getDepartmentInvntList(_httpParams);
+    }
+
 
   }
 ])
@@ -389,10 +470,37 @@ DInventory.factory('Department.Inventory.Service.Http', ['$http', '$q', 'API',
         path + '/dep/'
       )
     }
+
+    function getDepartInvntList(params) {
+      return $http.get(
+        path + '/inventory/inventoryListByDep' ,
+        {params: params}
+      )
+    }
+    function getShareLevelFilter(params) {
+      return $http.get(
+        path + '/openInventory/countByShareLevel',
+        {
+          params:params
+        }
+      )
+    }
+
+    function getSpatialFilter(params) {
+      return $http.get(
+        path + '/openInventory/countBySpatial',
+        {
+          params:params
+        }
+      )
+    }
     return {
       saveInventory: saveInventory,
       getSystemDictByCatagory: getSystemDictByCatagory,
-      getDepartmentList: getDepartmentList
+      getDepartmentList: getDepartmentList,
+      getDepartInvntList: getDepartInvntList,
+      getShareLevelFilter: getShareLevelFilter,
+      getSpatialFilter: getSpatialFilter
     }
   }
 ]);

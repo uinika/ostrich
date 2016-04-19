@@ -40,6 +40,9 @@ html {
   color: red;
   padding: 4px;
 }
+.modal-content {
+  width: 800px !important;
+}
 #login {
   height: 100%;
   background: #EEE;
