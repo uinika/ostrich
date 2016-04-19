@@ -23,24 +23,24 @@
     <!-- indicator inventory list -->
     <div class='indicator-list'>
       <div class='pull-right'>
-        <a class='btn btn-primary' ui-sref='main.department.requirement.publish'>发布需求</a>
+        <a class='btn btn-primary' ng-click='publishReq()'>发布需求</a>
       </div>
       <ul class='list-box'>
-        <li>
+        <li ng-repeat= 'item in requirementList'>
           <div class="panel panel-default ">
             <div class="panel-heading item-heading">
               <div class='pull-left'>
-                <span>上传日期：2016-04-16</span>
+                <span>上传日期：{{item.CREATE_TIME}}</span>
                 <span class='options'>
-                  <a title='修改'>
+                  <a title='修改' ng-click='updateReq(item)'>
                     <i class='fa fa-pencil'></i>
                   </a>
-                  <a title='删除'>
+                  <a title='删除' ng-click='deleteReq(item.ID)'>
                     <i class='fa fa-trash'></i>
                   </a>
                 </span>
               </div>
-              <div class='pull-right'>浏览：10</div>
+              <div class='pull-right'>浏览：{{item.VISIT_COUNT}}</div>
             </div>
             <div class="panel-body">
               <div class="media">
@@ -49,91 +49,16 @@
                 </div>
                 <div class="media-body">
                   <a ui-sref='main.department.requirement.detail'>
-                    <h4 class="media-heading main-heading">科技成果交换指标
+                    <h4 class="media-heading main-heading">{{item.REQUIREMENT_NAME}}
                     </h4>
                   </a>
-                  <h5>摘要：四川省21个地市州，2015年科技项目交换指标</h5>
+                  <h5>摘要：{{item.REQUIREMENT_DESC}}</h5>
                   <div class='row font-13 margin-top14'>
-                    <div class='col-sm-3'>来源：四川省科技局</div>
-                    <div class='col-sm-3'>联系人：李一</div>
-                    <div class='col-sm-3'>联系电话：028-86524152</div>
-                    <div class='col-sm-3'>邮箱：sdfsd@sdfsdf.com</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="panel panel-default ">
-            <div class="panel-heading item-heading">
-              <div class='pull-left'>
-                <span>上传日期：2016-04-16</span>
-                <span class='options'>
-                  <a title='修改'>
-                    <i class='fa fa-pencil'></i>
-                  </a>
-                  <a title='删除'>
-                    <i class='fa fa-trash'></i>
-                  </a>
-                </span>
-              </div>
-              <div class='pull-right'>浏览：10</div>
-            </div>
-            <div class="panel-body">
-              <div class="media">
-                <div class="media-left item-icon">
-                  <img ng-src='../../styles/images/department/jigou.png'/>
-                </div>
-                <div class="media-body">
-                  <a ui-sref='main.department.requirement.detail'>
-                    <h4 class="media-heading main-heading">科技机构交换指标
-                    </h4>
-                  </a>
-                  <h5>摘要：四川省21个地市州，2015年科技项目交换指标</h5>
-                  <div class='row font-13 margin-top14'>
-                    <div class='col-sm-3'>来源：四川省科技局</div>
-                    <div class='col-sm-3'>联系人：李一</div>
-                    <div class='col-sm-3'>联系电话：028-86524152</div>
-                    <div class='col-sm-3'>邮箱：sdfsd@sdfsdf.com</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="panel panel-default ">
-            <div class="panel-heading item-heading">
-              <div class='pull-left'>
-                <span>上传日期：2016-04-16</span>
-                <span class='options'>
-                  <a title='修改'>
-                    <i class='fa fa-pencil'></i>
-                  </a>
-                  <a title='删除'>
-                    <i class='fa fa-trash'></i>
-                  </a>
-                </span>
-              </div>
-              <div class='pull-right'>浏览：10</div>
-            </div>
-            <div class="panel-body">
-              <div class="media">
-                <div class="media-left item-icon">
-                  <img ng-src='../../styles/images/department/xiangmu.png'/>
-                </div>
-                <div class="media-body">
-                  <a ui-sref='main.department.requirement.detail'>
-                    <h4 class="media-heading main-heading">科技项目交换指标
-                    </h4>
-                  </a>
-                  <h5>摘要：四川省21个地市州，2015年科技项目交换指标</h5>
-                  <div class='row font-13 margin-top14'>
-                    <div class='col-sm-3'>来源：四川省科技局</div>
-                    <div class='col-sm-3'>联系人：李一</div>
-                    <div class='col-sm-3'>联系电话：028-86524152</div>
-                    <div class='col-sm-3'>邮箱：sdfsd@sdfsdf.com</div>
+                    <div class='col-sm-3'>来源：{{item.DEP_NAME}}</div>
+                    <div class='col-sm-3'>联系人：{{item.LINKMAN}}</div>
+                    <div class='col-sm-3'>联系电话：{{item.CONTACT_PHONE
+}}</div>
+                    <div class='col-sm-3'>邮箱：{{item.EMAIL}}</div>
                   </div>
                 </div>
               </div>
@@ -145,3 +70,58 @@
 
   </div>
 </div>
+
+<!-- Add user modal -->
+<script type='text/ng-template' id='add-req-modal.html'>
+  <form class="form-horizontal example-add-modal" name='reqAddForm'>
+
+    <div class='modal-header'>
+      <i class="fa fa-server"></i>
+      {{Modal.type}}需求
+      <button type='button' class='close' data-dismiss='modal' ng-click='Modal.cancel()'>&times;</button>
+    </div>
+    <div class='modal-body'>
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">需求名称
+          <span class='require-sign'>*</span>:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" ng-model='req.REQUIREMENT_NAME' required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">需求简介
+          <span class='require-sign'>*</span>:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" ng-model='req.REQUIREMENT_DESC' required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">联系人
+          <span class='require-sign'>*</span>:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" ng-model='req.LINKMAN' required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">联系电话
+          <span class='require-sign'>*</span>:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" ng-model='req.CONTACT_PHONE' required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">邮箱:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" ng-model='req.EMAIL'>
+        </div>
+      </div>
+
+    </div>
+    <div class='modal-footer'>
+      <button class='btn btn-primary' ng-disabled="userAddForm.$invalid" type='submit' ng-click='Modal.confirm(reqAddForm.$valid)'>提交</button>
+      <button class='btn btn-default' type='button' ng-click='Modal.cancel()'>取消</button>
+    </div>
+  </div>
+</form>
+</script>

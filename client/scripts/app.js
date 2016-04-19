@@ -14,6 +14,7 @@ var app = angular.module('app', [
   'Department.Inventory',
   'Department.Audit',
   'Department.SystemUser',
+  'Department.Requirement',
   'RequirementMain',
   'RequirementDetail'
 ]);
@@ -106,7 +107,8 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
       })
       .state('main.department.requirement', {
         url: '/requirement',
-        templateUrl: 'views/department/requirement.html'
+        templateUrl: 'views/department/requirement.html',
+        controller: 'Department.Requirement.Controller.Main'
       })
       .state('main.department.requirement.publish', {
         url: '/publish',
