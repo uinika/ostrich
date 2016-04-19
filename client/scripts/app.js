@@ -30,6 +30,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
         return {
           'request': function(config) {
             config.withCredentials = true;
+            config.cache = false;
             return config;
           },
           'requestError': function(rejection) {
