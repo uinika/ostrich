@@ -15,7 +15,7 @@
           </div>
           <div class='bureau-list'>
             <div ng-repeat='bureau in Bureaus' class='bureau-item col-md-3'>
-              <a ui-sref='main.department' class='thumbnail'>
+              <a ui-sref='main.inventory.detail({departmentID: bureau.ID})' class='thumbnail'>
                 <img ng-src='../styles/images/bureau/{{::bureau.DEP_EN_NAME}}' title='{{::bureau.DEP_NAME}}'>
               </a>
               <div class="caption">
