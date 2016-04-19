@@ -7,27 +7,27 @@
       <table class="table table-bordered table-condensed table-hover table-striped text-center">
         <tr>
           <td>需求名称</td>
-          <td></td>
+          <td>{{RequirementDetail.detail.REQUIREMENT_NAME}}</td>
         </tr>
         <tr>
           <td>需求简介</td>
-          <td></td>
+          <td>{{RequirementDetail.detail.REQUIREMENT_DESC}}</td>
         </tr>
         <tr>
           <td>需求来源</td>
-          <td></td>
+          <td>{{RequirementDetail.detail.DEP_NAME}}</td>
         </tr>
         <tr>
           <td>联系人</td>
-          <td></td>
+          <td>{{RequirementDetail.detail.LINKMAN}}</td>
         </tr>
         <tr>
           <td>联系电话</td>
-          <td></td>
+          <td>{{RequirementDetail.detail.CONTACT_PHONE}}</td>
         </tr>
         <tr>
           <td>邮箱</td>
-          <td></td>
+          <td>{{RequirementDetail.detail.EMAIL}}</td>
         </tr>
       </table>
     </table>
@@ -37,30 +37,29 @@
   <div class="bottom panel panel-default">
     <div class="panel-heading">
       <i class="fa fa-globe"> 需求响应</i>
-
     </div>
     <div class="panel-body">
-      <textarea class="form-control" rows="3"></textarea>
+      <textarea placeholder='请输入响应内容...' class="form-control" rows="4"></textarea>
       <br />
-      <button class='btn btn-info pull-right'>提 交</button>
+      <button class='btn btn-info btn-sm pull-right'>提 交</button>
       <div class='split'></div>
-      <button class='btn btn-default pull-right'>关 注</button>
+      <button class='btn btn-default btn-sm pull-right'>关 注</button>
     </div>
     <ul class="list-group">
-      <li class="list-group-item">
+      <li ng-repeat='detail in RequirementDetail.list' class="list-group-item">
         <article class='head'>
           <button type="button" class="btn btn-default btn-xs">
-            <span class="glyphicon glyphicon-align-left"> 部门：工商局 张三</span>
+            <span class="glyphicon glyphicon-align-left"> 部门：{{detail.DEP_NAME}} {{detail.PERSON_NAME}}</span>
           </button>
           <button type="button" class="btn btn-default btn-xs">
-            <span class="glyphicon glyphicon-earphone"> 电话：7412379125</span>
+            <span class="glyphicon glyphicon-earphone"> 电话：{{detail.PHONE}}</span>
           </button>
           <button type="button" class="btn btn-default btn-xs">
-            <span class="glyphicon glyphicon-comment"> 邮箱：fffd@163.com</span>
+            <span class="glyphicon glyphicon-comment"> 邮箱：{{detail.EMAIL}}</span>
           </button>
         </article>
         <article class='body'>
-          dfadfasfaaaaaaaaaaaaaaaaaaaaaaaaaa
+          {{detail.RESPONSE_CONTENT}}
         </article>
       </li>
     </ul>

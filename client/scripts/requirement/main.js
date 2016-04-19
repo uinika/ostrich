@@ -17,7 +17,7 @@ RequirementMain.controller('RequirementMain.Controller.Main', ['$scope', '$state
       }
     });
   }
-])
+]);
 
 /* HTTP Factory */
 RequirementMain.factory('RequirementMain.Service.Http', ['$http', 'API',
