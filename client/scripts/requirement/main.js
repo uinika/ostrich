@@ -4,12 +4,18 @@ var RequirementMain = angular.module('RequirementMain', ['ui.router']);
 /** InventoryMain Controller */
 RequirementMain.controller('RequirementMain.Controller.Main', ['$scope', '$stateParams', 'RequirementMain.Service.Http',
   function($scope, $stateParams, Http) {
-    // Http.getInventoryMain(httpParams).then(function(result) {
-    //   if(200 == result.data.head.status){
-    //     $scope.InventoryMain.detail = result.data.body[0];
-    //   }
-    // });
-
+    var httpParams = {};
+    $scope.Requirement = {};
+    Http.getStatistic(httpParams).then(function(result) {
+      if(200 == result.data.head.status){
+        $scope.Requirement.statistic = result.data.body[0];
+      }
+    });
+    Http.getRequirementList(httpParams).then(function(result) {
+      if(200 == result.data.head.status){
+        $scope.Requirement.list = result.data.body;
+      }
+    });
   }
 ])
 
@@ -17,13 +23,19 @@ RequirementMain.controller('RequirementMain.Controller.Main', ['$scope', '$state
 RequirementMain.factory('RequirementMain.Service.Http', ['$http', 'API',
   function($http, API) {
     var path = API.path;
-    function getInventoryMain(params) {
+    function getStatistic(params) {
       return $http.get(
-        path + '/inventory/getInventoryMain', {params: params}
+        path + '/requirement/statistic', {params: params}
+      )
+    };
+    function getRequirementList(params) {
+      return $http.get(
+        path + '/requirement/requirementList', {params: params}
       )
     };
     return {
-      getInventoryMain: getInventoryMain
+      getStatistic: getStatistic,
+      getRequirementList: getRequirementList
     }
   }
 ]);
