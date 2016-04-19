@@ -81,7 +81,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
         controller: 'RequirementMain.Controller.Main'
       })
       .state('main.requirement.detail', {
-        url: '/detail',
+        url: '/detail/:requirementID',
         templateUrl: 'views/requirement/detail.html',
         controller: 'RequirementDetail.Controller.Main'
       })

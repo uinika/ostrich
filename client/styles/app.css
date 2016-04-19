@@ -683,17 +683,19 @@ html {
 #requirement-main .content .information ul li {
   color: #777777;
 }
-#requirement-detail .dl-horizontal dt,
-#requirement-detail .dl-horizontal dd {
-  line-height: 35px;
+#requirement-detail .bottom .head {
+  display: inline-block;
 }
-#requirement-detail .response-items {
-  clear: right;
-  margin-top: 74px;
+#requirement-detail .bottom .head button {
+  float: left;
+  margin-right: 3rem;
+  margin-left: 0;
+  margin-bottom: 5px;
+  font-size: 13px;
 }
-#requirement-detail .response-items .response-item {
-  overflow: hidden;
-  padding: 15px 0;
-  border-top: 1px solid #CCC;
-  margin-top: 16px;
+#requirement-detail .bottom .body {
+  display: block;
+}
+#requirement-detail .bottom .btn {
+  margin-left: 20px;
 }
