@@ -10,7 +10,7 @@ Router.route('/inventory')
 
   });
 
-Router.route('/inventory/department')
+Router.route('/inventory')
   .post(function(request, response) {
     let datas = JsonLoader.sync(Config.path + 'department/post.json');
     response.json(datas);

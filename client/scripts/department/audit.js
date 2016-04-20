@@ -48,12 +48,12 @@ Audit.controller('Department.Audit.Controller.Main', ['$rootScope', '$scope', '$
     $scope.getAuListBySl = function(item) {
       var idx = $scope.shareLvSelection.indexOf(item.DICTID);
       if (idx > -1) {
-        $scope.shareLvSelection.splice(idx, 1);
+        $scope.shareLvSelection = [];
       }
       else {
         $scope.shareLvSelection = item.DICTID;
       }
-      _httpParams.SHARE_LEVEL = item.DICTID;
+      _httpParams.SHARE_LEVEL = $scope.shareLvSelection;
       _httpParams.limit = 10;
       _httpParams.skip = 0;
       getAuditList(_httpParams);

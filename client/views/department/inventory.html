@@ -23,10 +23,10 @@
       <label class='filter-title'>共享级别</label>
       <ul class="nav nav-pills filter-list">
         <li role="presentation" >
-          <a ng-class="{true: 'active', false: 'inactive'}[shareLvSelection.length == 0]" href="javascript:;" ng-click='getShareLevelAll()'>全部</a>
+          <a ng-class="{true: 'active', false: 'inactive'}[shareLvMainSelection.length == 0]" href="javascript:;" ng-click='getShareLevelAll()'>全部</a>
         </li>
         <li role="presentation" ng-repeat='shareLevel in shareLevelList'>
-          <a ng-class="{true: 'active', false: 'inactive'}[shareLvSelection.indexOf(shareLevel.SYS_DICT_ID) > -1]" href="javascript:;" ng-click='getIvntListBySl(shareLevel)' >{{shareLevel.DICT_NAME}}[{{shareLevel.INVENTORY_NUM}}]</a>
+          <a ng-class="{true: 'active', false: 'inactive'}[shareLvMainSelection.indexOf(shareLevel.SYS_DICT_ID) > -1]" href="javascript:;" ng-click='getIvntListBySl(shareLevel)' >{{shareLevel.DICT_NAME}}[{{shareLevel.INVENTORY_NUM}}]</a>
         </li>
       </ul>
     </div>
@@ -34,10 +34,10 @@
       <label class='filter-title'>空间范围</label>
       <ul class="nav nav-pills filter-list">
         <li role="presentation">
-          <a href="javascript:;" ng-class="{true: 'active', false: 'inactive'}[areaSelection.length == 0]" href="javascript:;" ng-click='getSpatialAll()'>全部</a>
+          <a href="javascript:;" ng-class="{true: 'active', false: 'inactive'}[areaMainSelection.length == 0]" href="javascript:;" ng-click='getSpatialAll()'>全部</a>
         </li>
         <li role="presentation" ng-repeat='areaPeriod in areaPeriodList'>
-          <a ng-class="{true: 'active', false: 'inactive'}[areaSelection.indexOf(areaPeriod.SYS_DICT_ID) > -1]" ng-checked="areaSelection.indexOf(areaPeriod.SYS_DICT_ID) > -1"  ng-click='getIvntListByAP(areaPeriod)' href="javascript:;">{{areaPeriod.DICT_NAME}}[{{areaPeriod.INVENTORY_NUM}}]</a>
+          <a ng-class="{true: 'active', false: 'inactive'}[areaMainSelection.indexOf(areaPeriod.SYS_DICT_ID) > -1]" ng-checked="areaMainSelection.indexOf(areaPeriod.SYS_DICT_ID) > -1"  ng-click='getIvntListByAP(areaPeriod)' href="javascript:;">{{areaPeriod.DICT_NAME}}[{{areaPeriod.INVENTORY_NUM}}]</a>
         </li>
       </ul>
     </div>
@@ -83,7 +83,7 @@
                   </div>
                   <h5>摘要：{{depIvnt.DATA_SUMMARY}}</h5>
                   <div class='row font-13 margin-top14'>
-                    <div class='col-sm-3'>提供部门：{{depIvnt.DEPNAME}}</div>
+                    <div class='col-sm-3'>提供部门：{{depIvnt.DEP_NAME}}</div>
                     <div class='col-sm-3'>联系人：{{depIvnt.LINKMAN}}</div>
                     <div class='col-sm-3'>联系电话：{{depIvnt.CONTACT_PHONE}}</div>
                     <div class='col-sm-3'>发布日期：{{depIvnt.PUBLISH_TIME | date:'yyyy-MM-dd'}}</div>

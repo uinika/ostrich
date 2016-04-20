@@ -26,43 +26,42 @@ DInventory.controller('Department.Inventory.Controller.Main', ['$scope', '$q', '
 
 
     function getDepartmentInvntList(_httpParams) {
-      Http.getDepartInvntList(_httpParams).then(function(result){
+      Http.getDepartInvntList(_httpParams).then(function(result) {
         $scope.depIvntList = result.data.body;
-      //  $scope.Paging.totalItems = data.head.total;
+        //  $scope.Paging.totalItems = data.head.total;
       });
     }
 
     // filter by share level
-    $scope.shareLvSelection = [];
+    $scope.shareLvMainSelection = [];
     $scope.getIvntListBySl = function(item) {
-      var idx = $scope.shareLvSelection.indexOf(item.SYS_DICT_ID);
+      var idx = $scope.shareLvMainSelection.indexOf(item.SYS_DICT_ID);
       if (idx > -1) {
-        $scope.shareLvSelection.splice(idx, 1);
+        $scope.shareLvMainSelection = [];
+      } else {
+        $scope.shareLvMainSelection = item.SYS_DICT_ID;
       }
-      else {
-        $scope.shareLvSelection = item.SYS_DICT_ID;
-      }
-      _httpParams.SHARE_LEVEL = item.SYS_DICT_ID;
+      _httpParams.SHARE_LEVEL = $scope.shareLvMainSelection;
       _httpParams.limit = 10;
       _httpParams.skip = 0;
       getDepartmentInvntList(_httpParams);
     }
 
     // filter by partial
-    $scope.areaSelection = [];
+    $scope.areaMainSelection = [];
     $scope.getIvntListByAP = function(item) {
-      var idx = $scope.areaSelection.indexOf(item.SYS_DICT_ID);
+      var idx = $scope.areaMainSelection.indexOf(item.SYS_DICT_ID);
       // is currently selected
       if (idx > -1) {
-        $scope.areaSelection.splice(idx, 1);
+        $scope.areaMainSelection.splice(idx, 1);
       }
       // is newly selected
       else {
-        $scope.areaSelection.push(item.SYS_DICT_ID);
+        $scope.areaMainSelection.push(item.SYS_DICT_ID);
       }
-      console.log($scope.areaSelection);
+      console.log($scope.areaMainSelection);
 
-      _httpParams.AREA_DATA_LEVEL = $scope.areaSelection;
+      _httpParams.AREA_DATA_LEVEL = $scope.areaMainSelection;
       _httpParams.limit = 10;
       _httpParams.skip = 0;
       getDepartmentInvntList(_httpParams);
@@ -70,7 +69,7 @@ DInventory.controller('Department.Inventory.Controller.Main', ['$scope', '$q', '
 
     // share level all
     $scope.getShareLevelAll = function() {
-      $scope.shareLvSelection = [];
+      $scope.shareLvMainSelection = [];
       _httpParams.SHARE_LEVEL = null;
       _httpParams.limit = 10;
       _httpParams.skip = 0;
@@ -79,7 +78,7 @@ DInventory.controller('Department.Inventory.Controller.Main', ['$scope', '$q', '
 
     // get spatial all
     $scope.getSpatialAll = function() {
-      $scope.areaSelection = [];
+      $scope.areaMainSelection = [];
       _httpParams.AREA_DATA_LEVEL = null;
       _httpParams.limit = 10;
       _httpParams.skip = 0;
@@ -357,15 +356,17 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$rootScope', 
 
         // format areaDataLevel to string
         var areaDataLevelStr = '';
-        _.forEach($scope.Modal.Quota.dataLevelSelection,function(value) {
-            areaDataLevelStr = areaDataLevelStr + value + ",";
+        _.forEach($scope.Modal.Quota.dataLevelSelection, function(value) {
+          areaDataLevelStr = areaDataLevelStr + value + ",";
         })
 
         var invntModalData = _.assign({
           "areaDataLevel": areaDataLevelStr
         }, {
           "shareDeps": shareDeps
-        }, $scope.Modal.Quota);
+        }, {
+          "createTime": new Date()
+        },$scope.Modal.Quota);
 
         $scope.inventoryAttrList.push(invntModalData);
 
@@ -471,31 +472,33 @@ DInventory.factory('Department.Inventory.Service.Http', ['$http', '$q', 'API',
         path + '/dep/'
       )
     }
+
     function getInventoryDepTotal() {
       return $http.get(
         path + '/inventory/getDepWithInventoryNumByDep'
       )
     }
+
     function getDepartInvntList(params) {
       return $http.get(
-        path + '/inventory/inventoryListByDep' ,
-        {params: params}
+        path + '/inventory/inventoryListByDep', {
+          params: params
+        }
       )
     }
+
     function getShareLevelFilter(params) {
       return $http.get(
-        path + '/inventory/getShareDictWithInventoryNumByDep',
-        {
-          params:params
+        path + '/inventory/getShareDictWithInventoryNumByDep', {
+          params: params
         }
       )
     }
 
     function getSpatialFilter(params) {
       return $http.get(
-        path + '/inventory/getAreaDictWithInventoryNumByDep',
-        {
-          params:params
+        path + '/inventory/getAreaDictWithInventoryNumByDep', {
+          params: params
         }
       )
     }
