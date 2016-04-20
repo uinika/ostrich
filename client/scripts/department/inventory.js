@@ -99,7 +99,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$rootScope', 
     $scope.step2.show = false;
     $scope.step3.show = false;
     $scope.step4.show = false;
-    $scope.progress = 25;
+    $scope.progress = 0;
     $scope.loginUser = $rootScope.User;
 
 
@@ -238,7 +238,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$rootScope', 
     $scope.backToStep1 = function() {
       $scope.step1.show = true;
       $scope.step2.show = false;
-      $scope.progress = 25;
+      $scope.progress = 0;
     }
 
     $scope.toStep3 = function() {
@@ -248,7 +248,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$rootScope', 
       }
       $scope.step3.show = true;
       $scope.step2.show = false;
-      $scope.progress = 75;
+      $scope.progress = 50;
 
       $scope.DataExamps = $scope.inventoryAttrList;
     }
@@ -256,7 +256,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$rootScope', 
     $scope.backToStep2 = function() {
       $scope.step2.show = true;
       $scope.step3.show = false;
-      $scope.progress = 50;
+      $scope.progress = 25;
     }
 
     $scope.toStep4 = function() {
@@ -266,7 +266,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$rootScope', 
       }
       $scope.step4.show = true;
       $scope.step3.show = false;
-      $scope.progress = 100;
+      $scope.progress = 75;
 
 
     }
@@ -274,14 +274,14 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$rootScope', 
     $scope.backToStep3 = function() {
       $scope.step3.show = true;
       $scope.step4.show = false;
-      $scope.progress = 75;
+      $scope.progress = 50;
     }
 
     $scope.toStep2 = function(isValid) {
       if (isValid) {
         $scope.step2.show = true;
         $scope.step1.show = false;
-        $scope.progress = 50;
+        $scope.progress = 25;
 
         $scope.step1_data = {};
         var data_info_add_configs = [];
@@ -431,6 +431,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$rootScope', 
       Http.saveInventory($scope.submitObject).then(function(result) {
         console.log(result.data.head);
         if (200 == result.data.head.status) {
+          $scope.progress = 100;
           alert('添加成功');
         }
       })

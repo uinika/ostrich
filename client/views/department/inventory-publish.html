@@ -4,19 +4,19 @@
     <div class="panel-body">
       <div class='navbar '>
         <ul class='row nav nav-pills nav-justified'>
-          <li role="presentation" class='active'>
+          <li role="presentation" ng-class="{true: 'active', false: ''}[progress == 25 || progress == 50 ||  progress == 75 || progress == 100]">
             <a>
               <span class='number'>1</span>
               <span class='desc'>指标基本信息</span>
             </a>
           </li>
-          <li role="presentation"  ng-class="{true: 'active', false: ''}[progress == 50 || progress == 75  || progress == 100]">
+          <li role="presentation"  ng-class="{true: 'active', false: ''}[ progress == 75 || progress == 50 || progress == 100]">
             <a>
               <span class='number'>2</span>
               <span class='desc'>指标属性</span>
             </a>
           </li>
-          <li role="presentation" ng-class="{true: 'active', false: ''}[progress == 75 || progress == 100]">
+          <li role="presentation" ng-class="{true: 'active', false: ''}[ progress == 75 || progress == 100]">
             <a>
               <span class='number'>3</span>
               <span class='desc'>示例数据</span>
