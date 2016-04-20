@@ -3,7 +3,7 @@
   <div class='panel panel-default'>
     <div class='panel-heading'>
       <i class='fa fa-clone'>
-        上传日期：{{InventoryDetail.detail.CREATE_TIME}}</i>
+        上传日期：{{InventoryDetail.detail.CREATE_TIME | date:'yyyy-MM-dd'}}</i>
       <span class='pull-right'>浏览：{{InventoryDetail.detail.VISIT_COUNT}}</span>
     </div>
     <div class='panel-body'>
@@ -16,8 +16,8 @@
             <li>提供部门：{{InventoryDetail.detail.DEP_NAME}}</li>
             <li>联系人：{{InventoryDetail.detail.LINKMAN}}</li>
             <li>联系方式：{{InventoryDetail.detail.CONTACT_PHONE}}</li>
-            <li>发布日期：{{InventoryDetail.detail.PUBLISH_TIME}}</li>
-            <li>上传日期：{{InventoryDetail.detail.UPDATE_TIME}}</li>
+            <li>发布日期：{{InventoryDetail.detail.PUBLISH_TIME | date:'yyyy-MM-dd'}}</li>
+            <li>上传日期：{{InventoryDetail.detail.UPDATE_TIME | date:'yyyy-MM-dd'}}</li>
           </ul>
         </div>
         <div class='operation pull-right'>
@@ -68,7 +68,7 @@
             <td>{{}}</td>
             <td>{{indicator.DEP_ID}}</td>
             <td>{{indicator.SHARE_LEVEL}}</td>
-            <td>{{indicator.CREATE_TIME}}</td>
+            <td>{{indicator.CREATE_TIME | date:'yyyy-MM-dd'}}</td>
             <td>{{indicator.LINKMAN}}</td>
             <td>{{indicator.CONTACT_PHONE}}</td>
           </tr>

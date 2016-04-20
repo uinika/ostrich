@@ -11,9 +11,10 @@ DInventory.controller('Department.Inventory.Controller.Main', ['$scope', '$q', '
     // init
     getDepartmentInvntList(_httpParams);
 
-    // Http.getAuditTotal().then(function(result) {
-    //   $scope.depIvntList = result.data.body[0].NUMBER;
-    // });
+    Http.getInventoryDepTotal().then(function(result) {
+      $scope.ivntDepTotal = result.data.body[0].INVENTORY_NUM;
+      $scope.depName = result.data.body[0].DEP_NAME;
+    });
 
     Http.getShareLevelFilter().then(function(result) {
       $scope.shareLevelList = result.data.body;
@@ -26,7 +27,7 @@ DInventory.controller('Department.Inventory.Controller.Main', ['$scope', '$q', '
 
     function getDepartmentInvntList(_httpParams) {
       Http.getDepartInvntList(_httpParams).then(function(result){
-        $scope.auditList = result.data.body;
+        $scope.depIvntList = result.data.body;
       //  $scope.Paging.totalItems = data.head.total;
       });
     }
@@ -470,7 +471,11 @@ DInventory.factory('Department.Inventory.Service.Http', ['$http', '$q', 'API',
         path + '/dep/'
       )
     }
-
+    function getInventoryDepTotal() {
+      return $http.get(
+        path + '/inventory/getDepWithInventoryNumByDep'
+      )
+    }
     function getDepartInvntList(params) {
       return $http.get(
         path + '/inventory/inventoryListByDep' ,
@@ -479,7 +484,7 @@ DInventory.factory('Department.Inventory.Service.Http', ['$http', '$q', 'API',
     }
     function getShareLevelFilter(params) {
       return $http.get(
-        path + '/openInventory/countByShareLevel',
+        path + '/inventory/getShareDictWithInventoryNumByDep',
         {
           params:params
         }
@@ -488,7 +493,7 @@ DInventory.factory('Department.Inventory.Service.Http', ['$http', '$q', 'API',
 
     function getSpatialFilter(params) {
       return $http.get(
-        path + '/openInventory/countBySpatial',
+        path + '/inventory/getAreaDictWithInventoryNumByDep',
         {
           params:params
         }
@@ -500,7 +505,8 @@ DInventory.factory('Department.Inventory.Service.Http', ['$http', '$q', 'API',
       getDepartmentList: getDepartmentList,
       getDepartInvntList: getDepartInvntList,
       getShareLevelFilter: getShareLevelFilter,
-      getSpatialFilter: getSpatialFilter
+      getSpatialFilter: getSpatialFilter,
+      getInventoryDepTotal: getInventoryDepTotal
     }
   }
 ]);

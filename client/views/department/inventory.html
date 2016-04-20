@@ -3,7 +3,7 @@
   <div id='department-inventory'>
     <div class='indicator-order'>
       <div class='pull-left'>
-        <p class='font-18'>科技局 [10]</p>
+        <p class='font-18'>{{depName}} [{{ivntDepTotal}}]</p>
       </div>
       <div class='pull-right'>
         <ul class="nav nav-pills">
@@ -52,7 +52,7 @@
           <div class="panel panel-default ">
             <div class="panel-heading item-heading">
               <div class='pull-left'>
-                <span>上传日期：{{depIvnt.CREATE_TIME}}</span>
+                <span>上传日期：{{depIvnt.CREATE_TIME | date:'yyyy-MM-dd'}}</span>
                 <!-- <span class='options'>
                   <a title='修改'>
                     <i class='fa fa-pencil'></i>
@@ -86,7 +86,7 @@
                     <div class='col-sm-3'>提供部门：{{depIvnt.DEPNAME}}</div>
                     <div class='col-sm-3'>联系人：{{depIvnt.LINKMAN}}</div>
                     <div class='col-sm-3'>联系电话：{{depIvnt.CONTACT_PHONE}}</div>
-                    <div class='col-sm-3'>发布日期：{{depIvnt.PUBLISH_TIME}}</div>
+                    <div class='col-sm-3'>发布日期：{{depIvnt.PUBLISH_TIME | date:'yyyy-MM-dd'}}</div>
                   </div>
                 </div>
               </div>

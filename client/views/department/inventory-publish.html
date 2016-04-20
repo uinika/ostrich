@@ -424,11 +424,11 @@
         <label for="" class="col-sm-2 control-label">指标类型
           <span class='require-sign'>*</span>:</label>
         <div class="col-sm-10">
-          <select ng-model='Modal.Quota.quotaType'>
+          <select ng-model='Modal.Quota.quotaType' class='custom-form-control'>
             <option ng-repeat="qtype in  quotaTypeList" value='{{qtype.ID}}'>{{qtype.DICT_NAME}}</option>
           </select>
           备注：
-          <input type='text' ng-model='Modal.Quota.quotaTypeAdd'/>
+          <input type='text' ng-model='Modal.Quota.quotaTypeAdd' class='custom-form-control'/>
           <span class='help-info'>
             指标类型如选择9.其他，请在备注中说明。
           </span>
@@ -458,11 +458,11 @@
         <label for="" class="col-sm-2 control-label">数据表示格式
           <span class='require-sign'>*</span>:</label>
         <div class="col-sm-10">
-          <select ng-model='Modal.Quota.dataShowFormat'>
+          <select ng-model='Modal.Quota.dataShowFormat' class='custom-form-control'>
             <option ng-repeat="dataFormat in  dataShowFormatList" value='{{dataFormat.ID}}'>{{dataFormat.DICT_NAME}}</option>
           </select>
           备注：
-          <input type='text' ng-model='Modal.Quota.dataShowFormatAdd'/>
+          <input type='text' ng-model='Modal.Quota.dataShowFormatAdd' class='custom-form-control'/>
           <span class='help-info'>
             展示页面上指标数据类型的具体表现形式。如选择99.其他，请在备注中说明。
           </span>
@@ -471,7 +471,7 @@
       <div class="form-group">
         <label for="" class="col-sm-2 control-label">是否涉密:</label>
         <div class="col-sm-10">
-          <select ng-model='Modal.Quota.secretFlag' required>
+          <select ng-model='Modal.Quota.secretFlag' required class='custom-form-control'>
             <option ng-repeat="qsflag in  secretFlagList" value='{{qsflag.ID}}'>{{qsflag.DICT_NAME}}</option>
           </select>
           <span class='help-info'>指标数据是否为涉密数据。</span>

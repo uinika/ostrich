@@ -17,7 +17,7 @@
 
   <div ng-repeat='requirement in Requirement.list' class='panel panel-default'>
     <div class='panel-heading'>
-      <i class='fa fa-minus-square-o'> 上传日期：{{requirement.CREATE_TIME}}</i>
+      <i class='fa fa-minus-square-o'> 上传日期：{{requirement.CREATE_TIME | date:'yyyy-MM-dd'}}</i>
     </div>
     <div class='panel-body'>
       <div class='content'>
@@ -30,7 +30,7 @@
               <li>提供部门：{{requirement.DEP_NAME}}</li>
               <li>联系人：{{requirement.LINKMAN}}</li>
               <li>联系方式：{{requirement.EMAIL}}</li>
-              <li>发布日期：{{requirement.UPDATE_TIME}}</li>
+              <li>发布日期：{{requirement.UPDATE_TIME | date:'yyyy-MM-dd'}}</li>
             </ul>
           </div>
         </a>

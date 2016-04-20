@@ -30,7 +30,7 @@
           <div class="panel panel-default ">
             <div class="panel-heading item-heading">
               <div class='pull-left'>
-                <span>上传日期：{{item.CREATE_TIME}}</span>
+                <span>上传日期：{{item.CREATE_TIME | date:'yyyy-MM-dd'}}</span>
                 <span class='options'>
                   <a title='修改' ng-click='updateReq(item)'>
                     <i class='fa fa-pencil'></i>

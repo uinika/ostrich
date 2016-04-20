@@ -31,7 +31,7 @@
           <h4>需求响应</h4>
           <div class='response-item' ng-repeat='item in responseList'>
             <div class='col-sm-12'>
-              响应日期：{{item.RESPONSE_TIME}}
+              响应日期：{{item.RESPONSE_TIME | date:'yyyy-MM-dd'}}
             </div>
             <div>
               <div class='col-sm-3'>部门：{{item.DEP_NAME}}</div>
