@@ -60,7 +60,7 @@ gulp.task('nodemon', function() {
 
 
 /**------------------ gulp build ------------------*/
-gulp.task('build', ['scripts','styles','htmls']);
+gulp.task('build', ['scripts','styles','htmls', 'libraries']);
 // Handle JavaScript
 gulp.task('scripts', function() {
   gulp.src('./client/scripts/**/*.js')
@@ -74,7 +74,7 @@ gulp.task('scripts', function() {
 });
 // Handle CSS
 gulp.task('styles', function() {
-  gulp.src('./client/styles/less/index.less')
+  gulp.src('./client/styles/less/app.less')
     .pipe(less())
     .pipe(gulp.dest('./build/styles'))
     .pipe(csso())
@@ -88,9 +88,13 @@ gulp.task('htmls', function(){
   gulp.src(['./client/views/*'])
     .pipe(gulp.dest('./build/views'));
 })
-
+// Handle Libraries
+gulp.task('libraries', function(){
+  gulp.src(['./client/libraries/**/*'])
+    .pipe(gulp.dest('./build/libraries'));
+})
 
 /**------------------ gulp clean ------------------*/
 gulp.task('clean', function() {
-  del(['./build/views','./build/scripts','./build/styles', './build/*.html']);
+  del(['./build/**/*']);
 });
