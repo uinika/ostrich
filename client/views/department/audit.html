@@ -26,7 +26,7 @@
           <a ng-class="{true: 'active', false: 'inactive'}[shareLvSelection.length == 0]" href="javascript:;" ng-click='getShareLevelAll()'>全部</a>
         </li>
         <li role="presentation" ng-repeat='shareLevel in shareLevelList'>
-          <a ng-class="{true: 'active', false: 'inactive'}[shareLvSelection.indexOf(shareLevel.DICTID) > -1]" href="javascript:;" ng-click='getAuListBySl(shareLevel)' >{{shareLevel.DICT_NAME}}[{{shareLevel.NUMBER}}]</a>
+          <a ng-class="{true: 'active', false: 'inactive'}[shareLvSelection.indexOf(shareLevel.SYS_DICT_ID) > -1]" href="javascript:;" ng-click='getAuListBySl(shareLevel)' >{{shareLevel.DICT_NAME}}[{{shareLevel.INVENTORY_NUM}}]</a>
         </li>
       </ul>
     </div>
@@ -37,7 +37,7 @@
           <a href="javascript:;" ng-class="{true: 'active', false: 'inactive'}[areaSelection.length == 0]" href="javascript:;" ng-click='getSpatialAll()'>全部</a>
         </li>
         <li role="presentation" ng-repeat='areaPeriod in areaPeriodList'>
-          <a ng-class="{true: 'active', false: 'inactive'}[areaSelection.indexOf(areaPeriod.DICTID) > -1]" ng-checked="areaSelection.indexOf(areaPeriod.DICTID) > -1"  ng-click='getAuListByAP(areaPeriod)' href="javascript:;">{{areaPeriod.DICT_NAME}}[{{areaPeriod.NUMBER}}]</a>
+          <a ng-class="{true: 'active', false: 'inactive'}[areaSelection.indexOf(areaPeriod.SYS_DICT_ID) > -1]" ng-checked="areaSelection.indexOf(areaPeriod.SYS_DICT_ID) > -1"  ng-click='getAuListByAP(areaPeriod)' href="javascript:;">{{areaPeriod.DICT_NAME}}[{{areaPeriod.INVENTORY_NUM}}]</a>
         </li>
       </ul>
     </div>
@@ -91,7 +91,7 @@
                     </div>
                     <div class='col-sm-4'>
                       <span class='col-sm-7'>申请部门：{{auditInfo.APPLY_DEPNAME}}</span>
-                      <a ng-class="{true: 'ng-show', false: 'ng-hide'}[{{auditInfo.SHOW_BUTTON}}]" ui-sref='main.department.audit.info({AUDITID:auditInfo.AUDITID})' class=' btn btn-sm btn-info'>我要审核</a>
+                      <a ng-class="{true: 'ng-show', false: 'ng-hide'}[{{auditInfo.SHOW_BUTTON == 'TRUE'}}]" ui-sref='main.department.audit.info({AUDITID:auditInfo.AUDITID})' class=' btn btn-sm btn-info'>我要审核</a>
                     </div>
                   </div>
                   <h5>摘要：{{auditInfo.DATA_SUMMARY}}</h5>

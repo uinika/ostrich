@@ -8,6 +8,12 @@
     margin: 5px 10px 5px 0;
     border-bottom: 1px solid #CCC;
     font-size: 13px;
+    ul>li>a.active {
+      background: #DDD;
+    }
+    ul>li>a.inactive {
+      background: #FFF;
+    }
     .filter-title {
       display: inline-block;
       vertical-align: top;
@@ -19,7 +25,7 @@
   }
   .indicator-list {
     .list-box {
-      clear:right;
+      clear: right;
       padding: 15px 0 0;
       list-style: none;
       .item-heading {
@@ -28,22 +34,22 @@
         font-size: 12px;
         color: #777;
         .options {
-          padding-left:86px;
+          padding-left: 86px;
           font-size: 14px;
           a {
             display: inline-block;
             width: 20px;
             height: 20px;
             margin-right: 5px;
-            padding:0 5px;
-            cursor:pointer;
+            padding: 0 5px;
+            cursor: pointer;
           }
         }
       }
       .item-icon {
         padding: 8px 20px 0 4px;
-        img{
-          width:100px;
+        img {
+          width: 100px;
         }
       }
       .media-body {
@@ -56,9 +62,14 @@
           right: 15px;
           top: 5px;
         }
-        .audit-info{
-          position:absolute;
-          top:18px;
+        .audit-status-icon {
+          position: absolute;
+          right: 15px;
+          top: 10px;
+        }
+        .audit-info {
+          position: absolute;
+          top: 18px;
         }
       }
     }

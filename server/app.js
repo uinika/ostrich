@@ -70,6 +70,21 @@ App.use('/api', unaudit_total);
 var audit = require('./api/department/audit');
 App.use('/api', audit);
 
+var dataAuditInfo = require('./api/department/dataAuditInfo');
+App.use('/api', dataAuditInfo);
+
+var requirementResponse = require('./api/department/requirementResponse');
+App.use('/api', requirementResponse);
+
+var share = require('./api/department/share');
+App.use('/api', share);
+
+var shareInventory = require('./api/department/shareInventory');
+App.use('/api', shareInventory);
+
+var requirement_dep = require('./api/department/requirement');
+App.use('/api', requirement_dep);
+
 /** user */
 var user = require('./api/department/user');
 App.use('/api', user);

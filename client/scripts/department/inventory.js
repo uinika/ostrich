@@ -50,7 +50,7 @@ DInventory.controller('Department.Inventory.Controller.Main', ['$scope', '$q', '
     // filter by partial
     $scope.areaMainSelection = [];
     $scope.getIvntListByAP = function(item) {
-      var idx = $scope.areaMainSelection.indexOf(item.SYS_DICT_ID);
+      var idx = $scope.areaMainSelection.indexOf(item.DICTID);
       // is currently selected
       if (idx > -1) {
         $scope.areaMainSelection.splice(idx, 1);
@@ -304,7 +304,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$rootScope', 
         }
 
         $scope.dataInfo.publishTime = $scope.dataInfo.publishTime.format('%Y-%m-%d');
-
+      //  if($scope.dataInfo.areaPeri)
         $scope.dataInfo = _.assign($scope.dataInfo, {
           'shareDeps': shareDeps
         }, {

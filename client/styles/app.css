@@ -329,6 +329,12 @@ html {
   border-bottom: 1px solid #CCC;
   font-size: 13px;
 }
+#department-share .indicator-filter ul > li > a.active {
+  background: #DDD;
+}
+#department-share .indicator-filter ul > li > a.inactive {
+  background: #FFF;
+}
 #department-share .indicator-filter .filter-title {
   display: inline-block;
   vertical-align: top;
@@ -376,6 +382,11 @@ html {
   position: absolute;
   right: 15px;
   top: 5px;
+}
+#department-share .indicator-list .list-box .media-body .audit-status-icon {
+  position: absolute;
+  right: 15px;
+  top: 10px;
 }
 #department-share .indicator-list .list-box .media-body .audit-info {
   position: absolute;

@@ -6,33 +6,23 @@ Audit.controller('Department.Audit.Controller.Main', ['$rootScope', '$scope', '$
   function($rootScope, $scope, $q ,Http) {
     var _httpParams = {};
     console.log($rootScope.User);
-    var depId = $rootScope.User.DEP_ID;
-    _httpParams.DEP_ID = depId;
 
     // init
     getAuditList(_httpParams);
 
-    Http.getAuditTotal({
-      "DEP_ID":depId
-    }).then(function(result) {
-      $scope.auditTotal = result.data.body[0].NUMBER;
+    Http.getAuditTotal().then(function(result) {
+      $scope.auditTotal = result.data.body[0].INVENTORY_NUM;
     });
 
-    Http.getShareLevelFilter({
-      "DEP_ID":depId
-    }).then(function(result) {
+    Http.getShareLevelFilter().then(function(result) {
       $scope.shareLevelList = result.data.body;
     });
 
-    Http.getSpatialFilter({
-      "DEP_ID":depId
-    }).then(function(result) {
+    Http.getSpatialFilter().then(function(result) {
       $scope.areaPeriodList = result.data.body;
     });
 
-    Http.getAuditStatusFilter({
-      "DEP_ID":depId
-    }).then(function(result) {
+    Http.getAuditStatusFilter().then(function(result) {
       $scope.auditStatusList = result.data.body;
     });
 
@@ -46,12 +36,12 @@ Audit.controller('Department.Audit.Controller.Main', ['$rootScope', '$scope', '$
     // filter by share level
     $scope.shareLvSelection = [];
     $scope.getAuListBySl = function(item) {
-      var idx = $scope.shareLvSelection.indexOf(item.DICTID);
+      var idx = $scope.shareLvSelection.indexOf(item.SYS_DICT_ID);
       if (idx > -1) {
         $scope.shareLvSelection = [];
       }
       else {
-        $scope.shareLvSelection = item.DICTID;
+        $scope.shareLvSelection = item.SYS_DICT_ID;
       }
       _httpParams.SHARE_LEVEL = $scope.shareLvSelection;
       _httpParams.limit = 10;
@@ -62,21 +52,21 @@ Audit.controller('Department.Audit.Controller.Main', ['$rootScope', '$scope', '$
     // filter by partial
     $scope.areaSelection = [];
     $scope.getAuListByAP = function(item) {
-      var idx = $scope.areaSelection.indexOf(item.DICTID);
+      var idx = $scope.areaSelection.indexOf(item.SYS_DICT_ID);
       // is currently selected
       if (idx > -1) {
         $scope.areaSelection.splice(idx, 1);
       }
       // is newly selected
       else {
-        $scope.areaSelection.push(item.DICTID);
+        $scope.areaSelection.push(item.SYS_DICT_ID);
       }
       console.log($scope.areaSelection);
 
       _httpParams.AREA_DATA_LEVEL = $scope.areaSelection;
       _httpParams.limit = 10;
       _httpParams.skip = 0;
-      getAuditList(_httpParams);
+        getAuditList(_httpParams);
     }
 
     // filter by audit status
@@ -84,7 +74,7 @@ Audit.controller('Department.Audit.Controller.Main', ['$rootScope', '$scope', '$
     $scope.getAuListBySta = function(item) {
       var idx = $scope.statusSelection.indexOf(item.AUDITNAME);
       if (idx > -1) {
-        $scope.statusSelection.splice(idx, 1);
+        $scope.statusSelection = [];
       }
       else {
         $scope.statusSelection = item.AUDITNAME;
@@ -125,8 +115,8 @@ Audit.controller('Department.Audit.Controller.Main', ['$rootScope', '$scope', '$
 ])
 
 
-Audit.controller('Department.Audit.Controller.info', ['$rootScope' ,'$scope', '$q','Department.Audit.Service.Http', '$stateParams',
-  function($rootScope, $scope, $q ,Http ,$stateParams) {
+Audit.controller('Department.Audit.Controller.info', ['$rootScope' ,'$scope', '$state', '$q','Department.Audit.Service.Http', '$stateParams',
+  function($rootScope, $scope, $state, $q ,Http ,$stateParams) {
     // login Department
     $scope.depName = $rootScope.User.DEP_NAME;
     var auditId = $stateParams.AUDITID;
@@ -142,11 +132,12 @@ Audit.controller('Department.Audit.Controller.info', ['$rootScope' ,'$scope', '$
       console.log(auditInfo);
       Http.updateAuditDetail(auditInfo).then(function(result) {
         if (200 == result.data.head.status) {
-          alert('修改成功');
-          getUserList();
+          alert('审核成功');
+          var idx = $scope.auditList.indexOf(auditId);
+          $state.go("main.department.audit",{}, { reload: true });
         }
         else{
-          alert('修改失败');
+          alert('审核失败');
         }
       });
     }

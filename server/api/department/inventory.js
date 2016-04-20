@@ -22,4 +22,28 @@ Router.route('/inventory/department')
     response.json(datas);
   });
 
+Router.route('/inventory/inventoryListByDep')
+  .get(function(request, response) {
+    let datas = JsonLoader.sync(Config.path + 'department/getInventoryListByDep.json');
+    response.json(datas);
+  });
+
+Router.route('/inventory/getDepWithInventoryNumByDep')
+  .get(function(request, response) {
+    let datas = JsonLoader.sync(Config.path + 'department/getDepWithInventoryNumByDep.json');
+    response.json(datas);
+  });
+
+Router.route('/inventory/getShareDictWithInventoryNumByDep')
+  .get(function(request, response) {
+    let datas = JsonLoader.sync(Config.path + 'department/getShareDictWithInventoryNumByDep.json');
+    response.json(datas);
+  });
+
+  Router.route('/inventory/getAreaDictWithInventoryNumByDep')
+    .get(function(request, response) {
+      let datas = JsonLoader.sync(Config.path + 'department/getAreaDictWithInventoryNumByDep.json');
+      response.json(datas);
+    });
+
 module.exports = Router;

@@ -1,0 +1,29 @@
+{
+  "head": {
+    "status": 200,
+    "total": 1,
+    "token": "1nlntasmeqsx2jquxkb9ftqsr"
+  },
+  "body": [{
+    "ID": "5d09199a-7985-49df-a9ec-eae60e03dd91",
+    "DATA_NAME": "gfhfghf",
+    "DATA_SUMMARY": "fgh",
+    "LINKMAN": "fghfgh",
+    "CONTACT_PHONE": "jfgj",
+    "CREATE_USER": "gonganju",
+    "CREATE_TIME": 1461122861000,
+    "PUBLISH_TIME": 1461340800000,
+    "UPDATE_USER": null,
+    "UPDATE_TIME": null,
+    "VISIT_COUNT": 0,
+    "SHARE_LEVEL": "2501e32c-02f0-11e6-a52a-5cf9dd40ad7e",
+    "SHARE_DEPS": "0",
+    "AREA_PERIOD": "ghjghjghj",
+    "DICT_NAME": "全开放",
+    "DEPNAME": "公安厅",
+    "AUDIT_STATUS": "1",
+    "DEPID": "7",
+    "AUDITID": "43d09176-06c5-11e6-b9cb-5cf9dd40ad7e",
+    "DEP_ID": "9"
+  }]
+}

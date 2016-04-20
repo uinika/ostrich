@@ -123,6 +123,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
       })
       .state('main.department.audit', {
         url: '/audit',
+        cache:'false', 
         templateUrl: 'views/department/audit.html',
         controller: 'Department.Audit.Controller.Main'
       })
