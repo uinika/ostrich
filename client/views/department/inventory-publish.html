@@ -78,7 +78,7 @@
             <label for="" class="col-sm-2 control-label">发布日期<span class='require-sign'>*</span>：</label>
             <div class="col-md-4">
               <p class="input-group">
-                <input type="text" class="form-control" uib-datepicker-popup ng-model='dataInfo.publishTime' is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close"/>
+                <input type="text" class="form-control" uib-datepicker-popup ng-model='dataInfo.publishTime' is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" current-text="今天" clear-text="重置" close-text="关闭"/>
                 <span class="input-group-btn">
                   <button type="button" class="btn btn-default" ng-click="openDatePicker()">
                     <i class="glyphicon glyphicon-calendar"></i>
