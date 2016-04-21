@@ -94,6 +94,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
       })
       .state('main.department.inventory', {
         url: '/inventory',
+        cache:'false',
         templateUrl: 'views/department/inventory.html',
         controller: 'Department.Inventory.Controller.Main'
       })
@@ -123,7 +124,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
       })
       .state('main.department.audit', {
         url: '/audit',
-        cache:'false', 
+        cache:'false',
         templateUrl: 'views/department/audit.html',
         controller: 'Department.Audit.Controller.Main'
       })

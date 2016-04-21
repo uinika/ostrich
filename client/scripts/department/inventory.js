@@ -89,8 +89,8 @@ DInventory.controller('Department.Inventory.Controller.Main', ['$scope', '$q', '
   }
 ])
 
-DInventory.controller('Department.Inventory.Controller.publish', ['$rootScope', '$scope', '$q', '$uibModal', 'Department.Inventory.Service.Component', 'Department.Inventory.Service.Http',
-  function($rootScope, $scope, $q, $uibModal, Component, Http) {
+DInventory.controller('Department.Inventory.Controller.publish', ['$rootScope', '$scope', '$state', '$q', '$uibModal', 'Department.Inventory.Service.Component', 'Department.Inventory.Service.Http',
+  function($rootScope, $scope, $state, $q, $uibModal, Component, Http) {
     $scope.step1 = {};
     $scope.step2 = {};
     $scope.step3 = {};
@@ -304,7 +304,8 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$rootScope', 
         }
 
         $scope.dataInfo.publishTime = $scope.dataInfo.publishTime.format('%Y-%m-%d');
-      //  if($scope.dataInfo.areaPeri)
+
+        console.log($scope.dataInfo.areaPeriod);
         $scope.dataInfo = _.assign($scope.dataInfo, {
           'shareDeps': shareDeps
         }, {
@@ -432,7 +433,9 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$rootScope', 
         console.log(result.data.head);
         if (200 == result.data.head.status) {
           $scope.progress = 100;
-          alert('添加成功');
+          alert('发布成功');
+          $state.go("main.department.inventory",{}, { reload: true });
+
         }
       })
     }
