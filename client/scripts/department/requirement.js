@@ -167,6 +167,7 @@ DepartmentReq.service('Department.Requirement.Service.Component', ['$uibModal',
       scope.Modal.type = type;
       var modalInstance = $uibModal.open({
         animation: true,
+        backdrop : 'static',
         templateUrl: templateUrl + '.html',
         scope: scope
       });

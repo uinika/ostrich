@@ -198,7 +198,9 @@
                 {{dataInfo.areaPeriod}}
               </td>
               <td>{{inventoryAttr.areaDataLevel}}</td>
-              <td>{{loginUser.DEP_NAME}}</td>
+              <td>{{loginUser.DEP_NAME}}
+
+              </td>
               <td>
                 {{inventoryAttr.shareLevel}}
               </td>
@@ -471,7 +473,7 @@
       <div class="form-group">
         <label for="" class="col-sm-2 control-label">是否涉密:</label>
         <div class="col-sm-10">
-          <select ng-model='Modal.Quota.secretFlag' required class='custom-form-control'>
+          <select ng-model='Modal.Quota.secretFlag'  class='custom-form-control'>
             <option ng-repeat="qsflag in  secretFlagList" value='{{qsflag.ID}}'>{{qsflag.DICT_NAME}}</option>
           </select>
           <span class='help-info'>指标数据是否为涉密数据。</span>
