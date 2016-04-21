@@ -1,0 +1,99 @@
+<div id='department-share'>
+  <div class='indicator-order'>
+    <div class='pull-left'>
+      <p class='font-18'>共享清单 [{{DepartmentShare.countAll}}]</p>
+    </div>
+    <div class='pull-right'>
+      <ul class="nav nav-pills">
+        <li role="presentation">
+          <a href="javascript:;">默认排序</a>
+        </li>
+        <li role="presentation">
+          <a href="javascript:;">发布日期</a>
+        </li>
+        <li role="presentation">
+          <a href="javascript:;">浏览量</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class='indicator-filter'>
+    <label class='filter-title'>共享级别</label>
+    <ul class="nav nav-pills filter-list">
+      <li role="presentation" >
+        <a ng-class="{true: 'active', false: 'inactive'}[shareLvShareSelection.length == 0]" href="javascript:;" ng-click='getShareLevelAll()'>全部</a>
+      </li>
+      <li role="presentation" ng-repeat='shareLevel in shareLevelList'>
+        <a ng-class="{true: 'active', false: 'inactive'}[shareLvShareSelection.indexOf(shareLevel.SYS_DICT_ID) > -1]" href="javascript:;" ng-click='getIvntListBySl(shareLevel)' >{{shareLevel.DICT_NAME}}[{{shareLevel.INVENTORY_NUM}}]</a>
+      </li>
+    </ul>
+  </div>
+  <div class='indicator-filter'>
+    <label class='filter-title'>空间范围</label>
+    <ul class="nav nav-pills filter-list">
+      <li role="presentation">
+        <a href="javascript:;" ng-class="{true: 'active', false: 'inactive'}[areaShareSelection.length == 0]" href="javascript:;" ng-click='getSpatialAll()'>全部</a>
+      </li>
+      <li role="presentation" ng-repeat='areaPeriod in areaPeriodList'>
+        <a ng-class="{true: 'active', false: 'inactive'}[areaShareSelection.indexOf(areaPeriod.SYS_DICT_ID) > -1]" ng-checked="areaShareSelection.indexOf(areaPeriod.SYS_DICT_ID) > -1"  ng-click='getIvntListByAP(areaPeriod)' href="javascript:;">{{areaPeriod.DICT_NAME}}[{{areaPeriod.INVENTORY_NUM}}]</a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- indicator inventory list -->
+  <div class='indicator-list'>
+    <ul class='list-box'>
+      <li ng-repeat='depShare in depShareList'>
+        <div class="panel panel-default ">
+          <div class="panel-heading item-heading">
+            <div class='pull-left'>
+              <span>上传日期：{{depShare.CREATE_TIME | date:'yyyy-MM-dd'}}</span>
+              <!-- <span class='options'>
+                <a title='修改'>
+                  <i class='fa fa-pencil'></i>
+                </a>
+                <a title='删除'>
+                  <i class='fa fa-trash'></i>
+                </a>
+              </span> -->
+            </div>
+            <div class='pull-right'>浏览：{{depShare.VISIT_COUNT}}</div>
+          </div>
+          <div class="panel-body">
+            <div class="media">
+              <div class="media-left item-icon">
+                <img ng-src='../../styles/images/department/xiangmu.png'/>
+              </div>
+              <div class="media-body">
+                <div class="row media-heading main-heading">
+                  <div class='col-sm-4'>
+                    <h4>{{depShare.DATA_NAME}}</h4>
+                  </div>
+                  <div class='col-sm-4'>
+
+                  </div>
+                  <div class='col-sm-4' style='position:relative;'>
+                    <div class='item-label'>
+                      <!-- <label class='label label-primary'>{{depShare.AREA_PERIOD}}</label> -->
+                      <label class='label label-info'>{{depShare.DICT_NAME}}</label>
+                    </div>
+                    <span class='audit-status-icon'>
+                      <img ng-show='depShare.AUDIT_STATUS == "1" ' ng-src='../styles/images/department/pass.png'/>
+                    </span>
+                  </div>
+                </div>
+                <h5>摘要：{{depShare.DATA_SUMMARY}}</h5>
+                <div class='row font-13 margin-top14'>
+                  <div class='col-sm-3'>提供部门：{{depShare.DEPNAME}}</div>
+                  <div class='col-sm-3'>联系人：{{depShare.LINKMAN}}</div>
+                  <div class='col-sm-3'>联系电话：{{depShare.CONTACT_PHONE}}</div>
+                  <div class='col-sm-3'>发布日期：{{depShare.PUBLISH_TIME | date:'yyyy-MM-dd' }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

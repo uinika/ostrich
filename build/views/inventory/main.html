@@ -1,0 +1,75 @@
+<div ui-view id='inventory-main' class='container'>
+  <div class='row'>
+    <div class='left col-md-2'>
+      <div class='department-list panel panel-default'>
+        <div class='panel-heading'><i class='fa fa-bars'> 指标清单</i></div>
+        <div class='list-group'>
+          <a ng-repeat='department in Inventory.departments' ng-click=Inventory.switcher(department.ID) class='list-group-item'>{{department.DEP_SHORT_NAME}} <span class='badge'>{{department.INVENTORY_NUM}}</span></a>
+        </div>
+      </div>
+    </div>
+    <div class='right col-md-10'>
+        <!-- Inventory Content -->
+        <div class='panel panel-default'>
+          <div class='panel-heading'>
+            <span>
+              <i class='fa fa-bookmark-o'> 查看方式</i>
+            </span>
+            <span class='filter-condition pull-right'>
+              <button class='btn btn-default btn-sm'>默认排序</button>
+              <button class='btn btn-default btn-sm'>最新指标</button>
+              <button class='btn btn-default btn-sm'>浏览量</button>
+            </span>
+          </div>
+          <div class='panel-body'>
+            <div class='filter'>
+              <nav class='shared-level pull-left'>
+                <ul class='pager'>
+                  共享级别
+                  <li><a>全部</a></li>
+                  <li ng-repeat='dict in Inventory.shareDict'><a>{{dict.DICT_NAME}} <span class='badge'>{{dict.INVENTORY_NUM}}</span></a></li>
+                </ul>
+              </nav>
+              <nav class='shared-range pull-left'>
+                <ul class='pager'>
+                  空间范围
+                  <li><a>全部</a></li>
+                  <li ng-repeat='dict in Inventory.areaDict'><a>{{dict.DICT_NAME}} <span class='badge'>{{dict.INVENTORY_NUM}}</span></a></li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+        <div ng-repeat='inventory in Inventory.inventoryList' class='panel panel-default'>
+          <div class='panel-heading'>
+            <i class='fa fa-clone'> 上传日期：{{inventory.CREATE_TIME | date:'yyyy-MM-dd'}}</i>
+            <span class='pull-right'>浏览：{{inventory.VISIT_COUNT}}</span>
+          </div>
+          <div class='panel-body'>
+            <div class='content'>
+              <a ui-sref='main.inventory.detail({inventoryID:inventory.ID})'>
+                <div class='icon organization test pull-left'></div>
+                <div class='information pull-left'>
+                  <h1>{{inventory.DATA_NAME}}</h3>
+                  <h2>{{inventory.DATA_SUMMARY}}</h5>
+                  <ul class='list-inline'>
+                    <li>提供部门：{{inventory.DEP_NAME}}</li>
+                    <li>联系人：{{inventory.LINKMAN}}</li>
+                    <li>联系方式：{{inventory.CONTACT_PHONE}}</li>
+                    <li>发布日期：{{inventory.PUBLISH_TIME | date:'yyyy-MM-dd'}}</li>
+                    <li>上传日期：{{inventory.UPDATE_TIME | date:'yyyy-MM-dd'}}</li>
+                  </ul>
+                </div>
+              </a>
+              <div class='operation pull-right'>
+                <span class='label label-success'>{{inventory.DICT_NAME}}</span>
+                &nbsp &nbsp
+                <button class='btn btn-info btn-sm'>申请查看</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- #Inventory Content -->
+    </div>
+  </div>
+</div>

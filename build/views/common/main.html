@@ -1,0 +1,31 @@
+<div id='main'>
+  <nav class='navbar navbar-default '>
+    <div class='container'>
+      <h1 class='logo pull-left'></h1>
+      <ul class='nav nav-tabs pull-left'>
+        <li ng-click="Tab.switcher('dashboard')" ng-init="Tab.Actived.dashboard='active'" class='{{Tab.Actived.dashboard}}'>
+          <a ui-sref='main.dashboard'>首页</a>
+        </li>
+        <li ng-click="Tab.switcher('inventory')" class='{{Tab.Actived.inventory}}'>
+          <a ui-sref='main.inventory'>指标清单</a>
+        </li>
+        <li ng-click="Tab.switcher('requirement')" class='{{Tab.Actived.requirement}}'>
+          <a ui-sref='main.requirement'>需求清单</a>
+        </li>
+      </ul>
+
+      <div class="btn-group pull-right btn-login">
+        <a class="btn btn-default" ui-sref='main.department'><i class="fa fa-user"> 用户信息</i></a>
+        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a ui-sref='main.department'>部门主页</a></li>
+        </ul>
+      </div>
+
+
+    </div>
+  </nav>
+  <div id='ui-view-main' ui-view></div>
+</div>

@@ -1,0 +1,533 @@
+<div id='inventory-publish'>
+  <div class="panel panel-default">
+    <div class="panel-heading">发布需求</div>
+    <div class="panel-body">
+      <div class='navbar '>
+        <ul class='row nav nav-pills nav-justified'>
+          <li role="presentation" ng-class="{true: 'active', false: ''}[progress == 25 || progress == 50 ||  progress == 75 || progress == 100]">
+            <a>
+              <span class='number'>1</span>
+              <span class='desc'>指标基本信息</span>
+            </a>
+          </li>
+          <li role="presentation"  ng-class="{true: 'active', false: ''}[ progress == 75 || progress == 50 || progress == 100]">
+            <a>
+              <span class='number'>2</span>
+              <span class='desc'>指标属性</span>
+            </a>
+          </li>
+          <li role="presentation" ng-class="{true: 'active', false: ''}[ progress == 75 || progress == 100]">
+            <a>
+              <span class='number'>3</span>
+              <span class='desc'>示例数据</span>
+            </a>
+          </li>
+          <li role="presentation" ng-class="{true: 'active', false: ''}[progress == 100]">
+            <a>
+              <span class='number'>4</span>
+              <span class='desc'>其他相关内容</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="progress">
+        <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: {{progress}}%">
+          <span class="sr-only">完成25%</span>
+        </div>
+      </div>
+
+      <!--Step 1-->
+      <div id='indicator-profile' name='step1' ng-show='step1.show'>
+        <form name='dataInfoForm' ng-submit='toStep2(dataInfoForm.$valid)' class="form-horizontal">
+          <div class="form-group">
+            <label for="" class="col-sm-2 control-label">清单名称
+              <span class='require-sign'>*</span>:</label>
+            <div class="col-sm-10">
+              <input type="text" name='dataName' ng-model='dataInfo.dataName' required class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="" class="col-sm-2 control-label">摘要
+              <span class='require-sign'>*</span>:</label>
+            <div class="col-sm-10">
+              <textarea class="form-control" name='dataSummary' ng-model='dataInfo.dataSummary' required cols='5'></textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="" class="col-sm-2 control-label">提供部门
+              <span class='require-sign'>*</span>:</label>
+            <div class="col-sm-10">
+              {{loginUser.DEP_NAME}}
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="" class="col-sm-2 control-label">联系人
+              <span class='require-sign'>*</span>:</label>
+            <div class="col-sm-10">
+              <input type="text" name='linkman' ng-model='dataInfo.linkman' required class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="" class="col-sm-2 control-label">联系电话
+              <span class='require-sign'>*</span>:</label>
+            <div class="col-sm-10">
+              <input type="text" name='contactPhone' ng-model='dataInfo.contactPhone' required class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="" class="col-sm-2 control-label">发布日期<span class='require-sign'>*</span>：</label>
+            <div class="col-md-4">
+              <p class="input-group">
+                <input type="text" class="form-control" uib-datepicker-popup ng-model='dataInfo.publishTime' is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close"/>
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="openDatePicker()">
+                    <i class="glyphicon glyphicon-calendar"></i>
+                  </button>
+                </span>
+              </p>
+            </div>
+
+          </div>
+
+          <div class="form-group">
+            <label for="" class="col-sm-2 control-label">共享频率
+              <span class='require-sign'>*</span>:</label>
+            <div class="col-sm-10">
+              <span ng-repeat="sfItem in  shareFrequencyList">
+                <input type="checkbox" value="{{sfItem.ID}}" ng-checked="shareFreqSelection.indexOf(sfItem.DICT_NAME) > -1" ng-click="toggleShareFreqSelection(sfItem.ID,sfItem.DICT_NAME)">
+                {{sfItem.DICT_NAME}}
+              </span>
+            </div>
+            <input type="hidden" ng-model='dataInfo.shareFrequency'>
+          </div>
+
+          <div class="form-group">
+            <label for="" class="col-sm-2 control-label">空间范围:</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" ng-model='dataInfo.areaPeriod'>
+              <span class='help-info'>
+                可取得数据的地区名称，如全国，四川省，各省等。
+              </span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="" class="col-sm-2 control-label">分地区数据级别
+              <span class='require-sign'>*</span>:</label>
+            <div class="col-sm-10">
+              <span ng-repeat="dataLevel in  dataLevelList">
+                <input type="checkbox" value="{{dataLevel.ID}}" ng-checked="dataLevelSelection.indexOf(dataLevel.DICT_NAME) > -1" ng-click="toggleDataLevelSelection(dataLevel)">
+                {{dataLevel.DICT_NAME}}
+              </span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="" class="col-sm-2 control-label">共享级别
+              <span class='require-sign'>*</span>:</label>
+            <div class="col-sm-10">
+              <select name='shareLevelOpt' ng-change='showHideDeps()' class='form-control' style='display: inline-block !important;width: auto;' ng-model='dataInfo.shareLevel'>
+                <option ng-repeat="shareLevel in  shareLevelList" value='{{shareLevel.ID}}'>{{shareLevel.DICT_NAME}}</option>
+              </select>
+              <span ng-class="{true: 'ng-show', false: 'ng-hide'}[depShow]">指定部门名称：
+                <div style='display:inline-block' isteven-multi-select input-model="deptList" output-model="outputDeptList" button-label="DEP_NAME" item-label="DEP_NAME" tick-property="ticked"></div>
+              </span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button type='submit' class="btn btn-default pull-right">下一步</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <!-- /.Step 1 -->
+
+      <!-- Step 2-->
+      <div id='indicator-attribute' name='step2' ng-show='step2.show'>
+        <div>
+          <div class="btn-group">
+            <button class="btn btn-primary " ng-click='popAttrAddModal()'>
+              <i class='fa fa-plus'></i>&nbsp;新增</button>
+          </div>
+          <div class="btn-group">
+            <button class="btn btn-default ">
+              <i class='fa fa-trash'></i>&nbsp;删除</button>
+          </div>
+        </div>
+        <!-- Table -->
+        <table class='table table-hover table-striped'>
+          <thead>
+            <tr>
+              <th><input type='checkbox'/></th>
+              <th>序号</th>
+              <th>指标名称</th>
+              <th>指标别称</th>
+              <th>计量单位</th>
+              <th>指标详细解释</th>
+              <th>计算方法</th>
+              <th>共享频率</th>
+              <th>空间范围</th>
+              <th>分地区数据级别</th>
+              <th>来源部门</th>
+              <th>共享级别</th>
+              <th>数据存储类型</th>
+              <th>数据精度</th>
+              <th>数据长度</th>
+              <th>创建时间</th>
+              <th>数据表示格式</th>
+              <th>是否涉密</th>
+              <th>联系人</th>
+              <th>联系电话</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat='inventoryAttr in inventoryAttrList'>
+              <td><input type='checkbox'/></td>
+              <td>{{$index+1}}</td>
+              <td>{{inventoryAttr.quotaName}}</td>
+              <td>{{inventoryAttr.alias}}</td>
+              <td>{{inventoryAttr.meterUnit}}</td>
+              <td>{{inventoryAttr.quotaDetail}}</td>
+              <td>{{inventoryAttr.calculateMethod}}</td>
+              <td>
+                {{shareFreqArrShow}}
+              </td>
+              <td>
+                {{dataInfo.areaPeriod}}
+              </td>
+              <td>{{inventoryAttr.areaDataLevel}}</td>
+              <td>{{loginUser.DEP_NAME}}</td>
+              <td>
+                {{inventoryAttr.shareLevel}}
+              </td>
+              <td>
+                <div ng-repeat="qtype in  quotaTypeList">
+                  <div ng-if="qtype.ID == inventoryAttr.quotaType">
+                    {{qtype.DICT_NAME}}
+                  </div>
+                </div>
+              </td>
+              <td>{{inventoryAttr.dataPrecision}}</td>
+              <td>{{inventoryAttr.dataLength}}</td>
+              <td>{{inventoryAttr.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+              <td>
+                <div ng-repeat="dataFormat in dataShowFormatList">
+                  <div ng-if="dataFormat.ID == inventoryAttr.dataShowFormat">
+                    {{dataFormat.DICT_NAME}}
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div ng-repeat="qsflag in  secretFlagList">
+                  <div ng-if="qsflag.ID == inventoryAttr.secretFlag">
+                    {{qsflag.DICT_NAME}}
+                  </div>
+                </div>
+              </td>
+              <td>{{inventoryAttr.linkman}}</td>
+              <td>{{inventoryAttr.contactPhone}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="pull-right">
+          <div class="btn btn-group">
+            <button class="btn btn-default " ng-click='backToStep1()'>上一步</button>
+          </div>
+          <div class="btn btn-group">
+            <button class="btn btn-default " ng-click='toStep3()'>下一步</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- /.Step 2-->
+
+      <!-- Step 3-->
+      <div id='indicator-examp' name='step3' ng-show='step3.show'>
+        <div>
+          <div class="btn-group">
+            <button class="btn btn-primary " ng-click='addExampData()'>
+              <i class='fa fa-plus'></i>&nbsp;新增</button>
+          </div>
+          <div class="btn-group">
+            <button class="btn btn-default ">
+              <i class='fa fa-trash'></i>&nbsp;删除</button>
+          </div>
+        </div>
+        <!-- Table -->
+        <table class='table table-hover table-striped'>
+          <thead>
+            <tr >
+              <th><input type='checkbox'/></th>
+              <th>序号</th>
+
+              <th ng-repeat='invntAttr in inventoryAttrList'>{{invntAttr.quotaName}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat='exampData in ExampDatas'>
+              <td><input type='checkbox'/></td>
+              <td>{{$index+1}}</td>
+              <td ng-repeat='rowData in exampData'>{{rowData.dataQuotaValue}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="pull-right">
+          <div class="btn btn-group">
+            <button class="btn btn-default " ng-click='backToStep2()'>上一步</button>
+          </div>
+          <div class="btn btn-group">
+            <button class="btn btn-default " ng-click='toStep4()'>下一步</button>
+          </div>
+        </div>
+      </div>
+      <!-- /.Step 3-->
+
+      <!-- Step 4-->
+      <div id='indicator-other' name='step4' ng-show='step4.show'>
+        <form class="form-horizontal ">
+          <div class="form-group">
+            <label for="" class="col-sm-2 control-label">数据接入方式
+              <span class='require-sign'>*</span>:</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" ng-model='DataOtherInfo.accessType'>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="" class="col-sm-2 control-label">技术支持:</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" ng-model='DataOtherInfo.techSupport'>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="" class="col-sm-2 control-label">联系人:</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" ng-model='DataOtherInfo.linkman'>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="" class="col-sm-2 control-label">联系电话:</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" ng-model='DataOtherInfo.contactPhone'>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="" class="col-sm-2 control-label">邮箱:</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" ng-model='DataOtherInfo.email'>
+            </div>
+          </div>
+          <div class="pull-right">
+            <div class="btn btn-group">
+              <button class="btn btn-default " ng-click='backToStep3()'>上一步</button>
+            </div>
+            <div class="btn btn-group">
+              <button class="btn btn-success " ng-click='addFormSubmit()'>提交</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <!-- /.Step 4-->
+    </div>
+
+  </div>
+</div>
+
+<!-- Add indicator modal -->
+<script type='text/ng-template' id='add-indicator-modal.html'>
+  <form class="form-horizontal indicator-add-modal" name='indicatorAddForm'>
+    <div class='modal-header'>
+      <i class="fa fa-server"></i>
+      {{Modal.type}}指标
+      <button type='button' ng-click='Modal.cancel()' class='close' data-dismiss='modal'>&times;</button>
+    </div>
+    <div class='modal-body'>
+
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">指标名称
+          <span class='require-sign'>*</span>:</label>
+        <div class="col-sm-10">
+          <input type="text" required class="form-control" ng-model='Modal.Quota.quotaName'>
+          <span class='help-info'>部门统计报表制度中对指标名称的全称</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">指标别称
+          <span class='require-sign'>*</span>:</label>
+        <div class="col-sm-10">
+          <input type="text" required class="form-control" ng-model='Modal.Quota.alias'>
+          <span class='help-info'>提供部门的内部名称或英文名称及简称等</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">计量单位:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" ng-model='Modal.Quota.meterUnit'>
+          <span class='help-info'>反映指标某一具体数值的实际度量单位</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">指标详细解释
+          <span class='require-sign'>*</span>:</label>
+        <div class="col-sm-10">
+          <textarea class="form-control" required cols='5' ng-model='Modal.Quota.quotaDetail'></textarea>
+          <span class='help-info'>统计制度上对指标的详细解释</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">计算方法:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" ng-model='Modal.Quota.calculateMethod'>
+          <span class='help-info'>是指为求得统计指标具体数值需要采用的算法。一般用计算公式表示，也可以用文字表述。</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">分地区数据级别
+          <span class='require-sign'>*</span>:</label>
+        <div class="col-sm-10">
+          <span ng-repeat="dataLevel in  dataLevelList">
+            <input type="checkbox" value="{{dataLevel.ID}}" ng-checked="Modal.dataLevelSelection.indexOf(dataLevel.DICT_NAME) > -1" ng-click="toggleDataLevelSelection(dataLevel)">
+            {{dataLevel.DICT_NAME}}
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">来源部门:</label>
+        <div class="col-sm-10">
+          <select class="form-control" ng-model='Modal.Quota.depId'>
+            <option ng-repeat="dep in  deptList" value='{{dep.ID}}'>{{dep.DEP_NAME}}</option>
+          </select>
+          <span class='help-info'>
+            可取得数据的地区名称，如全国，四川省，各省等。
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">共享级别
+          <span class='require-sign'>*</span>:</label>
+        <div class="col-sm-10">
+          <select name='shareLevelOpt' ng-change='showHideDeps()' class='form-control' style='display: inline-block !important;width: auto;' ng-model='Modal.Quota.shareLevel'>
+            <option ng-repeat="shareLevel in  shareLevelList" value='{{shareLevel.DICT_NAME}}'>{{shareLevel.DICT_NAME}}</option>
+          </select>
+          <span ng-class="{true: 'ng-show', false: 'ng-hide'}[depShowModal]">指定部门名称：
+            <div style='display:inline-block' isteven-multi-select input-model="deptListModal" output-model="outputModalDeptList" button-label="DEP_NAME" item-label="DEP_NAME" tick-property="ticked"></div>
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">指标类型
+          <span class='require-sign'>*</span>:</label>
+        <div class="col-sm-10">
+          <select ng-model='Modal.Quota.quotaType' class='custom-form-control'>
+            <option ng-repeat="qtype in  quotaTypeList" value='{{qtype.ID}}'>{{qtype.DICT_NAME}}</option>
+          </select>
+          备注：
+          <input type='text' ng-model='Modal.Quota.quotaTypeAdd' class='custom-form-control'/>
+          <span class='help-info'>
+            指标类型如选择9.其他，请在备注中说明。
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">数据精度
+          <span class='require-sign'>*</span>:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" ng-model='Modal.Quota.dataPrecision'>
+          <span class='help-info'>
+            数值型指标数据定义的数据存储的小数位数。如：小数点后取2位
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">数据长度
+          <span class='require-sign'>*</span>:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" ng-model='Modal.Quota.dataLength'>
+          <span class='help-info'>
+            指标数据的最大长度。如：小于9位
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">数据表示格式
+          <span class='require-sign'>*</span>:</label>
+        <div class="col-sm-10">
+          <select ng-model='Modal.Quota.dataShowFormat' class='custom-form-control'>
+            <option ng-repeat="dataFormat in  dataShowFormatList" value='{{dataFormat.ID}}'>{{dataFormat.DICT_NAME}}</option>
+          </select>
+          备注：
+          <input type='text' ng-model='Modal.Quota.dataShowFormatAdd' class='custom-form-control'/>
+          <span class='help-info'>
+            展示页面上指标数据类型的具体表现形式。如选择99.其他，请在备注中说明。
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">是否涉密:</label>
+        <div class="col-sm-10">
+          <select ng-model='Modal.Quota.secretFlag' required class='custom-form-control'>
+            <option ng-repeat="qsflag in  secretFlagList" value='{{qsflag.ID}}'>{{qsflag.DICT_NAME}}</option>
+          </select>
+          <span class='help-info'>指标数据是否为涉密数据。</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">联系人
+          <span class='require-sign'>*</span>:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" required ng-model='Modal.Quota.linkman'>
+          <span class='help-info'>
+            具有指标解释权的联系人名字。
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">联系电话
+          <span class='require-sign'>*</span>:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" required ng-model='Modal.Quota.contactPhone'>
+          <span class='help-info'>
+            具有指标解释权的联系部门或联系人电话。
+          </span>
+        </div>
+      </div>
+
+    </div>
+    <div class='modal-footer'>
+      <button type='submit' ng-disabled="indicatorAddForm.$invalid" ng-click='Modal.confirm(indicatorAddForm.$valid)' class='btn btn-primary'>提交</button>
+      <button class='btn btn-default' ng-click='Modal.cancel()' type='button'>关闭</button>
+    </div>
+  </div>
+</form>
+</script>
+
+<!-- Add example data modal -->
+<script type='text/ng-template' id='add-example-modal.html'>
+<div class='modal-header'>
+  <i class="fa fa-server"></i>
+  {{Modal.type}}指标
+  <button type='button' ng-click='Modal.cancel()' class='close' data-dismiss='modal'>&times;</button>
+</div>
+<div class='modal-body'>
+  <form class="form-horizontal example-add-modal" name='dataAddForm'>
+    <div class="form-group" ng-repeat='dataExamp in step2_data.dataQuota'>
+      <label for="" class="col-sm-2 control-label">{{dataExamp.quotaName}}:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" ng-model='dataExamp.dataValue'/>
+      </div>
+    </div>
+
+  </form>
+</div>
+<div class='modal-footer'>
+  <button class='btn btn-primary' type='button' ng-click='Modal.confirm(dataAddForm.$valid)'>提交</button>
+  <button class='btn btn-default' type='button' ng-click='Modal.cancel()'>关闭</button>
+</div>
+</div>
+</script>

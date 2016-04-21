@@ -1,0 +1,109 @@
+<div id='dashboard' class='container'>
+  <section class='first-section row'>
+    <div class='left col-md-4'>
+      <div class='panel panel-default'>
+        <div class='panel-heading'>
+          <i class='fa fa-home'> 部门列表</i>
+        </div>
+        <div class='panel-body'>
+          <div class='bureau-filter input-group'>
+            <span class='input-group-addon'>
+              <span class='glyphicon glyphicon-search'></span>
+            </span>
+            <input type='text' placeholder='请输入部门名称......' class='form-control'>
+            <span ui-sref='main.inventory' class='input-group-addon'>检索</span>
+          </div>
+          <div class='bureau-list'>
+            <div ng-repeat='bureau in Bureaus' class='bureau-item col-md-3'>
+              <a ui-sref='main.inventory.detail({departmentID: bureau.ID})' class='thumbnail'>
+                <img ng-src='../styles/images/bureau/{{::bureau.DEP_EN_NAME}}' title='{{::bureau.DEP_NAME}}'>
+              </a>
+              <div class="caption">
+                {{bureau.DEP_SHORT_NAME}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class='right col-md-4'>
+      <div class='panel panel-default'>
+        <div class='panel-heading'>
+          <i class='fa fa-server'> 清单总览</i>
+        </div>
+        <div class='panel-body'>
+          <wiserv-inventory-overview-chart/>
+        </div>
+      </div>
+    </div>
+    <div class='right col-md-4'>
+      <div class='panel panel-default'>
+        <div class='panel-heading'>
+          <i class='fa fa-share-alt'> 需求总览</i>
+        </div>
+        <div class='panel-body'>
+          <wiserv-requirement-overview-chart/>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class='second-section row'>
+    <div class='left col-md-6'>
+      <div class='panel panel-default'>
+        <div class='panel-heading'>
+          <i class='fa fa-cart-arrow-down'> 最新资源</i>
+        </div>
+        <table class='table table-hover table-condensed table-striped'>
+          <thead>
+            <tr>
+              <th>发布日期</th>
+              <th>清单名称</th>
+              <th>提供单位</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat='inventory in Inventories'>
+              <td>{{inventory.CREATE_TIME | date:'yyyy-MM-dd'}}</td>
+              <td>{{inventory.DATA_NAME}}</td>
+              <td>{{inventory.DEP_NAME}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class='right col-md-6'>
+      <div class='panel panel-default'>
+        <div class='panel-heading'>
+          <i class='fa fa-pencil-square-o'> 最新需求</i>
+        </div>
+        <table class='table table-hover table-condensed table-striped'>
+          <thead>
+            <tr>
+              <th>发布日期</th>
+              <th>需求内容</th>
+              <th>需求单位</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat='requirement in Requirements'>
+              <td>{{requirement.CREATE_TIME | date:'yyyy-MM-dd'}}</td>
+              <td>{{requirement.REQUIREMENT_NAME}}</td>
+              <td>{{requirement.DEP_NAME}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  <section class='third-section row'>
+    <div class='panel panel-default'>
+      <div class='panel-heading'>
+        <i class='fa fa-bar-chart'> 部门共享清单统计</i>
+      </div>
+      <div class='panel-body'>
+        <wiserv-statistic-chart/>
+      </div>
+    </div>
+  </section>
+
+</div>

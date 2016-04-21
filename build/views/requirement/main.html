@@ -1,0 +1,43 @@
+<div ui-view id='requirement-main' class='container'>
+
+  <ol class="breadcrumb">
+    <li><i class="fa fa-calendar-check-o"> 需求清单</i></li>
+    <section class='pull-right'>
+      <button class='btn btn-default btn-xs'>需求清单总计
+        <span class='badge'>{{Requirement.statistic.REQUIREMENT_NUM}}</span>
+      </button>
+      <button class='btn btn-default btn-xs'>需求部门
+        <span class='badge'>{{Requirement.statistic.DEP_NUM}}</span>
+      </button>
+      <button class='btn btn-default btn-xs'>需求已响应
+        <span class='badge'>{{Requirement.statistic.RESPONSE_NUM}}</span>
+      </button>
+    </section>
+  </ol>
+
+  <div ng-repeat='requirement in Requirement.list' class='panel panel-default'>
+    <div class='panel-heading'>
+      <i class='fa fa-minus-square-o'> 上传日期：{{requirement.CREATE_TIME | date:'yyyy-MM-dd'}}</i>
+    </div>
+    <div class='panel-body'>
+      <div class='content'>
+        <a ui-sref='main.requirement.detail({requirementID:requirement.ID})'>
+          <div class='icon organization test pull-left'></div>
+          <div class='information pull-left'>
+            <h1>{{requirement.REQUIREMENT_NAME}}</h3>
+            <h2>{{requirement.REQUIREMENT_DESC}}</h5>
+            <ul class='list-inline'>
+              <li>提供部门：{{requirement.DEP_NAME}}</li>
+              <li>联系人：{{requirement.LINKMAN}}</li>
+              <li>联系方式：{{requirement.EMAIL}}</li>
+              <li>发布日期：{{requirement.UPDATE_TIME | date:'yyyy-MM-dd'}}</li>
+            </ul>
+          </div>
+        </a>
+        <div class='approve pull-right'>
+          需求已响应
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

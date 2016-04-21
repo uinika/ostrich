@@ -1,0 +1,25 @@
+<div id='login' class="container-fluid">
+  <h4 class='title'><img ng-src='styles/images/login_log.png'></h4>
+  <div class="row login-wrap">
+    <div class="col-md-8"></div>
+    <div class="login-main col-md-4">
+      <div class='login-body'>
+        <form>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <span class="glyphicon glyphicon-user"></span>
+            </span>
+            <input ng-model='Login.username' type="text" class="form-control" placeholder="用户名">
+          </div>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <span class="glyphicon glyphicon-info-sign"></span>
+            </span>
+            <input ng-model='Login.password' type="password" class="form-control" placeholder="密码">
+          </div>
+          <button ng-click='Login.submit()' class='btn btn-info'>登录</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
