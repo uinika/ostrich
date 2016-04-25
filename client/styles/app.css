@@ -225,36 +225,54 @@ html {
 #department-inventory .indicator-order {
   overflow: hidden;
   border-bottom: 1px solid #777;
+  padding: 10px 0 5px 0;
 }
-#department-inventory .indicator-filter {
-  margin: 5px 10px 5px 0;
-  border-bottom: 1px solid #CCC;
+#department-inventory .indicator-order .dep-name {
+  margin: 0;
+  line-height: 34px;
+}
+#department-inventory .indicator-order ul > li {
+  margin: 0 20px;
+}
+#department-inventory .indicator-order ul > li a {
+  padding: 6px 12px;
+}
+#department-inventory .indicator-order ul > li.indicator-total {
+  height: 34px;
+  line-height: 40px;
+}
+#department-inventory .indicator-order ul > li.indicator-total .num {
+  font-size: 20px;
+  font-weight: bold;
+  padding: 0 6px;
+}
+#department-inventory .filter {
+  border-bottom: 1px solid #DDD;
+  padding: 15px 0;
+  margin-bottom: 10px;
+}
+#department-inventory .filter .indicator-filter {
+  margin: 0;
   font-size: 13px;
+  overflow: hidden;
 }
-#department-inventory .indicator-filter ul > li > a.active {
+#department-inventory .filter .indicator-filter ul.pager {
+  margin: 0 0 15px 0;
+}
+#department-inventory .filter .indicator-filter ul > li > a.active {
   background: #DDD;
 }
-#department-inventory .indicator-filter ul > li > a.inactive {
+#department-inventory .filter .indicator-filter ul > li > a.inactive {
   background: #FFF;
 }
-#department-inventory .indicator-filter .filter-title {
-  display: inline-block;
-  vertical-align: top;
-  margin-top: 10px;
-}
-#department-inventory .indicator-filter .filter-list {
-  display: inline-block;
+#department-inventory .filter .indicator-filter ul > li > a .badge {
+  background: #337AB7;
+  margin-left: 4px;
 }
 #department-inventory .indicator-list .list-box {
   clear: right;
   padding: 15px 0 0;
   list-style: none;
-}
-#department-inventory .indicator-list .list-box .item-heading {
-  overflow: hidden;
-  padding: 5px 25px 5px 10px;
-  font-size: 12px;
-  color: #777;
 }
 #department-inventory .indicator-list .list-box .item-heading .options {
   padding-left: 86px;
@@ -329,11 +347,30 @@ html {
 #department-share .indicator-order {
   overflow: hidden;
   border-bottom: 1px solid #777;
+  padding: 10px 0 5px 0;
+}
+#department-share .indicator-order ul > li {
+  margin: 0 20px;
+}
+#department-share .indicator-order ul > li a {
+  padding: 6px 12px;
+}
+#department-share .indicator-order ul > li.indicator-total {
+  height: 34px;
+  line-height: 40px;
+}
+#department-share .indicator-order ul > li.indicator-total .num {
+  font-size: 20px;
+  font-weight: bold;
+  padding: 0 6px;
 }
 #department-share .indicator-filter {
-  margin: 5px 10px 5px 0;
-  border-bottom: 1px solid #CCC;
+  margin: 0;
   font-size: 13px;
+  overflow: hidden;
+}
+#department-share .indicator-filter ul.pager {
+  margin: 0 0 15px;
 }
 #department-share .indicator-filter ul > li > a.active {
   background: #DDD;
@@ -341,30 +378,25 @@ html {
 #department-share .indicator-filter ul > li > a.inactive {
   background: #FFF;
 }
-#department-share .indicator-filter .filter-title {
-  display: inline-block;
-  vertical-align: top;
-  margin-top: 10px;
+#department-share .indicator-filter ul > li > a .badge {
+  background: #337AB7;
+  margin-left: 4px;
 }
-#department-share .indicator-filter .filter-list {
-  display: inline-block;
+#department-share .filter {
+  border-bottom: 1px solid #DDD;
+  padding: 15px 0;
+  margin-bottom: 10px;
 }
-#department-share .indicator-list .list-box {
+#department-share .filter .indicator-list .list-box {
   clear: right;
   padding: 15px 0 0;
   list-style: none;
 }
-#department-share .indicator-list .list-box .item-heading {
-  overflow: hidden;
-  padding: 5px 25px 5px 10px;
-  font-size: 12px;
-  color: #777;
-}
-#department-share .indicator-list .list-box .item-heading .options {
+#department-share .filter .indicator-list .list-box .item-heading .options {
   padding-left: 86px;
   font-size: 14px;
 }
-#department-share .indicator-list .list-box .item-heading .options a {
+#department-share .filter .indicator-list .list-box .item-heading .options a {
   display: inline-block;
   width: 20px;
   height: 20px;
@@ -372,29 +404,29 @@ html {
   padding: 0 5px;
   cursor: pointer;
 }
-#department-share .indicator-list .list-box .item-icon {
+#department-share .filter .indicator-list .list-box .item-icon {
   padding: 8px 20px 0 4px;
 }
-#department-share .indicator-list .list-box .item-icon img {
+#department-share .filter .indicator-list .list-box .item-icon img {
   width: 100px;
 }
-#department-share .indicator-list .list-box .media-body {
+#department-share .filter .indicator-list .list-box .media-body {
   position: relative;
 }
-#department-share .indicator-list .list-box .media-body .main-heading {
+#department-share .filter .indicator-list .list-box .media-body .main-heading {
   line-height: 28px;
 }
-#department-share .indicator-list .list-box .media-body .item-label {
+#department-share .filter .indicator-list .list-box .media-body .item-label {
   position: absolute;
   right: 15px;
   top: 5px;
 }
-#department-share .indicator-list .list-box .media-body .audit-status-icon {
+#department-share .filter .indicator-list .list-box .media-body .audit-status-icon {
   position: absolute;
   right: 15px;
   top: 10px;
 }
-#department-share .indicator-list .list-box .media-body .audit-info {
+#department-share .filter .indicator-list .list-box .media-body .audit-info {
   position: absolute;
   top: 18px;
 }

@@ -3,36 +3,58 @@
   .indicator-order {
     overflow: hidden;
     border-bottom: 1px solid #777;
+    padding: 10px 0 5px 0;
+    .dep-name{
+      margin: 0;
+      line-height: 34px;
+    }
+    ul>li {
+      margin:0 20px;
+      a {
+        padding: 6px 12px;
+      }
+    }
+    ul>li.indicator-total{
+      height: 34px;
+      line-height: 40px;
+      .num{
+        font-size:20px;
+        font-weight:bold;
+        padding: 0 6px;
+      }
+    }
+
   }
-  .indicator-filter {
-    margin: 5px 10px 5px 0;
-    border-bottom: 1px solid #CCC;
-    font-size: 13px;
-    ul>li>a.active{
-      background:#DDD;
-    }
-    ul>li>a.inactive{
-      background:#FFF;
-    }
-    .filter-title {
-      display: inline-block;
-      vertical-align: top;
-      margin-top: 10px;
-    }
-    .filter-list {
-      display: inline-block;
+  .filter{
+      border-bottom: 1px solid #DDD;
+      padding: 15px 0;
+      margin-bottom: 10px;
+    .indicator-filter {
+      margin: 0;
+      font-size: 13px;
+      overflow: hidden;
+      ul.pager{
+        margin: 0 0 15px 0;
+      }
+      ul>li>a.active{
+        background:#DDD;
+      }
+      ul>li>a.inactive{
+        background:#FFF;
+      }
+      ul>li>a .badge{
+        background: #337AB7;
+        margin-left:4px;
+      }
     }
   }
+
   .indicator-list {
     .list-box {
       clear:right;
       padding: 15px 0 0;
       list-style: none;
       .item-heading {
-        overflow: hidden;
-        padding: 5px 25px 5px 10px;
-        font-size: 12px;
-        color: #777;
         .options {
           padding-left:86px;
           font-size: 14px;

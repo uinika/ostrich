@@ -3,18 +3,16 @@
   <div id='department-audit'>
     <div class='indicator-order'>
       <div class='pull-left'>
-        <p class='font-18'>清单开放审核 [{{auditTotal}}]</p>
+        <p class='font-18'>清单开放审核</p>
       </div>
       <div class='pull-right'>
         <ul class="nav nav-pills">
-          <li role="presentation">
-            <a href="javascript:;">默认排序</a>
+          <li role="presentation "  class='indicator-total'>
+            指标审核总数<span class='num'>{{auditTotal}}</span>
           </li>
           <li role="presentation">
-            <a href="javascript:;">发布日期</a>
-          </li>
-          <li role="presentation">
-            <a href="javascript:;">浏览量</a>
+              <input type="text"  placeholder="请输入查询指标名称">
+              <button type="button" class="btn btn-primary">查询</button>
           </li>
         </ul>
       </div>
