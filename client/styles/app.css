@@ -10,6 +10,12 @@ html {
   height: 100%;
   width: 100%;
 }
+.pannel-patch {
+  margin-bottom: 12px !important;
+}
+.navbar-patch {
+  margin-bottom: 12px !important;
+}
 /* Xulan */
 .margin-bottom25 {
   margin-bottom: 25px;
@@ -128,7 +134,7 @@ html {
 }
 #dashboard .right {
   padding-right: 0;
-  padding-left: 8px;
+  padding-left: 11px;
 }
 #dashboard .first-section .panel {
   height: 310px;

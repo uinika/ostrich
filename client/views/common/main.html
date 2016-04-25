@@ -1,29 +1,44 @@
 <div id='main'>
-  <nav class='navbar navbar-default '>
+  <nav class='navbar navbar-default navbar-patch'>
     <div class='container'>
       <h1 class='logo pull-left'></h1>
       <ul class='nav nav-tabs pull-left'>
         <li ng-click="Tab.switcher('dashboard')" ng-init="Tab.Actived.dashboard='active'" class='{{Tab.Actived.dashboard}}'>
-          <a ui-sref='main.dashboard'>首页</a>
+          <a ui-sref='main.dashboard'><i class="fa fa-tachometer"> 首页</i></a>
         </li>
         <li ng-click="Tab.switcher('inventory')" class='{{Tab.Actived.inventory}}'>
-          <a ui-sref='main.inventory'>指标清单</a>
+          <a ui-sref='main.inventory'><i class="fa fa-database"> 指标清单</i></a>
         </li>
-        <li ng-click="Tab.switcher('requirement')" class='{{Tab.Actived.requirement}}'>
-          <a ui-sref='main.requirement'>需求清单</a>
+        <li ng-click="Tab.switcher('department')" class='{{Tab.Actived.department}}' class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown">
+            <i class="fa fa-graduation-cap"> 部门管理</i>
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <a ui-sref='main.requirement'>部门指标</a>
+            </li>
+            <li>
+              <a ui-sref='main.requirement'>共享指标</a>
+            </li>
+            <li>
+              <a ui-sref='main.requirement'>需求清单</a>
+            </li>
+            <li>
+              <a ui-sref='main.requirement'>审核指标</a>
+            </li>
+            <li>
+              <a ui-sref='main.requirement'>账号信息</a>
+            </li>
+          </ul>
         </li>
       </ul>
 
       <div class="btn-group pull-right btn-login">
-        <a class="btn btn-default" ui-sref='main.department'><i class="fa fa-user"> 用户信息</i></a>
-        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu">
-          <li><a ui-sref='main.department'>部门主页</a></li>
-        </ul>
+        <a class="btn btn-default" ui-sref='main.department'>
+          <i class="fa fa-user"> 管理员.国土局</i>
+        </a>
       </div>
-
 
     </div>
   </nav>
