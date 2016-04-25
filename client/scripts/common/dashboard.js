@@ -23,7 +23,7 @@ Dashboard.controller('Dashboard.Controller.Main', ['$scope', 'Dashboard.Service.
     });
     // Echarts Graph
     $scope.QInventoryOverview = Http.getInventoryOverview({
-      endTime: 0,
+      startTime: 0,
       endTime: 10
     });
     $scope.QRequirementOverview = Http.getRequirementOverview({
