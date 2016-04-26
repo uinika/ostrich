@@ -1,53 +1,79 @@
 #department-main {
+  .left {
+    padding: 0;
+  }
+  .right {
+    padding-left: 11px;
+    padding-right: 0;
+  }
   .sidebar {
     position: absolute;
     width: 140px;
-    li.sub-item{
-      padding-left:40px;
+    li.sub-item {
+      padding-left: 40px;
+    }
+    li.has-sub {
+      ul.sub-head{
+        margin-bottom:0;
+        box-shadow:none;
+        .sub-third-item{
+          padding:13px 0 5px 10px;
+          border:none;
+        }
+      }
     }
   }
   .department-main {
     margin-left: 170px;
-  }
-  .panel-heading {
-    overflow: hidden;
-  }
-  .panel-footer {
-    font-size: 12px;
-  }
-  .panel-green {
-    border-color: #5cb85c;
+    .focus-bureau-list {
+      height: 200px;
+      .bureau-item {
+        .thumbnail {
+          height: 16px;
+          font-size: 12px;
+          text-align: center;
+        }
+      }
+    }
     .panel-heading {
+      overflow: hidden;
+    }
+    .panel-footer {
+      font-size: 12px;
+    }
+    .panel-green {
       border-color: #5cb85c;
-      color: #fff;
-      background-color: #5cb85c;
+      .panel-heading {
+        border-color: #5cb85c;
+        color: #fff;
+        background-color: #5cb85c;
+      }
+      .panel-footer {
+        color: #5cb85c;
+      }
     }
-    .panel-footer {
-      color: #5cb85c;
-    }
-  }
-  .panel-yellow {
-    border-color: #f0ad4e;
-    .panel-heading {
+    .panel-yellow {
       border-color: #f0ad4e;
-      color: #fff;
-      background-color: #f0ad4e;
+      .panel-heading {
+        border-color: #f0ad4e;
+        color: #fff;
+        background-color: #f0ad4e;
+      }
+      .panel-footer {
+        color: #f0ad4e;
+      }
     }
-    .panel-footer {
-      color: #f0ad4e;
-    }
-  }
-  .panel-red {
-    border-color: #d9534f;
-    .panel-heading {
+    .panel-red {
       border-color: #d9534f;
-      color: #fff;
-      background-color: #d9534f;
-    }
-    .panel-footer {
-      color: #d9534f;
-      height: 38px;
+      .panel-heading {
+        border-color: #d9534f;
+        color: #fff;
+        background-color: #d9534f;
+      }
+      .panel-footer {
+        color: #d9534f;
+        height: 38px;
+      }
     }
   }
-
 }

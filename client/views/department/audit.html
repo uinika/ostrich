@@ -3,7 +3,7 @@
   <div id='department-audit'>
     <div class='indicator-order'>
       <div class='pull-left'>
-        <p class='font-18'>清单开放审核</p>
+        <p class='font-18'>指标审核</p>
       </div>
       <div class='pull-right'>
         <ul class="nav nav-pills">
@@ -17,94 +17,122 @@
         </ul>
       </div>
     </div>
-    <div class='indicator-filter'>
-      <label class='filter-title'>共享级别</label>
-      <ul class="nav nav-pills filter-list">
-        <li role="presentation" >
-          <a ng-class="{true: 'active', false: 'inactive'}[shareLvSelection.length == 0]" href="javascript:;" ng-click='getShareLevelAll()'>全部</a>
-        </li>
-        <li role="presentation" ng-repeat='shareLevel in shareLevelList'>
-          <a ng-class="{true: 'active', false: 'inactive'}[shareLvSelection.indexOf(shareLevel.SYS_DICT_ID) > -1]" href="javascript:;" ng-click='getAuListBySl(shareLevel)' >{{shareLevel.DICT_NAME}}[{{shareLevel.INVENTORY_NUM}}]</a>
-        </li>
-      </ul>
-    </div>
-    <div class='indicator-filter'>
-      <label class='filter-title'>空间范围</label>
-      <ul class="nav nav-pills filter-list">
-        <li role="presentation">
-          <a href="javascript:;" ng-class="{true: 'active', false: 'inactive'}[areaSelection.length == 0]" href="javascript:;" ng-click='getSpatialAll()'>全部</a>
-        </li>
-        <li role="presentation" ng-repeat='areaPeriod in areaPeriodList'>
-          <a ng-class="{true: 'active', false: 'inactive'}[areaSelection.indexOf(areaPeriod.SYS_DICT_ID) > -1]" ng-checked="areaSelection.indexOf(areaPeriod.SYS_DICT_ID) > -1"  ng-click='getAuListByAP(areaPeriod)' href="javascript:;">{{areaPeriod.DICT_NAME}}[{{areaPeriod.INVENTORY_NUM}}]</a>
-        </li>
-      </ul>
-    </div>
-
-    <div class='indicator-filter'>
-      <label class='filter-title'>审核状态</label>
-      <ul class="nav nav-pills filter-list">
-        <li role="presentation">
-          <a href="javascript:;" ng-class="{true: 'active', false: 'inactive'}[statusSelection.length == 0]" href="javascript:;" ng-click='getStatusAll()'>全部</a>
-        </li>
-        <li role="presentation" ng-repeat='auditStatus in auditStatusList'>
-          <a ng-class="{true: 'active', false: 'inactive'}[statusSelection.indexOf(auditStatus.AUDITNAME) > -1]" ng-click='getAuListBySta(auditStatus)' href="javascript:;">{{auditStatus.AUDITNAME}}[{{auditStatus.NUMBER}}]</a>
-        </li>
-      </ul>
-    </div>
 
     <!-- indicator inventory list -->
     <div class='indicator-list'>
-      <ul class='list-box'>
-        <li ng-repeat='auditInfo in auditList'>
-          <div class="panel panel-default ">
-            <div class="panel-heading item-heading">
-              <div class='pull-left'>
-                <span>上传日期：{{auditInfo.CREATE_TIME | date:'yyyy-MM-dd'}}</span>
-                <!-- <span class='options'>
-                  <a title='修改'>
-                    <i class='fa fa-pencil'></i>
-                  </a>
-                  <a title='删除'>
-                    <i class='fa fa-trash'></i>
-                  </a>
-                </span> -->
-              </div>
-              <div class='pull-right'>浏览：{{auditInfo.VISIT_COUNT}}</div>
-            </div>
-            <div class="panel-body">
-              <div class="media">
-                <div class="media-left item-icon">
-                  <img ng-src='../../styles/images/department/xiangmu.png'/>
-                </div>
-                <div class="media-body">
-                  <div class="row media-heading main-heading">
-                    <div class='col-sm-4'>
-                      <h4>{{auditInfo.DATA_NAME}}</h4>
-                    </div>
-                    <div class='col-sm-4'>
-                      <div class='item-label'>
-                        <!-- <label class='label label-primary'>{{auditInfo.AREA_PERIOD}}</label> -->
-                        <label class='label label-info'>{{auditInfo.DICT_NAME}}</label>
+      <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">
+          <ul class="nav nav-filter">
+            <li role="presentation" class="active">
+              <a href="#">
+                <i class='fa fa-check-circle-o'></i>&nbsp;审核通过&nbsp;[<span class='confirmed-total'>111</span>]</a>
+            </li>
+            <li role="presentation">
+              <a href="#">
+                <i class='fa fa-stop-circle-o' ></i>&nbsp;审核未通过&nbsp;[<span class='unconfirmed-total'>111</span>]</a>
+            </li>
+            <li role="presentation">
+              <a href="#">
+                <i class='fa fa-hand-o-up'></i>&nbsp;未审核&nbsp;[<span class='unconfirmed-total'>111</span>]</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class='panel-body'>
+          <div class=''>
+            <div class='row'>
+              <div class='col-lg-12'>
+              <!-- Table -->
+              <table class='table table-hover table-striped '>
+                <thead>
+                  <tr>
+                    <th>审核状态</th>
+                    <th>序号</th>
+                    <th>申请日期</th>
+                    <th>指标编号</th>
+                    <th>指标名称</th>
+                    <th>指标别称</th>
+                    <th>计量单位</th>
+                    <th>指标详细解释</th>
+                    <th>计算方法</th>
+                    <th>共享频率</th>
+                    <th>空间范围</th>
+                    <th>分地区数据级别</th>
+                    <th>来源部门</th>
+                    <th>共享级别</th>
+                    <th>数据存储类型</th>
+                    <th>数据精度</th>
+                    <th>数据长度</th>
+                    <th>创建时间</th>
+                    <th>数据表示格式</th>
+                    <th>是否涉密</th>
+                    <th>联系人</th>
+                    <th>联系电话</th>
+                    <th>审核日期</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat='inventoryAttr in inventoryAttrList'>
+                    <td></td>
+                    <td>{{$index+1}}</td>
+                    <td></td>
+                    <td>{{inventoryAttr.quotaNumber}}</td>
+                    <td>{{inventoryAttr.quotaName}}</td>
+                    <td>{{inventoryAttr.alias}}</td>
+                    <td>{{inventoryAttr.meterUnit}}</td>
+                    <td>{{inventoryAttr.quotaDetail}}</td>
+                    <td>{{inventoryAttr.calculateMethod}}</td>
+                    <td>
+                      {{shareFreqArrShow}}
+                    </td>
+                    <td>
+                      {{dataInfo.areaPeriod}}
+                    </td>
+                    <td>{{inventoryAttr.areaDataLevel}}</td>
+                    <td>{{loginUser.DEP_NAME}}
+
+                    </td>
+                    <td>
+                      {{inventoryAttr.shareLevel}}
+                    </td>
+                    <td>
+                      <div ng-repeat="qtype in  quotaTypeList">
+                        <div ng-if="qtype.ID == inventoryAttr.quotaType">
+                          {{qtype.DICT_NAME}}
+                        </div>
                       </div>
-                    </div>
-                    <div class='col-sm-4'>
-                      <span class='col-sm-7'>申请部门：{{auditInfo.APPLY_DEPNAME}}</span>
-                      <a ng-class="{true: 'ng-show', false: 'ng-hide'}[{{auditInfo.SHOW_BUTTON == 'TRUE'}}]" ui-sref='main.department.audit.info({AUDITID:auditInfo.AUDITID})' class=' btn btn-sm btn-info'>我要审核</a>
-                    </div>
-                  </div>
-                  <h5>摘要：{{auditInfo.DATA_SUMMARY}}</h5>
-                  <div class='row font-13 margin-top14'>
-                    <div class='col-sm-3'>数据来源：{{auditInfo.DEPNAME}}</div>
-                    <div class='col-sm-3'>联系人：{{auditInfo.LINKMAN}}</div>
-                    <div class='col-sm-3'>联系电话：{{auditInfo.CONTACT_PHONE}}</div>
-                    <div class='col-sm-3'>发布日期：{{auditInfo.PUBLISH_TIME | date:'yyyy-MM-dd'}}</div>
-                  </div>
-                </div>
-              </div>
+                    </td>
+                    <td>{{inventoryAttr.dataPrecision}}</td>
+                    <td>{{inventoryAttr.dataLength}}</td>
+                    <td>{{inventoryAttr.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                    <td>
+                      <div ng-repeat="dataFormat in dataShowFormatList">
+                        <div ng-if="dataFormat.ID == inventoryAttr.dataShowFormat">
+                          {{dataFormat.DICT_NAME}}
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div ng-repeat="qsflag in  secretFlagList">
+                        <div ng-if="qsflag.ID == inventoryAttr.secretFlag">
+                          {{qsflag.DICT_NAME}}
+                        </div>
+                      </div>
+                    </td>
+                    <td>{{inventoryAttr.linkman}}</td>
+                    <td>{{inventoryAttr.contactPhone}}</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
             </div>
           </div>
-        </li>
-      </ul>
+        </div>
+
+      </div>
     </div>
+
   </div>
 </div>

@@ -15,17 +15,22 @@
             <li class="list-group-item sub-item">
               <a ui-sref='main.department.share'>共享指标</a>
             </li>
-            <li class="list-group-item sub-item">
-              <a ui-sref='main.department.requirement'>需求清单</a>
-            </li>
-            <li class="list-group-item">
-              审核
+            <li class="list-group-item sub-item has-sub">
+              需求清单
+              <ul class="list-group sub-head">
+                <li class="list-group-item sub-third-item">
+                  <a ui-sref='main.department.requirement'>本部门需求</a>
+                </li>
+                <li class="list-group-item sub-third-item">
+                  <a ui-sref='main.department.requirementConfirm'>需求确认</a>
+                </li>
+              </ul>
             </li>
             <li class="list-group-item sub-item">
               <a ui-sref='main.department.audit'>指标审核</a>
             </li>
             <li class="list-group-item sub-item">
-              <a ui-sref=''>部门管理</a>
+              <a >部门管理</a>
             </li>
             <li class="list-group-item sub-item">
               <a ui-sref='main.department.user'>用户管理</a>
@@ -38,7 +43,7 @@
       <div id='ui-view-department' ui-view>
         <div class='department-main'>
           <div class='row'>
-            <div class='col-lg-3 col-md-6'>
+            <div class='col-lg-3 col-md-6 left'>
               <div class='panel panel-primary'>
                 <div class='panel-heading'>
                   <div class='row'>
@@ -57,7 +62,7 @@
               </div>
             </div>
 
-            <div class='col-lg-3 col-md-6'>
+            <div class='col-lg-3 col-md-6 right'>
               <div class='panel panel-green'>
                 <div class='panel-heading'>
                   <div class='row'>
@@ -76,7 +81,7 @@
               </div>
             </div>
 
-            <div class='col-lg-3 col-md-6'>
+            <div class='col-lg-3 col-md-6 right'>
               <div class='panel panel-yellow'>
                 <div class='panel-heading'>
                   <div class='row'>
@@ -95,7 +100,7 @@
               </div>
             </div>
 
-            <div class='col-lg-3 col-md-6'>
+            <div class='col-lg-3 col-md-6 right'>
               <div class='panel panel-red'>
                 <div class='panel-heading'>
                   <div class='row'>
@@ -114,61 +119,87 @@
           </div>
 
           <div class='row '>
-            <div class='col-sm-6'>
+            <div class='col-sm-6 left'>
               <div class="panel panel-default">
                 <div class="panel-heading">
                   <div class='pull-left'>待审核清单（{{unauditTotal}}）</div>
                   <div class='pull-right'>更多...</div>
                 </div>
-
-                <!-- Table -->
-                <table class='table table-hover table-striped'>
-                  <thead>
-                    <tr>
-                      <th>申请日期</th>
-                      <th>指标名称</th>
-                      <th>申请单位</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr ng-repeat='invtItem in unauditInventoryList'>
-                      <td>{{invtItem.APPLY_TIME | date:'yyyy-MM-dd'}}</td>
-                      <td>{{invtItem.QUOTA_NAME}}</td>
-                      <td>{{invtItem.DEP_NAME}}</td>
-                    </tr>
-                  </tbody>
-                </table>
+                <div class='panel-body'>
+                  <!-- Table -->
+                  <table class='table table-hover table-striped'>
+                    <thead>
+                      <tr>
+                        <th>申请日期</th>
+                        <th>指标名称</th>
+                        <th>申请单位</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat='invtItem in unauditInventoryList'>
+                        <td>{{invtItem.APPLY_TIME | date:'yyyy-MM-dd'}}</td>
+                        <td>{{invtItem.QUOTA_NAME}}</td>
+                        <td>{{invtItem.DEP_NAME}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
 
             </div>
-            <div class='col-sm-6'>
+            <div class='col-sm-6 right'>
               <div class="panel panel-default">
                 <div class="panel-heading">
                   <div class='pull-left'>需求响应列表（{{responseTotal}}）</div>
                   <div class='pull-right'>更多...</div>
                 </div>
-                <!-- Table -->
-                <table class="table">
-                  <table class='table table-hover table-striped'>
-                    <thead>
-                      <tr>
-                        <th>响应日期</th>
-                        <th>需求发布日期</th>
-                        <th>需求名称</th>
-                        <th>响应单位</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr ng-repeat='resItem in responseList'>
-                        <td>{{resItem.RESPONSE_TIME | date:'yyyy-MM-dd'}}</td>
-                        <td>{{resItem.CREATE_TIME | date:'yyyy-MM-dd'}}</td>
-                        <td>{{resItem.REQUIREMENT_NAME}}</td>
-                        <td>{{resItem.DEP_NAME}}</td>
-                      </tr>
-                    </tbody>
-                  </table>
+                <div class='panel-body'>
+                  <!-- Table -->
+                    <table class='table table-hover table-striped'>
+                      <thead>
+                        <tr>
+                          <th>响应日期</th>
+                          <th>需求发布日期</th>
+                          <th>需求名称</th>
+                          <th>响应单位</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat='resItem in responseList'>
+                          <td>{{resItem.RESPONSE_TIME | date:'yyyy-MM-dd'}}</td>
+                          <td>{{resItem.CREATE_TIME | date:'yyyy-MM-dd'}}</td>
+                          <td>{{resItem.REQUIREMENT_NAME}}</td>
+                          <td>{{resItem.DEP_NAME}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
-              </table>
+            </div>
+          </div>
+
+          <div class='row'>
+            <div class=''>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <div class='pull-left'>关注部门</div>
+                </div>
+                <div class='panel-body'>
+                  <div class='focus-bureau-list'>
+                    <div ng-repeat='bureau in FocusBureaus' class='bureau-item col-md-3'>
+                      <a ui-sref='main.inventory.detail({departmentID: bureau.ID})' class='thumbnail'>
+                        <img ng-src='../styles/images/bureau/{{::bureau.DEP_EN_NAME}}' title='{{::bureau.DEP_NAME}}'>
+                      </a>
+                      <div class="caption">
+                        {{bureau.DEP_SHORT_NAME}}
+                      </div>
+                    </div>
+                    <div class='col-md-3'>
+                      <button title='添加关注部门' class='btn btn-lg btn-primary'><i class='fa fa-plus'></i></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

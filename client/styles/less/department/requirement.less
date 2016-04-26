@@ -3,43 +3,47 @@
   .indicator-order {
     overflow: hidden;
     border-bottom: 1px solid #777;
-    margin-bottom: 5px;
+    padding: 10px 0 5px;
+    ul>li {
+      margin: 0 20px;
+      a {
+        padding: 6px 12px;
+      }
+    }
+    ul>li.indicator-total {
+      height: 34px;
+      line-height: 40px;
+      .num {
+        font-size: 20px;
+        font-weight: bold;
+        padding: 0 6px;
+      }
+    }
   }
   .indicator-list {
-    .list-box {
-      clear:right;
-      padding: 15px 0 0;
+    ul.nav-filter {
       list-style: none;
-      .item-heading {
-        overflow: hidden;
-        padding: 5px 25px 5px 10px;
-        font-size: 12px;
-        color: #777;
-        .options {
-          padding-left:86px;
-          font-size: 14px;
-          a {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            margin-right: 5px;
-            padding:0 5px;
-            cursor:pointer;
+      li {
+        display: inline-block;
+        a {
+          padding: 0 15px;
+          i{
+            font-size: 24px;
+          }
+          i.fa-check-circle{
+            color:#5cb85c
+          }
+          i.fa-question-circle{
+            color:#f0ad4e;
           }
         }
       }
-      .item-icon {
-        padding: 8px 20px 0 4px;
-        img{
-          width:100px;
-        }
-      }
-      .media-body {
-        position: relative;
-        .main-heading {
-          line-height: 28px;
-        }
-      }
+    }
+  }
+  .publish-req-modal{
+    .help-info{
+      font-size:12px;
+      color:#777;
     }
   }
 }

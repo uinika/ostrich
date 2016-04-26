@@ -3,22 +3,25 @@
   <div id='department-inventory'>
     <div class='indicator-order'>
       <div class='pull-left'>
-        <p class='font-18 dep-name'>{{depName}} </p>
+        <p class='font-18 dep-name'>{{depName}}
+        </p>
       </div>
       <div class='pull-right'>
         <ul class="nav nav-pills">
-          <li role="presentation "  class='indicator-total'>
-            指标总数<span class='num'>{{ivntDepTotal}}</span>
+          <li role="presentation " class='indicator-total'>
+            指标总数
+            <span class='num'>{{ivntDepTotal}}</span>
           </li>
           <li role="presentation">
-              <input type="text"  placeholder="请输入查询指标名称">
-              <button type="button" class="btn btn-primary">查询</button>
+            <input type="text" placeholder="请输入查询指标名称">
+            <button type="button" class="btn btn-primary">查询</button>
           </li>
           <li role="presentation">
-            <a class='btn btn-primary' ui-sref='main.department.inventory.publish'><i class='fa fa-plus'></i>新增指标</a>
+            <button class='btn btn-primary' ui-sref='main.department.inventory.publish'>
+              <i class='fa fa-plus'></i>新增指标</button>
           </li>
           <li role="presentation">
-            <a class='btn btn-primary' >导入指标</a>
+            <a class='btn btn-primary'>导入指标</a>
           </li>
         </ul>
       </div>
@@ -28,11 +31,28 @@
         <nav class='pull-left'>
           <ul class="pager">
             共享级别
-            <li role="presentation" >
+            <li role="presentation">
               <a ng-class="{true: 'active', false: 'inactive'}[shareLvMainSelection.length == 0]" href="javascript:;" ng-click='getShareLevelAll()'>全部</a>
             </li>
             <li role="presentation" ng-repeat='shareLevel in shareLevelList'>
-              <a ng-class="{true: 'active', false: 'inactive'}[shareLvMainSelection.indexOf(shareLevel.SYS_DICT_ID) > -1]" href="javascript:;" ng-click='getIvntListBySl(shareLevel)' >{{shareLevel.DICT_NAME}}<span class='badge'>{{shareLevel.INVENTORY_NUM}}</span></a>
+              <a ng-class="{true: 'active', false: 'inactive'}[shareLvMainSelection.indexOf(shareLevel.SYS_DICT_ID) > -1]" href="javascript:;" ng-click='getIvntListBySl(shareLevel)'>{{shareLevel.DICT_NAME}}
+                <span class='badge'>{{shareLevel.INVENTORY_NUM}}</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class='indicator-filter'>
+        <nav class='pull-left'>
+          <ul class="pager">
+            共享频率
+            <li role="presentation">
+              <a href="javascript:;" ng-class="{true: 'active', false: 'inactive'}[areaMainSelection.length == 0]" href="javascript:;" ng-click='getShareFreqAll()'>全部</a>
+            </li>
+            <li role="presentation" ng-repeat='shareFreq in shareFreqList'>
+              <a ng-class="{true: 'active', false: 'inactive'}[shareFreqSelection.indexOf(shareFreq.SYS_DICT_ID) > -1]" ng-checked="shareFreqSelection.indexOf(shareFreq.SYS_DICT_ID) > -1" ng-click='getIvntListByAP(shareFreq)' href="javascript:;">{{shareFreq.DICT_NAME}}
+                <span class='badge'>{{shareFreq.INVENTORY_NUM}}</span>
+              </a>
             </li>
           </ul>
         </nav>
@@ -45,7 +65,9 @@
               <a href="javascript:;" ng-class="{true: 'active', false: 'inactive'}[areaMainSelection.length == 0]" href="javascript:;" ng-click='getSpatialAll()'>全部</a>
             </li>
             <li role="presentation" ng-repeat='areaPeriod in areaPeriodList'>
-              <a ng-class="{true: 'active', false: 'inactive'}[areaMainSelection.indexOf(areaPeriod.SYS_DICT_ID) > -1]" ng-checked="areaMainSelection.indexOf(areaPeriod.SYS_DICT_ID) > -1"  ng-click='getIvntListByAP(areaPeriod)' href="javascript:;">{{areaPeriod.DICT_NAME}}<span class='badge'>{{areaPeriod.INVENTORY_NUM}}</span></a>
+              <a ng-class="{true: 'active', false: 'inactive'}[areaMainSelection.indexOf(areaPeriod.SYS_DICT_ID) > -1]" ng-checked="areaMainSelection.indexOf(areaPeriod.SYS_DICT_ID) > -1" ng-click='getIvntListByAP(areaPeriod)' href="javascript:;">{{areaPeriod.DICT_NAME}}
+                <span class='badge'>{{areaPeriod.INVENTORY_NUM}}</span>
+              </a>
             </li>
           </ul>
         </nav>
@@ -54,56 +76,118 @@
 
     <!-- indicator inventory list -->
     <div class='indicator-list'>
-      <div class='pull-right'>
+      <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">
+          <ul class="nav nav-filter">
+            <li role="presentation" class="active">
+              <a href="#">
+                <i class='fa fa-eye'></i>&nbsp;全开放</a>
+            </li>
+            <li role="presentation">
+              <a href="#">
+                <i class='fa fa-desktop'></i>&nbsp;政务云开放</a>
+            </li>
+            <li role="presentation">
+              <a href="#">
+                <i class='fa fa-lock'></i>&nbsp;授权开放</a>
+            </li>
+            <li role="presentation">
+              <a href="#">
+                <i class='fa fa-warning'></i>&nbsp;暂不开放</a>
+            </li>
+          </ul>
+        </div>
 
-      </div>
-      <ul class='list-box'>
-        <li ng-repeat='depIvnt in depIvntList'>
-          <div class="panel panel-default ">
-            <div class="panel-heading item-heading">
-              <div class='pull-left'>
-                <span>上传日期：{{depIvnt.CREATE_TIME | date:'yyyy-MM-dd'}}</span>
-                <!-- <span class='options'>
-                  <a title='修改'>
-                    <i class='fa fa-pencil'></i>
-                  </a>
-                  <a title='删除'>
-                    <i class='fa fa-trash'></i>
-                  </a>
-                </span> -->
-              </div>
-              <div class='pull-right'>浏览：{{depIvnt.VISIT_COUNT}}</div>
-            </div>
-            <div class="panel-body">
-              <div class="media">
-                <div class="media-left item-icon">
-                  <img ng-src='../../styles/images/department/xiangmu.png'/>
-                </div>
-                <div class="media-body">
-                  <div class="row media-heading main-heading">
-                    <div class='col-sm-4'>
-                      <h4>{{depIvnt.DATA_NAME}}</h4>
-                    </div>
-                    <div class='col-sm-4'>
-                      <div class='item-label'>
-                        <!-- <label class='label label-primary'>{{depIvnt.AREA_PERIOD}}</label> -->
-                        <label class='label label-info'>{{depIvnt.DICT_NAME}}</label>
+        <div class='panel-body scroll'>
+          <div class='container'>
+            <div class='row'>
+              <div class='col-lg-12'>
+              <!-- Table -->
+              <table class='table table-hover table-striped '>
+                <thead>
+                  <tr>
+                    <th>标识</th>
+                    <th>序号</th>
+                    <th>指标编号</th>
+                    <th>指标名称</th>
+                    <th>指标别称</th>
+                    <th>计量单位</th>
+                    <th>指标详细解释</th>
+                    <th>计算方法</th>
+                    <th>共享频率</th>
+                    <th>空间范围</th>
+                    <th>分地区数据级别</th>
+                    <th>来源部门</th>
+                    <th>共享级别</th>
+                    <th>数据存储类型</th>
+                    <th>数据精度</th>
+                    <th>数据长度</th>
+                    <th>创建时间</th>
+                    <th>数据表示格式</th>
+                    <th>是否涉密</th>
+                    <th>联系人</th>
+                    <th>联系电话</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat='inventoryAttr in inventoryAttrList'>
+                    <td></td>
+                    <td>{{$index+1}}</td>
+                    <td>{{inventoryAttr.quotaNumber}}</td>
+                    <td>{{inventoryAttr.quotaName}}</td>
+                    <td>{{inventoryAttr.alias}}</td>
+                    <td>{{inventoryAttr.meterUnit}}</td>
+                    <td>{{inventoryAttr.quotaDetail}}</td>
+                    <td>{{inventoryAttr.calculateMethod}}</td>
+                    <td>
+                      {{shareFreqArrShow}}
+                    </td>
+                    <td>
+                      {{dataInfo.areaPeriod}}
+                    </td>
+                    <td>{{inventoryAttr.areaDataLevel}}</td>
+                    <td>{{loginUser.DEP_NAME}}
+
+                    </td>
+                    <td>
+                      {{inventoryAttr.shareLevel}}
+                    </td>
+                    <td>
+                      <div ng-repeat="qtype in  quotaTypeList">
+                        <div ng-if="qtype.ID == inventoryAttr.quotaType">
+                          {{qtype.DICT_NAME}}
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                  <h5>摘要：{{depIvnt.DATA_SUMMARY}}</h5>
-                  <div class='row font-13 margin-top14'>
-                    <div class='col-sm-3'>提供部门：{{depIvnt.DEP_NAME}}</div>
-                    <div class='col-sm-3'>联系人：{{depIvnt.LINKMAN}}</div>
-                    <div class='col-sm-3'>联系电话：{{depIvnt.CONTACT_PHONE}}</div>
-                    <div class='col-sm-3'>发布日期：{{depIvnt.PUBLISH_TIME | date:'yyyy-MM-dd'}}</div>
-                  </div>
-                </div>
-              </div>
+                    </td>
+                    <td>{{inventoryAttr.dataPrecision}}</td>
+                    <td>{{inventoryAttr.dataLength}}</td>
+                    <td>{{inventoryAttr.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                    <td>
+                      <div ng-repeat="dataFormat in dataShowFormatList">
+                        <div ng-if="dataFormat.ID == inventoryAttr.dataShowFormat">
+                          {{dataFormat.DICT_NAME}}
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div ng-repeat="qsflag in  secretFlagList">
+                        <div ng-if="qsflag.ID == inventoryAttr.secretFlag">
+                          {{qsflag.DICT_NAME}}
+                        </div>
+                      </div>
+                    </td>
+                    <td>{{inventoryAttr.linkman}}</td>
+                    <td>{{inventoryAttr.contactPhone}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
             </div>
           </div>
-        </li>
-      </ul>
+        </div>
+
+      </div>
     </div>
 
   </div>

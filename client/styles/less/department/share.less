@@ -3,88 +3,71 @@
   .indicator-order {
     overflow: hidden;
     border-bottom: 1px solid #777;
-    padding: 10px 0 5px 0;
+    padding: 10px 0 5px;
     ul>li {
-      margin:0 20px;
+      margin: 0 20px;
       a {
         padding: 6px 12px;
       }
     }
-    ul>li.indicator-total{
+    ul>li.indicator-total {
       height: 34px;
       line-height: 40px;
-      .num{
-        font-size:20px;
-        font-weight:bold;
+      .num {
+        font-size: 20px;
+        font-weight: bold;
         padding: 0 6px;
       }
     }
   }
-  .indicator-filter {
-    margin: 0;
-    font-size: 13px;
-    overflow: hidden;
-    ul.pager {
-      margin: 0 0 15px;
-    }
-    ul>li>a.active {
-      background: #DDD;
-    }
-    ul>li>a.inactive {
-      background: #FFF;
-    }
-    ul>li>a .badge {
-      background: #337AB7;
-      margin-left: 4px;
-    }
-  }
+
   .filter {
     border-bottom: 1px solid #DDD;
     padding: 15px 0;
     margin-bottom: 10px;
-    .indicator-list {
-      .list-box {
-        clear: right;
-        padding: 15px 0 0;
-        list-style: none;
-        .item-heading {
-          .options {
-            padding-left: 86px;
-            font-size: 14px;
-            a {
-              display: inline-block;
-              width: 20px;
-              height: 20px;
-              margin-right: 5px;
-              padding: 0 5px;
-              cursor: pointer;
-            }
+    .indicator-filter {
+      margin: 0;
+      font-size: 13px;
+      overflow: hidden;
+      ul.pager {
+        margin: 0 0 15px;
+      }
+      ul>li>a.active {
+        background: #DDD;
+      }
+      ul>li>a.inactive {
+        background: #FFF;
+      }
+      ul>li>a .badge {
+        background: #337AB7;
+        margin-left: 4px;
+      }
+    }
+  }
+  .indicator-list {
+    .scroll {
+      overflow: scroll;
+    }
+    ul.nav-filter {
+      list-style: none;
+      li {
+        display: inline-block;
+        a {
+          padding: 4px 15px;
+          i{
+            font-size:24px;
           }
-        }
-        .item-icon {
-          padding: 8px 20px 0 4px;
-          img {
-            width: 100px;
+          i.fa-eye{
+            color:#5bc0de;
           }
-        }
-        .media-body {
-          position: relative;
-          .main-heading {
-            line-height: 28px;
+          i.fa-desktop {
+            color: #5bc0de;
           }
-          .item-label {
-            position: absolute;
-            right: 15px;
-            top: 5px;
+          i.fa-lock{
+            color: #5bc0de;
           }
-          .audit-status-icon {
-            position: absolute;
-            right: 15px;
-            top: 10px;
-          }
-          .audit-info {
-            position: absolute;
-            top: 18px;
+          i.fa-warning {
+            color:#f0ad4e;
           }
         }
       }

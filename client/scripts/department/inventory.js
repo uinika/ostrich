@@ -99,7 +99,6 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$rootScope', 
     $scope.step2.show = false;
     $scope.step3.show = false;
     $scope.step4.show = false;
-    $scope.progress = 0;
     $scope.loginUser = $rootScope.User;
 
 
@@ -238,7 +237,6 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$rootScope', 
     $scope.backToStep1 = function() {
       $scope.step1.show = true;
       $scope.step2.show = false;
-      $scope.progress = 0;
     }
 
     $scope.toStep3 = function() {
@@ -248,7 +246,6 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$rootScope', 
       }
       $scope.step3.show = true;
       $scope.step2.show = false;
-      $scope.progress = 50;
 
       $scope.DataExamps = $scope.inventoryAttrList;
     }
@@ -256,7 +253,6 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$rootScope', 
     $scope.backToStep2 = function() {
       $scope.step2.show = true;
       $scope.step3.show = false;
-      $scope.progress = 25;
     }
 
     $scope.toStep4 = function() {
@@ -266,7 +262,6 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$rootScope', 
       }
       $scope.step4.show = true;
       $scope.step3.show = false;
-      $scope.progress = 75;
 
 
     }
@@ -274,14 +269,12 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$rootScope', 
     $scope.backToStep3 = function() {
       $scope.step3.show = true;
       $scope.step4.show = false;
-      $scope.progress = 50;
     }
 
     $scope.toStep2 = function(isValid) {
       if (isValid) {
         $scope.step2.show = true;
         $scope.step1.show = false;
-        $scope.progress = 25;
 
         $scope.step1_data = {};
         var data_info_add_configs = [];
@@ -367,7 +360,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$rootScope', 
           "shareDeps": shareDeps
         }, {
           "createTime": new Date()
-        },$scope.Modal.Quota);
+        }, $scope.Modal.Quota);
 
         $scope.inventoryAttrList.push(invntModalData);
 
@@ -421,9 +414,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$rootScope', 
     $scope.addFormSubmit = function() {
       $scope.step4_data = {};
       $scope.step4_data.dataOtherInfo =
-        _.assign({
-          'dataInfoId': $scope.dataInfo.dataName
-        }, $scope.DataOtherInfo);
+        _.assign($scope.DataOtherInfo);
 
       $scope.submitObject = _.assign($scope.step1_data, $scope.step2_data, $scope.step3_data, $scope.step4_data);
 
@@ -432,10 +423,11 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$rootScope', 
       Http.saveInventory($scope.submitObject).then(function(result) {
         console.log(result.data.head);
         if (200 == result.data.head.status) {
-          $scope.progress = 100;
-          alert('发布成功');
-          $state.go("main.department.inventory",{}, { reload: true });
+          alert('新增成功');
+          //$state.go("main.department.inventory",{}, { reload: true });
+          Component.popModal($scope, '添加', 'import-example-modal').result.then(function() {
 
+          });
         }
       })
     }
@@ -539,7 +531,7 @@ DInventory.service('Department.Inventory.Service.Component', ['$uibModal',
       scope.Modal.type = type;
       var modalInstance = $uibModal.open({
         animation: true,
-        backdrop : 'static',
+        backdrop: 'static',
         templateUrl: templateUrl + '.html',
         scope: scope
       });

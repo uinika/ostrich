@@ -3,18 +3,20 @@
   <div id='department-requirement'>
     <div class='indicator-order'>
       <div class='pull-left'>
-        <p class='font-18'>需求清单 [10]</p>
+        <p class='font-18'>需求清单</p>
       </div>
       <div class='pull-right'>
         <ul class="nav nav-pills">
-          <li role="presentation">
-            <a href="javascript:;">默认排序</a>
+          <li role="presentation" class='indicator-total'>
+            本部门需求总数<span class='num'>xxx</span>
           </li>
           <li role="presentation">
-            <a href="javascript:;">指标发布日期</a>
+            <input type="text"  placeholder="请输入查询需求名称">
+            <button type="button" class="btn btn-primary">查询</button>
           </li>
           <li role="presentation">
-            <a href="javascript:;">浏览量</a>
+            <button class='btn btn-primary' ng-click='publishReq()'>
+              <i class='fa fa-plus'></i>发布需求</button>
           </li>
         </ul>
       </div>
@@ -22,58 +24,75 @@
 
     <!-- indicator inventory list -->
     <div class='indicator-list'>
-      <div class='pull-right'>
-        <a class='btn btn-primary' ng-click='publishReq()'>发布需求</a>
-      </div>
-      <ul class='list-box'>
-        <li ng-repeat= 'item in requirementList'>
-          <div class="panel panel-default ">
-            <div class="panel-heading item-heading">
-              <div class='pull-left'>
-                <span>上传日期：{{item.CREATE_TIME | date:'yyyy-MM-dd'}}</span>
-                <span class='options'>
-                  <a title='修改' ng-click='updateReq(item)'>
-                    <i class='fa fa-pencil'></i>
-                  </a>
-                  <a title='删除' ng-click='deleteReq(item.ID)'>
-                    <i class='fa fa-trash'></i>
-                  </a>
-                </span>
-              </div>
-              <div class='pull-right'>浏览：{{item.VISIT_COUNT}}</div>
+      <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">
+          <ul class="nav nav-filter">
+            需求状态
+            <li role="presentation" class="active">
+              <a href="#">
+                <i class='fa fa-check-circle'></i>&nbsp;已确认&nbsp;<span class='confirmed-total'>111</span></a>
+            </li>
+            <li role="presentation">
+              <a href="#">
+                <i class='fa fa-question-circle'></i>&nbsp;未确认<span class='unconfirmed-total'>111</span></a>
+            </li>
+          </ul>
+        </div>
+
+        <div class='panel-body'>
+          <div class=''>
+            <div class='row'>
+              <div class='col-lg-12'>
+              <!-- Table -->
+              <table class='table table-hover table-striped '>
+                <thead>
+                  <tr>
+                    <th>状态</th>
+                    <th>需求日期</th>
+                    <th>确认日期</th>
+                    <th>需求名称</th>
+                    <th>需求说明</th>
+                    <th>共享频率</th>
+                    <th>空间范围</th>
+                    <th>数据级别</th>
+                    <th>联系人</th>
+                    <th>联系电话</th>
+                    <th>对应部门</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat='inventoryAttr in inventoryAttrList'>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>{{$index+1}}</td>
+                    <td>{{inventoryAttr.quotaNumber}}</td>
+                    <td>{{inventoryAttr.quotaName}}</td>
+                    <td>{{inventoryAttr.alias}}</td>
+                    <td>{{inventoryAttr.meterUnit}}</td>
+                    <td>{{inventoryAttr.quotaDetail}}</td>
+                    <td>{{inventoryAttr.calculateMethod}}</td>
+                    <td>
+                      {{shareFreqArrShow}}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-            <div class="panel-body">
-              <div class="media">
-                <div class="media-left item-icon">
-                  <img ng-src='../../styles/images/department/chengguo.png'/>
-                </div>
-                <div class="media-body">
-                  <a ui-sref='main.department.requirement.detail({ID:item.ID})'>
-                    <h4 class="media-heading main-heading">{{item.REQUIREMENT_NAME}}
-                    </h4>
-                  </a>
-                  <h5>摘要：{{item.REQUIREMENT_DESC}}</h5>
-                  <div class='row font-13 margin-top14'>
-                    <div class='col-sm-3'>来源：{{item.DEP_NAME}}</div>
-                    <div class='col-sm-3'>联系人：{{item.LINKMAN}}</div>
-                    <div class='col-sm-3'>联系电话：{{item.CONTACT_PHONE
-}}</div>
-                    <div class='col-sm-3'>邮箱：{{item.EMAIL}}</div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
-        </li>
-      </ul>
+        </div>
+
+      </div>
     </div>
 
   </div>
 </div>
 
-<!-- Add user modal -->
+<!-- Add requirement modal -->
 <script type='text/ng-template' id='add-req-modal.html'>
-  <form class="form-horizontal example-add-modal" name='reqAddForm'>
+  <form class="form-horizontal publish-req-modal" name='reqAddForm'>
 
     <div class='modal-header'>
       <i class="fa fa-server"></i>
@@ -82,38 +101,76 @@
     </div>
     <div class='modal-body'>
       <div class="form-group">
-        <label for="" class="col-sm-2 control-label">需求名称
-          <span class='require-sign'>*</span>:</label>
+        <label for="" class="col-sm-2 control-label"><span class='require-sign'>*</span>需求名称
+          :</label>
         <div class="col-sm-10">
           <input type="text" class="form-control" ng-model='req.REQUIREMENT_NAME' required>
+          <span class='help-info'>需具体说明需求具体名称</span>
         </div>
       </div>
 
       <div class="form-group">
-        <label for="" class="col-sm-2 control-label">需求简介
-          <span class='require-sign'>*</span>:</label>
+        <label for="" class="col-sm-2 control-label"><span class='require-sign'>*</span>需求说明
+          :</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" ng-model='req.REQUIREMENT_DESC' required>
+          <textarea type="text" class="form-control" ng-model='req.REQUIREMENT_DESC' required>
+          </textarea>
+          <span class='help-info pull-left'>简要说明需求基本信息</span>
+          <span class='pull-right'>(最多256个汉字)</span>
         </div>
       </div>
       <div class="form-group">
-        <label for="" class="col-sm-2 control-label">联系人
-          <span class='require-sign'>*</span>:</label>
+        <label for="" class="col-sm-2 control-label">
+          <span class='require-sign'>*</span>共享频率:</label>
+        <div class="col-sm-10">
+          <span ng-repeat="sfItem in  shareFrequencyList">
+            <input type="checkbox" value="{{sfItem.ID}}" ng-checked="shareFreqSelection.indexOf(sfItem.DICT_NAME) > -1" ng-click="toggleShareFreqSelection(sfItem.ID,sfItem.DICT_NAME)">
+            {{sfItem.DICT_NAME}}
+          </span>
+        </div>
+        <input type="hidden" ng-model='req.shareFrequency'>
+      </div>
+
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">
+          <span class='require-sign'>*</span>空间范围:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" required ng-model='req.areaPeriod'>
+          <span class='help-info'>
+            可取得数据的地区名称，如全国，四川省，各省等。
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">分地区数据级别:</label>
+        <div class="col-sm-10">
+          <span ng-repeat="dataLevel in  dataLevelList">
+            <input type="checkbox" value="{{dataLevel.ID}}" ng-checked="dataLevelSelection.indexOf(dataLevel.DICT_NAME) > -1" ng-click="toggleDataLevelSelection(dataLevel)">
+            {{dataLevel.DICT_NAME}}
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label"><span class='require-sign'>*</span>联系人
+          :</label>
         <div class="col-sm-10">
           <input type="text" class="form-control" ng-model='req.LINKMAN' required>
         </div>
       </div>
       <div class="form-group">
-        <label for="" class="col-sm-2 control-label">联系电话
-          <span class='require-sign'>*</span>:</label>
+        <label for="" class="col-sm-2 control-label"><span class='require-sign'>*</span>联系电话
+          :</label>
         <div class="col-sm-10">
           <input type="text" class="form-control" ng-model='req.CONTACT_PHONE' required>
         </div>
       </div>
       <div class="form-group">
-        <label for="" class="col-sm-2 control-label">邮箱:</label>
+        <label for="" class="col-sm-2 control-label">需求对应部门:</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" ng-model='req.EMAIL'>
+          <select class="form-control" ng-model='Modal.Quota.depId' >
+            <option ng-repeat="dep in  deptList" value='{{dep.ID}}'>{{dep.DEP_NAME}}</option>
+          </select>
         </div>
       </div>
 
