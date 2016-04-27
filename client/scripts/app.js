@@ -4,6 +4,7 @@ var app = angular.module('app', [
   'Config',
   'ui.router',
   'ui.bootstrap',
+  'ui.tree',
   'isteven-multi-select',
   'Login',
   'Main',

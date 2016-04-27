@@ -3,9 +3,24 @@
     <div class='left col-md-2'>
       <div class='department-list panel panel-default'>
         <div class='panel-heading'><i class='fa fa-bars'> 指标清单</i></div>
-        <div class='list-group'>
-          <a ng-repeat='department in Inventory.departments' ng-click=Inventory.switcher(department.ID) class='list-group-item'>{{department.DEP_SHORT_NAME}} <span class='badge'>{{department.INVENTORY_NUM}}</span></a>
+
+        <div ui-tree data-drag-enabled="false">
+          <ol ui-tree-nodes="" ng-model="list">
+            <li ng-repeat="item in list" ui-tree-node>
+              <div ui-tree-handle>
+                {{item.title}}
+              </div>
+              <ol ui-tree-nodes="" ng-model="item.nodes">
+                <li ng-repeat="subItem in item.nodes" ui-tree-node>
+                  <div ui-tree-handle>
+                    {{subItem.title}}
+                  </div>
+                </li>
+              </ol>
+            </li>
+          </ol>
         </div>
+
       </div>
     </div>
     <div class='right col-md-10'>
