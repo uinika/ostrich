@@ -194,6 +194,10 @@ html {
 #department-main .department-main {
   margin-left: 170px;
 }
+#department-main .department-main .panel-list .panel {
+  height: 287px;
+  overflow: hidden;
+}
 #department-main .department-main .focus-bureau-list {
   height: 200px;
 }
