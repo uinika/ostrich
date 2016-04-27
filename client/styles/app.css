@@ -169,6 +169,9 @@ html {
 #dashboard .third-section .panel {
   height: 300px;
 }
+#dashboard .third-section .panel .nav-tabs {
+  bottom: 5px !important;
+}
 #department-main .left {
   padding: 0;
 }
@@ -753,47 +756,12 @@ html {
 #inventory-main .right .content .information ul li {
   color: #777777;
 }
-#indicator-detail .content .icon.test {
-  height: 60px;
-  width: 90px;
-  margin-top: 5px;
+#indicator-detail .nav-tabs {
+  bottom: -1px;
 }
-#indicator-detail .content .organization {
-  background-image: url('images/indicator/indicator-organization.png');
-  background-size: 90px 60px;
-  background-repeat: no-repeat;
-}
-#indicator-detail .content .project {
-  background-image: url('images/indicator/indicator-project.png');
-  background-size: 90px 60px;
-  background-repeat: no-repeat;
-}
-#indicator-detail .content .achievement {
-  background-image: url('images/indicator/indicator-achievement.png');
-  background-size: 90px 60px;
-  background-repeat: no-repeat;
-}
-#indicator-detail .content .information {
-  margin-left: 10px;
-}
-#indicator-detail .content .information h1 {
-  font-size: 15px;
-  font-weight: bold;
-  margin: 6px 20px 10px;
-}
-#indicator-detail .content .information h2 {
-  font-size: 13px;
-  margin: 7px 20px;
-}
-#indicator-detail .content .information ul {
-  margin: 0px 15px;
-  font-size: 12px;
-}
-#indicator-detail .content .information ul li {
-  color: #777777;
-}
-#indicator-detail .table {
-  font-size: 12px;
+#indicator-detail .tab-content {
+  padding: 20px 15px;
+  border: 1px solid #DDD;
 }
 #requirement-main {
   padding: 0;
