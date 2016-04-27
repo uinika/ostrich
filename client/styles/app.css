@@ -305,22 +305,22 @@ html {
 #department-inventory .indicator-list ul.nav-filter li {
   display: inline-block;
 }
-#department-inventory .indicator-list ul.nav-filter li a {
+#department-inventory .indicator-list ul.nav-filter li span {
   padding: 0 15px;
 }
-#department-inventory .indicator-list ul.nav-filter li a i {
+#department-inventory .indicator-list ul.nav-filter li span i {
   font-size: 24px;
 }
-#department-inventory .indicator-list ul.nav-filter li a i.fa-eye {
+#department-inventory .indicator-list ul.nav-filter li span i.fa-eye {
   color: #5bc0de;
 }
-#department-inventory .indicator-list ul.nav-filter li a i.fa-desktop {
+#department-inventory .indicator-list ul.nav-filter li span i.fa-desktop {
   color: #5bc0de;
 }
-#department-inventory .indicator-list ul.nav-filter li a i.fa-lock {
+#department-inventory .indicator-list ul.nav-filter li span i.fa-lock {
   color: #5bc0de;
 }
-#department-inventory .indicator-list ul.nav-filter li a i.fa-warning {
+#department-inventory .indicator-list ul.nav-filter li span i.fa-warning {
   color: #f0ad4e;
 }
 #inventory-publish {
@@ -416,22 +416,22 @@ html {
 #department-share .indicator-list ul.nav-filter li {
   display: inline-block;
 }
-#department-share .indicator-list ul.nav-filter li a {
+#department-share .indicator-list ul.nav-filter li span {
   padding: 4px 15px;
 }
-#department-share .indicator-list ul.nav-filter li a i {
+#department-share .indicator-list ul.nav-filter li span i {
   font-size: 24px;
 }
-#department-share .indicator-list ul.nav-filter li a i.fa-eye {
+#department-share .indicator-list ul.nav-filter li span i.fa-eye {
   color: #5bc0de;
 }
-#department-share .indicator-list ul.nav-filter li a i.fa-desktop {
+#department-share .indicator-list ul.nav-filter li span i.fa-desktop {
   color: #5bc0de;
 }
-#department-share .indicator-list ul.nav-filter li a i.fa-lock {
+#department-share .indicator-list ul.nav-filter li span i.fa-lock {
   color: #5bc0de;
 }
-#department-share .indicator-list ul.nav-filter li a i.fa-warning {
+#department-share .indicator-list ul.nav-filter li span i.fa-warning {
   color: #f0ad4e;
 }
 #department-requirement {
@@ -464,16 +464,16 @@ html {
   display: inline-block;
   margin-left: 20px;
 }
-#department-requirement .indicator-list ul.nav-filter li a {
+#department-requirement .indicator-list ul.nav-filter li span {
   padding: 0 15px;
 }
-#department-requirement .indicator-list ul.nav-filter li a i {
+#department-requirement .indicator-list ul.nav-filter li span i {
   font-size: 24px;
 }
-#department-requirement .indicator-list ul.nav-filter li a i.fa-check-circle {
+#department-requirement .indicator-list ul.nav-filter li span i.fa-check-circle {
   color: #5cb85c;
 }
-#department-requirement .indicator-list ul.nav-filter li a i.fa-question-circle {
+#department-requirement .indicator-list ul.nav-filter li span i.fa-question-circle {
   color: #f0ad4e;
 }
 #department-requirement .publish-req-modal .help-info {
@@ -510,17 +510,17 @@ html {
   display: inline-block;
   margin-left: 20px;
 }
-#department-requirement-confirm .indicator-list ul.nav-filter li a {
+#department-requirement-confirm .indicator-list ul.nav-filter li span {
   padding: 0 15px;
 }
-#department-requirement-confirm .indicator-list ul.nav-filter li a i {
+#department-requirement-confirm .indicator-list ul.nav-filter li span i {
   font-size: 24px;
 }
-#department-requirement-confirm .indicator-list ul.nav-filter li a i.fa-check-circle {
+#department-requirement-confirm .indicator-list ul.nav-filter li span i.fa-check-circle {
   color: #5cb85c;
 }
-#department-requirement-confirm .indicator-list ul.nav-filter li a i.fa-question-circle {
-  color: #f0ad4e;
+#department-requirement-confirm .indicator-list ul.nav-filter li span i.fa-times-circle-o {
+  color: #d9534f;
 }
 #department-requirement-confirm .publish-req-modal .help-info {
   font-size: 12px;
@@ -554,7 +554,7 @@ html {
 #department-audit .indicator-order {
   overflow: hidden;
   border-bottom: 1px solid #777;
-  padding: 10px 0 5px 0;
+  padding: 10px 0 5px;
 }
 #department-audit .indicator-order ul > li {
   margin: 0 20px;
@@ -580,19 +580,19 @@ html {
 #department-audit .indicator-list ul.nav-filter li {
   display: inline-block;
 }
-#department-audit .indicator-list ul.nav-filter li a {
+#department-audit .indicator-list ul.nav-filter li span {
   padding: 4px 15px;
 }
-#department-audit .indicator-list ul.nav-filter li a i {
+#department-audit .indicator-list ul.nav-filter li span i {
   font-size: 24px;
 }
-#department-audit .indicator-list ul.nav-filter li a i.fa-stop-circle-o {
+#department-audit .indicator-list ul.nav-filter li span i.fa-times-circle-o {
   color: #d9534f;
 }
-#department-audit .indicator-list ul.nav-filter li a i.fa-check-circle-o {
+#department-audit .indicator-list ul.nav-filter li span i.fa-check-circle-o {
   color: #5cb85c;
 }
-#department-audit .indicator-list ul.nav-filter li a i.fa-hand-o-up {
+#department-audit .indicator-list ul.nav-filter li span i.fa-question-circle {
   color: #f0ad4e;
 }
 #department-audit-info {
