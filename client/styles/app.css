@@ -458,6 +458,7 @@ html {
 }
 #department-requirement .indicator-list ul.nav-filter li {
   display: inline-block;
+  margin-left: 20px;
 }
 #department-requirement .indicator-list ul.nav-filter li a {
   padding: 0 15px;
@@ -503,6 +504,7 @@ html {
 }
 #department-requirement-confirm .indicator-list ul.nav-filter li {
   display: inline-block;
+  margin-left: 20px;
 }
 #department-requirement-confirm .indicator-list ul.nav-filter li a {
   padding: 0 15px;

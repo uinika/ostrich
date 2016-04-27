@@ -25,18 +25,15 @@
         <ul class="nav nav-filter">
           状态
           <li role="presentation" class="active">
-            <a href="#">全部&nbsp;[
-              <span class='confirmed-total'>111</span>]</a>
+            <span class="label label-info">全部&nbsp;[111]</a>
           </li>
           <li role="presentation" class="active">
-            <a href="#">
-              <i class='fa fa-check-circle'></i>&nbsp;已确认&nbsp;[
-              <span class='confirmed-total'>111</span>]</a>
+            <span class="label label-success">
+              <i class='fa fa-check-circle'></i>&nbsp;已确认&nbsp;[111]</span>
           </li>
           <li role="presentation">
-            <a href="#">
-              <i class='fa fa-times-circle-o'></i>&nbsp;未通过&nbsp;[
-              <span class='unconfirmed-total'>111</span>]</a>
+            <span class="label label-danger">
+              <i class='fa fa-times-circle-o'></i>&nbsp;未通过&nbsp;[111]</span>
           </li>
         </ul>
         <a ng-click='toConfirm(2)'>需求确认</a>
@@ -125,6 +122,7 @@
       <button class='btn btn-default' type='button' ng-click='Modal.cancel()'>取消</button>
     </div>
     <div class="panel panel-default">
+      <div class="panel-heading">需求信息</div>
       <div class="panel-body">
         <table class='table req-detail' style='width:60%;' border='0'>
           <tbody>
