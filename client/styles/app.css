@@ -434,6 +434,26 @@ html {
 #department-share .indicator-list ul.nav-filter li span i.fa-warning {
   color: #f0ad4e;
 }
+#department-share-detail {
+  margin-left: 170px;
+}
+#department-share-detail .nav-tabs {
+  bottom: 0 ;
+}
+#department-share-detail .tab-content {
+  border: 1px solid #DDD;
+  border-top: none;
+  padding: 20px 15px 10px 15px;
+}
+#department-share-detail .tab-content .data-title {
+  text-align: center;
+}
+#department-share-detail .tab-content .tab-pane > .row {
+  padding: 4px 0;
+}
+#department-share-detail .tab-content #invntDetail .text-right {
+  text-align: right;
+}
 #department-requirement {
   margin-left: 170px;
 }
@@ -598,23 +618,47 @@ html {
 #department-audit-info {
   margin-left: 170px;
 }
+#department-audit-info .nav-tabs {
+  bottom: -1px;
+}
 #department-audit-info .audit-wrap {
-  padding: 48px;
+  padding: 20px 60px;
+}
+#department-audit-info .audit-wrap .audit-info {
+  margin-top: 28px;
+  margin-bottom: 20px;
+}
+#department-audit-info .audit-wrap .audit-info .apply-dep-info {
+  padding: 15px 0;
+}
+#department-audit-info .audit-wrap .audit-info .apply-dep-info .text-right {
+  text-align: right;
+}
+#department-audit-info .audit-wrap .audit-info .apply-dep-info .left {
+  padding-left: 0;
+}
+#department-audit-info .audit-wrap .step-number {
+  background-color: #35aa47;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 300;
+  padding: 4px 8px !important;
+  margin-right: 10px;
+  -webkit-border-radius: 50% !important;
+  -moz-border-radius: 50% !important;
+  border-radius: 50% !important;
+  color: #FFF;
+}
+#department-audit-info .audit-wrap .tab-content {
+  padding: 20px 15px 10px;
+  border: 1px solid #DDD;
+}
+#department-audit-info .audit-wrap .tab-content .data-title {
+  text-align: center;
 }
 #department-audit-info .audit-wrap .audit-box {
   border: 1px solid #CCC;
   padding: 15px;
-}
-#department-audit-info .audit-wrap .audit-box .item-icon {
-  padding: 0 40px;
-}
-#department-audit-info .audit-wrap .audit-box .item-label {
-  padding: 7px 0;
-}
-#department-audit-info .audit-wrap .audit-box .dl-inline-block dt,
-#department-audit-info .audit-wrap .audit-box .dl-inline-block dd {
-  line-height: 35px;
-  display: inline-block;
 }
 #department-audit-info .audit-wrap .audit-box .apply-dept {
   padding: 7px 13px;

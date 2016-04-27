@@ -2,8 +2,8 @@
 var DepartmentShare = angular.module('DepartmentShare', ['ui.router']);
 
 /** InventoryDetail Controller */
-DepartmentShare.controller('DepartmentShare.Controller.Main', ['$rootScope', '$scope', '$stateParams', 'DepartmentShare.Service.Http',
-  function($rootScope, $scope, $stateParams, Http) {
+DepartmentShare.controller('DepartmentShare.Controller.Main', ['$rootScope', '$scope',  'DepartmentShare.Service.Http',
+  function($rootScope, $scope, Http) {
     $scope.DepartmentShare = {};
     var _httpParams = {};
     _httpParams.limit = 10;
@@ -85,6 +85,15 @@ DepartmentShare.controller('DepartmentShare.Controller.Main', ['$rootScope', '$s
       _httpParams.skip = 0;
       getDepartmentShareList(_httpParams);
     }
+  }
+])
+
+
+// Department share detail controller
+DepartmentShare.controller('DepartmentShare.Controller.detail', ['$rootScope', '$scope',  'DepartmentShare.Service.Http', '$stateParams' ,
+  function($rootScope, $scope, Http, $stateParams) {
+    // TODO get department share detail
+
   }
 ])
 

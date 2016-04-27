@@ -1,0 +1,133 @@
+<div id='department-share-detail'>
+  <div class="panel panel-default">
+    <div class="panel-heading">共享指标详情</div>
+    <div class="panel-body">
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" ng-class="{true: 'active', false: 'inactive'}[!exampData.show]">
+          <a ng-click='exampData.show = false' aria-controls="info" role="tab" data-toggle="tab">指标详情</a>
+        </li>
+        <li role="presentation" ng-class="{true: 'active', false: 'inactive'}[exampData.show]">
+          <a ng-click='exampData.show = true' aria-controls="exampleData" role="tab" data-toggle="tab">样例数据</a>
+        </li>
+      </ul>
+
+      <!-- Tab panes -->
+      <div class="tab-content container-fluid">
+        <div role="tabpanel" class="tab-pane" ng-class="{true: 'active', false: 'inactive'}[!exampData.show]" id="invntDetail">
+          <div class='row'>
+            <label class='col-sm-2 text-right'>序号:</label>
+            <div class='col-sm-10'>1</div>
+          </div>
+          <div class='row'>
+            <label class='col-sm-2 text-right'>指标名称:</label>
+            <div class='col-sm-10'>地区生产总值</div>
+          </div>
+          <div class='row'>
+            <label class='col-sm-2 text-right'>指标别称:</label>
+            <div class='col-sm-10'>地区GDP</div>
+          </div>
+          <div class='row'>
+            <label class='col-sm-2 text-right'>计量单位:</label>
+            <div class='col-sm-10'>地区GDP</div>
+          </div>
+          <div class='row'>
+            <label class='col-sm-2 text-right'>指标详细解释:</label>
+            <div class='col-sm-10'>地区GDP</div>
+          </div>
+          <div class='row'>
+            <label class='col-sm-2 text-right'>计算方法:</label>
+            <div class='col-sm-10'>地区GDP</div>
+          </div>
+          <div class='row'>
+            <label class='col-sm-2 text-right'>共享频率:</label>
+            <div class='col-sm-10'>地区GDP</div>
+          </div>
+          <div class='row'>
+            <label class='col-sm-2 text-right'>空间范围:</label>
+            <div class='col-sm-10'>地区GDP</div>
+          </div>
+          <div class='row'>
+            <label class='col-sm-2 text-right'>分地区数据级别:</label>
+            <div class='col-sm-10'>地区GDP</div>
+          </div>
+          <div class='row'>
+            <label class='col-sm-2 text-right'>来源部门:</label>
+            <div class='col-sm-10'>地区GDP</div>
+          </div>
+          <div class='row'>
+            <label class='col-sm-2 text-right'>共享级别:</label>
+            <div class='col-sm-10'>地区GDP</div>
+          </div>
+          <div class='row'>
+            <label class='col-sm-2 text-right'>数据存储类型:</label>
+            <div class='col-sm-10'>地区GDP</div>
+          </div>
+          <div class='row'>
+            <label class='col-sm-2 text-right'>数据精度:</label>
+            <div class='col-sm-10'>地区GDP</div>
+          </div>
+          <div class='row'>
+            <label class='col-sm-2 text-right'>数据长度:</label>
+            <div class='col-sm-10'>地区GDP</div>
+          </div>
+          <div class='row'>
+            <label class='col-sm-2 text-right'>创建时间:</label>
+            <div class='col-sm-10'>地区GDP</div>
+          </div>
+          <div class='row'>
+            <label class='col-sm-2 text-right'>数据表示格式:</label>
+            <div class='col-sm-10'>地区GDP</div>
+          </div>
+          <div class='row'>
+            <label class='col-sm-2 text-right'>是否涉密:</label>
+            <div class='col-sm-10'>地区GDP</div>
+          </div>
+          <div class='row'>
+            <label class='col-sm-2 text-right'>联系人:</label>
+            <div class='col-sm-10'>地区GDP</div>
+          </div>
+          <div class='row'>
+            <label class='col-sm-2 text-right'>联系电话:</label>
+            <div class='col-sm-10'>地区GDP</div>
+          </div>
+
+        </div>
+        <div role="tabpanel" class="tab-pane" ng-class="{true: 'active', false: 'inactive'}[exampData.show]" id="exampleData">
+          <h3 class='data-title'>四川省2015年地区生产总值</h3>
+          <!-- Table -->
+          <table class='table table-hover table-striped '>
+            <thead>
+              <tr>
+                <th>序号</th>
+                <th>城市</th>
+                <th>GDP(亿元)</th>
+                <th>增长</th>
+                <th>地方公共财政收入(亿元)</th>
+                <th>增长</th>
+                <th>城镇登记失业率</th>
+                <th>农村居民人均纯收入(元)</th>
+                <th>增长</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat='inventoryAttr in inventoryAttrList'>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{$index+1}}</td>
+                <td>{{inventoryAttr.quotaNumber}}</td>
+                <td>{{inventoryAttr.quotaName}}</td>
+                <td>{{inventoryAttr.alias}}</td>
+                <td>{{inventoryAttr.meterUnit}}</td>
+                <td>{{inventoryAttr.quotaDetail}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>

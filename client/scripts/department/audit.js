@@ -2,8 +2,8 @@
 var Audit = angular.module('Department.Audit', ['ui.router']);
 
 /** Main Controller */
-Audit.controller('Department.Audit.Controller.Main', ['$rootScope', '$scope', '$q','Department.Audit.Service.Http',
-  function($rootScope, $scope, $q ,Http) {
+Audit.controller('Department.Audit.Controller.Main', ['$rootScope', '$scope', '$q', 'Department.Audit.Service.Http',
+  function($rootScope, $scope, $q, Http) {
     var _httpParams = {};
     console.log($rootScope.User);
 
@@ -27,9 +27,9 @@ Audit.controller('Department.Audit.Controller.Main', ['$rootScope', '$scope', '$
     });
 
     function getAuditList(_httpParams) {
-      Http.getAuditList(_httpParams).then(function(result){
+      Http.getAuditList(_httpParams).then(function(result) {
         $scope.auditList = result.data.body;
-      //  $scope.Paging.totalItems = data.head.total;
+        //  $scope.Paging.totalItems = data.head.total;
       });
     }
 
@@ -39,8 +39,7 @@ Audit.controller('Department.Audit.Controller.Main', ['$rootScope', '$scope', '$
       var idx = $scope.shareLvSelection.indexOf(item.SYS_DICT_ID);
       if (idx > -1) {
         $scope.shareLvSelection = [];
-      }
-      else {
+      } else {
         $scope.shareLvSelection = item.SYS_DICT_ID;
       }
       _httpParams.SHARE_LEVEL = $scope.shareLvSelection;
@@ -66,7 +65,7 @@ Audit.controller('Department.Audit.Controller.Main', ['$rootScope', '$scope', '$
       _httpParams.AREA_DATA_LEVEL = $scope.areaSelection;
       _httpParams.limit = 10;
       _httpParams.skip = 0;
-        getAuditList(_httpParams);
+      getAuditList(_httpParams);
     }
 
     // filter by audit status
@@ -75,8 +74,7 @@ Audit.controller('Department.Audit.Controller.Main', ['$rootScope', '$scope', '$
       var idx = $scope.statusSelection.indexOf(item.AUDITNAME);
       if (idx > -1) {
         $scope.statusSelection = [];
-      }
-      else {
+      } else {
         $scope.statusSelection = item.AUDITNAME;
       }
       _httpParams.AUDIT_STATUS = item.AUDIT_STATUS;
@@ -115,33 +113,57 @@ Audit.controller('Department.Audit.Controller.Main', ['$rootScope', '$scope', '$
 ])
 
 
-Audit.controller('Department.Audit.Controller.info', ['$rootScope' ,'$scope', '$state', '$q','Department.Audit.Service.Http', '$stateParams',
-  function($rootScope, $scope, $state, $q ,Http ,$stateParams) {
+Audit.controller('Department.Audit.Controller.info', ['$rootScope', '$scope', '$state', '$q', 'Department.Audit.Service.Http', '$stateParams',
+  function($rootScope, $scope, $state, $q, Http, $stateParams) {
     // login Department
-    $scope.depName = $rootScope.User.DEP_NAME;
-    var auditId = $stateParams.AUDITID;
-    Http.getAuditDetail({
-      "AUDITID": auditId
-    }).then(function(result) {
-      $scope.AuditDetail = result.data.body[0];
-    });
+    $scope.Tab = {};
+
+    $scope.tabSwitcher = function(num) {
+
+      switch (num) {
+        case 'auditInfo':
+          $scope.Tab.show = {};
+          $scope.Tab.show.auditInfo = true;
+          break;
+        case 'auditExampData':
+          $scope.Tab.show = {};
+          $scope.Tab.show.auditExampData = true;
+          break;
+        case 'requirementInfo':
+          $scope.Tab.show = {};
+          $scope.Tab.show.requirementInfo = true;
+          break;
+        default:
+        case 2:
+          $scope.Tab = {};
+          $scope.Tab.auditInfo.show = true;
+          break;
+
+      }
+    }
 
     $scope.submitAudit = function() {
       var AUDITOR = $rootScope.User.PERSON_NAME;
-      var auditInfo = _.assign($scope.AuditInfo, {"AUDITOR": AUDITOR}, {"ID": auditId});
+      var auditInfo = _.assign($scope.AuditInfo, {
+        "AUDITOR": AUDITOR
+      }, {
+        "ID": auditId
+      });
       console.log(auditInfo);
       Http.updateAuditDetail(auditInfo).then(function(result) {
         if (200 == result.data.head.status) {
           alert('审核成功');
           var idx = $scope.auditList.indexOf(auditId);
-          $state.go("main.department.audit",{}, { reload: true });
-        }
-        else{
+          $state.go("main.department.audit", {}, {
+            reload: true
+          });
+        } else {
           alert('审核失败');
         }
       });
     }
-  }])
+  }
+])
 
 /* HTTP */
 Audit.factory('Department.Audit.Service.Http', ['$http', '$q', 'API',
@@ -150,35 +172,32 @@ Audit.factory('Department.Audit.Service.Http', ['$http', '$q', 'API',
 
     function getAuditTotal(params) {
       return $http.get(
-        path + '/openInventory/countAll',
-        {
-          params:params
+        path + '/openInventory/countAll', {
+          params: params
         }
       )
     };
 
     function getShareLevelFilter(params) {
       return $http.get(
-        path + '/openInventory/countByShareLevel',
-        {
-          params:params
+        path + '/openInventory/countByShareLevel', {
+          params: params
         }
       )
     }
 
     function getSpatialFilter(params) {
       return $http.get(
-        path + '/openInventory/countBySpatial',
-        {
-          params:params
+        path + '/openInventory/countBySpatial', {
+          params: params
         }
       )
     }
 
     function getAuditStatusFilter(params) {
       return $http.get(
-        path + '/openInventory/countByAuditStatus',{
-          params:params
+        path + '/openInventory/countByAuditStatus', {
+          params: params
         }
       )
     }
@@ -186,7 +205,7 @@ Audit.factory('Department.Audit.Service.Http', ['$http', '$q', 'API',
     function getAuditList(params) {
       return $http.get(
         path + '/openInventory/inventoryList', {
-          params:params
+          params: params
         }
       )
     }
@@ -194,7 +213,7 @@ Audit.factory('Department.Audit.Service.Http', ['$http', '$q', 'API',
     function getAuditDetail(params) {
       return $http.get(
         path + '/openInventory/openInventoryInfo', {
-          params:params
+          params: params
         }
       )
     }
@@ -202,7 +221,7 @@ Audit.factory('Department.Audit.Service.Http', ['$http', '$q', 'API',
     function updateAuditDetail(data) {
       return $http.put(
         path + '/openInventory/updateAuditStatus', {
-          data:data
+          data: data
         }
       )
     }
