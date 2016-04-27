@@ -10,6 +10,12 @@
 ### /api/data_quota/count
 > Type: GET
 
+### /api/data_quota/data_quota_examples
+> Type: GET
+
+### /api/data_quota/sys_dep/sys_dict
+> Type: GET
+
 #### Parameter:
 - id                   varchar(36)  '指标id',
 - quota_sn             varchar(64)  '指标编号',
@@ -21,7 +27,7 @@
 - quota_detail         varchar(1000)  '指标详细解释',
 - calculate_method     varchar(36)  '计算方法',
 - data_store_type      varchar(36)  '数据存储类型',
-- dep_name             varchar(36)  '来源部门',
+- dep_id               varchar(36)  '来源部门',
 - share_deps           varchar(1000)  '共享指定部门',
 - data_store_type_add  varchar(256)  '数据存储类型备注',
 - data_precision       varchar(36)  '数据精度',
@@ -46,6 +52,18 @@
 > Type: POST, GET, PUT, DELETE
 
 ### /api/data_quota_apply_info/count
+> Type: GET
+
+### /api/data_quota_apply_info/data_quota/sys_dep
+> Type: GET
+
+### /api/data_quota_apply_info/data_quota/sys_dep/sys_dict
+> Type: GET
+
+### /api/data_quota_apply_info/data_quota/data_quota_examples/sys_dep/sys_dict
+> Type: GET
+
+### /api/data_quota_apply_info/data_quota/sys_dep/count
 > Type: GET
 
 #### Parameter:
@@ -106,7 +124,10 @@
 ## 数据需求
 
 ### /api/data_requiement
-> Type: POST , GET , PUT , DELETE
+> Type: POST , PUT
+
+### /api/data_requiement/sys_dict/sys_dep
+> Type: GET
 
 ### /api/data_requiement/count
 > Type: GET
@@ -257,6 +278,9 @@
 ### /api/user_dep/count
 > Type: GET
 
+### /api/user_dep/sys_dep
+> Type: GET
+
 #### Parameter:
 - id                   varchar(36) 'id',
 - dep_id               varchar(36) '原部门id',
@@ -264,3 +288,5 @@
 
 #### Result:
 - Protocol
+
+-----
