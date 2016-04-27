@@ -1,49 +1,50 @@
-<!-- UI Router -->
-<div id='ui-view-department-requirement' ui-view>
-  <div id='department-requirement'>
-    <div class='indicator-order'>
-      <div class='pull-left'>
-        <p class='font-18'>需求清单</p>
-      </div>
-      <div class='pull-right'>
-        <ul class="nav nav-pills">
-          <li role="presentation" class='indicator-total'>
-            本部门需求总数<span class='num'>xxx</span>
+<div id='department-requirement'>
+  <div class='indicator-order'>
+    <div class='pull-left'>
+      <p class='font-18'>需求清单</p>
+    </div>
+    <div class='pull-right'>
+      <ul class="nav nav-pills">
+        <li role="presentation" class='indicator-total'>
+          本部门需求总数
+          <span class='num'>xxx</span>
+        </li>
+        <li role="presentation">
+          <input type="text" placeholder="请输入查询需求名称">
+          <button type="button" class="btn btn-primary">查询</button>
+        </li>
+        <li role="presentation">
+          <button class='btn btn-primary' ng-click='publishReq()'>
+            <i class='fa fa-plus'></i>发布需求</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- indicator inventory list -->
+  <div class='indicator-list'>
+    <div class="panel panel-default">
+      <!-- Default panel contents -->
+      <div class="panel-heading">
+        <ul class="nav nav-filter">
+          需求状态
+          <li role="presentation" class="active">
+            <a href="#">
+              <i class='fa fa-check-circle'></i>&nbsp;已确认&nbsp;[
+              <span class='confirmed-total'>111</span>]</a>
           </li>
           <li role="presentation">
-            <input type="text"  placeholder="请输入查询需求名称">
-            <button type="button" class="btn btn-primary">查询</button>
-          </li>
-          <li role="presentation">
-            <button class='btn btn-primary' ng-click='publishReq()'>
-              <i class='fa fa-plus'></i>发布需求</button>
+            <a href="#">
+              <i class='fa fa-question-circle'></i>&nbsp;未确认[
+              <span class='unconfirmed-total'>111</span>]</a>
           </li>
         </ul>
       </div>
-    </div>
 
-    <!-- indicator inventory list -->
-    <div class='indicator-list'>
-      <div class="panel panel-default">
-        <!-- Default panel contents -->
-        <div class="panel-heading">
-          <ul class="nav nav-filter">
-            需求状态
-            <li role="presentation" class="active">
-              <a href="#">
-                <i class='fa fa-check-circle'></i>&nbsp;已确认&nbsp;<span class='confirmed-total'>111</span></a>
-            </li>
-            <li role="presentation">
-              <a href="#">
-                <i class='fa fa-question-circle'></i>&nbsp;未确认<span class='unconfirmed-total'>111</span></a>
-            </li>
-          </ul>
-        </div>
-
-        <div class='panel-body'>
-          <div class=''>
-            <div class='row'>
-              <div class='col-lg-12'>
+      <div class='panel-body'>
+        <div class=''>
+          <div class='row'>
+            <div class='col-lg-12'>
               <!-- Table -->
               <table class='table table-hover table-striped '>
                 <thead>
@@ -80,14 +81,13 @@
                 </tbody>
               </table>
             </div>
-            </div>
           </div>
         </div>
-
       </div>
-    </div>
 
+    </div>
   </div>
+
 </div>
 
 <!-- Add requirement modal -->
@@ -101,8 +101,8 @@
     </div>
     <div class='modal-body'>
       <div class="form-group">
-        <label for="" class="col-sm-2 control-label"><span class='require-sign'>*</span>需求名称
-          :</label>
+        <label for="" class="col-sm-2 control-label">
+          <span class='require-sign'>*</span>需求名称 :</label>
         <div class="col-sm-10">
           <input type="text" class="form-control" ng-model='req.REQUIREMENT_NAME' required>
           <span class='help-info'>需具体说明需求具体名称</span>
@@ -110,11 +110,10 @@
       </div>
 
       <div class="form-group">
-        <label for="" class="col-sm-2 control-label"><span class='require-sign'>*</span>需求说明
-          :</label>
+        <label for="" class="col-sm-2 control-label">
+          <span class='require-sign'>*</span>需求说明 :</label>
         <div class="col-sm-10">
-          <textarea type="text" class="form-control" ng-model='req.REQUIREMENT_DESC' required>
-          </textarea>
+          <textarea type="text" class="form-control" ng-model='req.REQUIREMENT_DESC' required></textarea>
           <span class='help-info pull-left'>简要说明需求基本信息</span>
           <span class='pull-right'>(最多256个汉字)</span>
         </div>
@@ -152,15 +151,15 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="" class="col-sm-2 control-label"><span class='require-sign'>*</span>联系人
-          :</label>
+        <label for="" class="col-sm-2 control-label">
+          <span class='require-sign'>*</span>联系人 :</label>
         <div class="col-sm-10">
           <input type="text" class="form-control" ng-model='req.LINKMAN' required>
         </div>
       </div>
       <div class="form-group">
-        <label for="" class="col-sm-2 control-label"><span class='require-sign'>*</span>联系电话
-          :</label>
+        <label for="" class="col-sm-2 control-label">
+          <span class='require-sign'>*</span>联系电话 :</label>
         <div class="col-sm-10">
           <input type="text" class="form-control" ng-model='req.CONTACT_PHONE' required>
         </div>
@@ -168,7 +167,7 @@
       <div class="form-group">
         <label for="" class="col-sm-2 control-label">需求对应部门:</label>
         <div class="col-sm-10">
-          <select class="form-control" ng-model='Modal.Quota.depId' >
+          <select class="form-control" ng-model='Modal.Quota.depId'>
             <option ng-repeat="dep in  deptList" value='{{dep.ID}}'>{{dep.DEP_NAME}}</option>
           </select>
         </div>

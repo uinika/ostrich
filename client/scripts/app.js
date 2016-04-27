@@ -108,6 +108,11 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
         templateUrl: 'views/department/share.html',
         controller: 'DepartmentShare.Controller.Main'
       })
+      .state('main.department.requirementConfirm', {
+        url: '/requirement-confirm',
+        templateUrl: 'views/department/requirement-confirm.html',
+        controller: 'Department.Requirement.Controller.confirm'
+      })
       .state('main.department.requirement', {
         url: '/requirement',
         templateUrl: 'views/department/requirement.html',

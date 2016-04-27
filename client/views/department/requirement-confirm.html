@@ -1,0 +1,173 @@
+<div id='department-requirement-confirm'>
+  <div class='indicator-order'>
+    <div class='pull-left'>
+      <p class='font-18'>需求清单</p>
+    </div>
+    <div class='pull-right'>
+      <ul class="nav nav-pills">
+        <li role="presentation" class='indicator-total'>
+          本部门需求总数
+          <span class='num'>xxx</span>
+        </li>
+        <li role="presentation">
+          <input type="text" placeholder="请输入查询需求名称">
+          <button type="button" class="btn btn-primary">查询</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- indicator inventory list -->
+  <div class='indicator-list'>
+    <div class="panel panel-default">
+      <!-- Default panel contents -->
+      <div class="panel-heading">
+        <ul class="nav nav-filter">
+          状态
+          <li role="presentation" class="active">
+            <a href="#">全部&nbsp;[
+              <span class='confirmed-total'>111</span>]</a>
+          </li>
+          <li role="presentation" class="active">
+            <a href="#">
+              <i class='fa fa-check-circle'></i>&nbsp;已确认&nbsp;[
+              <span class='confirmed-total'>111</span>]</a>
+          </li>
+          <li role="presentation">
+            <a href="#">
+              <i class='fa fa-times-circle-o'></i>&nbsp;未通过&nbsp;[
+              <span class='unconfirmed-total'>111</span>]</a>
+          </li>
+        </ul>
+        <a ng-click='toConfirm(2)'>需求确认</a>
+      </div>
+
+      <div class='panel-body'>
+        <div class=''>
+          <div class='row'>
+            <div class='col-lg-12'>
+              <!-- Table -->
+              <table class='table table-hover table-striped '>
+                <thead>
+                  <tr>
+                    <th>状态</th>
+                    <th>需求日期</th>
+                    <th>确认日期</th>
+                    <th>需求名称</th>
+                    <th>需求说明</th>
+                    <th>共享频率</th>
+                    <th>空间范围</th>
+                    <th>数据级别</th>
+                    <th>联系人</th>
+                    <th>联系电话</th>
+                    <th>对应部门</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat='inventoryAttr in inventoryAttrList'>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>{{$index+1}}</td>
+                    <td>{{inventoryAttr.quotaNumber}}</td>
+                    <td>{{inventoryAttr.quotaName}}</td>
+                    <td>{{inventoryAttr.alias}}</td>
+                    <td>{{inventoryAttr.meterUnit}}</td>
+                    <td>{{inventoryAttr.quotaDetail}}</td>
+                    <td>{{inventoryAttr.calculateMethod}}</td>
+                    <td>
+                      {{shareFreqArrShow}}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<script type='text/ng-template' id='confirm-req-modal.html'>
+  <form class="form-horizontal confirm-req-modal" name='reqConfirmForm'>
+
+    <div class='modal-header'>
+      <i class="fa fa-server"></i>
+      需求确认
+      <button type='button' class='close' data-dismiss='modal' ng-click='Modal.cancel()'>&times;</button>
+    </div>
+    <div class='modal-body'>
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">指标：</label>
+        <div class='col-sm-8 apply-dept'><input type='text' class='form-control'/>
+          <span class='help-info'>根据需求选择对应的指标信息</span>
+        </div>
+        <div class='col-sm-2'>
+          <button class='btn btn-default'>
+            <i class='fa fa-plus'></i>
+          </button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">说明:</label>
+        <div class="col-sm-10">
+          <textarea class="form-control"></textarea>
+          <span class='help-info pull-left'>简要说明需求基本信息</span>
+          <span class='pull-right'>(最多256个汉字)</span>
+        </div>
+      </div>
+    </div>
+    <div class='modal-footer'>
+      <button class='btn btn-primary' ng-disabled="userAddForm.$invalid" type='submit' ng-click='Modal.confirm(reqConfirmForm.$valid)'>提交</button>
+      <button class='btn btn-default' type='button' ng-click='Modal.cancel()'>取消</button>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <table class='table req-detail' style='width:60%;' border='0'>
+          <tbody>
+            <tr>
+              <td align='right'>需求发布日期：</td>
+              <td>xxxx-xx-xx</td>
+            </tr>
+            <tr>
+              <td align='right'>需求名称：</td>
+              <td>xxxx</td>
+            </tr>
+            <tr>
+              <td align='right'>需求说明：</td>
+              <td>xxxx-xx-xx</td>
+            </tr>
+            <tr>
+              <td align='right'>共享频率：</td>
+              <td>xxxx-xx-xx</td>
+            </tr>
+            <tr>
+              <td align='right'>空间范围</td>
+              <td>xxxx-xx-xx</td>
+            </tr>
+            <tr>
+              <td align='right'>数据级别：</td>
+              <td>xxxx-xx-xx</td>
+            </tr>
+            <tr>
+              <td align='right'>联系人：</td>
+              <td>xxxx-xx-xx</td>
+            </tr>
+            <tr>
+              <td align='right'>联系电话：</td>
+              <td>xxxx-xx-xx</td>
+            </tr>
+            <tr>
+              <td align='right'>来源：</td>
+              <td>xxxx-xx-xx</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</form>
+</script>

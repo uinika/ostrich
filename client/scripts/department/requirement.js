@@ -84,6 +84,20 @@ DepartmentReq.controller('Department.Requirement.Controller.detail', ['$scope', 
     })
   }])
 
+  /** DepartmentReq Controller */
+  DepartmentReq.controller('Department.Requirement.Controller.confirm', ['$scope', '$stateParams', 'Department.Requirement.Service.Http', 'Department.Inventory.Service.Component' ,
+    function( $scope, $stateParams, Http, Component) {
+      $scope.Modal = {};
+
+      $scope.toConfirm = function() {
+        // TODO get requirement detail by ID
+        Component.popModal($scope, '', 'confirm-req-modal').result.then(function() {
+        });
+      }
+
+    }])
+
+
 /* HTTP Factory */
 DepartmentReq.factory('Department.Requirement.Service.Http', ['$http', 'API',
   function($http, API) {
