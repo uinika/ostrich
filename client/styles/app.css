@@ -689,79 +689,99 @@ html {
 }
 #inventory-main .right {
   padding-right: 0;
-  padding-left: 10px;
+  padding-left: 40px;
 }
-#inventory-main .right .filter-condition {
-  margin-top: -5px;
-  margin-right: -10px;
+#inventory-main .right .indicator-order {
+  overflow: hidden;
+  border-bottom: 1px solid #777;
+  padding: 10px 0 5px 0;
+}
+#inventory-main .right .indicator-order .dep-name {
+  margin: 0;
+  line-height: 34px;
+}
+#inventory-main .right .indicator-order ul > li {
+  margin: 0 20px;
+}
+#inventory-main .right .indicator-order ul > li a {
+  padding: 6px 12px;
+}
+#inventory-main .right .indicator-order ul > li.indicator-total {
+  height: 34px;
+  line-height: 40px;
+}
+#inventory-main .right .indicator-order ul > li.indicator-total .num {
+  font-size: 20px;
+  font-weight: bold;
+  padding: 0 6px;
 }
 #inventory-main .right .filter {
-  font-size: 11px !important;
+  border-bottom: 1px solid #DDD;
+  padding: 15px 0;
+  margin-bottom: 10px;
 }
-#inventory-main .right .filter .pager {
-  margin: 0 0 15px 0;
-}
-#inventory-main .right .filter .pager .badge {
-  background: #337AB7;
-}
-#inventory-main .right .filter a {
-  padding: 3px 8px;
-  margin-left: 6px;
-}
-#inventory-main .right .filter .shared-level {
-  display: block;
-}
-#inventory-main .right .filter .shared-range {
-  display: block;
-}
-#inventory-main .right .filter .shared-range .pager {
+#inventory-main .right .filter .indicator-filter {
   margin: 0;
-}
-#inventory-main .right .content .icon.test {
-  height: 60px;
-  width: 90px;
-  margin-top: 5px;
-}
-#inventory-main .right .content .organization {
-  background-image: url('images/indicator/indicator-organization.png');
-  background-size: 90px 60px;
-  background-repeat: no-repeat;
-}
-#inventory-main .right .content .project {
-  background-image: url('images/indicator/indicator-project.png');
-  background-size: 90px 60px;
-  background-repeat: no-repeat;
-}
-#inventory-main .right .content .achievement {
-  background-image: url('images/indicator/indicator-achievement.png');
-  background-size: 90px 60px;
-  background-repeat: no-repeat;
-}
-#inventory-main .right .content .information {
-  margin-left: 10px;
-}
-#inventory-main .right .content .information h1 {
-  font-size: 15px;
-  font-weight: bold;
-  margin: 6px 20px 10px;
-}
-#inventory-main .right .content .information h2 {
   font-size: 13px;
-  margin: 7px 20px;
+  overflow: hidden;
 }
-#inventory-main .right .content .information ul {
-  margin: 0px 15px;
-  font-size: 12px;
+#inventory-main .right .filter .indicator-filter ul.pager {
+  margin: 0 0 15px 0;
+  text-align: left;
 }
-#inventory-main .right .content .information ul li {
-  color: #777777;
+#inventory-main .right .filter .indicator-filter ul > li > a.active {
+  background: #DDD;
+}
+#inventory-main .right .filter .indicator-filter ul > li > a.inactive {
+  background: #FFF;
+}
+#inventory-main .right .filter .indicator-filter ul > li > a .badge {
+  background: #337AB7;
+  margin-left: 4px;
+}
+#inventory-main .right .indicator-list .scroll {
+  overflow: scroll;
+}
+#inventory-main .right .indicator-list ul.nav-filter {
+  list-style: none;
+}
+#inventory-main .right .indicator-list ul.nav-filter li {
+  display: inline-block;
+}
+#inventory-main .right .indicator-list ul.nav-filter li span {
+  padding: 0 15px;
+}
+#inventory-main .right .indicator-list ul.nav-filter li span i {
+  font-size: 24px;
+}
+#inventory-main .right .indicator-list ul.nav-filter li span i.fa-eye {
+  color: #5bc0de;
+}
+#inventory-main .right .indicator-list ul.nav-filter li span i.fa-desktop {
+  color: #5bc0de;
+}
+#inventory-main .right .indicator-list ul.nav-filter li span i.fa-lock {
+  color: #5bc0de;
+}
+#inventory-main .right .indicator-list ul.nav-filter li span i.fa-warning {
+  color: #f0ad4e;
 }
 #indicator-detail .nav-tabs {
   bottom: -1px;
 }
 #indicator-detail .tab-content {
-  padding: 20px 15px;
   border: 1px solid #DDD;
+  border-top: none;
+  padding: 20px 15px 10px 15px;
+}
+#indicator-detail .tab-content .data-title {
+  text-align: center;
+}
+#indicator-detail .tab-content .tab-pane > .row {
+  padding: 4px 0;
+}
+#indicator-detail .tab-content #invntDetail .text-right {
+  text-align: right;
 }
 #requirement-main {
   padding: 0;

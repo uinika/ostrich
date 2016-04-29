@@ -25,6 +25,17 @@ InventoryDetail.controller('InventoryDetail.Controller.Main', ['$rootScope', '$s
   }
 ])
 
+
+/* InventoryDetail.Controller.detail controller*/
+DepartmentShare.controller('InventoryDetail.Controller.detail', ['$rootScope', '$scope',  'InventoryDetail.Service.Http', '$stateParams' ,
+  function($rootScope, $scope, Http, $stateParams) {
+
+
+  }
+])
+
+
+
 /* HTTP Factory */
 InventoryDetail.factory('InventoryDetail.Service.Http', ['$http', 'API',
   function($http, API) {
