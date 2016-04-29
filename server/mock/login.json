@@ -1,9 +1,9 @@
 {
   "head": {
-    "status": "200|300|400|500",
-    "token": "混淆后的sessionId",
-    "message": "服务器端业务执行的信息",
-    "total": "响应结果总数，如果响应结果为对象则为1，为数组则值为数组长度"
+    "status": 200,
+    "token": "ghco9xdnaco31gmafukxchph",
+    "message": "登陆成功",
+    "total": 0
   },
-  "body": "响应数据"
+  "body": ""
 }
