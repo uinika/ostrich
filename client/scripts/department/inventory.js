@@ -4,9 +4,32 @@ var DInventory = angular.module('Department.Inventory', ['ui.router']);
 /** Inventory Controller */
 DInventory.controller('Department.Inventory.Controller.Main', ['$scope', '$q', 'Department.Inventory.Service.Http',
   function($scope, $q, Http) {
+    var SHARE_FREQUENCY = 1;
+    var DATA_LEVEL = 2;
+    var SHARE_LEVEL = 3;
+
     var _httpParams = {};
     _httpParams.limit = 10;
     _httpParams.skip = 0;
+
+    // Get system dict
+    Http.getSystemDictByCatagory({
+      'dict_category': SHARE_FREQUENCY
+    }).then(function(result) {
+      $scope.shareFrequencyList = result.data.body;
+    });
+
+    Http.getSystemDictByCatagory({
+      'dict_category': SHARE_LEVEL
+    }).then(function(result) {
+      $scope.shareLevelList = result.data.body;
+    });
+
+    Http.getSystemDictByCatagory({
+      'dict_category': DATA_LEVEL
+    }).then(function(result) {
+      $scope.dataLevelList = result.data.body;
+    });
 
     // Http.getShareLevelFilter().then(function(result) {
     //   $scope.shareLevelList = result.data.body;
@@ -93,9 +116,6 @@ DInventory.controller('Department.Inventory.Controller.Main', ['$scope', '$q', '
 
 DInventory.controller('Department.Inventory.Controller.publish', ['$rootScope', '$scope', '$state', '$q', '$uibModal', 'Department.Inventory.Service.Component', 'Department.Inventory.Service.Http',
   function($rootScope, $scope, $state, $q, $uibModal, Component, Http) {
-    var SHARE_FREQUENCY = 1;
-    var DATA_LEVEL = 2;
-    var SHARE_LEVEL = 3;
     var DATA_STORE_TYPE = 4;
     var DATA_SHOW_FORMAT = 6;
     var SECRET_FLAG = 5;
@@ -109,27 +129,6 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$rootScope', 
 
     Http.getDepartmentList().then(function(result) {
       $scope.deptList = result.data.body;
-    });
-
-    // Get system dict
-    Http.getSystemDictByCatagory({
-      'dict_category': SHARE_FREQUENCY
-    }).then(function(result) {
-      console.log(result.data.body);
-      $scope.shareFrequencyList = result.data.body;
-      console.log($scope.shareFrequencyList);
-    });
-
-    Http.getSystemDictByCatagory({
-      'dict_category': DATA_LEVEL
-    }).then(function(result) {
-      $scope.dataLevelList = result.data.body;
-    });
-
-    Http.getSystemDictByCatagory({
-      'dict_category': SHARE_LEVEL
-    }).then(function(result) {
-      $scope.shareLevelList = result.data.body;
     });
 
     Http.getSystemDictByCatagory({

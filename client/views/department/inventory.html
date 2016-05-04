@@ -35,8 +35,7 @@
               <a ng-class="{true: 'active', false: 'inactive'}[shareLvMainSelection.length == 0]" href="javascript:;" ng-click='getShareLevelAll()'>全部</a>
             </li>
             <li role="presentation" ng-repeat='shareLevel in shareLevelList'>
-              <a ng-class="{true: 'active', false: 'inactive'}[shareLvMainSelection.indexOf(shareLevel.SYS_DICT_ID) > -1]" href="javascript:;" ng-click='getIvntListBySl(shareLevel)'>{{shareLevel.DICT_NAME}}
-                <span class='badge'>{{shareLevel.INVENTORY_NUM}}</span>
+              <a ng-class="{true: 'active', false: 'inactive'}[shareLvMainSelection.indexOf(shareLevel.id) > -1]" href="javascript:;" ng-click='getIvntListBySl(shareLevel)'>{{shareLevel.dict_name}}
               </a>
             </li>
           </ul>
@@ -49,9 +48,8 @@
             <li role="presentation">
               <a href="javascript:;" ng-class="{true: 'active', false: 'inactive'}[areaMainSelection.length == 0]" href="javascript:;" ng-click='getShareFreqAll()'>全部</a>
             </li>
-            <li role="presentation" ng-repeat='shareFreq in shareFreqList'>
-              <a ng-class="{true: 'active', false: 'inactive'}[shareFreqSelection.indexOf(shareFreq.SYS_DICT_ID) > -1]" ng-checked="shareFreqSelection.indexOf(shareFreq.SYS_DICT_ID) > -1" ng-click='getIvntListByAP(shareFreq)' href="javascript:;">{{shareFreq.DICT_NAME}}
-                <span class='badge'>{{shareFreq.INVENTORY_NUM}}</span>
+            <li role="presentation" ng-repeat='shareFreq in shareFrequencyList'>
+              <a ng-class="{true: 'active', false: 'inactive'}[shareFreqSelection.indexOf(shareFreq.id) > -1]" ng-checked="shareFreqSelection.indexOf(shareFreq.id) > -1" ng-click='getIvntListByAP(shareFreq)' href="javascript:;">{{shareFreq.dict_name}}
               </a>
             </li>
           </ul>
@@ -64,9 +62,8 @@
             <li role="presentation">
               <a href="javascript:;" ng-class="{true: 'active', false: 'inactive'}[areaMainSelection.length == 0]" href="javascript:;" ng-click='getSpatialAll()'>全部</a>
             </li>
-            <li role="presentation" ng-repeat='areaPeriod in areaPeriodList'>
-              <a ng-class="{true: 'active', false: 'inactive'}[areaMainSelection.indexOf(areaPeriod.SYS_DICT_ID) > -1]" ng-checked="areaMainSelection.indexOf(areaPeriod.SYS_DICT_ID) > -1" ng-click='getIvntListByAP(areaPeriod)' href="javascript:;">{{areaPeriod.DICT_NAME}}
-                <span class='badge'>{{areaPeriod.INVENTORY_NUM}}</span>
+            <li role="presentation" ng-repeat='dataLevel in dataLevelList'>
+              <a ng-class="{true: 'active', false: 'inactive'}[areaMainSelection.indexOf(dataLevel.id) > -1]" ng-checked="areaMainSelection.indexOf(dataLevel.id) > -1" ng-click='getIvntListByAP(dataLevel)' href="javascript:;">{{dataLevel.dict_name}}
               </a>
             </li>
           </ul>
