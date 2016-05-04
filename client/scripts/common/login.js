@@ -10,8 +10,8 @@ Login.controller('Login.Controller.Main', ['$rootScope', '$scope', '$state', 'Lo
       var username = $scope.Login.username;
       var password = $scope.Login.password;
       Http.login({
-        USERNAME: username,
-        PASSWORD: password
+        username: username,
+        password: password
       }).then(function(result) {
         $rootScope.User = result.data.body[0];
         console.log(result.data.body[0]);
@@ -24,7 +24,6 @@ Login.controller('Login.Controller.Main', ['$rootScope', '$scope', '$state', 'Lo
       });
     }
   }
-
 
 ])
 
