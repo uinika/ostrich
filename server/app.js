@@ -43,3 +43,6 @@ App.use('/api', sys_dict);
 /** department */
 var data_quota = require('./api/department/data_quota');
 App.use('/api', data_quota);
+/** user */
+var user = require('./api/user/user');
+App.use('/api', user);

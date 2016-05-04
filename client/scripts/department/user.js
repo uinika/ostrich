@@ -10,11 +10,12 @@ SystemUser.controller('Department.SystemUser.Controller.Main', ['$scope', '$q', 
     function getUserList() {
       Http.getUserList().then(function(result) {
         $scope.users = result.data.body;
+        $scope.DepUserTotal =result.data.head.total;
       });
     }
-    Http.getDepartmentList().then(function(result) {
-      $scope.deptList = result.data.body;
-    });
+    // Http.getDepartmentList().then(function(result) {
+    //   $scope.deptList = result.data.body;
+    // });
 
     // init
     getUserList();
@@ -38,6 +39,22 @@ SystemUser.controller('Department.SystemUser.Controller.Main', ['$scope', '$q', 
 
     }
 
+    $scope.searchUser = function(){
+      var username= $scope.username;
+      alert(username);
+      // http.getUser({
+      //   USERNAME: username,
+      // })then(function(result) {
+      //   if(200 == result.data.head.status){
+      //     $scope.users = result.data.body;
+      //     $scope.DepUserTotal =result.data.head.total;
+      //   }else {
+      //     alert("输入错误，请");
+      //   }
+      //
+      // });
+    }
+
     $scope.updateUser = function(user) {
       user.DEP_NAME = null;
       $scope.sysUser = user;
@@ -56,17 +73,20 @@ SystemUser.controller('Department.SystemUser.Controller.Main', ['$scope', '$q', 
 
     $scope.deleteUser = function(user) {
       console.log(user);
-      Http.deleteUser(user).then(function(result) {
-        console.log(result.data);
-        if (200 == result.data.head.status) {
-          alert('删除成功');
+      var fig = confirm("确定要删除吗？");
+      if (fig) {
+        Http.deleteUser(user).then(function(result) {
+          console.log(result.data);
+          if (200 == result.data.head.status) {
+            alert('删除成功');
+            getUserList();
+          }
+          else{
+            alert('删除失败！');
+          }
           getUserList();
-        }
-        else{
-          alert('删除失败！');
-        }
-        getUserList();
-      })
+        })
+      }
     }
 
 
@@ -82,6 +102,14 @@ SystemUser.factory('Department.SystemUser.Service.Http', ['$http', '$q', 'API',
     function getUserList() {
       return $http.get(
         path + '/user'
+      )
+    };
+    function getUser(params) {
+      return $http.get(
+        path + '/user', {
+          params: params
+        }
+
       )
     };
 
@@ -119,7 +147,8 @@ SystemUser.factory('Department.SystemUser.Service.Http', ['$http', '$q', 'API',
       saveUser: saveUser,
       getDepartmentList: getDepartmentList,
       updateUser: updateUser,
-      deleteUser: deleteUser
+      deleteUser: deleteUser,
+      getUser:getUser
     }
   }
 ]);
