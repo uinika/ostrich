@@ -107,9 +107,9 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$rootScope', 
     $scope.DataQuota.data_show_format_add = '';
     $scope.DataQuota.data_store_type_add = '';
 
-    // Http.getDepartmentList().then(function(result) {
-    //   $scope.deptList = result.data.body;
-    // });
+    Http.getDepartmentList().then(function(result) {
+      $scope.deptList = result.data.body;
+    });
 
     // Get system dict
     Http.getSystemDictByCatagory({
@@ -166,7 +166,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$rootScope', 
           dataRelationConfig.push(sys_dict);
         });
 
-        var shareDeps = _.map($scope.outputDeptList, 'ID');
+        var shareDeps = _.map($scope.outputDeptList, 'id');
         _(shareDeps).forEach(function(value) {
           var share_dep = {};
           share_dep.dataQuotaId = $scope.DataQuota.quota_name;
@@ -515,11 +515,11 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$rootScope', 
 DInventory.factory('Department.Inventory.Service.Http', ['$http', '$q', 'API',
   function($http, $q, API) {
     var path = API.path;
-    // function getDepartmentList() {
-    //   return $http.get(
-    //     path + '/dep/'
-    //   )
-    // }
+    function getDepartmentList() {
+      return $http.get(
+        path + '/department'
+      )
+    }
 
 
     function saveDataQuota(data) {
@@ -539,7 +539,8 @@ DInventory.factory('Department.Inventory.Service.Http', ['$http', '$q', 'API',
     };
     return {
       saveDataQuota: saveDataQuota,
-      getSystemDictByCatagory: getSystemDictByCatagory
+      getSystemDictByCatagory: getSystemDictByCatagory,
+      getDepartmentList: getDepartmentList
     }
   }
 ]);

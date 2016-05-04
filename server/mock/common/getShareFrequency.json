@@ -1,0 +1,53 @@
+{
+  "head": {
+    "status": 200,
+    "total": 4,
+    "token": "8F2700B378AC34EAC6D789A8F4AA5913"
+  },
+  "body": [{
+    "id": "24f7c092-02f0-11e6-a52a-5cf9dd40ad7e",
+    "dict_category": "1",
+    "dict_code": "1",
+    "dict_name": "年度",
+    "parent_code": "0",
+    "dict_desc": "共享频率",
+    "dict_ord": 1,
+    "active_flag": "1"
+  }, {
+    "id": "24f8deaf-02f0-11e6-a52a-5cf9dd40ad7e",
+    "dict_category": "1",
+    "dict_code": "2",
+    "dict_name": "季度",
+    "parent_code": "0",
+    "dict_desc": "共享频率",
+    "dict_ord": 2,
+    "active_flag": "1"
+  }, {
+    "id": "24f9bbe6-02f0-11e6-a52a-5cf9dd40ad7e",
+    "dict_category": "1",
+    "dict_code": "3",
+    "dict_name": "月度",
+    "parent_code": "0",
+    "dict_desc": "共享频率",
+    "dict_ord": 3,
+    "active_flag": "1"
+  }, {
+    "id": "24faa6ce-02f0-11e6-a52a-5cf9dd40ad7e",
+    "dict_category": "1",
+    "dict_code": "4",
+    "dict_name": "每日",
+    "parent_code": "0",
+    "dict_desc": "共享频率",
+    "dict_ord": 4,
+    "active_flag": "1"
+  }, {
+    "id": "24fbce1b-02f0-11e6-a52a-5cf9dd40ad7e",
+    "dict_category": "1",
+    "dict_code": "5",
+    "dict_name": "实时",
+    "parent_code": "0",
+    "dict_desc": "共享频率",
+    "dict_ord": 5,
+    "active_flag": "1"
+  }]
+}

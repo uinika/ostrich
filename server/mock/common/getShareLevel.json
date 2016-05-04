@@ -1,0 +1,44 @@
+{
+  "head": {
+    "status": 200,
+    "total": 4,
+    "token": "8F2700B378AC34EAC6D789A8F4AA5913"
+  },
+  "body": [{
+    "id": "2501e32c-02f0-11e6-a52a-5cf9dd40ad7e",
+    "dict_category": "3",
+    "dict_code": "1",
+    "dict_name": "全开放",
+    "parent_code": "0",
+    "dict_desc": "共享级别",
+    "dict_ord": 1,
+    "active_flag": "1"
+  }, {
+    "id": "2502a67d-02f0-11e6-a52a-5cf9dd40ad7e",
+    "dict_category": "3",
+    "dict_code": "2",
+    "dict_name": "省政务云平台开放",
+    "parent_code": "0",
+    "dict_desc": "共享级别",
+    "dict_ord": 2,
+    "active_flag": "1"
+  }, {
+    "id": "250375bd-02f0-11e6-a52a-5cf9dd40ad7e",
+    "dict_category": "3",
+    "dict_code": "3",
+    "dict_name": "授权开放",
+    "parent_code": "0",
+    "dict_desc": "共享级别",
+    "dict_ord": 3,
+    "active_flag": "1"
+  }, {
+    "id": "250446dc-02f0-11e6-a52a-5cf9dd40ad7e",
+    "dict_category": "3",
+    "dict_code": "4",
+    "dict_name": "暂不开放",
+    "parent_code": "0",
+    "dict_desc": "共享级别",
+    "dict_ord": 4,
+    "active_flag": "1"
+  }]
+}

@@ -33,6 +33,9 @@ console.info('http-server[express] listening on 5001');
 var login = require('./api/common/login');
 App.use('/api', login);
 
+var department = require('./api/common/department');
+App.use('/api', department);
+
 /** sys_dict */
 var sys_dict = require('./api/common/sys_dict');
 App.use('/api', sys_dict);
