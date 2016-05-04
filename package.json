@@ -16,11 +16,15 @@
     "url": "https://github.com/uinika/autumn/issues"
   },
   "homepage": "https://github.com/uinika/autumn#readme",
-  "dependencies": {},
+  "dependencies": {
+    "express": "^4.13.4",
+    "mongodb": "^2.1.18",
+    "mongoose": "^4.4.14",
+    "q": "^1.4.1"
+  },
   "devDependencies": {
     "body-parser": "^1.15.0",
     "del": "^2.2.0",
-    "express": "^4.13.4",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.0",
     "gulp-connect": "^2.3.1",
@@ -32,8 +36,6 @@
     "gulp-rename": "^1.2.2",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-uglify": "^1.5.3",
-    "load-json-file": "^1.1.0",
-    "mongodb": "^2.1.7",
-    "q": "^1.4.1"
+    "load-json-file": "^1.1.0"
   }
 }
