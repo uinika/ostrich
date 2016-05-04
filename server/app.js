@@ -2,8 +2,7 @@
 const Express = require('express'),
       App = Express(),
       Config = require('./config'),
-      bodyParser = require('body-parser'),
-      session = require('express-session');
+      bodyParser = require('body-parser');
 
 App.use(bodyParser.json());
 /** CORS Filter */
@@ -33,3 +32,11 @@ console.info('http-server[express] listening on 5001');
 /** Login */
 var login = require('./api/common/login');
 App.use('/api', login);
+
+/** sys_dict */
+var sys_dict = require('./api/common/sys_dict');
+App.use('/api', sys_dict);
+
+/** department */
+var data_quota = require('./api/department/data_quota');
+App.use('/api', data_quota);

@@ -16,40 +16,45 @@
           </a>
           <ul class="dropdown-menu">
             <li>
-              <a ui-sref='main.requirement'>部门指标</a>
+              <a ui-sref='main.requirement'>
+                <i class="fa fa-genderless"> 部门指标</i>
+              </a>
             </li>
             <li role="separator" class="divider"></li>
             <li>
-              <a ui-sref='main.requirement'>共享指标</a>
+              <a ui-sref='main.requirement'>
+                <i class="fa fa-genderless"> 共享指标</i>
+              </a>
             </li>
             <li role="separator" class="divider"></li>
             <li>
-              <a ui-sref='main.requirement'>需求清单</a>
+              <a ui-sref='main.requirement'>
+                <i class="fa fa-genderless"> 需求清单</i>
+              </a>
             </li>
             <li role="separator" class="divider"></li>
             <li>
-              <a ui-sref='main.requirement'>审核指标</a>
+              <a ui-sref='main.requirement'>
+                <i class="fa fa-genderless"> 审核指标</i>
+              </a>
+            </li>
+            <li role="separator" class="divider"></li>
+            <li>
+              <a ui-sref='main.requirement'>
+                <i class="fa fa-genderless"> 账号信息</i>
+              </a>
             </li>
           </ul>
         </li>
       </ul>
+
       <div class="btn-group pull-right btn-login">
         <a class="btn btn-default" ui-sref='main.department'>
-          <i class="fa fa-user">
-            国土局-管理员</i>
+          <i class="fa fa-user"> 管理员.国土局</i>
         </a>
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu">
-          <li><a href="#">部门管理</a></li>
-          <li class="divider"></li>
-          <li><a href="#">用户管理</a></li>
-        </ul>
       </div>
+
     </div>
   </nav>
-
   <div id='ui-view-main' ui-view></div>
-
 </div>

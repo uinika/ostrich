@@ -155,26 +155,26 @@
                 </div>
                 <div class='panel-body'>
                   <!-- Table -->
-                    <table class='table table-hover table-striped'>
-                      <thead>
-                        <tr>
-                          <th>响应日期</th>
-                          <th>需求发布日期</th>
-                          <th>需求名称</th>
-                          <th>响应单位</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr ng-repeat='resItem in responseList'>
-                          <td>{{resItem.RESPONSE_TIME | date:'yyyy-MM-dd'}}</td>
-                          <td>{{resItem.CREATE_TIME | date:'yyyy-MM-dd'}}</td>
-                          <td>{{resItem.REQUIREMENT_NAME}}</td>
-                          <td>{{resItem.DEP_NAME}}</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
+                  <table class='table table-hover table-striped'>
+                    <thead>
+                      <tr>
+                        <th>响应日期</th>
+                        <th>需求发布日期</th>
+                        <th>需求名称</th>
+                        <th>响应单位</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat='resItem in responseList'>
+                        <td>{{resItem.RESPONSE_TIME | date:'yyyy-MM-dd'}}</td>
+                        <td>{{resItem.CREATE_TIME | date:'yyyy-MM-dd'}}</td>
+                        <td>{{resItem.REQUIREMENT_NAME}}</td>
+                        <td>{{resItem.DEP_NAME}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
+              </div>
             </div>
           </div>
 
@@ -186,16 +186,26 @@
                 </div>
                 <div class='panel-body'>
                   <div class='focus-bureau-list'>
-                    <div ng-repeat='bureau in FocusBureaus' class='bureau-item col-md-3'>
+                    <div ng-repeat='bureau in outputDeptList' class='bureau-item col-md-3'>
                       <a ui-sref='main.inventory.detail({departmentID: bureau.ID})' class='thumbnail'>
                         <img ng-src='../styles/images/bureau/{{::bureau.DEP_EN_NAME}}' title='{{::bureau.DEP_NAME}}'>
                       </a>
                       <div class="caption">
-                        {{bureau.DEP_SHORT_NAME}}
+                        {{bureau.DEP_NAME}}
                       </div>
                     </div>
-                    <div class='col-md-3'>
-                      <button title='添加关注部门' class='btn btn-lg btn-primary'><i class='fa fa-plus'></i></button>
+                    <div class='col-md-2 add-focus-option'>
+                        <div class='dep-select' ng-show='depSelect.show'>
+                          <div  isteven-multi-select  input-model='deptList' output-model='outputDeptList' button-label='DEP_NAME' item-label='DEP_NAME' tick-property='ticked'></div>
+                          <div class='btn btn-group'>
+                            <button class='btn btn-primary'>关注</button>
+                            <button class='btn btn-cancel'>取消</button>
+                          </div>
+                        </div>
+
+                      <button  title='添加关注部门' class="btn btn-default" ng-click='depSelect.show = true'>
+                        <i class='fa fa-plus'></i>
+                      </button>
                     </div>
                   </div>
                 </div>

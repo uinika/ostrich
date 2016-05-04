@@ -4,20 +4,20 @@
     <div class="panel-body">
 
       <!--Step 1-->
-      <div id='indicator-profile' name='step1' ng-show='step1.show'>
-        <form name='dataInfoForm' ng-submit='toStep2(dataInfoForm.$valid)' novalidation class="form-horizontal">
+      <div id='indicator-profile'>
+        <form name='DataQuotaForm' ng-submit='addQuota(DataQuotaForm.$valid)' class="form-horizontal">
           <div class="form-group">
             <label for="" class="col-sm-2 control-label">
               <span class='require-sign'>*</span>指标编号 :</label>
             <div class="col-sm-10">
-              <input type="text" ng-model='dataInfo.dataNumber' required class="form-control">
+              <input type="text" ng-model='DataQuota.quota_sn' required class="form-control">
             </div>
           </div>
           <div class="form-group">
             <label for="" class="col-sm-2 control-label">
               <span class='require-sign'>*</span>指标名称:</label>
             <div class="col-sm-10">
-              <input type="text" required class="form-control" ng-model='Modal.Quota.quotaName'>
+              <input type="text" required class="form-control" ng-model='DataQuota.quota_name'>
               <span class='help-info'>部门统计报表制度中对指标名称的全称</span>
             </div>
           </div>
@@ -25,7 +25,7 @@
             <label for="" class="col-sm-2 control-label">
               <span class='require-sign'>*</span>指标别称:</label>
             <div class="col-sm-10">
-              <input type="text" required class="form-control" ng-model='Modal.Quota.alias'>
+              <input type="text" required class="form-control" ng-model='DataQuota.alias'>
               <span class='help-info'>提供部门的内部名称或英文名称及简称等</span>
             </div>
           </div>
@@ -33,7 +33,7 @@
             <label for="" class="col-sm-2 control-label">
               <span class='require-sign'>*</span>计量单位:</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" required ng-model='Modal.Quota.meterUnit'>
+              <input type="text" class="form-control" required ng-model='DataQuota.meter_unit'>
               <span class='help-info'>反映指标某一具体数值的实际度量单位</span>
             </div>
           </div>
@@ -41,7 +41,7 @@
             <label for="" class="col-sm-2 control-label">
               <span class='require-sign'>*</span>指标详细解释:</label>
             <div class="col-sm-10">
-              <textarea class="form-control" required rows='3' ng-model='Modal.Quota.quotaDetail'></textarea>
+              <textarea class="form-control" required rows='3' ng-model='DataQuota.quota_detail'></textarea>
               <span class='help-info pull-left'>统计制度上对指标的详细解释</span>
               <span class='pull-right'>(最多256个汉字)</span>
             </div>
@@ -49,7 +49,7 @@
           <div class="form-group">
             <label for="" class="col-sm-2 control-label">计算方法:</label>
             <div class="col-sm-10">
-              <textarea class="form-control" rows='3' ng-model='Modal.Quota.calculateMethod'></textarea>
+              <textarea class="form-control" rows='3' ng-model='DataQuota.calculate_method'></textarea>
               <span class='help-info pull-left'>是指为求得统计指标具体数值需要采用的算法。一般用计算公式表示，也可以用文字表述。</span>
               <span class='pull-right'>(最多256个汉字)</span>
             </div>
@@ -60,18 +60,18 @@
               <span class='require-sign'>*</span>共享频率:</label>
             <div class="col-sm-10">
               <span ng-repeat="sfItem in  shareFrequencyList">
-                <input type="checkbox" value="{{sfItem.ID}}" ng-checked="shareFreqSelection.indexOf(sfItem.DICT_NAME) > -1" ng-click="toggleShareFreqSelection(sfItem.ID,sfItem.DICT_NAME)">
-                {{sfItem.DICT_NAME}}
+                <input type="radio" name='share_frequency'
+                ng-model='DataQuota.share_frequency' value="{{sfItem.id}}">
+                {{sfItem.dict_name}}
               </span>
             </div>
-            <input type="hidden" ng-model='dataInfo.shareFrequency'>
           </div>
 
           <div class="form-group">
             <label for="" class="col-sm-2 control-label">
               <span class='require-sign'>*</span>空间范围:</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" required ng-model='dataInfo.areaPeriod'>
+              <input type="text" class="form-control" required ng-model='DataQuota.area_range'>
               <span class='help-info'>
                 可取得数据的地区名称，如全国，四川省，各省等。
               </span>
@@ -82,8 +82,8 @@
             <label for="" class="col-sm-2 control-label">分地区数据级别:</label>
             <div class="col-sm-10">
               <span ng-repeat="dataLevel in  dataLevelList">
-                <input type="checkbox" value="{{dataLevel.ID}}" ng-checked="dataLevelSelection.indexOf(dataLevel.DICT_NAME) > -1" ng-click="toggleDataLevelSelection(dataLevel)">
-                {{dataLevel.DICT_NAME}}
+                <input type="checkbox" value="{{dataLevel.id}}" ng-checked="dataLevelSelection.indexOf(dataLevel.id) > -1" ng-click="toggleDataLevelSelection(dataLevel)">
+                {{dataLevel.dict_name}}
               </span>
             </div>
           </div>
@@ -92,9 +92,10 @@
             <label for="" class="col-sm-2 control-label">
               <span class='require-sign'>*</span>来源部门:</label>
             <div class="col-sm-10">
-              <select class="form-control" ng-model='Modal.Quota.depId' required>
+              <input type='text' ng-model='DataQuota.dep_name' required/>
+              <!-- <select class="form-control" ng-model='DataQuota.dep_name' required>
                 <option ng-repeat="dep in  deptList" value='{{dep.ID}}'>{{dep.DEP_NAME}}</option>
-              </select>
+              </select> -->
               <span class='help-info'>
                 可取得数据的地区名称，如全国，四川省，各省等。
               </span>
@@ -105,8 +106,8 @@
             <label for="" class="col-sm-2 control-label">
               <span class='require-sign'>*</span>共享级别:</label>
             <div class="col-sm-10">
-              <select name='shareLevelOpt' ng-change='showHideDeps()' class='form-control' style='display: inline-block !important;width: auto;' ng-model='dataInfo.shareLevel'>
-                <option ng-repeat="shareLevel in  shareLevelList" value='{{shareLevel.ID}}'>{{shareLevel.DICT_NAME}}</option>
+              <select ng-model='DataQuota.share_level' name='shareLevelOpt' ng-change='showHideDeps()' class='form-control' style='display: inline-block !important;width: auto;' ng-model='DataQuota.shareLevel'>
+                <option ng-repeat="shareLevel in  shareLevelList" value='{{shareLevel.id}}'>{{shareLevel.dict_name}}</option>
               </select>
               <span ng-class="{true: 'ng-show', false: 'ng-hide'}[depShow]">指定部门名称：
                 <div style='display:inline-block' isteven-multi-select input-model="deptList" output-model="outputDeptList" button-label="DEP_NAME" item-label="DEP_NAME" tick-property="ticked"></div>
@@ -118,11 +119,13 @@
             <label for="" class="col-sm-2 control-label">
               <span class='require-sign'>*</span>数据存储类型:</label>
             <div class="col-sm-10">
-              <select ng-model='Modal.Quota.quotaType' class='custom-form-control'>
-                <option ng-repeat="qtype in  quotaTypeList" value='{{qtype.ID}}'>{{qtype.DICT_NAME}}</option>
+              <select ng-change='storeTypeChange()' ng-model='DataQuota.data_store_type' class='custom-form-control'>
+                <option ng-repeat="qtype in  quotaTypeList" value='{{qtype.id}}'>{{qtype.dict_name}}</option>
               </select>
-              备注：
-              <input type='text' ng-model='Modal.Quota.quotaTypeAdd' class='custom-form-control'/>
+              <span ng-class="{true: 'ng-show', false: 'ng-hide'}[storeTypeOther]">
+                备注：
+                <input type='text' ng-model='DataQuota.data_store_type_add' class='custom-form-control'/>
+              </span>
               <span class='help-info'>
                 指标类型如选择9.其他，请在备注中说明。
               </span>
@@ -132,7 +135,7 @@
             <label for="" class="col-sm-2 control-label">
               <span class='require-sign'>*</span>数据精度:</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" required ng-model='Modal.Quota.dataPrecision'>
+              <input type="text" class="form-control" required ng-model='DataQuota.data_precision'>
               <span class='help-info'>
                 数值型指标数据定义的数据存储的小数位数。如：小数点后取2位
               </span>
@@ -142,7 +145,7 @@
             <label for="" class="col-sm-2 control-label">
               <span class='require-sign'>*</span>数据长度:</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" ng-model='Modal.Quota.dataLength'>
+              <input type="text" class="form-control" ng-model='DataQuota.data_length'>
               <span class='help-info'>
                 指标数据的最大长度。如：小于9位
               </span>
@@ -152,11 +155,13 @@
             <label for="" class="col-sm-2 control-label">
               <span class='require-sign'>*</span>数据表示格式 :</label>
             <div class="col-sm-10">
-              <select ng-model='Modal.Quota.dataShowFormat' class='custom-form-control'>
-                <option ng-repeat="dataFormat in  dataShowFormatList" value='{{dataFormat.ID}}'>{{dataFormat.DICT_NAME}}</option>
+              <select ng-change='dataShowChange()'  ng-model='DataQuota.data_show_format' class='custom-form-control'>
+                <option ng-repeat="dataFormat in  dataShowFormatList" value='{{dataFormat.id}}'>{{dataFormat.dict_name}}</option>
               </select>
-              备注：
-              <input type='text' ng-model='Modal.Quota.dataShowFormatAdd' class='custom-form-control'/>
+              <span ng-class="{true: 'ng-show', false: 'ng-hide'}[dataShowOther]">
+                备注：
+                <input type='text' ng-model='DataQuota.data_show_format_add' class='custom-form-control'/>
+              </span>
               <span class='help-info'>
                 展示页面上指标数据类型的具体表现形式。如选择99.其他，请在备注中说明。
               </span>
@@ -165,8 +170,8 @@
           <div class="form-group">
             <label for="" class="col-sm-2 control-label">是否涉密:</label>
             <div class="col-sm-10">
-              <select ng-model='Modal.Quota.secretFlag' class='custom-form-control'>
-                <option ng-repeat="qsflag in  secretFlagList" value='{{qsflag.ID}}'>{{qsflag.DICT_NAME}}</option>
+              <select ng-model='DataQuota.secret_flag' class='custom-form-control'>
+                <option ng-repeat="qsflag in  secretFlagList" value='{{qsflag.id}}'>{{qsflag.dict_name}}</option>
               </select>
               <span class='help-info'>指标数据是否为涉密数据。</span>
             </div>
@@ -174,7 +179,7 @@
           <div class="form-group">
             <label for="" class="col-sm-2 control-label">联系人:</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" ng-model='Modal.Quota.linkman'>
+              <input type="text" class="form-control" ng-model='DataQuota.linkman'>
               <span class='help-info'>
                 具有指标解释权的联系人名字。
               </span>
@@ -183,7 +188,7 @@
           <div class="form-group">
             <label for="" class="col-sm-2 control-label">联系电话:</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" ng-model='Modal.Quota.contactPhone'>
+              <input type="text" class="form-control" ng-model='DataQuota.contact_phone'>
               <span class='help-info'>
                 具有指标解释权的联系部门或联系人电话。
               </span>
@@ -193,7 +198,7 @@
           <div class="form-group">
             <label for="" class="col-sm-2 control-label">文件标识:</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" ng-model='Modal.Quota.contactPhone'>
+              <input type="text" class="form-control" ng-model='DataQuota.file_name'>
               <span class='help-info'>
                 请输入样表表明或者文件编号。
               </span>
@@ -204,7 +209,7 @@
               <button class="btn btn-default " ng-click='backToStep3()'>关闭</button>
             </div>
             <div class="btn btn-group">
-              <button class="btn btn-success " ng-click='addFormSubmit(1)'>保存</button>
+              <button class="btn btn-success " type='submit'>保存</button>
             </div>
           </div>
         </form>
@@ -227,7 +232,8 @@
 
     </div>
     <div class='modal-body'>
-      样式数据扩展名为：csv, xls文件，<a>参考样例数据模板</a>
+      样式数据扩展名为：csv, xls文件，
+      <a>参考样例数据模板</a>
     </div>
     <div class='modal-footer'>
       <button class='btn btn-primary' type='submit' ng-click='Modal.confirm(1)'>现在上传</button>

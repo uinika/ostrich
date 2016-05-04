@@ -1,0 +1,21 @@
+{
+  "head": {
+    "status": 200,
+    "token": "ghco9xdnaco31gmafukxchph",
+    "message": "新增成功"
+  },
+  "body": [{
+    "id": "34234",
+    "dict_name": "省级"
+  },
+  {
+    "id": "34234sdfwf",
+    "dict_name": "市级"
+  },
+  {
+    "id": "3423sdfsf4",
+    "dict_name": "县级"
+  }
+
+  ]
+}
