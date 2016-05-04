@@ -2,7 +2,8 @@
 const Express = require('express'),
       App = Express(),
       Config = require('./config'),
-      bodyParser = require('body-parser');
+      bodyParser = require('body-parser'),
+      session = require('express-session');
 
 App.use(bodyParser.json());
 /** CORS Filter */
