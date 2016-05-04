@@ -26,27 +26,27 @@
 
 ## 二级通用接口
 
-### /api/data_quota_share_dep/data_quota
+### /api/data_quota_share_dep-data_quota
 #### 根据共享需求部门，列出相应指标，并包含共享需求部门的信息
-### /api/data_quota/data_quota_share_dep
+### /api/data_quota-data_quota_share_dep
 #### 根据指标，列出共享需求部门，并包含2张表全部字段
 
-### /api/data_requiement/data_quota
+### /api/data_requiement-data_quota
 #### 根据数据需求，列出相应指标，并包含需求相关的字段信息
-### /api/data_quota/data_requiement
+### /api/data_quota-data_requiement
 #### 获取指标对应的需求信息，包含2张表全部字段
 
-### /api/data_quota_apply_info/data_quota
+### /api/data_quota_apply_info-data_quota
 #### 根据数据指标申请审核信息，列出相应指标，并包含申请审核的字段信息
-### /api/data_quota/data_quota_apply_info
+### /api/data_quota-data_quota_apply_info
 #### 根据指标，获取数据指标申请审核信息，包含2张表全部字段
 
-### /api/data_quota_examples/data_quota
+### /api/data_quota_examples-data_quota
 #### 根据数据清单示例数据，列出相应指标，并包含示例数据相关信息
-### /api/data_quota/data_quota_examples
+### /api/data_quota-data_quota_examples
 #### 根据指标数据，获取指标样例，包含2张表全部字段
 
-### /api/sys_dep/data_quota
+### /api/sys_dep-data_quota
 #### 根据部门表信息，获取相应指标
-### /api/data_quota/sys_dep
+### /api/data_quota-sys_dep
 #### 根据指标信息，获取部门及对应的指标数据

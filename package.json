@@ -18,6 +18,7 @@
   "homepage": "https://github.com/uinika/autumn#readme",
   "dependencies": {
     "express": "^4.13.4",
+    "express-session": "^1.13.0",
     "mongodb": "^2.1.18",
     "mongoose": "^4.4.14",
     "q": "^1.4.1"
