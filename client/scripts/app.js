@@ -9,12 +9,14 @@ var app = angular.module('app', [
   'Login',
   'Main',
   'Dashboard',
+  'Admin',
+  'Admin.User',
+  'Admin.Department',
   'Department',
   'Inventory',
   'InventoryDetail',
   'Department.Inventory',
   'Department.Audit',
-  'Department.SystemUser',
   'Department.Requirement',
   'RequirementMain',
   'RequirementDetail',
@@ -63,6 +65,21 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
         templateUrl: 'views/common/dashboard.html',
         controller: 'Dashboard.Controller.Main'
       })
+      .state('main.admin', {
+        url: '/admin',
+        templateUrl: 'views/admin/main.html',
+        controller: 'Admin.Controller.Main'
+      })
+      .state('main.admin.department', {
+        url: '/dashboard',
+        templateUrl: 'views/admin/department.html',
+        controller: 'Admin.Department.Controller.Main'
+      })
+      .state('main.admin.user', {
+        url: '/user',
+        templateUrl: 'views/admin/user.html',
+        controller: 'Admin.User.Controller.Main'
+      })
       .state('main.inventory', {
         url: '/inventory',
         templateUrl: 'views/inventory/main.html',
@@ -78,7 +95,6 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
         templateUrl: 'views/inventory/detail.html',
         controller: 'InventoryDetail.Controller.detail'
       })
-
       .state('main.requirement', {
         url: '/requirement',
         templateUrl: 'views/requirement/main.html',
@@ -145,10 +161,6 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
         templateUrl: 'views/department/audit-info.html',
         controller: 'Department.Audit.Controller.info'
       })
-      .state('main.department.user', {
-        url: '/user',
-        templateUrl: 'views/department/user.html',
-        controller: 'Department.SystemUser.Controller.Main'
-      })
+
   }
 ]);
