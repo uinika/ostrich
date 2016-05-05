@@ -326,6 +326,21 @@ html {
 #department-inventory .indicator-list ul.nav-filter li span i.fa-warning {
   color: #f0ad4e;
 }
+#department-inventory .indicator-list table tr span i {
+  font-size: 18px;
+}
+#department-inventory .indicator-list table tr span i.fa-eye {
+  color: #5bc0de;
+}
+#department-inventory .indicator-list table tr span i.fa-desktop {
+  color: #5bc0de;
+}
+#department-inventory .indicator-list table tr span i.fa-lock {
+  color: #5bc0de;
+}
+#department-inventory .indicator-list table tr span i.fa-warning {
+  color: #f0ad4e;
+}
 #inventory-publish {
   margin-left: 170px;
 }
@@ -363,6 +378,26 @@ html {
 #inventory-publish .indicator-add-modal .help-info {
   font-size: 12px;
   color: #777;
+}
+#department-inventory-detail {
+  margin-left: 170px;
+}
+#department-inventory-detail .nav-tabs {
+  bottom: 0 ;
+}
+#department-inventory-detail .tab-content {
+  border: 1px solid #DDD;
+  border-top: none;
+  padding: 20px 15px 10px 15px;
+}
+#department-inventory-detail .tab-content .data-title {
+  text-align: center;
+}
+#department-inventory-detail .tab-content .tab-pane > .row {
+  padding: 4px 0;
+}
+#department-inventory-detail .tab-content #invntDetail .text-right {
+  text-align: right;
 }
 #department-share {
   margin-left: 170px;

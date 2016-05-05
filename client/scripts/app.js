@@ -121,6 +121,11 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
         templateUrl: 'views/department/inventory-publish.html',
         controller: 'Department.Inventory.Controller.publish'
       })
+      .state('main.department.inventory.detail', {
+        url: '/detail?ID',
+        templateUrl: 'views/department/inventory-detail.html',
+        controller: 'Department.Inventory.Controller.detail'
+      })
       .state('main.department.share', {
         url: '/share',
         templateUrl: 'views/department/share.html',

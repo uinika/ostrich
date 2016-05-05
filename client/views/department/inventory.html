@@ -35,7 +35,7 @@
               <a ng-class="{true: 'active', false: 'inactive'}[shareLvMainSelection.length == 0]" href="javascript:;" ng-click='getShareLevelAll()'>全部</a>
             </li>
             <li role="presentation" ng-repeat='shareLevel in shareLevelList'>
-              <a ng-class="{true: 'active', false: 'inactive'}[shareLvMainSelection.indexOf(shareLevel.id) > -1]" href="javascript:;" ng-click='getIvntListBySl(shareLevel)'>{{shareLevel.dict_name}}
+              <a ng-class="{true: 'active', false: 'inactive'}[shareLvMainSelection.indexOf(shareLevel.id) > -1]" href="javascript:;" ng-click='getDataQuotaListBySl(shareLevel)'>{{shareLevel.dict_name}}
               </a>
             </li>
           </ul>
@@ -46,10 +46,10 @@
           <ul class="pager">
             共享频率
             <li role="presentation">
-              <a href="javascript:;" ng-class="{true: 'active', false: 'inactive'}[areaMainSelection.length == 0]" href="javascript:;" ng-click='getShareFreqAll()'>全部</a>
+              <a href="javascript:;" ng-class="{true: 'active', false: 'inactive'}[shareFreqSelection.length == 0]" href="javascript:;" ng-click='getShareFreqAll()'>全部</a>
             </li>
             <li role="presentation" ng-repeat='shareFreq in shareFrequencyList'>
-              <a ng-class="{true: 'active', false: 'inactive'}[shareFreqSelection.indexOf(shareFreq.id) > -1]" ng-checked="shareFreqSelection.indexOf(shareFreq.id) > -1" ng-click='getIvntListByAP(shareFreq)' href="javascript:;">{{shareFreq.dict_name}}
+              <a ng-class="{true: 'active', false: 'inactive'}[shareFreqSelection.indexOf(shareFreq.id) > -1]" ng-checked="shareFreqSelection.indexOf(shareFreq.id) > -1" ng-click='getDataQuotaListBySF(shareFreq)' href="javascript:;">{{shareFreq.dict_name}}
               </a>
             </li>
           </ul>
@@ -63,7 +63,7 @@
               <a href="javascript:;" ng-class="{true: 'active', false: 'inactive'}[areaMainSelection.length == 0]" href="javascript:;" ng-click='getSpatialAll()'>全部</a>
             </li>
             <li role="presentation" ng-repeat='dataLevel in dataLevelList'>
-              <a ng-class="{true: 'active', false: 'inactive'}[areaMainSelection.indexOf(dataLevel.id) > -1]" ng-checked="areaMainSelection.indexOf(dataLevel.id) > -1" ng-click='getIvntListByAP(dataLevel)' href="javascript:;">{{dataLevel.dict_name}}
+              <a ng-class="{true: 'active', false: 'inactive'}[areaMainSelection.indexOf(dataLevel.id) > -1]" ng-checked="areaMainSelection.indexOf(dataLevel.id) > -1" ng-click='getDataQuotaListByAP(dataLevel)' href="javascript:;">{{dataLevel.dict_name}}
               </a>
             </li>
           </ul>
@@ -128,54 +128,49 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr ng-repeat='inventoryAttr in inventoryAttrList'>
-                    <td></td>
+                  <tr ng-repeat='DepDataQuota in depQuotaList'>
+                    <td><div ng-if='DepDataQuota.SHARELEVEL =="全开放" '><span>
+                      <i class='fa fa-eye'></i></span></div>
+                    <div ng-if='DepDataQuota.SHARELEVEL =="政务云开放" '><span>
+                      <i class='fa fa-desktop'></i></span></div>
+                  <div ng-if='DepDataQuota.SHARELEVEL =="授权开放" '><span>
+                    <i class='fa fa-lock'></i></span></div>
+                <div ng-if='DepDataQuota.SHARELEVEL =="暂不开放" '><span>
+                  <i class='fa fa-warning'></i></span></div></td>
                     <td>{{$index+1}}</td>
-                    <td>{{inventoryAttr.quotaNumber}}</td>
-                    <td>{{inventoryAttr.quotaName}}</td>
-                    <td>{{inventoryAttr.alias}}</td>
-                    <td>{{inventoryAttr.meterUnit}}</td>
-                    <td>{{inventoryAttr.quotaDetail}}</td>
-                    <td>{{inventoryAttr.calculateMethod}}</td>
+                    <td>{{DepDataQuota.quota_sn}}</td>
+                    <td><a ui-sref='main.department.inventory.detail({ID:DepDataQuota.id})'>{{DepDataQuota.quota_name}}</a></td>
+                    <td>{{DepDataQuota.alias}}</td>
+                    <td>{{DepDataQuota.meter_unit}}</td>
+                    <td>{{DepDataQuota.quota_detail}}</td>
+                    <td>{{DepDataQuota.calculate_method}}</td>
                     <td>
-                      {{shareFreqArrShow}}
+                      {{DepDataQuota.SHAREFREQUENCY}}
                     </td>
                     <td>
-                      {{dataInfo.areaPeriod}}
+                      {{DepDataQuota.area_range}}
                     </td>
-                    <td>{{inventoryAttr.areaDataLevel}}</td>
-                    <td>{{loginUser.DEP_NAME}}
+                    <td>{{DepDataQuota.REGIONALLEVEL}}</td>
+                    <td>{{DepDataQuota.DEPNAME}}
 
                     </td>
                     <td>
-                      {{inventoryAttr.shareLevel}}
+                      {{DepDataQuota.SHARELEVEL}}
                     </td>
                     <td>
-                      <div ng-repeat="qtype in  quotaTypeList">
-                        <div ng-if="qtype.ID == inventoryAttr.quotaType">
-                          {{qtype.DICT_NAME}}
-                        </div>
-                      </div>
+
                     </td>
-                    <td>{{inventoryAttr.dataPrecision}}</td>
-                    <td>{{inventoryAttr.dataLength}}</td>
-                    <td>{{inventoryAttr.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                    <td>{{DepDataQuota.data_precision}}</td>
+                    <td>{{DepDataQuota.data_length}}</td>
+                    <td>{{DepDataQuota.create_time | date:'yyyy-MM-dd HH:mm:ss'}}</td>
                     <td>
-                      <div ng-repeat="dataFormat in dataShowFormatList">
-                        <div ng-if="dataFormat.ID == inventoryAttr.dataShowFormat">
-                          {{dataFormat.DICT_NAME}}
-                        </div>
-                      </div>
+
                     </td>
                     <td>
-                      <div ng-repeat="qsflag in  secretFlagList">
-                        <div ng-if="qsflag.ID == inventoryAttr.secretFlag">
-                          {{qsflag.DICT_NAME}}
-                        </div>
-                      </div>
+                      {{DepDataQuota.secret_flag}}
                     </td>
-                    <td>{{inventoryAttr.linkman}}</td>
-                    <td>{{inventoryAttr.contactPhone}}</td>
+                    <td>{{DepDataQuota.linkman}}</td>
+                    <td>{{DepDataQuota.contact_phone}}</td>
                   </tr>
                 </tbody>
               </table>

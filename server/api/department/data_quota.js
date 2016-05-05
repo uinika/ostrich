@@ -5,8 +5,9 @@ const Router = require('express').Router(),
 
 Router.route('/data_quota')
   .get(function(request, response) {
-    let head = {},
-      body = {};
+    let head = {}, body = {};
+    let datas = JsonLoader.sync(Config.path + 'department/dataQuotaList.json');
+    response.json(datas);
 
   });
 
