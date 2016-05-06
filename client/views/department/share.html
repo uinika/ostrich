@@ -109,13 +109,13 @@
                   <tbody>
                     <tr ng-repeat='ShareDataQuota in depShareList'>
                       <td><input type='checkbox'/></td>
-                      <td><div ng-if='ShareDataQuota.SHARELEVEL =="全开放" '><span>
+                      <td><div ng-if='ShareDataQuota.sharelevel =="全开放" '><span>
                         <i class='fa fa-eye'></i></span></div>
-                      <div ng-if='ShareDataQuota.SHARELEVEL =="政务云开放" '><span>
+                      <div ng-if='ShareDataQuota.sharelevel =="政务云开放" '><span>
                         <i class='fa fa-desktop'></i></span></div>
-                    <div ng-if='ShareDataQuota.SHARELEVEL =="授权开放" '><span>
+                    <div ng-if='ShareDataQuota.sharelevel =="授权开放" '><span>
                       <i class='fa fa-lock'></i></span></div>
-                  <div ng-if='ShareDataQuota.SHARELEVEL =="暂不开放" '><span>
+                  <div ng-if='ShareDataQuota.sharelevel =="暂不开放" '><span>
                     <i class='fa fa-warning'></i></span></div></td>
                       <td>{{$index+1}}</td>
                       <td>{{ShareDataQuota.quota_sn}}</td>
@@ -125,26 +125,26 @@
                       <td>{{ShareDataQuota.quota_detail}}</td>
                       <td>{{ShareDataQuota.calculate_method}}</td>
                       <td>
-                        {{ShareDataQuota.SHAREFREQUENCY}}
+                        {{ShareDataQuota.sharefrequency}}
                       </td>
                       <td>
                         {{ShareDataQuota.area_range}}
                       </td>
-                      <td>{{ShareDataQuota.REGIONALLEVEL}}</td>
-                      <td>{{ShareDataQuota.DEPNAME}}
+                      <td>{{ShareDataQuota.regionallevel}}</td>
+                      <td>{{ShareDataQuota.depname}}
 
                       </td>
                       <td>
-                        {{ShareDataQuota.SHARELEVEL}}
+                        {{ShareDataQuota.sharelevel}}
                       </td>
                       <td>
-
+                        {{ShareDataQuota.datastoretype}}
                       </td>
                       <td>{{ShareDataQuota.data_precision}}</td>
                       <td>{{ShareDataQuota.data_length}}</td>
                       <td>{{ShareDataQuota.create_time}}</td>
                       <td>
-
+                        {{ShareDataQuota.datashowformat}}
                       </td>
                       <td>
                         {{ShareDataQuota.secret_flag}}

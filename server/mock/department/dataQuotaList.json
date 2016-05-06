@@ -2,7 +2,7 @@
   "head": {
     "status": 200,
     "total": 6,
-    "token": "C260D8E3EE0AB5666F41A9C91EA175D9"
+    "token": "057DE12648317198B64B2332DA02A385"
   },
   "body": [{
     "id": "76bc54d6-11f5-11e6-a5cf-507b9d1b58bb",
@@ -30,10 +30,12 @@
     "file_name": null,
     "delete_flag": "N",
     "share_dep": null,
-    "SHARELEVEL": "授权开放",
-    "SHAREFREQUENCY": "年度",
-    "DEPNAME": "成都市统计局",
-    "REGIONALLEVEL": "市级数据"
+    "sharelevel": "授权开放",
+    "sharefrequency": "年度",
+    "depname": "成都市统计局",
+    "datastoretype": "数值",
+    "datashowformat": "文本",
+    "regionallevel": "市级数据"
   }, {
     "id": "76d3ffff-11f5-11e6-a5cf-507b9d1b58bb",
     "quota_sn": "A002",
@@ -60,10 +62,12 @@
     "file_name": null,
     "delete_flag": "N",
     "share_dep": null,
-    "SHARELEVEL": "授权开放",
-    "SHAREFREQUENCY": "年度",
-    "DEPNAME": "成都市统计局",
-    "REGIONALLEVEL": "省级数据"
+    "sharelevel": "授权开放",
+    "sharefrequency": "年度",
+    "depname": "成都市统计局",
+    "datastoretype": "数值",
+    "datashowformat": "文本",
+    "regionallevel": "省级数据"
   }, {
     "id": "76e15606-11f5-11e6-a5cf-507b9d1b58bb",
     "quota_sn": "B01",
@@ -90,10 +94,12 @@
     "file_name": null,
     "delete_flag": "N",
     "share_dep": null,
-    "SHARELEVEL": "全开放",
-    "SHAREFREQUENCY": "年度",
-    "DEPNAME": "成都市统计局",
-    "REGIONALLEVEL": "省级数据"
+    "sharelevel": "全开放",
+    "sharefrequency": "年度",
+    "depname": "成都市统计局",
+    "datastoretype": "数值",
+    "datashowformat": "文本",
+    "regionallevel": "省级数据"
   }, {
     "id": "76f5c3bb-11f5-11e6-a5cf-507b9d1b58bb",
     "quota_sn": "B001",
@@ -105,7 +111,7 @@
     "quota_detail": "国内生产总值是指按",
     "calculate_method": "GDP有三种计算方法",
     "data_store_type": "2505d719-02f0-11e6-a52a-5cf9dd40ad7e",
-    "dep_name": "1",
+    "dep_name": "2",
     "share_frequency": "24f7c092-02f0-11e6-a52a-5cf9dd40ad7e",
     "share_level": "2501e32c-02f0-11e6-a52a-5cf9dd40ad7e",
     "data_store_type_add": null,
@@ -120,10 +126,12 @@
     "file_name": null,
     "delete_flag": "N",
     "share_dep": null,
-    "SHARELEVEL": "全开放",
-    "SHAREFREQUENCY": "年度",
-    "DEPNAME": "成都市统计局",
-    "REGIONALLEVEL": "县级数据"
+    "sharelevel": "全开放",
+    "sharefrequency": "年度",
+    "depname": "成都市教育局",
+    "datastoretype": "数值",
+    "datashowformat": "文本",
+    "regionallevel": "县级数据"
   }, {
     "id": "7704f77c-11f5-11e6-a5cf-507b9d1b58bb",
     "quota_sn": "B002",
@@ -150,10 +158,12 @@
     "file_name": null,
     "delete_flag": "N",
     "share_dep": null,
-    "SHARELEVEL": "全开放",
-    "SHAREFREQUENCY": "年度",
-    "DEPNAME": "成都市统计局",
-    "REGIONALLEVEL": "县级数据,市级数据"
+    "sharelevel": "全开放",
+    "sharefrequency": "年度",
+    "depname": "成都市统计局",
+    "datastoretype": "数值",
+    "datashowformat": "文本",
+    "regionallevel": "市级数据,县级数据"
   }, {
     "id": "e417899b-11f4-11e6-a5cf-507b9d1b58bb",
     "quota_sn": "A01",
@@ -180,9 +190,11 @@
     "file_name": null,
     "delete_flag": "N",
     "share_dep": null,
-    "SHARELEVEL": "全开放",
-    "SHAREFREQUENCY": "年度",
-    "DEPNAME": "成都市统计局",
-    "REGIONALLEVEL": "省级数据,县级数据,市级数据"
+    "sharelevel": "全开放",
+    "sharefrequency": "年度",
+    "depname": "成都市统计局",
+    "datastoretype": "数值",
+    "datashowformat": "文本",
+    "regionallevel": "县级数据,省级数据,市级数据"
   }]
 }

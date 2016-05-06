@@ -278,13 +278,20 @@ DInventory.factory('Department.Inventory.Service.Http', ['$http', '$q', 'API',
         }
       )
     };
-
+    function getSystemDictByCatagory(params) {
+      return $http.get(
+        path + '/sys_dict', {
+          params: params
+        }
+      )
+    };
 
     return {
       saveDataQuota: saveDataQuota,
       getDepartmentList: getDepartmentList,
       getDepartQuotaList: getDepartQuotaList,
-      getQuotaDetail: getQuotaDetail
+      getQuotaDetail: getQuotaDetail,
+      getSystemDictByCatagory: getSystemDictByCatagory
     }
   }
 ]);

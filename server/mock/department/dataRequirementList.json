@@ -2,7 +2,7 @@
   "head": {
     "status": 200,
     "total": 1,
-    "token": "5E0EE650C86C2BDB7968F3AFA458C33A"
+    "token": "F4AC2FAE926C81000517F3834885644C"
   },
   "body": [{
     "id": "67312256-11f9-11e6-a5cf-507b9d1b58bb",
@@ -17,13 +17,14 @@
     "create_time": "2016-05-04 21:09:15",
     "response_dep_id": "1",
     "responser": null,
-    "status": "0",
+    "status": "1",
     "response_time": null,
     "response_content": null,
     "share_frequency": "24f9bbe6-02f0-11e6-a52a-5cf9dd40ad7e",
     "dep_name": "成都市教育局",
     "area_range_name": null,
     "response_dep_name": "成都市统计局",
-    "requiement": "县级数据"
+    "sharefrequency": "月度",
+    "regionallevel": "县级数据"
   }]
 }

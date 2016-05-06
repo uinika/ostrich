@@ -129,13 +129,13 @@
                 </thead>
                 <tbody>
                   <tr ng-repeat='DepDataQuota in depQuotaList'>
-                    <td><div ng-if='DepDataQuota.SHARELEVEL =="全开放" '><span>
+                    <td><div ng-if='DepDataQuota.sharelevel =="全开放" '><span>
                       <i class='fa fa-eye'></i></span></div>
-                    <div ng-if='DepDataQuota.SHARELEVEL =="政务云开放" '><span>
+                    <div ng-if='DepDataQuota.sharelevel =="政务云开放" '><span>
                       <i class='fa fa-desktop'></i></span></div>
-                  <div ng-if='DepDataQuota.SHARELEVEL =="授权开放" '><span>
+                  <div ng-if='DepDataQuota.sharelevel =="授权开放" '><span>
                     <i class='fa fa-lock'></i></span></div>
-                <div ng-if='DepDataQuota.SHARELEVEL =="暂不开放" '><span>
+                <div ng-if='DepDataQuota.sharelevel =="暂不开放" '><span>
                   <i class='fa fa-warning'></i></span></div></td>
                     <td>{{$index+1}}</td>
                     <td>{{DepDataQuota.quota_sn}}</td>
@@ -145,26 +145,26 @@
                     <td>{{DepDataQuota.quota_detail}}</td>
                     <td>{{DepDataQuota.calculate_method}}</td>
                     <td>
-                      {{DepDataQuota.SHAREFREQUENCY}}
+                      {{DepDataQuota.sharefrequency}}
                     </td>
                     <td>
                       {{DepDataQuota.area_range}}
                     </td>
-                    <td>{{DepDataQuota.REGIONALLEVEL}}</td>
-                    <td>{{DepDataQuota.DEPNAME}}
+                    <td>{{DepDataQuota.regionallevel}}</td>
+                    <td>{{DepDataQuota.depname}}
 
                     </td>
                     <td>
-                      {{DepDataQuota.SHARELEVEL}}
+                      {{DepDataQuota.sharelevel}}
                     </td>
                     <td>
-
+                      {{DepDataQuota.datastoretype}}
                     </td>
                     <td>{{DepDataQuota.data_precision}}</td>
                     <td>{{DepDataQuota.data_length}}</td>
                     <td>{{DepDataQuota.create_time | date:'yyyy-MM-dd HH:mm:ss'}}</td>
                     <td>
-
+                      {{DepDataQuota.datashowformat}}
                     </td>
                     <td>
                       {{DepDataQuota.secret_flag}}
