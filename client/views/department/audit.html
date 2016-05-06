@@ -11,8 +11,8 @@
             指标审核总数<span class='num'>{{auditTotal}}</span>
           </li>
           <li role="presentation">
-              <input type="text"  placeholder="请输入查询指标名称">
-              <button type="button" class="btn btn-primary">查询</button>
+              <input type="text"  placeholder="请输入查询指标名称" ng-model='DeptAudit.quota_name_filter'>
+              <button type="button" class="btn btn-primary" ng-click='searchDeptAuditByName()'>查询</button>
           </li>
         </ul>
       </div>
@@ -37,7 +37,6 @@
                 <i class='fa fa-question-circle'></i>&nbsp;未审核&nbsp;[111]</span>
             </li>
           </ul>
-          <a ui-sref='main.department.audit.info'>我要审核</a>
         </div>
 
         <div class='panel-body scroll'>
@@ -74,55 +73,47 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr ng-repeat='inventoryAttr in inventoryAttrList'>
-                    <td></td>
+                  <tr ng-repeat='DeptAudit in auditList'>
+                    <td><div ng-if='DeptAudit.status == 0'><span>
+                      <i class='fa fa-question-circle'></i></span><a ng-click='toConfirm(DeptAudit)'>确认</a></div>
+                      <div ng-if='DeptAudit.status == 1'><span>
+                        <i class='fa fa-check-circle'></i></span></div>
+                        <div ng-if='DeptAudit.status == 2'><span>
+                          <i class='fa fa-times-circle-o'></i></span></div></td>
                     <td>{{$index+1}}</td>
-                    <td></td>
-                    <td>{{inventoryAttr.quotaNumber}}</td>
-                    <td>{{inventoryAttr.quotaName}}</td>
-                    <td>{{inventoryAttr.alias}}</td>
-                    <td>{{inventoryAttr.meterUnit}}</td>
-                    <td>{{inventoryAttr.quotaDetail}}</td>
-                    <td>{{inventoryAttr.calculateMethod}}</td>
+                    <td>{{DeptAudit.create_time}}</td>
+                    <td>{{DeptAudit.quota_sn}}</td>
+                    <td><a ui-sref='main.department.audit.info({AUDITID:DeptAudit.id})'>{{DeptAudit.quota_name}}</a></td>
+                    <td>{{DeptAudit.alias}}</td>
+                    <td>{{DeptAudit.meter_unit}}</td>
+                    <td>{{DeptAudit.quota_detail}}</td>
+                    <td>{{DeptAudit.calculate_method}}</td>
                     <td>
-                      {{shareFreqArrShow}}
-                    </td>
-                    <td>
-                      {{dataInfo.areaPeriod}}
-                    </td>
-                    <td>{{inventoryAttr.areaDataLevel}}</td>
-                    <td>{{loginUser.DEP_NAME}}
-
+                      {{DeptAudit.sharefrequency}}
                     </td>
                     <td>
-                      {{inventoryAttr.shareLevel}}
+                      {{DeptAudit.area_range}}
+                    </td>
+                    <td>{{DeptAudit.REGIONALLEVEL}}</td>
+                    <td>{{DeptAudit.depname}}
                     </td>
                     <td>
-                      <div ng-repeat="qtype in  quotaTypeList">
-                        <div ng-if="qtype.ID == inventoryAttr.quotaType">
-                          {{qtype.DICT_NAME}}
-                        </div>
-                      </div>
-                    </td>
-                    <td>{{inventoryAttr.dataPrecision}}</td>
-                    <td>{{inventoryAttr.dataLength}}</td>
-                    <td>{{inventoryAttr.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
-                    <td>
-                      <div ng-repeat="dataFormat in dataShowFormatList">
-                        <div ng-if="dataFormat.ID == inventoryAttr.dataShowFormat">
-                          {{dataFormat.DICT_NAME}}
-                        </div>
-                      </div>
+                      {{DeptAudit.sharelevel}}
                     </td>
                     <td>
-                      <div ng-repeat="qsflag in  secretFlagList">
-                        <div ng-if="qsflag.ID == inventoryAttr.secretFlag">
-                          {{qsflag.DICT_NAME}}
-                        </div>
-                      </div>
+                      {{DeptAudit.datastoretype}}
                     </td>
-                    <td>{{inventoryAttr.linkman}}</td>
-                    <td>{{inventoryAttr.contactPhone}}</td>
+                    <td>{{DeptAudit.data_precision}}</td>
+                    <td>{{DeptAudit.data_length}}</td>
+                    <td>{{DeptAudit.create_time | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                    <td>
+                      {{DeptAudit.datashowformat}}
+                    </td>
+                    <td>
+                      {{DeptAudit.secret_flag}}
+                    </td>
+                    <td>{{DeptAudit.linkman}}</td>
+                    <td>{{DeptAudit.contact_phone}}</td>
                     <td></td>
                   </tr>
                 </tbody>

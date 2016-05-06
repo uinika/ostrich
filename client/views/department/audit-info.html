@@ -13,21 +13,21 @@
             <form class="form-horizontal">
               <div class="form-group">
                 <label for="" class="col-sm-2 control-label">申请单位：</label>
-                <div class='col-sm-10 apply-dept'>{{AuditDetail.APPLYDEP}}
+                <div class='col-sm-10 apply-dept'>{{AuditDetail.depname}}
                 </div>
               </div>
               <div class="form-group">
                 <label for="" class="col-sm-2 control-label">审核
                   <span class='require-sign'>*</span>:</label>
                 <div class="col-sm-10">
-                  <input type='radio' name='status' value='1'/>&nbsp;通过
-                  <input type='radio' name='status' value='0'/>&nbsp;不通过
+                  <input type='radio' name='status' ng-model='AuditInfo.status' value='1'/>&nbsp;通过
+                  <input type='radio' name='status' ng-model='AuditInfo.status' value='0'/>&nbsp;不通过
                 </div>
               </div>
               <div class="form-group">
                 <label for="" class="col-sm-2 control-label">审核意见：</label>
                 <div class="col-sm-10">
-                  <textarea ng-model='AuditInfo.AUDIT_OPINION' class="col-sm-12" rows='3'></textarea>
+                  <textarea ng-model='AuditInfo.response_content' class="col-sm-12" rows='3'></textarea>
                 </div>
               </div>
             </form>
@@ -40,10 +40,10 @@
             <span class='step-number'>2</span>清单基本信息</h4>
           <div class='row apply-dep-info'>
             <label class='col-sm-2 text-right'>申请部门：</label>
-            <div class='col-sm-2 left'>工商局</div>
+            <div class='col-sm-2 left'>{{AuditDetail.depname}}</div>
 
             <label class='col-sm-2 text-right'>申请日期：</label>
-            <div class='col-sm-3 left'>2016-03-01 10:10:30</div>
+            <div class='col-sm-3 left'></div>
           </div>
           <!-- Nav tabs -->
           <ul class="nav nav-tabs" role="tablist">
@@ -67,75 +67,75 @@
               </div>
               <div class='row'>
                 <label class='col-sm-2 text-right'>指标名称:</label>
-                <div class='col-sm-10'>地区生产总值</div>
+                <div class='col-sm-10'>{{AuditDetail.quota_name}}</div>
               </div>
               <div class='row'>
                 <label class='col-sm-2 text-right'>指标别称:</label>
-                <div class='col-sm-10'>地区GDP</div>
+                <div class='col-sm-10'>{{AuditDetail.alias}}</div>
               </div>
               <div class='row'>
                 <label class='col-sm-2 text-right'>计量单位:</label>
-                <div class='col-sm-10'>地区GDP</div>
+                <div class='col-sm-10'>{{AuditDetail.meter_unit}}</div>
               </div>
               <div class='row'>
                 <label class='col-sm-2 text-right'>指标详细解释:</label>
-                <div class='col-sm-10'>地区GDP</div>
+                <div class='col-sm-10'>{{AuditDetail.quota_detail}}</div>
               </div>
               <div class='row'>
                 <label class='col-sm-2 text-right'>计算方法:</label>
-                <div class='col-sm-10'>地区GDP</div>
+                <div class='col-sm-10'>{{AuditDetail.calculate_method}}</div>
               </div>
               <div class='row'>
                 <label class='col-sm-2 text-right'>共享频率:</label>
-                <div class='col-sm-10'>地区GDP</div>
+                <div class='col-sm-10'>{{AuditDetail.sharefrequency}}</div>
               </div>
               <div class='row'>
                 <label class='col-sm-2 text-right'>空间范围:</label>
-                <div class='col-sm-10'>地区GDP</div>
+                <div class='col-sm-10'>{{AuditDetail.area_range}}</div>
               </div>
               <div class='row'>
                 <label class='col-sm-2 text-right'>分地区数据级别:</label>
-                <div class='col-sm-10'>地区GDP</div>
+                <div class='col-sm-10'>{{AuditDetail.quota_name}}</div>
               </div>
               <div class='row'>
                 <label class='col-sm-2 text-right'>来源部门:</label>
-                <div class='col-sm-10'>地区GDP</div>
+                <div class='col-sm-10'>{{AuditDetail.depname}}</div>
               </div>
               <div class='row'>
                 <label class='col-sm-2 text-right'>共享级别:</label>
-                <div class='col-sm-10'>地区GDP</div>
+                <div class='col-sm-10'>{{AuditDetail.sharelevel}}</div>
               </div>
               <div class='row'>
                 <label class='col-sm-2 text-right'>数据存储类型:</label>
-                <div class='col-sm-10'>地区GDP</div>
+                <div class='col-sm-10'>{{AuditDetail.datastoretype}}</div>
               </div>
               <div class='row'>
                 <label class='col-sm-2 text-right'>数据精度:</label>
-                <div class='col-sm-10'>地区GDP</div>
+                <div class='col-sm-10'>{{AuditDetail.data_precision}}</div>
               </div>
               <div class='row'>
                 <label class='col-sm-2 text-right'>数据长度:</label>
-                <div class='col-sm-10'>地区GDP</div>
+                <div class='col-sm-10'>{{AuditDetail.data_length}}</div>
               </div>
               <div class='row'>
                 <label class='col-sm-2 text-right'>创建时间:</label>
-                <div class='col-sm-10'>地区GDP</div>
+                <div class='col-sm-10'>{{AuditDetail.create_time}}</div>
               </div>
               <div class='row'>
                 <label class='col-sm-2 text-right'>数据表示格式:</label>
-                <div class='col-sm-10'>地区GDP</div>
+                <div class='col-sm-10'>{{AuditDetail.datashowformat}}</div>
               </div>
               <div class='row'>
                 <label class='col-sm-2 text-right'>是否涉密:</label>
-                <div class='col-sm-10'>地区GDP</div>
+                <div class='col-sm-10'>{{AuditDetail.secret_flag}}</div>
               </div>
               <div class='row'>
                 <label class='col-sm-2 text-right'>联系人:</label>
-                <div class='col-sm-10'>地区GDP</div>
+                <div class='col-sm-10'>{{AuditDetail.linkman}}</div>
               </div>
               <div class='row'>
                 <label class='col-sm-2 text-right'>联系电话:</label>
-                <div class='col-sm-10'>地区GDP</div>
+                <div class='col-sm-10'>{{AuditDetail.contact_phone}}</div>
               </div>
 
             </div>

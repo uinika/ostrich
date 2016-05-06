@@ -58,7 +58,15 @@ App.use('/api', data_requiement);
 var data_requiement_response = require('./api/department/data_requiement_response');
 App.use('/api', data_requiement_response);
 
-
 /** Data Quota */
 var data_quota_main = require('./api/data-quota/main');
 App.use('/api', data_quota_main);
+
+var opendata_quotalist = require('./api/department/opendata_quotalist');
+App.use('/api', opendata_quotalist);
+
+var opendata_quotamesg = require('./api/department/opendata_quotamesg');
+App.use('/api', opendata_quotamesg);
+
+var opendata_quotaok = require('./api/department/opendata_quotaok');
+App.use('/api', opendata_quotaok);

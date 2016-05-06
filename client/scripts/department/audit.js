@@ -4,117 +4,40 @@ var Audit = angular.module('Department.Audit', ['ui.router']);
 /** Main Controller */
 Audit.controller('Department.Audit.Controller.Main', ['$rootScope', '$scope', '$q', 'Department.Audit.Service.Http',
   function($rootScope, $scope, $q, Http) {
+    $scope.DeptAudit = {};
     var _httpParams = {};
-    console.log($rootScope.User);
+    _httpParams.limit = 10;
+    _httpParams.skip = 0;
 
     // init
-    getAuditList(_httpParams);
+    getAuditList();
 
-    Http.getAuditTotal().then(function(result) {
-      $scope.auditTotal = result.data.body[0].INVENTORY_NUM;
-    });
-
-    Http.getShareLevelFilter().then(function(result) {
-      $scope.shareLevelList = result.data.body;
-    });
-
-    Http.getSpatialFilter().then(function(result) {
-      $scope.areaPeriodList = result.data.body;
-    });
-
-    Http.getAuditStatusFilter().then(function(result) {
-      $scope.auditStatusList = result.data.body;
-    });
-
-    function getAuditList(_httpParams) {
+    function getAuditList() {
       Http.getAuditList(_httpParams).then(function(result) {
         $scope.auditList = result.data.body;
-        //  $scope.Paging.totalItems = data.head.total;
       });
     }
 
-    // filter by share level
-    $scope.shareLvSelection = [];
-    $scope.getAuListBySl = function(item) {
-      var idx = $scope.shareLvSelection.indexOf(item.SYS_DICT_ID);
-      if (idx > -1) {
-        $scope.shareLvSelection = [];
-      } else {
-        $scope.shareLvSelection = item.SYS_DICT_ID;
-      }
-      _httpParams.SHARE_LEVEL = $scope.shareLvSelection;
+    $scope.searchDeptAuditByName = function() {
+      _httpParams.quota_name = $scope.DeptAudit.quota_name_filter;
       _httpParams.limit = 10;
       _httpParams.skip = 0;
-      getAuditList(_httpParams);
+      getAuditList();
     }
 
-    // filter by partial
-    $scope.areaSelection = [];
-    $scope.getAuListByAP = function(item) {
-      var idx = $scope.areaSelection.indexOf(item.SYS_DICT_ID);
-      // is currently selected
-      if (idx > -1) {
-        $scope.areaSelection.splice(idx, 1);
-      }
-      // is newly selected
-      else {
-        $scope.areaSelection.push(item.SYS_DICT_ID);
-      }
-      console.log($scope.areaSelection);
 
-      _httpParams.AREA_DATA_LEVEL = $scope.areaSelection;
-      _httpParams.limit = 10;
-      _httpParams.skip = 0;
-      getAuditList(_httpParams);
-    }
-
-    // filter by audit status
-    $scope.statusSelection = [];
-    $scope.getAuListBySta = function(item) {
-      var idx = $scope.statusSelection.indexOf(item.AUDITNAME);
-      if (idx > -1) {
-        $scope.statusSelection = [];
-      } else {
-        $scope.statusSelection = item.AUDITNAME;
-      }
-      _httpParams.AUDIT_STATUS = item.AUDIT_STATUS;
-      _httpParams.limit = 10;
-      _httpParams.skip = 0;
-      getAuditList(_httpParams);
-    }
-
-    // share level all
-    $scope.getShareLevelAll = function() {
-      $scope.shareLvSelection = [];
-      _httpParams.SHARE_LEVEL = null;
-      _httpParams.limit = 10;
-      _httpParams.skip = 0;
-      getAuditList(_httpParams);
-    }
-
-    // get spatial all
-    $scope.getSpatialAll = function() {
-      $scope.areaSelection = [];
-      _httpParams.AREA_DATA_LEVEL = null;
-      _httpParams.limit = 10;
-      _httpParams.skip = 0;
-      getAuditList(_httpParams);
-    }
-
-    // get status all
-    $scope.getStatusAll = function() {
-      $scope.statusSelection = [];
-      _httpParams.AUDIT_STATUS = null;
-      _httpParams.limit = 10;
-      _httpParams.skip = 0;
-      getAuditList(_httpParams);
-    }
   }
 ])
 
 
 Audit.controller('Department.Audit.Controller.info', ['$rootScope', '$scope', '$state', '$q', 'Department.Audit.Service.Http', '$stateParams',
   function($rootScope, $scope, $state, $q, Http, $stateParams) {
+    // get audit detail by id
+    Http.getAuditDetail($stateParams.AUDITID).then(function(result) {
+      $scope.AuditDetail = result.data.body[0];
+      console.log($scope.AuditDetail);
+    })
+
     // login Department
     $scope.Tab = {};
 
@@ -142,18 +65,13 @@ Audit.controller('Department.Audit.Controller.info', ['$rootScope', '$scope', '$
       }
     }
 
+
+
     $scope.submitAudit = function() {
-      var AUDITOR = $rootScope.User.PERSON_NAME;
-      var auditInfo = _.assign($scope.AuditInfo, {
-        "AUDITOR": AUDITOR
-      }, {
-        "ID": auditId
-      });
-      console.log(auditInfo);
-      Http.updateAuditDetail(auditInfo).then(function(result) {
+      $scope.AuditInfo.id = $scope.AuditDetail.id;
+      Http.updateAuditDetail($scope.AuditInfo).then(function(result) {
         if (200 == result.data.head.status) {
           alert('审核成功');
-          var idx = $scope.auditList.indexOf(auditId);
           $state.go("main.department.audit", {}, {
             reload: true
           });
@@ -170,41 +88,9 @@ Audit.factory('Department.Audit.Service.Http', ['$http', '$q', 'API',
   function($http, $q, API) {
     var path = API.path;
 
-    function getAuditTotal(params) {
-      return $http.get(
-        path + '/openInventory/countAll', {
-          params: params
-        }
-      )
-    };
-
-    function getShareLevelFilter(params) {
-      return $http.get(
-        path + '/openInventory/countByShareLevel', {
-          params: params
-        }
-      )
-    }
-
-    function getSpatialFilter(params) {
-      return $http.get(
-        path + '/openInventory/countBySpatial', {
-          params: params
-        }
-      )
-    }
-
-    function getAuditStatusFilter(params) {
-      return $http.get(
-        path + '/openInventory/countByAuditStatus', {
-          params: params
-        }
-      )
-    }
-
     function getAuditList(params) {
       return $http.get(
-        path + '/openInventory/inventoryList', {
+        path + '/opendata_quotalist', {
           params: params
         }
       )
@@ -212,7 +98,7 @@ Audit.factory('Department.Audit.Service.Http', ['$http', '$q', 'API',
 
     function getAuditDetail(params) {
       return $http.get(
-        path + '/openInventory/openInventoryInfo', {
+        path + '/opendata_quotamesg', {
           params: params
         }
       )
@@ -220,16 +106,12 @@ Audit.factory('Department.Audit.Service.Http', ['$http', '$q', 'API',
 
     function updateAuditDetail(data) {
       return $http.put(
-        path + '/openInventory/updateAuditStatus', {
+        path + '/opendata_quotaok', {
           data: data
         }
       )
     }
     return {
-      getAuditTotal: getAuditTotal,
-      getShareLevelFilter: getShareLevelFilter,
-      getSpatialFilter: getSpatialFilter,
-      getAuditStatusFilter: getAuditStatusFilter,
       getAuditList: getAuditList,
       getAuditDetail: getAuditDetail,
       updateAuditDetail: updateAuditDetail
