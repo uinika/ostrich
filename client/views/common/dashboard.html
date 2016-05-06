@@ -113,152 +113,35 @@
         <div class="pull-right">更多...</div>
       </div>
         <div class='panel-body' >
-      <!-- Nav tabs -->
-          <!-- <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="main.dashboard #shenggongshangju" aria-controls="shenggongshangju" role="tab" data-toggle="tab">省工商局</a></li>
-            <li role="presentation"><a href="main.dashboard #shengdishuiju" aria-controls="shengdishuiju" role="tab" data-toggle="tab">省地税局</a></li>
-            <li role="presentation"><a href="main.dashboard #shengguoshuiju" aria-controls="shengguoshuiju" role="tab" data-toggle="tab">省国税局</a></li>
-            <li role="presentation"><a href="main.dashboard #shengjingxinwei" aria-controls="shengjingxinwei" role="tab" data-toggle="tab">省经信委</a></li>
-          </ul> -->
-          <!-- Tab panes -->
-          <!-- <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active" id="shenggongshangju">
-              <table class='table table-hover table-condensed table-striped'>
-                <thead>
-                  <tr>
-                    <th>发布日期</th>
-                    <th>指标名称</th>
-                    <th>共享频率</th>
-                    <th>空间范围</th>
-                    <th>数据级别</th>
-                    <th>提供部门</th>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr ng-repeat='requirement in Requirements'>
-                    <td>{{requirement.CREATE_TIME | date:'yyyy-MM-dd HH：mm：ss'}}</td>
-                    <td>{{1}}</td>
-                    <td>{{1}}</td>
-                    <td>{{1}}</td>
-                    <td>{{1}}</td>
-                    <td>{{1}}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
 
-            <div role="tabpanel" class="tab-pane" id="shengdishuiju">
-              <table class='table table-hover table-condensed table-striped'>
-                <thead>
-                  <tr>
-                    <th>发布日期</th>
-                    <th>指标名称</th>
-                    <th>共享频率</th>
-                    <th>空间范围</th>
-                    <th>数据级别</th>
-                    <th>提供部门</th>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr ng-repeat='requirement in Requirements'>
-                    <td>{{requirement.CREATE_TIME | date:'yyyy-MM-dd HH：mm：ss'}}</td>
-                    <td>{{2}}</td>
-                    <td>{{2}}</td>
-                    <td>{{2}}</td>
-                    <td>{{2}}</td>
-                    <td>{{2}}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="shengguoshuiju">
-              <table class='table table-hover table-condensed table-striped'>
-                <thead>
-                  <tr>
-                    <th>发布日期</th>
-                    <th>指标名称</th>
-                    <th>共享频率</th>
-                    <th>空间范围</th>
-                    <th>数据级别</th>
-                    <th>提供部门</th>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr ng-repeat='requirement in Requirements'>
-                    <td>{{requirement.CREATE_TIME | date:'yyyy-MM-dd HH：mm：ss'}}</td>
-                    <td>{{3}}</td>
-                    <td>{{3}}</td>
-                    <td>{{3}}</td>
-                    <td>{{3}}</td>
-                    <td>{{3}}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="shengjingxinwei">
-              <table class='table table-hover table-condensed table-striped'>
-                <thead>
-                  <tr>
-                    <th>发布日期</th>
-                    <th>指标名称</th>
-                    <th>共享频率</th>
-                    <th>空间范围</th>
-                    <th>数据级别</th>
-                    <th>提供部门</th>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr ng-repeat='requirement in Requirements'>
-                    <td>{{requirement.CREATE_TIME | date:'yyyy-MM-dd HH：mm：ss'}}</td>
-                    <td>{{4}}</td>
-                    <td>{{4}}</td>
-                    <td>{{4}}</td>
-                    <td>{{4}}</td>
-                    <td>{{4}}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div> -->
+              <uib-tabset active="activeForm">
+                <uib-tab ng-repeat="followDep in followDeps" ng-click='select(followDep.follow_dep_id)' index="$index + 1" heading="{{followDep.follow_dep_name}}">
+                  <table class='table table-hover table-condensed table-striped'>
+                    <thead>
+                      <tr>
+                        <th>发布日期</th>
+                        <th>指标名称</th>
+                        <th>共享频率</th>
+                        <th>空间范围</th>
+                        <th>数据级别</th>
+                        <th>提供部门</th>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat='indicator in followDepIndicators'>
+                        <td>{{indicator.create_time | date:'yyyy-MM-dd'}}</td>
+                        <td>{{indicator.quota_name}}</td>
+                        <td>{{indicator.share_frequency}}</td>
+                        <td>{{indicator.area_range}}</td>
+                        <td>{{indicator.share_level}}</td>
+                        <td>{{indicator.dep_name}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </uib-tab>
+            </uib-tabset>
 
-          <ul class="nav nav-tabs" role="tablist" >
-            <li role="presentation"  ng-repeat="followDep in followDeps" ng-class="{true: 'active', false: 'inactive'}[index == 0]">
-              <a ng-click='index = false' aria-controls="info"  role="tab" data-toggle="tab">
-                {{followDep.follow_dep_name}}
-              </a>
-            </li>
-          </ul>
-          <div class="tab-content">
-            <div role="tabpanel" class="tab-pane " ng-class="{true: 'active', false: 'inactive'}[!exampData.show]">
-              <table class='table table-hover table-condensed table-striped'>
-                <thead>
-                  <tr>
-                    <th>发布日期</th>
-                    <th>指标名称</th>
-                    <th>共享频率</th>
-                    <th>空间范围</th>
-                    <th>数据级别</th>
-                    <th>提供部门</th>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr ng-repeat='indicator in followDepIndicators'>
-                    <td>{{indicator.create_time | date:'yyyy-MM-dd'}}</td>
-                    <td>{{indicator.quota_name}}</td>
-                    <td>{{indecator.share_frequency}}</td>
-                    <td>{{indecator.area_range}}</td>
-                    <td>{{indecator.share_level}}</td>
-                    <td>{{indecator.dep_name}}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
        </div>
     </div>
   </section>

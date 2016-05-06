@@ -11,5 +11,19 @@
     "area_range": "分区/地州数据",
     "share_level": "全开放",
     "dep_name": "公安局"
+  },{
+    "create_time":1457835272000,
+    "quota_name": "各区犯罪率统计清单",
+    "share_frequency": "月度",
+    "area_range": "分区/地州数据",
+    "share_level": "全开放",
+    "dep_name": "公安局"
+  },{
+    "create_time":1457835272000,
+    "quota_name": "各区犯罪率统计清单",
+    "share_frequency": "月度",
+    "area_range": "分区/地州数据",
+    "share_level": "全开放",
+    "dep_name": "公安局"
   }]
 }

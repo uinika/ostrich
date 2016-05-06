@@ -1,5 +1,5 @@
 'use strict';
-var Dashboard = angular.module('Dashboard', ['ui.router']);
+var Dashboard = angular.module('Dashboard', ['ui.router','ui.bootstrap']);
 
 /** Dashboard Controller */
 Dashboard.controller('Dashboard.Controller.Main', ['$scope', 'Dashboard.Service.Http',
@@ -39,25 +39,31 @@ Dashboard.controller('Dashboard.Controller.Main', ['$scope', 'Dashboard.Service.
         $scope.requireDepartment_number = result.data.body[0].department_number;
       }
     });
-
+    $scope.select = function(param){
+      console.log(param);
+      Http.getDataQuota({
+        follow_dep_id: param
+      }).then(function(result){
+          $scope.followDepIndicators = result.data.body;
+      });
+    }
     Http.getUserDep({
-      // id: $rootScope.User.id
-      id:  "29"
-    }).then(function(result) {
-      var followDepId = "";
-      if (200 == result.data.head.status) {
-        $scope.followDeps = result.data.body;
-        followDepId = $scope.followDeps[0].follow_dep_id;
-      }
-      return followDepId;
-    }).then(function(followDepId){
-        Http.getDataQuota({
-          follow_dep_id: followDepId
-        }).then(function(result1){
-            console.log(result1);
-            $scope.followDepIndicator = result1.data.body;
-        });
-   });
+        // id: $rootScope.User.id
+        id:  "29"
+      }).then(function(result) {
+        var followDepId = "";
+        if (200 == result.data.head.status) {
+          $scope.followDeps = result.data.body;
+          followDepId = $scope.followDeps[0].follow_dep_id;
+        }
+        return followDepId;
+      }).then(function(followDepId){
+          Http.getDataQuota({
+            follow_dep_id: followDepId
+          }).then(function(result1){
+              $scope.followDepIndicators = result1.data.body;
+          });
+     });
  }
 ])
 
