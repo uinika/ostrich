@@ -16,25 +16,28 @@
           </div>
           <div class='bureau-list'>
             <div ng-repeat='bureau in Bureaus' class='bureau-item col-md-3'>
-              <a ui-sref='main.inventory.detail({departmentID: bureau.ID})' class='thumbnail'>
-                <img ng-src='../styles/images/bureau/{{::bureau.DEP_EN_NAME}}' title='{{::bureau.DEP_NAME}}'>
+              <a ui-sref='main.inventory.detail({departmentID: bureau.id})' class='thumbnail'>
+                <img ng-src='../styles/images/bureau/{{::bureau.dep_en_name}}' title='{{::bureau.dep_name}}'>
               </a>
               <div class="caption">
-                {{bureau.DEP_SHORT_NAME}}
+                {{bureau.dep_short_name}}
               </div>
             </div>
           </div>
-          <!-- Will be removed --> 
+          <!-- Will be removed -->
         </div>
       </div>
     </div>
     <div class='right col-md-4'>
       <div class='panel panel-default pannel-patch'>
         <div class='panel-heading'>
-          <i class='fa fa-server'> 清单总览</i>
+          <i class='fa fa-server'> 指标总览</i>
         </div>
-        <div class='panel-body'>
-          <wiserv-inventory-overview-chart/>
+        <div class='quota_number panel-body'>
+          <!-- <wiserv-inventory-overview-chart/> -->
+          <div>指标总数<span class='num'>{{quota_number}}</span>个</div>
+          <div>指标提供部门<span class='num'>{{quotaDepartment_number}}</span>个</div>
+
         </div>
       </div>
     </div>
@@ -44,7 +47,10 @@
           <i class='fa fa-share-alt'> 需求总览</i>
         </div>
         <div class='panel-body'>
-          <wiserv-requirement-overview-chart/>
+          <!-- <wiserv-requirement-overview-chart/> -->
+          <div>需求总数<span class='num'>{{require_number}}</span>个</div>
+          <div>需求涉及部门<span class='num'>{{requireDepartment_number}}</span>个</div>
+
         </div>
       </div>
     </div>
@@ -53,21 +59,22 @@
     <div class='left col-md-6'>
       <div class='panel panel-default pannel-patch'>
         <div class='panel-heading'>
-          <i class='fa fa-cart-arrow-down'> 最新资源</i>
+          <i class='fa fa-cart-arrow-down'> 最新指标</i>
+          <div class="pull-right">更多...</div>
         </div>
         <table class='table table-hover table-condensed table-striped'>
           <thead>
             <tr>
               <th>发布日期</th>
-              <th>清单名称</th>
-              <th>提供单位</th>
+              <th>指标名称</th>
+              <th>提供部门</th>
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat='inventory in Inventories'>
-              <td>{{inventory.CREATE_TIME | date:'yyyy-MM-dd'}}</td>
-              <td>{{inventory.DATA_NAME}}</td>
-              <td>{{inventory.DEP_NAME}}</td>
+            <tr ng-repeat='indicator in NewIndicators'>
+              <td>{{indicator.create_time | date:'yyyy-MM-dd'}}</td>
+              <td>{{indicator.quota_name}}</td>
+              <td>{{indicator.share_dep}}</td>
             </tr>
           </tbody>
         </table>
@@ -77,6 +84,7 @@
       <div class='panel panel-default pannel-patch'>
         <div class='panel-heading'>
           <i class='fa fa-pencil-square-o'> 最新需求</i>
+          <div class="pull-right">更多...</div>
         </div>
         <table class='table table-hover table-condensed table-striped'>
           <thead>
@@ -88,9 +96,9 @@
           </thead>
           <tbody>
             <tr ng-repeat='requirement in Requirements'>
-              <td>{{requirement.CREATE_TIME | date:'yyyy-MM-dd'}}</td>
-              <td>{{requirement.REQUIREMENT_NAME}}</td>
-              <td>{{requirement.DEP_NAME}}</td>
+              <td>{{requirement.create_time | date:'yyyy-MM-dd'}}</td>
+              <td>{{requirement.quota_name}}</td>
+              <td>{{requirement.response_dep_name}}</td>
             </tr>
           </tbody>
         </table>
@@ -102,17 +110,18 @@
     <div class='panel panel-default'>
       <div class='panel-heading'>
         <i class='fa fa-bar-chart'> 关注部门指标</i>
+        <div class="pull-right">更多...</div>
       </div>
-      <div class='panel-body'>
+        <div class='panel-body' >
       <!-- Nav tabs -->
-          <ul class="nav nav-tabs" role="tablist">
+          <!-- <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active"><a href="main.dashboard #shenggongshangju" aria-controls="shenggongshangju" role="tab" data-toggle="tab">省工商局</a></li>
             <li role="presentation"><a href="main.dashboard #shengdishuiju" aria-controls="shengdishuiju" role="tab" data-toggle="tab">省地税局</a></li>
             <li role="presentation"><a href="main.dashboard #shengguoshuiju" aria-controls="shengguoshuiju" role="tab" data-toggle="tab">省国税局</a></li>
             <li role="presentation"><a href="main.dashboard #shengjingxinwei" aria-controls="shengjingxinwei" role="tab" data-toggle="tab">省经信委</a></li>
-          </ul>
+          </ul> -->
           <!-- Tab panes -->
-          <div class="tab-content">
+          <!-- <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="shenggongshangju">
               <table class='table table-hover table-condensed table-striped'>
                 <thead>
@@ -214,10 +223,44 @@
                 </tbody>
               </table>
             </div>
-          </div>
-      </div>
-    </div>
+          </div> -->
 
+          <ul class="nav nav-tabs" role="tablist" >
+            <li role="presentation"  ng-repeat="followDep in followDeps" ng-class="{true: 'active', false: 'inactive'}[index == 0]">
+              <a ng-click='index = false' aria-controls="info"  role="tab" data-toggle="tab">
+                {{followDep.follow_dep_name}}
+              </a>
+            </li>
+          </ul>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane " ng-class="{true: 'active', false: 'inactive'}[!exampData.show]">
+              <table class='table table-hover table-condensed table-striped'>
+                <thead>
+                  <tr>
+                    <th>发布日期</th>
+                    <th>指标名称</th>
+                    <th>共享频率</th>
+                    <th>空间范围</th>
+                    <th>数据级别</th>
+                    <th>提供部门</th>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat='indicator in followDepIndicators'>
+                    <td>{{indicator.create_time | date:'yyyy-MM-dd'}}</td>
+                    <td>{{indicator.quota_name}}</td>
+                    <td>{{indecator.share_frequency}}</td>
+                    <td>{{indecator.area_range}}</td>
+                    <td>{{indecator.share_level}}</td>
+                    <td>{{indecator.dep_name}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+       </div>
+    </div>
   </section>
 
 </div>

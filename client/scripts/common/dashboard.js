@@ -4,35 +4,22 @@ var Dashboard = angular.module('Dashboard', ['ui.router']);
 /** Dashboard Controller */
 Dashboard.controller('Dashboard.Controller.Main', ['$scope', 'Dashboard.Service.Http',
   function($scope, Http) {
-    // Datas List
-    Http.getInventory({
+    // new data_quato  List
+    Http.getDataQuotaNew({
       skip: 0,
       limit: 6
     }).then(function(result) {
       if (200 == result.data.head.status) {
-        $scope.Inventories = result.data.body;
+        $scope.NewIndicators = result.data.body;
       }
     });
-    Http.getRequirement({
+    Http.getDataRequirementNew({
       skip: 0,
-      limit: 7
+      limit: 6
     }).then(function(result) {
       if (200 == result.data.head.status) {
         $scope.Requirements = result.data.body;
       }
-    });
-    // Echarts Graph
-    $scope.QInventoryOverview = Http.getInventoryOverview({
-      startTime: 0,
-      endTime: 10
-    });
-    $scope.QRequirementOverview = Http.getRequirementOverview({
-      startTime: 0,
-      endTime: 10
-    });
-    $scope.QInventoryStatistic = Http.getInventoryStatistic({
-      skip: 0,
-      limit: 10
     });
     // Bureaus logo grid
     Http.getDepartments().then(function(result) {
@@ -40,51 +27,90 @@ Dashboard.controller('Dashboard.Controller.Main', ['$scope', 'Dashboard.Service.
         $scope.Bureaus = result.data.body;
       }
     });
+    Http.getDataquotaSummary().then(function(result) {
+      if (200 == result.data.head.status) {
+        $scope.quota_number = result.data.body[0].data_quota_number;
+        $scope.quotaDepartment_number = result.data.body[0].department_number;
+      }
+    });
+    Http.getDataRequirementSummary().then(function(result) {
+      if (200 == result.data.head.status) {
+        $scope.require_number = result.data.body[0].data_quota_number;
+        $scope.requireDepartment_number = result.data.body[0].department_number;
+      }
+    });
 
-  }
+    Http.getUserDep({
+      // id: $rootScope.User.id
+      id:  "29"
+    }).then(function(result) {
+      var followDepId = "";
+      if (200 == result.data.head.status) {
+        $scope.followDeps = result.data.body;
+        followDepId = $scope.followDeps[0].follow_dep_id;
+      }
+      return followDepId;
+    }).then(function(followDepId){
+        Http.getDataQuota({
+          follow_dep_id: followDepId
+        }).then(function(result1){
+            console.log(result1);
+            $scope.followDepIndicator = result1.data.body;
+        });
+   });
+ }
 ])
 
 /* HTTP Factory */
 Dashboard.factory('Dashboard.Service.Http', ['$http', 'API',
   function($http, API) {
     var path = API.path;
-    function getInventory(params) {
+    function getDataQuotaNew(params) {
       return $http.get(
-        path + '/inventory', {params: params}
+        path + '/data_quota/new', {params: params}
       )
     };
-    function getInventoryOverview(params) {
+    function getDataRequirementNew(params) {
       return $http.get(
-        path + '/inventory/overview', {params: params}
-      )
-    };
-    function getRequirement(params) {
-      return $http.get(
-        path + '/requirement', {params: params}
-      )
-    };
-    function getRequirementOverview(params) {
-      return $http.get(
-        path + '/requirement/overview', {params: params}
-      )
-    };
-    function getInventoryStatistic(params) {
-      return $http.get(
-        path + '/inventory/statistic', {params: params}
+        path + '/data_requiement/new', {params: params}
       )
     };
     function getDepartments() {
       return $http.get(
-        path + '/dep'
+        path + '/department'
       )
     }
+    function getDataquotaSummary(){
+      return $http.get(
+        path + '/data_quota/summary'
+      )
+    }
+    function getDataRequirementSummary(){
+      return $http.get(
+        path + '/data_requiement/summary'
+      )
+    }
+    function getUserDep(params){
+      return $http.get(
+        path + '/user_dep',{params: params}
+      )
+    }
+    function getDataQuota(params){
+      return $http.get(
+        path + '/data_quota',{params: params}
+      )
+    }
+
+
     return {
-      getInventory: getInventory,
-      getInventoryOverview: getInventoryOverview,
-      getRequirement: getRequirement,
-      getRequirementOverview: getRequirementOverview,
-      getInventoryStatistic: getInventoryStatistic,
-      getDepartments: getDepartments
+      getDataQuotaNew: getDataQuotaNew,
+      getDataRequirementNew: getDataRequirementNew,
+      getDepartments: getDepartments,
+      getDataquotaSummary: getDataquotaSummary,
+      getDataRequirementSummary: getDataRequirementSummary,
+      getUserDep: getUserDep,
+      getDataQuota: getDataQuota
+
     }
   }
 ]);
