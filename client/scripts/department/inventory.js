@@ -4,10 +4,7 @@ var DInventory = angular.module('Department.Inventory', ['ui.router']);
 /** Inventory Controller */
 DInventory.controller('Department.Inventory.Controller.Main', ['$scope', '$q', 'Department.Inventory.Service.Http',
   function($scope, $q, Http) {
-    var SHARE_FREQUENCY = 1;
-    var DATA_LEVEL = 2;
-    var SHARE_LEVEL = 3;
-
+    $scope.DepartDataQuota = {};
     var _httpParams = {};
     _httpParams.limit = 10;
     _httpParams.skip = 0;
@@ -20,24 +17,6 @@ DInventory.controller('Department.Inventory.Controller.Main', ['$scope', '$q', '
       });
     }
 
-    // Get system dict
-    Http.getSystemDictByCatagory({
-      'dict_category': SHARE_FREQUENCY
-    }).then(function(result) {
-      $scope.shareFrequencyList = result.data.body;
-    });
-
-    Http.getSystemDictByCatagory({
-      'dict_category': SHARE_LEVEL
-    }).then(function(result) {
-      $scope.shareLevelList = result.data.body;
-    });
-
-    Http.getSystemDictByCatagory({
-      'dict_category': DATA_LEVEL
-    }).then(function(result) {
-      $scope.dataLevelList = result.data.body;
-    });
 
     //init
     getDepartmentQuotaList(_httpParams);
@@ -119,6 +98,13 @@ DInventory.controller('Department.Inventory.Controller.Main', ['$scope', '$q', '
       getDepartmentQuotaList(_httpParams);
     }
 
+    // search by name
+    $scope.searchDeptDataQuotaByName = function() {
+      _httpParams.quota_name = $scope.DepartDataQuota.quota_name_filter;
+      _httpParams.limit = 10;
+      _httpParams.skip = 0;
+      getDepartmentQuotaList(_httpParams);
+    }
   }
 ])
 
@@ -252,7 +238,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$rootScope', 
         $scope.dataLevelSelection.push(item.id);
       }
     };
-    
+
   }
 ])
 
@@ -291,16 +277,9 @@ DInventory.factory('Department.Inventory.Service.Http', ['$http', '$q', 'API',
       )
     };
 
-    function getSystemDictByCatagory(params) {
-      return $http.get(
-        path + '/sys_dict', {
-          params: params
-        }
-      )
-    };
+
     return {
       saveDataQuota: saveDataQuota,
-      getSystemDictByCatagory: getSystemDictByCatagory,
       getDepartmentList: getDepartmentList,
       getDepartQuotaList: getDepartQuotaList,
       getQuotaDetail: getQuotaDetail

@@ -4,6 +4,27 @@ var Department = angular.module('Department', ['ui.router']);
 /** Main Controller */
 Department.controller('Department.Controller.Main', ['$scope', '$q', 'Department.Service.Http', '$sce',
   function($scope, $q, Http, $sce) {
+    var SHARE_FREQUENCY = 1;
+    var DATA_LEVEL = 2;
+    var SHARE_LEVEL = 3;
+    // Get system dict
+    Http.getSystemDictByCatagory({
+      'dict_category': SHARE_FREQUENCY
+    }).then(function(result) {
+      $scope.shareFrequencyList = result.data.body;
+    });
+
+    Http.getSystemDictByCatagory({
+      'dict_category': SHARE_LEVEL
+    }).then(function(result) {
+      $scope.shareLevelList = result.data.body;
+    });
+
+    Http.getSystemDictByCatagory({
+      'dict_category': DATA_LEVEL
+    }).then(function(result) {
+      $scope.dataLevelList = result.data.body;
+    });
     //var starTime = getFirstDayMonth();
     //var endTime = getNowDate();
 
@@ -139,7 +160,16 @@ Department.factory('Department.Service.Http', ['$http', '$q', 'API',
         }
       )
     }
+
+    function getSystemDictByCatagory(params) {
+      return $http.get(
+        path + '/sys_dict', {
+          params: params
+        }
+      )
+    };
     return {
+      getSystemDictByCatagory: getSystemDictByCatagory,
       getInventoryTotal: getInventoryTotal,
       getShareTotal: getShareTotal,
       getRequirementTotal: getRequirementTotal,

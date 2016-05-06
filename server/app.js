@@ -46,6 +46,10 @@ App.use('/api', data_quota);
 
 var data_quota_detail = require('./api/department/data_quota_detail');
 App.use('/api', data_quota_detail);
+
+var sharedata_quotalist = require('./api/department/sharedata_quotalist');
+App.use('/api', sharedata_quotalist);
+
 /** user */
 var user = require('./api/user/user');
 App.use('/api', user);

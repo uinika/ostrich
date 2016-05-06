@@ -9,82 +9,76 @@ DepartmentShare.controller('DepartmentShare.Controller.Main', ['$rootScope', '$s
     _httpParams.limit = 10;
     _httpParams.skip = 0;
 
-    //init
-    getDepartmentShareList(_httpParams);
-
     function getDepartmentShareList(_httpParams) {
-      Http.inventoryList(_httpParams).then(function(result) {
+      Http.shareDataQuotaList(_httpParams).then(function(result) {
         $scope.depShareList = result.data.body;
         //  $scope.Paging.totalItems = data.head.total;
       });
     }
 
-    Http.countAll().then(function(result) {
-      if(200 == result.data.head.status){
-        $scope.DepartmentShare.countAll = result.data.body[0].NUMBER;
-      }
-    });
+    //init
+    getDepartmentShareList(_httpParams);
 
-    Http.countByShareLevel().then(function(result) {
-      $scope.shareLevelList = result.data.body;
-    });
-
-    Http.countBySpatial().then(function(result) {
-      $scope.areaPeriodList = result.data.body;
-    });
+    // share level all
+    $scope.getShareLevelAllForShare = function() {
+      $scope.shareLvShareSelection = [];
+      _httpParams.share_level = null;
+      _httpParams.limit = 10;
+      _httpParams.skip = 0;
+      getDepartmentShareList(_httpParams);
+    }
 
     // filter by share level
     $scope.shareLvShareSelection = [];
-    $scope.getIvntListBySl = function(item) {
-      var idx = $scope.shareLvShareSelection.indexOf(item.SYS_DICT_ID);
+    $scope.getShareDataQuotaListBySl = function(item) {
+      var idx = $scope.shareLvShareSelection.indexOf(item.id);
       if (idx > -1) {
         $scope.shareLvShareSelection = [];
       } else {
-        $scope.shareLvShareSelection = item.SYS_DICT_ID;
+        $scope.shareLvShareSelection = item.id;
       }
-      _httpParams.SHARE_LEVEL = $scope.shareLvShareSelection;
+      _httpParams.share_level = $scope.shareLvShareSelection;
+      _httpParams.limit = 10;
+      _httpParams.skip = 0;
+      getDepartmentShareList(_httpParams);
+    }
+
+    // get data level all
+    $scope.getDataLevelAllForShare = function() {
+      $scope.dataLevelShareSelection = [];
+      _httpParams.sys_dict_id = null;
       _httpParams.limit = 10;
       _httpParams.skip = 0;
       getDepartmentShareList(_httpParams);
     }
 
     // filter by partial
-    $scope.areaShareSelection = [];
-    $scope.getIvntListByAP = function(item) {
-      var idx = $scope.areaShareSelection.indexOf(item.SYS_DICT_ID);
+    $scope.dataLevelShareSelection = [];
+    $scope.getShareDataQuotaListByAP = function(item) {
+      var idx = $scope.dataLevelShareSelection.indexOf(item.id);
       // is currently selected
       if (idx > -1) {
-        $scope.areaShareSelection.splice(idx, 1);
+        $scope.dataLevelShareSelection.splice(idx, 1);
       }
       // is newly selected
       else {
-        $scope.areaShareSelection.push(item.SYS_DICT_ID);
+        $scope.dataLevelShareSelection.push(item.id);
       }
-      console.log($scope.areaShareSelection);
 
-      _httpParams.AREA_DATA_LEVEL = $scope.areaShareSelection;
+      _httpParams.sys_dict_id = $scope.dataLevelShareSelection;
       _httpParams.limit = 10;
       _httpParams.skip = 0;
       getDepartmentShareList(_httpParams);
     }
 
-    // share level all
-    $scope.getShareLevelAll = function() {
-      $scope.shareLvShareSelection = [];
-      _httpParams.SHARE_LEVEL = null;
+    // search by name
+    $scope.searchShareDataQuotaByName = function() {
+      _httpParams.quota_name = $scope.DepartmentShare.quota_name_filter;
       _httpParams.limit = 10;
       _httpParams.skip = 0;
       getDepartmentShareList(_httpParams);
     }
 
-    // get spatial all
-    $scope.getSpatialAll = function() {
-      $scope.areaShareSelection = [];
-      _httpParams.AREA_DATA_LEVEL = null;
-      _httpParams.limit = 10;
-      _httpParams.skip = 0;
-      getDepartmentShareList(_httpParams);
-    }
   }
 ])
 
@@ -92,7 +86,12 @@ DepartmentShare.controller('DepartmentShare.Controller.Main', ['$rootScope', '$s
 // Department share detail controller
 DepartmentShare.controller('DepartmentShare.Controller.detail', ['$rootScope', '$scope',  'DepartmentShare.Service.Http', '$stateParams' ,
   function($rootScope, $scope, Http, $stateParams) {
-    // TODO get department share detail
+    // get department share detail
+    Http.getQuotaDetail({
+      data_quota_id: $stateParams.ID
+    }).then(function(result) {
+
+    })
 
   }
 ])
@@ -101,31 +100,22 @@ DepartmentShare.controller('DepartmentShare.Controller.detail', ['$rootScope', '
 DepartmentShare.factory('DepartmentShare.Service.Http', ['$http', 'API',
   function($http, API) {
     var path = API.path;
-    function countAll(params) {
+    function shareDataQuotaList(params) {
       return $http.get(
-        path + '/shareInventory/countAll', {params: params}
+        path + '/sharedata_quotalist', {params: params}
       )
     };
-    function countByShareLevel(params) {
+
+    function getQuotaDetail(params) {
       return $http.get(
-        path + '/shareInventory/countByShareLevel', {params: params}
+        path + '/data_quota_detail', {
+          params: params
+        }
       )
-    };
-    function countBySpatial(params) {
-      return $http.get(
-        path + '/shareInventory/countBySpatial', {params: params}
-      )
-    };
-    function inventoryList(params) {
-      return $http.get(
-        path + '/shareInventory/inventoryList', {params: params}
-      )
-    };
+    }
     return {
-      countAll: countAll,
-      countByShareLevel: countByShareLevel,
-      countBySpatial: countBySpatial,
-      inventoryList: inventoryList
+      shareDataQuotaList: shareDataQuotaList,
+      getQuotaDetail: getQuotaDetail
     }
   }
 ]);

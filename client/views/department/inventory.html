@@ -13,8 +13,8 @@
             <span class='num'>{{ivntDepTotal}}</span>
           </li>
           <li role="presentation">
-            <input type="text" placeholder="请输入查询指标名称">
-            <button type="button" class="btn btn-primary">查询</button>
+            <input type="text" placeholder="请输入查询指标名称" ng-model='DepartDataQuota.quota_name_filter'>
+            <button type="button" class="btn btn-primary" ng-click='searchDeptDataQuotaByName()'>查询</button>
           </li>
           <li role="presentation">
             <button class='btn btn-primary' ui-sref='main.department.inventory.publish'>

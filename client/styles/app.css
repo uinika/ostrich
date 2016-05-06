@@ -472,6 +472,21 @@ html {
 #department-share .indicator-list ul.nav-filter li span i.fa-warning {
   color: #f0ad4e;
 }
+#department-share .indicator-list table tr span i {
+  font-size: 18px;
+}
+#department-share .indicator-list table tr span i.fa-eye {
+  color: #5bc0de;
+}
+#department-share .indicator-list table tr span i.fa-desktop {
+  color: #5bc0de;
+}
+#department-share .indicator-list table tr span i.fa-lock {
+  color: #5bc0de;
+}
+#department-share .indicator-list table tr span i.fa-warning {
+  color: #f0ad4e;
+}
 #department-share-detail {
   margin-left: 170px;
 }

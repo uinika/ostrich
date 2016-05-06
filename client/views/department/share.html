@@ -12,8 +12,8 @@
             <span class='num'>{{DepartmentShare.countAll}}</span>
           </li>
           <li role="presentation">
-            <input type="text" placeholder="请输入查询指标名称">
-            <button type="button" class="btn btn-primary">查询</button>
+            <input type="text" placeholder="请输入查询指标名称" ng-model='DepartmentShare.quota_name_filter'>
+            <button type="button" class="btn btn-primary" ng-click='searchShareDataQuotaByName()'>查询</button>
           </li>
         </ul>
       </div>
@@ -24,11 +24,10 @@
           <ul class="pager">
             共享级别
             <li role="presentation">
-              <a ng-class="{true: 'active', false: 'inactive'}[shareLvShareSelection.length == 0]" href="javascript:;" ng-click='getShareLevelAll()'>全部</a>
+              <a ng-class="{true: 'active', false: 'inactive'}[shareLvShareSelection.length == 0]" href="javascript:;" ng-click='getShareLevelAllForShare()'>全部</a>
             </li>
             <li role="presentation" ng-repeat='shareLevel in shareLevelList'>
-              <a ng-class="{true: 'active', false: 'inactive'}[shareLvShareSelection.indexOf(shareLevel.SYS_DICT_ID) > -1]" href="javascript:;" ng-click='getIvntListBySl(shareLevel)'>{{shareLevel.DICT_NAME}}
-                <span class='badge'>{{shareLevel.INVENTORY_NUM}}</span>
+              <a ng-class="{true: 'active', false: 'inactive'}[shareLvShareSelection.indexOf(shareLevel.id) > -1]" href="javascript:;" ng-click='getShareDataQuotaListBySl(shareLevel)'>{{shareLevel.dict_name}}
               </a>
             </li>
           </ul>
@@ -39,11 +38,10 @@
           <ul class="pager">
             空间范围
             <li role="presentation">
-              <a href="javascript:;" ng-class="{true: 'active', false: 'inactive'}[areaShareSelection.length == 0]" href="javascript:;" ng-click='getSpatialAll()'>全部</a>
+              <a href="javascript:;" ng-class="{true: 'active', false: 'inactive'}[dataLevelShareSelection.length == 0]" href="javascript:;" ng-click='getDataLevelAllForShare()'>全部</a>
             </li>
-            <li role="presentation" ng-repeat='areaPeriod in areaPeriodList'>
-              <a ng-class="{true: 'active', false: 'inactive'}[areaShareSelection.indexOf(areaPeriod.SYS_DICT_ID) > -1]" ng-checked="areaShareSelection.indexOf(areaPeriod.SYS_DICT_ID) > -1" ng-click='getIvntListByAP(areaPeriod)' href="javascript:;">{{areaPeriod.DICT_NAME}}
-                <span class='badge'>{{areaPeriod.INVENTORY_NUM}}</span>
+            <li role="presentation" ng-repeat='DataLevel in dataLevelList'>
+              <a ng-class="{true: 'active', false: 'inactive'}[dataLevelShareSelection.indexOf(DataLevel.id) > -1]" ng-checked="dataLevelShareSelection.indexOf(DataLevel.id) > -1" ng-click='getShareDataQuotaListByAP(DataLevel)' href="javascript:;">{{DataLevel.dict_name}}
               </a>
             </li>
           </ul>
@@ -73,7 +71,6 @@
               <span>
                 <i class='fa fa-warning'></i>&nbsp;暂不开放</span>
             </li>
-            <a ui-sref='main.department.share.detail'>共享指标详情</a>
           </ul>
         </div>
 
@@ -110,55 +107,50 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr ng-repeat='inventoryAttr in inventoryAttrList'>
+                    <tr ng-repeat='ShareDataQuota in depShareList'>
                       <td><input type='checkbox'/></td>
-                      <td></td>
+                      <td><div ng-if='ShareDataQuota.SHARELEVEL =="全开放" '><span>
+                        <i class='fa fa-eye'></i></span></div>
+                      <div ng-if='ShareDataQuota.SHARELEVEL =="政务云开放" '><span>
+                        <i class='fa fa-desktop'></i></span></div>
+                    <div ng-if='ShareDataQuota.SHARELEVEL =="授权开放" '><span>
+                      <i class='fa fa-lock'></i></span></div>
+                  <div ng-if='ShareDataQuota.SHARELEVEL =="暂不开放" '><span>
+                    <i class='fa fa-warning'></i></span></div></td>
                       <td>{{$index+1}}</td>
-                      <td>{{inventoryAttr.quotaNumber}}</td>
-                      <td>{{inventoryAttr.quotaName}}</td>
-                      <td>{{inventoryAttr.alias}}</td>
-                      <td>{{inventoryAttr.meterUnit}}</td>
-                      <td>{{inventoryAttr.quotaDetail}}</td>
-                      <td>{{inventoryAttr.calculateMethod}}</td>
+                      <td>{{ShareDataQuota.quota_sn}}</td>
+                      <td><a ui-sref='main.department.share.detail({ID:ShareDataQuota.id})'>{{ShareDataQuota.quota_name}}</a></td>
+                      <td>{{ShareDataQuota.alias}}</td>
+                      <td>{{ShareDataQuota.meter_unit}}</td>
+                      <td>{{ShareDataQuota.quota_detail}}</td>
+                      <td>{{ShareDataQuota.calculate_method}}</td>
                       <td>
-                        {{shareFreqArrShow}}
+                        {{ShareDataQuota.SHAREFREQUENCY}}
                       </td>
                       <td>
-                        {{dataInfo.areaPeriod}}
+                        {{ShareDataQuota.area_range}}
                       </td>
-                      <td>{{inventoryAttr.areaDataLevel}}</td>
-                      <td>{{loginUser.DEP_NAME}}
+                      <td>{{ShareDataQuota.REGIONALLEVEL}}</td>
+                      <td>{{ShareDataQuota.DEPNAME}}
 
                       </td>
                       <td>
-                        {{inventoryAttr.shareLevel}}
+                        {{ShareDataQuota.SHARELEVEL}}
                       </td>
                       <td>
-                        <div ng-repeat="qtype in  quotaTypeList">
-                          <div ng-if="qtype.ID == inventoryAttr.quotaType">
-                            {{qtype.DICT_NAME}}
-                          </div>
-                        </div>
+
                       </td>
-                      <td>{{inventoryAttr.dataPrecision}}</td>
-                      <td>{{inventoryAttr.dataLength}}</td>
-                      <td>{{inventoryAttr.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                      <td>{{ShareDataQuota.data_precision}}</td>
+                      <td>{{ShareDataQuota.data_length}}</td>
+                      <td>{{ShareDataQuota.create_time}}</td>
                       <td>
-                        <div ng-repeat="dataFormat in dataShowFormatList">
-                          <div ng-if="dataFormat.ID == inventoryAttr.dataShowFormat">
-                            {{dataFormat.DICT_NAME}}
-                          </div>
-                        </div>
+
                       </td>
                       <td>
-                        <div ng-repeat="qsflag in  secretFlagList">
-                          <div ng-if="qsflag.ID == inventoryAttr.secretFlag">
-                            {{qsflag.DICT_NAME}}
-                          </div>
-                        </div>
+                        {{ShareDataQuota.secret_flag}}
                       </td>
-                      <td>{{inventoryAttr.linkman}}</td>
-                      <td>{{inventoryAttr.contactPhone}}</td>
+                      <td>{{ShareDataQuota.linkman}}</td>
+                      <td>{{ShareDataQuota.contact_phone}}</td>
                     </tr>
                   </tbody>
                 </table>
