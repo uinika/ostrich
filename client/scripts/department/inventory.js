@@ -4,12 +4,14 @@ var DInventory = angular.module('Department.Inventory', ['ui.router']);
 /** Inventory Controller */
 DInventory.controller('Department.Inventory.Controller.Main', ['$scope', '$q', 'Department.Inventory.Service.Http',
   function($scope, $q, Http) {
+    var DEP_NAME = '统计局';
     $scope.DepartDataQuota = {};
     var _httpParams = {};
     _httpParams.limit = 10;
     _httpParams.skip = 0;
 
     function getDepartmentQuotaList(_httpParams) {
+      _httpParams.dep_name = DEP_NAME;
       Http.getDepartQuotaList(_httpParams).then(function(result) {
         console.log(result);
         $scope.depQuotaList = result.data.body;
@@ -226,7 +228,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$rootScope', 
     }
 
     $scope.dataLevelSelection = [];
-    $scope.toggleDataLevelSelection = function toggleDataLevelSelection(item) {
+    $scope.toggleDataLevelSelection = function(item) {
       var idx = $scope.dataLevelSelection.indexOf(item.id);
       // is currently selected
       if (idx > -1) {

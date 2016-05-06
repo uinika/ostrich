@@ -1,0 +1,29 @@
+{
+  "head": {
+    "status": 200,
+    "total": 1,
+    "token": "5E0EE650C86C2BDB7968F3AFA458C33A"
+  },
+  "body": [{
+    "id": "67312256-11f9-11e6-a5cf-507b9d1b58bb",
+    "dep_id": "2",
+    "requiement_name": "地区生产总值",
+    "requiement_desc": "2016年第1季度生产总",
+    "area_range": "四川省",
+    "linkman": "李一",
+    "phone": "028-555666",
+    "email": "123@123.com",
+    "create_user": "李一",
+    "create_time": "2016-05-04 21:09:15",
+    "response_dep_id": "1",
+    "responser": null,
+    "status": "0",
+    "response_time": null,
+    "response_content": null,
+    "share_frequency": "24f9bbe6-02f0-11e6-a52a-5cf9dd40ad7e",
+    "dep_name": "成都市教育局",
+    "area_range_name": null,
+    "response_dep_name": "成都市统计局",
+    "requiement": "县级数据"
+  }]
+}

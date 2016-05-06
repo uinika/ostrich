@@ -4,26 +4,56 @@ var DepartmentReq = angular.module('Department.Requirement', ['ui.router']);
 /** DepartmentReq Controller */
 DepartmentReq.controller('Department.Requirement.Controller.Main', ['$rootScope', '$scope', '$stateParams', 'Department.Inventory.Service.Component', 'Department.Requirement.Service.Http',
   function($rootScope, $scope, $stateParams, Component, Http) {
+    var DEP_ID = 1;
+    $scope.DeptRequirement = {};
+    var _httpParams = {};
+    _httpParams.limit = 10;
+    _httpParams.skip = 0;
     // init
-    getReqList();
+    getDeptRequirementList();
 
-    function getReqList() {
-      Http.getDepartmentRequirementList({
-        "skip": 0,
-        "limit": 10
-      }).then(function(result) {
+    function getDeptRequirementList() {
+      _httpParams.dep_id = DEP_ID;
+      Http.getDepartmentRequirementList(_httpParams).then(function(result) {
         $scope.requirementList = result.data.body;
       })
     }
 
+    $scope.dataLevelReqSelection = [];
+    $scope.toggleDataLevelReqSelection = function(item) {
+      var idx = $scope.dataLevelReqSelection.indexOf(item.id);
+      // is currently selected
+      if (idx > -1) {
+        $scope.dataLevelReqSelection.splice(idx, 1);
+      }
+
+      // is newly selected
+      else {
+        $scope.dataLevelReqSelection.push(item.id);
+      }
+    };
+
     $scope.publishReq = function() {
       $scope.Modal = {};
-      $scope.req = {};
+      $scope.Modal.DepRequirment = {};
+      var _httpPublishParams = {};
+      var dataRelationConfig = [];
+
       Component.popModal($scope, '发布', 'add-req-modal').result.then(function() {
-        Http.publishReq($scope.req).then(function(result) {
+        _($scope.dataLevelReqSelection).forEach(function(value) {
+          var req_sys_dict = {};
+          req_sys_dict.datarequiementId = $scope.Modal.DepRequirment.requiement_name;
+          req_sys_dict.sys_dict_id = value;
+          dataRelationConfig.push(req_sys_dict);
+        });
+
+        _httpPublishParams.dataRequiement = $scope.Modal.DepRequirment;
+        _httpPublishParams.dataRelationConfig = dataRelationConfig;
+
+        Http.publishRequirement(_httpPublishParams).then(function(result) {
           if (200 == result.data.head.status) {
             alert('发布成功');
-            getReqList();
+            getDeptRequirementList();
           } else {
             alert('发布失败');
           }
@@ -31,67 +61,117 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$rootScope'
       });
     }
 
-    $scope.updateReq = function(item) {
-      $scope.Modal = {};
-      $scope.req = item;
-
-      Component.popModal($scope, '修改', 'add-req-modal').result.then(function() {
-        Http.updateReq({
-          "ID" : $scope.req.ID,
-          "REQUIREMENT_NAME" : $scope.req.REQUIREMENT_NAME,
-          "REQUIREMENT_DESC" : $scope.req.REQUIREMENT_DESC,
-          "LINKMAN" : $scope.req.LINKMAN,
-          "EMAIL":$scope.req.EMAIL
-        }).then(function(result) {
-          if (200 == result.data.head.status) {
-            alert('修改成功');
-            getReqList();
-          } else {
-            alert('修改失败');
-          }
-        })
-      });
+    $scope.searchDeptReqByName = function() {
+      _httpParams.requiement_name = $scope.DeptRequirement.req_name_filter;
+      _httpParams.limit = 10;
+      _httpParams.skip = 0;
+      getDeptRequirementList();
     }
 
-    $scope.deleteReq = function(ID) {
-      Http.deleteReq(ID).then(function(result) {
-        if (200 == result.data.head.status) {
-          alert('删除成功');
-          getReqList();
-        } else {
-          alert('删除失败');
-        }
-      })
-    }
+    // $scope.updateReq = function(item) {
+    //   $scope.Modal = {};
+    //   $scope.req = item;
+    //
+    //   Component.popModal($scope, '修改', 'add-req-modal').result.then(function() {
+    //     Http.updateReq({
+    //       "ID" : $scope.req.ID,
+    //       "REQUIREMENT_NAME" : $scope.req.REQUIREMENT_NAME,
+    //       "REQUIREMENT_DESC" : $scope.req.REQUIREMENT_DESC,
+    //       "LINKMAN" : $scope.req.LINKMAN,
+    //       "EMAIL":$scope.req.EMAIL
+    //     }).then(function(result) {
+    //       if (200 == result.data.head.status) {
+    //         alert('修改成功');
+    //         getDeptRequirementList();
+    //       } else {
+    //         alert('修改失败');
+    //       }
+    //     })
+    //   });
+    // }
+    //
+    // $scope.deleteReq = function(ID) {
+    //   Http.deleteReq(ID).then(function(result) {
+    //     if (200 == result.data.head.status) {
+    //       alert('删除成功');
+    //       getDeptRequirementList();
+    //     } else {
+    //       alert('删除失败');
+    //     }
+    //   })
+    // }
 
   }
 ])
 
 /** DepartmentReq Controller */
-DepartmentReq.controller('Department.Requirement.Controller.detail', ['$scope', '$stateParams', 'Department.Requirement.Service.Http',
-  function( $scope, $stateParams, Http) {
-    console.log($stateParams.ID);
-    Http.getReqDetail({
-      "ID": $stateParams.ID
-    }).then(function(result) {
-      $scope.ReqDetail = result.data.body[0];
-    }).then(function(){
-      Http.getResponseList({
-        "REQUIREMENT_ID": $stateParams.ID
-      }).then(function(result) {
-        $scope.responseList = result.data.body;
-      })
-    })
-  }])
+// DepartmentReq.controller('Department.Requirement.Controller.detail', ['$scope', '$stateParams', 'Department.Requirement.Service.Http',
+//   function( $scope, $stateParams, Http) {
+//     console.log($stateParams.ID);
+//     Http.getReqDetail({
+//       "ID": $stateParams.ID
+//     }).then(function(result) {
+//       $scope.ReqDetail = result.data.body[0];
+//     }).then(function(){
+//       Http.getResponseList({
+//         "REQUIREMENT_ID": $stateParams.ID
+//       }).then(function(result) {
+//         $scope.responseList = result.data.body;
+//       })
+//     })
+//   }])
 
   /** DepartmentReq Controller */
   DepartmentReq.controller('Department.Requirement.Controller.confirm', ['$scope', '$stateParams', 'Department.Requirement.Service.Http', 'Department.Inventory.Service.Component' ,
     function( $scope, $stateParams, Http, Component) {
       $scope.Modal = {};
+      $scope.DeptRequirementConfirm = {};
 
-      $scope.toConfirm = function() {
-        // TODO get requirement detail by ID
+      var DEP_ID = 1;
+      $scope.DeptRequirement = {};
+      var _httpConfirmParams = {};
+      _httpConfirmParams.limit = 10;
+      _httpConfirmParams.skip = 0;
+      // init
+      getDeptRequirementConfirmList();
+
+      function getDeptRequirementConfirmList() {
+        _httpConfirmParams.response_dep_id = DEP_ID;
+        Http.getDepartmentRequirementList(_httpConfirmParams).then(function(result) {
+          $scope.requirementConfirmList = result.data.body;
+        })
+      }
+
+      $scope.searchDeptReqConfirmByName = function() {
+        _httpConfirmParams.requiement_name = $scope.DeptRequirementConfirm.req_name_filter;
+        _httpConfirmParams.limit = 10;
+        _httpConfirmParams.skip = 0;
+        getDeptRequirementConfirmList();
+      }
+
+      $scope.toConfirm = function(item) {
+        // get requirement detail
+        $scope.Modal.ReqDetail = item;
         Component.popModal($scope, '', 'confirm-req-modal').result.then(function() {
+          console.log($scope.Modal.ReqResponse);
+          $scope.Modal.ReqResponse.id = item.id;
+          Http.updateRequirement($scope.Modal.ReqResponse).then(function(result) {
+            if (200 == result.data.head.status) {
+              // 保存需求响应
+              Http.saveReqResponse({
+                requiement_id: item.id,
+                data_quota_id: $scope.Modal.ReqResponse.dataQuota
+              }).then(function(saveResult) {
+                if (200 == saveResult.data.head.status) {
+                  alert('确认成功');
+                  getDeptRequirementConfirmList();
+                }
+              })
+
+            } else {
+              alert('确认失败');
+            }
+          })
         });
       }
 
@@ -105,35 +185,50 @@ DepartmentReq.factory('Department.Requirement.Service.Http', ['$http', 'API',
 
     function getDepartmentRequirementList(params) {
       return $http.get(
-        path + '/requirement/getRequirementListByDep', {
+        path + '/data_requiement', {
           params: params
         }
       )
     };
 
-    function publishReq(data) {
+    function publishRequirement(data) {
       return $http.post(
-        path + '/requirement', {
+        path + '/data_requiement', {
           data: data
         }
       )
     }
 
-    function updateReq(data) {
+    function updateRequirement(data) {
       return $http.put(
-        path + '/requirement/' , {
+        path + '/data_requiement', {
           data: data
         }
       )
     }
 
-    function deleteReq(data) {
-      return $http.delete(
-        path + '/requirement/' , {
-          data:{"ID":data}
+    function saveReqResponse(data) {
+      return $http.post(
+        path + '/data_requiement_response', {
+          data: data
         }
       )
     }
+    // function updateReq(data) {
+    //   return $http.put(
+    //     path + '/requirement/' , {
+    //       data: data
+    //     }
+    //   )
+    // }
+    //
+    // function deleteReq(data) {
+    //   return $http.delete(
+    //     path + '/requirement/' , {
+    //       data:{"ID":data}
+    //     }
+    //   )
+    // }
 
     function getReqDetail(params) {
       return $http.get(
@@ -152,11 +247,11 @@ DepartmentReq.factory('Department.Requirement.Service.Http', ['$http', 'API',
     }
     return {
       getDepartmentRequirementList: getDepartmentRequirementList,
-      publishReq: publishReq,
-      updateReq: updateReq,
-      deleteReq: deleteReq,
+      publishRequirement: publishRequirement,
       getReqDetail: getReqDetail,
-      getResponseList: getResponseList
+      getResponseList: getResponseList,
+      updateRequirement: updateRequirement,
+      saveReqResponse: saveReqResponse
     }
   }
 ]);

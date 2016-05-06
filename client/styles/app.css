@@ -595,6 +595,21 @@ html {
 #department-requirement-confirm .indicator-list ul.nav-filter li span i.fa-times-circle-o {
   color: #d9534f;
 }
+#department-requirement-confirm .indicator-list table tr span {
+  padding: 0 15px;
+}
+#department-requirement-confirm .indicator-list table tr span i {
+  font-size: 18px;
+}
+#department-requirement-confirm .indicator-list table tr span i.fa-question-circle {
+  color: #f0ad4e;
+}
+#department-requirement-confirm .indicator-list table tr span i.fa-check-circle {
+  color: #5cb85c;
+}
+#department-requirement-confirm .indicator-list table tr span i.fa-times-circle-o {
+  color: #d9534f;
+}
 #department-requirement-confirm .publish-req-modal .help-info {
   font-size: 12px;
   color: #777;

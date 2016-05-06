@@ -50,6 +50,12 @@ App.use('/api', data_quota_detail);
 var sharedata_quotalist = require('./api/department/sharedata_quotalist');
 App.use('/api', sharedata_quotalist);
 
+var data_requiement = require('./api/department/data_requiement');
+App.use('/api', data_requiement);
+
+var data_requiement_response = require('./api/department/data_requiement_response');
+App.use('/api', data_requiement_response);
+
 /** user */
 var user = require('./api/user/user');
 App.use('/api', user);
