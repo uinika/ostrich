@@ -765,4 +765,10 @@ html {
 }
 #data-quota-main .right {
   padding-right: 0;
+  padding-left: 0;
+}
+#data-quota-list .input-patch {
+  position: relative;
+  top: -7px;
+  right: -12px;
 }

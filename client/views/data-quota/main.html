@@ -10,22 +10,22 @@
           <ol ui-tree-nodes="" ng-model="list">
             <li ng-repeat="item1 in list" ui-tree-node>
               <div ui-tree-handle>
-                {{item1.dict_name}}
+                <i class="fa fa-sort-desc"> {{item1.dict_name}}</i>
               </div>
               <ol ui-tree-nodes="" ng-model="item1.nodes">
                 <li ng-repeat="item2 in item1.nodes" ui-tree-node>
                   <div ui-tree-handle>
-                    {{item2.dep_name}}
+                    <span ui-sref="main.data-quota.list">{{item2.dep_name}}</span>
                   </div>
                   <ol ui-tree-nodes="" ng-model="item2.nodes">
                     <li ng-repeat="item3 in item2.nodes" ui-tree-node>
                       <div ui-tree-handle>
-                        {{item3.dep_name}}
+                        <span ui-sref="main.data-quota.list">{{item3.dep_name}}</span>
                       </div>
                       <ol ui-tree-nodes="" ng-model="item3.nodes">
                         <li ng-repeat="item4 in item3.nodes" ui-tree-node>
                           <div ui-tree-handle>
-                            {{item4.dep_name}}
+                            <span ui-sref="main.data-quota.list">{{item4.dep_name}}</span>
                           </div>
                         </li>
                       </ol>
