@@ -71,21 +71,6 @@ App.use('/api', opendata_quotamesg);
 var opendata_quotaok = require('./api/department/opendata_quotaok');
 App.use('/api', opendata_quotaok);
 
-/** data_quota_summary */
-var data_quota_Summary = require('./api/common/data_quota_Summary');
-App.use('/api', data_quota_Summary);
-/** data_requiement_summary */
-var data_requirement_Summary = require('./api/common/data_requirement_Summary');
-App.use('/api', data_requirement_Summary);
-/** data_quota_new */
-var data_quota_new = require('./api/common/data_quota_new');
-App.use('/api', data_quota_new);
-/** data_requiement_new */
-var data_requiement_new = require('./api/common/data_requiement_new');
-App.use('/api', data_requiement_new);
-/** user_dep */
-var user_dep = require('./api/common/user_dep');
-App.use('/api', user_dep);
-/** attention_dep_indicator */
-var  data_quota = require('./api/common/data_quota');
-App.use('/api', data_quota);
+/** darshboard */
+var dashboard = require('./api/common/dashboard');
+App.use('/api', dashboard);
