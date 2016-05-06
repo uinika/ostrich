@@ -9,8 +9,8 @@ Main.controller('Main.Controller.Main', ['$scope',
       switch (target) {
         case 'dashboard': $scope.Tab.Actived = {};
           $scope.Tab.Actived.dashboard = 'active'; break;
-        case 'inventory': $scope.Tab.Actived = {};
-          $scope.Tab.Actived.inventory = 'active'; break;
+        case 'dataquota': $scope.Tab.Actived = {};
+          $scope.Tab.Actived.dataquota = 'active'; break;
         case 'requirement': $scope.Tab.Actived = {};
           $scope.Tab.Actived.requirement = 'active'; break;
         case 'department': $scope.Tab.Actived = {};

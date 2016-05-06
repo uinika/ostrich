@@ -6,11 +6,11 @@
         <li ng-click="Tab.switcher('dashboard')" ng-init="Tab.Actived.dashboard='active'" class='{{Tab.Actived.dashboard}}'>
           <a ui-sref='main.dashboard'><i class="fa fa-tachometer"> 首页</i></a>
         </li>
-        <li ng-click="Tab.switcher('inventory')" class='{{Tab.Actived.inventory}}'>
-          <a ui-sref='main.inventory'><i class="fa fa-database"> 指标清单</i></a>
+        <li ng-click="Tab.switcher('dataquota')" class='{{Tab.Actived.dataquota}}'>
+          <a ui-sref='main.data-quota'><i class="fa fa-database"> 指标清单</i></a>
         </li>
         <li ng-click="Tab.switcher('department')" class='{{Tab.Actived.department}}' class="dropdown">
-          <a ui-sref="main.department"><i class="fa fa-database"> 部门管理</i></a>
+          <a ui-sref="main.department"><i class="fa fa-cogs"> 部门管理</i></a>
         </li>
       </ul>
 

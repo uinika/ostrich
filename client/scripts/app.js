@@ -13,13 +13,10 @@ var app = angular.module('app', [
   'Admin.User',
   'Admin.Department',
   'Department',
-  'Inventory',
-  'InventoryDetail',
+  'DataQuota',
   'Department.Inventory',
   'Department.Audit',
   'Department.Requirement',
-  'RequirementMain',
-  'RequirementDetail',
   'DepartmentShare'
 ]);
 
@@ -80,30 +77,10 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
         templateUrl: 'views/admin/user.html',
         controller: 'Admin.User.Controller.Main'
       })
-      .state('main.inventory', {
-        url: '/inventory',
-        templateUrl: 'views/inventory/main.html',
-        controller: 'Inventory.Controller.Main'
-      })
-      .state('main.inventory.list', {
-        url: '/list',
-        templateUrl: 'views/inventory/list.html',
-        controller: 'Inventory.Controller.Main'
-      })
-      .state('main.inventory.detail', {
-        url: '/detail/:inventoryID',
-        templateUrl: 'views/inventory/detail.html',
-        controller: 'InventoryDetail.Controller.detail'
-      })
-      .state('main.requirement', {
-        url: '/requirement',
-        templateUrl: 'views/requirement/main.html',
-        controller: 'RequirementMain.Controller.Main'
-      })
-      .state('main.requirement.detail', {
-        url: '/detail/:requirementID',
-        templateUrl: 'views/requirement/detail.html',
-        controller: 'RequirementDetail.Controller.Main'
+      .state('main.data-quota', {
+        url: '/data-quota',
+        templateUrl: 'views/data-quota/main.html',
+        controller: 'DataQuota.Main'
       })
       .state('main.department', {
         url: '/department',
