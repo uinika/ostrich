@@ -80,7 +80,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
       .state('main.data-quota', {
         url: '/data-quota',
         templateUrl: 'views/data-quota/main.html',
-        controller: 'DataQuota.Main'
+        controller: 'DataQuota.Controller.Main'
       })
       .state('main.department', {
         url: '/department',

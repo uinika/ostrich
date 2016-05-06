@@ -36,9 +36,11 @@ App.use('/api', login);
 var department = require('./api/common/department');
 App.use('/api', department);
 
+
 /** sys_dict */
 var sys_dict = require('./api/common/sys_dict');
 App.use('/api', sys_dict);
+
 
 /** department */
 var data_quota = require('./api/department/data_quota');
@@ -56,6 +58,7 @@ App.use('/api', data_requiement);
 var data_requiement_response = require('./api/department/data_requiement_response');
 App.use('/api', data_requiement_response);
 
-/** user */
-var user = require('./api/user/user');
-App.use('/api', user);
+
+/** Data Quota */
+var data_quota_main = require('./api/data-quota/main');
+App.use('/api', data_quota_main);
