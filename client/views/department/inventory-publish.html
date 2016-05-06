@@ -236,7 +236,8 @@
       <a>参考样例数据模板</a>
     </div>
     <div class='modal-footer'>
-      <button class='btn btn-primary' type="file" nv-file-select="" uploader="uploader" >现在上传</button>
+      <input type="file" file-model="myFile"/>
+      <button ng-click="uploadFile()">开始上传</button>
       <button class='btn btn-default' type='button' ng-click='Modal.cancel()'>以后再说</button>
     </div>
   </div>

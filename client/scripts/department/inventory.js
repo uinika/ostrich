@@ -188,13 +188,17 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$rootScope', 
         Http.saveDataQuota(DataQuotaAddObj).then(function(result) {
           console.log(result.data.head);
           if (200 == result.data.head.status) {
-            alert('新增成功');
+
+            var modalInstance = Component.popModal('Department.Inventory.Controller.publish', '', 'import-example-modal').result.then(function(res) {
+            })
+
           }
-        }).then(function() {
-          $state.go("main.department.inventory", {}, {
-            reload: true
-          });
         })
+        // .then(function() {
+        //   $state.go("main.department.inventory", {}, {
+        //     reload: true
+        //   });
+        // })
       }
     }
 
@@ -239,6 +243,15 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$rootScope', 
       else {
         $scope.dataLevelSelection.push(item.id);
       }
+    };
+
+    $scope.uploadFile = function(){
+        var file = $scope.myFile;
+        console.log('file is ' );
+        console.dir(file);
+        Http.uploadFile(file).then(function(result) {
+          console.log(result);
+        });
     };
 
   }
@@ -286,12 +299,24 @@ DInventory.factory('Department.Inventory.Service.Http', ['$http', '$q', 'API',
       )
     };
 
+    function uploadFile(file){
+        var fd = new FormData();
+        var uploadUrl = path + '/upload/excel';
+        fd.append('file', file);
+        var promise = $http.post(uploadUrl, fd, {
+            transformRequest: angular.identity,
+            headers: {'Content-Type': undefined}
+        });
+        return promise;
+    }
+
     return {
       saveDataQuota: saveDataQuota,
       getDepartmentList: getDepartmentList,
       getDepartQuotaList: getDepartQuotaList,
       getQuotaDetail: getQuotaDetail,
-      getSystemDictByCatagory: getSystemDictByCatagory
+      getSystemDictByCatagory: getSystemDictByCatagory,
+      uploadFile: uploadFile
     }
   }
 ]);
@@ -313,23 +338,23 @@ DInventory.service('Department.Inventory.Service.Component', ['$uibModal',
       };
     };
     // prompt Modal
-    function popModal(scope, type, templateUrl) {
-      scope.Modal.type = type;
+    function popModal(controller, type, templateUrl) {
+      //scope.Modal.type = type;
       var modalInstance = $uibModal.open({
         animation: true,
         backdrop: 'static',
         templateUrl: templateUrl + '.html',
-        scope: scope
+        controller: controller
       });
-      scope.Modal.confirm = function(isValid) {
-        if (isValid) {
-          modalInstance.close(scope.Modal);
-        }
-
-      };
-      scope.Modal.cancel = function() {
-        modalInstance.dismiss();
-      };
+      // scope.Modal.uploadFile = function() {
+      //   if (isValid) {
+      //     modalInstance.close(scope.Modal);
+      //   }
+      //
+      // };
+      // scope.Modal.cancel = function() {
+      //   modalInstance.dismiss();
+      // };
       return modalInstance;
     };
 
@@ -339,3 +364,20 @@ DInventory.service('Department.Inventory.Service.Component', ['$uibModal',
     }
   }
 ])
+
+
+DInventory.directive('fileModel', ['$parse', function ($parse) {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            var model = $parse(attrs.fileModel);
+            var modelSetter = model.assign;
+
+            element.bind('change', function(){
+                scope.$apply(function(){
+                    modelSetter(scope, element[0].files[0]);
+                });
+            });
+        }
+    };
+}]);
