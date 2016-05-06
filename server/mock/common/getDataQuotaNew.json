@@ -1,0 +1,20 @@
+{
+  "head": {
+    "status": 200,
+    "total": 3,
+    "token": "15ruc93c0lr151peuds3h27xla"
+  },
+  "body": [{
+    "quota_name": "企业注册信息清单",
+    "share_dep": "公安局",
+    "create_time": 1460340736000
+  }, {
+    "quota_name": "残疾补助等级清单",
+    "share_dep": "残联局",
+    "create_time": 1460513672000
+  }, {
+    "quota_name": "各区犯罪率统计清单",
+    "share_dep": "公安局",
+    "create_time": 1457835272000
+  }]
+}

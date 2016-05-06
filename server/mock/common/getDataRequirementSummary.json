@@ -1,0 +1,12 @@
+{
+  "head": {
+    "status": 200,
+    "total": 1,
+    "token": "8F2700B378AC34EAC6D789A8F4AA5913"
+  },
+  "body": [{
+    "data_quota_number": "55",
+    "department_number": "26"
+  }]
+
+}
