@@ -204,10 +204,10 @@ Dashboard.directive('wiservRequirementOverviewChart', [
                   }
                 },
                 data: [{
-                  value: summary.REQUIREMENT_DEPT_NUM,
+                  value: summary.department_number,
                   name: '清单提供部门'
                 }, {
-                  value: summary.MONTH_REQUIREMENT_DEPT_NUM,
+                  value: summary.data_quota_number,
                   name: '本月新增',
                   selected: true
                 }]
@@ -216,10 +216,10 @@ Dashboard.directive('wiservRequirementOverviewChart', [
                 type: 'pie',
                 radius: ['40%', '55%'],
                 data: [{
-                  value: summary.REQUIREMENT_NUM,
+                  value: summary.department_number,
                   name: '清单总数'
                 }, {
-                  value: summary.REQUIREMENT_DEPT_NUM,
+                  value: summary.data_quota_number,
                   name: '本月新增',
                   selected: true
                 }]
