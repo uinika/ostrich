@@ -49,11 +49,11 @@ Dashboard.controller('Dashboard.Controller.Main', ['$scope', 'Dashboard.Service.
         }
         return followDepId;
       }).then(function(followDepId){
-          Http.getDataQuota({
-            follow_dep_id: followDepId
-          }).then(function(result1){
-              $scope.followDepIndicators = result1.data.body;
-          });
+        Http.getDataQuota({
+          follow_dep_id: followDepId
+        }).then(function(result1){
+            $scope.followDepIndicators = result1.data.body;
+        });
      });
  }
 ])
@@ -181,7 +181,6 @@ Dashboard.directive('wiservRequirementOverviewChart', [
         scope.DataRequirementSummary.then(function(result) {
           if (200 == result.data.head.status) {
             var summary = result.data.body[0];
-            console.log(summary);
             var myChart = echarts.init((element.find('div'))[0]);
             var option = {
               tooltip: {

@@ -15,6 +15,7 @@ var app = angular.module('app', [
   'Department',
   'DataQuota',
   'DataQuotaList',
+  'DataQuotaDetail',
   'Department.Inventory',
   'Department.Audit',
   'Department.Requirement',
@@ -87,6 +88,11 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
         url: '/list',
         templateUrl: 'views/data-quota/list.html',
         controller: 'DataQuotaList.Controller.Main'
+      })
+      .state('main.data-quota.detail', {
+        url: '/list',
+        templateUrl: 'views/data-quota/detail.html',
+        controller: 'DataQuotaDetail.Controller.Main'
       })
       .state('main.department', {
         url: '/department',
