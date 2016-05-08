@@ -10,7 +10,7 @@
           <ol ui-tree-nodes="" ng-model="list">
             <li ng-repeat="item1 in list" ui-tree-node>
               <div ui-tree-handle>
-                <i class="fa fa-sort-desc"> {{item1.dict_name}}</i>
+                <span class="caret"></span> {{item1.dict_name}}
               </div>
               <ol ui-tree-nodes="" ng-model="item1.nodes">
                 <li ng-repeat="item2 in item1.nodes" ui-tree-node>

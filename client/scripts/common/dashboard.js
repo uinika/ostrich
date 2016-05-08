@@ -4,7 +4,6 @@ var Dashboard = angular.module('Dashboard', ['ui.router','ui.bootstrap']);
 /** Dashboard Controller */
 Dashboard.controller('Dashboard.Controller.Main', ['$scope', 'Dashboard.Service.Http',
   function($scope, Http) {
-    // new data_quato  List
     Http.getDataQuotaNew({
       skip: 0,
       limit: 6
@@ -27,18 +26,10 @@ Dashboard.controller('Dashboard.Controller.Main', ['$scope', 'Dashboard.Service.
         $scope.Bureaus = result.data.body;
       }
     });
-    Http.getDataquotaSummary().then(function(result) {
-      if (200 == result.data.head.status) {
-        $scope.quota_number = result.data.body[0].data_quota_number;
-        $scope.quotaDepartment_number = result.data.body[0].department_number;
-      }
-    });
-    Http.getDataRequirementSummary().then(function(result) {
-      if (200 == result.data.head.status) {
-        $scope.require_number = result.data.body[0].data_quota_number;
-        $scope.requireDepartment_number = result.data.body[0].department_number;
-      }
-    });
+    <!-- ECharts -->
+    $scope.DataquotaSummary = Http.getDataquotaSummary();
+    $scope.DataRequirementSummary = Http.getDataRequirementSummary();
+    <!-- #ECharts -->
     $scope.select = function(param){
       console.log(param);
       Http.getDataQuota({
@@ -107,7 +98,6 @@ Dashboard.factory('Dashboard.Service.Http', ['$http', 'API',
       )
     }
 
-
     return {
       getDataQuotaNew: getDataQuotaNew,
       getDataRequirementNew: getDataRequirementNew,
@@ -116,21 +106,21 @@ Dashboard.factory('Dashboard.Service.Http', ['$http', 'API',
       getDataRequirementSummary: getDataRequirementSummary,
       getUserDep: getUserDep,
       getDataQuota: getDataQuota
-
     }
+
   }
 ]);
 
 /** Dashboard Directive */
-Dashboard.directive('wiservInventoryOverviewChart', [
+Dashboard.directive('wiservDataQuotaOverviewChart', [
   function() {
     return {
       restrict: 'AE',
       template: "<div style='width:300;height:240px;'></div>",
       link: function(scope, element, attr) {
-        scope.QInventoryOverview.then(function(result) {
+        scope.DataquotaSummary.then(function(result) {
           if (200 == result.data.head.status) {
-            var inventoryOverview = result.data.body[0];
+            var summary = result.data.body[0];
             var myChart = echarts.init((element.find('div'))[0]);
             var option = {
               tooltip: {
@@ -153,10 +143,10 @@ Dashboard.directive('wiservInventoryOverviewChart', [
                   }
                 },
                 data: [{
-                  value: inventoryOverview.INVENTORY_DEPT_NUM,
+                  value: summary.data_quota_number,
                   name: '清单提供部门'
                 }, {
-                  value: inventoryOverview.MONTH_INVENTORY_DEPT_NUM,
+                  value: summary.department_number,
                   name: '本月新增',
                   selected: true
                 }]
@@ -165,10 +155,10 @@ Dashboard.directive('wiservInventoryOverviewChart', [
                 type: 'pie',
                 radius: ['40%', '55%'],
                 data: [{
-                  value: inventoryOverview.INVENTORY_NUM,
+                  value: summary.data_quota_number,
                   name: '清单总数'
                 }, {
-                  value: inventoryOverview.INVENTORY_DEPT_NUM,
+                  value: summary.department_number,
                   name: '本月新增',
                   selected: true
                 }]
@@ -188,9 +178,10 @@ Dashboard.directive('wiservRequirementOverviewChart', [
       restrict: 'AE',
       template: "<div style='width:300;height:240px;'></div>",
       link: function(scope, element, attr) {
-        scope.QRequirementOverview.then(function(result) {
+        scope.DataRequirementSummary.then(function(result) {
           if (200 == result.data.head.status) {
-            var requirementOverview = result.data.body[0];
+            var summary = result.data.body[0];
+            console.log(summary);
             var myChart = echarts.init((element.find('div'))[0]);
             var option = {
               tooltip: {
@@ -213,10 +204,10 @@ Dashboard.directive('wiservRequirementOverviewChart', [
                   }
                 },
                 data: [{
-                  value: requirementOverview.REQUIREMENT_DEPT_NUM,
+                  value: summary.REQUIREMENT_DEPT_NUM,
                   name: '清单提供部门'
                 }, {
-                  value: requirementOverview.MONTH_REQUIREMENT_DEPT_NUM,
+                  value: summary.MONTH_REQUIREMENT_DEPT_NUM,
                   name: '本月新增',
                   selected: true
                 }]
@@ -225,10 +216,10 @@ Dashboard.directive('wiservRequirementOverviewChart', [
                 type: 'pie',
                 radius: ['40%', '55%'],
                 data: [{
-                  value: requirementOverview.REQUIREMENT_NUM,
+                  value: summary.REQUIREMENT_NUM,
                   name: '清单总数'
                 }, {
-                  value: requirementOverview.REQUIREMENT_DEPT_NUM,
+                  value: summary.REQUIREMENT_DEPT_NUM,
                   name: '本月新增',
                   selected: true
                 }]
