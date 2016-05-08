@@ -4,6 +4,7 @@ var DataQuota = angular.module('DataQuota', ['ui.router']);
 /** Main Controller */
 DataQuota.controller('DataQuota.Controller.Main', ['$scope', '$state', 'DataQuota.Service.Http',
   function($scope, $state, Http) {
+
     $scope.toggle = function(scope) {
       scope.toggle();
     };

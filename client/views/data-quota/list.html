@@ -9,35 +9,31 @@
       </div>
     </div>
     <div class="panel-body">
-      <div class="pull-left">
-        <div class="">
-          <nav >
-            <ul class="pager" style='margin:5px'>
-              <li>共享级别</li>
-              <li><a>全部</a></li>
-              <li><a>？</a></li>
-            </ul>
-          </nav>
-        </div>
-        <div class="">
-          <nav >
-            <ul class="pager" style='margin:5px'>
-              <li>共享频率</li>
-              <li><a>全部</a></li>
-              <li><a>？</a></li>
-            </ul>
-          </nav>
-        </div>
-        <div class="">
-          <nav >
-            <ul class="pager" style='margin:5px'>
-              <li>空间范围</li>
-              <li><a>全部</a></li>
-              <li><a>？</a></li>
-            </ul>
-          </nav>
-        </div>
-      </div>
+
+      <nav>
+        <ul class="pager">
+          <li>共享级别</li>
+          <li><a>全部</a></li>
+          <li ng-repeat='shareLevel in shareLevelList'><a>{{shareLevel.dict_name}}</a></li>
+        </ul>
+      </nav>
+
+      <nav>
+        <ul class="pager">
+          <li>共享频率</li>
+          <li><a>全部</a></li>
+          <li ng-repeat='shareFreq in shareFrequencyList'><a>{{shareFreq.dict_name}}</a></li>
+        </ul>
+      </nav>
+
+      <nav>
+        <ul class="pager">
+          <li>空间范围</li>
+          <li><a>全部</a></li>
+          <li ng-repeat='DataLevel in dataLevelList'><a>{{DataLevel.dict_name}}</a></li>
+        </ul>
+      </nav>
+
     </div>
   </div>
 
