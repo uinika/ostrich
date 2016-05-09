@@ -81,3 +81,7 @@ App.use('/api', examples_detail);
 /** darshboard */
 var dashboard = require('./api/common/dashboard');
 App.use('/api', dashboard);
+
+/**admin*/
+var user = require('./api/admin/user');
+App.use('/api', user);

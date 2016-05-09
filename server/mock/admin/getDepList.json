@@ -1,0 +1,15 @@
+{
+  "head": {
+    "status": 200,
+    "total": 2,
+    "token": "1gzzwuj7ibw0k1oqqfwrguyr7b"
+  },
+  "body": [{
+    "dep_name": "省国税局",
+    "id": 15
+  },
+  {
+    "dep_name": "省地税局",
+    "id": 12
+  }]
+}

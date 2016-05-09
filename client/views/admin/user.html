@@ -7,46 +7,115 @@
       <div class="panel-heading">用户管理</div>
       <div class="panel-body">
         <div class="col-xs-7 pull-left">
-          <button type="button" class="btn btn-primary"><i class="fa fa-plus"> 新增</i></button>
-          <button type="button" class="btn btn-success"><i class="fa fa-minus"> 修改</i></button>
-          <button type="button" class="btn btn-danger"><i class="fa fa-remove"> 删除</i></button>
+          <button type="button" class="btn btn-primary" ng-click="addUserModal()">
+            <i class="fa fa-plus"> 新增</i></button>
         </div>
-        <div class="input-group col-xs-4 pull-right">
-          <div class="input-group-addon">部门总数-60</div>
-          <input type="text" class="form-control" placeholder="请输入查询指标名称...">
-          <div class="input-group-addon">查询</div>
+        <div class='pull-right'>
+          <ul class="nav nav-pills">
+            <li role="presentation " class='indicator-total'>
+              部门用户数
+              <span class='num'>{{UserTotal}}</span>
+            </li>
+            <li role="presentation">
+              <input type="text" placeholder="请输入查询用户" ng-model="username" required>
+              <button type="button" class="btn btn-primary" ng-click='searchUser()'>查询</button>
+            </li>
+          </ul>
         </div>
       </div>
       <table class="table table-striped table-hover">
         <thead>
           <tr>
-            <th>#</th>
             <th>序号</th>
-            <th>部门编号</th>
-            <th>排序号</th>
-            <th>部门名称</th>
-            <th>上级部门</th>
-            <th>机构类型</th>
-            <th>区域名称</th>
-            <th>联系人</th>
-            <th>联系电话</th>
+             <th>用户名</th>
+             <th>部门名称</th>
+             <th>姓名</th>
+             <th>联系电话</th>
+             <th>操作</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>Mark</td>
-            <td>@mdo</td>
-            <td>Mark</td>
+          <tr ng-repeat="user in users">
+            <td>{{$index+1}}</td>
+            <td>{{user.username}}</td>
+            <td>{{user.dep_name}}</td>
+            <td>{{user.person_name}}</td>
+            <td>{{user.phone}}</td>
+            <td><a ng-click='updateUser(user)'>修改</a>&nbsp;&nbsp;<a ng-click='deleteUser(user)'>删除</a></td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
 </div>
+
+<!-- Add user modal -->
+<script type='text/ng-template' id='add-user-modal.html'>
+  <form class="form-horizontal example-add-modal" name='userAddForm'>
+
+    <div class='modal-header'>
+      <i class="fa fa-server"></i>
+      {{Modal.type}}用户
+      <button type='button' class='close' data-dismiss='modal' ng-click='Modal.cancel()'>&times;</button>
+    </div>
+    <div class='modal-body'>
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">登录名
+          <span class='require-sign'>*</span>:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" ng-model='sysUser.username' required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">密码
+          <span class='require-sign'>*</span>:</label>
+        <div class="col-sm-10">
+          <input type="password" class="form-control" ng-model='sysUser.password' required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">确认密码
+          <span class='require-sign'>*</span>:</label>
+        <div class="col-sm-10">
+          <input type="password" class="form-control" ng-model='sysUser.password' required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">部门名称
+          <span class='require-sign'>*</span>:</label>
+        <div class="col-sm-10">
+          <select class="form-control" ng-model='sysUser.dep_id' required>
+            <option ng-repeat="dep in  deptList" value='{{dep.id}}'>{{dep.dep_name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">姓名
+          <span class='require-sign'>*</span>:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" ng-model='sysUser.person_name' required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">联系电话
+          <span class='require-sign'>*</span>:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" ng-model='sysUser.phone' required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">邮箱:</label>
+        <div class="col-sm-10">
+          <input type="email" class="form-control"  ng-model='sysUser.email'>
+        </div>
+      </div>
+
+    </div>
+    <div class='modal-footer'>
+      <button class='btn btn-primary' ng-disabled="userAddForm.$invalid" type='submit' ng-click='Modal.confirm(userAddForm.$valid)'>提交</button>
+      <button class='btn btn-default' type='button' ng-click='Modal.cancel()'>取消</button>
+    </div>
+  </div>
+</form>
+</script>
