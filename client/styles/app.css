@@ -455,6 +455,9 @@ html {
 #department-share .indicator-list .scroll {
   overflow: scroll;
 }
+#department-share .indicator-list .scroll div.container {
+  width: 2000px !important;
+}
 #department-share .indicator-list ul.nav-filter {
   list-style: none;
 }
@@ -537,6 +540,9 @@ html {
   font-weight: bold;
   padding: 0 6px;
 }
+#department-requirement .indicator-list div.container {
+  width: 1600px !important;
+}
 #department-requirement .indicator-list ul.nav-filter {
   list-style: none;
 }
@@ -582,6 +588,9 @@ html {
   font-size: 20px;
   font-weight: bold;
   padding: 0 6px;
+}
+#department-requirement-confirm .indicator-list div.container {
+  width: 1600px !important;
 }
 #department-requirement-confirm .indicator-list ul.nav-filter {
   list-style: none;
@@ -668,6 +677,9 @@ html {
 }
 #department-audit .indicator-list .scroll {
   overflow: scroll;
+}
+#department-audit .indicator-list .scroll div.container {
+  width: 2000px !important;
 }
 #department-audit .indicator-list ul.nav-filter {
   list-style: none;

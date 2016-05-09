@@ -81,7 +81,7 @@
                         <div ng-if='DeptAudit.audit_status == 2'><span>
                           <i class='fa fa-times-circle-o'></i></span></div></td>
                     <td>{{$index+1}}</td>
-                    <td>{{DeptAudit.create_time}}</td>
+                    <td>{{DeptAudit.create_time | date:"yyyy-MM-dd hh:mm:ss"}}</td>
                     <td>{{DeptAudit.quota_sn}}</td>
                     <td><a ui-sref='main.department.audit.info({AUDITID:DeptAudit.id})'>{{DeptAudit.quota_name}}</a></td>
                     <td>{{DeptAudit.alias}}</td>
@@ -114,7 +114,7 @@
                     </td>
                     <td>{{DeptAudit.linkman}}</td>
                     <td>{{DeptAudit.contact_phone}}</td>
-                    <td>{{DeptAudit.audite_time}}</td>
+                    <td>{{DeptAudit.audite_time | date:"yyyy-MM-dd hh:mm:ss"}}</td>
                   </tr>
                 </tbody>
               </table>

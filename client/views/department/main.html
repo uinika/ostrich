@@ -131,7 +131,7 @@
                     </thead>
                     <tbody>
                       <tr ng-repeat='invtItem in toAuditList'>
-                        <td>{{invtItem.create_time}}</td>
+                        <td>{{invtItem.create_time |date:"yyyy-MM-dd hh:mm:ss"}}</td>
                         <td>{{invtItem.quota_name}}</td>
                         <td>{{invtItem.depname}}</td>
                       </tr>
@@ -160,8 +160,8 @@
                     </thead>
                     <tbody>
                       <tr ng-repeat='resItem in requireToConfirmList'>
-                        <td>{{resItem.response_time}}</td>
-                        <td>{{resItem.create_time}}</td>
+                        <td>{{resItem.response_time |date:"yyyy-MM-dd hh:mm:ss"}}</td>
+                        <td>{{resItem.create_time| date:"yyyy-MM-dd hh:mm:ss"}}</td>
                         <td>{{resItem.requiement_name}}</td>
                         <td>{{resItem.dep_name}}</td>
                       </tr>

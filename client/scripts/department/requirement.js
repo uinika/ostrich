@@ -66,7 +66,8 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$rootScope'
           req_sys_dict.obj_type = 2;
           dataRelationConfig.push(req_sys_dict);
         });
-        $scope.Modal.DepRequirment.response_dep_id = _.map($scope.outputDeptList, 'id');
+        var res_dep_id = _.map($scope.outputDeptList, 'id');
+         $scope.Modal.DepRequirment.response_dep_id = res_dep_id[0];
         _httpPublishParams.dataRequiement = $scope.Modal.DepRequirment;
         _httpPublishParams.dataRelationConfig = dataRelationConfig;
 
