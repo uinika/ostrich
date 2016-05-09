@@ -8,6 +8,7 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
     /** Data Quota */
     Http.getDataQuotaByDepID(Params).then(function(result) {
       $scope.DataQuotas = result.data.body;
+      console.log(result.data.body)
     });
     /** Data Quota */
 
