@@ -2,20 +2,31 @@
 var DInventory = angular.module('Department.Inventory', ['ui.router']);
 
 /** Inventory Controller */
-DInventory.controller('Department.Inventory.Controller.Main', ['$scope', '$q', 'Department.Inventory.Service.Http',
-  function($scope, $q, Http) {
-    var DEP_NAME = '统计局';
+DInventory.controller('Department.Inventory.Controller.Main', ['$rootScope','$scope', '$q', 'Department.Inventory.Service.Http',
+  function($rootScope,$scope, $q, Http) {
+    console.log($rootScope.User);
+    var DEP_NAME = $rootScope.User.dep_id;
     $scope.DepartDataQuota = {};
+
+    $scope.Paging = {};
+    $scope.Paging.maxSize = 5;
+    $scope.Paging.itemsPerPage = 10;
+
     var _httpParams = {};
     _httpParams.limit = 10;
-    _httpParams.ps = 0;
+    _httpParams.skip = 0;
+
+    $scope.Paging.pageChanged = function() {
+      _httpParams.skip = $scope.Paging.currentPage-1;
+      getDepartmentQuotaList(_httpParams);
+    }
 
     function getDepartmentQuotaList(_httpParams) {
       _httpParams.dep_name = DEP_NAME;
       Http.getDepartQuotaList(_httpParams).then(function(result) {
         console.log(result);
         $scope.depQuotaList = result.data.body;
-        //  $scope.Paging.totalItems = data.head.total;
+        $scope.Paging.totalItems = result.data.head.total;
       });
     }
 
@@ -28,7 +39,7 @@ DInventory.controller('Department.Inventory.Controller.Main', ['$scope', '$q', '
       $scope.shareLvMainSelection = [];
       _httpParams.share_level = null;
       _httpParams.limit = 10;
-      _httpParams.ps = 0;
+      _httpParams.skip = 0;
       getDepartmentQuotaList(_httpParams);
     }
 
@@ -43,7 +54,7 @@ DInventory.controller('Department.Inventory.Controller.Main', ['$scope', '$q', '
       }
       _httpParams.share_level = $scope.shareLvMainSelection;
       _httpParams.limit = 10;
-      _httpParams.ps = 0;
+      _httpParams.skip = 0;
       getDepartmentQuotaList(_httpParams);
     }
 
@@ -52,7 +63,7 @@ DInventory.controller('Department.Inventory.Controller.Main', ['$scope', '$q', '
       $scope.shareFreqSelection = [];
       _httpParams.share_frequency = null;
       _httpParams.limit = 10;
-      _httpParams.ps = 0;
+      _httpParams.skip = 0;
       getDepartmentQuotaList(_httpParams);
     }
 
@@ -67,7 +78,7 @@ DInventory.controller('Department.Inventory.Controller.Main', ['$scope', '$q', '
       }
       _httpParams.share_frequency = $scope.shareFreqSelection;
       _httpParams.limit = 10;
-      _httpParams.ps = 0;
+      _httpParams.skip = 0;
       getDepartmentQuotaList(_httpParams);
     }
 
@@ -77,7 +88,7 @@ DInventory.controller('Department.Inventory.Controller.Main', ['$scope', '$q', '
       $scope.areaMainSelection = [];
       _httpParams.sys_dict_id = null;
       _httpParams.limit = 10;
-      _httpParams.ps = 0;
+      _httpParams.skip = 0;
       getDepartmentQuotaList(_httpParams);
     }
 
@@ -96,7 +107,7 @@ DInventory.controller('Department.Inventory.Controller.Main', ['$scope', '$q', '
 
       _httpParams.sys_dict_id = $scope.areaMainSelection;
       _httpParams.limit = 10;
-      _httpParams.ps = 0;
+      _httpParams.skip = 0;
       getDepartmentQuotaList(_httpParams);
     }
 
@@ -104,7 +115,7 @@ DInventory.controller('Department.Inventory.Controller.Main', ['$scope', '$q', '
     $scope.searchDeptDataQuotaByName = function() {
       _httpParams.quota_name = $scope.DepartDataQuota.quota_name_filter;
       _httpParams.limit = 10;
-      _httpParams.ps = 0;
+      _httpParams.skip = 0;
       getDepartmentQuotaList(_httpParams);
     }
   }
@@ -117,7 +128,13 @@ DInventory.controller('Department.Inventory.Controller.detail', ['$scope', '$q',
     Http.getQuotaDetail({
       data_quota_id: $stateParams.ID
     }).then(function(result) {
-
+      $scope.DataQuotaDetail = result.data.body[0];
+      Http.getQuotaExamples({
+        dataquotaid: $stateParams.ID
+      }).then(function(res) {
+        $scope.DataQuotaExamples = res.data.body[0];
+        console.log($scope.DataQuotaExamples.file_content);
+      })
     })
   }
 ])
@@ -131,6 +148,8 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$rootScope', 
     var STORE_TYPE_OTHER = '25098ff3-02f0-11e6-a52a-5cf9dd40ad7e';
     var DATA_SHOW_OTHER = '2515e9b5-02f0-11e6-a52a-5cf9dd40ad7e';
 
+    var DEP_ID = $rootScope.User.dep_id;
+    $scope.DEP_NAME = $rootScope.User.dep_name;
     $scope.DataQuota = {};
     $scope.DataQuota.data_show_format_add = '';
     $scope.DataQuota.data_store_type_add = '';
@@ -170,6 +189,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$rootScope', 
           var sys_dict = {};
           sys_dict.dataQuotaId = $scope.DataQuota.quota_name;
           sys_dict.sys_dict_id = value;
+          sys_dict.obj_type = 1;
           dataRelationConfig.push(sys_dict);
         });
 
@@ -190,7 +210,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$rootScope', 
             if (200 == result.data.head.status) {
               $scope.Modal = {};
               var modalInstance = Component.popModal($scope, 'Department.Inventory.Controller.publish', '', 'import-example-modal').result.then(function(res) {
-                $state.go("main.department.inventory.upload", {}, {
+                $state.go("main.department.inventory.upload", {ID:'33ed7584-df86-4eb2-87df-b6167ba3510b'}, {
                   reload: true
                 });
 
@@ -264,7 +284,7 @@ DInventory.controller('Department.Inventory.Controller.upload', ['$scope', '$q',
           alert('您还未选择文件');
           return;
         }
-        Http.uploadFile(file).then(function(result) {
+        Http.uploadFile(file,$stateParams.ID).then(function(result) {
           if (200 == result.data.head.status) {
             $state.go("main.department.inventory", {}, {
               reload: true
@@ -317,9 +337,17 @@ DInventory.factory('Department.Inventory.Service.Http', ['$http', '$q', 'API',
       )
     };
 
-    function uploadFile(file) {
+    function getQuotaExamples(params) {
+      return $http.get(
+        path + '/examples_detail', {
+          params: params
+        }
+      )
+    }
+
+    function uploadFile(file,id) {
       var fd = new FormData();
-      var uploadUrl = path + '/upload/excel';
+      var uploadUrl = path + '/upload/excel?data_quota_id=' + id;
       fd.append('file', file);
       var promise = $http.post(uploadUrl, fd, {
         transformRequest: angular.identity,
@@ -336,7 +364,8 @@ DInventory.factory('Department.Inventory.Service.Http', ['$http', '$q', 'API',
       getDepartQuotaList: getDepartQuotaList,
       getQuotaDetail: getQuotaDetail,
       getSystemDictByCatagory: getSystemDictByCatagory,
-      uploadFile: uploadFile
+      uploadFile: uploadFile,
+      getQuotaExamples: getQuotaExamples
     }
   }
 ]);

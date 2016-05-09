@@ -302,6 +302,9 @@ html {
 #department-inventory .indicator-list .scroll {
   overflow: scroll;
 }
+#department-inventory .indicator-list .scroll div.container {
+  width: 2000px !important;
+}
 #department-inventory .indicator-list ul.nav-filter {
   list-style: none;
 }

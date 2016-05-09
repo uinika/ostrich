@@ -128,10 +128,10 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr ng-repeat='DepDataQuota in depQuotaList'>
+                  <tr ng-repeat='DepDataQuota in depQuotaList | orderBy:"create_time":true'>
                     <td><div ng-if='DepDataQuota.sharelevel =="全开放" '><span>
                       <i class='fa fa-eye'></i></span></div>
-                    <div ng-if='DepDataQuota.sharelevel =="政务云开放" '><span>
+                    <div ng-if='DepDataQuota.sharelevel =="省政务云平台开放" '><span>
                       <i class='fa fa-desktop'></i></span></div>
                   <div ng-if='DepDataQuota.sharelevel =="授权开放" '><span>
                     <i class='fa fa-lock'></i></span></div>
@@ -162,21 +162,26 @@
                     </td>
                     <td>{{DepDataQuota.data_precision}}</td>
                     <td>{{DepDataQuota.data_length}}</td>
-                    <td>{{DepDataQuota.create_time | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                    <td>{{DepDataQuota.create_time }}</td>
                     <td>
                       {{DepDataQuota.datashowformat}}
                     </td>
                     <td>
-                      {{DepDataQuota.secret_flag}}
+                      {{DepDataQuota.secretflag}}
                     </td>
                     <td>{{DepDataQuota.linkman}}</td>
                     <td>{{DepDataQuota.contact_phone}}</td>
                   </tr>
                 </tbody>
               </table>
+
+
             </div>
             </div>
           </div>
+        </div>
+        <div class='pull-right'>
+          <uib-pagination boundary-links='true' ng-change='Paging.pageChanged()' total-items='Paging.totalItems' items-per-page='Paging.itemsPerPage' ng-model='Paging.currentPage' max-size='Paging.maxSize' class='pagination' boundary-link-numbers='true' rotate='false' first-text='首页' last-text='末页' next-text='下一页' previous-text='上一页'></uib-pagination>
         </div>
 
       </div>

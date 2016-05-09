@@ -2,9 +2,9 @@
 var Department = angular.module('Department', ['ui.router']);
 
 /** Main Controller */
-Department.controller('Department.Controller.Main', ['$scope', '$q', 'Department.Service.Http', '$sce',
-  function($scope, $q, Http, $sce) {
-    var DEP_ID = 1;
+Department.controller('Department.Controller.Main', ['$rootScope', '$scope', '$q', 'Department.Service.Http', '$sce',
+  function($rootScope, $scope, $q, Http, $sce) {
+    var DEP_ID = $rootScope.User.dep_id;
     var SHARE_FREQUENCY = 1;
     var DATA_LEVEL = 2;
     var SHARE_LEVEL = 3;

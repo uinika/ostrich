@@ -4,7 +4,7 @@ var DepartmentReq = angular.module('Department.Requirement', ['ui.router']);
 /** DepartmentReq Controller */
 DepartmentReq.controller('Department.Requirement.Controller.Main', ['$rootScope', '$scope', '$stateParams', 'Department.Requirement.Service.Component', 'Department.Requirement.Service.Http',
   function($rootScope, $scope, $stateParams, Component, Http) {
-    var DEP_ID = 1;
+    var DEP_ID = $rootScope.User.dep_id;
     $scope.DeptRequirement = {};
     var _httpParams = {};
     _httpParams.limit = 10;
@@ -122,12 +122,12 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$rootScope'
 //   }])
 
   /** DepartmentReq Controller */
-  DepartmentReq.controller('Department.Requirement.Controller.confirm', ['$scope', '$stateParams', 'Department.Requirement.Service.Http', 'Department.Requirement.Service.Component' ,
-    function( $scope, $stateParams, Http, Component) {
+  DepartmentReq.controller('Department.Requirement.Controller.confirm', ['$rootScope', '$scope', '$stateParams', 'Department.Requirement.Service.Http', 'Department.Requirement.Service.Component' ,
+    function($rootScope, $scope, $stateParams, Http, Component) {
       $scope.Modal = {};
       $scope.DeptRequirementConfirm = {};
 
-      var DEP_ID = 1;
+      var DEP_ID = $rootScope.User.dep_id;
       $scope.DeptRequirement = {};
       var _httpConfirmParams = {};
       _httpConfirmParams.limit = 10;

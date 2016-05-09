@@ -112,11 +112,13 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
       })
       .state('main.department.inventory.detail', {
         url: '/detail?ID',
+        cache:'false',
         templateUrl: 'views/department/inventory-detail.html',
         controller: 'Department.Inventory.Controller.detail'
       })
       .state('main.department.inventory.upload', {
         url: '/upload?ID',
+        cache:'false',
         templateUrl: 'views/department/inventory-upload.html',
         controller: 'Department.Inventory.Controller.upload'
       })

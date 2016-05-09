@@ -1,0 +1,18 @@
+{
+  "head": {
+    "status": 200,
+    "total": 1,
+    "token": "7E75CA0683C71A08416C0AB7B33EAEF2"
+  },
+  "body": [{
+    "id": "600aaac6-1592-11e6-9b0d-507b9d1b58bb",
+    "data_quota_id": "76d3ffff-11f5-11e6-a5cf-507b9d1b58bb",
+    "file_name": "excel003.xls",
+    "file_path": null,
+    "title": ["序号", "指标名称", "城市", "增长", "农村"],
+    "column":[
+      ["1.0", "A1", "B1", "C1", "D1"],
+      ["2.0", "A2", "B2", "C2", "D2"],
+      ["3.0", "A3", "B3", "C3", "D3"]]
+  }]
+}

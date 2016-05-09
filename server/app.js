@@ -74,6 +74,9 @@ App.use('/api', opendata_quotaok);
 var upload_examples = require('./api/department/upload');
 App.use('/api', upload_examples);
 
+var examples_detail = require('./api/department/examples_detail');
+App.use('/api', examples_detail);
+
 
 /** darshboard */
 var dashboard = require('./api/common/dashboard');

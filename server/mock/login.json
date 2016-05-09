@@ -5,5 +5,8 @@
     "message": "登陆成功",
     "total": 0
   },
-  "body": ""
+  "body": [{
+    "dep_id" : 5,
+    "dep_name": "省统计局"
+    }]
 }
