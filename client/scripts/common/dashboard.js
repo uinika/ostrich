@@ -76,7 +76,7 @@ Dashboard.factory('Dashboard.Service.Http', ['$http', 'API',
     };
     function getDepartments() {
       return $http.get(
-        path + '/department'
+        path + '/sys_dep'
       )
     }
     function getDataquotaSummary(){
