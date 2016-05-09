@@ -5,6 +5,18 @@ var DataQuotaList = angular.module('DataQuotaList', ['ui.router']);
 DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', 'DataQuotaList.Service.Http', '$stateParams',
   function($scope, $state, Http, Params) {
     console.log(Params);
+
+    /** Init Data Quota Table */
+
+    /** #Init Data Quota Table */
+
+    /**  */
+    console.log();
+    Http.getDataQuotaByDepID(Params).then(function(result) {
+
+    });
+    /**  */
+
     /** SysDict */
     var SHARE_FREQUENCY = 1,
         DATA_LEVEL = 2,
@@ -37,13 +49,17 @@ DataQuotaList.factory('DataQuotaList.Service.Http', ['$http', 'API',
     var path = API.path;
     function getSystemDictByCatagory(params) {
       return $http.get(
-        path + '/sys_dict', {
-          params: params
-        }
+        path + '/sys_dict', { params: params }
       )
     };
+    function getDataQuotaByDepID(params){
+      return $http.get(
+        path + '/', { params: params }
+      )
+    }
     return {
-      getSystemDictByCatagory: getSystemDictByCatagory
+      getSystemDictByCatagory: getSystemDictByCatagory,
+      getDataQuotaByDepID: getDataQuotaByDepID
     }
   }
 ]);
