@@ -14,7 +14,7 @@
         <ul class="pager">
           <li>共享级别</li>
           <li><a>全部</a></li>
-          <li ng-repeat='shareLevel in shareLevelList'><a>{{shareLevel.dict_name}}</a></li>
+          <li ui-sref-active="active" ng-repeat='shareLevel in shareLevelList'><a>{{shareLevel.dict_name}}</a></li>
         </ul>
       </nav>
 

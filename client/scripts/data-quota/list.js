@@ -54,7 +54,7 @@ DataQuotaList.factory('DataQuotaList.Service.Http', ['$http', 'API',
     };
     function getDataQuotaByDepID(params){
       return $http.get(
-        path + '/', { params: params }
+        path + '/data_quota/concern_dep', { params: params }
       )
     }
     return {
