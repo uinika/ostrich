@@ -99,12 +99,12 @@
           <table class='table table-hover table-striped '>
             <thead>
               <tr>
-                <th ng-repeat='DQTitle in DataQuotaExamples.title'>{{DQTitle}}</th>
+                <th ng-repeat='DQTitle in DataTitle track by $index'>{{DQTitle}}</th>
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat='ExampData in DataQuotaExamples.column'>
-                <td ng-repeat='CellData in ExampData'>{{CellData}}</td>
+              <tr ng-repeat='ExampData in DataColumn'>
+                <td ng-repeat='CellData in ExampData track by $index'>{{CellData}}</td>
               </tr>
             </tbody>
           </table>

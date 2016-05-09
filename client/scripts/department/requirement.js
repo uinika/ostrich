@@ -45,6 +45,13 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$rootScope'
       }
     };
 
+    Http.getDepartmentList().then(function(result) {
+      $scope.deptList = result.data.body;
+      var evens = _.remove($scope.deptList, function(item) {
+        return item.id == DEP_ID;
+      });
+    });
+
     $scope.publishReq = function() {
       $scope.Modal = {};
       $scope.Modal.DepRequirment = {};
@@ -59,7 +66,7 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$rootScope'
           req_sys_dict.obj_type = 2;
           dataRelationConfig.push(req_sys_dict);
         });
-
+        $scope.Modal.DepRequirment.response_dep_id = _.map($scope.outputDeptList, 'id');
         _httpPublishParams.dataRequiement = $scope.Modal.DepRequirment;
         _httpPublishParams.dataRelationConfig = dataRelationConfig;
 
@@ -283,6 +290,11 @@ DepartmentReq.factory('Department.Requirement.Service.Http', ['$http', 'API',
         }
       )
     }
+    function getDepartmentList() {
+      return $http.get(
+        path + '/sys_dep'
+      )
+    }
     return {
       getDepartmentRequirementList: getDepartmentRequirementList,
       publishRequirement: publishRequirement,
@@ -290,7 +302,8 @@ DepartmentReq.factory('Department.Requirement.Service.Http', ['$http', 'API',
       getResponseList: getResponseList,
       updateRequirement: updateRequirement,
       saveReqResponse: saveReqResponse,
-      getDepartQuotaList: getDepartQuotaList
+      getDepartQuotaList: getDepartQuotaList,
+      getDepartmentList: getDepartmentList
     }
   }
 ]);

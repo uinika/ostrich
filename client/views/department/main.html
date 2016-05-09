@@ -45,13 +45,13 @@
                       <i class='fa fa-list-alt fa-3x'></i>
                     </div>
                     <div class='col-xs-9 text-right'>
-                      <div class='font-16'>{{inventoryTotal}}</div>
+                      <div class='font-16'>{{Count.data_quota_number}}</div>
                       <div>部门指标</div>
                     </div>
                   </div>
                 </div>
                 <div class='panel-footer'>
-                  本月新增 +{{inventoryMonthTotal}}
+                  本月新增 +{{Count.data_quota_number_inc}}
                 </div>
               </div>
             </div>
@@ -64,13 +64,13 @@
                       <i class='fa fa-share-square-o fa-3x'></i>
                     </div>
                     <div class='col-xs-9 text-right'>
-                      <div class='font-16'>{{shareTotal}}</div>
+                      <div class='font-16'>{{Count.data_apply_number}}</div>
                       <div>共享指标</div>
                     </div>
                   </div>
                 </div>
                 <div class='panel-footer'>
-                  本月新增 +{{shareMonthTotal}}
+                  本月新增 +{{Count.data_apply_number_inc}}
                 </div>
               </div>
             </div>
@@ -83,13 +83,13 @@
                       <i class='fa fa-commenting-o fa-3x'></i>
                     </div>
                     <div class='col-xs-9 text-right'>
-                      <div class='font-16'>{{requirementTotal}}</div>
+                      <div class='font-16'>{{Count.data_req_number}}</div>
                       <div>需求清单</div>
                     </div>
                   </div>
                 </div>
                 <div class='panel-footer'>
-                  本月新增 +{{requirementMonthTotal}}
+                  本月新增 +{{Count.data_req_number_inc}}
                 </div>
               </div>
             </div>
@@ -102,7 +102,7 @@
                       <i class='fa fa-file-text fa-3x'></i>
                     </div>
                     <div class='col-xs-9 text-right'>
-                      <div class='font-16'>{{unauditTotal}}</div>
+                      <div class='font-16'>{{Count.data_apply_wait_number}}</div>
                       <div>待审核指标</div>
                     </div>
                   </div>
@@ -116,7 +116,7 @@
             <div class='col-sm-6 left'>
               <div class="panel panel-default">
                 <div class="panel-heading">
-                  <div class='pull-left'>待审核清单（{{unauditTotal}}）</div>
+                  <div class='pull-left'>待审核清单（{{auditTotal}}）</div>
                   <div class='pull-right'>更多...</div>
                 </div>
                 <div class='panel-body'>
@@ -144,7 +144,7 @@
             <div class='col-sm-6 right'>
               <div class="panel panel-default">
                 <div class="panel-heading">
-                  <div class='pull-left'>最新需求列表（{{responseTotal}}）</div>
+                  <div class='pull-left'>最新需求列表（{{reqTotal}}）</div>
                   <div class='pull-right'>更多...</div>
                 </div>
                 <div class='panel-body'>

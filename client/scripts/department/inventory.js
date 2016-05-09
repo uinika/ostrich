@@ -2,8 +2,8 @@
 var DInventory = angular.module('Department.Inventory', ['ui.router']);
 
 /** Inventory Controller */
-DInventory.controller('Department.Inventory.Controller.Main', ['$rootScope','$scope', '$q', 'Department.Inventory.Service.Http',
-  function($rootScope,$scope, $q, Http) {
+DInventory.controller('Department.Inventory.Controller.Main', ['$rootScope', '$scope', '$q', 'Department.Inventory.Service.Http',
+  function($rootScope, $scope, $q, Http) {
     console.log($rootScope.User);
     var DEP_NAME = $rootScope.User.dep_id;
     $scope.DepartDataQuota = {};
@@ -17,7 +17,7 @@ DInventory.controller('Department.Inventory.Controller.Main', ['$rootScope','$sc
     _httpParams.skip = 0;
 
     $scope.Paging.pageChanged = function() {
-      _httpParams.skip = $scope.Paging.currentPage-1;
+      _httpParams.skip = $scope.Paging.currentPage - 1;
       getDepartmentQuotaList(_httpParams);
     }
 
@@ -133,7 +133,10 @@ DInventory.controller('Department.Inventory.Controller.detail', ['$scope', '$q',
         dataquotaid: $stateParams.ID
       }).then(function(res) {
         $scope.DataQuotaExamples = res.data.body[0];
-        console.log($scope.DataQuotaExamples.file_content);
+        $scope.DataTitle = $scope.DataQuotaExamples.file_content.title;
+        $scope.DataColumn = $scope.DataQuotaExamples.file_content.column;
+        console.log($scope.DataTitle);
+        console.log($scope.DataColumn);
       })
     })
   }
@@ -156,6 +159,9 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$rootScope', 
 
     Http.getDepartmentList().then(function(result) {
       $scope.deptList = result.data.body;
+      var evens = _.remove($scope.deptList, function(item) {
+        return item.id == DEP_ID;
+      });
     });
 
     Http.getSystemDictByCatagory({
@@ -206,11 +212,13 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$rootScope', 
 
         console.log(DataQuotaAddObj);
         Http.saveDataQuota(DataQuotaAddObj).then(function(result) {
-            console.log(result.data.head);
+            console.log(result.data);
             if (200 == result.data.head.status) {
               $scope.Modal = {};
               var modalInstance = Component.popModal($scope, 'Department.Inventory.Controller.publish', '', 'import-example-modal').result.then(function(res) {
-                $state.go("main.department.inventory.upload", {ID:'33ed7584-df86-4eb2-87df-b6167ba3510b'}, {
+                $state.go("main.department.inventory.upload", {
+                  ID: result.data.body[0].id
+                }, {
                   reload: true
                 });
 
@@ -278,13 +286,13 @@ DInventory.controller('Department.Inventory.Controller.upload', ['$scope', '$q',
       console.log($stateParams.ID);
       $scope.uploadFile = function() {
         var file = $scope.myFile;
-        console.log('file is ' );
+        console.log('file is ');
         console.dir(file);
-        if(!file) {
+        if (!file) {
           alert('您还未选择文件');
           return;
         }
-        Http.uploadFile(file,$stateParams.ID).then(function(result) {
+        Http.uploadFile(file, $stateParams.ID).then(function(result) {
           if (200 == result.data.head.status) {
             $state.go("main.department.inventory", {}, {
               reload: true
@@ -301,7 +309,7 @@ DInventory.factory('Department.Inventory.Service.Http', ['$http', '$q', 'API',
 
     function getDepartmentList() {
       return $http.get(
-        path + '/department'
+        path + '/sys_dep'
       )
     }
 
@@ -345,7 +353,7 @@ DInventory.factory('Department.Inventory.Service.Http', ['$http', '$q', 'API',
       )
     }
 
-    function uploadFile(file,id) {
+    function uploadFile(file, id) {
       var fd = new FormData();
       var uploadUrl = path + '/upload/excel?data_quota_id=' + id;
       fd.append('file', file);

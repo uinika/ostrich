@@ -100,7 +100,7 @@ DepartmentShare.controller('DepartmentShare.Controller.detail', ['$rootScope', '
     Http.getQuotaDetail({
       data_quota_id: $stateParams.ID
     }).then(function(result) {
-
+      $scope.DataQuotaDetail = result.data.body[0];
     })
 
   }
