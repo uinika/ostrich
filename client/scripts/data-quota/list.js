@@ -4,12 +4,22 @@ var DataQuotaList = angular.module('DataQuotaList', ['ui.router']);
 /** Main Controller */
 DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', 'DataQuotaList.Service.Http', '$stateParams',
   function($scope, $state, Http, Params) {
-    /**  */
-    Http.getDataQuotaByDepID(Params).then(function(result) {
-      console.log(result.data.body);
-      $scope.DataQuotas = result.data.body;
-    });
-    /**  */
+    /** Handle Data Quota Table */
+    if(Params.dep_name==='' && typeof Params.dep_name==='string'){
+      // Init Data Quota Table
+      Http.getDataQuota().then(function(result) {
+        console.log(result.data.body);
+        $scope.DataQuotas = result.data.body;
+      });
+    }
+    else{
+      // Fetch Data Quota By Department ID
+      Http.getDataQuotaByDepID(Params).then(function(result) {
+        console.log(result.data.body);
+        $scope.DataQuotas = result.data.body;
+      });
+    }
+    /** #Handle Data Quota Table */
 
     /** SysDict */
     var SHARE_FREQUENCY = 1,
@@ -32,7 +42,6 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
     });
     /** #SysDict */
 
-
   }
 ]);
 
@@ -51,9 +60,15 @@ DataQuotaList.factory('DataQuotaList.Service.Http', ['$http', 'API',
         path + '/data_quota', { params: params }
       )
     }
+    function getDataQuota(){
+      return $http.get(
+        path + '/data_quota'
+      )
+    }
     return {
       getSystemDictByCatagory: getSystemDictByCatagory,
-      getDataQuotaByDepID: getDataQuotaByDepID
+      getDataQuotaByDepID: getDataQuotaByDepID,
+      getDataQuota: getDataQuota
     }
   }
 ]);

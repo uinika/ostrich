@@ -6,7 +6,7 @@ Dashboard.controller('Dashboard.Controller.Main', ['$scope', 'Dashboard.Service.
   function($scope, Http) {
     Http.getDataQuotaNew({
       skip: 0,
-      limit: 6
+      limit: 7
     }).then(function(result) {
       if (200 == result.data.head.status) {
         $scope.NewIndicators = result.data.body;
@@ -14,7 +14,7 @@ Dashboard.controller('Dashboard.Controller.Main', ['$scope', 'Dashboard.Service.
     });
     Http.getDataRequirementNew({
       skip: 0,
-      limit: 6
+      limit: 7
     }).then(function(result) {
       if (200 == result.data.head.status) {
         $scope.Requirements = result.data.body;
@@ -30,31 +30,33 @@ Dashboard.controller('Dashboard.Controller.Main', ['$scope', 'Dashboard.Service.
     $scope.DataquotaSummary = Http.getDataquotaSummary();
     $scope.DataRequirementSummary = Http.getDataRequirementSummary();
     <!-- #ECharts -->
+
+    // Handle Selected Department
     $scope.select = function(param){
-      console.log(param);
       Http.getDataQuota({
-        follow_dep_id: param
+        skip: 0,
+        limit: 6,
+        dep_name: param
       }).then(function(result){
           $scope.followDepIndicators = result.data.body;
       });
     }
-    Http.getUserDep({
-        // id: $rootScope.User.id
-        id:  "29"
-      }).then(function(result) {
-        var followDepId = "";
-        if (200 == result.data.head.status) {
+    // Generoted Department
+    Http.getUserDep().then(function(result) {
+        if (200 === result.data.head.status) {
           $scope.followDeps = result.data.body;
-          followDepId = $scope.followDeps[0].follow_dep_id;
         }
-        return followDepId;
+        return result.data.body[0].follow_dep_id;
       }).then(function(followDepId){
         Http.getDataQuota({
-          follow_dep_id: followDepId
-        }).then(function(result1){
-            $scope.followDepIndicators = result1.data.body;
+          skip: 0,
+          limit: 6,
+          dep_name: followDepId
+        }).then(function(result){
+            $scope.followDepIndicators = result.data.body;
         });
      });
+
  }
 ])
 
@@ -94,7 +96,7 @@ Dashboard.factory('Dashboard.Service.Http', ['$http', 'API',
     }
     function getDataQuota(params){
       return $http.get(
-        path + '/data_quota_dashboard',{params: params}
+        path + '/data_quota',{params: params}
       )
     }
 
@@ -143,10 +145,10 @@ Dashboard.directive('wiservDataQuotaOverviewChart', [
                   }
                 },
                 data: [{
-                  value: summary.data_quota_number,
+                  value: summary.department_number,
                   name: '清单提供部门'
                 }, {
-                  value: summary.department_number,
+                  value: summary.department_number_inc,
                   name: '本月新增',
                   selected: true
                 }]
@@ -158,7 +160,7 @@ Dashboard.directive('wiservDataQuotaOverviewChart', [
                   value: summary.data_quota_number,
                   name: '清单总数'
                 }, {
-                  value: summary.department_number,
+                  value: summary.data_quota_number_inc,
                   name: '本月新增',
                   selected: true
                 }]
@@ -188,7 +190,7 @@ Dashboard.directive('wiservRequirementOverviewChart', [
                 formatter: "{a} <br/>{b}: {c} ({d}%)"
               },
               series: [{
-                name: '清单提供部门',
+                name: '需求涉及部门',
                 type: 'pie',
                 selectedMode: 'single',
                 radius: [0, '30%'],
@@ -204,21 +206,21 @@ Dashboard.directive('wiservRequirementOverviewChart', [
                 },
                 data: [{
                   value: summary.department_number,
-                  name: '清单提供部门'
+                  name: '需求涉及部门'
                 }, {
-                  value: summary.data_quota_number,
+                  value: summary.department_number_inc,
                   name: '本月新增',
                   selected: true
                 }]
               }, {
-                name: '清单总数',
+                name: '需求总数',
                 type: 'pie',
                 radius: ['40%', '55%'],
                 data: [{
-                  value: summary.department_number,
-                  name: '清单总数'
+                  value: summary.requiement_number,
+                  name: '需求总数'
                 }, {
-                  value: summary.data_quota_number,
+                  value: summary.requiement_number_inc,
                   name: '本月新增',
                   selected: true
                 }]
