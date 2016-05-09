@@ -5,9 +5,19 @@ var Audit = angular.module('Department.Audit', ['ui.router']);
 Audit.controller('Department.Audit.Controller.Main', ['$rootScope', '$scope', '$q', 'Department.Audit.Service.Http',
   function($rootScope, $scope, $q, Http) {
     $scope.DeptAudit = {};
+
+    $scope.Paging = {};
+    $scope.Paging.maxSize = 5;
+    $scope.Paging.itemsPerPage = 10;
+
     var _httpParams = {};
     _httpParams.limit = 10;
     _httpParams.skip = 0;
+
+    $scope.Paging.pageChanged = function() {
+      _httpParams.skip = $scope.Paging.currentPage - 1;
+      getAuditList(_httpParams);
+    }
 
     // init
     getAuditList();
@@ -15,6 +25,7 @@ Audit.controller('Department.Audit.Controller.Main', ['$rootScope', '$scope', '$
     function getAuditList() {
       Http.getAuditList(_httpParams).then(function(result) {
         $scope.auditList = result.data.body;
+        $scope.Paging.totalItems = result.data.head.total;
       });
     }
 

@@ -2,17 +2,27 @@
 var DepartmentShare = angular.module('DepartmentShare', ['ui.router']);
 
 /** InventoryDetail Controller */
-DepartmentShare.controller('DepartmentShare.Controller.Main', ['$rootScope', '$scope',  'DepartmentShare.Service.Http',
+DepartmentShare.controller('DepartmentShare.Controller.Main', ['$rootScope', '$scope', 'DepartmentShare.Service.Http',
   function($rootScope, $scope, Http) {
     $scope.DepartmentShare = {};
+
+    $scope.Paging = {};
+    $scope.Paging.maxSize = 5;
+    $scope.Paging.itemsPerPage = 10;
+
     var _httpParams = {};
     _httpParams.limit = 10;
     _httpParams.skip = 0;
 
+    $scope.Paging.pageChanged = function() {
+      _httpParams.skip = $scope.Paging.currentPage - 1;
+      getDepartmentShareList(_httpParams);
+    }
+
     function getDepartmentShareList(_httpParams) {
       Http.shareDataQuotaList(_httpParams).then(function(result) {
         $scope.depShareList = result.data.body;
-        //  $scope.Paging.totalItems = data.head.total;
+        $scope.Paging.totalItems = result.data.head.total;
       });
     }
 
@@ -84,7 +94,7 @@ DepartmentShare.controller('DepartmentShare.Controller.Main', ['$rootScope', '$s
 
 
 // Department share detail controller
-DepartmentShare.controller('DepartmentShare.Controller.detail', ['$rootScope', '$scope',  'DepartmentShare.Service.Http', '$stateParams' ,
+DepartmentShare.controller('DepartmentShare.Controller.detail', ['$rootScope', '$scope', 'DepartmentShare.Service.Http', '$stateParams',
   function($rootScope, $scope, Http, $stateParams) {
     // get department share detail
     Http.getQuotaDetail({
@@ -100,9 +110,12 @@ DepartmentShare.controller('DepartmentShare.Controller.detail', ['$rootScope', '
 DepartmentShare.factory('DepartmentShare.Service.Http', ['$http', 'API',
   function($http, API) {
     var path = API.path;
+
     function shareDataQuotaList(params) {
       return $http.get(
-        path + '/sharedata_quotalist', {params: params}
+        path + '/sharedata_quotalist', {
+          params: params
+        }
       )
     };
 

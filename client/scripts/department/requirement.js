@@ -6,9 +6,20 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$rootScope'
   function($rootScope, $scope, $stateParams, Component, Http) {
     var DEP_ID = $rootScope.User.dep_id;
     $scope.DeptRequirement = {};
+
+    $scope.Paging = {};
+    $scope.Paging.maxSize = 5;
+    $scope.Paging.itemsPerPage = 10;
+
     var _httpParams = {};
     _httpParams.limit = 10;
     _httpParams.skip = 0;
+
+    $scope.Paging.pageChanged = function() {
+      _httpParams.skip = $scope.Paging.currentPage - 1;
+      getDeptRequirementList(_httpParams);
+    }
+
     // init
     getDeptRequirementList();
 
@@ -16,6 +27,7 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$rootScope'
       _httpParams.dep_id = DEP_ID;
       Http.getDepartmentRequirementList(_httpParams).then(function(result) {
         $scope.requirementList = result.data.body;
+        $scope.Paging.totalItems = result.data.head.total;
       })
     }
 
@@ -44,6 +56,7 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$rootScope'
           var req_sys_dict = {};
           req_sys_dict.datarequiementId = $scope.Modal.DepRequirment.requiement_name;
           req_sys_dict.sys_dict_id = value;
+          req_sys_dict.obj_type = 2;
           dataRelationConfig.push(req_sys_dict);
         });
 
@@ -129,9 +142,20 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$rootScope'
 
       var DEP_ID = $rootScope.User.dep_id;
       $scope.DeptRequirement = {};
+
+      $scope.Paging = {};
+      $scope.Paging.maxSize = 5;
+      $scope.Paging.itemsPerPage = 10;
+
       var _httpConfirmParams = {};
       _httpConfirmParams.limit = 10;
       _httpConfirmParams.skip = 0;
+
+      $scope.Paging.pageChanged = function() {
+        _httpConfirmParams.skip = $scope.Paging.currentPage - 1;
+        getDeptRequirementConfirmList(_httpConfirmParams);
+      }
+
       // init
       getDeptRequirementConfirmList();
 
@@ -139,6 +163,7 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$rootScope'
         _httpConfirmParams.response_dep_id = DEP_ID;
         Http.getDepartmentRequirementList(_httpConfirmParams).then(function(result) {
           $scope.requirementConfirmList = result.data.body;
+          $scope.Paging.totalItems = result.data.head.total;
         })
       }
 
