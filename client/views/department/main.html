@@ -46,7 +46,7 @@
                     </div>
                     <div class='col-xs-9 text-right'>
                       <div class='font-16'>{{inventoryTotal}}</div>
-                      <div>部门清单</div>
+                      <div>部门指标</div>
                     </div>
                   </div>
                 </div>
@@ -65,7 +65,7 @@
                     </div>
                     <div class='col-xs-9 text-right'>
                       <div class='font-16'>{{shareTotal}}</div>
-                      <div>共享授权清单</div>
+                      <div>共享指标</div>
                     </div>
                   </div>
                 </div>
@@ -103,7 +103,7 @@
                     </div>
                     <div class='col-xs-9 text-right'>
                       <div class='font-16'>{{unauditTotal}}</div>
-                      <div>待审核清单</div>
+                      <div>待审核指标</div>
                     </div>
                   </div>
                 </div>
@@ -130,10 +130,10 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr ng-repeat='invtItem in unauditInventoryList'>
-                        <td>{{invtItem.APPLY_TIME | date:'yyyy-MM-dd'}}</td>
-                        <td>{{invtItem.QUOTA_NAME}}</td>
-                        <td>{{invtItem.DEP_NAME}}</td>
+                      <tr ng-repeat='invtItem in toAuditList'>
+                        <td>{{invtItem.create_time}}</td>
+                        <td>{{invtItem.quota_name}}</td>
+                        <td>{{invtItem.depname}}</td>
                       </tr>
                     </tbody>
                   </table>
@@ -159,11 +159,11 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr ng-repeat='resItem in responseList'>
-                        <td>{{resItem.RESPONSE_TIME | date:'yyyy-MM-dd'}}</td>
-                        <td>{{resItem.CREATE_TIME | date:'yyyy-MM-dd'}}</td>
-                        <td>{{resItem.REQUIREMENT_NAME}}</td>
-                        <td>{{resItem.DEP_NAME}}</td>
+                      <tr ng-repeat='resItem in requireToConfirmList'>
+                        <td>{{resItem.response_time}}</td>
+                        <td>{{resItem.create_time}}</td>
+                        <td>{{resItem.requiement_name}}</td>
+                        <td>{{resItem.dep_name}}</td>
                       </tr>
                     </tbody>
                   </table>

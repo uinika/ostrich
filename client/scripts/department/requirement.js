@@ -2,7 +2,7 @@
 var DepartmentReq = angular.module('Department.Requirement', ['ui.router']);
 
 /** DepartmentReq Controller */
-DepartmentReq.controller('Department.Requirement.Controller.Main', ['$rootScope', '$scope', '$stateParams', 'Department.Inventory.Service.Component', 'Department.Requirement.Service.Http',
+DepartmentReq.controller('Department.Requirement.Controller.Main', ['$rootScope', '$scope', '$stateParams', 'Department.Requirement.Service.Component', 'Department.Requirement.Service.Http',
   function($rootScope, $scope, $stateParams, Component, Http) {
     var DEP_ID = 1;
     $scope.DeptRequirement = {};
@@ -122,7 +122,7 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$rootScope'
 //   }])
 
   /** DepartmentReq Controller */
-  DepartmentReq.controller('Department.Requirement.Controller.confirm', ['$scope', '$stateParams', 'Department.Requirement.Service.Http', 'Department.Inventory.Service.Component' ,
+  DepartmentReq.controller('Department.Requirement.Controller.confirm', ['$scope', '$stateParams', 'Department.Requirement.Service.Http', 'Department.Requirement.Service.Component' ,
     function( $scope, $stateParams, Http, Component) {
       $scope.Modal = {};
       $scope.DeptRequirementConfirm = {};
@@ -149,6 +149,12 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$rootScope'
         getDeptRequirementConfirmList();
       }
 
+      Http.getDepartQuotaList().then(function(result) {
+        console.log(result);
+        $scope.depQuotaReqList = result.data.body;
+        //  $scope.Paging.totalItems = data.head.total;
+      });
+
       $scope.toConfirm = function(item) {
         // get requirement detail
         $scope.Modal.ReqDetail = item;
@@ -160,7 +166,7 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$rootScope'
               // 保存需求响应
               Http.saveReqResponse({
                 requiement_id: item.id,
-                data_quota_id: $scope.Modal.ReqResponse.dataQuota
+                data_quota_id: $scope.Modal.ReqResponse.data_quota_id
               }).then(function(saveResult) {
                 if (200 == saveResult.data.head.status) {
                   alert('确认成功');
@@ -214,6 +220,13 @@ DepartmentReq.factory('Department.Requirement.Service.Http', ['$http', 'API',
         }
       )
     }
+    function getDepartQuotaList(params) {
+      return $http.get(
+        path + '/data_quota', {
+          params: params
+        }
+      )
+    }
     // function updateReq(data) {
     //   return $http.put(
     //     path + '/requirement/' , {
@@ -251,7 +264,8 @@ DepartmentReq.factory('Department.Requirement.Service.Http', ['$http', 'API',
       getReqDetail: getReqDetail,
       getResponseList: getResponseList,
       updateRequirement: updateRequirement,
-      saveReqResponse: saveReqResponse
+      saveReqResponse: saveReqResponse,
+      getDepartQuotaList: getDepartQuotaList
     }
   }
 ]);

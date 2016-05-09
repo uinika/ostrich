@@ -4,9 +4,37 @@ var Department = angular.module('Department', ['ui.router']);
 /** Main Controller */
 Department.controller('Department.Controller.Main', ['$scope', '$q', 'Department.Service.Http', '$sce',
   function($scope, $q, Http, $sce) {
+    var DEP_ID = 1;
     var SHARE_FREQUENCY = 1;
     var DATA_LEVEL = 2;
     var SHARE_LEVEL = 3;
+    var _httpParams = {};
+    _httpParams.limit = 10;
+    _httpParams.skip = 0;
+    var _httpConfirmParams = {};
+    _httpConfirmParams.limit = 10;
+    _httpConfirmParams.skip = 0;
+
+    // init
+    getAuditList();
+
+    function getAuditList() {
+      _httpParams.audit_status = 0;
+      Http.getAuditList(_httpParams).then(function(result) {
+        $scope.toAuditList = result.data.body;
+      });
+    }
+
+    // init
+    getDeptRequirementConfirmList();
+
+    function getDeptRequirementConfirmList() {
+      _httpConfirmParams.response_dep_id = DEP_ID;
+      Http.getDepartmentRequirementList(_httpConfirmParams).then(function(result) {
+        $scope.requireToConfirmList = result.data.body;
+      })
+    }
+
     // Get system dict
     Http.getSystemDictByCatagory({
       'dict_category': SHARE_FREQUENCY
@@ -168,8 +196,26 @@ Department.factory('Department.Service.Http', ['$http', '$q', 'API',
         }
       )
     };
+
+    function getAuditList(params) {
+      return $http.get(
+        path + '/opendata_quotalist', {
+          params: params
+        }
+      )
+    }
+
+    function getDepartmentRequirementList(params) {
+      return $http.get(
+        path + '/data_requiement', {
+          params: params
+        }
+      )
+    };
     return {
       getSystemDictByCatagory: getSystemDictByCatagory,
+      getAuditList: getAuditList,
+      getDepartmentRequirementList: getDepartmentRequirementList,
       getInventoryTotal: getInventoryTotal,
       getShareTotal: getShareTotal,
       getRequirementTotal: getRequirementTotal,
