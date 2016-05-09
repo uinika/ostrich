@@ -181,6 +181,12 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$rootScope', 
     }).then(function(result) {
       $scope.secretFlagList = result.data.body;
     });
+    
+    $scope.close = function(isValid) {
+      $state.go("main.department.inventory", {}, {
+        reload: true
+      });
+    }
 
     // submit add
     $scope.addQuota = function(isValid) {
@@ -294,10 +300,17 @@ DInventory.controller('Department.Inventory.Controller.upload', ['$scope', '$q',
         }
         Http.uploadFile(file, $stateParams.ID).then(function(result) {
           if (200 == result.data.head.status) {
+            alert('上传成功!');
             $state.go("main.department.inventory", {}, {
               reload: true
             });
           }
+        });
+      }
+
+      $scope.toIndex = function() {
+        $state.go("main.department.inventory", {}, {
+          reload: true
         });
       }
     }
