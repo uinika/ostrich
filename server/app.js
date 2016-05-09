@@ -85,3 +85,6 @@ App.use('/api', dashboard);
 /**admin*/
 var user = require('./api/admin/user');
 App.use('/api', user);
+/**department*/
+var department = require('./api/admin/department');
+App.use('/api', department);

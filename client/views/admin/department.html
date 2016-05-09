@@ -7,20 +7,18 @@
       <div class="panel-heading">部门管理</div>
       <div class="panel-body">
         <div class="col-xs-7 pull-left">
-          <button type="button" class="btn btn-primary"><i class="fa fa-plus"> 新增</i></button>
-          <button type="button" class="btn btn-success"><i class="fa fa-minus"> 修改</i></button>
-          <button type="button" class="btn btn-danger"><i class="fa fa-remove"> 删除</i></button>
+          <button type="button" class="btn btn-primary" ng-click="addDepartmentModal()">
+            <i class="fa fa-plus"> 新增</i></button>
         </div>
         <div class="input-group col-xs-4 pull-right">
           <div class="input-group-addon">部门总数-60</div>
-          <input type="text" class="form-control" placeholder="请输入查询指标名称...">
-          <div class="input-group-addon">查询</div>
+          <input type="text" class="form-control" placeholder="请输入查询指标名称..." ng-model="dep_name" required>
+          <div class="input-group-addon" ng-click='searchDepartment()'>查询</div>
         </div>
       </div>
       <table class="table table-striped table-hover">
         <thead>
           <tr>
-            <th>#</th>
             <th>序号</th>
             <th>部门编号</th>
             <th>排序号</th>
@@ -30,23 +28,99 @@
             <th>区域名称</th>
             <th>联系人</th>
             <th>联系电话</th>
+            <th>操作</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>Mark</td>
-            <td>@mdo</td>
-            <td>Mark</td>
+          <tr ng-repeat="AdminDep in AdminDepartments">
+            <th>{{$index+1}}</th>
+            <td>{{AdminDep.dep_sn}}</td>
+            <td>{{AdminDep.order_by}}</td>
+            <td>{{AdminDep.dep_name}}</td>
+            <td>{{AdminDep.parent_name}}</td>
+            <td>{{AdminDep.dep_type}}</td>
+            <td>{{AdminDep.area_name}}</td>
+            <td>{{AdminDep.contacts}}</td>
+            <td>{{AdminDep.contact_phone}}</td>
+            <td><a ng-click='updateDepartment(AdminDep)'>修改</a>&nbsp;&nbsp;<a ng-click='deleteDepartment(AdminDep)'>删除</a></td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
 </div>
+
+
+<!-- Add department modal -->
+<script type='text/ng-template' id='add-department-modal.html'>
+  <form class="form-horizontal example-add-modal" name='departmentAddForm'>
+
+    <div class='modal-header'>
+      <i class="fa fa-server"></i>
+      {{Modal.type}}用户
+      <button type='button' class='close' data-dismiss='modal' ng-click='Modal.cancel()'>&times;</button>
+    </div>
+    <div class='modal-body'>
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">部门编号
+          <span class='require-sign'>*</span>:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" ng-model='department.dep_sn' required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">排序号
+          <span class='require-sign'>*</span>:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" ng-model='department.order_by ' required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">部门名称
+          <span class='require-sign'>*</span>:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" ng-model='department.dep_en_name' required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">上级部门
+          <span class='require-sign'>*</span>:</label>
+        <div class="col-sm-10">
+          <select class="form-control" ng-model='department.parent_id' required>
+            <option ng-repeat="dep in  previousDepNames" value='{{dep.id}}'>{{dep.dict_name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">区域名称
+          <span class='require-sign'>*</span>:</label>
+        <div class="col-sm-10">
+          <select class="form-control" ng-model='department.area_id' required>
+            <option ng-repeat="area in  areaNames" value='{{area.id}}'>{{area.dict_name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">联系人
+          <span class='require-sign'>*</span>:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" ng-model='department.contacts' required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">联系电话
+          <span class='require-sign'>*</span>:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" ng-model='department.contact_phone' required>
+        </div>
+      </div>
+
+    </div>
+    <div class='modal-footer'>
+      <button class='btn btn-primary' ng-disabled="departmentAddForm.$invalid" type='submit' ng-click='Modal.confirm(departmentAddForm.$valid)'>提交</button>
+      <button class='btn btn-default' type='button' ng-click='Modal.cancel()'>取消</button>
+    </div>
+  </div>
+</form>
+</script>

@@ -10,17 +10,10 @@
           <button type="button" class="btn btn-primary" ng-click="addUserModal()">
             <i class="fa fa-plus"> 新增</i></button>
         </div>
-        <div class='pull-right'>
-          <ul class="nav nav-pills">
-            <li role="presentation " class='indicator-total'>
-              部门用户数
-              <span class='num'>{{UserTotal}}</span>
-            </li>
-            <li role="presentation">
-              <input type="text" placeholder="请输入查询用户" ng-model="username" required>
-              <button type="button" class="btn btn-primary" ng-click='searchUser()'>查询</button>
-            </li>
-          </ul>
+        <div class="input-group col-xs-4 pull-right">
+          <div class="input-group-addon">用户数-{{UserTotal}}</div>
+          <input type="text" class="form-control" placeholder="请输入查询指标名称..." ng-model="username" required>
+          <div class="input-group-addon" ng-click='searchUser()'>查询</div>
         </div>
       </div>
       <table class="table table-striped table-hover">

@@ -5,6 +5,7 @@
     "token": "B7F1362A432ACCF15924F6DF65AF3DCA"
   },
   "body": [{
+<<<<<<< Updated upstream
     "id": 5,
     "dep_sn": "A001",
     "parent_id": "0",
@@ -1280,5 +1281,28 @@
     "dep_type_name": "部门管理机构",
     "role_type_name": null,
     "area_code_name": null
+=======
+    "id": 1,
+    "dep_sn": "A01",
+    "parent_name": "四川省政府",
+    "order_by": "S01",
+    "dep_name": "省统计局",
+    "dep_type": "监督类",
+    "role_type": "",
+    "area_name": "省级",
+    "contacts": "李一",
+    "contact_phone": "028-8641234"
+  },{
+    "id": 1,
+    "dep_sn": "A01",
+    "parent_name": "四川省政府",
+    "order_by": "S01",
+    "dep_name": "省统计局",
+    "dep_type": "监督类",
+    "role_type": "",
+    "area_name": "省级",
+    "contacts": "李一",
+    "contact_phone": "028-8641234"
+>>>>>>> Stashed changes
   }]
 }

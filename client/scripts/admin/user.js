@@ -4,11 +4,12 @@ var AdminUser = angular.module('Admin.User', ['ui.router']);
 /** DepartmentReq Controller */
 AdminUser.controller('Admin.User.Controller.Main', ['$rootScope', '$scope', '$stateParams','AdminUser.Service.Http', 'AdminUser.Service.Component','$uibModal',
   function($rootScope, $scope, $stateParams, Http, Component, $uibModal) {
-    // $scope.Modal = {}; // Clean scope of modal
-    // $scope.deptList = [];
-
+    $scope.Modal = {}; // Clean scope of modal
+    $scope.deptList = [];
     function getUserList() {
-      Http.getUserList().then(function(result) {
+      Http.getUserList({
+        // dep_id:$scope.user.id
+      }).then(function(result) {
         $scope.users = result.data.body;
       });
     }
