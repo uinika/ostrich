@@ -15,7 +15,7 @@ Router.route('/data_quota/Summary')
       let datas = JsonLoader.sync(Config.path + 'common/dashboard/getDataquotaSummary.json');
       response.json(datas);
     });
-Router.route('/data_quota')
+Router.route('/data_quota_dashboard')
   .get(function(request, response) {
     let head = {}, body = {};
     console.log('test');

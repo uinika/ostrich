@@ -2,28 +2,42 @@
   "head": {
     "status": 200,
     "total": 1,
-    "token": "15ruc93c0lr151peuds3h27xla"
+    "token": "057DE12648317198B64B2332DA02A385"
   },
   "body": [{
-    "create_time":1457835272000,
-    "quota_name": "各区犯罪率统计清单",
-    "share_frequency": "月度",
-    "area_range": "分区/地州数据",
-    "share_level": "全开放",
-    "dep_name": "公安局"
+    "create_time": "2016-05-04 20:41:03",
+    "quota_name": "第一产业",
+    "share_frequency":  "年度",
+    "area_range": "全国、四川省、各省",
+    "share_level": "授权开放",
+    "dep_name": "成都市统计局"
   },{
-    "create_time":1457835272000,
-    "quota_name": "各区犯罪率统计清单",
-    "share_frequency": "月度",
-    "area_range": "分区/地州数据",
-    "share_level": "全开放",
-    "dep_name": "公安局"
+    "create_time": "2016-05-04 20:41:04",
+    "quota_name": "第二产业",
+    "share_frequency":  "年度",
+    "area_range": "全国、四川省、各省",
+    "share_level": "授权开放",
+    "dep_name": "成都市统计局"
   },{
-    "create_time":1457835272000,
-    "quota_name": "各区犯罪率统计清单",
-    "share_frequency": "月度",
-    "area_range": "分区/地州数据",
+    "create_time": "2016-05-04 20:41:04",
+    "quota_name": "进出口总额",
+    "share_frequency": "年度",
+    "area_range": "全国、四川省、各省",
     "share_level": "全开放",
-    "dep_name": "公安局"
+    "dep_name": "成都市统计局"
+  },{
+    "create_time": "2016-05-04 20:41:04",
+    "quota_name": "进口",
+    "share_frequency": "年度",
+    "area_range": "全国、四川省、各省",
+    "share_level": "全开放",
+    "dep_name": "成都市教育局"
+  },{
+    "create_time": "2016-05-04 20:41:04",
+    "quota_name": "出口",
+    "share_frequency": "年度",
+    "area_range": "全国、四川省、各省",
+    "share_level": "全开放",
+    "dep_name": "成都市统计局"
   }]
 }

@@ -94,7 +94,7 @@ Dashboard.factory('Dashboard.Service.Http', ['$http', 'API',
     }
     function getDataQuota(params){
       return $http.get(
-        path + '/data_quota',{params: params}
+        path + '/data_quota_dashboard',{params: params}
       )
     }
 
