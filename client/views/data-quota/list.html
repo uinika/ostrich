@@ -42,8 +42,7 @@
       <i class="fa fa-table"> 指标表格</i>
     </div>
     <div class="table-responsive">
-      <table class="table">
-        <table class='table table-hover table-striped '>
+        <table class='table table-hover table-striped table-bordered'>
            <thead>
              <tr>
                <th>关注</th>
@@ -71,59 +70,41 @@
              </tr>
            </thead>
            <tbody>
-             <tr ng-repeat='inventoryAttr in inventoryAttrList'>
-               <td></td>
-               <td></td>
-               <td>{{$index+1}}</td>
-               <td>{{inventoryAttr.quotaNumber}}</td>
-               <td>{{inventoryAttr.quotaName}}</td>
-               <td>{{inventoryAttr.alias}}</td>
-               <td>{{inventoryAttr.meterUnit}}</td>
-               <td>{{inventoryAttr.quotaDetail}}</td>
-               <td>{{inventoryAttr.calculateMethod}}</td>
-               <td>
-                 {{shareFreqArrShow}}
-               </td>
-               <td>
-                 {{dataInfo.areaPeriod}}
-               </td>
-               <td>{{inventoryAttr.areaDataLevel}}</td>
-               <td>{{loginUser.DEP_NAME}}
-
-               </td>
-               <td>
-                 {{inventoryAttr.shareLevel}}
-               </td>
-               <td>
-                 <div ng-repeat="qtype in  quotaTypeList">
-                   <div ng-if="qtype.ID == inventoryAttr.quotaType">
-                     {{qtype.DICT_NAME}}
-                   </div>
-                 </div>
-               </td>
-               <td>{{inventoryAttr.dataPrecision}}</td>
-               <td>{{inventoryAttr.dataLength}}</td>
-               <td>{{inventoryAttr.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
-               <td>
-                 <div ng-repeat="dataFormat in dataShowFormatList">
-                   <div ng-if="dataFormat.ID == inventoryAttr.dataShowFormat">
-                     {{dataFormat.DICT_NAME}}
-                   </div>
-                 </div>
-               </td>
-               <td>
-                 <div ng-repeat="qsflag in  secretFlagList">
-                   <div ng-if="qsflag.ID == inventoryAttr.secretFlag">
-                     {{qsflag.DICT_NAME}}
-                   </div>
-                 </div>
-               </td>
-               <td>{{inventoryAttr.linkman}}</td>
-               <td>{{inventoryAttr.contactPhone}}</td>
+             <tr ng-repeat='quota in DataQuotas' ui-sref='main.data-quota.detail({id:quota.id})'>
+              <td>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox">
+                  </label>
+                </div>
+              </td>
+              <td>
+                <span class="glyphicon glyphicon-eye-open"></span>
+              </td>
+              <td>{{quota.quota_sn}}</td>
+              <td>{{quota.quota_name}}</td>
+              <td>{{quota.alias}}</td>
+              <td>{{quota.meter_unit}}</td>
+              <td>{{quota.quota_detail}}</td>
+              <td>{{quota.calculate_method}}</td>
+              <td></td>
+              <td>{{quota.area_range}}</td>
+              <td>{{quota.area_range}}</td>
+              <td>{{quota.area_range_data_level}}</td>
+              <td>{{quota.depname}}</td>
+              <td>{{quota.regionallevel}}</td>
+              <td>{{quota.data_store_type}}</td>
+              <td>{{quota.data_precision}}</td>
+              <td>{{quota.data_length}}</td>
+              <td>{{quota.create_time}}</td>
+              <td>{{quota.data_show_format}}</td>
+              <td>{{quota.secret_flag}}</td>
+              <td>{{quota.linkman}}</td>
+              <td>{{quota.contact_phone}}</td>
              </tr>
            </tbody>
          </table>
-      </table>
+
     </div>
 
   </div>
