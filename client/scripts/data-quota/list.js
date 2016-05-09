@@ -4,16 +4,10 @@ var DataQuotaList = angular.module('DataQuotaList', ['ui.router']);
 /** Main Controller */
 DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', 'DataQuotaList.Service.Http', '$stateParams',
   function($scope, $state, Http, Params) {
-    console.log(Params);
-
-    /** Init Data Quota Table */
-
-    /** #Init Data Quota Table */
-
     /**  */
-    console.log();
     Http.getDataQuotaByDepID(Params).then(function(result) {
-
+      console.log(result.data.body);
+      $scope.DataQuotas = result.data.body;
     });
     /**  */
 
@@ -54,7 +48,7 @@ DataQuotaList.factory('DataQuotaList.Service.Http', ['$http', 'API',
     };
     function getDataQuotaByDepID(params){
       return $http.get(
-        path + '/data_quota/concern_dep', { params: params }
+        path + '/data_quota', { params: params }
       )
     }
     return {
