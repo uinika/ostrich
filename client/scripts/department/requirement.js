@@ -89,58 +89,9 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$rootScope'
       getDeptRequirementList();
     }
 
-    // $scope.updateReq = function(item) {
-    //   $scope.Modal = {};
-    //   $scope.req = item;
-    //
-    //   Component.popModal($scope, '修改', 'add-req-modal').result.then(function() {
-    //     Http.updateReq({
-    //       "ID" : $scope.req.ID,
-    //       "REQUIREMENT_NAME" : $scope.req.REQUIREMENT_NAME,
-    //       "REQUIREMENT_DESC" : $scope.req.REQUIREMENT_DESC,
-    //       "LINKMAN" : $scope.req.LINKMAN,
-    //       "EMAIL":$scope.req.EMAIL
-    //     }).then(function(result) {
-    //       if (200 == result.data.head.status) {
-    //         alert('修改成功');
-    //         getDeptRequirementList();
-    //       } else {
-    //         alert('修改失败');
-    //       }
-    //     })
-    //   });
-    // }
-    //
-    // $scope.deleteReq = function(ID) {
-    //   Http.deleteReq(ID).then(function(result) {
-    //     if (200 == result.data.head.status) {
-    //       alert('删除成功');
-    //       getDeptRequirementList();
-    //     } else {
-    //       alert('删除失败');
-    //     }
-    //   })
-    // }
-
   }
 ])
 
-/** DepartmentReq Controller */
-// DepartmentReq.controller('Department.Requirement.Controller.detail', ['$scope', '$stateParams', 'Department.Requirement.Service.Http',
-//   function( $scope, $stateParams, Http) {
-//     console.log($stateParams.ID);
-//     Http.getReqDetail({
-//       "ID": $stateParams.ID
-//     }).then(function(result) {
-//       $scope.ReqDetail = result.data.body[0];
-//     }).then(function(){
-//       Http.getResponseList({
-//         "REQUIREMENT_ID": $stateParams.ID
-//       }).then(function(result) {
-//         $scope.responseList = result.data.body;
-//       })
-//     })
-//   }])
 
   /** DepartmentReq Controller */
   DepartmentReq.controller('Department.Requirement.Controller.confirm', ['$rootScope', '$scope', '$stateParams', 'Department.Requirement.Service.Http', 'Department.Requirement.Service.Component' ,
@@ -196,16 +147,19 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$rootScope'
           $scope.Modal.ReqResponse.id = item.id;
           Http.updateRequirement($scope.Modal.ReqResponse).then(function(result) {
             if (200 == result.data.head.status) {
-              // 保存需求响应
-              Http.saveReqResponse({
-                requiement_id: item.id,
-                data_quota_id: $scope.Modal.ReqResponse.data_quota_id
-              }).then(function(saveResult) {
-                if (200 == saveResult.data.head.status) {
-                  alert('确认成功');
-                  getDeptRequirementConfirmList();
-                }
-              })
+              if($scope.Modal.ReqResponse.data_quota_id) {
+                // 保存需求响应
+                Http.saveReqResponse({
+                  requiement_id: item.id,
+                  data_quota_id: $scope.Modal.ReqResponse.data_quota_id
+                }).then(function(saveResult) {
+                  if (200 == saveResult.data.head.status) {
+                    alert('确认成功');
+                    getDeptRequirementConfirmList();
+                  }
+                })
+              }
+
 
             } else {
               alert('确认失败');

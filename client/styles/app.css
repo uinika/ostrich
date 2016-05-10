@@ -565,6 +565,21 @@ html {
 #department-requirement .indicator-list ul.nav-filter li span i.fa-question-circle {
   color: #f0ad4e;
 }
+#department-requirement .indicator-list table tr span {
+  padding: 0 15px;
+}
+#department-requirement .indicator-list table tr span i {
+  font-size: 18px;
+}
+#department-requirement .indicator-list table tr span i.fa-question-circle {
+  color: #f0ad4e;
+}
+#department-requirement .indicator-list table tr span i.fa-check-circle {
+  color: #5cb85c;
+}
+#department-requirement .indicator-list table tr span i.fa-times-circle-o {
+  color: #d9534f;
+}
 #department-requirement .publish-req-modal .help-info {
   font-size: 12px;
   color: #777;
@@ -704,6 +719,21 @@ html {
 }
 #department-audit .indicator-list ul.nav-filter li span i.fa-question-circle {
   color: #f0ad4e;
+}
+#department-audit .indicator-list table tr span {
+  padding: 0 15px;
+}
+#department-audit .indicator-list table tr span i {
+  font-size: 18px;
+}
+#department-audit .indicator-list table tr span i.fa-question-circle {
+  color: #f0ad4e;
+}
+#department-audit .indicator-list table tr span i.fa-check-circle {
+  color: #5cb85c;
+}
+#department-audit .indicator-list table tr span i.fa-times-circle-o {
+  color: #d9534f;
 }
 #department-audit-info {
   margin-left: 170px;
