@@ -37,6 +37,13 @@ Department.controller('Department.Controller.Main', ['$rootScope', '$scope', '$q
       })
     }
 
+    Http.getDepartmentList().then(function(result) {
+      $scope.deptAllList = result.data.body;
+      var evens = _.remove($scope.deptList, function(item) {
+        return item.id == DEP_ID;
+      });
+    });
+
     // Get system dict
     Http.getSystemDictByCatagory({
       'dict_category': SHARE_FREQUENCY
@@ -73,6 +80,16 @@ Department.controller('Department.Controller.Main', ['$rootScope', '$scope', '$q
         reload: true
       });
     }
+
+    // follow department
+    $scope.depSelect = {};
+    $scope.followDeptList = [];
+    $scope.parentObj = {};
+    $scope.followDep = function() {
+      $scope.depSelect.show = false;
+      $scope.followDeptList = $scope.parentObj.outputAllDeptList;
+      console.log($scope.followDeptList);
+    }
   }
 ])
 
@@ -84,7 +101,7 @@ Department.factory('Department.Service.Http', ['$http', '$q', 'API',
 
     function getDepartmentList() {
       return $http.get(
-        path + '/dep/'
+        path + '/sys_dep'
       )
     }
 
