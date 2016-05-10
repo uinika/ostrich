@@ -6,7 +6,14 @@ const Router = require('express').Router(),
 Router.route('/sys_dep')
   .get(function(request, response) {
     let head = {}, body = {};
-    let datas = JsonLoader.sync(Config.path + 'admin/getDepList.json');
+    let datas = {};
+    var dep_name = request.query.dep_name;
+    if(undefined == dep_name) {
+      datas = JsonLoader.sync(Config.path + 'admin/getDepList.json');
+    }
+    if(dep_name != null) {
+      datas = JsonLoader.sync(Config.path + 'admin/getDep.json');
+    }
     response.json(datas);
 });
 Router.route('/sys_dict')

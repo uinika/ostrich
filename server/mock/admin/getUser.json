@@ -5,11 +5,13 @@
     "token": "1gzzwuj7ibw0k1oqqfwrguyr7b"
   },
   "body": [{
-    "USERNAME": "Henry",
-    "DEP_NAME": "城管局",
-    "PERSON_NAME":"张2",
-    "PHONE":"13894049848",
-    "EMAIL":"sdfhisdfi@dd.com"
+    "id": "1",
+    "username": "Henry",
+    "password": "",
+    "dep_name": "省发改委",
+    "person_name":"张三",
+    "phone":"13894049848",
+    "email":"sdfhisdfi@dd.com"
   }]
 
 }

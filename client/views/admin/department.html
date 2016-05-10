@@ -38,14 +38,19 @@
             <td>{{AdminDep.order_by}}</td>
             <td>{{AdminDep.dep_name}}</td>
             <td>{{AdminDep.parent_name}}</td>
-            <td>{{AdminDep.dep_type}}</td>
-            <td>{{AdminDep.area_name}}</td>
+            <td>{{AdminDep.dep_type_name}}</td>
+            <td>{{AdminDep.area_code_name}}</td>
             <td>{{AdminDep.contacts}}</td>
             <td>{{AdminDep.contact_phone}}</td>
             <td><a ng-click='updateDepartment(AdminDep)'>修改</a>&nbsp;&nbsp;<a ng-click='deleteDepartment(AdminDep)'>删除</a></td>
           </tr>
         </tbody>
       </table>
+
+      <div class='pull-right'>
+        <uib-pagination boundary-links='true' ng-change='Paging.pageChanged()' total-items='Paging.totalItems' items-per-page='Paging.itemsPerPage' ng-model='Paging.currentPage' max-size='Paging.maxSize' class='pagination' boundary-link-numbers='true' rotate='false' first-text='首页' last-text='末页' next-text='下一页' previous-text='上一页'></uib-pagination>
+      </div>
+
     </div>
   </div>
 </div>
@@ -80,7 +85,7 @@
         <label for="" class="col-sm-2 control-label">部门名称
           <span class='require-sign'>*</span>:</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" ng-model='department.dep_en_name' required>
+          <input type="text" class="form-control" ng-model='department.dep_name' required>
         </div>
       </div>
       <div class="form-group">
@@ -88,7 +93,7 @@
           <span class='require-sign'>*</span>:</label>
         <div class="col-sm-10">
           <select class="form-control" ng-model='department.parent_id' required>
-            <option ng-repeat="dep in  previousDepNames" value='{{dep.id}}'>{{dep.dict_name}}</option>
+            <option ng-repeat="dep in  AdminDepartments" value='{{dep.id}}'>{{dep.dep_name}}</option>
           </select>
         </div>
       </div>
@@ -96,8 +101,8 @@
         <label for="" class="col-sm-2 control-label">区域名称
           <span class='require-sign'>*</span>:</label>
         <div class="col-sm-10">
-          <select class="form-control" ng-model='department.area_id' required>
-            <option ng-repeat="area in  areaNames" value='{{area.id}}'>{{area.dict_name}}</option>
+          <select class="form-control" ng-model='department.area_code' required>
+            <option ng-repeat="area in  AdminDepartments" value='{{area.id}}'>{{area.dep_name}}</option>
           </select>
         </div>
       </div>

@@ -3,10 +3,17 @@ const Router = require('express').Router(),
   JsonLoader = require('load-json-file'),
   Config = require('../../config');
 
-Router.route('/sys_user-sys_dep')
+Router.route('/sys_user')
   .get(function(request, response) {
     let head = {}, body = {};
-    let datas = JsonLoader.sync(Config.path + 'admin/getUserList.json');
+    let datas = {};
+    var username = request.query.username;
+    if(undefined == username) {
+      datas = JsonLoader.sync(Config.path + 'admin/getUserList.json');
+    }
+    if(username != null) {
+      datas = JsonLoader.sync(Config.path + 'admin/getUser.json');
+    }
     response.json(datas);
 });
 Router.route('/sys_user')

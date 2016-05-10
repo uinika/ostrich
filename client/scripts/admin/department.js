@@ -7,16 +7,28 @@ AdminDepartment.controller('Admin.Department.Controller.Main', ['$rootScope', '$
     $scope.Modal = {}; // Clean scope of modal
     $scope.previousDepNames = [];
     $scope.areaNames = [];
-    function getDepartmentList() {
-      Http.getDepartmentList().then(function(result) {
+    $scope.Paging = {};
+    $scope.Paging.maxSize = 5;
+    $scope.Paging.itemsPerPage = 10;
+
+    var _httpParams = {};
+    _httpParams.limit = 10;
+    _httpParams.skip = 0;
+
+    $scope.Paging.pageChanged = function() {
+      _httpParams.skip = $scope.Paging.currentPage - 1;
+      getDepartmentList(_httpParams);
+    }
+    function getDepartmentList(_httpParams) {
+      Http.getDepartmentList(_httpParams).then(function(result) {
         $scope.AdminDepartments = result.data.body;
       });
     }
     // init
-    getDepartmentList();
+    getDepartmentList(_httpParams);
 
     Http.getSysDict({
-      dict_category:"2"
+      // dict_category:"2"
     }).then(function(result) {
       $scope.previousDepNames = result.data.body;
     });
@@ -34,7 +46,9 @@ AdminDepartment.controller('Admin.Department.Controller.Main', ['$rootScope', '$
         Http.saveDepartment($scope.department).then(function(result) {
           if (200 == result.data.head.status) {
             alert('添加成功');
-            getDepartmentList();
+            _httpParams.limit = 10;
+            _httpParams.skip = 0;
+            getDepartmentList(_httpParams);
           }
           else{
             alert('添加失败');
@@ -49,7 +63,9 @@ AdminDepartment.controller('Admin.Department.Controller.Main', ['$rootScope', '$
         Http.updateDepartment($scope.department).then(function(result) {
           if (200 == result.data.head.status) {
             alert('修改成功');
-            getDepartmentList();
+            _httpParams.limit = 10;
+            _httpParams.skip = 0;
+            getDepartmentList(_httpParams);
           }
           else{
             alert('修改失败');
@@ -62,14 +78,16 @@ AdminDepartment.controller('Admin.Department.Controller.Main', ['$rootScope', '$
       var flag = confirm("确定要删除吗？");
       if (flag) {
         Http.deleteDepartment(AdminDep).then(function(result) {
+          _httpParams.limit = 10;
+          _httpParams.skip = 0;
           if (200 == result.data.head.status) {
             alert('删除成功');
-            getDepartmentList();
+            getDepartmentList(_httpParams);
           }
           else{
             alert('删除失败！');
           }
-          getDepartmentList();
+          getDepartmentList(_httpParams);
         })
       }else{
         alert('已取消删除！');

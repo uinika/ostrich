@@ -99,7 +99,7 @@ AdminUser.factory('AdminUser.Service.Http', ['$http', 'API',
 
     function getUserList(params) {
       return $http.get(
-        path + '/sys_user-sys_dep',{
+        path + '/sys_user',{
            params: params
         }
       )
