@@ -44,18 +44,30 @@ Audit.controller('Department.Audit.Controller.Main', ['$rootScope', '$scope', '$
 Audit.controller('Department.Audit.Controller.info', ['$rootScope', '$scope', '$state', '$q', 'Department.Audit.Service.Http', '$stateParams',
   function($rootScope, $scope, $state, $q, Http, $stateParams) {
     // get audit detail by id
-    Http.getAuditDetail($stateParams.AUDITID).then(function(result) {
+    Http.getQuotaDetail({
+      data_quota_id: $stateParams.DATAQUOTAID
+    }).then(function(result) {
+      $scope.Tab = {};
+
       $scope.AuditDetail = result.data.body[0];
+      $scope.AuditDetail.applydepname = $stateParams.APPLYDEPNAME;
+      $scope.AuditDetail.applytime = $stateParams.APPLYTIME;
       console.log($scope.AuditDetail);
-      Http.getQuotaExamples({dataquotaid:$scope.AuditDetail.data_quota_id}).then(function(res) {
+      Http.getQuotaExamples({
+        dataquotaid: $stateParams.DATAQUOTAID
+      }).then(function(res) {
         $scope.DataQuotaExamples = res.data.body[0];
-        $scope.DataTitle = $scope.DataQuotaExamples.file_content.title;
-        $scope.DataColumn = $scope.DataQuotaExamples.file_content.column;
+        if (res.data.head.total == 0) {
+          $scope.TabExampShow = false;
+        }
+        else{
+          $scope.DataTitle = $scope.DataQuotaExamples.file_content.title;
+          $scope.DataColumn = $scope.DataQuotaExamples.file_content.column;
+        }
+
       })
     })
 
-    // login Department
-    $scope.Tab = {};
 
     $scope.tabSwitcher = function(num) {
 
@@ -84,7 +96,7 @@ Audit.controller('Department.Audit.Controller.info', ['$rootScope', '$scope', '$
 
 
     $scope.submitAudit = function() {
-      $scope.AuditInfo.id = $scope.AuditDetail.id;
+      $scope.AuditInfo.ID = $stateParams.AUDITID;
       Http.updateAuditDetail($scope.AuditInfo).then(function(result) {
         if (200 == result.data.head.status) {
           alert('审核成功');
@@ -112,9 +124,9 @@ Audit.factory('Department.Audit.Service.Http', ['$http', '$q', 'API',
       )
     }
 
-    function getAuditDetail(params) {
+    function getQuotaDetail(params) {
       return $http.get(
-        path + '/opendata_quotamesg', {
+        path + '/data_quota_detail', {
           params: params
         }
       )
@@ -122,11 +134,12 @@ Audit.factory('Department.Audit.Service.Http', ['$http', '$q', 'API',
 
     function updateAuditDetail(data) {
       return $http.put(
-        path + '/opendata_quotaok', {
+        path + '/data_quota_apply_info', {
           data: data
         }
       )
     }
+
     function getQuotaExamples(params) {
       return $http.get(
         path + '/examples_detail', {
@@ -136,7 +149,7 @@ Audit.factory('Department.Audit.Service.Http', ['$http', '$q', 'API',
     }
     return {
       getAuditList: getAuditList,
-      getAuditDetail: getAuditDetail,
+      getQuotaDetail: getQuotaDetail,
       updateAuditDetail: updateAuditDetail,
       getQuotaExamples: getQuotaExamples
     }

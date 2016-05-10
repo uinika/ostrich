@@ -158,7 +158,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
         controller: 'Department.Audit.Controller.Main'
       })
       .state('main.department.audit.info', {
-        url: '/info?AUDITID',
+        url: '/info/:AUDITID/:DATAQUOTAID/:APPLYDEPNAME/:APPLYTIME',
         templateUrl: 'views/department/audit-info.html',
         controller: 'Department.Audit.Controller.info'
       })

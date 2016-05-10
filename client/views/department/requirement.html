@@ -7,7 +7,7 @@
       <ul class="nav nav-pills">
         <li role="presentation" class='indicator-total'>
           本部门需求总数
-          <span class='num'>xxx</span>
+          <span class='num'>{{Paging.totalItems}}</span>
         </li>
         <li role="presentation">
           <input type="text" placeholder="请输入查询需求名称" ng-model='DeptRequirement.req_name_filter'>
@@ -30,11 +30,11 @@
           需求状态
           <li role="presentation">
             <span>
-              <i class='fa fa-check-circle'></i>&nbsp;已确认&nbsp;[111]</span>
+              <i class='fa fa-check-circle'></i>&nbsp;已确认&nbsp;</span>
           </li>
           <li role="presentation">
             <span>
-              <i class='fa fa-question-circle'></i>&nbsp;未确认&nbsp;[111]</span>
+              <i class='fa fa-question-circle'></i>&nbsp;未确认&nbsp;</span>
           </li>
         </ul>
       </div>
@@ -79,7 +79,7 @@
                     <td>{{DeptReq.linkman}}</td>
                     <td>{{DeptReq.phone}}</td>
                     <td>
-                      {{DeptReq.dep_name}}
+                      {{DeptReq.response_dep_name}}
                     </td>
                   </tr>
                 </tbody>

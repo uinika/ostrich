@@ -69,7 +69,7 @@ Department.controller('Department.Controller.Main', ['$rootScope', '$scope', '$q
 
     // go to requirement list page
     $scope.reqMore = function() {
-      $state.go("main.department.requirementConfirm", {}, {
+      $state.go("main.department.requirement", {}, {
         reload: true
       });
     }

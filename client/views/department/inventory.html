@@ -10,7 +10,7 @@
         <ul class="nav nav-pills">
           <li role="presentation " class='indicator-total'>
             指标总数
-            <span class='num'>{{ivntDepTotal}}</span>
+            <span class='num'>{{Paging.totalItems}}</span>
           </li>
           <li role="presentation">
             <input type="text" placeholder="请输入查询指标名称" ng-model='DepartDataQuota.quota_name_filter'>
@@ -20,9 +20,9 @@
             <button class='btn btn-primary' ui-sref='main.department.inventory.publish'>
               <i class='fa fa-plus'></i>新增指标</button>
           </li>
-          <li role="presentation">
+          <!-- <li role="presentation">
             <a class='btn btn-primary'>导入指标</a>
-          </li>
+          </li> -->
         </ul>
       </div>
     </div>

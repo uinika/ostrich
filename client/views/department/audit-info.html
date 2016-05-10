@@ -13,21 +13,21 @@
             <form class="form-horizontal">
               <div class="form-group">
                 <label for="" class="col-sm-2 control-label">申请单位：</label>
-                <div class='col-sm-10 apply-dept'>{{AuditDetail.depname}}
+                <div class='col-sm-10 apply-dept'>{{AuditDetail.applydepname}}
                 </div>
               </div>
               <div class="form-group">
                 <label for="" class="col-sm-2 control-label">审核
                   <span class='require-sign'>*</span>:</label>
                 <div class="col-sm-10">
-                  <input type='radio' name='status' ng-model='AuditInfo.status' value='1'/>&nbsp;通过
-                  <input type='radio' name='status' ng-model='AuditInfo.status' value='0'/>&nbsp;不通过
+                  <input type='radio' name='status' ng-model='AuditInfo.audit_status' value='1'/>&nbsp;通过
+                  <input type='radio' name='status' ng-model='AuditInfo.audit_status' value='0'/>&nbsp;不通过
                 </div>
               </div>
               <div class="form-group">
                 <label for="" class="col-sm-2 control-label">审核意见：</label>
                 <div class="col-sm-10">
-                  <textarea ng-model='AuditInfo.response_content' class="col-sm-12" rows='3'></textarea>
+                  <textarea ng-model='AuditInfo.audit_opinion' class="col-sm-12" rows='3'></textarea>
                 </div>
               </div>
             </form>
@@ -40,17 +40,17 @@
             <span class='step-number'>2</span>清单基本信息</h4>
           <div class='row apply-dep-info'>
             <label class='col-sm-2 text-right'>申请部门：</label>
-            <div class='col-sm-2 left'>{{AuditDetail.depname}}</div>
+            <div class='col-sm-2 left'>{{AuditDetail.applydepname}}</div>
 
             <label class='col-sm-2 text-right'>申请日期：</label>
-            <div class='col-sm-3 left'></div>
+            <div class='col-sm-3 left'>{{AuditDetail.applytime | date:"yyyy-MM-dd hh:mm:ss"}}</div>
           </div>
           <!-- Nav tabs -->
           <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" ng-class="{true: 'active', false: 'inactive'}[Tab.show.auditInfo]" ng-init="Tab.show.auditInfo = true">
               <a ng-click='tabSwitcher("auditInfo")' aria-controls="info" role="tab" data-toggle="tab">指标详情</a>
             </li>
-            <li role="presentation" ng-class="{true: 'active', false: 'inactive'}[Tab.show.auditExampData]">
+            <li ng-hide='!TabExampShow' role="presentation" ng-class="{true: 'active', false: 'inactive'}[Tab.show.auditExampData]">
               <a ng-click='tabSwitcher("auditExampData")' aria-controls="exampleData" role="tab" data-toggle="tab">样例数据</a>
             </li>
             <li role="presentation" ng-class="{true: 'active', false: 'inactive'}[Tab.show.requirementInfo]">
@@ -127,7 +127,7 @@
               </div>
               <div class='row'>
                 <label class='col-sm-2 text-right'>是否涉密:</label>
-                <div class='col-sm-10'>{{AuditDetail.secret_flag}}</div>
+                <div class='col-sm-10'>{{AuditDetail.secretflag}}</div>
               </div>
               <div class='row'>
                 <label class='col-sm-2 text-right'>联系人:</label>

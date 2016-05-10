@@ -8,7 +8,7 @@
       <div class='pull-right'>
         <ul class="nav nav-pills">
           <li role="presentation "  class='indicator-total'>
-            指标审核总数<span class='num'>{{auditTotal}}</span>
+            指标审核总数<span class='num'>{{Paging.totalItems}}</span>
           </li>
           <li role="presentation">
               <input type="text"  placeholder="请输入查询指标名称" ng-model='DeptAudit.quota_name_filter'>
@@ -75,13 +75,13 @@
                 <tbody>
                   <tr ng-repeat='DeptAudit in auditList'>
                     <td><div ng-if='DeptAudit.audit_status == 0'><span>
-                      <i class='fa fa-question-circle'></i></span><a ui-sref='main.department.audit.info({AUDITID:DeptAudit.id})'>审核</a></div>
+                      <i class='fa fa-question-circle'></i></span><a ui-sref='main.department.audit.info({AUDITID:DeptAudit.applyid,DATAQUOTAID:DeptAudit.data_quota_id,APPLYDEPNAME:DeptAudit.applydepname,APPLYTIME:DeptAudit.apply_time})'>审核</a></div>
                       <div ng-if='DeptAudit.audit_status == 1'><span>
                         <i class='fa fa-check-circle'></i></span></div>
                         <div ng-if='DeptAudit.audit_status == 2'><span>
                           <i class='fa fa-times-circle-o'></i></span></div></td>
                     <td>{{$index+1}}</td>
-                    <td>{{DeptAudit.create_time | date:"yyyy-MM-dd hh:mm:ss"}}</td>
+                    <td>{{DeptAudit.apply_time | date:"yyyy-MM-dd hh:mm:ss"}}</td>
                     <td>{{DeptAudit.quota_sn}}</td>
                     <td><a ui-sref='main.department.inventory.detail({ID:DeptAudit.data_quota_id})'>{{DeptAudit.quota_name}}</a></td>
                     <td>{{DeptAudit.alias}}</td>
