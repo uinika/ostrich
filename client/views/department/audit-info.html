@@ -140,33 +140,17 @@
 
             </div>
             <div role="tabpanel" class="tab-pane" ng-class="{true: 'active', false: 'inactive'}[Tab.show.auditExampData]">
-              <h3 class='data-title'>四川省2015年地区生产总值</h3>
+              <h3 class='data-title'>{{DataQuotaExamples.file_name}}</h3>
               <!-- Table -->
               <table class='table table-hover table-striped '>
                 <thead>
                   <tr>
-                    <th>序号</th>
-                    <th>城市</th>
-                    <th>GDP(亿元)</th>
-                    <th>增长</th>
-                    <th>地方公共财政收入(亿元)</th>
-                    <th>增长</th>
-                    <th>城镇登记失业率</th>
-                    <th>农村居民人均纯收入(元)</th>
-                    <th>增长</th>
+                    <th ng-repeat='DQTitle in DataTitle track by $index'>{{DQTitle}}</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr ng-repeat='inventoryAttr in inventoryAttrList'>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>{{$index+1}}</td>
-                    <td>{{inventoryAttr.quotaNumber}}</td>
-                    <td>{{inventoryAttr.quotaName}}</td>
-                    <td>{{inventoryAttr.alias}}</td>
-                    <td>{{inventoryAttr.meterUnit}}</td>
-                    <td>{{inventoryAttr.quotaDetail}}</td>
+                  <tr ng-repeat='ExampData in DataColumn'>
+                    <td ng-repeat='CellData in ExampData track by $index'>{{CellData}}</td>
                   </tr>
                 </tbody>
               </table>

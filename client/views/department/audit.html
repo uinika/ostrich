@@ -75,7 +75,7 @@
                 <tbody>
                   <tr ng-repeat='DeptAudit in auditList'>
                     <td><div ng-if='DeptAudit.audit_status == 0'><span>
-                      <i class='fa fa-question-circle'></i></span><a ng-click='toConfirm(DeptAudit)'>确认</a></div>
+                      <i class='fa fa-question-circle'></i></span><a ui-sref='main.department.audit.info({AUDITID:DeptAudit.id})'>审核</a></div>
                       <div ng-if='DeptAudit.audit_status == 1'><span>
                         <i class='fa fa-check-circle'></i></span></div>
                         <div ng-if='DeptAudit.audit_status == 2'><span>
@@ -83,7 +83,7 @@
                     <td>{{$index+1}}</td>
                     <td>{{DeptAudit.create_time | date:"yyyy-MM-dd hh:mm:ss"}}</td>
                     <td>{{DeptAudit.quota_sn}}</td>
-                    <td><a ui-sref='main.department.audit.info({AUDITID:DeptAudit.id})'>{{DeptAudit.quota_name}}</a></td>
+                    <td><a ui-sref='main.department.inventory.detail({ID:DeptAudit.data_quota_id})'>{{DeptAudit.quota_name}}</a></td>
                     <td>{{DeptAudit.alias}}</td>
                     <td>{{DeptAudit.meter_unit}}</td>
                     <td>{{DeptAudit.quota_detail}}</td>

@@ -47,6 +47,11 @@ Audit.controller('Department.Audit.Controller.info', ['$rootScope', '$scope', '$
     Http.getAuditDetail($stateParams.AUDITID).then(function(result) {
       $scope.AuditDetail = result.data.body[0];
       console.log($scope.AuditDetail);
+      Http.getQuotaExamples({dataquotaid:$scope.AuditDetail.data_quota_id}).then(function(res) {
+        $scope.DataQuotaExamples = res.data.body[0];
+        $scope.DataTitle = $scope.DataQuotaExamples.file_content.title;
+        $scope.DataColumn = $scope.DataQuotaExamples.file_content.column;
+      })
     })
 
     // login Department
@@ -122,10 +127,18 @@ Audit.factory('Department.Audit.Service.Http', ['$http', '$q', 'API',
         }
       )
     }
+    function getQuotaExamples(params) {
+      return $http.get(
+        path + '/examples_detail', {
+          params: params
+        }
+      )
+    }
     return {
       getAuditList: getAuditList,
       getAuditDetail: getAuditDetail,
-      updateAuditDetail: updateAuditDetail
+      updateAuditDetail: updateAuditDetail,
+      getQuotaExamples: getQuotaExamples
     }
   }
 ]);

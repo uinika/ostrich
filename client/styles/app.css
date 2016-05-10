@@ -172,6 +172,9 @@ html {
 #dashboard .third-section .panel .nav-tabs {
   bottom: 5px !important;
 }
+#department-main a {
+  cursor: pointer;
+}
 #department-main .left {
   padding: 0;
 }

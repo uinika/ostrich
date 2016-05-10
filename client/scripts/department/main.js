@@ -2,8 +2,8 @@
 var Department = angular.module('Department', ['ui.router']);
 
 /** Main Controller */
-Department.controller('Department.Controller.Main', ['$rootScope', '$scope', '$q', 'Department.Service.Http', '$sce',
-  function($rootScope, $scope, $q, Http, $sce) {
+Department.controller('Department.Controller.Main', ['$rootScope', '$scope', '$q', 'Department.Service.Http', '$sce','$state',
+  function($rootScope, $scope, $q, Http, $sce, $state) {
     var DEP_ID = $rootScope.User.dep_id;
     var SHARE_FREQUENCY = 1;
     var DATA_LEVEL = 2;
@@ -60,6 +60,19 @@ Department.controller('Department.Controller.Main', ['$rootScope', '$scope', '$q
       $scope.Count = result.data.body[0];
     });
 
+    // go to audit list page
+    $scope.auditMore = function() {
+      $state.go("main.department.audit", {}, {
+        reload: true
+      });
+    }
+
+    // go to requirement list page
+    $scope.reqMore = function() {
+      $state.go("main.department.requirementConfirm", {}, {
+        reload: true
+      });
+    }
   }
 ])
 
