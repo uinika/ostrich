@@ -808,3 +808,6 @@ html {
   text-overflow: ellipsis;
   table-layout: fixed;
 }
+#data-quota-list .pannel-patch {
+  margin-bottom: 10px;
+}

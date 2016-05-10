@@ -26,10 +26,20 @@ Dashboard.controller('Dashboard.Controller.Main', ['$scope', 'Dashboard.Service.
         $scope.Bureaus = result.data.body;
       }
     });
+
     <!-- ECharts -->
     $scope.DataquotaSummary = Http.getDataquotaSummary();
     $scope.DataRequirementSummary = Http.getDataRequirementSummary();
     <!-- #ECharts -->
+
+    <!-- -->
+    Http.getDataquotaSummary().then(function(result){
+      $scope.SummaryDataQuota = result.data.body[0];
+    })
+    Http.getDataRequirementSummary().then(function(result){
+      $scope.SummaryRequirement = result.data.body[0];
+    })
+    <!-- -->
 
     // Handle Selected Department
     $scope.select = function(param){
@@ -118,7 +128,7 @@ Dashboard.directive('wiservDataQuotaOverviewChart', [
   function() {
     return {
       restrict: 'AE',
-      template: "<div style='width:300;height:240px;'></div>",
+      template: "<div style='width:300;height:155px;'></div>",
       link: function(scope, element, attr) {
         scope.DataquotaSummary.then(function(result) {
           if (200 == result.data.head.status) {
@@ -178,7 +188,7 @@ Dashboard.directive('wiservRequirementOverviewChart', [
   function() {
     return {
       restrict: 'AE',
-      template: "<div style='width:300;height:240px;'></div>",
+      template: "<div style='width:300;height:155px;'></div>",
       link: function(scope, element, attr) {
         scope.DataRequirementSummary.then(function(result) {
           if (200 == result.data.head.status) {
