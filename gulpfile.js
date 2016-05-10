@@ -60,7 +60,7 @@ gulp.task('nodemon', function() {
 
 
 /**------------------ gulp build ------------------*/
-gulp.task('build', ['scripts','styles','htmls', 'libraries']);
+gulp.task('build', ['scripts','styles','images','htmls','libraries']);
 // Handle JavaScript
 gulp.task('scripts', function() {
   gulp.src('./client/scripts/**/*.js')
@@ -93,7 +93,11 @@ gulp.task('libraries', function(){
   gulp.src(['./client/libraries/**/*'])
     .pipe(gulp.dest('./build/libraries'));
 })
-
+// Handle Images
+gulp.task('images', function(){
+  gulp.src(['./client/styles/images/**/*'])
+    .pipe(gulp.dest('./build/styles/images'));
+})
 /**------------------ gulp clean ------------------*/
 gulp.task('clean', function() {
   del(['./build/**/*']);

@@ -73,7 +73,7 @@ html {
   padding: 15px 0 15px 80px;
 }
 #login .login-wrap {
-  background: url(/styles/images/bg.png) no-repeat;
+  background: url('/styles/images/bg.png') no-repeat;
   background-size: 100% 100%;
   height: 66%;
 }
