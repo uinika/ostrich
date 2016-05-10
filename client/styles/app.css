@@ -801,3 +801,10 @@ html {
 #data-quota-list .pager li {
   margin-left: 6px;
 }
+#data-quota-list .table-patch td,
+#data-quota-list .table-patch th {
+  word-break: keep-all;
+  word-wrap: normal;
+  text-overflow: ellipsis;
+  table-layout: fixed;
+}
