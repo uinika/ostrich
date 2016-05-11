@@ -29,7 +29,30 @@ AdminUser.controller('Admin.User.Controller.Main', ['$rootScope', '$scope', '$st
       $scope.Modal = {}; // Clean scope of modal
       $scope.sysUser = {}; // Clean scope of modal
 
-      Component.popModal($scope, '添加', 'add-user-modal').result.then(function() {
+      var prom = Component.popModal($scope, '添加', 'add-user-modal');
+      prom.opened.then(function() {
+        $scope.Modal.validUser = function (user){
+          console.log(user);
+          Http.getUserList({
+            // dep_id:$scope.user.id
+          }).then(function(result) {
+             var users = result.data.body;
+             for (var i = 0; i < users.length; i++) {
+               if(users[i].username === user){
+                 alert("用户名已存在,请重新输入");
+                 $scope.sysUser.username ="";
+               }
+             }
+          });
+        }
+        $scope.Modal.validPword = function (password){
+             if($scope.sysUser.password!=password){
+               alert("密码不对,请重新输入");
+               $scope.password ="";
+             }
+        }
+      });
+      prom.result.then(function() {
         Http.saveUser($scope.sysUser).then(function(result) {
           if (200 == result.data.head.status) {
             alert('添加成功');
@@ -40,6 +63,9 @@ AdminUser.controller('Admin.User.Controller.Main', ['$rootScope', '$scope', '$st
           }
         })
       });
+
+
+
     }
     $scope.updateUser = function(user) {
       user.dep_name = null;
@@ -83,7 +109,7 @@ AdminUser.controller('Admin.User.Controller.Main', ['$rootScope', '$scope', '$st
         if(200 == result.data.head.status){
           $scope.users = result.data.body;
         }else {
-          alert("输入有误，请重新输入");
+          alert("系统没有查到"+$scope.username+"这个用户名，请重新输入");
         }
 
       });
@@ -185,6 +211,7 @@ AdminUser.service('AdminUser.Service.Component', ['$uibModal',
         }
 
       };
+
       scope.Modal.cancel = function() {
         modalInstance.dismiss();
       };

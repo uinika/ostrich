@@ -102,7 +102,7 @@ AdminDepartment.controller('Admin.Department.Controller.Main', ['$rootScope', '$
         if(200 == result.data.head.status){
           $scope.AdminDepartments = result.data.body;
         }else {
-          alert("输入有误，请重新输入");
+          alert("系统没有查到"+$scope.dep_name+"这个部门，请重新输入");
         }
 
       });
