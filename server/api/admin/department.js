@@ -7,11 +7,11 @@ Router.route('/sys_dep')
   .get(function(request, response) {
     let head = {}, body = {};
     let datas = {};
-    var dep_name = request.query.dep_name;
-    if(undefined == dep_name) {
+    var depname = request.query.dep_name;
+    console.log("23");
+    if(undefined == depname) {
       datas = JsonLoader.sync(Config.path + 'admin/getDepList.json');
-    }
-    if(dep_name != null) {
+    }else {
       datas = JsonLoader.sync(Config.path + 'admin/getDep.json');
     }
     response.json(datas);

@@ -68,7 +68,6 @@ AdminUser.controller('Admin.User.Controller.Main', ['$rootScope', '$scope', '$st
 
     }
     $scope.updateUser = function(user) {
-      user.dep_name = null;
       $scope.sysUser = user;
       Component.popModal($scope, '修改', 'add-user-modal').result.then(function() {
         Http.updateUser($scope.sysUser).then(function(result) {

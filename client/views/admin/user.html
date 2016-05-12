@@ -10,9 +10,9 @@
           <button type="button" class="btn btn-primary" ng-click="addUserModal()">
             <i class="fa fa-plus"> 新增</i></button>
         </div>
-        <div class="input-group col-xs-5 pull-right">
+        <div class="input-group col-xs-4 pull-right">
           <div class="input-group-addon">用户数-{{UserTotal}}</div>
-          <input type="text" class="form-control" placeholder="请输入查询指标名称..." ng-model="username" required>
+          <input type="text" class="form-control" placeholder="请输入用户名" ng-model="username" required>
           <div class="input-group-addon" ng-click='searchUser()'>查询</div>
         </div>
       </div>
@@ -34,7 +34,10 @@
             <td>{{user.dep_name}}</td>
             <td>{{user.person_name}}</td>
             <td>{{user.phone}}</td>
-            <td><a ng-click='updateUser(user)'>修改</a>&nbsp;&nbsp;<a ng-click='deleteUser(user)'>删除</a></td>
+            <td>
+              <a ng-click='updateUser(user)'><button type="button" class="btn btn-success btn-xs"><i class="fa fa-pencil-square-o"> 修改</i></button></a>&nbsp;&nbsp;
+              <a ng-click='deleteUser(user)'><button type="button" class="btn btn-danger btn-xs"><i class="fa fa-remove"> 删除</i></button></a>
+            </td>
           </tr>
         </tbody>
       </table>

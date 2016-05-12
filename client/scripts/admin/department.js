@@ -66,8 +66,8 @@ AdminDepartment.controller('Admin.Department.Controller.Main', ['$rootScope', '$
         Http.saveDepartment($scope.department).then(function(result) {
           if (200 == result.data.head.status) {
             alert('添加成功');
-            // _httpParams.limit = 10;
-            // _httpParams.skip = 0;
+            _httpParams.limit = 10;
+            _httpParams.skip = 0;
             getDepartmentList(_httpParams);
           }
           else{
@@ -77,7 +77,6 @@ AdminDepartment.controller('Admin.Department.Controller.Main', ['$rootScope', '$
       });
     }
     $scope.updateDepartment = function(AdminDep) {
-      AdminDep.dep_name = null;
       $scope.department = AdminDep;
       Component.popModal($scope, '修改', 'add-department-modal').result.then(function() {
         Http.updateDepartment($scope.department).then(function(result) {
@@ -116,6 +115,7 @@ AdminDepartment.controller('Admin.Department.Controller.Main', ['$rootScope', '$
 
     //search department
     $scope.searchDepartment = function(){
+      console.log($scope.dep_name);
       Http.getDepartmentList({
         'dep_name': $scope.dep_name
       }).then(function(result) {

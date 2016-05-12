@@ -7,12 +7,12 @@
       <div class="panel-heading">部门管理</div>
       <div class="panel-body">
         <div class="col-xs-7 pull-left">
-          <button type="button" class="btn btn-primary" ng-click="addDepartmentModal()">
+          <button type="button" class="btn btn-primary " ng-click="addDepartmentModal()">
             <i class="fa fa-plus"> 新增</i></button>
         </div>
-        <div class="input-group col-xs-5 pull-right">
+        <div class="input-group col-xs-4 pull-right">
           <div class="input-group-addon">部门总数-{{depTotal}}</div>
-          <input type="text" class="form-control" placeholder="请输入查询指标名称..." ng-model="dep_name" required>
+          <input type="text" class="form-control" placeholder="请输入部门名称" ng-model="dep_name" required>
           <div class="input-group-addon" ng-click='searchDepartment()'>查询</div>
         </div>
       </div>
@@ -42,7 +42,10 @@
             <td>{{AdminDep.area_code_name}}</td>
             <td>{{AdminDep.contacts}}</td>
             <td>{{AdminDep.contact_phone}}</td>
-            <td><a ng-click='updateDepartment(AdminDep)'>修改</a>&nbsp;&nbsp;<a ng-click='deleteDepartment(AdminDep)'>删除</a></td>
+            <td>
+              <a ng-click='updateDepartment(AdminDep)'><button type="button" class="btn btn-success btn-xs"><i class="fa fa-pencil-square-o"> 修改</i></button></a>&nbsp;&nbsp;
+              <a ng-click='deleteDepartment(AdminDep)'><button type="button" class="btn btn-danger btn-xs"><i class="fa fa-remove"> 删除</i></button></a>
+            </td>
           </tr>
         </tbody>
       </table>
