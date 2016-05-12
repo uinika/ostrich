@@ -12,10 +12,7 @@
              options="treeOptions"
              on-selection="showSelected(node)"
              selected-node="node1">
-             <a>
-
-             </a>
-             {{node.dep_short_name}}
+             <span ui-sref="main.data-quota.list({dep_name: node.id})">{{node.dep_short_name}}</span>
           </treecontrol>
         </div>
 
