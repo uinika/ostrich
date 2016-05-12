@@ -836,8 +836,19 @@ html {
   word-break: keep-all;
   word-wrap: normal;
   text-overflow: ellipsis;
-  table-layout: fixed;
+  font-size: 12px;
+  vertical-align: middle;
 }
 #data-quota-list .pannel-patch {
   margin-bottom: 10px;
+}
+#data-quota-list .icon-list {
+  color: #337AB7;
+  font-size: 13px;
+}
+#data-quota-list .icon-list li {
+  margin-left: 15px;
+}
+#data-quota-list .icon-list li .warning {
+  color: #F07746;
 }

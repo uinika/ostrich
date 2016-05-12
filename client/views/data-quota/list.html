@@ -40,14 +40,28 @@
   <div class="panel panel-default">
     <div class="panel-heading">
       <i class="fa fa-table"> 指标表格</i>
+      <ul class="icon-list nav nav-filter pull-right">
+          <li class='pull-left'>
+            <i class="fa fa-eye">&nbsp;全开放</i>
+          </li>
+          <li class='pull-left'>
+            <i class="fa fa-desktop">&nbsp;政务云开放</i>
+          </li>
+          <li class='pull-left'>
+            <i class="fa fa-lock">&nbsp;授权开放</i>
+          </li>
+          <li class='pull-left'>
+            <i class="fa fa-warning warning">&nbsp;暂不开放</i>
+          </li>
+        </ul>
     </div>
     <div class="table-responsive">
         <table class='table table-hover table-striped table-bordered table-patch'>
            <thead>
              <tr>
                <th>关注</th>
-               <th>标识</th>
                <th>序号</th>
+               <th>标识</th>
                <th>指标编号</th>
                <th>指标名称</th>
                <th>指标别称</th>
@@ -78,10 +92,10 @@
                   </label>
                 </div>
               </td>
+              <td>{{$index}}</td>
               <td>
                 <span class="glyphicon glyphicon-eye-open"></span>
               </td>
-              <td>{{$index}}</td>
               <td>{{quota.quota_sn}}</td>
               <td>{{quota.quota_name}}</td>
               <td>{{quota.alias}}</td>

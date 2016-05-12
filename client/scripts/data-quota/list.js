@@ -8,7 +8,6 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
     if(Params.dep_name==='' && typeof Params.dep_name==='string'){
       // Init Data Quota Table
       Http.getDataQuota().then(function(result) {
-        console.log(result.data.body);
         $scope.DataQuotas = result.data.body;
       });
     }
