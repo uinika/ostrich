@@ -812,8 +812,12 @@ html {
   padding-left: 0;
 }
 #data-quota-main .left .menu {
-  margin: 10px 15px;
+  margin: 10px 0;
+  padding: 0;
   font-size: 13px;
+}
+#data-quota-main .left .menu li {
+  padding-left: 15px;
 }
 #data-quota-main .right {
   padding-right: 0;
