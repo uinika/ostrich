@@ -833,8 +833,11 @@ html {
 }
 #data-quota-list .table-patch td,
 #data-quota-list .table-patch th {
+  max-width: 200px;
   word-break: keep-all;
   word-wrap: normal;
+  white-space: nowrap;
+  overflow: hidden;
   text-overflow: ellipsis;
   font-size: 12px;
   vertical-align: middle;
