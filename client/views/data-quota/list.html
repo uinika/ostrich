@@ -14,7 +14,7 @@
         <ul class="pager">
           <li>共享级别</li>
           <li><a>全部</a></li>
-          <li ui-sref-active="active" ng-repeat='shareLevel in shareLevelList'><a>{{shareLevel.dict_name}}</a></li>
+          <li ui-sref-active="active" ng-repeat='shareLevel in shareLevelList'><a>{{::shareLevel.dict_name}}</a></li>
         </ul>
       </nav>
 
@@ -22,7 +22,7 @@
         <ul class="pager">
           <li>共享频率</li>
           <li><a>全部</a></li>
-          <li ng-repeat='shareFreq in shareFrequencyList'><a>{{shareFreq.dict_name}}</a></li>
+          <li ng-repeat='shareFreq in shareFrequencyList'><a>{{::shareFreq.dict_name}}</a></li>
         </ul>
       </nav>
 
@@ -30,7 +30,7 @@
         <ul class="pager">
           <li>空间范围</li>
           <li><a>全部</a></li>
-          <li ng-repeat='DataLevel in dataLevelList'><a>{{DataLevel.dict_name}}</a></li>
+          <li ng-repeat='DataLevel in dataLevelList'><a>{{::DataLevel.dict_name}}</a></li>
         </ul>
       </nav>
 
@@ -40,20 +40,6 @@
   <div class="panel panel-default">
     <div class="panel-heading">
       <i class="fa fa-table"> 指标表格</i>
-      <ul class="icon-list nav nav-filter pull-right">
-          <li class='pull-left'>
-            <i class="fa fa-eye">&nbsp;全开放</i>
-          </li>
-          <li class='pull-left'>
-            <i class="fa fa-desktop">&nbsp;政务云开放</i>
-          </li>
-          <li class='pull-left'>
-            <i class="fa fa-lock">&nbsp;授权开放</i>
-          </li>
-          <li class='pull-left'>
-            <i class="fa fa-warning warning">&nbsp;暂不开放</i>
-          </li>
-        </ul>
     </div>
     <div class="table-responsive">
         <table class='table table-hover table-striped table-bordered table-patch'>
@@ -92,29 +78,40 @@
                   </label>
                 </div>
               </td>
-              <td>{{$index}}</td>
+              <td>{{::$index}}</td>
               <td>
-                <span class="glyphicon glyphicon-eye-open"></span>
+                <button ng-if="quota.sharelevel==='全开放'" class='btn btn-default btn-xs'>
+                  <i class='fa fa-eye blue'> {{::quota.sharelevel}}</i>
+                </button>
+                <button ng-if="quota.sharelevel==='省政务云平台开放'" class='btn btn-default btn-xs'>
+                  <i class='fa fa-desktop blue'> {{::quota.sharelevel}}</i>
+                </button>
+                <button ng-if="quota.sharelevel==='授权开放'"  class='btn btn-default btn-xs'>
+                  <i class='fa fa-lock blue'> {{::quota.sharelevel}}</i>
+                </button>
+                <button ng-if="quota.sharelevel==='暂不开放'"  class='btn btn-default btn-xs'>
+                  <i class='fa fa-warning orange'> {{::quota.sharelevel}}</i>
+                </button>
               </td>
-              <td>{{quota.quota_sn}}</td>
-              <td>{{quota.quota_name}}</td>
-              <td>{{quota.alias}}</td>
-              <td>{{quota.meter_unit}}</td>
-              <td>{{quota.quota_detail}}</td>
-              <td>{{quota.calculate_method}}</td>
-              <td>{{quota.area_range}}</td>
-              <td>{{quota.area_range}}</td>
-              <td>{{quota.regionallevel}}</td>
-              <td>{{quota.depname}}</td>
-              <td>{{quota.regionallevel}}</td>
-              <td>{{quota.datastoretype}}</td>
-              <td>{{quota.data_precision}}</td>
-              <td>{{quota.data_length}}</td>
-              <td>{{quota.create_time | date:'yyyy-MM-dd HH:mm:ss'}}</td>
-              <td>{{quota.datashowformat}}</td>
-              <td>{{quota.secretflag}}</td>
-              <td>{{quota.linkman}}</td>
-              <td>{{quota.contact_phone}}</td>
+              <td>{{::quota.quota_sn}}</td>
+              <td>{{::quota.quota_name}}</td>
+              <td>{{::quota.alias}}</td>
+              <td>{{::quota.meter_unit}}</td>
+              <td>{{::quota.quota_detail}}</td>
+              <td>{{::quota.calculate_method}}</td>
+              <td>{{::quota.area_range}}</td>
+              <td>{{::quota.area_range}}</td>
+              <td>{{::quota.regionallevel}}</td>
+              <td>{{::quota.depname}}</td>
+              <td>{{::quota.regionallevel}}</td>
+              <td>{{::quota.datastoretype}}</td>
+              <td>{{::quota.data_precision}}</td>
+              <td>{{::quota.data_length}}</td>
+              <td>{{::quota.create_time | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+              <td>{{::quota.datashowformat}}</td>
+              <td>{{::quota.secretflag}}</td>
+              <td>{{::quota.linkman}}</td>
+              <td>{{::quota.contact_phone}}</td>
              </tr>
            </tbody>
          </table>

@@ -842,13 +842,15 @@ html {
 #data-quota-list .pannel-patch {
   margin-bottom: 10px;
 }
-#data-quota-list .icon-list {
+#data-quota-list .blue {
   color: #337AB7;
+}
+#data-quota-list .orange {
+  color: #F07746;
+}
+#data-quota-list .icon-list {
   font-size: 13px;
 }
 #data-quota-list .icon-list li {
   margin-left: 15px;
-}
-#data-quota-list .icon-list li .warning {
-  color: #F07746;
 }

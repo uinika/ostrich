@@ -15,19 +15,19 @@
               <ol ui-tree-nodes="" ng-model="item1.nodes">
                 <li ng-repeat="item2 in item1.nodes" ui-tree-node>
                   <div ui-tree-handle>
-                    <span ui-sref="main.data-quota.list({dep_name:item2.id})">{{item2.dep_name}}</span>
+                    <span ui-sref="main.data-quota.list({dep_name:item2.id})">{{item2.dep_short_name}}</span>
                     <span class="badge pull-right">{{item2.data_quota_num}}</span>
                   </div>
                   <ol ui-tree-nodes="" ng-model="item2.nodes">
                     <li ng-repeat="item3 in item2.nodes" ui-tree-node>
                       <div ui-tree-handle>
-                        <span ui-sref="main.data-quota.list({dep_name:item3.id})">{{item3.dep_name}}</span>
+                        <span ui-sref="main.data-quota.list({dep_name:item3.id})">{{item3.dep_short_name}}</span>
                         <span class="badge pull-right">{{item3.data_quota_num}}</span>
                       </div>
                       <ol ui-tree-nodes="" ng-model="item3.nodes">
                         <li ng-repeat="item4 in item3.nodes" ui-tree-node>
                           <div ui-tree-handle>
-                            <span ui-sref="main.data-quota.list({dep_name:item4.id})">{{item4.dep_name}}</span>
+                            <span ui-sref="main.data-quota.list({dep_name:item4.id})">{{item4.dep_short_name}}</span>
                             <span class="badge pull-right">{{item4.data_quota_num}}</span>
                           </div>
                         </li>
