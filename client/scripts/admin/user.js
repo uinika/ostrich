@@ -8,7 +8,7 @@ AdminUser.controller('Admin.User.Controller.Main', ['$rootScope', '$scope', '$st
     $scope.deptList = [];
     function getUserList() {
       Http.getUserList({
-        // dep_id:$scope.user.id
+        "dep_id":$rootScope.User.dep_id
       }).then(function(result) {
         $scope.users = result.data.body;
       });
@@ -16,7 +16,7 @@ AdminUser.controller('Admin.User.Controller.Main', ['$rootScope', '$scope', '$st
     // init
     getUserList();
     Http.getUserTotal({
-      // dep_id:$scope.user.id
+      "dep_id":$rootScope.User.dep_id
     }).then(function(result) {
       $scope.UserTotal = result.data.body[0].number;
     });
@@ -34,7 +34,7 @@ AdminUser.controller('Admin.User.Controller.Main', ['$rootScope', '$scope', '$st
         $scope.Modal.validUser = function (user){
           console.log(user);
           Http.getUserList({
-            // dep_id:$scope.user.id
+            "dep_id":$rootScope.User.dep_id
           }).then(function(result) {
              var users = result.data.body;
              for (var i = 0; i < users.length; i++) {

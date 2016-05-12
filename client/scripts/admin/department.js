@@ -26,14 +26,19 @@ AdminDepartment.controller('Admin.Department.Controller.Main', ['$rootScope', '$
     }
     // init
     getDepartmentList(_httpParams);
+    Http.getDepTotal({
+    }).then(function(result) {
+      $scope.depTotal = result.data.body[0].number;
+      $scope.Paging.totalItems =  result.data.body[0].number
+    });
 
     Http.getSysDict({
-      // dict_category:"2"
+      dict_category:"7"
     }).then(function(result) {
-      $scope.previousDepNames = result.data.body;
+      $scope.types = result.data.body;
     });
     Http.getSysDict({
-      dict_category:"2"
+      dict_category:"9"
     }).then(function(result) {
       $scope.areaNames = result.data.body;
     });
@@ -42,12 +47,27 @@ AdminDepartment.controller('Admin.Department.Controller.Main', ['$rootScope', '$
       $scope.Modal = {}; // Clean scope of modal
       $scope.department = {}; // Clean scope of modal
 
-      Component.popModal($scope, '添加', 'add-department-modal').result.then(function() {
+      var promise = Component.popModal($scope, '添加', 'add-department-modal');
+      promise.opened.then(function() {
+        $scope.Modal.validDepName = function (depName){
+          Http.getDepartmentList().then(function(result) {
+             var deps = result.data.body;
+             for (var i = 0; i < deps.length; i++) {
+               if(deps[i].dep_name === depName){
+                 $scope.department.dep_name ="";
+                 alert("该部门已存在,请重新添加");
+               }
+             }
+          });
+        }
+
+      });
+      promise.result.then(function() {
         Http.saveDepartment($scope.department).then(function(result) {
           if (200 == result.data.head.status) {
             alert('添加成功');
-            _httpParams.limit = 10;
-            _httpParams.skip = 0;
+            // _httpParams.limit = 10;
+            // _httpParams.skip = 0;
             getDepartmentList(_httpParams);
           }
           else{
@@ -125,6 +145,12 @@ AdminDepartment.factory('AdminDepartment.Service.Http', ['$http', 'API',
         }
       )
     };
+
+    function getDepTotal() {
+      return $http.get(
+        path + '/sys_dep/count'
+      )
+    };
     function saveDepartment(data) {
       return $http.post(
         path + '/sys_dep', {
@@ -156,6 +182,7 @@ AdminDepartment.factory('AdminDepartment.Service.Http', ['$http', 'API',
 
     return {
       getDepartmentList: getDepartmentList,
+      getDepTotal: getDepTotal,
       saveDepartment: saveDepartment,
       getSysDict: getSysDict,
       updateDepartment: updateDepartment,

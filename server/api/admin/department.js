@@ -16,6 +16,12 @@ Router.route('/sys_dep')
     }
     response.json(datas);
 });
+Router.route('/sys_dep/count')
+  .get(function(request, response) {
+    let head = {}, body = {};
+    let datas = JsonLoader.sync(Config.path + 'admin/getDepTotal.json');
+    response.json(datas);
+});
 Router.route('/sys_dict')
   .get(function(request, response) {
     let head = {}, body = {};
