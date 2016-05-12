@@ -204,10 +204,18 @@ html {
   height: 287px;
   overflow: hidden;
 }
+#department-main .department-main .panel-list .panel table {
+  table-layout: fixed;
+}
+#department-main .department-main .panel-list .panel table tr td {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 #department-main .department-main .focus-bureau-list {
   height: 200px;
 }
-#department-main .department-main .focus-bureau-list .bureau-item .thumbnail {
+#department-main .department-main .focus-bureau-list .bureau-item .caption {
   height: 16px;
   font-size: 12px;
   text-align: center;
@@ -331,6 +339,14 @@ html {
 }
 #department-inventory .indicator-list ul.nav-filter li span i.fa-warning {
   color: #f0ad4e;
+}
+#department-inventory .indicator-list table {
+  table-layout: fixed;
+}
+#department-inventory .indicator-list table tr td {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 #department-inventory .indicator-list table tr span i {
   font-size: 18px;
@@ -485,6 +501,14 @@ html {
 #department-share .indicator-list ul.nav-filter li span i.fa-warning {
   color: #f0ad4e;
 }
+#department-share .indicator-list table {
+  table-layout: fixed;
+}
+#department-share .indicator-list table tr td {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 #department-share .indicator-list table tr span i {
   font-size: 18px;
 }
@@ -565,6 +589,14 @@ html {
 #department-requirement .indicator-list ul.nav-filter li span i.fa-question-circle {
   color: #f0ad4e;
 }
+#department-requirement .indicator-list table {
+  table-layout: fixed;
+}
+#department-requirement .indicator-list table tr td {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 #department-requirement .indicator-list table tr span {
   padding: 0 15px;
 }
@@ -628,6 +660,14 @@ html {
 }
 #department-requirement-confirm .indicator-list ul.nav-filter li span i.fa-times-circle-o {
   color: #d9534f;
+}
+#department-requirement-confirm .indicator-list table {
+  table-layout: fixed;
+}
+#department-requirement-confirm .indicator-list table tr td {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 #department-requirement-confirm .indicator-list table tr span {
   padding: 0 15px;
@@ -720,6 +760,14 @@ html {
 #department-audit .indicator-list ul.nav-filter li span i.fa-question-circle {
   color: #f0ad4e;
 }
+#department-audit .indicator-list table {
+  table-layout: fixed;
+}
+#department-audit .indicator-list table tr td {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 #department-audit .indicator-list table tr span {
   padding: 0 15px;
 }
@@ -756,6 +804,9 @@ html {
 }
 #department-audit-info .audit-wrap .audit-info .apply-dep-info .left {
   padding-left: 0;
+}
+#department-audit-info .audit-wrap .audit-info table.no-border tr td {
+  border: none;
 }
 #department-audit-info .audit-wrap .step-number {
   background-color: #35aa47;

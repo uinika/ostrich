@@ -100,83 +100,86 @@
           <div class='container'>
             <div class='row'>
               <div class='col-lg-12'>
-              <!-- Table -->
-              <table class='table table-hover table-striped '>
-                <thead>
-                  <tr>
-                    <th>标识</th>
-                    <th>序号</th>
-                    <th>指标编号</th>
-                    <th>指标名称</th>
-                    <th>指标别称</th>
-                    <th>计量单位</th>
-                    <th>指标详细解释</th>
-                    <th>计算方法</th>
-                    <th>共享频率</th>
-                    <th>空间范围</th>
-                    <th>分地区数据级别</th>
-                    <th>来源部门</th>
-                    <th>共享级别</th>
-                    <th>数据存储类型</th>
-                    <th>数据精度</th>
-                    <th>数据长度</th>
-                    <th>创建时间</th>
-                    <th>数据表示格式</th>
-                    <th>是否涉密</th>
-                    <th>联系人</th>
-                    <th>联系电话</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr ng-repeat='DepDataQuota in depQuotaList | orderBy:"create_time":true'>
-                    <td><div ng-if='DepDataQuota.sharelevel =="全开放" '><span>
-                      <i class='fa fa-eye'></i></span></div>
-                    <div ng-if='DepDataQuota.sharelevel =="省政务云平台开放" '><span>
-                      <i class='fa fa-desktop'></i></span></div>
-                  <div ng-if='DepDataQuota.sharelevel =="授权开放" '><span>
-                    <i class='fa fa-lock'></i></span></div>
-                <div ng-if='DepDataQuota.sharelevel =="暂不开放" '><span>
-                  <i class='fa fa-warning'></i></span></div></td>
-                    <td>{{$index+1}}</td>
-                    <td>{{DepDataQuota.quota_sn}}</td>
-                    <td><a ui-sref='main.department.inventory.detail({ID:DepDataQuota.id})'>{{DepDataQuota.quota_name}}</a></td>
-                    <td>{{DepDataQuota.alias}}</td>
-                    <td>{{DepDataQuota.meter_unit}}</td>
-                    <td>{{DepDataQuota.quota_detail}}</td>
-                    <td>{{DepDataQuota.calculate_method}}</td>
-                    <td>
-                      {{DepDataQuota.sharefrequency}}
-                    </td>
-                    <td>
-                      {{DepDataQuota.area_range}}
-                    </td>
-                    <td>{{DepDataQuota.regionallevel}}</td>
-                    <td>{{DepDataQuota.depname}}
+                <!-- Table -->
+                <table class='table table-hover table-striped '>
+                  <thead>
+                    <tr>
+                      <th width='60px'>操作</th>
+                      <th width='40px'>标识</th>
+                      <th width='40px'>序号</th>
+                      <th width='60px'>指标编号</th>
+                      <th width='60px'>指标名称</th>
+                      <th width='60px'>指标别称</th>
+                      <th width='60px'>计量单位</th>
+                      <th width='100px'>指标详细解释</th>
+                      <th width='60px'>计算方法</th>
+                      <th width='60px'>共享频率</th>
+                      <th width='60px'>空间范围</th>
+                      <th width='100px'>分地区数据级别</th>
+                      <th width='60px'>来源部门</th>
+                      <th width='60px'>共享级别</th>
+                      <th width='100px'>数据存储类型</th>
+                      <th width='60px'>数据精度</th>
+                      <th width='60px'>数据长度</th>
+                      <th width='60px'>创建时间</th>
+                      <th width='100px'>数据表示格式</th>
+                      <th width='60px'>是否涉密</th>
+                      <th width='60px'>联系人</th>
+                      <th width='60px'>联系电话</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat='DepDataQuota in depQuotaList | orderBy:"create_time":true'>
+                      <td><input type='checkbox' ng-checked='DepDataQuota.delete_flag == "true"' ng-click='deleteQuota($event,DepDataQuota.id)'/>删除</td>
+                      <td>
+                        <div ng-if='DepDataQuota.sharelevel =="全开放" '>
+                          <span>
+                            <i class='fa fa-eye'></i>
+                          </span>
+                        </div>
+                        <div ng-if='DepDataQuota.sharelevel =="省政务云平台开放" '>
+                          <span>
+                            <i class='fa fa-desktop'></i>
+                          </span>
+                        </div>
+                        <div ng-if='DepDataQuota.sharelevel =="授权开放" '>
+                          <span>
+                            <i class='fa fa-lock'></i>
+                          </span>
+                        </div>
+                        <div ng-if='DepDataQuota.sharelevel =="暂不开放" '>
+                          <span>
+                            <i class='fa fa-warning'></i>
+                          </span>
+                        </div>
+                      </td>
+                      <td>{{$index+1}}</td>
+                      <td title='{{DepDataQuota.quota_sn}}'>{{DepDataQuota.quota_sn}}</td>
+                      <td title='{{DepDataQuota.quota_name}}'>
+                        <a ui-sref='main.department.inventory.detail({ID:DepDataQuota.id})'>{{DepDataQuota.quota_name}}</a>
+                      </td>
+                      <td title='{{DepDataQuota.alias}}'>{{DepDataQuota.alias}}</td>
+                      <td title={{DepDataQuota.meter_unit}}''>{{DepDataQuota.meter_unit}}</td>
+                      <td title='{{DepDataQuota.quota_detail}}'>{{DepDataQuota.quota_detail}}</td>
+                      <td title='{{DepDataQuota.calculate_method}}'>{{DepDataQuota.calculate_method}}</td>
+                      <td title='{{DepDataQuota.sharefrequency}}'>{{DepDataQuota.sharefrequency}}</td>
+                      <td title='{{DepDataQuota.area_range}}'>{{DepDataQuota.area_range}}</td>
+                      <td title='{{DepDataQuota.regionallevel}}'>{{DepDataQuota.regionallevel}}</td>
+                      <td title='{{DepDataQuota.depname}}'>{{DepDataQuota.depname}}</td>
+                      <td title='{{DepDataQuota.sharelevel}}'>{{DepDataQuota.sharelevel}}</td>
+                      <td title='{{DepDataQuota.datastoretype}}'>{{DepDataQuota.datastoretype}}</td>
+                      <td title='{{DepDataQuota.data_precision}}'>{{DepDataQuota.data_precision}}</td>
+                      <td title='{{DepDataQuota.data_length}}'>{{DepDataQuota.data_length}}</td>
+                      <td title='{{DepDataQuota.create_time | date:"yyyy-MM-dd hh:mm:ss" }}'>{{DepDataQuota.create_time | date:"yyyy-MM-dd hh:mm:ss" }}</td>
+                      <td title='{{DepDataQuota.datashowformat}}'>{{DepDataQuota.datashowformat}}</td>
+                      <td title='{{DepDataQuota.secretflag}}'>{{DepDataQuota.secretflag}}</td>
+                      <td title={{DepDataQuota.linkman}}>{{DepDataQuota.linkman}}</td>
+                      <td title='{{DepDataQuota.contact_phone}}'>{{DepDataQuota.contact_phone}}</td>
+                    </tr>
+                  </tbody>
+                </table>
 
-                    </td>
-                    <td>
-                      {{DepDataQuota.sharelevel}}
-                    </td>
-                    <td>
-                      {{DepDataQuota.datastoretype}}
-                    </td>
-                    <td>{{DepDataQuota.data_precision}}</td>
-                    <td>{{DepDataQuota.data_length}}</td>
-                    <td>{{DepDataQuota.create_time | date:"yyyy-MM-dd hh:mm:ss" }}</td>
-                    <td>
-                      {{DepDataQuota.datashowformat}}
-                    </td>
-                    <td>
-                      {{DepDataQuota.secretflag}}
-                    </td>
-                    <td>{{DepDataQuota.linkman}}</td>
-                    <td>{{DepDataQuota.contact_phone}}</td>
-                  </tr>
-                </tbody>
-              </table>
-
-
-            </div>
+              </div>
             </div>
           </div>
         </div>

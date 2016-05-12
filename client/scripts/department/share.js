@@ -89,6 +89,36 @@ DepartmentShare.controller('DepartmentShare.Controller.Main', ['$rootScope', '$s
       getDepartmentShareList(_httpParams);
     }
 
+    // follow department
+    $scope.followChange = function(event,depId) {
+      var value = event.target.checked;
+      console.log(value);
+      if(value) {// follow
+        Http.followDepartment({
+          follow_dep_id: depId
+        }).then(function(result) {
+          if (200 == result.data.head.status) {
+
+          }
+          else {
+
+          }
+        })
+      }
+      else{// cancel follow
+        Http.cancelFollowDepartment({
+          follow_dep_id: depId
+        }).then(function(result) {
+          if (200 == result.data.head.status) {
+
+          }
+          else {
+
+          }
+        })
+      }
+
+    }
   }
 ])
 
@@ -126,9 +156,27 @@ DepartmentShare.factory('DepartmentShare.Service.Http', ['$http', 'API',
         }
       )
     }
+
+    function followDepartment(id) {
+      return $http.post(
+        path + '/user_dep', {
+          data: id
+        }
+      )
+    }
+
+    function cancelFollowDepartment(id) {
+      return $http.delete(
+        path + '/user_dep', {
+          data: id
+        }
+      )
+    }
     return {
       shareDataQuotaList: shareDataQuotaList,
-      getQuotaDetail: getQuotaDetail
+      getQuotaDetail: getQuotaDetail,
+      followDepartment: followDepartment,
+      cancelFollowDepartment: cancelFollowDepartment
     }
   }
 ]);

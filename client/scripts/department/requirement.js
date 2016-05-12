@@ -57,6 +57,7 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$rootScope'
       $scope.Modal.DepRequirment = {};
       var _httpPublishParams = {};
       var dataRelationConfig = [];
+      $scope.reqParent = {};
 
       Component.popModal($scope, '发布', 'add-req-modal').result.then(function() {
         _($scope.dataLevelReqSelection).forEach(function(value) {
@@ -66,7 +67,7 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$rootScope'
           req_sys_dict.obj_type = 2;
           dataRelationConfig.push(req_sys_dict);
         });
-        var res_dep_id = _.map($scope.outputDeptList, 'id');
+        var res_dep_id = _.map($scope.reqParent.outputDeptList, 'id');
          $scope.Modal.DepRequirment.response_dep_id = res_dep_id[0];
         _httpPublishParams.dataRequiement = $scope.Modal.DepRequirment;
         _httpPublishParams.dataRelationConfig = dataRelationConfig;
@@ -89,6 +90,18 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$rootScope'
       getDeptRequirementList();
     }
 
+
+    // delete requirement
+    $scope.deleteReqFlag = false;
+    $scope.deleteReq = function(id) {
+      $scope.deleteReqFlag = !$scope.deleteReqFlag;
+      Http.deleteRequirement({
+        id : id,
+        delete_flag :$scope.deleteReqFlag
+      }).then(function(result) {
+
+      })
+    }
   }
 ])
 
@@ -133,7 +146,9 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$rootScope'
         getDeptRequirementConfirmList();
       }
 
-      Http.getDepartQuotaList().then(function(result) {
+      Http.getDepartQuotaList({
+        dep_name : DEP_ID
+      }).then(function(result) {
         console.log(result);
         $scope.depQuotaReqList = result.data.body;
         //  $scope.Paging.totalItems = data.head.total;
@@ -214,21 +229,6 @@ DepartmentReq.factory('Department.Requirement.Service.Http', ['$http', 'API',
         }
       )
     }
-    // function updateReq(data) {
-    //   return $http.put(
-    //     path + '/requirement/' , {
-    //       data: data
-    //     }
-    //   )
-    // }
-    //
-    // function deleteReq(data) {
-    //   return $http.delete(
-    //     path + '/requirement/' , {
-    //       data:{"ID":data}
-    //     }
-    //   )
-    // }
 
     function getReqDetail(params) {
       return $http.get(
@@ -250,6 +250,14 @@ DepartmentReq.factory('Department.Requirement.Service.Http', ['$http', 'API',
         path + '/sys_dep'
       )
     }
+
+    function deleteRequirement(id) {
+      return $http.put(
+        path + '/data_requiement_delete' , {
+          data: data
+        }
+      )
+    }
     return {
       getDepartmentRequirementList: getDepartmentRequirementList,
       publishRequirement: publishRequirement,
@@ -258,7 +266,8 @@ DepartmentReq.factory('Department.Requirement.Service.Http', ['$http', 'API',
       updateRequirement: updateRequirement,
       saveReqResponse: saveReqResponse,
       getDepartQuotaList: getDepartQuotaList,
-      getDepartmentList: getDepartmentList
+      getDepartmentList: getDepartmentList,
+      deleteRequirement: deleteRequirement
     }
   }
 ]);

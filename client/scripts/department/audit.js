@@ -43,12 +43,15 @@ Audit.controller('Department.Audit.Controller.Main', ['$rootScope', '$scope', '$
 
 Audit.controller('Department.Audit.Controller.info', ['$rootScope', '$scope', '$state', '$q', 'Department.Audit.Service.Http', '$stateParams',
   function($rootScope, $scope, $state, $q, Http, $stateParams) {
+    $scope.TabExampShow = true;
+    $scope.Tab = {};
+    $scope.Tab.show = {};
+    $scope.Tab.show.auditInfo = true;
+
     // get audit detail by id
     Http.getQuotaDetail({
       data_quota_id: $stateParams.DATAQUOTAID
     }).then(function(result) {
-      $scope.Tab = {};
-
       $scope.AuditDetail = result.data.body[0];
       $scope.AuditDetail.applydepname = $stateParams.APPLYDEPNAME;
       $scope.AuditDetail.applytime = $stateParams.APPLYTIME;
@@ -64,13 +67,17 @@ Audit.controller('Department.Audit.Controller.info', ['$rootScope', '$scope', '$
           $scope.DataTitle = $scope.DataQuotaExamples.file_content.title;
           $scope.DataColumn = $scope.DataQuotaExamples.file_content.column;
         }
+        Http.getQuotaRequirement({
+          dataquotaid: $stateParams.DATAQUOTAID
+        }).then(function(reqRes) {
+          $scope.QuotaReqDetail = reqRes.data.body[0];
+        })
 
       })
     })
 
 
     $scope.tabSwitcher = function(num) {
-
       switch (num) {
         case 'auditInfo':
           $scope.Tab.show = {};
@@ -147,11 +154,19 @@ Audit.factory('Department.Audit.Service.Http', ['$http', '$q', 'API',
         }
       )
     }
+    function getQuotaRequirement(params) {
+      return $http.get(
+        path + '/requiement_detail', {
+          params: params
+        }
+      )
+    }
     return {
       getAuditList: getAuditList,
       getQuotaDetail: getQuotaDetail,
       updateAuditDetail: updateAuditDetail,
-      getQuotaExamples: getQuotaExamples
+      getQuotaExamples: getQuotaExamples,
+      getQuotaRequirement: getQuotaRequirement
     }
   }
 ]);

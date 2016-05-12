@@ -133,9 +133,9 @@
                     </thead>
                     <tbody>
                       <tr ng-repeat='invtItem in toAuditList'>
-                        <td>{{invtItem.create_time |date:"yyyy-MM-dd hh:mm:ss"}}</td>
-                        <td>{{invtItem.quota_name}}</td>
-                        <td>{{invtItem.depname}}</td>
+                        <td title='{{invtItem.create_time |date:"yyyy-MM-dd hh:mm:ss"}}'>{{invtItem.create_time |date:"yyyy-MM-dd hh:mm:ss"}}</td>
+                        <td title='{{invtItem.quota_name}}'>{{invtItem.quota_name}}</td>
+                        <td title='{{invtItem.depname}}'>{{invtItem.depname}}</td>
                       </tr>
                     </tbody>
                   </table>
@@ -164,10 +164,10 @@
                     </thead>
                     <tbody>
                       <tr ng-repeat='resItem in requireToConfirmList'>
-                        <td>{{resItem.response_time |date:"yyyy-MM-dd hh:mm:ss"}}</td>
-                        <td>{{resItem.create_time| date:"yyyy-MM-dd hh:mm:ss"}}</td>
-                        <td>{{resItem.requiement_name}}</td>
-                        <td>{{resItem.response_dep_name}}</td>
+                        <td title='{{resItem.response_time |date:"yyyy-MM-dd hh:mm:ss"}}'>{{resItem.response_time |date:"yyyy-MM-dd hh:mm:ss"}}</td>
+                        <td title='{{resItem.create_time| date:"yyyy-MM-dd hh:mm:ss"}}'>{{resItem.create_time| date:"yyyy-MM-dd hh:mm:ss"}}</td>
+                        <td title='{{resItem.requiement_name}}'>{{resItem.requiement_name}}</td>
+                        <td title='{{resItem.response_dep_name}}'>{{resItem.response_dep_name}}</td>
                       </tr>
                     </tbody>
                   </table>
@@ -184,17 +184,17 @@
                 </div>
                 <div class='panel-body'>
                   <div class='focus-bureau-list'>
-                    <div ng-repeat='bureau in followDeptList' class='bureau-item col-md-3'>
-                      <a ui-sref='main.inventory.detail({departmentID: bureau.ID})' class='thumbnail'>
-                        <img ng-src='../styles/images/bureau/{{::bureau.DEP_EN_NAME}}' title='{{::bureau.DEP_NAME}}'>
+                    <div ng-repeat='bureau in followDeptList' class='bureau-item col-md-1'>
+                      <a ui-sref='main.inventory.detail({departmentID: bureau.dep_id})' class='thumbnail'>
+                        <img ng-src='../styles/images/bureau/{{::bureau.dep_en_name}}' title='{{::bureau.dep_name}}'>
                       </a>
                       <div class="caption">
-                        {{bureau.DEP_NAME}}
+                        {{bureau.dep_short_name}}
                       </div>
                     </div>
                     <div class='col-md-3 add-focus-option'>
-                      <div class='dep-select'>
-                        <div style='display:inline-block' isteven-multi-select input-model="deptAllList" output-model="parentObj.outputAllDeptList" button-label="dep_name" item-label="dep_name" tick-property="ticked" max-labels="5" max-height="250px" ></div>
+                      <div class='dep-select' ng-show='depSelect.show'>
+                        <div style='display:inline-block' isteven-multi-select input-model="parentObj.deptAllList" output-model="parentObj.outputAllDeptList" button-label="dep_name" item-label="dep_name" tick-property="ticked" max-labels="5" max-height="250px"  on-close='closeFn()'></div>
                         <div class='btn btn-group'>
                           <button class='btn btn-primary' ng-click='followDep()'>关注</button>
                         </div>

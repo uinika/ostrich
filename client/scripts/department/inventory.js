@@ -118,6 +118,19 @@ DInventory.controller('Department.Inventory.Controller.Main', ['$rootScope', '$s
       _httpParams.skip = 0;
       getDepartmentQuotaList(_httpParams);
     }
+
+    // delete data quota
+    $scope.deleteQuota = function(event,quotaId) {
+      var deleteFlag = event.target.checked;
+      Http.deleteDataQuota({
+        id: quotaId,
+        delete_flag : deleteFlag? 'true' : 'false'
+      }).then(function(result) {
+        if (200 == result.data.head.status) {
+
+        }
+      })
+    }
   }
 ])
 
@@ -181,7 +194,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$rootScope', 
     }).then(function(result) {
       $scope.secretFlagList = result.data.body;
     });
-    
+
     $scope.close = function(isValid) {
       $state.go("main.department.inventory", {}, {
         reload: true
@@ -379,6 +392,13 @@ DInventory.factory('Department.Inventory.Service.Http', ['$http', '$q', 'API',
       return promise;
     }
 
+    function deleteDataQuota(id) {
+      return $http.put(
+        path + '/data_quota_delete_flag', {
+          data: id
+        }
+      )
+    }
     return {
       saveDataQuota: saveDataQuota,
       getDepartmentList: getDepartmentList,
@@ -386,7 +406,8 @@ DInventory.factory('Department.Inventory.Service.Http', ['$http', '$q', 'API',
       getQuotaDetail: getQuotaDetail,
       getSystemDictByCatagory: getSystemDictByCatagory,
       uploadFile: uploadFile,
-      getQuotaExamples: getQuotaExamples
+      getQuotaExamples: getQuotaExamples,
+      deleteDataQuota: deleteDataQuota
     }
   }
 ]);

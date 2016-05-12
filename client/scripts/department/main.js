@@ -15,6 +15,27 @@ Department.controller('Department.Controller.Main', ['$rootScope', '$scope', '$q
     _httpConfirmParams.limit = 10;
     _httpConfirmParams.skip = 0;
 
+    // follow department
+    $scope.depSelect = {};
+    $scope.followDeptList = [];
+    $scope.parentObj = {};
+    function toFollowDep() {
+      $scope.depSelect.show = false;
+      $scope.followDeptList = $scope.parentObj.outputAllDeptList;
+      // send request to add follow department
+      var params = [];
+      _($scope.followDeptList).forEach(function(item) {
+        var followDep = {};
+        followDep.follow_dep_id = item.dep_id;
+        params.push(followDep);
+      });
+      Http.followDepts({
+        userdep: params
+      }).then(function(result) {
+
+      })
+    }
+
     // init
     getAuditList();
 
@@ -37,12 +58,7 @@ Department.controller('Department.Controller.Main', ['$rootScope', '$scope', '$q
       })
     }
 
-    Http.getDepartmentList().then(function(result) {
-      $scope.deptAllList = result.data.body;
-      var evens = _.remove($scope.deptList, function(item) {
-        return item.id == DEP_ID;
-      });
-    });
+
 
     // Get system dict
     Http.getSystemDictByCatagory({
@@ -81,14 +97,33 @@ Department.controller('Department.Controller.Main', ['$rootScope', '$scope', '$q
       });
     }
 
-    // follow department
-    $scope.depSelect = {};
-    $scope.followDeptList = [];
-    $scope.parentObj = {};
+    //select close callback
+    $scope.closeFn = function() {
+      toFollowDep();
+    }
+
+    // 已关注部门列表
+    Http.getFollowDepList().then(function(result) {
+      $scope.parentObj.outputAllDeptList = result.data.body;
+      $scope.followDeptList = _.uniq($scope.parentObj.outputAllDeptList);
+
+      Http.getDepartmentFollowList().then(function(result) {
+        $scope.parentObj.deptAllList = result.data.body;
+        console.log($scope.parentObj.deptAllList);
+        console.log($scope.parentObj.outputAllDeptList);
+        $scope.parentObj.deptAllList = _.pullAllWith($scope.parentObj.deptAllList, $scope.parentObj.outputAllDeptList,function(arrItem,othItem) {
+          return arrItem.dep_id == othItem.dep_id;
+        });
+        console.log($scope.parentObj.deptAllList);
+      });
+    })
+
+
+
+
+
     $scope.followDep = function() {
-      $scope.depSelect.show = false;
-      $scope.followDeptList = $scope.parentObj.outputAllDeptList;
-      console.log($scope.followDeptList);
+      toFollowDep();
     }
   }
 ])
@@ -99,9 +134,9 @@ Department.factory('Department.Service.Http', ['$http', '$q', 'API',
   function($http, $q, API) {
     var path = API.path;
 
-    function getDepartmentList() {
+    function getDepartmentFollowList() {
       return $http.get(
-        path + '/sys_dep'
+        path + '/follow_sys_dep'
       )
     }
 
@@ -134,12 +169,28 @@ Department.factory('Department.Service.Http', ['$http', '$q', 'API',
         }
       )
     };
+
+    function getFollowDepList() {
+      return $http.get(
+        path + '/followed_user_dep'
+      )
+    }
+
+    function followDepts(params) {
+      return $http.post(
+        path + '/user_dep_batch', {
+          data: params
+        }
+      )
+    }
     return {
       getSystemDictByCatagory: getSystemDictByCatagory,
       getAuditList: getAuditList,
       getDepartmentRequirementList: getDepartmentRequirementList,
-      getDepartmentList: getDepartmentList,
-      getDepDataQuotaTotal: getDepDataQuotaTotal
+      getDepartmentFollowList: getDepartmentFollowList,
+      getDepDataQuotaTotal: getDepDataQuotaTotal,
+      followDepts: followDepts,
+      getFollowDepList: getFollowDepList
     }
   }
 ]);

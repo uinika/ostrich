@@ -1,6 +1,6 @@
 #department-main {
-  a{
-    cursor:pointer;
+  a {
+    cursor: pointer;
   }
   .left {
     padding: 0;
@@ -28,18 +28,27 @@
   }
   .department-main {
     margin-left: 170px;
-    .panel-list{
+    .panel-list {
       .panel {
         height: 287px;
         overflow: hidden;
-
+        table{
+          table-layout:fixed;
+          tr{
+            td{
+              overflow:hidden;
+              white-space:nowrap;
+              text-overflow: ellipsis;
+            }
+          }
+        }
       }
     }
-
     .focus-bureau-list {
       height: 200px;
       .bureau-item {
-        .thumbnail {
+        .thumbnail {}
+        .caption {
           height: 16px;
           font-size: 12px;
           text-align: center;

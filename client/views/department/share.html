@@ -82,33 +82,33 @@
                 <table class='table table-hover table-striped '>
                   <thead>
                     <tr>
-                      <th>关注</th>
-                      <th>共享标识</th>
-                      <th>序号</th>
-                      <th>指标编号</th>
-                      <th>指标名称</th>
-                      <th>指标别称</th>
-                      <th>计量单位</th>
-                      <th>指标详细解释</th>
-                      <th>计算方法</th>
-                      <th>共享频率</th>
-                      <th>空间范围</th>
-                      <th>分地区数据级别</th>
-                      <th>来源部门</th>
-                      <th>共享级别</th>
-                      <th>数据存储类型</th>
-                      <th>数据精度</th>
-                      <th>数据长度</th>
-                      <th>创建时间</th>
-                      <th>数据表示格式</th>
-                      <th>是否涉密</th>
-                      <th>联系人</th>
-                      <th>联系电话</th>
+                      <th width='40px'>关注</th>
+                      <th width='60px'>共享标识</th>
+                      <th width='40px'>序号</th>
+                      <th width='60px'>指标编号</th>
+                      <th width='60px'>指标名称</th>
+                      <th width='60px'>指标别称</th>
+                      <th width='60px'>计量单位</th>
+                      <th width='100px'>指标详细解释</th>
+                      <th width='60px'>计算方法</th>
+                      <th width='60px'>共享频率</th>
+                      <th width='60px'>空间范围</th>
+                      <th width='100px'>分地区数据级别</th>
+                      <th width='80px'>来源部门</th>
+                      <th width='80px'>共享级别</th>
+                      <th width='80px'>数据存储类型</th>
+                      <th width='60px'>数据精度</th>
+                      <th width='60px'>数据长度</th>
+                      <th width='80px'>创建时间</th>
+                      <th width='80px'>数据表示格式</th>
+                      <th width='60px'>是否涉密</th>
+                      <th width='60px'>联系人</th>
+                      <th width='60px'>联系电话</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr ng-repeat='ShareDataQuota in depShareList'>
-                      <td><input type='checkbox'/></td>
+                      <td><input type='checkbox'  ng-true-value="true" ng-false-value="false" ng-checked='ShareDataQuota.isfollowed == "true" ' ng-click='followChange($event,ShareDataQuota.dep_name)' /></td>
                       <td><div ng-if='ShareDataQuota.sharelevel =="全开放" '><span>
                         <i class='fa fa-eye'></i></span></div>
                       <div ng-if='ShareDataQuota.sharelevel =="省政务云平台开放" '><span>
@@ -118,39 +118,25 @@
                   <div ng-if='ShareDataQuota.sharelevel =="暂不开放" '><span>
                     <i class='fa fa-warning'></i></span></div></td>
                       <td>{{$index+1}}</td>
-                      <td>{{ShareDataQuota.quota_sn}}</td>
-                      <td><a ui-sref='main.department.share.detail({ID:ShareDataQuota.id})'>{{ShareDataQuota.quota_name}}</a></td>
-                      <td>{{ShareDataQuota.alias}}</td>
-                      <td>{{ShareDataQuota.meter_unit}}</td>
-                      <td>{{ShareDataQuota.quota_detail}}</td>
-                      <td>{{ShareDataQuota.calculate_method}}</td>
-                      <td>
-                        {{ShareDataQuota.sharefrequency}}
-                      </td>
-                      <td>
-                        {{ShareDataQuota.area_range}}
-                      </td>
-                      <td>{{ShareDataQuota.regionallevel}}</td>
-                      <td>{{ShareDataQuota.depname}}
-
-                      </td>
-                      <td>
-                        {{ShareDataQuota.sharelevel}}
-                      </td>
-                      <td>
-                        {{ShareDataQuota.datastoretype}}
-                      </td>
-                      <td>{{ShareDataQuota.data_precision}}</td>
-                      <td>{{ShareDataQuota.data_length}}</td>
-                      <td>{{ShareDataQuota.create_time |date:"yyyy-MM-dd hh:mm:ss"}}</td>
-                      <td>
-                        {{ShareDataQuota.datashowformat}}
-                      </td>
-                      <td>
-                        {{ShareDataQuota.secretflag}}
-                      </td>
-                      <td>{{ShareDataQuota.linkman}}</td>
-                      <td>{{ShareDataQuota.contact_phone}}</td>
+                      <td title='{{ShareDataQuota.quota_sn}}'>{{ShareDataQuota.quota_sn}}</td>
+                      <td title='{{ShareDataQuota.quota_name}}'><a ui-sref='main.department.share.detail({ID:ShareDataQuota.id})'>{{ShareDataQuota.quota_name}}</a></td>
+                      <td title='{{ShareDataQuota.alias}}'>{{ShareDataQuota.alias}}</td>
+                      <td title='{{ShareDataQuota.meter_unit}}'>{{ShareDataQuota.meter_unit}}</td>
+                      <td title='{{ShareDataQuota.quota_detail}}'>{{ShareDataQuota.quota_detail}}</td>
+                      <td title='{{ShareDataQuota.calculate_method}}'>{{ShareDataQuota.calculate_method}}</td>
+                      <td title='{{ShareDataQuota.sharefrequency}}'>{{ShareDataQuota.sharefrequency}}</td>
+                      <td title='{{ShareDataQuota.area_range}}'>{{ShareDataQuota.area_range}}</td>
+                      <td title='{{ShareDataQuota.regionallevel}}'>{{ShareDataQuota.regionallevel}}</td>
+                      <td title='{{ShareDataQuota.depname}}'>{{ShareDataQuota.depname}}</td>
+                      <td title='{{ShareDataQuota.sharelevel}}'>{{ShareDataQuota.sharelevel}}</td>
+                      <td title='{{ShareDataQuota.datastoretype}}'>{{ShareDataQuota.datastoretype}}</td>
+                      <td title='{{ShareDataQuota.data_precision}}'>{{ShareDataQuota.data_precision}}</td>
+                      <td title='{{ShareDataQuota.data_length}}'>{{ShareDataQuota.data_length}}</td>
+                      <td title='{{ShareDataQuota.create_time |date:"yyyy-MM-dd hh:mm:ss"}}'>{{ShareDataQuota.create_time |date:"yyyy-MM-dd hh:mm:ss"}}</td>
+                      <td title='{{ShareDataQuota.datashowformat}}'>{{ShareDataQuota.datashowformat}}</td>
+                      <td title='{{ShareDataQuota.secretflag}}'>{{ShareDataQuota.secretflag}}</td>
+                      <td title='{{ShareDataQuota.linkman}}'>{{ShareDataQuota.linkman}}</td>
+                      <td title='{{ShareDataQuota.contact_phone}}'>{{ShareDataQuota.contact_phone}}</td>
                     </tr>
                   </tbody>
                 </table>

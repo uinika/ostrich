@@ -26,15 +26,15 @@
           <ul class="nav nav-filter">
             <li role="presentation" class="active">
               <span>
-                <i class='fa fa-check-circle-o'></i>&nbsp;审核通过&nbsp;[111]</span>
+                <i class='fa fa-check-circle-o'></i>&nbsp;审核通过&nbsp;</span>
             </li>
             <li role="presentation">
               <span>
-                <i class='fa fa-times-circle-o' ></i>&nbsp;审核未通过&nbsp;[111]</span>
+                <i class='fa fa-times-circle-o' ></i>&nbsp;审核未通过&nbsp;</span>
             </li>
             <li role="presentation">
               <span>
-                <i class='fa fa-question-circle'></i>&nbsp;未审核&nbsp;[111]</span>
+                <i class='fa fa-question-circle'></i>&nbsp;未审核&nbsp;</span>
             </li>
           </ul>
         </div>
@@ -80,41 +80,41 @@
                         <i class='fa fa-check-circle'></i></span></div>
                         <div ng-if='DeptAudit.audit_status == 2'><span>
                           <i class='fa fa-times-circle-o'></i></span></div></td>
-                    <td>{{$index+1}}</td>
-                    <td>{{DeptAudit.apply_time | date:"yyyy-MM-dd hh:mm:ss"}}</td>
-                    <td>{{DeptAudit.quota_sn}}</td>
-                    <td><a ui-sref='main.department.inventory.detail({ID:DeptAudit.data_quota_id})'>{{DeptAudit.quota_name}}</a></td>
-                    <td>{{DeptAudit.alias}}</td>
-                    <td>{{DeptAudit.meter_unit}}</td>
-                    <td>{{DeptAudit.quota_detail}}</td>
-                    <td>{{DeptAudit.calculate_method}}</td>
-                    <td>
+                    <td title='{{$index+1}}'>{{$index+1}}</td>
+                    <td title='{{DeptAudit.apply_time | date:"yyyy-MM-dd hh:mm:ss"}}'>{{DeptAudit.apply_time | date:"yyyy-MM-dd hh:mm:ss"}}</td>
+                    <td title='{{DeptAudit.quota_sn}}'>{{DeptAudit.quota_sn}}</td>
+                    <td title='{{DeptAudit.quota_name}}'><a ui-sref='main.department.inventory.detail({ID:DeptAudit.data_quota_id})'>{{DeptAudit.quota_name}}</a></td>
+                    <td title='{{DeptAudit.alias}}'>{{DeptAudit.alias}}</td>
+                    <td title='{{DeptAudit.meter_unit}}'>{{DeptAudit.meter_unit}}</td>
+                    <td title='{{DeptAudit.quota_detail}}'>{{DeptAudit.quota_detail}}</td>
+                    <td title='{{DeptAudit.calculate_method}}'>{{DeptAudit.calculate_method}}</td>
+                    <td title='{{DeptAudit.sharefrequency}}'>
                       {{DeptAudit.sharefrequency}}
                     </td>
-                    <td>
+                    <td title='{{DeptAudit.area_range}}'>
                       {{DeptAudit.area_range}}
                     </td>
-                    <td>{{DeptAudit.regionallevel}}</td>
-                    <td>{{DeptAudit.depname}}
+                    <td title='{{DeptAudit.regionallevel}}'>{{DeptAudit.regionallevel}}</td>
+                    <td title='{{DeptAudit.depname}}'>{{DeptAudit.depname}}
                     </td>
-                    <td>
+                    <td title='{{DeptAudit.sharelevel}}'>
                       {{DeptAudit.sharelevel}}
                     </td>
-                    <td>
+                    <td title='{{DeptAudit.datastoretype}}'>
                       {{DeptAudit.datastoretype}}
                     </td>
-                    <td>{{DeptAudit.data_precision}}</td>
-                    <td>{{DeptAudit.data_length}}</td>
-                    <td>{{DeptAudit.create_time | date:'yyyy-MM-dd HH:mm:ss'}}</td>
-                    <td>
+                    <td title='{{DeptAudit.data_precision}}'>{{DeptAudit.data_precision}}</td>
+                    <td title='{{DeptAudit.data_length}}'>{{DeptAudit.data_length}}</td>
+                    <td title='{{DeptAudit.create_time | date:'yyyy-MM-dd HH:mm:ss'}}'>{{DeptAudit.create_time | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                    <td title='{{DeptAudit.datashowformat}}'>
                       {{DeptAudit.datashowformat}}
                     </td>
-                    <td>
+                    <td title='{{DeptAudit.secretflag}}'>
                       {{DeptAudit.secretflag}}
                     </td>
-                    <td>{{DeptAudit.linkman}}</td>
-                    <td>{{DeptAudit.contact_phone}}</td>
-                    <td>{{DeptAudit.audite_time | date:"yyyy-MM-dd hh:mm:ss"}}</td>
+                    <td title='{{DeptAudit.linkman}}'>{{DeptAudit.linkman}}</td>
+                    <td title='{{DeptAudit.contact_phone}}'>{{DeptAudit.contact_phone}}</td>
+                    <td title='{{DeptAudit.audite_time | date:"yyyy-MM-dd hh:mm:ss"}}'>{{DeptAudit.audite_time | date:"yyyy-MM-dd hh:mm:ss"}}</td>
                   </tr>
                 </tbody>
               </table>
