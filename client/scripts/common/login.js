@@ -1,9 +1,9 @@
 'use strict';
-var Login = angular.module('Login', ['ui.router']);
+var Login = angular.module('Login', ['ui.router','ngCookies']);
 
 /** Main Controller */
-Login.controller('Login.Controller.Main', ['$rootScope', '$scope', '$state', 'Login.Service.Http',
-  function($rootScope, $scope, $state, Http) {
+Login.controller('Login.Controller.Main', ['$rootScope', '$cookies', '$scope', '$state', 'Login.Service.Http',
+  function($rootScope, $cookies, $scope, $state, Http) {
     $scope.Login = {};
 
     $scope.Login.submit = function() {
@@ -13,7 +13,9 @@ Login.controller('Login.Controller.Main', ['$rootScope', '$scope', '$state', 'Lo
         username: username,
         password: password
       }).then(function(result) {
-        $rootScope.User = result.data.body[0];
+        var loginUser = result.data.body[0];
+        $rootScope.User = loginUser;
+        $cookies.put('User', JSON.stringify(loginUser));
         if(200 == result.data.head.status){
           $state.go("main.dashboard");
         }
@@ -23,7 +25,6 @@ Login.controller('Login.Controller.Main', ['$rootScope', '$scope', '$state', 'Lo
       });
     }
   }
-
 
 ])
 

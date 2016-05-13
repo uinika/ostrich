@@ -2,11 +2,14 @@
   <div class="panel panel-default pannel-patch">
     <div class="panel-heading">
       <i class="fa fa-paperclip"> 指标检索</i>
-      <div class="input-group col-xs-4 pull-right input-patch">
-        <div class="input-group-addon">指标总数 60</div>
-        <input type="text" class="form-control" placeholder="请输入查询指标名称...">
-        <div class="input-group-addon">查询</div>
+
+      <div class="input-group col-xs-3 pull-right input-patch">
+        <input ng-model='TargetDataQuotaName' type="text" class="form-control" placeholder="请输入查询指标名称...">
+        <span class="input-group-btn">
+          <button ng-click='Retrieval()' class="btn btn-default" type="button">查询</button>
+        </span>
       </div>
+
     </div>
     <div class="panel-body">
 
@@ -40,6 +43,7 @@
   <div class="panel panel-default">
     <div class="panel-heading">
       <i class="fa fa-table"> 指标表格</i>
+      <span class='pull-right text-info'>指标总数({{DataQuotasTotal}})</span>
     </div>
     <div class="table-responsive">
         <table class='table table-hover table-striped table-bordered table-patch'>
