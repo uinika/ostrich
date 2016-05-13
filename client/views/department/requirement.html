@@ -70,8 +70,9 @@
                         <i class='fa fa-check-circle'></i></span></div>
                         <div ng-if='DeptReq.status == 2'><span>
                           <i class='fa fa-times-circle-o'></i></span></div></td>
-                    <td title=''>{{DeptReq.create_time| date:"yyyy-mm-dd hh:MM:ss"}}</td>
-                    <td title=''>{{DeptReq.response_time |
+                    <td title='{{DeptReq.create_time| date:"yyyy-mm-dd hh:MM:ss"}}'>{{DeptReq.create_time| date:"yyyy-mm-dd hh:MM:ss"}}</td>
+                    <td title='{{DeptReq.response_time |
+                      date:"yyyy-mm-dd hh:MM:ss"}}'>{{DeptReq.response_time |
                       date:"yyyy-mm-dd hh:MM:ss"}}</td>
                     <td title='{{DeptReq.requiement_name}}'>{{DeptReq.requiement_name}}</td>
                     <td title='{{DeptReq.requiement_desc}}'>{{DeptReq.requiement_desc}}</td>
