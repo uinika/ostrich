@@ -1,7 +1,7 @@
 <div id='main'>
   <nav class='navbar navbar-default navbar-patch'>
     <div class='container'>
-      <h1 class='logo pull-left'></h1>
+      <a ui-sref="main.dashboard" class='logo pull-left'></a>
       <!-- Left Menu -->
       <ul class='nav nav-tabs pull-left'>
         <li ui-sref-active-eq="active">
@@ -17,7 +17,9 @@
       <!-- Right Admin Button -->
       <div class="btn-group pull-right btn-login">
         <a class="btn btn-default" ui-sref="main.admin.department">
-          <i class="fa fa-user"> {{User.username}}--{{User.dep_name}}</i>
+          <i class="fa fa-user text-primary"></i>
+          <strong><small>{{User.username}}</small></strong>
+          <small>{{User.dep_name}}</small>
         </a>
         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
           <span class="caret"></span>
