@@ -129,6 +129,10 @@ html {
   top: 7px;
   right: -15px;
 }
+#main .text-center {
+  position: relative;
+  top: 15px;
+}
 #dashboard .left {
   padding: 0;
 }
@@ -171,6 +175,14 @@ html {
 }
 #dashboard .third-section .panel .nav-tabs {
   bottom: 5px !important;
+}
+#dashboard .third-section .nav-pills {
+  height: 63px;
+  overflow: scroll;
+  border: solid 1px #DDDDDD;
+}
+#dashboard .third-section .nav-pills li {
+  margin-top: 3px;
 }
 #department-main a {
   cursor: pointer;
