@@ -47,7 +47,7 @@
               <table class='table table-hover table-striped '>
                 <thead>
                   <tr>
-                    <th>操作</th>
+                    <!-- <th>操作</th> -->
                     <th>状态</th>
                     <th>需求日期</th>
                     <th>确认日期</th>
@@ -63,7 +63,7 @@
                 </thead>
                 <tbody>
                   <tr ng-repeat='DeptReq in requirementList | orderBy:"create_time" '>
-                    <td><input type='checkbox' ng-click='deleteReq(DeptReq.id)' />删除</td>
+                    <!-- <td><input type='checkbox' ng-click='deleteReq(DeptReq.id)' />删除</td> -->
                     <td><div ng-if='DeptReq.status == 0'><span>
                       <i class='fa fa-question-circle'></i></span></div>
                       <div ng-if='DeptReq.status == 1'><span>
