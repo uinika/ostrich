@@ -2,9 +2,10 @@
 var DepartmentReq = angular.module('Department.Requirement', ['ui.router']);
 
 /** DepartmentReq Controller */
-DepartmentReq.controller('Department.Requirement.Controller.Main', ['$rootScope', '$scope', '$stateParams', 'Department.Requirement.Service.Component', 'Department.Requirement.Service.Http',
-  function($rootScope, $scope, $stateParams, Component, Http) {
-    var DEP_ID = $rootScope.User.dep_id;
+DepartmentReq.controller('Department.Requirement.Controller.Main', ['$cookies', '$scope', '$stateParams', 'Department.Requirement.Service.Component', 'Department.Requirement.Service.Http',
+  function($cookies, $scope, $stateParams, Component, Http) {
+    var LoginUser = JSON.parse($cookies.get('User'));
+    var DEP_ID = LoginUser.dep_id;
     $scope.DeptRequirement = {};
 
     $scope.Paging = {};
@@ -107,12 +108,13 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$rootScope'
 
 
   /** DepartmentReq Controller */
-  DepartmentReq.controller('Department.Requirement.Controller.confirm', ['$rootScope', '$scope', '$stateParams', 'Department.Requirement.Service.Http', 'Department.Requirement.Service.Component' ,
-    function($rootScope, $scope, $stateParams, Http, Component) {
+  DepartmentReq.controller('Department.Requirement.Controller.confirm', ['$cookies', '$scope', '$stateParams', 'Department.Requirement.Service.Http', 'Department.Requirement.Service.Component' ,
+    function($cookies, $scope, $stateParams, Http, Component) {
       $scope.Modal = {};
       $scope.DeptRequirementConfirm = {};
 
-      var DEP_ID = $rootScope.User.dep_id;
+      var LoginUser = JSON.parse($cookies.get('User'));
+      var DEP_ID = LoginUser.dep_id;
       $scope.DeptRequirement = {};
 
       $scope.Paging = {};

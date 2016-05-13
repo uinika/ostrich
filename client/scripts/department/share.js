@@ -2,8 +2,8 @@
 var DepartmentShare = angular.module('DepartmentShare', ['ui.router']);
 
 /** InventoryDetail Controller */
-DepartmentShare.controller('DepartmentShare.Controller.Main', ['$rootScope', '$scope', 'DepartmentShare.Service.Http',
-  function($rootScope, $scope, Http) {
+DepartmentShare.controller('DepartmentShare.Controller.Main', [ '$scope', 'DepartmentShare.Service.Http',
+  function( $scope, Http) {
     $scope.DepartmentShare = {};
 
     $scope.Paging = {};
@@ -124,8 +124,8 @@ DepartmentShare.controller('DepartmentShare.Controller.Main', ['$rootScope', '$s
 
 
 // Department share detail controller
-DepartmentShare.controller('DepartmentShare.Controller.detail', ['$rootScope', '$scope', 'DepartmentShare.Service.Http', '$stateParams',
-  function($rootScope, $scope, Http, $stateParams) {
+DepartmentShare.controller('DepartmentShare.Controller.detail', [ '$scope', 'DepartmentShare.Service.Http', '$stateParams',
+  function( $scope, Http, $stateParams) {
     // get department share detail
     Http.getQuotaDetail({
       data_quota_id: $stateParams.ID

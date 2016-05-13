@@ -1,11 +1,11 @@
 'use strict';
-var DInventory = angular.module('Department.Inventory', ['ui.router']);
+var DInventory = angular.module('Department.Inventory', ['ui.router','ngCookies']);
 
 /** Inventory Controller */
-DInventory.controller('Department.Inventory.Controller.Main', ['$rootScope', '$scope', '$q', 'Department.Inventory.Service.Http',
-  function($rootScope, $scope, $q, Http) {
-    console.log($rootScope.User);
-    var DEP_NAME = $rootScope.User.dep_id;
+DInventory.controller('Department.Inventory.Controller.Main', ['$cookies', '$scope', '$q', 'Department.Inventory.Service.Http',
+  function($cookies, $scope, $q, Http) {
+    var LoginUser = JSON.parse($cookies.get('User'));
+    var DEP_NAME = LoginUser.dep_id;
     $scope.DepartDataQuota = {};
 
     $scope.Paging = {};
@@ -155,8 +155,8 @@ DInventory.controller('Department.Inventory.Controller.detail', ['$scope', '$q',
   }
 ])
 
-DInventory.controller('Department.Inventory.Controller.publish', ['$rootScope', '$scope', '$state', '$q', '$uibModal', 'Department.Inventory.Service.Component', 'Department.Inventory.Service.Http',
-  function($rootScope, $scope, $state, $q, $uibModal, Component, Http) {
+DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$scope', '$state', '$q', '$uibModal', 'Department.Inventory.Service.Component', 'Department.Inventory.Service.Http',
+  function($cookies, $scope, $state, $q, $uibModal, Component, Http) {
     var DATA_STORE_TYPE = 4;
     var DATA_SHOW_FORMAT = 6;
     var SECRET_FLAG = 5;
@@ -164,8 +164,9 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$rootScope', 
     var STORE_TYPE_OTHER = '25098ff3-02f0-11e6-a52a-5cf9dd40ad7e';
     var DATA_SHOW_OTHER = '2515e9b5-02f0-11e6-a52a-5cf9dd40ad7e';
 
-    var DEP_ID = $rootScope.User.dep_id;
-    $scope.DEP_NAME = $rootScope.User.dep_name;
+    var LoginUser = JSON.parse($cookies.get('User'));
+    var DEP_ID = LoginUser.dep_id;
+    $scope.DEP_NAME = LoginUser.dep_name;
     $scope.DataQuota = {};
     $scope.DataQuota.data_show_format_add = '';
     $scope.DataQuota.data_store_type_add = '';

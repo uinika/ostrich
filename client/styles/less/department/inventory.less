@@ -3,106 +3,115 @@
   .indicator-order {
     overflow: hidden;
     border-bottom: 1px solid #777;
-    padding: 10px 0 5px 0;
-    .dep-name{
+    padding: 10px 0 5px;
+    .dep-name {
       margin: 0;
       line-height: 34px;
     }
     ul>li {
-      margin:0 20px;
+      margin: 0 20px;
       a {
         padding: 6px 12px;
       }
     }
-    ul>li.indicator-total{
+    ul>li.indicator-total {
       height: 34px;
       line-height: 40px;
-      .num{
-        font-size:20px;
-        font-weight:bold;
+      .num {
+        font-size: 20px;
+        font-weight: bold;
         padding: 0 6px;
       }
     }
-
+    .input-filter {
+      height: 34px;
+      padding: 6px 12px;
+      font-size: 14px;
+      line-height: 1.42857143;
+      color: #555;
+      background-color: #fff;
+      background-image: none;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
   }
-  .filter{
-      border-bottom: 1px solid #DDD;
-      padding: 15px 0;
-      margin-bottom: 10px;
+  .filter {
+    border-bottom: 1px solid #DDD;
+    padding: 15px 0;
+    margin-bottom: 10px;
     .indicator-filter {
       margin: 0;
       font-size: 13px;
       overflow: hidden;
-      ul.pager{
-        margin: 0 0 15px 0;
+      ul.pager {
+        margin: 0 0 15px;
       }
-      ul>li>a.active{
-        background:#DDD;
+      ul>li>a.active {
+        background: #DDD;
       }
-      ul>li>a.inactive{
-        background:#FFF;
+      ul>li>a.inactive {
+        background: #FFF;
       }
-      ul>li>a .badge{
+      ul>li>a .badge {
         background: #337AB7;
-        margin-left:4px;
+        margin-left: 4px;
       }
     }
   }
-
   .indicator-list {
-    .scroll{
+    .scroll {
       overflow: scroll;
-      div.container{
-        width:2000px !important;
+      div.container {
+        width: 2000px !important;
       }
     }
-    ul.nav-filter{
-      list-style:none;
-      li{
-        display:inline-block;
-        span{
+    ul.nav-filter {
+      list-style: none;
+      li {
+        display: inline-block;
+        span {
           padding: 0 15px;
-          i{
-            font-size:24px;
+          i {
+            font-size: 24px;
           }
-          i.fa-eye{
-            color:#5bc0de;
+          i.fa-eye {
+            color: #5bc0de;
           }
           i.fa-desktop {
             color: #5bc0de;
           }
-          i.fa-lock{
+          i.fa-lock {
             color: #5bc0de;
           }
           i.fa-warning {
-            color:#f0ad4e;
+            color: #f0ad4e;
           }
         }
       }
     }
-    table{
+    table {
       table-layout: fixed;
-      tr{
-        td{
-          overflow:hidden;
+      tr {
+        td {
+          overflow: hidden;
           white-space: nowrap;
           text-overflow: ellipsis;
         }
-        span{
-          i{
-            font-size:18px;
+        span {
+          i {
+            font-size: 18px;
           }
-          i.fa-eye{
-            color:#5bc0de;
+          i.fa-eye {
+            color: #5bc0de;
           }
           i.fa-desktop {
             color: #5bc0de;
           }
-          i.fa-lock{
+          i.fa-lock {
             color: #5bc0de;
           }
           i.fa-warning {
-            color:#f0ad4e;
+            color: #f0ad4e;
           }
         }
       }

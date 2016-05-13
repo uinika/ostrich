@@ -266,7 +266,7 @@ html {
 #department-inventory .indicator-order {
   overflow: hidden;
   border-bottom: 1px solid #777;
-  padding: 10px 0 5px 0;
+  padding: 10px 0 5px;
 }
 #department-inventory .indicator-order .dep-name {
   margin: 0;
@@ -287,6 +287,17 @@ html {
   font-weight: bold;
   padding: 0 6px;
 }
+#department-inventory .indicator-order .input-filter {
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
 #department-inventory .filter {
   border-bottom: 1px solid #DDD;
   padding: 15px 0;
@@ -298,7 +309,7 @@ html {
   overflow: hidden;
 }
 #department-inventory .filter .indicator-filter ul.pager {
-  margin: 0 0 15px 0;
+  margin: 0 0 15px;
 }
 #department-inventory .filter .indicator-filter ul > li > a.active {
   background: #DDD;
@@ -448,6 +459,17 @@ html {
   font-weight: bold;
   padding: 0 6px;
 }
+#department-share .indicator-order .input-filter {
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
 #department-share .filter {
   border-bottom: 1px solid #DDD;
   padding: 15px 0;
@@ -567,6 +589,17 @@ html {
   font-weight: bold;
   padding: 0 6px;
 }
+#department-requirement .indicator-order .input-filter {
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
 #department-requirement .indicator-list div.container {
   width: 1600px !important;
 }
@@ -638,6 +671,17 @@ html {
   font-size: 20px;
   font-weight: bold;
   padding: 0 6px;
+}
+#department-requirement-confirm .indicator-order .input-filter {
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 #department-requirement-confirm .indicator-list div.container {
   width: 1600px !important;
@@ -732,6 +776,17 @@ html {
   font-size: 20px;
   font-weight: bold;
   padding: 0 6px;
+}
+#department-audit .indicator-order .input-filter {
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 #department-audit .indicator-list .scroll {
   overflow: scroll;

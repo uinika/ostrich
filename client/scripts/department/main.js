@@ -2,9 +2,10 @@
 var Department = angular.module('Department', ['ui.router']);
 
 /** Main Controller */
-Department.controller('Department.Controller.Main', ['$rootScope', '$scope', '$q', 'Department.Service.Http', '$sce','$state',
-  function($rootScope, $scope, $q, Http, $sce, $state) {
-    var DEP_ID = $rootScope.User.dep_id;
+Department.controller('Department.Controller.Main', ['$cookies', '$scope', '$q', 'Department.Service.Http', '$sce','$state',
+  function($cookies, $scope, $q, Http, $sce, $state) {
+    var LoginUser = JSON.parse($cookies.get('User'));
+    var DEP_ID = LoginUser.dep_id;
     var SHARE_FREQUENCY = 1;
     var DATA_LEVEL = 2;
     var SHARE_LEVEL = 3;
