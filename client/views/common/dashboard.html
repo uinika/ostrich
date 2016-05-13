@@ -38,11 +38,11 @@
           <ul class="list-group">
             <li class="list-group-item">
               指标总数：{{SummaryDataQuota.data_quota_number}}个
-              <span class='pull-right'>(本月新增{{SummaryDataQuota.data_quota_number_inc}}个)</span>
+              <span class='pull-right text-muted'>(本月新增{{SummaryDataQuota.data_quota_number_inc}}个)</span>
             </li>
             <li class="list-group-item">
               提供部门：{{SummaryDataQuota.department_number}}个
-              <span class='pull-right'>(本月新增{{SummaryDataQuota.department_number_inc}}个)</span>
+              <span class='pull-right text-muted'>(本月新增{{SummaryDataQuota.department_number_inc}}个)</span>
             </li>
           </ul>
         </div>
@@ -58,11 +58,11 @@
           <ul class="list-group">
             <li class="list-group-item">
               指标总数：{{SummaryRequirement.requiement_number}}个
-              <span class='pull-right'>(本月新增{{SummaryRequirement.requiement_number_inc}}个)</span>
+              <span class='pull-right text-muted'>(本月新增{{SummaryRequirement.requiement_number_inc}}个)</span>
             </li>
             <li class="list-group-item">
               提供部门：{{SummaryRequirement.department_number}}个
-              <span class='pull-right'>(本月新增{{SummaryRequirement.department_number_inc}}个)</span>
+              <span class='pull-right text-muted'>(本月新增{{SummaryRequirement.department_number_inc}}个)</span>
             </li>
           </ul>
         </div>
@@ -128,33 +128,33 @@
       </div>
         <div class='panel-body' >
 
-              <uib-tabset active="activeForm">
-                <uib-tab ng-repeat="followDep in followDeps" ng-click='select(followDep.follow_dep_id)' index="$index + 1" heading="{{followDep.follow_dep_name}}">
-                  <table class='table table-hover table-condensed table-striped'>
-                    <thead>
-                      <tr>
-                        <th>发布日期</th>
-                        <th>指标名称</th>
-                        <th>共享频率</th>
-                        <th>空间范围</th>
-                        <th>数据级别</th>
-                        <th>提供部门</th>
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr ng-repeat='indicator in followDepIndicators'>
-                        <td>{{indicator.create_time | date:'yyyy-MM-dd'}}</td>
-                        <td>{{indicator.quota_name}}</td>
-                        <td>{{indicator.sharefrequency}}</td>
-                        <td>{{indicator.area_range}}</td>
-                        <td>{{indicator.regionallevel}}</td>
-                        <td>{{indicator.depname}}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </uib-tab>
-            </uib-tabset>
+          <uib-tabset type='pills' active="activeForm">
+            <uib-tab classes='btn-xs' ng-repeat="followDep in followDeps" ng-click='select(followDep.follow_dep_id)' index="$index + 1" heading="{{followDep.follow_dep_name}}">
+              <table class='table table-hover table-condensed table-striped'>
+                <thead>
+                  <tr>
+                    <th>发布日期</th>
+                    <th>指标名称</th>
+                    <th>共享频率</th>
+                    <th>空间范围</th>
+                    <th>数据级别</th>
+                    <th>提供部门</th>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat='indicator in followDepIndicators'>
+                    <td>{{indicator.create_time | date:'yyyy-MM-dd'}}</td>
+                    <td>{{indicator.quota_name}}</td>
+                    <td>{{indicator.sharefrequency}}</td>
+                    <td>{{indicator.area_range}}</td>
+                    <td>{{indicator.regionallevel}}</td>
+                    <td>{{indicator.depname}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </uib-tab>
+        </uib-tabset>
 
        </div>
     </div>

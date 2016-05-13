@@ -167,7 +167,7 @@ html {
   height: 291px;
 }
 #dashboard .third-section .panel {
-  height: 300px;
+  height: auto;
 }
 #dashboard .third-section .panel .nav-tabs {
   bottom: 5px !important;
