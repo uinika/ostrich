@@ -55,10 +55,10 @@ Dashboard.controller('Dashboard.Controller.Main', ['$scope', 'Dashboard.Service.
     }
     // Generoted Department
     Http.getUserDep().then(function(result) {
-        if (200 === result.data.head.status) {
+        if (200 === result.data.head.status && result.data.body.length !== 0) {
           $scope.followDeps = result.data.body;
+          return result.data.body[0].follow_dep_id;
         }
-        return result.data.body[0].follow_dep_id;
       }).then(function(followDepId){
         Http.getDataQuota({
           skip: 0,
