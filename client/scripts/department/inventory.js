@@ -1,5 +1,5 @@
 'use strict';
-var DInventory = angular.module('Department.Inventory', ['ui.router','ngCookies']);
+var DInventory = angular.module('Department.Inventory', ['ui.router', 'ngCookies', 'cgBusy']);
 
 /** Inventory Controller */
 DInventory.controller('Department.Inventory.Controller.Main', ['$cookies', '$scope', '$q', 'Department.Inventory.Service.Http',
@@ -21,9 +21,15 @@ DInventory.controller('Department.Inventory.Controller.Main', ['$cookies', '$sco
       getDepartmentQuotaList(_httpParams);
     }
 
+    $scope.delay = 0;
+    $scope.minDuration = 0;
+    $scope.message = 'Please Wait...';
+    $scope.backdrop = true;
+    $scope.promise = null;
+
     function getDepartmentQuotaList(_httpParams) {
       _httpParams.dep_name = DEP_NAME;
-      Http.getDepartQuotaList(_httpParams).then(function(result) {
+      $scope.promise = Http.getDepartQuotaList(_httpParams).then(function(result) {
         console.log(result);
         $scope.depQuotaList = result.data.body;
         $scope.Paging.totalItems = result.data.head.total;
@@ -120,11 +126,11 @@ DInventory.controller('Department.Inventory.Controller.Main', ['$cookies', '$sco
     }
 
     // delete data quota
-    $scope.deleteQuota = function(event,quotaId) {
+    $scope.deleteQuota = function(event, quotaId) {
       var deleteFlag = event.target.checked;
       Http.deleteDataQuota({
         id: quotaId,
-        delete_flag : deleteFlag? 'true' : 'false'
+        delete_flag: deleteFlag ? 'true' : 'false'
       }).then(function(result) {
         if (200 == result.data.head.status) {
 
@@ -303,7 +309,8 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
 // upload file
 DInventory.controller('Department.Inventory.Controller.upload', ['$scope', '$q', 'Department.Inventory.Service.Http', '$stateParams', '$state',
     function($scope, $q, Http, $stateParams, $state) {
-      console.log($stateParams.ID);
+      $scope.uploadPromise = null;
+
       $scope.uploadFile = function() {
         var file = $scope.myFile;
         console.log('file is ');
@@ -312,7 +319,7 @@ DInventory.controller('Department.Inventory.Controller.upload', ['$scope', '$q',
           alert('您还未选择文件');
           return;
         }
-        Http.uploadFile(file, $stateParams.ID).then(function(result) {
+        $scope.uploadPromise = Http.uploadFile(file, $stateParams.ID).then(function(result) {
           if (200 == result.data.head.status) {
             alert('上传成功!');
             $state.go("main.department.inventory", {}, {

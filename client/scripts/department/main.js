@@ -113,7 +113,7 @@ Department.controller('Department.Controller.Main', ['$cookies', '$scope', '$q',
         // console.log($scope.parentObj.deptAllList);
         // console.log($scope.parentObj.outputAllDeptList);
         $scope.parentObj.deptAllList = _.pullAllWith($scope.parentObj.deptAllList, $scope.parentObj.outputAllDeptList,function(arrItem,othItem) {
-          return arrItem.dep_id == othItem.dep_id;
+          return arrItem.dep_id == othItem.dep_id || DEP_ID == arrItem.dep_id;
         });
         // console.log($scope.parentObj.deptAllList);
       });
