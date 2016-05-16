@@ -110,12 +110,12 @@ Department.controller('Department.Controller.Main', ['$cookies', '$scope', '$q',
 
       Http.getDepartmentFollowList().then(function(result) {
         $scope.parentObj.deptAllList = result.data.body;
-        console.log($scope.parentObj.deptAllList);
-        console.log($scope.parentObj.outputAllDeptList);
+        // console.log($scope.parentObj.deptAllList);
+        // console.log($scope.parentObj.outputAllDeptList);
         $scope.parentObj.deptAllList = _.pullAllWith($scope.parentObj.deptAllList, $scope.parentObj.outputAllDeptList,function(arrItem,othItem) {
           return arrItem.dep_id == othItem.dep_id;
         });
-        console.log($scope.parentObj.deptAllList);
+        // console.log($scope.parentObj.deptAllList);
       });
     })
 

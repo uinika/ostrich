@@ -4,6 +4,26 @@ var Dashboard = angular.module('Dashboard', ['ui.router','ui.bootstrap']);
 /** Dashboard Controller */
 Dashboard.controller('Dashboard.Controller.Main', ['$scope', 'Dashboard.Service.Http',
   function($scope, Http) {
+    <!-- Bureaus logo grid -->
+    Http.getDepartments().then(function(result) {
+      if (200 == result.data.head.status) {
+        $scope.Bureaus = result.data.body;
+      }
+    });
+    <!-- #Bureaus logo grid -->
+
+    <!-- ECharts -->
+    $scope.DataquotaSummary = Http.getDataquotaSummary();
+    $scope.DataRequirementSummary = Http.getDataRequirementSummary();
+    Http.getDataquotaSummary().then(function(result){
+      $scope.SummaryDataQuota = result.data.body[0];
+    })
+    Http.getDataRequirementSummary().then(function(result){
+      $scope.SummaryRequirement = result.data.body[0];
+    })
+    <!-- #ECharts -->
+
+    <!-- DataQuota & Requirement Summary -->
     Http.getDataQuotaNew({
       skip: 0,
       limit: 7
@@ -20,27 +40,9 @@ Dashboard.controller('Dashboard.Controller.Main', ['$scope', 'Dashboard.Service.
         $scope.Requirements = result.data.body;
       }
     });
-    // Bureaus logo grid
-    Http.getDepartments().then(function(result) {
-      if (200 == result.data.head.status) {
-        $scope.Bureaus = result.data.body;
-      }
-    });
+    <!-- #DataQuota & Requirement Summary -->
 
-    <!-- ECharts -->
-    $scope.DataquotaSummary = Http.getDataquotaSummary();
-    $scope.DataRequirementSummary = Http.getDataRequirementSummary();
-    <!-- #ECharts -->
-
-    <!-- -->
-    Http.getDataquotaSummary().then(function(result){
-      $scope.SummaryDataQuota = result.data.body[0];
-    })
-    Http.getDataRequirementSummary().then(function(result){
-      $scope.SummaryRequirement = result.data.body[0];
-    })
-    <!-- -->
-
+    <!-- DataQuota for Concerned Departments -->
     // Handle Selected Department
     $scope.select = function(param){
       Http.getDataQuota({
@@ -66,6 +68,7 @@ Dashboard.controller('Dashboard.Controller.Main', ['$scope', 'Dashboard.Service.
             $scope.followDepIndicators = result.data.body;
         });
      });
+     <!-- #DataQuota for Concerned Departments -->
 
  }
 ])
