@@ -211,6 +211,7 @@ html {
 }
 #department-main .department-main {
   margin-left: 170px;
+  margin-bottom: 80px;
 }
 #department-main .department-main .panel-list .panel {
   height: 287px;
@@ -274,6 +275,8 @@ html {
 }
 #department-inventory {
   margin-left: 170px;
+  overflow: hidden;
+  margin-bottom: 80px;
 }
 #department-inventory .indicator-order {
   overflow: hidden;
@@ -388,6 +391,8 @@ html {
 }
 #inventory-publish {
   margin-left: 170px;
+  overflow: hidden;
+  margin-bottom: 80px;
 }
 #inventory-publish .navbar .nav-pills li a {
   background-color: #fff !important;
@@ -430,6 +435,8 @@ html {
 }
 #department-inventory-detail {
   margin-left: 170px;
+  overflow: hidden;
+  margin-bottom: 80px;
 }
 #department-inventory-detail .nav-tabs {
   bottom: 0 ;
@@ -450,6 +457,8 @@ html {
 }
 #department-share {
   margin-left: 170px;
+  overflow: hidden;
+  margin-bottom: 80px;
 }
 #department-share .indicator-order {
   overflow: hidden;
@@ -560,6 +569,8 @@ html {
 }
 #department-share-detail {
   margin-left: 170px;
+  overflow: hidden;
+  margin-bottom: 80px;
 }
 #department-share-detail .nav-tabs {
   bottom: 0 ;
@@ -580,6 +591,8 @@ html {
 }
 #department-requirement {
   margin-left: 170px;
+  overflow: hidden;
+  margin-bottom: 80px;
 }
 #department-requirement .indicator-order {
   overflow: hidden;
@@ -663,6 +676,8 @@ html {
 }
 #department-requirement-confirm {
   margin-left: 170px;
+  overflow: hidden;
+  margin-bottom: 80px;
 }
 #department-requirement-confirm .indicator-order {
   overflow: hidden;
@@ -749,6 +764,8 @@ html {
 }
 #department-requirement-detail {
   margin-left: 170px;
+  overflow: hidden;
+  margin-bottom: 80px;
 }
 #department-requirement-detail .dl-horizontal dt,
 #department-requirement-detail .dl-horizontal dd {
@@ -765,9 +782,13 @@ html {
 }
 #department-requirement-publish {
   margin-left: 170px;
+  overflow: hidden;
+  margin-bottom: 80px;
 }
 #department-audit {
   margin-left: 170px;
+  overflow: hidden;
+  margin-bottom: 80px;
 }
 #department-audit .indicator-order {
   overflow: hidden;
@@ -852,6 +873,8 @@ html {
 }
 #department-audit-info {
   margin-left: 170px;
+  overflow: hidden;
+  margin-bottom: 80px;
 }
 #department-audit-info .nav-tabs {
   bottom: -1px;

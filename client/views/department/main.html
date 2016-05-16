@@ -182,7 +182,7 @@
                 <div class="panel-heading">
                   <div class='pull-left'>关注部门</div>
                 </div>
-                <div class='panel-body'>
+                <div class='panel-body' style='padding:15px 0'>
                   <div class='focus-bureau-list'>
                     <div ng-repeat='bureau in followDeptList' class='bureau-item col-md-1'>
                       <a ui-sref='main.inventory.detail({departmentID: bureau.dep_id})' class='thumbnail'>
@@ -193,16 +193,16 @@
                       </div>
                     </div>
                     <div class='col-md-3 add-focus-option'>
+                      <button title='添加关注部门' class="btn btn-default" ng-click='depSelect.show = true'>
+                        <i class='fa fa-plus'></i>
+                      </button>
                       <div class='dep-select' ng-show='depSelect.show'>
-                        <div style='display:inline-block' isteven-multi-select input-model="parentObj.deptAllList" output-model="parentObj.outputAllDeptList" button-label="dep_name" item-label="dep_name" tick-property="ticked" max-labels="5" max-height="250px"  on-close='closeFn()'></div>
+                        <div style='display:inline-block' isteven-multi-select input-model="parentObj.deptAllList" output-model="parentObj.outputAllDeptList" button-label="icon dep_name" item-label="icon dep_name" tick-property="ticked" max-labels="5" max-height="250px" on-open='openFn()' on-close='closeFn()'></div>
                         <div class='btn btn-group'>
                           <button class='btn btn-primary' ng-click='followDep()'>关注</button>
                         </div>
                       </div>
 
-                      <button title='添加关注部门' class="btn btn-default" ng-click='depSelect.show = true'>
-                        <i class='fa fa-plus'></i>
-                      </button>
                     </div>
                   </div>
                 </div>

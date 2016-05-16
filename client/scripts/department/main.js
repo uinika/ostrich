@@ -107,19 +107,34 @@ Department.controller('Department.Controller.Main', ['$cookies', '$scope', '$q',
     Http.getFollowDepList().then(function(result) {
       $scope.parentObj.outputAllDeptList = result.data.body;
       $scope.followDeptList = _.uniq($scope.parentObj.outputAllDeptList);
-
+      //console.log($scope.parentObj.outputAllDeptList);
       Http.getDepartmentFollowList().then(function(result) {
         $scope.parentObj.deptAllList = result.data.body;
-        // console.log($scope.parentObj.deptAllList);
-        // console.log($scope.parentObj.outputAllDeptList);
-        $scope.parentObj.deptAllList = _.pullAllWith($scope.parentObj.deptAllList, $scope.parentObj.outputAllDeptList,function(arrItem,othItem) {
-          return arrItem.dep_id == othItem.dep_id || DEP_ID == arrItem.dep_id;
+        $scope.parentObj.outputDeptList = [];
+        console.log($scope.parentObj.deptAllList);
+        console.log($scope.parentObj.outputAllDeptList);
+        _($scope.parentObj.deptAllList).forEach(function(allItem) {
+          allItem.icon = '<img  src=styles/images/bureau/'+ allItem.dep_en_name +' />'
+          _($scope.parentObj.outputAllDeptList).forEach(function(outItem) {
+            if(allItem.dep_id == outItem.dep_id) {
+              allItem.ticked = true;
+              $scope.parentObj.outputDeptList.push(allItem);
+            }
+          })
         });
+        console.log($scope.parentObj.outputDeptList);
+         $scope.$broadcast('someEvent', $scope.parentObj.outputDeptList);
+        // $scope.parentObj.deptAllList = _.pullAllWith($scope.parentObj.deptAllList, $scope.parentObj.outputAllDeptList,function(arrItem,othItem) {
+        //   return arrItem.dep_id == othItem.dep_id || DEP_ID == arrItem.dep_id;
+        // });
         // console.log($scope.parentObj.deptAllList);
       });
     })
 
-
+    $scope.openFn = function() {
+      $scope.parentObj.outputAllDeptList = $scope.parentObj.outputDeptList;
+      console.log($scope.parentObj.outputAllDeptList);
+    }
 
 
 
