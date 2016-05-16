@@ -10,24 +10,24 @@
               <a ui-sref='main.department'>部门首页</a>
             </li>
             <li class="list-group-item sub-item">
-              <a ui-sref='main.department.inventory'>部门指标</a>
+              <a ui-sref='main.department.inventory'><i class='fa fa-list-alt'></i>&nbsp;部门指标</a>
             </li>
             <li class="list-group-item sub-item">
-              <a ui-sref='main.department.share'>共享指标</a>
+              <a ui-sref='main.department.share'><i class='fa fa-share-square-o'></i>&nbsp;共享指标</a>
             </li>
             <li class="list-group-item sub-item has-sub">
               需求清单
               <ul class="list-group sub-head">
                 <li class="list-group-item sub-third-item">
-                  <a ui-sref='main.department.requirement'>本部门需求</a>
+                  <a ui-sref='main.department.requirement'><i class='fa fa-commenting-o'></i>&nbsp;本部门需求</a>
                 </li>
                 <li class="list-group-item sub-third-item">
-                  <a ui-sref='main.department.requirementConfirm'>需求确认</a>
+                  <a ui-sref='main.department.requirementConfirm'><i class='fa fa-check-square-o'></i>&nbsp;需求确认</a>
                 </li>
               </ul>
             </li>
             <li class="list-group-item sub-item">
-              <a ui-sref='main.department.audit'>指标审核</a>
+              <a ui-sref='main.department.audit'><i class='fa fa-edit'></i>&nbsp;指标审核</a>
             </li>
           </ul>
         </div>
@@ -193,7 +193,7 @@
                       </div>
                     </div>
                     <div class='col-md-3 add-focus-option'>
-                      <button title='添加关注部门' class="btn btn-default" ng-click='depSelect.show = true'>
+                      <button title='添加关注部门' class="btn btn-lg btn-default" ng-click='depSelect.show = true'>
                         <i class='fa fa-plus'></i>
                       </button>
                       <div class='dep-select' ng-show='depSelect.show'>

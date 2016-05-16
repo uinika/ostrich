@@ -199,7 +199,7 @@ html {
   width: 140px;
 }
 #department-main .sidebar li.sub-item {
-  padding-left: 40px;
+  padding-left: 22px;
 }
 #department-main .sidebar li.has-sub ul.sub-head {
   margin-bottom: 0;
@@ -328,6 +328,8 @@ html {
 }
 #department-inventory .filter .indicator-filter ul > li > a.active {
   background: #DDD;
+  background: #ECECEC;
+  color: #3FB1F7;
 }
 #department-inventory .filter .indicator-filter ul > li > a.inactive {
   background: #FFF;
@@ -505,7 +507,8 @@ html {
   margin: 0 0 15px;
 }
 #department-share .filter .indicator-filter ul > li > a.active {
-  background: #DDD;
+  background: #ECECEC;
+  color: #3FB1F7;
 }
 #department-share .filter .indicator-filter ul > li > a.inactive {
   background: #FFF;
