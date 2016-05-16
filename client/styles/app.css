@@ -177,12 +177,12 @@ html {
   bottom: 5px !important;
 }
 #dashboard .third-section .nav-pills {
-  height: 63px;
-  overflow: scroll;
+  height: 52px;
+  overflow-y: scroll;
   border: solid 1px #DDDDDD;
 }
 #dashboard .third-section .nav-pills li {
-  margin-top: 3px;
+  margin-top: 5px;
 }
 #department-main a {
   cursor: pointer;
