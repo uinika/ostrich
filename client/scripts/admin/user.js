@@ -1,24 +1,41 @@
 'use strict';
-var AdminUser = angular.module('Admin.User', ['ui.router']);
+var AdminUser = angular.module('Admin.User', ['ui.router','ngCookies']);
 
 /** DepartmentReq Controller */
-AdminUser.controller('Admin.User.Controller.Main', ['$rootScope', '$scope', '$stateParams','AdminUser.Service.Http', 'AdminUser.Service.Component','$uibModal',
-  function($rootScope, $scope, $stateParams, Http, Component, $uibModal) {
+AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', '$stateParams','AdminUser.Service.Http', 'AdminUser.Service.Component','$uibModal',
+  function($cookies, $scope, $q, $stateParams, Http, Component, $uibModal) {
+    var LoginUser = JSON.parse($cookies.get('User'));
+    var dep_id = LoginUser.dep_id;
+
+    $scope.Paging = {};
+    $scope.Paging.maxSize = 3;
+    $scope.Paging.itemsPerPage = 10;
+
+    var _httpParams = {};
+    _httpParams.limit =10;
+    _httpParams.skip = 0;
+    $scope.Paging.pageChanged = function() {
+      _httpParams.skip = $scope.Paging.currentPage - 1;
+      getUserList(_httpParams);
+    }
+
+
     $scope.Modal = {}; // Clean scope of modal
     $scope.deptList = [];
-    function getUserList() {
+    function getUserList(_httpParams) {
       Http.getUserList({
-        "dep_id":$rootScope.User.dep_id
+        "dep_id":dep_id,
       }).then(function(result) {
         $scope.users = result.data.body;
       });
     }
     // init
-    getUserList();
+    getUserList(_httpParams);
     Http.getUserTotal({
-      "dep_id":$rootScope.User.dep_id
+      "dep_id":dep_id
     }).then(function(result) {
       $scope.UserTotal = result.data.body[0].number;
+      $scope.Paging.totalItems = result.data.body[0].number;
     });
     Http.getDepartmentList().then(function(result) {
       $scope.deptList = result.data.body;
@@ -34,7 +51,7 @@ AdminUser.controller('Admin.User.Controller.Main', ['$rootScope', '$scope', '$st
         $scope.Modal.validUser = function (user){
           console.log(user);
           Http.getUserList({
-            "dep_id":$rootScope.User.dep_id
+            "dep_id":dep_id
           }).then(function(result) {
              var users = result.data.body;
              for (var i = 0; i < users.length; i++) {
