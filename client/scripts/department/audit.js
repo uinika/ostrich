@@ -15,7 +15,7 @@ Audit.controller('Department.Audit.Controller.Main', ['$scope', '$q', 'Departmen
     _httpParams.skip = 0;
 
     $scope.Paging.pageChanged = function() {
-      _httpParams.skip = $scope.Paging.currentPage - 1;
+      _httpParams.skip = ($scope.Paging.currentPage - 1)*_httpParams.limit;
       getAuditList(_httpParams);
     }
 
@@ -24,8 +24,8 @@ Audit.controller('Department.Audit.Controller.Main', ['$scope', '$q', 'Departmen
 
     function getAuditList() {
       Http.getAuditList(_httpParams).then(function(result) {
-        $scope.auditList = result.data.body;
-        $scope.Paging.totalItems = result.data.head.total;
+        $scope.auditList = result.data.body[0].results;
+        $scope.Paging.totalItems = result.data.body[0].count;
       });
     }
 

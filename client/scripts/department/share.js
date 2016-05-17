@@ -15,14 +15,14 @@ DepartmentShare.controller('DepartmentShare.Controller.Main', [ '$scope', 'Depar
     _httpParams.skip = 0;
 
     $scope.Paging.pageChanged = function() {
-      _httpParams.skip = $scope.Paging.currentPage - 1;
+      _httpParams.skip = ($scope.Paging.currentPage - 1)*_httpParams.limit;
       getDepartmentShareList(_httpParams);
     }
 
     function getDepartmentShareList(_httpParams) {
       Http.shareDataQuotaList(_httpParams).then(function(result) {
-        $scope.depShareList = result.data.body;
-        $scope.Paging.totalItems = result.data.head.total;
+        $scope.depShareList = result.data.body[0].results;
+        $scope.Paging.totalItems = result.data.body[0].count;
       });
     }
 

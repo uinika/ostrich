@@ -17,7 +17,7 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$cookies', 
     _httpParams.skip = 0;
 
     $scope.Paging.pageChanged = function() {
-      _httpParams.skip = $scope.Paging.currentPage - 1;
+      _httpParams.skip = ($scope.Paging.currentPage - 1)*_httpParams.limit;
       getDeptRequirementList(_httpParams);
     }
 
@@ -27,8 +27,8 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$cookies', 
     function getDeptRequirementList() {
       _httpParams.dep_id = DEP_ID;
       Http.getDepartmentRequirementList(_httpParams).then(function(result) {
-        $scope.requirementList = result.data.body;
-        $scope.Paging.totalItems = result.data.head.total;
+        $scope.requirementList = result.data.body[0].results;
+        $scope.Paging.totalItems = result.data.body[0].count;
       })
     }
 
@@ -126,7 +126,7 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$cookies', 
       _httpConfirmParams.skip = 0;
 
       $scope.Paging.pageChanged = function() {
-        _httpConfirmParams.skip = $scope.Paging.currentPage - 1;
+        _httpConfirmParams.skip = ($scope.Paging.currentPage - 1)*_httpConfirmParams.limit;
         getDeptRequirementConfirmList(_httpConfirmParams);
       }
 
@@ -136,8 +136,8 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$cookies', 
       function getDeptRequirementConfirmList() {
         _httpConfirmParams.response_dep_id = DEP_ID;
         Http.getDepartmentRequirementList(_httpConfirmParams).then(function(result) {
-          $scope.requirementConfirmList = result.data.body;
-          $scope.Paging.totalItems = result.data.head.total;
+          $scope.requirementConfirmList = result.data.body[0].results;
+          $scope.Paging.totalItems = result.data.body[0].count;
         })
       }
 

@@ -17,7 +17,7 @@ DInventory.controller('Department.Inventory.Controller.Main', ['$cookies', '$sco
     _httpParams.skip = 0;
 
     $scope.Paging.pageChanged = function() {
-      _httpParams.skip = $scope.Paging.currentPage - 1;
+      _httpParams.skip = ($scope.Paging.currentPage - 1)*_httpParams.limit;
       getDepartmentQuotaList(_httpParams);
     }
 
@@ -31,8 +31,8 @@ DInventory.controller('Department.Inventory.Controller.Main', ['$cookies', '$sco
       _httpParams.dep_name = DEP_NAME;
       $scope.promise = Http.getDepartQuotaList(_httpParams).then(function(result) {
         console.log(result);
-        $scope.depQuotaList = result.data.body;
-        $scope.Paging.totalItems = result.data.head.total;
+        $scope.depQuotaList = result.data.body[0].results;
+        $scope.Paging.totalItems = result.data.body[0].count;
       });
     }
 
