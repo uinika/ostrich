@@ -23,7 +23,7 @@ DInventory.controller('Department.Inventory.Controller.Main', ['$cookies', '$sco
 
     $scope.delay = 0;
     $scope.minDuration = 0;
-    $scope.message = 'Please Wait...';
+    $scope.message = '加载中...';
     $scope.backdrop = true;
     $scope.promise = null;
 
