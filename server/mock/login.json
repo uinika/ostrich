@@ -7,6 +7,7 @@
   },
   "body": [{
     "dep_id" : 5,
-    "dep_name": "省统计局"
+    "dep_name": "省统计局",
+    "username": "test"
     }]
 }

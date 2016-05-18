@@ -16,7 +16,7 @@
       </ul>
       <!-- Right Admin Button -->
       <div class="btn-group pull-right btn-login">
-        <a class="btn btn-default" ui-sref="main.admin.department">
+        <a class="btn btn-default" ui-sref="main.admin.user">
           <i class="fa fa-user text-primary"></i>
           <strong><small>{{User.username}}</small></strong>
           <small>{{User.dep_name}}</small>
@@ -25,7 +25,7 @@
           <span class="caret"></span>
         </button>
         <ul class="dropdown-menu">
-          <li><a ui-sref="main.admin.department">部门管理</a></li>
+          <li ng-show='User.username==="admin"'><a ui-sref="main.admin.department">部门管理</a></li>
           <li class="divider"></li>
           <li><a ui-sref="main.admin.user">用户管理</a></li>
           <li class="divider"></li>

@@ -49,7 +49,6 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
       var prom = Component.popModal($scope, '添加', 'add-user-modal');
       prom.opened.then(function() {
         $scope.Modal.validUser = function (user){
-          console.log(user);
           Http.getUserList({
             "dep_id":dep_id
           }).then(function(result) {
@@ -112,8 +111,6 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
           }
           getUserList();
         })
-      }else{
-        alert('已取消删除！');
       }
     }
 

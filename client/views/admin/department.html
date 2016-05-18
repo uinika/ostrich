@@ -10,7 +10,7 @@
             <i class="fa fa-plus"> 新增</i></button>
         </div>
         <div class="input-group col-xs-4 pull-right">
-          <div class="input-group-addon">部门总数-{{depTotal}}</div>
+          <div class="input-group-addon">部门总数(<span ng-bind="depTotal"></span>)</div>
           <input type="text" class="form-control" placeholder="请输入部门名称" ng-model="dep_name" required>
           <div class="input-group-addon" ng-click='searchDepartment()'>查询</div>
         </div>
