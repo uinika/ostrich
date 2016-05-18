@@ -85,6 +85,7 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
     }
     $scope.updateUser = function(user) {
       $scope.sysUser = user;
+      $.scope.sysUser.password = null;
       Component.popModal($scope, '修改', 'add-user-modal').result.then(function() {
         Http.updateUser($scope.sysUser).then(function(result) {
           if (200 == result.data.head.status) {
