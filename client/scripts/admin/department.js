@@ -122,17 +122,24 @@ AdminDepartment.controller('Admin.Department.Controller.Main', ['$rootScope', '$
 
     //search department
     $scope.searchDepartment = function(){
-      Http.getDepartmentList({
-        'dep_name': $scope.dep_name
-      }).then(function(result) {
-        if(result.data.head.total >=1){
-          $scope.AdminDepartments = result.data.body;
-          $scope.depTotal = result.data.head.total;
-          $scope.Paging.totalItems =  $scope.depTotal
-        }else {
-          alert("系统没有查到'"+$scope.dep_name+"'这个部门，请重新输入");
-        }
+      _httpParams.limit = 10;
+      _httpParams.skip = 0;
+      _httpParams.sysdepname = $scope.dep_name;
+      Http.getDepartmentList(_httpParams).then(function(result) {
+        if($scope.dep_name==null){
+          getDepTotal();
+          getDepartmentList(_httpParams);
+        }else{
 
+          if(result.data.head.total >=1){
+            $scope.AdminDepartments = result.data.body;
+            $scope.depTotal = result.data.head.total;
+            $scope.Paging.totalItems =  $scope.depTotal
+          }else {
+            alert("系统没有查到'"+$scope.dep_name+"'这个部门，请重新输入");
+            $scope.dep_name = "";
+          }
+        }
       });
     }
 

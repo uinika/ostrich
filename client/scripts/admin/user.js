@@ -139,18 +139,25 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
 
     //search user
     $scope.searchUser = function(){
-      Http.getUserList({
-        "dep_id":dep_id,
-        'username': $scope.username
-      }).then(function(result) {
-        if(result.data.head.total >= 1){
-          $scope.users = result.data.body;
-          $scope.UserTotal = result.data.head.total;
-          $scope.Paging.totalItems = $scope.UserTotal;
-        }else {
-          alert("系统没有查到'"+$scope.username+"'这个用户名，请重新输入");
-        }
+      _httpParams.limit = 10;
+      _httpParams.skip = 0;
+      _httpParams.dep_id = dep_id;
+      _httpParams.sysusername = $scope.username;
+      Http.getUserList(_httpParams).then(function(result) {
+        if($scope.username==null){
+          getUserTotal();
+          getUserList(_httpParams);
+        }else{
 
+          if(result.data.head.total >= 1){
+            $scope.users = result.data.body;
+            $scope.UserTotal = result.data.head.total;
+            $scope.Paging.totalItems = $scope.UserTotal;
+          }else {
+            alert("系统没有查到'"+$scope.username+"'这个用户名，请重新输入");
+            $scope.username = "";
+          }
+        }
       });
     }
 
