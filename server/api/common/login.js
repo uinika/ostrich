@@ -6,7 +6,13 @@ const Router = require('express').Router(),
 Router.route('/login')
   .get(function(request, response) {
     let head = {}, body = {};
-    let datas = JsonLoader.sync(Config.path + 'login.json');
+    let datas = {};
+    var username = request.query.username;
+    if("admin"==username){
+      datas = JsonLoader.sync(Config.path + 'login1.json');
+    }else {
+      datas = JsonLoader.sync(Config.path + 'login.json');
+    }
     response.json(datas);
   });
 
