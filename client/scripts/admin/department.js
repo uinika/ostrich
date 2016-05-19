@@ -108,19 +108,18 @@ AdminDepartment.controller('Admin.Department.Controller.Main', ['$rootScope', '$
           }
           getDepartmentList(_httpParams);
         })
-      }else{
-        alert('已取消删除！');
       }
     }
 
     //search department
     $scope.searchDepartment = function(){
-      console.log($scope.dep_name);
       Http.getDepartmentList({
         'dep_name': $scope.dep_name
       }).then(function(result) {
         if(200 == result.data.head.status){
           $scope.AdminDepartments = result.data.body;
+          $scope.depTotal = result.data.head.total;
+          $scope.Paging.totalItems =  $scope.depTotal
         }else {
           alert("系统没有查到"+$scope.dep_name+"这个部门，请重新输入");
         }

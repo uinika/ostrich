@@ -1,0 +1,17 @@
+{
+  "head": {
+    "status": 200,
+    "total": 1,
+    "token": "31702E96753F02912233588DE65C08BB"
+  },
+  "body": [{
+    "id": "2c2934b2-10df-11e6-9b44-507b9d1b58bb",
+    "dict_category": "9"
+    ,"dict_code": "1",
+    "dict_name": "四川省",
+    "parent_code": "0",
+    "dict_desc": "区域",
+    "dict_ord": 1,
+    "active_flag": "1"
+  }]
+}

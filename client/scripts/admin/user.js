@@ -118,10 +118,13 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
     //search user
     $scope.searchUser = function(){
       Http.getUserList({
+        "dep_id":dep_id,
         'username': $scope.username
       }).then(function(result) {
         if(200 == result.data.head.status){
           $scope.users = result.data.body;
+          $scope.UserTotal = result.data.head.total;
+          $scope.Paging.totalItems = $scope.UserTotal;
         }else {
           alert("系统没有查到"+$scope.username+"这个用户名，请重新输入");
         }

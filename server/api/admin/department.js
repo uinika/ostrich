@@ -8,7 +8,6 @@ Router.route('/sys_dep')
     let head = {}, body = {};
     let datas = {};
     var depname = request.query.dep_name;
-    console.log("23");
     if(undefined == depname) {
       datas = JsonLoader.sync(Config.path + 'admin/getDepList.json');
     }else {
@@ -27,11 +26,11 @@ Router.route('/sys_dict')
     let head = {}, body = {};
     let datas = {};
     var category = request.query.dict_category;
-    if(2 == category) {
-      datas = JsonLoader.sync(Config.path + 'common/getDataLevel.json');
-    }
     if(7 == category) {
-      datas = JsonLoader.sync(Config.path + 'common/getDepartments.json');
+      datas = JsonLoader.sync(Config.path + 'common/getSysDictByType.json');
+    }
+    if(9 == category) {
+      datas = JsonLoader.sync(Config.path + 'common/getSysDictByAreaName.json');
     }
     response.json(datas);
 });
