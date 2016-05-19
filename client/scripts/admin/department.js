@@ -16,22 +16,29 @@ AdminDepartment.controller('Admin.Department.Controller.Main', ['$rootScope', '$
     _httpParams.skip = 0;
 
     $scope.Paging.pageChanged = function() {
-      _httpParams.skip = $scope.Paging.currentPage - 1;
+      _httpParams.skip = ($scope.Paging.currentPage - 1)*_httpParams.limit;
       getDepartmentList(_httpParams);
     }
+    //pagination
     function getDepartmentList(_httpParams) {
       Http.getDepartmentList(_httpParams).then(function(result) {
         $scope.AdminDepartments = result.data.body;
       });
+      Http.getDepartmentList().then(function(result) {
+        $scope.AllDepartments = result.data.body;
+      });
     }
+
     // init
     getDepartmentList(_httpParams);
-    Http.getDepTotal({
-    }).then(function(result) {
-      $scope.depTotal = result.data.body[0].number;
-      $scope.Paging.totalItems =  result.data.body[0].number
-    });
-
+    function getDepTotal(){
+      Http.getDepTotal({
+      }).then(function(result) {
+        $scope.depTotal = result.data.body[0].number;
+        $scope.Paging.totalItems = $scope.depTotal
+      });
+    }
+    getDepTotal();
     Http.getSysDict({
       dict_category:"7"
     }).then(function(result) {
@@ -66,13 +73,15 @@ AdminDepartment.controller('Admin.Department.Controller.Main', ['$rootScope', '$
         Http.saveDepartment($scope.department).then(function(result) {
           if (200 == result.data.head.status) {
             alert('添加成功');
-            _httpParams.limit = 10;
-            _httpParams.skip = 0;
-            getDepartmentList(_httpParams);
           }
           else{
             alert('添加失败');
           }
+          _httpParams.limit = 10;
+          _httpParams.skip = 0;
+          $scope.Paging.currentPage = 0 ;
+          getDepartmentList(_httpParams);
+          getDepTotal();
         })
       });
     }
@@ -80,15 +89,15 @@ AdminDepartment.controller('Admin.Department.Controller.Main', ['$rootScope', '$
       $scope.department = AdminDep;
       Component.popModal($scope, '修改', 'add-department-modal').result.then(function() {
         Http.updateDepartment($scope.department).then(function(result) {
+          _httpParams.limit = 10;
+          _httpParams.skip = 0;
           if (200 == result.data.head.status) {
             alert('修改成功');
-            _httpParams.limit = 10;
-            _httpParams.skip = 0;
-            getDepartmentList(_httpParams);
           }
           else{
             alert('修改失败');
           }
+          getDepartmentList(_httpParams);
         })
       });
     }
@@ -98,14 +107,14 @@ AdminDepartment.controller('Admin.Department.Controller.Main', ['$rootScope', '$
       if (flag) {
         Http.deleteDepartment(AdminDep).then(function(result) {
           _httpParams.limit = 10;
-          _httpParams.skip = 0;
+          _httpParams.skip = ($scope.Paging.currentPage - 1)*_httpParams.limit;
           if (200 == result.data.head.status) {
             alert('删除成功');
-            getDepartmentList(_httpParams);
           }
           else{
             alert('删除失败！');
           }
+          getDepTotal();
           getDepartmentList(_httpParams);
         })
       }
@@ -116,12 +125,12 @@ AdminDepartment.controller('Admin.Department.Controller.Main', ['$rootScope', '$
       Http.getDepartmentList({
         'dep_name': $scope.dep_name
       }).then(function(result) {
-        if(200 == result.data.head.status){
+        if(result.data.head.total >=1){
           $scope.AdminDepartments = result.data.body;
           $scope.depTotal = result.data.head.total;
           $scope.Paging.totalItems =  $scope.depTotal
         }else {
-          alert("系统没有查到"+$scope.dep_name+"这个部门，请重新输入");
+          alert("系统没有查到'"+$scope.dep_name+"'这个部门，请重新输入");
         }
 
       });

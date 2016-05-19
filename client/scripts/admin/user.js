@@ -6,16 +6,18 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
   function($cookies, $scope, $q, $stateParams, Http, Component, $uibModal) {
     var LoginUser = JSON.parse($cookies.get('User'));
     var dep_id = LoginUser.dep_id;
+    var dep_name= LoginUser.dep_name;
 
     $scope.Paging = {};
-    $scope.Paging.maxSize = 3;
+    $scope.Paging.maxSize = 5;
     $scope.Paging.itemsPerPage = 10;
 
     var _httpParams = {};
     _httpParams.limit =10;
     _httpParams.skip = 0;
+    _httpParams.dep_id = dep_id;
     $scope.Paging.pageChanged = function() {
-      _httpParams.skip = $scope.Paging.currentPage - 1;
+      _httpParams.skip = ($scope.Paging.currentPage - 1)*_httpParams.limit;
       getUserList(_httpParams);
     }
 
@@ -23,21 +25,31 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
     $scope.Modal = {}; // Clean scope of modal
     $scope.deptList = [];
     function getUserList(_httpParams) {
-      Http.getUserList({
-        "dep_id":dep_id,
-      }).then(function(result) {
+      Http.getUserList(_httpParams).then(function(result) {
         $scope.users = result.data.body;
       });
     }
+    function getUserTotal(){
+      Http.getUserTotal({
+        "dep_id":dep_id
+      }).then(function(result) {
+        if (dep_id) {
+          $scope.UserTotal = result.data.body[0].number;
+        }else {
+          $scope.UserTotal = result.data.body[0].number - 1;
+
+        }
+        $scope.Paging.totalItems = $scope.UserTotal;
+      });
+    }
     // init
+    getUserTotal();
     getUserList(_httpParams);
-    Http.getUserTotal({
-      "dep_id":dep_id
+
+    //department
+    Http.getDepartmentList({
+      'dep_name': dep_name
     }).then(function(result) {
-      $scope.UserTotal = result.data.body[0].number;
-      $scope.Paging.totalItems = result.data.body[0].number;
-    });
-    Http.getDepartmentList().then(function(result) {
       $scope.deptList = result.data.body;
     });
 
@@ -72,11 +84,15 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
         Http.saveUser($scope.sysUser).then(function(result) {
           if (200 == result.data.head.status) {
             alert('添加成功');
-            getUserList();
           }
           else{
             alert('添加失败');
           }
+          _httpParams.limit = 10;
+          _httpParams.skip = 0;
+          $scope.Paging.currentPage = 0 ;
+          getUserList(_httpParams);
+          getUserTotal();
         })
       });
 
@@ -85,16 +101,18 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
     }
     $scope.updateUser = function(user) {
       $scope.sysUser = user;
-      $.scope.sysUser.password = null;
+      $scope.sysUser.password = null;
       Component.popModal($scope, '修改', 'add-user-modal').result.then(function() {
         Http.updateUser($scope.sysUser).then(function(result) {
+          _httpParams.limit = 10;
+          _httpParams.skip = 0;
           if (200 == result.data.head.status) {
             alert('修改成功');
-            getUserList();
           }
           else{
             alert('修改失败');
           }
+          getUserList(_httpParams);
         })
       });
     }
@@ -103,14 +121,18 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
       var flag = confirm("确定要删除吗？");
       if (flag) {
         Http.deleteUser(user).then(function(result) {
+          _httpParams.limit = 10;
+          _httpParams.skip = 0;
           if (200 == result.data.head.status) {
             alert('删除成功');
-            getUserList();
+            getUserTotal();
+            getUserList(_httpParams);
           }
           else{
             alert('删除失败！');
           }
-          getUserList();
+          getUserTotal();
+          getUserList(_httpParams);
         })
       }
     }
@@ -121,12 +143,12 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
         "dep_id":dep_id,
         'username': $scope.username
       }).then(function(result) {
-        if(200 == result.data.head.status){
+        if(result.data.head.total >= 1){
           $scope.users = result.data.body;
           $scope.UserTotal = result.data.head.total;
           $scope.Paging.totalItems = $scope.UserTotal;
         }else {
-          alert("系统没有查到"+$scope.username+"这个用户名，请重新输入");
+          alert("系统没有查到'"+$scope.username+"'这个用户名，请重新输入");
         }
 
       });
