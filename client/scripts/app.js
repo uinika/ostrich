@@ -85,7 +85,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
         controller: 'DataQuota.Controller.Main'
       })
       .state('main.data-quota.list', {
-        url: '/list/{dep_name}',
+        url: '/list/{quota_dep_id}',
         templateUrl: 'views/data-quota/list.html',
         controller: 'DataQuotaList.Controller.Main'
       })

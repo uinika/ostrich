@@ -3,28 +3,38 @@ var DataQuotaList = angular.module('DataQuotaList', ['ui.router']);
 
 /** Main Controller */
 DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', 'DataQuotaList.Service.Http', '$stateParams',
-  function($scope, $state, Http, Params) {
+  function($scope, $state, Http, StateParams) {
     /** Handle Data Quota Table */
-    if(Params.dep_name==='' && typeof Params.dep_name==='string'){
+    // Paging
+    var httpParams = {};
+    $scope.currentPage = 1;
+    if(StateParams.dep_name===''){
       // Init Data Quota Table
-      Http.getDataQuota().then(function(result) {
-        $scope.DataQuotas = result.data.body;
-        $scope.DataQuotasTotal = result.data.head.total;
-      });
+      httpParams = {limit:20, skip: 1} ;
     }
     else{
       // Fetch Data Quota By Department ID
-      Http.getDataQuotaByDepID(Params).then(function(result) {
-        $scope.DataQuotas = result.data.body;
-        $scope.DataQuotasTotal = result.data.head.total;
-      });
+      httpParams = StateParams ;
     }
+    Http.getDataQuota(httpParams).then(function(result) {
+      $scope.DataQuotas = result.data.body[0].results;
+      $scope.DataQuotasTotal = result.data.body[0].count;
+      $scope.totalItems = result.data.body[0].count;
+    });
+    $scope.pageChanged = function() {
+      var paginParams = _.assign(httpParams, {limit:20, skip: ($scope.currentPage-1) * 20});
+      Http.getDataQuota(httpParams).then(function(result) {
+        $scope.DataQuotas = result.data.body[0].results;
+        $scope.DataQuotasTotal = result.data.body[0].count;
+        $scope.totalItems = result.data.body[0].count;
+      });
+    };
     /** #Handle Data Quota Table */
 
     /** Search for Data Quota Name */
     $scope.Retrieval = function(){
       var httpParam = _.assign(Params, {quotaname: $scope.TargetDataQuotaName});
-      Http.getDataQuotaByDepID(httpParam).then(function(result) {
+      Http.getDataQuota(httpParam).then(function(result) {
         $scope.DataQuotas = result.data.body;
         $scope.DataQuotasTotal = result.data.head.total;
       });
@@ -65,19 +75,13 @@ DataQuotaList.factory('DataQuotaList.Service.Http', ['$http', 'API',
         path + '/sys_dict', { params: params }
       )
     };
-    function getDataQuotaByDepID(params){
+    function getDataQuota(params){
       return $http.get(
         path + '/data_quota/sys_dict', { params: params }
       )
     }
-    function getDataQuota(){
-      return $http.get(
-        path + '/data_quota/sys_dict'
-      )
-    }
     return {
       getSystemDictByCatagory: getSystemDictByCatagory,
-      getDataQuotaByDepID: getDataQuotaByDepID,
       getDataQuota: getDataQuota
     }
   }

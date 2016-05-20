@@ -1005,3 +1005,6 @@ html {
 #data-quota-list .icon-list li {
   margin-left: 15px;
 }
+#data-quota-list .table-responsive {
+  height: 45rem;
+}
