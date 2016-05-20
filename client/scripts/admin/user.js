@@ -313,7 +313,8 @@ AdminUser.service('AdminUser.Service.Component', ['$uibModal','$state',
         animation: true,
         backdrop : 'static',
         templateUrl: templateUrl + '.html',
-        scope: scope
+        scope: scope,
+        size: 'lg'
       });
       scope.Modal.confirm = function(isValid) {
         if (isValid) {
