@@ -43,8 +43,8 @@ Department.controller('Department.Controller.Main', ['$cookies', '$scope', '$q',
     function getAuditList() {
       _httpParams.audit_status = 0;
       Http.getAuditList(_httpParams).then(function(result) {
-        $scope.toAuditList = result.data.body;
-        $scope.auditTotal = result.data.head.total;
+        $scope.toAuditList = result.data.body[0].results;
+        $scope.auditTotal = result.data.body[0].count;
       });
     }
 
@@ -54,8 +54,8 @@ Department.controller('Department.Controller.Main', ['$cookies', '$scope', '$q',
     function getDeptRequirementConfirmList() {
       //_httpConfirmParams.response_dep_id = DEP_ID;
       Http.getDepartmentRequirementList(_httpConfirmParams).then(function(result) {
-        $scope.requireToConfirmList = result.data.body;
-        $scope.reqTotal = result.data.head.total;
+        $scope.requireToConfirmList = result.data.body[0].results;
+        $scope.reqTotal = result.data.body[0].count;
       })
     }
 
