@@ -184,15 +184,7 @@
                 </div>
                 <div class='panel-body' style='padding:15px 0'>
                   <div class='focus-bureau-list'>
-                    <div ng-repeat='bureau in followDeptList' class='bureau-item col-md-1'>
-                      <a ui-sref='main.inventory.detail({departmentID: bureau.dep_id})' class='thumbnail'>
-                        <img ng-src='../styles/images/bureau/{{::bureau.dep_en_name}}' title='{{::bureau.dep_name}}'>
-                      </a>
-                      <div class="caption">
-                        {{bureau.dep_short_name}}
-                      </div>
-                    </div>
-                    <div class='col-md-3 add-focus-option'>
+                    <div class='col-md-12 add-focus-option'>
                       <button title='添加关注部门' class="btn btn-lg btn-default" ng-click='depSelect.show = true'>
                         <i class='fa fa-plus'></i>
                       </button>
@@ -204,6 +196,15 @@
                       </div>
 
                     </div>
+                    <div ng-repeat='bureau in followDeptList' class='bureau-item col-md-1'>
+                      <a ui-sref='main.inventory.detail({departmentID: bureau.dep_id})' class='thumbnail'>
+                        <img ng-src='../styles/images/bureau/{{::bureau.dep_en_name}}' title='{{::bureau.dep_name}}'>
+                      </a>
+                      <div class="caption">
+                        {{bureau.dep_short_name}}
+                      </div>
+                    </div>
+
                   </div>
                 </div>
               </div>
