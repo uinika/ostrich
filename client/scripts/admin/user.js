@@ -101,11 +101,12 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
     }
     $scope.updateUser = function(user) {
       $scope.sysUser = user;
-      $scope.sysUser.password = null;
+      $scope.password = $scope.sysUser.password;
       Component.popModal($scope, '修改', 'add-user-modal').result.then(function() {
         Http.updateUser($scope.sysUser).then(function(result) {
           _httpParams.limit = 10;
           _httpParams.skip = 0;
+          $scope.Paging.currentPage = 0 ;
           if (200 == result.data.head.status) {
             alert('修改成功');
           }
@@ -135,6 +136,44 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
           getUserList(_httpParams);
         })
       }
+    }
+    $scope.Password = function(user) {
+      var id = user.id ;
+      var prom = Component.popModal($scope, '密码', 'update-password-modal');
+      prom.opened.then(function() {
+        $scope.Modal.validPword1 = function (password_pre){
+          Http.validatePassword({
+            "id": id,
+            "password": password_pre
+          }).then(function(result) {
+            if (200 != result.data.head.status) {
+              alert('密码不对,请重新输入');
+              $scope.password_pre ="";
+            }
+          });
+        }
+        $scope.Modal.validPword = function (password){
+             if($scope.password_now!=password){
+               alert("两次输入的密码不匹配,请重新输入");
+               $scope.password ="";
+             }
+        }
+      });
+      prom.result.then(function() {
+        Http.UpdatePassword($scope.password_now).then(function(result) {
+          if (200 == result.data.head.status) {
+            alert('修改成功');
+          }
+          else{
+            alert('修改失败');
+          }
+          _httpParams.limit = 10;
+          _httpParams.skip = 0;
+          $scope.Paging.currentPage = 0 ;
+          getUserList(_httpParams);
+          getUserTotal();
+        })
+      });
     }
 
     //search user
@@ -217,13 +256,29 @@ AdminUser.factory('AdminUser.Service.Http', ['$http', 'API',
         }
       )
     }
+    function validatePassword(params){
+      return $http.get(
+        path + '/sys_user/password', {
+            params: params
+        }
+      )
+    }
+    function UpdatePassword(data) {
+      return $http.put(
+        path + '/sys_user/password' , {
+          data: data
+        }
+      )
+    }
     return {
       getUserList: getUserList,
       saveUser: saveUser,
       getDepartmentList: getDepartmentList,
       updateUser: updateUser,
       deleteUser: deleteUser,
-      getUserTotal: getUserTotal
+      getUserTotal: getUserTotal,
+      validatePassword: validatePassword,
+      UpdatePassword: UpdatePassword
     }
   }
 ]);

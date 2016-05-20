@@ -61,8 +61,8 @@ AdminDepartment.controller('Admin.Department.Controller.Main', ['$rootScope', '$
              var deps = result.data.body;
              for (var i = 0; i < deps.length; i++) {
                if(deps[i].dep_name === depName){
-                 $scope.department.dep_name ="";
                  alert("该部门已存在,请重新添加");
+                 $scope.department.dep_name ="";
                }
              }
           });
@@ -87,10 +87,18 @@ AdminDepartment.controller('Admin.Department.Controller.Main', ['$rootScope', '$
     }
     $scope.updateDepartment = function(AdminDep) {
       $scope.department = AdminDep;
-      Component.popModal($scope, '修改', 'add-department-modal').result.then(function() {
+      _.remove($scope.AllDepartments, function(dep) {
+        return (dep.dep_name == AdminDep.dep_name);
+     });
+      var promise = Component.popModal($scope, '修改', 'add-department-modal');
+      promise.opened.then(function() {
+
+      });
+      promise.result.then(function() {
         Http.updateDepartment($scope.department).then(function(result) {
           _httpParams.limit = 10;
           _httpParams.skip = 0;
+          $scope.Paging.currentPage = 0 ;
           if (200 == result.data.head.status) {
             alert('修改成功');
           }
@@ -99,7 +107,7 @@ AdminDepartment.controller('Admin.Department.Controller.Main', ['$rootScope', '$
           }
           getDepartmentList(_httpParams);
         })
-      });
+    });
     }
 
     $scope.deleteDepartment = function(AdminDep) {
