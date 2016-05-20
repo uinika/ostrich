@@ -46,13 +46,8 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
       var httpParam = {data_quota_id: data_quota_id};
       Http.getDataQuotaApplyInfo(httpParam).then(function() {
         alert('申请查看成功');
-        if(StateParams.dep_name===''){
-          httpParams = {limit:20, skip: 1} ;
-        }
-        else{
-          httpParams = _.assign(StateParams, {limit:20, skip: 1});
-        }
-        Http.getDataQuota(httpParams).then(function(result) {
+        var paginParams = _.assign(httpParams, {limit:20, skip: ($scope.currentPage-1) * 20});
+        Http.getDataQuota(paginParams).then(function(result) {
           $scope.DataQuotas = result.data.body[0].results;
           $scope.DataQuotasTotal = result.data.body[0].count;
           $scope.totalItems = result.data.body[0].count;
@@ -100,9 +95,9 @@ DataQuotaList.factory('DataQuotaList.Service.Http', ['$http', 'API',
         path + '/data_quota/sys_dict', { params: params }
       )
     };
-    function getDataQuotaApplyInfo(params){
-      return $http.put(
-        path + '/data_quota_apply_info', { params: params }
+    function getDataQuotaApplyInfo(data){
+      return $http.post(
+        path + '/data_quota_apply_info', { data: data }
       )
     };
     return {
