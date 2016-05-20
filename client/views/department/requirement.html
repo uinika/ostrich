@@ -62,7 +62,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr ng-repeat='DeptReq in requirementList | orderBy:"create_time" '>
+                  <tr ng-repeat='DeptReq in requirementList | orderBy:"-create_time" '>
                     <!-- <td><input type='checkbox' ng-click='deleteReq(DeptReq.id)' />删除</td> -->
                     <td><div ng-if='DeptReq.status == 0'><span>
                       <i class='fa fa-question-circle'></i></span></div>
@@ -70,10 +70,10 @@
                         <i class='fa fa-check-circle'></i></span></div>
                         <div ng-if='DeptReq.status == 2'><span>
                           <i class='fa fa-times-circle-o'></i></span></div></td>
-                    <td title='{{DeptReq.create_time| date:"yyyy-mm-dd hh:MM:ss"}}'>{{DeptReq.create_time| date:"yyyy-mm-dd hh:MM:ss"}}</td>
+                    <td title='{{DeptReq.create_time| date:"yyyy-MM-dd hh:mm:ss"}}'>{{DeptReq.create_time| date:"yyyy-MM-dd hh:mm:ss"}}</td>
                     <td title='{{DeptReq.response_time |
-                      date:"yyyy-mm-dd hh:MM:ss"}}'>{{DeptReq.response_time |
-                      date:"yyyy-mm-dd hh:MM:ss"}}</td>
+                      date:"yyyy-MM-dd hh:mm:ss"}}'>{{DeptReq.response_time |
+                      date:"yyyy-MM-dd hh:mm:ss"}}</td>
                     <td title='{{DeptReq.requiement_name}}'>{{DeptReq.requiement_name}}</td>
                     <td title='{{DeptReq.requiement_desc}}'>{{DeptReq.requiement_desc}}</td>
                     <td title='{{DeptReq.sharefrequency}}'>{{DeptReq.sharefrequency}}</td>

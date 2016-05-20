@@ -152,34 +152,44 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$cookies', 
         dep_name : DEP_ID
       }).then(function(result) {
         console.log(result);
-        $scope.depQuotaReqList = result.data.body;
+        $scope.depQuotaReqList = result.data.body[0].results;
+
         //  $scope.Paging.totalItems = data.head.total;
       });
 
       $scope.toConfirm = function(item) {
         // get requirement detail
         $scope.Modal.ReqDetail = item;
+        $scope.Modal.ReqResponse = {};
+        $scope.Modal.ReqResponse.data_quota_id = $scope.depQuotaReqList[0].id;
         Component.popModal($scope, '', 'confirm-req-modal').result.then(function() {
           console.log($scope.Modal.ReqResponse);
           $scope.Modal.ReqResponse.id = item.id;
           Http.updateRequirement($scope.Modal.ReqResponse).then(function(result) {
             if (200 == result.data.head.status) {
-              if($scope.Modal.ReqResponse.data_quota_id) {
+              if($scope.Modal.ReqResponse.status == 1) {
                 // 保存需求响应
                 Http.saveReqResponse({
                   requiement_id: item.id,
                   data_quota_id: $scope.Modal.ReqResponse.data_quota_id
                 }).then(function(saveResult) {
                   if (200 == saveResult.data.head.status) {
-                    alert('确认成功');
+                    alert('保存成功！');
+                    getDeptRequirementConfirmList();
+                  }
+                  else {
+                    alert('保存失败！');
                     getDeptRequirementConfirmList();
                   }
                 })
               }
-
+              else {
+                alert('保存成功！');
+                getDeptRequirementConfirmList();
+              }
 
             } else {
-              alert('确认失败');
+              alert('保存失败');
             }
           })
         });

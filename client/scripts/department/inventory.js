@@ -161,7 +161,7 @@ DInventory.controller('Department.Inventory.Controller.detail', ['$scope', '$q',
   }
 ])
 
-DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$scope', '$state', '$q', '$uibModal', 'Department.Inventory.Service.Component', 'Department.Inventory.Service.Http',
+DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$scope', '$state', '$q', '$uibModal', 'Department.Inventory.Service.Component', 'Department.Inventory.Service.Http', 
   function($cookies, $scope, $state, $q, $uibModal, Component, Http) {
     var DATA_STORE_TYPE = 4;
     var DATA_SHOW_FORMAT = 6;
@@ -176,6 +176,8 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
     $scope.DataQuota = {};
     $scope.DataQuota.data_show_format_add = '';
     $scope.DataQuota.data_store_type_add = '';
+
+
 
     Http.getDepartmentList().then(function(result) {
       $scope.deptList = result.data.body;
@@ -210,10 +212,12 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
 
     // submit add
     $scope.addQuota = function(isValid) {
+      $scope.submitted = false;
       var DataQuotaAddObj = {};
       var dataRelationConfig = [];
       var dataQuotaApplyInfo = [];
       if (isValid) {
+
         console.log($scope.dataLevelSelection);
         DataQuotaAddObj.dataQuota = $scope.DataQuota;
 
@@ -241,6 +245,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
             console.log(result.data);
             if (200 == result.data.head.status) {
               $scope.Modal = {};
+
               var modalInstance = Component.popModal($scope, 'Department.Inventory.Controller.publish', '', 'import-example-modal').result.then(function(res) {
                 $state.go("main.department.inventory.upload", {
                   ID: result.data.body[0].id
@@ -251,12 +256,21 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
               })
 
             }
+            else{
+              alert('保存失败');
+              $state.go("main.department.inventory", {}, {
+                reload: true
+              });
+            }
           })
           // .then(function() {
           //   $state.go("main.department.inventory", {}, {
           //     reload: true
           //   });
           // })
+      }
+      else{
+        $scope.submitted = true;
       }
     }
 
@@ -307,9 +321,17 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
 ])
 
 // upload file
-DInventory.controller('Department.Inventory.Controller.upload', ['$scope', '$q', 'Department.Inventory.Service.Http', '$stateParams', '$state',
-    function($scope, $q, Http, $stateParams, $state) {
+DInventory.controller('Department.Inventory.Controller.upload', ['$scope', '$q', 'Department.Inventory.Service.Http', '$stateParams', '$state', '$sce',
+    function($scope, $q, Http, $stateParams, $state ,$sce) {
       $scope.uploadPromise = null;
+
+      $scope.htmlPopover = $sce.trustAsHtml("<table class='table table-hover table-striped '>"+
+        "<thead><tr><th>序号</th><th>城市</th><th>GDP(亿元)</th><th>增长</th>"+
+        "<th>地方公共财政收入(亿元)</th><th>增长</th><th>城镇登记失业率</th>"+
+        "<th>农村居民人均纯收入(元)</th><th>增长</th></tr></thead>"+
+        "<tbody><tr><td>1</td><td>成都</td><td>9000</td><td>8.54%</td><td>8000</td><td>7.51%</td>"+
+        "<td>1.39</td><td>5678</td><td>3.40%</td></tr>"+
+        "</tbody></table>");
 
       $scope.uploadFile = function() {
         var file = $scope.myFile;
@@ -423,8 +445,8 @@ DInventory.factory('Department.Inventory.Service.Http', ['$http', '$q', 'API',
 
 
 /* Component */
-DInventory.service('Department.Inventory.Service.Component', ['$uibModal',
-  function($uibModal) {
+DInventory.service('Department.Inventory.Service.Component', ['$uibModal', '$state',
+  function($uibModal,$state) {
     // prompt Alert
     function popAlert(scope, info) {
       scope.Alerts = [{
@@ -451,6 +473,10 @@ DInventory.service('Department.Inventory.Service.Component', ['$uibModal',
       };
       scope.Modal.cancel = function() {
         modalInstance.dismiss();
+        alert('保存成功！');
+        $state.go("main.department.inventory", {}, {
+          reload: true
+        });
       };
       return modalInstance;
     };

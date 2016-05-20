@@ -1,9 +1,8 @@
-<div id='department-inventory-detail'>
+<div id='department-inventory-upload'>
   <div class="panel panel-default">
     <div class="panel-heading">上传样例数据</div>
     <div class="panel-body"  cg-busy="{promise:uploadPromise,message:'正在上传...'}">
-      样式数据扩展名为：csv, xls文件，
-      <a>参考样例数据模板</a>
+      样式数据扩展名为：csv,xls,xlsx文件,<button uib-popover-html="htmlPopover"   popover-placement='bottom-left' popover-trigger="focus" type="button" class="btn btn-default">参考样例数据模板</button>
       <input type="file" file-model="myFile" style='margin-top:48px'/>
       <div style='margin-top:50px;'>
         <button class='btn btn-primary' ng-click="uploadFile()">开始上传</button>
