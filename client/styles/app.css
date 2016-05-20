@@ -680,6 +680,9 @@ input.ng-invalid {
 #department-requirement .indicator-list ul.nav-filter li span i.fa-question-circle {
   color: #f0ad4e;
 }
+#department-requirement .indicator-list ul.nav-filter li span i.fa-times-circle-o {
+  color: #d9534f;
+}
 #department-requirement .indicator-list table {
   table-layout: fixed;
 }
@@ -761,6 +764,9 @@ input.ng-invalid {
 }
 #department-requirement-confirm .indicator-list ul.nav-filter li span i.fa-check-circle {
   color: #5cb85c;
+}
+#department-requirement-confirm .indicator-list ul.nav-filter li span i.fa-question-circle {
+  color: #f0ad4e;
 }
 #department-requirement-confirm .indicator-list ul.nav-filter li span i.fa-times-circle-o {
   color: #d9534f;
