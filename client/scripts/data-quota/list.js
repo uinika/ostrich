@@ -40,12 +40,16 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
       });
     }
     /** #Search for Data Quota Name */
-    $scope.ControllaDomande = function(){
-      console.log('test');
-    }
-    /** Controlla Domande */
 
-    /** Controlla Domande */
+    /** Data quota apply info */
+    $scope.DataQuotaApplyInfo = function(data_quota_id){
+      var httpParam = {data_quota_id: data_quota_id};
+      Http.getDataQuotaApplyInfo(httpParam).then(function(result) {
+        $scope.DataQuotas = result.data.body;
+        $scope.DataQuotasTotal = result.data.head.total;
+      });
+    }
+    /** #Data quota apply info */
 
     /** SysDict */
     var SHARE_FREQUENCY = 1,
@@ -85,9 +89,15 @@ DataQuotaList.factory('DataQuotaList.Service.Http', ['$http', 'API',
       return $http.get(
         path + '/data_quota/sys_dict', { params: params }
       )
-    }
+    };
+    function getDataQuotaApplyInfo(params){
+      return $http.get(
+        path + '/data_quota_apply_info', { params: params }
+      )
+    };
     return {
       getSystemDictByCatagory: getSystemDictByCatagory,
+      getDataQuotaApplyInfo: getDataQuotaApplyInfo,
       getDataQuota: getDataQuota
     }
   }
