@@ -14,7 +14,7 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
     }
     else{
       // Fetch Data Quota By Department ID
-      httpParams = StateParams ;
+      httpParams = _.assign(StateParams, {limit:20, skip: 1});
     }
     Http.getDataQuota(httpParams).then(function(result) {
       $scope.DataQuotas = result.data.body[0].results;
@@ -44,9 +44,19 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
     /** Data quota apply info */
     $scope.DataQuotaApplyInfo = function(data_quota_id){
       var httpParam = {data_quota_id: data_quota_id};
-      Http.getDataQuotaApplyInfo(httpParam).then(function(result) {
-        $scope.DataQuotas = result.data.body;
-        $scope.DataQuotasTotal = result.data.head.total;
+      Http.getDataQuotaApplyInfo(httpParam).then(function() {
+        alert('申请查看成功');
+        if(StateParams.dep_name===''){
+          httpParams = {limit:20, skip: 1} ;
+        }
+        else{
+          httpParams = _.assign(StateParams, {limit:20, skip: 1});
+        }
+        Http.getDataQuota(httpParams).then(function(result) {
+          $scope.DataQuotas = result.data.body[0].results;
+          $scope.DataQuotasTotal = result.data.body[0].count;
+          $scope.totalItems = result.data.body[0].count;
+        });
       });
     }
     /** #Data quota apply info */
@@ -91,7 +101,7 @@ DataQuotaList.factory('DataQuotaList.Service.Http', ['$http', 'API',
       )
     };
     function getDataQuotaApplyInfo(params){
-      return $http.get(
+      return $http.put(
         path + '/data_quota_apply_info', { params: params }
       )
     };
