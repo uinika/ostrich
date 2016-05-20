@@ -50,7 +50,7 @@ Dashboard.controller('Dashboard.Controller.Main', ['$scope', 'Dashboard.Service.
         limit: 6,
         dep_name: param
       }).then(function(result){
-          $scope.followDepIndicators = result.data.body;
+          $scope.followDepIndicators = result.data.body[0].results;
       });
     }
     // Generoted Department
@@ -65,7 +65,7 @@ Dashboard.controller('Dashboard.Controller.Main', ['$scope', 'Dashboard.Service.
           limit: 6,
           dep_name: followDepId
         }).then(function(result){
-            $scope.followDepIndicators = result.data.body;
+          $scope.followDepIndicators = result.data.body[0].results;
         });
      });
      <!-- #DataQuota for Concerned Departments -->
