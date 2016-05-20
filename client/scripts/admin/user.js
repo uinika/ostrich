@@ -126,6 +126,7 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
         Http.deleteUser(user).then(function(result) {
           _httpParams.limit = 10;
           _httpParams.skip = 0;
+          $scope.Paging.currentPage = 0 ;
           if (200 == result.data.head.status) {
             alert('删除成功');
             getUserTotal();

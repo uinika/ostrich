@@ -115,7 +115,8 @@ AdminDepartment.controller('Admin.Department.Controller.Main', ['$rootScope', '$
       if (flag) {
         Http.deleteDepartment(AdminDep).then(function(result) {
           _httpParams.limit = 10;
-          _httpParams.skip = ($scope.Paging.currentPage - 1)*_httpParams.limit;
+          _httpParams.skip = 0;
+          $scope.Paging.currentPage = 0 ;
           if (200 == result.data.head.status) {
             alert('删除成功');
           }
@@ -245,7 +246,7 @@ AdminDepartment.service('AdminDepartment.Service.Component', ['$uibModal','$stat
       };
       scope.Modal.cancel = function() {
         modalInstance.dismiss();
-        $state.go("main.admin.Department", {}, {
+        $state.go("main.admin.department", {}, {
           reload: true
         });
       };
