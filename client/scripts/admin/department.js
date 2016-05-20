@@ -215,8 +215,8 @@ AdminDepartment.factory('AdminDepartment.Service.Http', ['$http', 'API',
 ]);
 
 /* Component */
-AdminDepartment.service('AdminDepartment.Service.Component', ['$uibModal',
-  function($uibModal) {
+AdminDepartment.service('AdminDepartment.Service.Component', ['$uibModal','$state',
+  function($uibModal,$state) {
     // prompt Alert
     function popAlert(scope, info) {
       scope.Alerts = [{
@@ -245,6 +245,9 @@ AdminDepartment.service('AdminDepartment.Service.Component', ['$uibModal',
       };
       scope.Modal.cancel = function() {
         modalInstance.dismiss();
+        $state.go("main.admin.Department", {}, {
+          reload: true
+        });
       };
       return modalInstance;
     };

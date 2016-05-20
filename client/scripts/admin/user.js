@@ -292,8 +292,8 @@ AdminUser.factory('AdminUser.Service.Http', ['$http', 'API',
 ]);
 
 /* Component */
-AdminUser.service('AdminUser.Service.Component', ['$uibModal',
-  function($uibModal) {
+AdminUser.service('AdminUser.Service.Component', ['$uibModal','$state',
+  function($uibModal,$state) {
     // prompt Alert
     function popAlert(scope, info) {
       scope.Alerts = [{
@@ -323,6 +323,9 @@ AdminUser.service('AdminUser.Service.Component', ['$uibModal',
 
       scope.Modal.cancel = function() {
         modalInstance.dismiss();
+        $state.go("main.admin.user", {}, {
+          reload: true
+        });
       };
       return modalInstance;
     };
