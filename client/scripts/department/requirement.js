@@ -17,7 +17,7 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$cookies', 
     _httpParams.skip = 0;
 
     $scope.Paging.pageChanged = function() {
-      _httpParams.skip = ($scope.Paging.currentPage - 1)*_httpParams.limit;
+      _httpParams.skip = ($scope.Paging.currentPage - 1) * _httpParams.limit;
       getDeptRequirementList(_httpParams);
     }
 
@@ -71,7 +71,7 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$cookies', 
         var res_dep_id = _.map($scope.reqParent.outputDeptList, 'id');
 
         console.log(res_dep_id);
-         $scope.Modal.DepRequirment.response_dep_id = res_dep_id[0];
+        $scope.Modal.DepRequirment.response_dep_id = res_dep_id[0];
         _httpPublishParams.dataRequiement = $scope.Modal.DepRequirment;
         _httpPublishParams.dataRelationConfig = dataRelationConfig;
 
@@ -99,8 +99,8 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$cookies', 
     $scope.deleteReq = function(id) {
       $scope.deleteReqFlag = !$scope.deleteReqFlag;
       Http.deleteRequirement({
-        id : id,
-        delete_flag :$scope.deleteReqFlag
+        id: id,
+        delete_flag: $scope.deleteReqFlag
       }).then(function(result) {
 
       })
@@ -109,98 +109,107 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$cookies', 
 ])
 
 
-  /** DepartmentReq Controller */
-  DepartmentReq.controller('Department.Requirement.Controller.confirm', ['$cookies', '$scope', '$stateParams', 'Department.Requirement.Service.Http', 'Department.Requirement.Service.Component' ,
-    function($cookies, $scope, $stateParams, Http, Component) {
-      $scope.Modal = {};
-      $scope.DeptRequirementConfirm = {};
+/** DepartmentReq Controller */
+DepartmentReq.controller('Department.Requirement.Controller.confirm', ['$cookies', '$scope', '$stateParams', 'Department.Requirement.Service.Http', 'Department.Requirement.Service.Component',
+  function($cookies, $scope, $stateParams, Http, Component) {
+    $scope.Modal = {};
+    $scope.DeptRequirementConfirm = {};
 
-      var LoginUser = JSON.parse($cookies.get('User'));
-      var DEP_ID = LoginUser.dep_id;
-      $scope.DeptRequirement = {};
+    var LoginUser = JSON.parse($cookies.get('User'));
+    var DEP_ID = LoginUser.dep_id;
+    $scope.DeptRequirement = {};
 
-      $scope.Paging = {};
-      $scope.Paging.maxSize = 5;
-      $scope.Paging.itemsPerPage = 10;
+    $scope.Paging = {};
+    $scope.Paging.maxSize = 5;
+    $scope.Paging.itemsPerPage = 10;
 
-      var _httpConfirmParams = {};
+    var _httpConfirmParams = {};
+    _httpConfirmParams.limit = 10;
+    _httpConfirmParams.skip = 0;
+
+    $scope.Paging.pageChanged = function() {
+      _httpConfirmParams.skip = ($scope.Paging.currentPage - 1) * _httpConfirmParams.limit;
+      getDeptRequirementConfirmList(_httpConfirmParams);
+    }
+
+    // init
+    getDeptRequirementConfirmList();
+
+    function getDeptRequirementConfirmList() {
+      _httpConfirmParams.response_dep_id = DEP_ID;
+      Http.getDepartmentRequirementList(_httpConfirmParams).then(function(result) {
+        $scope.requirementConfirmList = result.data.body[0].results;
+        $scope.Paging.totalItems = result.data.body[0].count;
+      })
+    }
+
+    $scope.searchDeptReqConfirmByName = function() {
+      _httpConfirmParams.requiement_name = $scope.DeptRequirementConfirm.req_name_filter;
       _httpConfirmParams.limit = 10;
       _httpConfirmParams.skip = 0;
-
-      $scope.Paging.pageChanged = function() {
-        _httpConfirmParams.skip = ($scope.Paging.currentPage - 1)*_httpConfirmParams.limit;
-        getDeptRequirementConfirmList(_httpConfirmParams);
-      }
-
-      // init
       getDeptRequirementConfirmList();
+    }
 
-      function getDeptRequirementConfirmList() {
-        _httpConfirmParams.response_dep_id = DEP_ID;
-        Http.getDepartmentRequirementList(_httpConfirmParams).then(function(result) {
-          $scope.requirementConfirmList = result.data.body[0].results;
-          $scope.Paging.totalItems = result.data.body[0].count;
-        })
-      }
+    Http.getDepartQuotaList({
+      dep_name: DEP_ID
+    }).then(function(result) {
+      console.log(result);
+      $scope.depQuotaReqList = result.data.body[0].results;
 
-      $scope.searchDeptReqConfirmByName = function() {
-        _httpConfirmParams.requiement_name = $scope.DeptRequirementConfirm.req_name_filter;
-        _httpConfirmParams.limit = 10;
-        _httpConfirmParams.skip = 0;
-        getDeptRequirementConfirmList();
-      }
+      //  $scope.Paging.totalItems = data.head.total;
+    });
 
-      Http.getDepartQuotaList({
-        dep_name : DEP_ID
-      }).then(function(result) {
-        console.log(result);
-        $scope.depQuotaReqList = result.data.body[0].results;
-
-        //  $scope.Paging.totalItems = data.head.total;
-      });
-
-      $scope.toConfirm = function(item) {
-        // get requirement detail
-        $scope.Modal.ReqDetail = item;
-        $scope.Modal.ReqResponse = {};
-        $scope.Modal.ReqResponse.data_quota_id = $scope.depQuotaReqList[0].id;
-        Component.popModal($scope, '', 'confirm-req-modal').result.then(function() {
-          console.log($scope.Modal.ReqResponse);
-          $scope.Modal.ReqResponse.id = item.id;
-          Http.updateRequirement($scope.Modal.ReqResponse).then(function(result) {
-            if (200 == result.data.head.status) {
-              if($scope.Modal.ReqResponse.status == 1) {
-                // 保存需求响应
-                Http.saveReqResponse({
-                  requiement_id: item.id,
-                  data_quota_id: $scope.Modal.ReqResponse.data_quota_id
-                }).then(function(saveResult) {
-                  if (200 == saveResult.data.head.status) {
-                    alert('保存成功！');
-                    getDeptRequirementConfirmList();
-                  }
-                  else {
-                    alert('保存失败！');
-                    getDeptRequirementConfirmList();
-                  }
-                })
-              }
-              else {
-                alert('保存成功！');
-                getDeptRequirementConfirmList();
-              }
-
+    $scope.toConfirm = function(item) {
+      // get requirement detail
+      $scope.Modal.ReqDetail = item;
+      $scope.Modal.ReqResponse = {};
+      $scope.Modal.ReqResponse.data_quota_id = $scope.depQuotaReqList[0].id;
+      Component.popModal($scope, '', 'confirm-req-modal').result.then(function() {
+        console.log($scope.Modal.ReqResponse);
+        $scope.Modal.ReqResponse.id = item.id;
+        Http.updateRequirement($scope.Modal.ReqResponse).then(function(result) {
+          if (200 == result.data.head.status) {
+            if ($scope.Modal.ReqResponse.status == 1) {
+              // 保存需求响应
+              Http.saveReqResponse({
+                requiement_id: item.id,
+                data_quota_id: $scope.Modal.ReqResponse.data_quota_id
+              }).then(function(saveResult) {
+                if (200 == saveResult.data.head.status) {
+                  alert('保存成功！');
+                  getDeptRequirementConfirmList();
+                } else {
+                  alert('保存失败！');
+                  getDeptRequirementConfirmList();
+                }
+              })
             } else {
-              alert('保存失败');
+              alert('保存成功！');
+              getDeptRequirementConfirmList();
             }
-          })
-        });
-      }
 
-    }])
+          } else {
+            alert('保存失败');
+          }
+        })
+      });
+    }
 
+  }
+])
 
-/* HTTP Factory */
+/** DepartmentReq Controller */
+DepartmentReq.controller('Department.Requirement.Controller.detail', [ '$scope', '$stateParams', 'Department.Requirement.Service.Http', 'Department.Requirement.Service.Component',
+    function( $scope, $stateParams, Http, Component) {
+      Http.getReqDetail({
+        data_requiement_id: $stateParams.ID
+      }).then(function(result) {
+        console.log(result.data.body[0]);
+        $scope.ReqDetail = result.data.body[0];
+      })
+    }
+  ])
+  /* HTTP Factory */
 DepartmentReq.factory('Department.Requirement.Service.Http', ['$http', 'API',
   function($http, API) {
     var path = API.path;
@@ -236,6 +245,7 @@ DepartmentReq.factory('Department.Requirement.Service.Http', ['$http', 'API',
         }
       )
     }
+
     function getDepartQuotaList(params) {
       return $http.get(
         path + '/data_quota', {
@@ -246,7 +256,7 @@ DepartmentReq.factory('Department.Requirement.Service.Http', ['$http', 'API',
 
     function getReqDetail(params) {
       return $http.get(
-        path + '/requirement/requireDetail', {
+        path + '/data_requiement_detail', {
           params: params
         }
       )
@@ -259,6 +269,7 @@ DepartmentReq.factory('Department.Requirement.Service.Http', ['$http', 'API',
         }
       )
     }
+
     function getDepartmentList() {
       return $http.get(
         path + '/sys_dep'
@@ -267,7 +278,7 @@ DepartmentReq.factory('Department.Requirement.Service.Http', ['$http', 'API',
 
     function deleteRequirement(id) {
       return $http.put(
-        path + '/data_requiement_delete' , {
+        path + '/data_requiement_delete', {
           data: data
         }
       )
@@ -306,17 +317,16 @@ DepartmentReq.service('Department.Requirement.Service.Component', ['$uibModal',
       scope.Modal.type = type;
       var modalInstance = $uibModal.open({
         animation: true,
-        backdrop : 'static',
+        backdrop: 'static',
         templateUrl: templateUrl + '.html',
         scope: scope,
         size: 'lg'
       });
       scope.Modal.confirm = function(isValid) {
         console.log(scope.reqParent.outputDeptList.length);
-        if (isValid && scope.reqParent.outputDeptList.length >0) {
+        if (isValid && scope.reqParent.outputDeptList.length > 0) {
           modalInstance.close(scope.Modal);
-        }
-        else{
+        } else {
           scope.error = true;
         }
 

@@ -225,6 +225,12 @@ input.ng-invalid {
   margin-left: 170px;
   margin-bottom: 80px;
 }
+#department-main .department-main .font-22 {
+  font-size: 22px;
+}
+#department-main .department-main .font-20 {
+  font-size: 20px;
+}
 #department-main .department-main .panel-list .panel {
   height: 287px;
   overflow: hidden;
@@ -236,6 +242,18 @@ input.ng-invalid {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+#department-main .department-main .panel-list .panel table tr td pre {
+  overflow: hidden;
+  border: none;
+  border-radius: 0;
+  word-break: initial;
+  word-wrap: initial;
+  color: inherit;
+  background: none;
+  padding: 0;
+  font-size: inherit;
+  margin: 0;
 }
 #department-main .department-main .focus-bureau-list {
   height: 200px;
@@ -894,7 +912,7 @@ input.ng-invalid {
   height: 490px;
 }
 #department-audit .indicator-list .scroll div.container {
-  width: 2000px !important;
+  width: 2800px !important;
 }
 #department-audit .indicator-list ul.nav-filter {
   list-style: none;

@@ -45,13 +45,13 @@
                       <i class='fa fa-list-alt fa-3x'></i>
                     </div>
                     <div class='col-xs-9 text-right'>
-                      <div class='font-16'>{{Count.data_quota_number}}</div>
+                      <div class='font-22'>{{Count.data_quota_number}}</div>
                       <div>部门指标</div>
                     </div>
                   </div>
                 </div>
-                <div class='panel-footer'>
-                  本月新增 +{{Count.data_quota_number_inc}}
+                <div class='panel-footer font-20'>
+                  本月新增 <span class='font-20'>+{{Count.data_quota_number_inc}}</span>
                 </div>
               </div>
             </div>
@@ -64,13 +64,13 @@
                       <i class='fa fa-share-square-o fa-3x'></i>
                     </div>
                     <div class='col-xs-9 text-right'>
-                      <div class='font-16'>{{Count.data_apply_number}}</div>
+                      <div class='font-22'>{{Count.data_apply_number}}</div>
                       <div>共享指标</div>
                     </div>
                   </div>
                 </div>
                 <div class='panel-footer'>
-                  本月新增 +{{Count.data_apply_number_inc}}
+                  本月新增 <span class='font-20'>+{{Count.data_apply_number_inc}}</span>
                 </div>
               </div>
             </div>
@@ -83,13 +83,13 @@
                       <i class='fa fa-commenting-o fa-3x'></i>
                     </div>
                     <div class='col-xs-9 text-right'>
-                      <div class='font-16'>{{Count.data_req_number}}</div>
+                      <div class='font-22'>{{Count.data_req_number}}</div>
                       <div>需求清单</div>
                     </div>
                   </div>
                 </div>
                 <div class='panel-footer'>
-                  本月新增 +{{Count.data_req_number_inc}}
+                  本月新增 <span class='font-20'>+{{Count.data_req_number_inc}}</span>
                 </div>
               </div>
             </div>
@@ -102,12 +102,12 @@
                       <i class='fa fa-file-text fa-3x'></i>
                     </div>
                     <div class='col-xs-9 text-right'>
-                      <div class='font-16'>{{Count.data_apply_wait_number}}</div>
+                      <div class='font-22'>{{Count.data_apply_wait_number}}</div>
                       <div>待审核指标</div>
                     </div>
                   </div>
                 </div>
-                <div class='panel-footer'></div>
+                <div class='panel-footer' style='padding:24px'></div>
               </div>
             </div>
           </div>
@@ -134,8 +134,9 @@
                     <tbody>
                       <tr ng-repeat='invtItem in toAuditList'>
                         <td title='{{invtItem.create_time |date:"yyyy-MM-dd hh:mm:ss"}}'>{{invtItem.create_time |date:"yyyy-MM-dd hh:mm:ss"}}</td>
-                        <td title='{{invtItem.quota_name}}'>{{invtItem.quota_name}}</td>
-                        <td title='{{invtItem.depname}}'>{{invtItem.depname}}</td>
+                        <td title='{{invtItem.quota_name}}'>
+                          <a ui-sref='main.department.inventory.detail({ID:invtItem.data_quota_id})'><pre>{{invtItem.quota_name}}</pre></a></td>
+                        <td title='{{invtItem.depname}}'>{{invtItem.applydepname}}</td>
                       </tr>
                     </tbody>
                   </table>
@@ -166,7 +167,7 @@
                       <tr ng-repeat='resItem in requireToConfirmList'>
                         <td title='{{resItem.response_time |date:"yyyy-MM-dd hh:mm:ss"}}'>{{resItem.response_time |date:"yyyy-MM-dd hh:mm:ss"}}</td>
                         <td title='{{resItem.create_time| date:"yyyy-MM-dd hh:mm:ss"}}'>{{resItem.create_time| date:"yyyy-MM-dd hh:mm:ss"}}</td>
-                        <td title='{{resItem.requiement_name}}'>{{resItem.requiement_name}}</td>
+                        <td title='{{resItem.requiement_name}}'><a ui-sref='main.department.requirement.detail({ID:resItem.id})'>{{resItem.requiement_name}}</a></td>
                         <td title='{{resItem.response_dep_name}}'>{{resItem.response_dep_name}}</td>
                       </tr>
                     </tbody>

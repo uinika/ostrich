@@ -42,25 +42,25 @@
         </ul>
       </div>
 
-      <div class='panel-body'>
-        <div class=''>
+      <div class='panel-body' style='overflow-x:scroll'>
+        <div class='' style='width:1600px'>
           <div class='row'>
             <div class='col-lg-12'>
               <!-- Table -->
               <table class='table table-hover table-striped '>
                 <thead>
                   <tr>
-                    <th>状态</th>
-                    <th>需求日期</th>
-                    <th>确认日期</th>
-                    <th>需求名称</th>
-                    <th>需求说明</th>
-                    <th>共享频率</th>
-                    <th>空间范围</th>
-                    <th>数据级别</th>
-                    <th>联系人</th>
-                    <th>联系电话</th>
-                    <th>对应部门</th>
+                    <th width='40px'>状态</th>
+                    <th width='100px'>需求日期</th>
+                    <th width='100px'>确认日期</th>
+                    <th width='80px'>需求名称</th>
+                    <th width='120px'>需求说明</th>
+                    <th width='40px'>共享频率</th>
+                    <th width='60px'>空间范围</th>
+                    <th width='80px'>数据级别</th>
+                    <th width='40px'>联系人</th>
+                    <th width='80px'>联系电话</th>
+                    <th width='80px'>对应部门</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -142,8 +142,9 @@
       </div>
     </div>
     <div class='modal-footer'>
-      <button class='btn btn-primary' ng-disabled="reqConfirmForm.$invalid" type='submit' ng-click='Modal.confirm(reqConfirmForm.$valid)'>提交</button>
+
       <button class='btn btn-default' type='button' ng-click='Modal.cancel()'>取消</button>
+      <button class='btn btn-success' ng-disabled="reqConfirmForm.$invalid" type='submit' ng-click='Modal.confirm(reqConfirmForm.$valid)'>保存</button>
     </div>
     <div class="panel panel-default">
       <div class="panel-heading">需求信息</div>
