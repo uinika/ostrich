@@ -40,6 +40,12 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
       });
     }
     /** #Search for Data Quota Name */
+    $scope.ControllaDomande = function(){
+      console.log('test');
+    }
+    /** Controlla Domande */
+
+    /** Controlla Domande */
 
     /** SysDict */
     var SHARE_FREQUENCY = 1,
