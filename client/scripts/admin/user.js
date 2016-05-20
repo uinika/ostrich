@@ -57,7 +57,7 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
     $scope.addUserModal = function() {
       $scope.Modal = {}; // Clean scope of modal
       $scope.sysUser = {}; // Clean scope of modal
-
+      $scope.password = "";
       var prom = Component.popModal($scope, '添加', 'add-user-modal');
       prom.opened.then(function() {
         $scope.Modal.validUser = function (user){
@@ -101,9 +101,11 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
     }
     $scope.updateUser = function(user) {
       $scope.sysUser = user;
+
+      var u = $scope.sysUser;
       $scope.password = $scope.sysUser.password;
       Component.popModal($scope, '修改', 'add-user-modal').result.then(function() {
-        Http.updateUser($scope.sysUser).then(function(result) {
+        Http.updateUser(u).then(function(result) {
           _httpParams.limit = 10;
           _httpParams.skip = 0;
           $scope.Paging.currentPage = 0 ;
@@ -139,6 +141,8 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
     }
     $scope.Password = function(user) {
       var id = user.id ;
+      $scope.password = user.password;
+      $scope.password = null;
       var prom = Component.popModal($scope, '密码', 'update-password-modal');
       prom.opened.then(function() {
         $scope.Modal.validPword1 = function (password_pre){
@@ -146,21 +150,25 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
             "id": id,
             "password": password_pre
           }).then(function(result) {
-            if (200 != result.data.head.status) {
-              alert('密码不对,请重新输入');
-              $scope.password_pre ="";
+            if (result.data.head.total == 0) {
+              alert('原密码不对,请重新输入');
             }
           });
         }
-        $scope.Modal.validPword = function (password){
-             if($scope.password_now!=password){
+        $scope.Modal.validPword = function (password,p2){
+             if(p2!=password){
                alert("两次输入的密码不匹配,请重新输入");
-               $scope.password ="";
+             }else{
+
              }
         }
       });
+
       prom.result.then(function() {
-        Http.UpdatePassword($scope.password_now).then(function(result) {
+        Http.UpdatePassword({
+          "id": id,
+          "password":$scope.Modal.password
+        }).then(function(result) {
           if (200 == result.data.head.status) {
             alert('修改成功');
           }

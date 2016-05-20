@@ -121,7 +121,7 @@
 </script>
 <!-- update  password modal -->
 <script type='text/ng-template' id='update-password-modal.html'>
-  <form class="form-horizontal example-updatePassword-modal" name='passwordForm'>
+  <form class="form-horizontal example-add-modal" name='passwordForm'>
 
     <div class='modal-header'>
       <i class="fa fa-server"></i>
@@ -141,18 +141,18 @@
         <label for="" class="col-sm-2 control-label">新密码
           <span class='require-sign'>*</span>:</label>
         <div class="col-sm-10">
-          <input type="password" class="form-control"  ng-copy="false"  ng-model='password_now' required>
+          <input type="password" class="form-control"  ng-copy="false"  ng-model='p2' required>
         </div>
       </div>
       <div class="form-group">
         <label for="" class="col-sm-2 control-label">密码确认
           <span class='require-sign'>*</span>:</label>
         <div class="col-sm-10">
-          <input type="password" class="form-control"  ng-paste="false" ng-model='password' required ng-blur="Modal.validPword(password)">
+          <input type="password" class="form-control"  ng-paste="false" ng-model='Modal.password' required ng-blur="Modal.validPword(Modal.password,p2)">
         </div>
       </div>
     <div class='modal-footer'>
-      <button class='btn btn-primary' ng-disabled="userAddForm.$invalid" type='submit' ng-click='Modal.confirm(passwordForm.$valid)'>提交</button>
+      <button class='btn btn-primary' ng-disabled="passwordForm.$invalid" type='submit' ng-click='Modal.confirm(passwordForm.$valid)'>提交</button>
       <button class='btn btn-default' type='button' ng-click='Modal.cancel()'>取消</button>
     </div>
     </div>
