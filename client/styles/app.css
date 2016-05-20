@@ -394,6 +394,18 @@ input.ng-invalid {
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+#department-inventory .indicator-list table tr td pre {
+  overflow: hidden;
+  border: none;
+  border-radius: 0;
+  word-break: initial;
+  word-wrap: initial;
+  color: inherit;
+  background: none;
+  padding: 0;
+  font-size: inherit;
+  margin: 0;
+}
 #department-inventory .indicator-list table tr span i {
   font-size: 18px;
 }
@@ -459,18 +471,30 @@ input.ng-invalid {
   margin-bottom: 80px;
 }
 #department-inventory-detail .nav-tabs {
-  bottom: 0 ;
+  bottom: 0;
 }
 #department-inventory-detail .tab-content {
   border: 1px solid #DDD;
   border-top: none;
-  padding: 20px 15px 10px 15px;
+  padding: 20px 15px 10px;
 }
 #department-inventory-detail .tab-content .data-title {
   text-align: center;
 }
 #department-inventory-detail .tab-content .tab-pane > .row {
   padding: 4px 0;
+}
+#department-inventory-detail .tab-content .tab-pane > .row pre {
+  overflow: hidden;
+  border: none;
+  border-radius: 0;
+  word-break: initial;
+  word-wrap: initial;
+  color: inherit;
+  background: none;
+  padding: 0;
+  font-size: inherit;
+  margin: 0;
 }
 #department-inventory-detail .tab-content #invntDetail .text-right {
   text-align: right;

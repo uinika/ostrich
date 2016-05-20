@@ -18,7 +18,7 @@
             <label for="" class="col-sm-2 control-label">
               <span class='require-sign'>*</span>指标名称:</label>
             <div class="col-sm-10">
-              <input type="text" name='quota_name' required class="form-control" ng-model='DataQuota.quota_name'>
+              <input type="text" ng-trim="false" name='quota_name' required class="form-control" ng-model='DataQuota.quota_name'>
               <p ng-show="DataQuotaForm.quota_name.$error.required && submitted" class="help-block">请输入指标名称</p>
               <span class='help-info'>部门统计报表制度中对指标名称的全称</span>
             </div>

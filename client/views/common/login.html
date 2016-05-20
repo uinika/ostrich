@@ -16,7 +16,7 @@
             <span class="input-group-addon">
               <span class="glyphicon glyphicon-info-sign"></span>
             </span>
-            <input ng-model='Login.password' type="text" name='password' class="form-control" placeholder="密码" required />
+            <input ng-model='Login.password' type="password" name='password' class="form-control" placeholder="密码" required />
             <p ng-show="LoginForm.password.$error.required && loginSubmitted" class="help-block">请输入密码</p>
             <p ng-show="loginError && !LoginForm.password.$error.required" class="help-block">用户名或密码错误。</p>
           </div>

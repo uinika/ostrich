@@ -31,6 +31,8 @@ DInventory.controller('Department.Inventory.Controller.Main', ['$cookies', '$sco
       _httpParams.dep_name = DEP_NAME;
       $scope.promise = Http.getDepartQuotaList(_httpParams).then(function(result) {
         console.log(result);
+        var temp = _.replace('  Hi', ' ', '0');
+        console.log(temp);
         $scope.depQuotaList = result.data.body[0].results;
         $scope.Paging.totalItems = result.data.body[0].count;
       });
@@ -161,7 +163,7 @@ DInventory.controller('Department.Inventory.Controller.detail', ['$scope', '$q',
   }
 ])
 
-DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$scope', '$state', '$q', '$uibModal', 'Department.Inventory.Service.Component', 'Department.Inventory.Service.Http', 
+DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$scope', '$state', '$q', '$uibModal', 'Department.Inventory.Service.Component', 'Department.Inventory.Service.Http',
   function($cookies, $scope, $state, $q, $uibModal, Component, Http) {
     var DATA_STORE_TYPE = 4;
     var DATA_SHOW_FORMAT = 6;
