@@ -69,6 +69,8 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$cookies', 
           dataRelationConfig.push(req_sys_dict);
         });
         var res_dep_id = _.map($scope.reqParent.outputDeptList, 'id');
+
+        console.log(res_dep_id);
          $scope.Modal.DepRequirment.response_dep_id = res_dep_id[0];
         _httpPublishParams.dataRequiement = $scope.Modal.DepRequirment;
         _httpPublishParams.dataRelationConfig = dataRelationConfig;
@@ -306,11 +308,16 @@ DepartmentReq.service('Department.Requirement.Service.Component', ['$uibModal',
         animation: true,
         backdrop : 'static',
         templateUrl: templateUrl + '.html',
-        scope: scope
+        scope: scope,
+        size: 'lg'
       });
       scope.Modal.confirm = function(isValid) {
-        if (isValid) {
+        console.log(scope.reqParent.outputDeptList.length);
+        if (isValid && scope.reqParent.outputDeptList.length >0) {
           modalInstance.close(scope.Modal);
+        }
+        else{
+          scope.error = true;
         }
 
       };
