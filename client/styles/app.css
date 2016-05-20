@@ -243,6 +243,12 @@ input.ng-invalid {
 #department-main .department-main .focus-bureau-list {
   height: 200px;
 }
+#department-main .department-main .focus-bureau-list .add-focus-option {
+  padding-bottom: 15px;
+}
+#department-main .department-main .focus-bureau-list .add-focus-option .dep-select {
+  display: inline;
+}
 #department-main .department-main .focus-bureau-list .bureau-item .caption {
   height: 16px;
   font-size: 12px;
