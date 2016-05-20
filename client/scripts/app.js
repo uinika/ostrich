@@ -97,6 +97,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
       .state('main.department', {
         url: '/department',
         cache:'false',
+        reload: true,
         templateUrl: 'views/department/main.html',
         controller: 'Department.Controller.Main'
       })
