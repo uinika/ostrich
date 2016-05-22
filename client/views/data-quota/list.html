@@ -16,24 +16,24 @@
       <nav>
         <ul class="pager">
           <li>共享级别</li>
-          <li><a>全部</a></li>
-          <li ui-sref-active="active" ng-repeat='shareLevel in shareLevelList'><a>{{shareLevel.dict_name}}</a></li>
+          <li ng-click='ShareLevelAll()'><a>全部</a></li>
+          <li ng-repeat='shareLevel in ShareLevels' ng-click='ShareLevelFilter(shareLevel.id)'><a>{{shareLevel.dict_name}}</a></li>
         </ul>
       </nav>
 
       <nav>
         <ul class="pager">
           <li>共享频率</li>
-          <li><a>全部</a></li>
-          <li ng-repeat='shareFreq in shareFrequencyList'><a>{{shareFreq.dict_name}}</a></li>
+          <li ng-click='ShareFrequencyAll()'><a>全部</a></li>
+          <li ng-repeat='shareFrequency in ShareFrequencys' ng-click='ShareFrequencyFilter(shareFrequency.id)'><a>{{shareFrequency.dict_name}}</a></li>
         </ul>
       </nav>
 
       <nav>
         <ul class="pager">
           <li>空间范围</li>
-          <li><a>全部</a></li>
-          <li ng-repeat='DataLevel in dataLevelList'><a >{{DataLevel.dict_name}}</a></li>
+          <li ng-click='DataLevelAll()'><a>全部</a></li>
+          <li ng-repeat='dataLevel in DataLevels' ng-click='DataLevelFilter(dataLevel.id)'><a >{{dataLevel.dict_name}}</a></li>
         </ul>
       </nav>
 

@@ -4,57 +4,41 @@ var DataQuotaList = angular.module('DataQuotaList', ['ui.router']);
 /** Main Controller */
 DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', 'DataQuotaList.Service.Http', '$stateParams',
   function($scope, $state, Http, StateParams) {
-    /** Handle Data Quota Table */
-    // Paging
+
     var httpParams = {};
     $scope.currentPage = 1;
-    if(StateParams.dep_name===''){
-      // Init Data Quota Tablembwr
-      httpParams = {limit:20, skip: 0} ;
-    }
-    else{
-      // Fetch Data Quota By Department ID
-      httpParams = _.assign(StateParams, {limit:20, skip: 0});
-    }
-    Http.getDataQuota(httpParams).then(function(result) {
-      $scope.DataQuotas = result.data.body[0].results;
-      $scope.DataQuotasTotal = result.data.body[0].count;
-      $scope.totalItems = result.data.body[0].count;
-    });
-    $scope.pageChanged = function() {
-      var paginParams = _.assign(httpParams, {limit:20, skip: ($scope.currentPage-1) * 20});
+    // Common
+    function getDataQuotaList(_httpParams){
       Http.getDataQuota(httpParams).then(function(result) {
         $scope.DataQuotas = result.data.body[0].results;
         $scope.DataQuotasTotal = result.data.body[0].count;
         $scope.totalItems = result.data.body[0].count;
       });
+    }
+    // Init talbe with pagin
+    getDataQuotaList({limit:20, skip: 0});
+    // Paging
+    (StateParams.dep_name==='') ? (httpParams = {limit:20, skip: 0}) : (httpParams = _.assign(StateParams, {limit:20, skip: 0}));
+    $scope.pageChanged = function() {
+      _.assign(httpParams, {limit:20, skip: ($scope.currentPage-1) * 20});
+      getDataQuotaList(httpParams);
     };
-    /** #Handle Data Quota Table */
 
-    /** Search for Data Quota Name */
+    // Search for Data Quota Name
     $scope.Retrieval = function(){
       var httpParam = _.assign(StateParams, {quotaname: $scope.TargetDataQuotaName});
-      Http.getDataQuota(httpParam).then(function(result) {
-        $scope.DataQuotas = result.data.body[0].results;
-        $scope.DataQuotasTotal = result.data.body[0].count;
-        $scope.totalItems = result.data.body[0].count;
-      });
-    }
-    /** #Search for Data Quota Name */
+      getDataQuotaList(httpParams);
+    };
 
-    /** Data quota apply info */
-    $scope.DataQuotaApplyInfo = function(data_quota_id){
+    // Data quota apply info
+    $scope.DataQuotaApplyInfo = function(data_quota_id) {
       var httpParam = {data_quota_id: data_quota_id};
       Http.getDataQuotaApplyInfo(httpParam).then(function() {
         alert('申请查看成功');
-        var paginParams = _.assign(httpParams, {limit:20, skip: ($scope.currentPage-1) * 20});
-        Http.getDataQuota(paginParams).then(function(result) {
-          $scope.DataQuotas = result.data.body[0].results;
-          $scope.DataQuotasTotal = result.data.body[0].count;
-          $scope.totalItems = result.data.body[0].count;
-        });
+        _.assign(httpParams, {limit:20, skip: ($scope.currentPage-1) * 20});
+        getDataQuotaList(httpParams);
       });
-    }
+    };
     /** #Data quota apply info */
 
     /** SysDict */
@@ -62,21 +46,42 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
         DATA_LEVEL = 2,
         SHARE_LEVEL = 3;
     Http.getSystemDictByCatagory({
-      'dict_category': SHARE_FREQUENCY
-    }).then(function(result) {
-      $scope.shareFrequencyList = result.data.body;
-    });
-    Http.getSystemDictByCatagory({
       'dict_category': SHARE_LEVEL
     }).then(function(result) {
-      $scope.shareLevelList = result.data.body;
+      $scope.ShareLevels = result.data.body;
+    });
+    Http.getSystemDictByCatagory({
+      'dict_category': SHARE_FREQUENCY
+    }).then(function(result) {
+      $scope.ShareFrequencys = result.data.body;
     });
     Http.getSystemDictByCatagory({
       'dict_category': DATA_LEVEL
     }).then(function(result) {
-      $scope.dataLevelList = result.data.body;
+      $scope.DataLevels = result.data.body;
     });
     /** #SysDict */
+
+    /** Filter */
+    $scope.ShareLevelFilter = function(id){
+      console.log(id);
+    };
+    $scope.ShareFrequencyFilter = function(id){
+      console.log(id);
+    };
+    $scope.DataLevelFilter = function(id){
+      console.log(id);
+    };
+    $scope.ShareLevelAll = function(){
+      console.log('all');
+    };
+    $scope.ShareFrequencyAll = function(){
+      console.log('all');
+    };
+    $scope.DataLevelAll = function(){
+      console.log('all');
+    };
+    /** #Filter */
 
   }
 ]);
