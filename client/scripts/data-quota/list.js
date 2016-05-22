@@ -33,6 +33,7 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
     };
     // Data quota apply info
     $scope.DataQuotaApplyInfo = function(data_quota_id) {
+      var httpParams = {};
       var httpParam = { data_quota_id: data_quota_id };
       Http.getDataQuotaApplyInfo(httpParam).then(function() {
         alert('申请查看成功');
@@ -64,9 +65,6 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
     /** #SysDict */
 
     /** Filter */
-    function getDataQuotaList(){
-      
-    }
     $scope.ShareLevelFilter = function(id){
       initDataQuotaList();
     };
