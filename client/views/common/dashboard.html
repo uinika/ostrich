@@ -35,14 +35,14 @@
         </div>
         <div class='quota_number panel-body'>
           <wiserv-data-quota-overview-chart/>
-          <ul class="list-group">
+          <ul class="list-group ">
             <li class="list-group-item">
-              指标总数：{{SummaryDataQuota.data_quota_number}}个
-              <span class='pull-right text-muted'>(本月新增{{SummaryDataQuota.data_quota_number_inc}}个)</span>
+              指标总数：<span class="list-number-style">{{SummaryDataQuota.data_quota_number}}</span>个
+              <span class='pull-right text-muted'>(本月新增<span class="list-number-style">{{SummaryDataQuota.data_quota_number_inc}}</span>个)</span>
             </li>
             <li class="list-group-item">
-              提供部门：{{SummaryDataQuota.department_number}}个
-              <span class='pull-right text-muted'>(本月新增{{SummaryDataQuota.department_number_inc}}个)</span>
+              提供部门：<span class="list-number-style">{{SummaryDataQuota.department_number}}</span>个
+              <span class='pull-right text-muted'>(本月新增<span class="list-number-style">{{SummaryDataQuota.department_number_inc}}</span>个)</span>
             </li>
           </ul>
         </div>
@@ -56,13 +56,13 @@
         <div class='panel-body'>
           <wiserv-requirement-overview-chart/>
           <ul class="list-group">
-            <li class="list-group-item">
-              指标总数：{{SummaryRequirement.requiement_number}}个
-              <span class='pull-right text-muted'>(本月新增{{SummaryRequirement.requiement_number_inc}}个)</span>
+            <li class="list-group-item ">
+              指标总数：<span class="list-number-style">{{SummaryRequirement.requiement_number}}</span>个
+              <span class='pull-right text-muted'>(本月新增<span class="list-number-style">{{SummaryRequirement.requiement_number_inc}}</span>个)</span>
             </li>
             <li class="list-group-item">
-              提供部门：{{SummaryRequirement.department_number}}个
-              <span class='pull-right text-muted'>(本月新增{{SummaryRequirement.department_number_inc}}个)</span>
+              提供部门：<span class="list-number-style">{{SummaryRequirement.department_number}}</span>个
+              <span class='pull-right text-muted'>(本月新增<span class="list-number-style">{{SummaryRequirement.department_number_inc}}</span>个)</span>
             </li>
           </ul>
         </div>

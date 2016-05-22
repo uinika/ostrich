@@ -155,6 +155,11 @@ input.ng-invalid {
 #dashboard .first-section .panel {
   height: 310px;
 }
+#dashboard .first-section .list-number-style {
+  font-size: 17px;
+  font-weight: bold;
+  padding: 0 6px;
+}
 #dashboard .first-section .bureau-filter {
   width: 95%;
   margin-left: 15px;
