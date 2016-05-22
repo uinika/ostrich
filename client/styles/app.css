@@ -750,7 +750,7 @@ input.ng-invalid {
 #department-requirement .indicator-list table tr span i.fa-times-circle-o {
   color: #d9534f;
 }
-#department-requirement .publish-req-modal .help-info {
+.publish-req-modal .help-info {
   font-size: 12px;
   color: #777;
 }

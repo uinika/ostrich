@@ -52,7 +52,8 @@ Department.controller('Department.Controller.Main', ['$cookies', '$scope', '$q',
     getDeptRequirementConfirmList();
 
     function getDeptRequirementConfirmList() {
-      //_httpConfirmParams.response_dep_id = DEP_ID;
+      _httpConfirmParams.response_dep_id = DEP_ID;
+      console.log(_httpConfirmParams);
       Http.getDepartmentRequirementList(_httpConfirmParams).then(function(result) {
         $scope.requireToConfirmList = result.data.body[0].results;
         $scope.reqTotal = result.data.body[0].count;

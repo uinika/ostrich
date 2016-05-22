@@ -38,7 +38,7 @@
         <div class='department-main'>
           <div class='row'>
             <div class='col-lg-3 col-md-6 left'>
-              <div class='panel panel-primary'>
+              <div class='panel panel-primary' ui-sref='main.department.inventory' style='cursor:pointer'>
                 <div class='panel-heading'>
                   <div class='row'>
                     <div class='col-xs-3'>
@@ -57,7 +57,7 @@
             </div>
 
             <div class='col-lg-3 col-md-6 right'>
-              <div class='panel panel-green'>
+              <div class='panel panel-green' ui-sref='main.department.share' style='cursor:pointer'>
                 <div class='panel-heading'>
                   <div class='row'>
                     <div class='col-xs-3'>
@@ -76,7 +76,7 @@
             </div>
 
             <div class='col-lg-3 col-md-6 right'>
-              <div class='panel panel-yellow'>
+              <div class='panel panel-yellow' ui-sref='main.department.requirementConfirm' style='cursor:pointer'>
                 <div class='panel-heading'>
                   <div class='row'>
                     <div class='col-xs-3'>
@@ -95,7 +95,7 @@
             </div>
 
             <div class='col-lg-3 col-md-6 right'>
-              <div class='panel panel-red'>
+              <div class='panel panel-red' ui-sref='main.department.audit' style='cursor:pointer'>
                 <div class='panel-heading'>
                   <div class='row'>
                     <div class='col-xs-3'>
@@ -186,7 +186,7 @@
                 <div class='panel-body' style='padding:15px 0'>
                   <div class='focus-bureau-list'>
                     <div class='col-md-12 add-focus-option'>
-                      <button title='添加关注部门' class="btn btn-lg btn-default" ng-click='depSelect.show = true'>
+                      <button title='添加关注部门' class="btn btn-default" ng-click='depSelect.show = true'>
                         <i class='fa fa-plus'></i>
                       </button>
                       <div class='dep-select' ng-show='depSelect.show'>
