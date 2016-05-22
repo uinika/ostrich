@@ -21,6 +21,13 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
       getDataQuotaList(httpParams);
     };
     initDataQuotaList();
+    // Get Data Quota List By Filter
+    function getDataQuotaListByFilter(params){
+      var httpParams = {};
+      (StateParams.dep_name==='') ? (httpParams = {limit:20, skip: 0}) : (httpParams = _.assign(StateParams, {limit:20, skip: 0}));
+      _.assign(httpParams, params);
+      getDataQuotaList(httpParams);
+    };
     // Paging
     $scope.pageChanged = function() {
       var httpParams = _.assign(StateParams, {limit:20, skip: ($scope.currentPage-1) * 20});
@@ -29,7 +36,7 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
     // Search for Data Quota Name
     $scope.Retrieval = function(){
       var httpParam = _.assign(StateParams, {quotaname: $scope.TargetDataQuotaName});
-      getDataQuotaList(httpParams);
+      getDataQuotaList(httpParam);
     };
     // Data quota apply info
     $scope.DataQuotaApplyInfo = function(data_quota_id) {
@@ -66,13 +73,13 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
 
     /** Filter */
     $scope.ShareLevelFilter = function(id){
-      initDataQuotaList();
+      getDataQuotaListByFilter({share_level: id});
     };
     $scope.ShareFrequencyFilter = function(id){
-      initDataQuotaList();
+      getDataQuotaListByFilter({share_frequency: id});
     };
     $scope.DataLevelFilter = function(id){
-      initDataQuotaList();
+      getDataQuotaListByFilter({sys_dict_id: id});
     };
     $scope.ShareLevelAll = function(){
       initDataQuotaList();
