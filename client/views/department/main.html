@@ -199,7 +199,7 @@
                     </div>
                     <div ng-repeat='bureau in followDeptList' class='bureau-item col-md-1'>
                       <a ui-sref='main.inventory.detail({departmentID: bureau.dep_id})' class='thumbnail'>
-                        <img ng-src='../styles/images/bureau/{{::bureau.dep_en_name}}' title='{{::bureau.dep_name}}'>
+                        <img ng-src='styles/images/bureau/{{::bureau.dep_en_name}}' title='{{::bureau.dep_name}}'>
                       </a>
                       <div class="caption">
                         {{bureau.dep_short_name}}

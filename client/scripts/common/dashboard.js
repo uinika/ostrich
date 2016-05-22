@@ -146,10 +146,13 @@ Dashboard.directive('wiservDataQuotaOverviewChart', [
                 name: '清单提供部门',
                 type: 'pie',
                 selectedMode: 'single',
-                radius: [0, '30%'],
+                radius: [0, '60%'],
                 label: {
                   normal: {
-                    position: 'inner'
+                    position: 'inner',
+                    textStyle :{
+                        color:'#FFAD38'
+                      }
                   }
                 },
                 labelLine: {
@@ -168,7 +171,7 @@ Dashboard.directive('wiservDataQuotaOverviewChart', [
               }, {
                 name: '清单总数',
                 type: 'pie',
-                radius: ['40%', '55%'],
+                radius: ['70%', '90%'],
                 data: [{
                   value: summary.data_quota_number,
                   name: '清单总数'
@@ -206,10 +209,13 @@ Dashboard.directive('wiservRequirementOverviewChart', [
                 name: '需求涉及部门',
                 type: 'pie',
                 selectedMode: 'single',
-                radius: [0, '30%'],
+                radius: [0, '60%'],
                 label: {
                   normal: {
-                    position: 'inner'
+                    position: 'inner',
+                    textStyle :{
+                        color:'#FFAD38'
+                      }
                   }
                 },
                 labelLine: {
@@ -228,7 +234,7 @@ Dashboard.directive('wiservRequirementOverviewChart', [
               }, {
                 name: '需求总数',
                 type: 'pie',
-                radius: ['40%', '55%'],
+                radius: ['70%', '90%'],
                 data: [{
                   value: summary.requiement_number,
                   name: '需求总数'
