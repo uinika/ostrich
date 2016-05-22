@@ -163,10 +163,20 @@ DepartmentReq.controller('Department.Requirement.Controller.confirm', ['$cookies
       // get requirement detail
       $scope.Modal.ReqDetail = item;
       $scope.Modal.ReqResponse = {};
-      $scope.Modal.ReqResponse.data_quota_id = $scope.depQuotaReqList[0].id;
+      console.log($scope.depQuotaReqList.length);
+      if($scope.depQuotaReqList.length == 0) {
+        $scope.Modal.ReqResponse.data_quota_id = '';
+        $scope.errorMsg = '本部门还未添加任何指标';
+        $scope.dataQuotaIdNull = true;
+      }
+      else{
+        $scope.Modal.ReqResponse.data_quota_id = $scope.depQuotaReqList[0].id;
+      }
+
       Component.popModalConfirm($scope, '', 'confirm-req-modal').result.then(function() {
         console.log($scope.Modal.ReqResponse);
         $scope.Modal.ReqResponse.id = item.id;
+
         Http.updateRequirement($scope.Modal.ReqResponse).then(function(result) {
           if (200 == result.data.head.status) {
             if ($scope.Modal.ReqResponse.status == 1) {

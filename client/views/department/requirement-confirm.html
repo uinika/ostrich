@@ -123,7 +123,7 @@
           <select class='form-control' ng-model='Modal.ReqResponse.data_quota_id'>
             <option ng-repeat ='depQuota in depQuotaReqList'  value={{depQuota.id}}>{{depQuota.quota_name}}</option>
           </select>
-
+          <p class='help-block'>{{errorMsg}}</p>
           <span class='help-info'>根据需求选择对应的指标信息</span>
         </div>
         <!-- <div class='col-sm-2'>
@@ -144,7 +144,7 @@
     <div class='modal-footer'>
 
       <button class='btn btn-default' type='button' ng-click='Modal.cancel()'>取消</button>
-      <button class='btn btn-success' ng-disabled="reqConfirmForm.$invalid" type='submit' ng-click='Modal.confirm(reqConfirmForm.$valid)'>保存</button>
+      <button class='btn btn-success' ng-disabled="reqConfirmForm.$invalid || (dataQuotaIdNull && dataQuotaShow)" type='submit' ng-click='Modal.confirm(reqConfirmForm.$valid)'>保存</button>
     </div>
     <div class="panel panel-default">
       <div class="panel-heading">需求信息</div>
