@@ -263,9 +263,9 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
             }
             else{
               alert('保存失败');
-              $state.go("main.department.inventory", {}, {
-                reload: true
-              });
+              // $state.go("main.department.inventory", {}, {
+              //   reload: true
+              // });
             }
           })
           // .then(function() {
@@ -478,10 +478,13 @@ DInventory.service('Department.Inventory.Service.Component', ['$uibModal', '$sta
       };
       scope.Modal.cancel = function() {
         modalInstance.dismiss();
-        alert('保存成功！');
-        $state.go("main.department.inventory", {}, {
-          reload: true
-        });
+        setTimeout(function(){
+          alert('保存成功！');
+          $state.go("main.department.inventory", {}, {
+            reload: true
+          });
+        },600)
+
       };
       return modalInstance;
     };
