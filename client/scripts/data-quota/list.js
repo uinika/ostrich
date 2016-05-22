@@ -9,12 +9,12 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
     var httpParams = {};
     $scope.currentPage = 1;
     if(StateParams.dep_name===''){
-      // Init Data Quota Table
-      httpParams = {limit:20, skip: 1} ;
+      // Init Data Quota Tablembwr
+      httpParams = {limit:20, skip: 0} ;
     }
     else{
       // Fetch Data Quota By Department ID
-      httpParams = _.assign(StateParams, {limit:20, skip: 1});
+      httpParams = _.assign(StateParams, {limit:20, skip: 0});
     }
     Http.getDataQuota(httpParams).then(function(result) {
       $scope.DataQuotas = result.data.body[0].results;

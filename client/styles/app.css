@@ -1092,3 +1092,6 @@ input.ng-invalid {
 #data-quota-list .table-responsive {
   height: 45rem;
 }
+#data-quota-list .pager .active {
+  background: #eee;
+}
