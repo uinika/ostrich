@@ -33,10 +33,11 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
 
     /** Search for Data Quota Name */
     $scope.Retrieval = function(){
-      var httpParam = _.assign(Params, {quotaname: $scope.TargetDataQuotaName});
+      var httpParam = _.assign(StateParams, {quotaname: $scope.TargetDataQuotaName});
       Http.getDataQuota(httpParam).then(function(result) {
-        $scope.DataQuotas = result.data.body;
-        $scope.DataQuotasTotal = result.data.head.total;
+        $scope.DataQuotas = result.data.body[0].results;
+        $scope.DataQuotasTotal = result.data.body[0].count;
+        $scope.totalItems = result.data.body[0].count;
       });
     }
     /** #Search for Data Quota Name */
