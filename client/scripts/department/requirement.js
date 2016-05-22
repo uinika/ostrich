@@ -164,7 +164,7 @@ DepartmentReq.controller('Department.Requirement.Controller.confirm', ['$cookies
       $scope.Modal.ReqDetail = item;
       $scope.Modal.ReqResponse = {};
       $scope.Modal.ReqResponse.data_quota_id = $scope.depQuotaReqList[0].id;
-      Component.popModal($scope, '', 'confirm-req-modal').result.then(function() {
+      Component.popModalConfirm($scope, '', 'confirm-req-modal').result.then(function() {
         console.log($scope.Modal.ReqResponse);
         $scope.Modal.ReqResponse.id = item.id;
         Http.updateRequirement($scope.Modal.ReqResponse).then(function(result) {
@@ -312,6 +312,30 @@ DepartmentReq.service('Department.Requirement.Service.Component', ['$uibModal',
         scope.Alerts.splice(index, 1);
       };
     };
+    // prompt Modal for confirm
+    function popModalConfirm(scope, type, templateUrl) {
+      scope.Modal.type = type;
+      var modalInstanceConfirm = $uibModal.open({
+        animation: true,
+        backdrop: 'static',
+        templateUrl: templateUrl + '.html',
+        scope: scope,
+        size: 'lg'
+      });
+      scope.Modal.confirm = function(isValid) {
+        console.log(scope);
+        if (isValid) {
+          modalInstanceConfirm.close(scope.Modal);
+        } else {
+          return;
+        }
+
+      };
+      scope.Modal.cancel = function() {
+        modalInstance.dismiss();
+      };
+      return modalInstanceConfirm;
+    };
     // prompt Modal
     function popModal(scope, type, templateUrl) {
       scope.Modal.type = type;
@@ -323,7 +347,7 @@ DepartmentReq.service('Department.Requirement.Service.Component', ['$uibModal',
         size: 'lg'
       });
       scope.Modal.confirm = function(isValid) {
-        console.log(scope.reqParent.outputDeptList.length);
+        console.log(scope);
         if (isValid && scope.reqParent.outputDeptList.length > 0) {
           modalInstance.close(scope.Modal);
         } else {
@@ -339,7 +363,8 @@ DepartmentReq.service('Department.Requirement.Service.Component', ['$uibModal',
 
     return {
       popAlert: popAlert,
-      popModal: popModal
+      popModal: popModal,
+      popModalConfirm: popModalConfirm
     }
   }
 ])
