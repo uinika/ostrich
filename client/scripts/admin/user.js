@@ -61,23 +61,33 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
       var prom = Component.popModal($scope, '添加', 'add-user-modal');
       prom.opened.then(function() {
         $scope.Modal.validUser = function (user){
+          $scope.validUser = false;
           Http.getUserList({
             "dep_id":dep_id
           }).then(function(result) {
              var users = result.data.body;
              for (var i = 0; i < users.length; i++) {
                if(users[i].username === user){
-                 alert("用户名已存在,请重新输入");
+                 $scope.validUser = true;
                  $scope.sysUser.username ="";
                }
              }
           });
         }
         $scope.Modal.validPword = function (password){
-             if($scope.sysUser.password!=password){
-               alert("密码不对,请重新输入");
-               $scope.password ="";
-             }
+          $scope.validPword = false;
+          if($scope.sysUser.password!=password){
+            $scope.validPword = true;
+            $scope.password ="";
+          }
+        }
+        $scope.Modal.sub = function(valid){
+          $scope.submitted = false;
+          if (valid) {
+
+          }else{
+            $scope.submitted = true ;
+          }
         }
       });
       prom.result.then(function() {
@@ -86,7 +96,7 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
             alert('添加成功');
           }
           else{
-            alert('添加失败');
+            alert('保存数据库失败');
           }
           _httpParams.limit = 10;
           _httpParams.skip = 0;

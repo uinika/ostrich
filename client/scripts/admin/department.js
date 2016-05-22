@@ -53,7 +53,7 @@ AdminDepartment.controller('Admin.Department.Controller.Main', ['$rootScope', '$
     $scope.addDepartmentModal = function() {
       $scope.Modal = {}; // Clean scope of modal
       $scope.department = {}; // Clean scope of modal
-
+      $scope.department.parent_id = 0;
       var promise = Component.popModal($scope, '添加', 'add-department-modal');
       promise.opened.then(function() {
         $scope.Modal.validDepName = function (depName){
@@ -66,6 +66,7 @@ AdminDepartment.controller('Admin.Department.Controller.Main', ['$rootScope', '$
                }
              }
           });
+
         }
 
       });
