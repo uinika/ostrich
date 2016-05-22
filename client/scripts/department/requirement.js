@@ -332,7 +332,7 @@ DepartmentReq.service('Department.Requirement.Service.Component', ['$uibModal',
 
       };
       scope.Modal.cancel = function() {
-        modalInstance.dismiss();
+        modalInstanceConfirm.dismiss();
       };
       return modalInstanceConfirm;
     };
