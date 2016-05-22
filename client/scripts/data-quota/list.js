@@ -4,35 +4,44 @@ var DataQuotaList = angular.module('DataQuotaList', ['ui.router']);
 /** Main Controller */
 DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', 'DataQuotaList.Service.Http', '$stateParams',
   function($scope, $state, Http, StateParams) {
-
-    var httpParams = {};
+    // Params for pagin
     $scope.currentPage = 1;
     // Common
     function getDataQuotaList(_httpParams){
-      Http.getDataQuota(httpParams).then(function(result) {
+      Http.getDataQuota(_httpParams).then(function(result) {
         $scope.DataQuotas = result.data.body[0].results;
         $scope.DataQuotasTotal = result.data.body[0].count;
         $scope.totalItems = result.data.body[0].count;
       });
-    }
+    };
     // Init talbe with pagin
-    getDataQuotaList({limit:20, skip: 0});
-    // Paging
-    (StateParams.dep_name==='') ? (httpParams = {limit:20, skip: 0}) : (httpParams = _.assign(StateParams, {limit:20, skip: 0}));
-    $scope.pageChanged = function() {
-      _.assign(httpParams, {limit:20, skip: ($scope.currentPage-1) * 20});
+    function initDataQuotaList(){
+      var httpParams = {};
+      (StateParams.dep_name==='') ? (httpParams = {limit:20, skip: 0}) : (httpParams = _.assign(StateParams, {limit:20, skip: 0}));
       getDataQuotaList(httpParams);
     };
-
+    initDataQuotaList();
+    // Get Data Quota List By Filter
+    function getDataQuotaListByFilter(params){
+      var httpParams = {};
+      (StateParams.dep_name==='') ? (httpParams = {limit:20, skip: 0}) : (httpParams = _.assign(StateParams, {limit:20, skip: 0}));
+      _.assign(httpParams, params);
+      getDataQuotaList(httpParams);
+    };
+    // Paging
+    $scope.pageChanged = function() {
+      var httpParams = _.assign(StateParams, {limit:20, skip: ($scope.currentPage-1) * 20});
+      getDataQuotaList(httpParams);
+    };
     // Search for Data Quota Name
     $scope.Retrieval = function(){
       var httpParam = _.assign(StateParams, {quotaname: $scope.TargetDataQuotaName});
-      getDataQuotaList(httpParams);
+      getDataQuotaList(httpParam);
     };
-
     // Data quota apply info
     $scope.DataQuotaApplyInfo = function(data_quota_id) {
-      var httpParam = {data_quota_id: data_quota_id};
+      var httpParams = {};
+      var httpParam = { data_quota_id: data_quota_id };
       Http.getDataQuotaApplyInfo(httpParam).then(function() {
         alert('申请查看成功');
         _.assign(httpParams, {limit:20, skip: ($scope.currentPage-1) * 20});
@@ -64,22 +73,22 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
 
     /** Filter */
     $scope.ShareLevelFilter = function(id){
-      console.log(id);
+      getDataQuotaListByFilter({share_level: id});
     };
     $scope.ShareFrequencyFilter = function(id){
-      console.log(id);
+      getDataQuotaListByFilter({share_frequency: id});
     };
     $scope.DataLevelFilter = function(id){
-      console.log(id);
+      getDataQuotaListByFilter({sys_dict_id: id});
     };
     $scope.ShareLevelAll = function(){
-      console.log('all');
+      initDataQuotaList();
     };
     $scope.ShareFrequencyAll = function(){
-      console.log('all');
+      initDataQuotaList();
     };
     $scope.DataLevelAll = function(){
-      console.log('all');
+      initDataQuotaList();
     };
     /** #Filter */
 
