@@ -1,4 +1,4 @@
-<div id='admin-department'>
+<div id='admin-user'>
   <div class="row">
 
   </div>
@@ -51,7 +51,7 @@
 
 <!-- Add user modal -->
 <script type='text/ng-template' id='add-user-modal.html'>
-  <form class="form-horizontal example-add-modal" name='userAddForm' ng-submit='Modal.sub(userAddForm.$valid)' novalidate>
+  <form class="form-horizontal example-add-modal" name='userAddForm' novalidate>
 
     <div class='modal-header'>
       <i class="fa fa-server"></i>
@@ -60,72 +60,71 @@
     </div>
     <div class='modal-body'>
       <div class="form-group has-feedback">
-        <label for="" class="col-sm-2 control-label">登录名
+        <label for="" class="col-sm-3 control-label">登录名
           <span class='require-sign'>*</span>:
         </label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" name='name' ng-model='sysUser.username' name='name' required ng-blur="Modal.validUser(sysUser.username)">
-          <p ng-show="userAddForm.name.$error.required && submitted" class="help-block">用户名不能为空或用户名格式不对</p>
-          <p ng-show="validUser" class="help-block">用户名已存在,请重新输入</p>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" name='name' ng-model='sysUser.username' name='name'placeholder={{placeholder.name}} required ng-blur="Modal.validUser(sysUser.username)">
           <span class="glyphicon glyphicon-ok form-control-feedback" ng-show='(!validUser)&&(userAddForm.name.$valid)'></span>
+          <span class="glyphicon glyphicon-remove form-control-feedback" ng-show='(validUser)||(userAddForm.name.$invalid)'></span>
         </div>
       </div>
       <div class="form-group has-feedback" ng-show='Modal.type=="添加"'>
-        <label for="" class="col-sm-2 control-label">密码
+        <label for="" class="col-sm-3 control-label">密码
           <span class='require-sign'>*</span>:</label>
-        <div class="col-sm-10">
-          <input type="password" class="form-control"  ng-copy="false" name='password' ng-model='sysUser.password' required>
-          <p ng-show="userAddForm.password.$error.required && submitted" class="help-block">密码不能为空或密码格式不对</p>
+        <div class="col-sm-8">
+          <input type="password" class="form-control"  ng-copy="false" name='password' placeholder={{placeholder.password}} ng-model='sysUser.password' required>
           <span class="glyphicon glyphicon-ok form-control-feedback" ng-show='(userAddForm.password.$valid)'></span>
+          <span class="glyphicon glyphicon-remove form-control-feedback" ng-show='(userAddForm.password.$invalid)'></span>
         </div>
       </div>
       <div class="form-group has-feedback" ng-show='Modal.type=="添加"'>
-        <label for="" class="col-sm-2 control-label">密码确认
+        <label for="" class="col-sm-3 control-label">确认密码
           <span class='require-sign'>*</span>:</label>
-        <div class="col-sm-10">
-          <input type="password" class="form-control"  ng-paste="false" name='password1' ng-model='password'  required ng-blur="Modal.validPword(password)">
-          <p ng-show="userAddForm.password1.$error.required && submitted" class="help-block">密码不能为空或密码格式不对</p>
-          <p ng-show="validPword" class="help-block">密码不对,请重新输入</p>
-          <span class="glyphicon glyphicon-ok form-control-feedback" ng-show='(userAddForm.password.$valid)'></span>
+        <div class="col-sm-8">
+          <input type="password" class="form-control"  ng-paste="false" name='password1' placeholder={{placeholder.password1}} ng-model='sysUser.password1'  required ng-blur="Modal.validPword()">
+          <span class="glyphicon glyphicon-ok form-control-feedback" ng-show='(userAddForm.password1.$valid)&&(!validPword)'></span>
+          <span class="glyphicon glyphicon-remove form-control-feedback" ng-show='(userAddForm.password1.$invalid)||(validPword)'></span>
         </div>
       </div>
       <div class="form-group ">
-        <label for="" class="col-sm-2 control-label">部门名称
+        <label for="" class="col-sm-3 control-label">部门名称
           <span class='require-sign'>*</span>:</label>
-        <div class="col-sm-10">
-          <select class="form-control" ng-model='sysUser.dep_id' required>
+        <div class="col-sm-8">
+          <select class="form-control" name='depId' ng-model='sysUser.dep_id' required>
             <option ng-repeat="dep in  deptList" value='{{dep.id}}'>{{dep.dep_name}}</option>
           </select>
         </div>
       </div>
       <div class="form-group has-feedback">
-        <label for="" class="col-sm-2 control-label">姓名
+        <label for="" class="col-sm-3 control-label">姓名
           <span class='require-sign'>*</span>:</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" name='personName'ng-model='sysUser.person_name' required>
-          <p ng-show="userAddForm.personName.$error.required && submitted" class="help-block">姓名不能为空或姓名格式不对</p>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" name='personName' placeholder={{placeholder.personName}} ng-model='sysUser.person_name' required>
+          <p ng-show="userAddForm.personName.$error.$pristine" class="help-block">姓名不能为空</p>
           <span class="glyphicon glyphicon-ok form-control-feedback" ng-show='(userAddForm.personName.$valid)'></span>
-        </div>
-        </div>
-      </div>
-      <div class="form-group has-feedback">
-        <label for="" class="col-sm-2 control-label">联系电话
-          <span class='require-sign'>*</span>:</label>
-        <div class="col-sm-10">
-          <input type="number" class="form-control" name='phone'ng-model='sysUser.phone' required>
-          <p ng-show="userAddForm.phone.$error.required && submitted" class="help-block">联系电话不能为空或联系电话格式不对</p>
-          <span class="glyphicon glyphicon-ok form-control-feedback" ng-show='(userAddForm.phone.$valid)'></span>
+          <span class="glyphicon glyphicon-remove form-control-feedback" ng-show='(userAddForm.personName.$invalid)'></span>
         </div>
       </div>
       <div class="form-group has-feedback">
-        <label for="" class="col-sm-2 control-label">邮箱
+        <label for="" class="col-sm-3 control-label">联系电话
           <span class='require-sign'>*</span>:</label>
-        <div class="col-sm-10">
-          <input type="email" class="form-control" name='email' ng-model='sysUser.email'required>
-          <p ng-show="userAddForm.email.$error.email && submited" class="help-block">邮箱格式不对</p>
-          <span class="glyphicon glyphicon-ok form-control-feedback" ng-show='(userAddForm.emai.$valid)'></span>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" name='phone'placeholder={{placeholder.phone}} ng-model='sysUser.phone' required  ng-blur="Modal.validPhone()">
+          <p ng-show="userAddForm.phone.$pattern" class="help-block">电话格式不对</p>
+          <span class="glyphicon glyphicon-ok form-control-feedback" ng-show='(userAddForm.phone.$valid)&&(!validPhone)'></span>
+          <span class="glyphicon glyphicon-remove form-control-feedback" ng-show='(validPhone)||(userAddForm.phone.$invalid)'></span>
         </div>
       </div>
+      <div class="form-group has-feedback">
+        <label for="" class="col-sm-3 control-label">邮箱
+          <span class='require-sign'>*</span>:</label>
+        <div class="col-sm-8">
+          <input type="email" class="form-control" name='email' placeholder={{placeholder.email}} ng-model='sysUser.email' required ng-blur="Modal.validEmail(userAddForm.email.$error.email)">
+          <span class="glyphicon glyphicon-ok form-control-feedback" ng-show='(userAddForm.email.$valid)&&(!validEmail)'></span>
+          <span class="glyphicon glyphicon-remove form-control-feedback" ng-show='(validEmail)||(userAddForm.email.$invalid)'></span>
+          </div>
+        </div>
     </div>
     <div class='modal-footer'>
       <button class='btn btn-primary' ng-disabled="userAddForm.$invalid" type='submit' ng-click='Modal.confirm(userAddForm.$valid)'>提交</button>
@@ -144,26 +143,32 @@
       <button type='button' class='close' data-dismiss='modal' ng-click='Modal.cancel()'>&times;</button>
     </div>
     <div class='modal-body'>
-      <div class="form-group">
-        <label for="" class="col-sm-2 control-label">原密码
-          <span class='require-sign'>*</span>:
-        </label>
-        <div class="col-sm-10">
-          <input type="password" class="form-control" ng-model='password_pre' required ng-blur="Modal.validPword1(password_pre)">
+      <div class="form-group has-feedback">
+        <label for="" class="col-sm-3 control-label">原密码
+          <span class='require-sign'>*</span>:</label>
+        <div class="col-sm-8">
+          <input type="password" class="form-control"  ng-copy="false" name='password_1' placeholder={{placeholder.password_1}} ng-model='Modal.password_pre' required ng-blur="Modal.validPword1(password_pre)">
+          <span class="glyphicon glyphicon-ok form-control-feedback" ng-show='(passwordForm.password_1.$valid) && (!password_1)'></span>
+          <span class="glyphicon glyphicon-remove form-control-feedback" ng-show='(passwordForm.password_1.$invalid)||password_1'></span>
         </div>
       </div>
-      <div class="form-group">
-        <label for="" class="col-sm-2 control-label">新密码
+      <div class="form-group has-feedback">
+        <label for="" class="col-sm-3 control-label">新密码
           <span class='require-sign'>*</span>:</label>
-        <div class="col-sm-10">
-          <input type="password" class="form-control"  ng-copy="false"  ng-model='p2' required>
+        <div class="col-sm-8">
+          <input type="password" class="form-control"  ng-copy="false" name='password_2' placeholder={{placeholder.password_2}} ng-model='Modal.p2' required>
+          <span class="glyphicon glyphicon-ok form-control-feedback" ng-show='(passwordForm.password_2.$valid)'></span>
+          <span class="glyphicon glyphicon-remove form-control-feedback" ng-show='(passwordForm.password_2.$invalid)'></span>
+
         </div>
       </div>
-      <div class="form-group">
-        <label for="" class="col-sm-2 control-label">密码确认
+      <div class="form-group has-feedback">
+        <label for="" class="col-sm-3 control-label">确认密码
           <span class='require-sign'>*</span>:</label>
-        <div class="col-sm-10">
-          <input type="password" class="form-control"  ng-paste="false" ng-model='Modal.password' required ng-blur="Modal.validPword(Modal.password,p2)">
+        <div class="col-sm-8">
+          <input type="password" class="form-control"  ng-paste="false" name='password_3' placeholder={{placeholder.password_3}} ng-model='Modal.password' required ng-blur="Modal.validPword()">
+          <span class="glyphicon glyphicon-ok form-control-feedback" ng-show='(passwordForm.password_3.$valid) && (!password_3)'></span>
+          <span class="glyphicon glyphicon-remove form-control-feedback" ng-show='(passwordForm.password_3.$invalid)||password_3'></span>
         </div>
       </div>
     <div class='modal-footer'>

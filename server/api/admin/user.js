@@ -40,6 +40,18 @@ Router.route('/sys_user/count')
     let datas = JsonLoader.sync(Config.path + 'admin/getUserTotal.json');
     response.json(datas);
 });
+Router.route('/sys_user/password')
+  .get(function(request, response) {
+    let head = {}, body = {};
+    let datas = JsonLoader.sync(Config.path + 'admin/getUserTotal.json');
+    response.json(datas);
+});
+Router.route('/sys_user/password')
+  .put(function(request, response) {
+    let head = {}, body = {};
+    let datas = JsonLoader.sync(Config.path + 'admin/getUserTotal.json');
+    response.json(datas);
+});
 
 Router.route('/sys_dep')
   .get(function(request, response) {

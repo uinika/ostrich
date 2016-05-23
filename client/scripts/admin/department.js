@@ -238,7 +238,7 @@ AdminDepartment.service('AdminDepartment.Service.Component', ['$uibModal','$stat
         backdrop : 'static',
         templateUrl: templateUrl + '.html',
         scope: scope,
-        size: 'lg'
+        size: 'md'
       });
       scope.Modal.confirm = function(isValid) {
         if (isValid) {

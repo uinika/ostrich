@@ -53,14 +53,21 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
       $scope.deptList = result.data.body;
     });
 
+    $scope.placeholder = {};
+    $scope.placeholder.name = "登录名不能为空";
+    $scope.placeholder.password = "密码不能为空";
+    $scope.placeholder.password1 = "确认密码不能为空";
+    $scope.placeholder.personName = "姓名不能为空";
+    $scope.placeholder.phone = "联系电话不能为空";
+    $scope.placeholder.email = "邮箱不能为空";
     // add user
     $scope.addUserModal = function() {
       $scope.Modal = {}; // Clean scope of modal
       $scope.sysUser = {}; // Clean scope of modal
-      $scope.password = "";
       var prom = Component.popModal($scope, '添加', 'add-user-modal');
       prom.opened.then(function() {
         $scope.Modal.validUser = function (user){
+          $scope.placeholder.name ="登录名不能为空";
           $scope.validUser = false;
           Http.getUserList({
             "dep_id":dep_id
@@ -69,26 +76,41 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
              for (var i = 0; i < users.length; i++) {
                if(users[i].username === user){
                  $scope.validUser = true;
+                 $scope.placeholder.name ="用户名已存在,请重新输入";
                  $scope.sysUser.username ="";
                }
              }
           });
         }
-        $scope.Modal.validPword = function (password){
+        $scope.Modal.validPword = function (){
+          $scope.placeholder.password1 ="密码确认不能为空";
           $scope.validPword = false;
-          if($scope.sysUser.password!=password){
+          if($scope.sysUser.password!=$scope.sysUser.password1&&$scope.sysUser.password1!=null){
             $scope.validPword = true;
-            $scope.password ="";
+            $scope.placeholder.password1 ="两次输入的密码不同,请重新输入";
+            $scope.sysUser.password1 ="";
           }
         }
-        $scope.Modal.sub = function(valid){
-          $scope.submitted = false;
-          if (valid) {
+        $scope.Modal.validPhone = function (){
+          $scope.placeholder.phone = "联系电话不能为空";
+          $scope.validPhone = false ;
+          var reg =/^((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)/;
+          if(!reg.test($scope.sysUser.phone)&&$scope.sysUser.phone!=null){
+            $scope.validPhone = true ;
+            $scope.placeholder.phone = "电话格式不对";
+            $scope.sysUser.phone ="";
+          }
+        }
+        $scope.Modal.validEmail = function (invalid){
+          $scope.placeholder.email = "邮箱不能为空";
+          $scope.validEmail = false ;
+          if(invalid){
+            $scope.validEmail = true ;
+            $scope.placeholder.email = "邮箱格式不对";
+            $scope.sysUser.email ="";
+          }
+        }
 
-          }else{
-            $scope.submitted = true ;
-          }
-        }
       });
       prom.result.then(function() {
         Http.saveUser($scope.sysUser).then(function(result) {
@@ -111,11 +133,49 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
     }
     $scope.updateUser = function(user) {
       $scope.sysUser = user;
+      $scope.sysUser.password1 =0;
+      $scope.sysUser.password = 0;
+      var prom = Component.popModal($scope, '修改', 'add-user-modal');
+      prom.opened.then(function() {
+        $scope.Modal.validUser = function (user){
+          $scope.placeholder.name ="登录名不能为空";
+          $scope.validUser = false;
+          Http.getUserList({
+            "dep_id":dep_id
+          }).then(function(result) {
+             var users = result.data.body;
+             for (var i = 0; i < users.length; i++) {
+               if(users[i].username === user){
+                 $scope.validUser = true;
+                 $scope.placeholder.name ="用户名已存在,请重新输入";
+                 $scope.sysUser.username ="";
+               }
+             }
+          });
+        }
+        $scope.Modal.validPhone = function (){
+          $scope.placeholder.phone = "联系电话不能为空";
+          $scope.validPhone = false ;
+          var reg =/^((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)/;
+          if(!reg.test($scope.sysUser.phone)&&$scope.sysUser.phone!=null){
+            $scope.validPhone = true ;
+            $scope.placeholder.phone = "电话格式不对";
+            $scope.sysUser.phone ="";
+          }
+        }
+        $scope.Modal.validEmail = function (invalid){
+          $scope.placeholder.email = "邮箱不能为空";
+          $scope.validEmail = false ;
+          if(invalid){
+            $scope.validEmail = true ;
+            $scope.placeholder.email = "邮箱格式不对";
+            $scope.sysUser.email ="";
+          }
+        }
 
-      var u = $scope.sysUser;
-      $scope.password = $scope.sysUser.password;
-      Component.popModal($scope, '修改', 'add-user-modal').result.then(function() {
-        Http.updateUser(u).then(function(result) {
+      });
+      prom.result.then(function() {
+        Http.updateUser($scope.sysUser).then(function(result) {
           _httpParams.limit = 10;
           _httpParams.skip = 0;
           $scope.Paging.currentPage = 0 ;
@@ -150,27 +210,39 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
         })
       }
     }
+
     $scope.Password = function(user) {
-      var id = user.id ;
-      $scope.password = user.password;
-      $scope.password = null;
+      $scope.placeholder.password_1 = "原密码不能为空";
+      $scope.placeholder.password_2 = "新密码不能为空";
+      $scope.placeholder.password_3 = "确认密码不能为空";
+      var id = 0;
+      id = user.id;
+      $scope.password_1 = false;
+      $scope.password_2 = false;
+      $scope.password_3 = false;
       var prom = Component.popModal($scope, '密码', 'update-password-modal');
       prom.opened.then(function() {
         $scope.Modal.validPword1 = function (password_pre){
+          $scope.validPword1 = false;
+          $scope.placeholder.password_1 ="原密码不能为空";
           Http.validatePassword({
-            "id": id,
+            "id":id,
             "password": password_pre
           }).then(function(result) {
-            if (result.data.head.total == 0) {
-              alert('原密码不对,请重新输入');
+            if(result.data.head.total == 0) {
+              $scope.password_1 = true;
+              $scope.placeholder.password_1 ="原密码不对,请重新输入";
+              $scope.Modal.password_pre = "";
             }
           });
         }
-        $scope.Modal.validPword = function (password,p2){
-             if(p2!=password){
-               alert("两次输入的密码不匹配,请重新输入");
-             }else{
-
+        $scope.Modal.validPword = function (){
+             $scope.password_3 = false;
+             $scope.placeholder.password_3 ="原密码不能为空";
+             if($scope.Modal.p2!=$scope.Modal.password){
+               $scope.password_3 = true;
+               $scope.placeholder.password_3 = "两次输入的密码不同,请重新输入";
+               $scope.Modal.password ="";
              }
         }
       });
@@ -324,7 +396,7 @@ AdminUser.service('AdminUser.Service.Component', ['$uibModal','$state',
         backdrop : 'static',
         templateUrl: templateUrl + '.html',
         scope: scope,
-        size: 'lg'
+        size: 'md'
       });
       scope.Modal.confirm = function(isValid) {
         if (isValid) {
