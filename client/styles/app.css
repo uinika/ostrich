@@ -187,14 +187,17 @@ input.ng-touched.ng-invalid {
 #dashboard .second-section .panel {
   height: 291px;
 }
+#dashboard .third-section {
+  margin-bottom: 90px;
+}
 #dashboard .third-section .panel {
-  height: auto;
+  height: 260px;
 }
 #dashboard .third-section .panel .nav-tabs {
   bottom: 5px !important;
 }
 #dashboard .third-section .nav-pills {
-  height: 52px;
+  height: 95px;
   overflow-y: scroll;
   border: solid 1px #DDDDDD;
 }

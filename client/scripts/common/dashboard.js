@@ -47,7 +47,7 @@ Dashboard.controller('Dashboard.Controller.Main', ['$scope', 'Dashboard.Service.
     $scope.select = function(param){
       Http.getDataQuota({
         skip: 0,
-        limit: 6,
+        limit: 5,
         dep_name: param
       }).then(function(result){
           $scope.followDepIndicators = result.data.body[0].results;
@@ -62,7 +62,7 @@ Dashboard.controller('Dashboard.Controller.Main', ['$scope', 'Dashboard.Service.
       }).then(function(followDepId){
         Http.getDataQuota({
           skip: 0,
-          limit: 6,
+          limit: 5,
           dep_name: followDepId
         }).then(function(result){
           $scope.followDepIndicators = result.data.body[0].results;
@@ -91,27 +91,27 @@ Dashboard.factory('Dashboard.Service.Http', ['$http', 'API',
       return $http.get(
         path + '/sys_dep'
       )
-    }
+    };
     function getDataquotaSummary(){
       return $http.get(
         path + '/data_quota/summary'
       )
-    }
+    };
     function getDataRequirementSummary(){
       return $http.get(
         path + '/data_requiement/summary'
       )
-    }
+    };
     function getUserDep(params){
       return $http.get(
         path + '/user_dep',{params: params}
       )
-    }
+    };
     function getDataQuota(params){
       return $http.get(
         path + '/data_quota',{params: params}
       )
-    }
+    };
 
     return {
       getDataQuotaNew: getDataQuotaNew,
@@ -121,7 +121,7 @@ Dashboard.factory('Dashboard.Service.Http', ['$http', 'API',
       getDataRequirementSummary: getDataRequirementSummary,
       getUserDep: getUserDep,
       getDataQuota: getDataQuota
-    }
+    };
 
   }
 ]);
