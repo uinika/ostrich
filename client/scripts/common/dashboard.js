@@ -25,16 +25,14 @@ Dashboard.controller('Dashboard.Controller.Main', ['$scope', 'Dashboard.Service.
 
     <!-- DataQuota & Requirement Summary -->
     Http.getDataQuotaNew({
-      skip: 0,
-      limit: 7
+      skip: 0, limit: 7
     }).then(function(result) {
       if (200 == result.data.head.status) {
         $scope.NewIndicators = result.data.body;
       }
     });
     Http.getDataRequirementNew({
-      skip: 0,
-      limit: 7
+      skip: 0, limit: 7
     }).then(function(result) {
       if (200 == result.data.head.status) {
         $scope.Requirements = result.data.body;
@@ -45,10 +43,9 @@ Dashboard.controller('Dashboard.Controller.Main', ['$scope', 'Dashboard.Service.
     <!-- DataQuota for Concerned Departments -->
     // Handle Selected Department
     $scope.select = function(param){
+      $scope.departmentID = {quota_dep_id: param};
       Http.getDataQuota({
-        skip: 0,
-        limit: 5,
-        dep_name: param
+        skip: 0, limit: 5,  dep_name: param
       }).then(function(result){
           $scope.followDepIndicators = result.data.body[0].results;
       });

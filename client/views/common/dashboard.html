@@ -124,7 +124,7 @@
     <div class='panel panel-default'>
       <div class='panel-heading'>
         <i class='fa fa-bar-chart'> 关注部门指标</i>
-        <a ui-sref='main.data-quota.list' class="pull-right text-primary">更多</a>
+        <a ui-sref='main.data-quota.list(departmentID)' class="pull-right text-primary">更多</a>
       </div>
       <uib-tabset type='pills' active="activeForm">
         <uib-tab classes='btn-xs' ng-repeat="followDep in followDeps" ng-click='select(followDep.follow_dep_id)' index="$index + 1" heading="{{followDep.follow_dep_name}}">
@@ -143,7 +143,7 @@
             <tbody>
               <tr ng-repeat='indicator in followDepIndicators'>
                 <td>{{indicator.create_time | date:'yyyy-MM-dd'}}</td>
-                <td>{{indicator.quota_name}}</td>
+                <td ><a ui-sref='main.data-quota.detail({data_quota_id:indicator.id})'>{{indicator.quota_name}}</a></td>
                 <td>{{indicator.sharefrequency}}</td>
                 <td>{{indicator.area_range}}</td>
                 <td>{{indicator.regionallevel}}</td>
