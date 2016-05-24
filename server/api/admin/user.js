@@ -43,13 +43,13 @@ Router.route('/sys_user/count')
 Router.route('/sys_user/password')
   .get(function(request, response) {
     let head = {}, body = {};
-    let datas = JsonLoader.sync(Config.path + 'admin/getUserTotal.json');
+    let datas = JsonLoader.sync(Config.path + 'admin/getValidatePassword.json');
     response.json(datas);
 });
 Router.route('/sys_user/password')
   .put(function(request, response) {
     let head = {}, body = {};
-    let datas = JsonLoader.sync(Config.path + 'admin/getUserTotal.json');
+    let datas = JsonLoader.sync(Config.path + 'admin/getUpdatePassword.json');
     response.json(datas);
 });
 

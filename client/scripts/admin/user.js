@@ -217,17 +217,18 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
       $scope.placeholder.password_3 = "确认密码不能为空";
       var id = 0;
       id = user.id;
+      $scope.Modal.password_pre = "";
       $scope.password_1 = false;
       $scope.password_2 = false;
       $scope.password_3 = false;
       var prom = Component.popModal($scope, '密码', 'update-password-modal');
       prom.opened.then(function() {
-        $scope.Modal.validPword1 = function (password_pre){
+        $scope.Modal.validPword1 = function (){
           $scope.validPword1 = false;
           $scope.placeholder.password_1 ="原密码不能为空";
           Http.validatePassword({
             "id":id,
-            "password": password_pre
+            "password":$scope.Modal.password_pre
           }).then(function(result) {
             if(result.data.head.total == 0) {
               $scope.password_1 = true;
