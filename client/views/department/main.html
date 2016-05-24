@@ -10,24 +10,29 @@
               <a ui-sref='main.department' ui-sref-opts="{reload: true}">部门首页</a>
             </li>
             <li class="list-group-item sub-item">
-              <a ui-sref='main.department.inventory'><i class='fa fa-list-alt'></i>&nbsp;部门指标</a>
+              <a ui-sref='main.department.inventory'>
+                <i class='fa fa-list-alt'></i>&nbsp;部门指标</a>
             </li>
             <li class="list-group-item sub-item">
-              <a ui-sref='main.department.share'><i class='fa fa-share-square-o'></i>&nbsp;共享指标</a>
+              <a ui-sref='main.department.share'>
+                <i class='fa fa-share-square-o'></i>&nbsp;共享指标</a>
             </li>
             <li class="list-group-item sub-item has-sub">
               需求清单
               <ul class="list-group sub-head">
                 <li class="list-group-item sub-third-item">
-                  <a ui-sref='main.department.requirement'><i class='fa fa-commenting-o'></i>&nbsp;本部门需求</a>
+                  <a ui-sref='main.department.requirement'>
+                    <i class='fa fa-commenting-o'></i>&nbsp;本部门需求</a>
                 </li>
                 <li class="list-group-item sub-third-item">
-                  <a ui-sref='main.department.requirementConfirm'><i class='fa fa-check-square-o'></i>&nbsp;需求确认</a>
+                  <a ui-sref='main.department.requirementConfirm'>
+                    <i class='fa fa-check-square-o'></i>&nbsp;需求确认</a>
                 </li>
               </ul>
             </li>
             <li class="list-group-item sub-item">
-              <a ui-sref='main.department.audit'><i class='fa fa-edit'></i>&nbsp;指标审核</a>
+              <a ui-sref='main.department.audit'>
+                <i class='fa fa-edit'></i>&nbsp;指标审核</a>
             </li>
           </ul>
         </div>
@@ -51,7 +56,8 @@
                   </div>
                 </div>
                 <div class='panel-footer font-20'>
-                  本月新增 <span class='font-20'>+{{Count.data_quota_number_inc}}</span>
+                  本月新增
+                  <span class='font-20'>+{{Count.data_quota_number_inc}}</span>
                 </div>
               </div>
             </div>
@@ -70,7 +76,8 @@
                   </div>
                 </div>
                 <div class='panel-footer'>
-                  本月新增 <span class='font-20'>+{{Count.data_apply_number_inc}}</span>
+                  本月新增
+                  <span class='font-20'>+{{Count.data_apply_number_inc}}</span>
                 </div>
               </div>
             </div>
@@ -89,7 +96,8 @@
                   </div>
                 </div>
                 <div class='panel-footer'>
-                  本月新增 <span class='font-20'>+{{Count.data_req_number_inc}}</span>
+                  本月新增
+                  <span class='font-20'>+{{Count.data_req_number_inc}}</span>
                 </div>
               </div>
             </div>
@@ -135,7 +143,10 @@
                       <tr ng-repeat='invtItem in toAuditList'>
                         <td title='{{invtItem.create_time |date:"yyyy-MM-dd HH:mm:ss"}}'>{{invtItem.create_time |date:"yyyy-MM-dd HH:mm:ss"}}</td>
                         <td title='{{invtItem.quota_name}}'>
-                          <a ui-sref='main.department.inventory.detail({ID:invtItem.data_quota_id})'><pre>{{invtItem.quota_name}}</pre></a></td>
+                          <a ui-sref='main.department.inventory.detail({ID:invtItem.data_quota_id})'>
+                            <pre>{{invtItem.quota_name}}</pre>
+                          </a>
+                        </td>
                         <td title='{{invtItem.depname}}'>{{invtItem.applydepname}}</td>
                       </tr>
                     </tbody>
@@ -167,7 +178,9 @@
                       <tr ng-repeat='resItem in requireToConfirmList'>
                         <td title='{{resItem.response_time |date:"yyyy-MM-dd HH:mm:ss"}}'>{{resItem.response_time |date:"yyyy-MM-dd HH:mm:ss"}}</td>
                         <td title='{{resItem.create_time| date:"yyyy-MM-dd HH:mm:ss"}}'>{{resItem.create_time| date:"yyyy-MM-dd HH:mm:ss"}}</td>
-                        <td title='{{resItem.requiement_name}}'><a ui-sref='main.department.requirement.detail({ID:resItem.id})'>{{resItem.requiement_name}}</a></td>
+                        <td title='{{resItem.requiement_name}}'>
+                          <a ui-sref='main.department.requirement.detail({ID:resItem.id})'>{{resItem.requiement_name}}</a>
+                        </td>
                         <td title='{{resItem.response_dep_name}}'>{{resItem.response_dep_name}}</td>
                       </tr>
                     </tbody>
@@ -190,13 +203,26 @@
                         <i class='fa fa-plus'></i>
                       </button>
                       <div class='dep-select' ng-show='depSelect.show'>
-                        <div style='display:inline-block' isteven-multi-select input-model="parentObj.deptAllList" output-model="parentObj.outputAllDeptList" button-label="icon dep_name" item-label="icon dep_name" tick-property="ticked" max-labels="5" max-height="250px" on-open='openFn()' on-close='closeFn()'></div>
+                        <div style='display:inline-block' isteven-multi-select input-model="parentObj.deptAllList" output-model="parentObj.outputAllDeptList" button-label="icon dep_name" item-label="icon dep_name" tick-property="ticked" max-labels="5" max-height="250px" on-open='openFn()' ></div>
                         <div class='btn btn-group'>
                           <button class='btn btn-primary' ng-click='followDep()'>关注</button>
                         </div>
                       </div>
 
                     </div>
+                    <!-- <div style="height: 305px">
+                    <uib-carousel active="active" interval="3000" no-wrap="true">
+                      <uib-slide ng-repeat="bureau in followDeptList" index="bureau.dep_id">
+                        <img ng-src="styles/images/bureau/{{::bureau.dep_en_name}}" style="margin:auto;">
+                        <div class="carousel-caption">
+                          <h4>Slide
+                            {{bureau.dep_id}}</h4>
+                          <p>{{bureau.dep_name}}</p>
+                        </div>
+                      </uib-slide>
+                    </uib-carousel>
+                  </div> -->
+
                     <div ng-repeat='bureau in followDeptList' class='bureau-item col-md-1'>
                       <a ui-sref='main.inventory.detail({departmentID: bureau.dep_id})' class='thumbnail'>
                         <img ng-src='styles/images/bureau/{{::bureau.dep_en_name}}' title='{{::bureau.dep_name}}'>
