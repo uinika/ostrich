@@ -1064,6 +1064,13 @@ input.ng-touched.ng-invalid {
 #data-quota-main .left .menu li {
   padding-left: 15px;
 }
+#data-quota-main .left .list-group .list-group-item {
+  cursor: pointer;
+}
+#data-quota-main .left .list-group .list-group-item:HOVER {
+  background: #FBFBFB;
+  color: #337AC8;
+}
 #data-quota-main .right {
   padding-right: 0;
   padding-left: 0;
@@ -1076,6 +1083,7 @@ input.ng-touched.ng-invalid {
 #data-quota-list .pager {
   text-align: left;
   margin: 8px;
+  font-size: 13px;
 }
 #data-quota-list .pager li {
   margin-left: 6px;
@@ -1094,6 +1102,9 @@ input.ng-touched.ng-invalid {
 #data-quota-list .pannel-patch {
   margin-bottom: 10px;
 }
+#data-quota-list .panel-body {
+  padding: 5px;
+}
 #data-quota-list .blue {
   color: #337AB7;
 }
@@ -1108,6 +1119,10 @@ input.ng-touched.ng-invalid {
 }
 #data-quota-list .table-responsive {
   height: 66rem;
+}
+#data-quota-list .table-responsive td {
+  max-width: 165px;
+  text-overflow: ellipsis;
 }
 #data-quota-list .pager .active {
   background: #eee;
