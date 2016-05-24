@@ -2,8 +2,8 @@
 var AdminDepartment = angular.module('Admin.Department', ['ui.router']);
 
 /** DepartmentReq Controller */
-AdminDepartment.controller('Admin.Department.Controller.Main', ['$rootScope', '$scope', '$stateParams','AdminDepartment.Service.Http', 'AdminDepartment.Service.Component','$uibModal',
-  function($rootScope, $scope, $stateParams, Http, Component, $uibModal) {
+AdminDepartment.controller('Admin.Department.Controller.Main', ['$rootScope', '$scope', '$stateParams','AdminDepartment.Service.Http', 'AdminDepartment.Service.Component', '$uibModal', '$state',
+  function($rootScope, $scope, $stateParams, Http, Component, $uibModal, $state) {
     $scope.Modal = {}; // Clean scope of modal
     $scope.previousDepNames = [];
     $scope.areaNames = [];
@@ -24,9 +24,6 @@ AdminDepartment.controller('Admin.Department.Controller.Main', ['$rootScope', '$
       Http.getDepartmentList(_httpParams).then(function(result) {
         $scope.AdminDepartments = result.data.body;
       });
-      Http.getDepartmentList().then(function(result) {
-        $scope.AllDepartments = result.data.body;
-      });
     }
 
     // init
@@ -35,40 +32,68 @@ AdminDepartment.controller('Admin.Department.Controller.Main', ['$rootScope', '$
       Http.getDepTotal({
       }).then(function(result) {
         $scope.depTotal = result.data.body[0].number;
-        $scope.Paging.totalItems = $scope.depTotal
+        $scope.Paging.totalItems = $scope.depTotal;
       });
     }
     getDepTotal();
-    Http.getSysDict({
-      dict_category:"7"
-    }).then(function(result) {
-      $scope.types = result.data.body;
-    });
-    Http.getSysDict({
-      dict_category:"9"
-    }).then(function(result) {
-      $scope.areaNames = result.data.body;
-    });
+    function parentId(){
+      Http.getDepartmentList().then(function(result) {
+        $scope.AllDepartments = result.data.body;
+      });
+      Http.getSysDict({
+        dict_category:"7"
+      }).then(function(result) {
+        $scope.types = result.data.body;
+      });
+      Http.getSysDict({
+        dict_category:"9"
+      }).then(function(result) {
+        $scope.areaNames = result.data.body;
+      });
+    }
+
+    $scope.placeholder = {};
+    $scope.placeholder.dep_sn = "必填";
+    $scope.placeholder.order_by = "必填";
+    $scope.placeholder.dep_name = "必填";
+    $scope.placeholder.dep_short_name = "必填";
+    $scope.placeholder.dep_en_name = "必填";
+    $scope.placeholder.contacts = "必填";
+    $scope.placeholder.contact_phone = "必填";
+
     // add Department
     $scope.addDepartmentModal = function() {
+      parentId();
       $scope.Modal = {}; // Clean scope of modal
       $scope.department = {}; // Clean scope of modal
+      $scope.department.dep_en_name="anquanting.png";
       $scope.department.parent_id = 0;
       var promise = Component.popModal($scope, '添加', 'add-department-modal');
       promise.opened.then(function() {
         $scope.Modal.validDepName = function (depName){
+          $scope.validDepName = false;
+          $scope.placeholder.dep_name = "必填";
           Http.getDepartmentList().then(function(result) {
              var deps = result.data.body;
              for (var i = 0; i < deps.length; i++) {
                if(deps[i].dep_name === depName){
-                 alert("该部门已存在,请重新添加");
+                 $scope.validDepName = true;
+                 $scope.placeholder.dep_name ="该部门已存在,请重新输入";
                  $scope.department.dep_name ="";
                }
              }
           });
-
         }
-
+        $scope.Modal.validPhone = function (){
+          $scope.placeholder.contact_phone = "必填";
+          $scope.validPhone = false ;
+          var reg =/^((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)/;
+          if(!reg.test($scope.department.contact_phone)&&($scope.department.contact_phone!=null)){
+            $scope.validPhone = true ;
+            $scope.placeholder.contact_phone = "电话格式不对";
+            $scope.department.contact_phone ="";
+          }
+        }
       });
       promise.result.then(function() {
         Http.saveDepartment($scope.department).then(function(result) {
@@ -87,12 +112,38 @@ AdminDepartment.controller('Admin.Department.Controller.Main', ['$rootScope', '$
       });
     }
     $scope.updateDepartment = function(AdminDep) {
+      parentId();
       $scope.department = AdminDep;
+      $scope.department.dep_en_name="anquanting.png";
       _.remove($scope.AllDepartments, function(dep) {
         return (dep.dep_name == AdminDep.dep_name);
      });
       var promise = Component.popModal($scope, '修改', 'add-department-modal');
       promise.opened.then(function() {
+        $scope.Modal.validDepName = function (depName){
+          $scope.validDepName = false;
+          $scope.placeholder.dep_name = "必填";
+          Http.getDepartmentList().then(function(result) {
+             var deps = result.data.body;
+             for (var i = 0; i < deps.length; i++) {
+               if(deps[i].dep_name === depName){
+                 $scope.validDepName = true;
+                 $scope.placeholder.dep_name ="该部门已存在,请重新输入";
+                 $scope.department.dep_name ="";
+               }
+             }
+          });
+        }
+        $scope.Modal.validPhone = function (){
+          $scope.placeholder.contact_phone = "必填";
+          $scope.validPhone = false ;
+          var reg =/^((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)/;
+          if(!reg.test($scope.department.contact_phone)&&($scope.department.contact_phone!=null)){
+            $scope.validPhone = true ;
+            $scope.placeholder.contact_phone = "电话格式不对";
+            $scope.department.contact_phone ="";
+          }
+        }
 
       });
       promise.result.then(function() {
@@ -135,22 +186,24 @@ AdminDepartment.controller('Admin.Department.Controller.Main', ['$rootScope', '$
       _httpParams.limit = 10;
       _httpParams.skip = 0;
       _httpParams.sysdepname = $scope.dep_name;
-      Http.getDepartmentList(_httpParams).then(function(result) {
-        if($scope.dep_name==null){
-          getDepTotal();
-          getDepartmentList(_httpParams);
-        }else{
-
+      if($scope.dep_name==null){
+        getDepTotal();
+        getDepartmentList(_httpParams);
+      }else{
+        Http.getDepartmentList(_httpParams).then(function(result) {
           if(result.data.head.total >=1){
             $scope.AdminDepartments = result.data.body;
             $scope.depTotal = result.data.head.total;
-            $scope.Paging.totalItems =  $scope.depTotal
+            $scope.Paging.totalItems =  $scope.depTotal;
           }else {
             alert("系统没有查到'"+$scope.dep_name+"'这个部门，请重新输入");
             $scope.dep_name = "";
+            $state.go("main.admin.department", {}, {
+              reload: true
+            });
           }
-        }
-      });
+        });
+      }
     }
 
   }

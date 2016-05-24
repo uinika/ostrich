@@ -1,4 +1,4 @@
-<div id='admin-department'>
+<div id="admin-department">
   <div class="row">
   </div>
   <div class="row">
@@ -12,7 +12,7 @@
         <div class="input-group col-xs-4 pull-right">
           <div class="input-group-addon">部门总数(<span ng-bind="depTotal"></span>)</div>
           <input type="text" class="form-control" placeholder="请输入部门名称" ng-model="dep_name" required>
-          <div class="input-group-addon" ng-click='searchDepartment()'>查询</div>
+          <div class="input-group-addon" ng-click="searchDepartment()">查询</div>
         </div>
         <table class="table table-striped table-hover">
           <thead>
@@ -41,14 +41,14 @@
               <td>{{AdminDep.contacts}}</td>
               <td>{{AdminDep.contact_phone}}</td>
               <td>
-                <a ng-click='updateDepartment(AdminDep)'><button type="button" class="btn btn-success btn-xs"><i class="fa fa-pencil-square-o"> 修改</i></button></a>&nbsp;&nbsp;
-                <a ng-click='deleteDepartment(AdminDep)'><button type="button" class="btn btn-danger btn-xs"><i class="fa fa-remove"> 删除</i></button></a>
+                <a ng-click="updateDepartment(AdminDep)"><button type="button" class="btn btn-success btn-xs"><i class="fa fa-pencil-square-o"> 修改</i></button></a>&nbsp;&nbsp;
+                <a ng-click="deleteDepartment(AdminDep)"><button type="button" class="btn btn-danger btn-xs"><i class="fa fa-remove"> 删除</i></button></a>
               </td>
             </tr>
           </tbody>
         </table>
         <div class="pull-right">
-        <uib-pagination boundary-links='true' ng-change='Paging.pageChanged()' total-items='Paging.totalItems' items-per-page='Paging.itemsPerPage' ng-model='Paging.currentPage' max-size='Paging.maxSize' class='pagination' boundary-link-numbers='true' rotate='false' first-text='首页' last-text='末页' next-text='下一页' previous-text='上一页'></uib-pagination>
+        <uib-pagination boundary-links="true" ng-change="Paging.pageChanged()" total-items="Paging.totalItems" items-per-page="Paging.itemsPerPage" ng-model="Paging.currentPage" max-size="Paging.maxSize" class="pagination" boundary-link-numbers="true" rotate="false" first-text="首页" last-text="末页" next-text="下一页" previous-text="上一页"></uib-pagination>
       </div>
       </div>
     </div>
@@ -57,90 +57,101 @@
 
 
 <!-- Add department modal -->
-<script type='text/ng-template' id='add-department-modal.html'>
-  <form class="form-horizontal example-add-modal" name='departmentAddForm'>
+<script type="text/ng-template" id="add-department-modal.html">
+  <form class="form-horizontal example-add-modal" name="departmentAddForm"novalidate>
 
-    <div class='modal-header'>
+    <div class="modal-header">
       <i class="fa fa-server"></i>
       {{Modal.type}}部门
-      <button type='button' class='close' data-dismiss='modal' ng-click='Modal.cancel()'>&times;</button>
+      <button type="button" class="close" data-dismiss="modal" ng-click="Modal.cancel()">&times;</button>
     </div>
-    <div class='modal-body'>
-      <div class="form-group">
+    <div class="modal-body">
+      <div class="form-group has-feedback">
         <label for="" class="col-sm-3 control-label">部门编号
-          <span class='require-sign'>*</span>:</label>
+          :</label>
         <div class="col-sm-8">
-          <input type="text" class="form-control" ng-model='department.dep_sn' required>
+          <input type="text" class="form-control" name="dep_sn" placeholder={{placeholder.dep_sn}} ng-model="department.dep_sn" required>
+          <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="(departmentAddForm.dep_sn.$valid)"></span>
+          <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="(departmentAddForm.dep_sn.$invalid)"></span>
         </div>
       </div>
-
-      <div class="form-group">
+      <div class="form-group has-feedback">
         <label for="" class="col-sm-3 control-label">排序号
-          <span class='require-sign'>*</span>:</label>
+          :</label>
         <div class="col-sm-8">
-          <input type="number" class="form-control" ng-model='department.order_by ' required>
+          <input type="number" class="form-control" name="order_by" placeholder={{placeholder.order_by}} ng-model="department.order_by " required>
+          <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="(departmentAddForm.order_by.$valid)"></span>
+          <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="(departmentAddForm.order_by.$invalid)"></span>
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-group has-feedback">
         <label for="" class="col-sm-3 control-label">部门全称
-          <span class='require-sign'>*</span>:</label>
+          :</label>
         <div class="col-sm-8">
-          <input type="text" class="form-control" ng-model='department.dep_name' required ng-blur="Modal.validDepName(department.dep_name)">
+          <input type="text" class="form-control" name="dep_name" placeholder={{placeholder.dep_name}} ng-model="department.dep_name" required ng-blur="Modal.validDepName(department.dep_name)">
+          <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="(!validDepName) && (departmentAddForm.dep_name.$valid)"></span>
+          <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="(validDepName)||(departmentAddForm.dep_name.$invalid)"></span>
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-group has-feedback">
         <label for="" class="col-sm-3 control-label">部门短名称
-          <span class='require-sign'>*</span>:</label>
+          :</label>
         <div class="col-sm-8">
-          <input type="text" class="form-control" ng-model='department.dep_short_name' required >
+          <input type="text" class="form-control" name="dep_short_name" placeholder={{placeholder.dep_short_name}} ng-model="department.dep_short_name" required >
+          <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="(departmentAddForm.dep_short_name.$valid)"></span>
+          <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="(departmentAddForm.dep_short_name.$invalid)"></span>
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-group has-feedback">
         <label for="" class="col-sm-3 control-label">上级部门
-          <span class='require-sign'>&nbsp</span>:</label>
+          <span class="require-sign">&nbsp</span>:</label>
         <div class="col-sm-8">
-          <select class="form-control" ng-model='department.parent_id' >
-            <option ng-repeat="dep in  AllDepartments" value='{{dep.id}}'>{{dep.dep_name}}</option>
+          <select class="form-control" ng-model="department.parent_id" >
+            <option ng-repeat="dep in  AllDepartments" value="{{dep.id}}" >{{dep.dep_name}}</option>
           </select>
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-group has-feedback">
         <label for="" class="col-sm-3 control-label">机构类型
-          <span class='require-sign'>*</span>:</label>
+          :</label>
         <div class="col-sm-8">
-          <select class="form-control" ng-model='department.dep_type' required>
-            <option ng-repeat="type in  types" value='{{type.id}}'>{{type.dict_name}}</option>
+          <select class="form-control" ng-model="department.dep_type" required>
+            <option ng-repeat="type in  types" value="{{type.id}}" selected>{{type.dict_name}}</option>
           </select>
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-group has-feedback">
         <label for="" class="col-sm-3 control-label">区域名称
-          <span class='require-sign'>*</span>:</label>
+          :</label>
         <div class="col-sm-8">
-          <select class="form-control" ng-model='department.area_code' required>
-            <option ng-repeat="area in  areaNames" value='{{area.id}}'>{{area.dict_name}}</option>
+          <select class="form-control" ng-model="department.area_code" required>
+            <option ng-repeat="area in  areaNames" value="{{area.id}}" selected>{{area.dict_name}}</option>
           </select>
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-group has-feedback">
         <label for="" class="col-sm-3 control-label">联系人
-          <span class='require-sign'>*</span>:</label>
+          :</label>
         <div class="col-sm-8">
-          <input type="text" class="form-control" ng-model='department.contacts' required>
+          <input type="text" class="form-control" name="contacts" placeholder={{placeholder.contacts}} ng-model="department.contacts" required>
+          <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="(departmentAddForm.contacts.$valid)"></span>
+          <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="(departmentAddForm.contacts.$invalid)"></span>
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-group has-feedback">
         <label for="" class="col-sm-3 control-label">联系电话
-          <span class='require-sign'>*</span>:</label>
+          :</label>
         <div class="col-sm-8">
-          <input type="num" class="form-control" ng-model='department.contact_phone' required>
+          <input type="num" class="form-control" name="contact_phone" placeholder={{placeholder.contact_phone}} ng-model="department.contact_phone" required  ng-blur="Modal.validPhone()">
+          <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="(departmentAddForm.contact_phone.$valid)&&(!validPhone)"></span>
+          <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="(validPhone)||(departmentAddForm.contact_phone.$invalid)"></span>
         </div>
       </div>
 
     </div>
-    <div class='modal-footer'>
-      <button class='btn btn-primary' ng-disabled="departmentAddForm.$invalid" type='submit' ng-click='Modal.confirm(departmentAddForm.$valid)'>提交</button>
-      <button class='btn btn-default' type='button' ng-click='Modal.cancel()'>取消</button>
+    <div class="modal-footer">
+      <button class="btn btn-primary" ng-disabled="departmentAddForm.$invalid" type="submit" ng-click="Modal.confirm(departmentAddForm.$valid)">提交</button>
+      <button class="btn btn-default" type="button" ng-click="Modal.cancel()">取消</button>
     </div>
   </div>
 </form>

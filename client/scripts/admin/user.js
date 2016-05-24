@@ -2,8 +2,8 @@
 var AdminUser = angular.module('Admin.User', ['ui.router','ngCookies']);
 
 /** DepartmentReq Controller */
-AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', '$stateParams','AdminUser.Service.Http', 'AdminUser.Service.Component','$uibModal',
-  function($cookies, $scope, $q, $stateParams, Http, Component, $uibModal) {
+AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', '$stateParams','AdminUser.Service.Http', 'AdminUser.Service.Component','$uibModal','$state',
+  function($cookies, $scope, $q, $stateParams, Http, Component, $uibModal, $state) {
     var LoginUser = JSON.parse($cookies.get('User'));
     var dep_id = LoginUser.dep_id;
     var dep_name= LoginUser.dep_name;
@@ -54,12 +54,12 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
     });
 
     $scope.placeholder = {};
-    $scope.placeholder.name = "登录名不能为空";
-    $scope.placeholder.password = "密码不能为空";
-    $scope.placeholder.password1 = "确认密码不能为空";
-    $scope.placeholder.personName = "姓名不能为空";
-    $scope.placeholder.phone = "联系电话不能为空";
-    $scope.placeholder.email = "邮箱不能为空";
+    $scope.placeholder.name = "必填";
+    $scope.placeholder.password = "必填";
+    $scope.placeholder.password1 = "必填";
+    $scope.placeholder.personName = "必填";
+    $scope.placeholder.phone = "必填";
+    $scope.placeholder.email = "必填";
     // add user
     $scope.addUserModal = function() {
       $scope.Modal = {}; // Clean scope of modal
@@ -67,7 +67,7 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
       var prom = Component.popModal($scope, '添加', 'add-user-modal');
       prom.opened.then(function() {
         $scope.Modal.validUser = function (user){
-          $scope.placeholder.name ="登录名不能为空";
+          $scope.placeholder.name ="必填";
           $scope.validUser = false;
           Http.getUserList({
             "dep_id":dep_id
@@ -83,7 +83,7 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
           });
         }
         $scope.Modal.validPword = function (){
-          $scope.placeholder.password1 ="密码确认不能为空";
+          $scope.placeholder.password1 ="必填";
           $scope.validPword = false;
           if($scope.sysUser.password!=$scope.sysUser.password1&&$scope.sysUser.password1!=null){
             $scope.validPword = true;
@@ -92,17 +92,17 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
           }
         }
         $scope.Modal.validPhone = function (){
-          $scope.placeholder.phone = "联系电话不能为空";
+          $scope.placeholder.phone = "必填";
           $scope.validPhone = false ;
           var reg =/^((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)/;
-          if(!reg.test($scope.sysUser.phone)&&$scope.sysUser.phone!=null){
+          if(!reg.test($scope.sysUser.phone)&&($scope.sysUser.phone!=null)){
             $scope.validPhone = true ;
             $scope.placeholder.phone = "电话格式不对";
             $scope.sysUser.phone ="";
           }
         }
         $scope.Modal.validEmail = function (invalid){
-          $scope.placeholder.email = "邮箱不能为空";
+          $scope.placeholder.email = "必填";
           $scope.validEmail = false ;
           if(invalid){
             $scope.validEmail = true ;
@@ -138,7 +138,7 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
       var prom = Component.popModal($scope, '修改', 'add-user-modal');
       prom.opened.then(function() {
         $scope.Modal.validUser = function (user){
-          $scope.placeholder.name ="登录名不能为空";
+          $scope.placeholder.name ="必填";
           $scope.validUser = false;
           Http.getUserList({
             "dep_id":dep_id
@@ -154,7 +154,7 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
           });
         }
         $scope.Modal.validPhone = function (){
-          $scope.placeholder.phone = "联系电话不能为空";
+          $scope.placeholder.phone = "必填";
           $scope.validPhone = false ;
           var reg =/^((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)/;
           if(!reg.test($scope.sysUser.phone)&&$scope.sysUser.phone!=null){
@@ -164,7 +164,7 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
           }
         }
         $scope.Modal.validEmail = function (invalid){
-          $scope.placeholder.email = "邮箱不能为空";
+          $scope.placeholder.email = "必填";
           $scope.validEmail = false ;
           if(invalid){
             $scope.validEmail = true ;
@@ -212,9 +212,9 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
     }
 
     $scope.Password = function(user) {
-      $scope.placeholder.password_1 = "原密码不能为空";
-      $scope.placeholder.password_2 = "新密码不能为空";
-      $scope.placeholder.password_3 = "确认密码不能为空";
+      $scope.placeholder.password_1 = "必填";
+      $scope.placeholder.password_2 = "必填";
+      $scope.placeholder.password_3 = "必填";
       var id = 0;
       id = user.id;
       $scope.Modal.password_pre = "";
@@ -225,7 +225,7 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
       prom.opened.then(function() {
         $scope.Modal.validPword1 = function (){
           $scope.validPword1 = false;
-          $scope.placeholder.password_1 ="原密码不能为空";
+          $scope.placeholder.password_1 ="必填";
           Http.validatePassword({
             "id":id,
             "password":$scope.Modal.password_pre
@@ -239,7 +239,7 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
         }
         $scope.Modal.validPword = function (){
              $scope.password_3 = false;
-             $scope.placeholder.password_3 ="原密码不能为空";
+             $scope.placeholder.password_3 ="必填";
              if($scope.Modal.p2!=$scope.Modal.password){
                $scope.password_3 = true;
                $scope.placeholder.password_3 = "两次输入的密码不同,请重新输入";
@@ -274,22 +274,23 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
       _httpParams.skip = 0;
       _httpParams.dep_id = dep_id;
       _httpParams.sysusername = $scope.username;
-      Http.getUserList(_httpParams).then(function(result) {
-        if($scope.username==null){
-          getUserTotal();
-          getUserList(_httpParams);
-        }else{
-
+      if($scope.username==null){
+        getUserTotal();
+        getUserList(_httpParams);
+      }else{
+        Http.getUserList(_httpParams).then(function(result) {
           if(result.data.head.total >= 1){
             $scope.users = result.data.body;
             $scope.UserTotal = result.data.head.total;
             $scope.Paging.totalItems = $scope.UserTotal;
-          }else {
+          }else{
             alert("系统没有查到'"+$scope.username+"'这个用户名，请重新输入");
-            $scope.username = "";
+            $state.go("main.admin.user", {}, {
+              reload: true
+            });
           }
-        }
-      });
+        });
+      }
     }
 
   }
