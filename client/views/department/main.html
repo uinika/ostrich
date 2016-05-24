@@ -133,7 +133,7 @@
                     </thead>
                     <tbody>
                       <tr ng-repeat='invtItem in toAuditList'>
-                        <td title='{{invtItem.create_time |date:"yyyy-MM-dd hh:mm:ss"}}'>{{invtItem.create_time |date:"yyyy-MM-dd hh:mm:ss"}}</td>
+                        <td title='{{invtItem.create_time |date:"yyyy-MM-dd HH:mm:ss"}}'>{{invtItem.create_time |date:"yyyy-MM-dd HH:mm:ss"}}</td>
                         <td title='{{invtItem.quota_name}}'>
                           <a ui-sref='main.department.inventory.detail({ID:invtItem.data_quota_id})'><pre>{{invtItem.quota_name}}</pre></a></td>
                         <td title='{{invtItem.depname}}'>{{invtItem.applydepname}}</td>
@@ -165,8 +165,8 @@
                     </thead>
                     <tbody>
                       <tr ng-repeat='resItem in requireToConfirmList'>
-                        <td title='{{resItem.response_time |date:"yyyy-MM-dd hh:mm:ss"}}'>{{resItem.response_time |date:"yyyy-MM-dd hh:mm:ss"}}</td>
-                        <td title='{{resItem.create_time| date:"yyyy-MM-dd hh:mm:ss"}}'>{{resItem.create_time| date:"yyyy-MM-dd hh:mm:ss"}}</td>
+                        <td title='{{resItem.response_time |date:"yyyy-MM-dd HH:mm:ss"}}'>{{resItem.response_time |date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                        <td title='{{resItem.create_time| date:"yyyy-MM-dd HH:mm:ss"}}'>{{resItem.create_time| date:"yyyy-MM-dd HH:mm:ss"}}</td>
                         <td title='{{resItem.requiement_name}}'><a ui-sref='main.department.requirement.detail({ID:resItem.id})'>{{resItem.requiement_name}}</a></td>
                         <td title='{{resItem.response_dep_name}}'>{{resItem.response_dep_name}}</td>
                       </tr>
