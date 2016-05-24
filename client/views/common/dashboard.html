@@ -11,11 +11,11 @@
             <span class='input-group-addon'>
               <span class='glyphicon glyphicon-search'></span>
             </span>
-            <input type='text' placeholder='请输入部门名称......' class='form-control'>
+            <input ng-model="query" type='text' placeholder='请输入部门名称......' class='form-control'>
             <span ui-sref='main.data-quota.list' class='input-group-addon'>查询</span>
           </div>
           <div class='bureau-list'>
-            <div ng-repeat='bureau in Bureaus' class='bureau-item col-md-3'>
+            <div ng-repeat='bureau in Bureaus | filter:query' class='bureau-item col-md-3'>
               <a ui-sref='main.data-quota.list({quota_dep_id: bureau.id})' class='thumbnail'>
                 <img ng-src='styles/images/bureau/{{::bureau.dep_en_name}}' title='{{::bureau.dep_name}}'>
               </a>
