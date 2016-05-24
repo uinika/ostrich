@@ -121,7 +121,7 @@
                     <a ng-click='auditMore()'>更多...</a>
                   </div>
                 </div>
-                <div class='panel-body'>
+                <div class='panel-body' cg-busy="{promise:mainAuditPromise,message:'加载中',backdrop:backdrop,delay:delay,minDuration:minDuration}">
                   <!-- Table -->
                   <table class='table table-hover table-striped'>
                     <thead>
@@ -152,7 +152,7 @@
                     <a ng-click='reqMore()'>更多...</a>
                   </div>
                 </div>
-                <div class='panel-body'>
+                <div class='panel-body' cg-busy="{promise:mainReqPromise,message:'加载中',backdrop:backdrop,delay:delay,minDuration:minDuration}">
                   <!-- Table -->
                   <table class='table table-hover table-striped'>
                     <thead>

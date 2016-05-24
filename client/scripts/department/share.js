@@ -20,7 +20,7 @@ DepartmentShare.controller('DepartmentShare.Controller.Main', [ '$scope', 'Depar
     }
 
     function getDepartmentShareList(_httpParams) {
-      Http.shareDataQuotaList(_httpParams).then(function(result) {
+      $scope.sharePromise = Http.shareDataQuotaList(_httpParams).then(function(result) {
         $scope.depShareList = result.data.body[0].results;
         $scope.Paging.totalItems = result.data.body[0].count;
       });

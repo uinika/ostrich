@@ -26,7 +26,7 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$cookies', 
 
     function getDeptRequirementList() {
       _httpParams.dep_id = DEP_ID;
-      Http.getDepartmentRequirementList(_httpParams).then(function(result) {
+      $scope.reqPromise = Http.getDepartmentRequirementList(_httpParams).then(function(result) {
         $scope.requirementList = result.data.body[0].results;
         $scope.Paging.totalItems = result.data.body[0].count;
       })
@@ -137,7 +137,7 @@ DepartmentReq.controller('Department.Requirement.Controller.confirm', ['$cookies
 
     function getDeptRequirementConfirmList() {
       _httpConfirmParams.response_dep_id = DEP_ID;
-      Http.getDepartmentRequirementList(_httpConfirmParams).then(function(result) {
+      $scope.reqConfirmPromise = Http.getDepartmentRequirementList(_httpConfirmParams).then(function(result) {
         $scope.requirementConfirmList = result.data.body[0].results;
         $scope.Paging.totalItems = result.data.body[0].count;
       })
