@@ -67,7 +67,7 @@ AdminDepartment.controller('Admin.Department.Controller.Main', ['$rootScope', '$
       $scope.Modal = {}; // Clean scope of modal
       $scope.department = {}; // Clean scope of modal
       $scope.department.dep_en_name="anquanting.png";
-      $scope.department.parent_id = 0;
+      $scope.department.parent_id = "0";
       var promise = Component.popModal($scope, '添加', 'add-department-modal');
       promise.opened.then(function() {
         $scope.Modal.validDepName = function (depName){
@@ -175,8 +175,9 @@ AdminDepartment.controller('Admin.Department.Controller.Main', ['$rootScope', '$
           else{
             alert('删除失败！');
           }
-          getDepTotal();
-          getDepartmentList(_httpParams);
+          $state.go("main.admin.department", {}, {
+            reload: true
+          });
         })
       }
     }

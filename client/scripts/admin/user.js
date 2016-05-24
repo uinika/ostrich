@@ -205,8 +205,9 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
           else{
             alert('删除失败！');
           }
-          getUserTotal();
-          getUserList(_httpParams);
+          $state.go("main.admin.user", {}, {
+            reload: true
+          });
         })
       }
     }
@@ -218,13 +219,15 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
       var id = 0;
       id = user.id;
       $scope.Modal.password_pre = "";
+      $scope.Modal.p2 = "";
+      $scope.Modal.password = "";
       $scope.password_1 = false;
       $scope.password_2 = false;
       $scope.password_3 = false;
       var prom = Component.popModal($scope, '密码', 'update-password-modal');
       prom.opened.then(function() {
         $scope.Modal.validPword1 = function (){
-          $scope.validPword1 = false;
+          $scope.password_1 = false;
           $scope.placeholder.password_1 ="必填";
           Http.validatePassword({
             "id":id,
