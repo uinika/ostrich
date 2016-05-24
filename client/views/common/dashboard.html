@@ -11,7 +11,7 @@
             <span class='input-group-addon'>
               <span class='glyphicon glyphicon-search'></span>
             </span>
-            <input ng-model="query" type='text' placeholder='请输入部门名称......' class='form-control'>
+            <input ng-model="query" type='text' placeholder='请输入部门中文名或拼音......' class='form-control'>
           </div>
           <div class='bureau-list'>
             <div ng-repeat='bureau in Bureaus | filter:query' class='bureau-item col-md-3'>

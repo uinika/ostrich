@@ -4,6 +4,10 @@ var DataQuotaList = angular.module('DataQuotaList', ['ui.router']);
 /** Main Controller */
 DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', 'DataQuotaList.Service.Http', '$stateParams',
   function($scope, $state, Http, StateParams) {
+    var currentDepID = {quota_dep_id:StateParams.quota_dep_id};
+    var currentDepName = {dep_name:StateParams.dep_name};
+    // Selected department name
+    $scope.currentDep = currentDepName.dep_name;
     // Params for pagin
     $scope.currentPage = 1;
     // Common
@@ -17,25 +21,25 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
     // Init talbe with pagin
     function initDataQuotaList(){
       var httpParams = {};
-      (StateParams.dep_name==='') ? (httpParams = {limit:12, skip: 0}) : (httpParams = _.assign(StateParams, {limit:12, skip: 0}));
+      (currentDepID.dep_name==='') ? (httpParams = {limit:12, skip: 0}) : (httpParams = _.assign(currentDepID, {limit:12, skip: 0}));
       getDataQuotaList(httpParams);
     };
     initDataQuotaList();
     // Get Data Quota List By Filter
     function getDataQuotaListByFilter(params){
       var httpParams = {};
-      (StateParams.dep_name==='') ? (httpParams = {limit:12, skip: 0}) : (httpParams = _.assign(StateParams, {limit:12, skip: 0}));
+      (currentDepID.dep_name==='') ? (httpParams = {limit:12, skip: 0}) : (httpParams = _.assign(currentDepID, {limit:12, skip: 0}));
       _.assign(httpParams, params);
       getDataQuotaList(httpParams);
     };
     // Paging
     $scope.pageChanged = function() {
-      var httpParams = _.assign(StateParams, {limit:12, skip: ($scope.currentPage-1) * 12});
+      var httpParams = _.assign(currentDepID, {limit:12, skip: ($scope.currentPage-1) * 12});
       getDataQuotaList(httpParams);
     };
     // Search for Data Quota Name
     $scope.Retrieval = function(){
-      var httpParam = _.assign(StateParams, {quotaname: $scope.TargetDataQuotaName});
+      var httpParam = _.assign(currentDepID, {quotaname: $scope.TargetDataQuotaName});
       getDataQuotaList(httpParam);
     };
     // Data quota apply info

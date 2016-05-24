@@ -7,7 +7,7 @@
         </div>
 
         <ul class="list-group">
-          <li class="list-group-item text-primary"><i class="fa fa-globe" ui-sref="main.data-quota.list" ui-sref-opts="{reload:true}"> 全部指标</i></li>
+          <li class="list-group-item text-primary"><i class="fa fa-globe" ui-sref="main.data-quota.list" ui-sref-opts="{reload:true}"> 查看所有指标</i></li>
         </ul>
 
         <div class='menu' ui-tree data-drag-enabled="false">
@@ -16,7 +16,7 @@
              options="treeOptions"
              on-selection="showSelected(node)"
              selected-node="node1">
-             <span ui-sref="main.data-quota.list({quota_dep_id: node.id})">{{node.dep_short_name}}</span>
+             <span ui-sref="main.data-quota.list({quota_dep_id: node.id, dep_name: node.dep_name})">{{node.dep_short_name}}</span>
           </treecontrol>
         </div>
 
