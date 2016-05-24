@@ -7,12 +7,11 @@
         </div>
         <div class='panel-body'>
           <!-- Will be removed -->
-          <div class='bureau-filter input-group'>
+          <div class='bureau-filter input-group input-group-sm'>
             <span class='input-group-addon'>
               <span class='glyphicon glyphicon-search'></span>
             </span>
             <input ng-model="query" type='text' placeholder='请输入部门名称......' class='form-control'>
-            <span ui-sref='main.data-quota.list' class='input-group-addon'>查询</span>
           </div>
           <div class='bureau-list'>
             <div ng-repeat='bureau in Bureaus | filter:query' class='bureau-item col-md-3'>
@@ -37,12 +36,12 @@
           <wiserv-data-quota-overview-chart/>
           <ul class="list-group ">
             <li class="list-group-item">
-              指标总数：<span class="list-number-style">{{SummaryDataQuota.data_quota_number}}</span>个
-              <span class='pull-right text-muted'>(本月新增<span class="list-number-style">{{SummaryDataQuota.data_quota_number_inc}}</span>个)</span>
+              指标总数<span class="list-number text-primary">{{SummaryDataQuota.data_quota_number}}</span>个
+              <span class='pull-right text-muted list-number-new'>(本月新增<span class="text-info">{{SummaryDataQuota.data_quota_number_inc}}</span>个)</span>
             </li>
             <li class="list-group-item">
-              提供部门：<span class="list-number-style">{{SummaryDataQuota.department_number}}</span>个
-              <span class='pull-right text-muted'>(本月新增<span class="list-number-style">{{SummaryDataQuota.department_number_inc}}</span>个)</span>
+              提供部门<span class="list-number text-primary">{{SummaryDataQuota.department_number}}</span>个
+              <span class='pull-right text-muted list-number-new'>(本月新增<span class="text-info">{{SummaryDataQuota.department_number_inc}}</span>个)</span>
             </li>
           </ul>
         </div>
@@ -57,12 +56,12 @@
           <wiserv-requirement-overview-chart/>
           <ul class="list-group">
             <li class="list-group-item ">
-              指标总数：<span class="list-number-style">{{SummaryRequirement.requiement_number}}</span>个
-              <span class='pull-right text-muted'>(本月新增<span class="list-number-style">{{SummaryRequirement.requiement_number_inc}}</span>个)</span>
+              指标总数<span class="list-number text-primary">{{SummaryRequirement.requiement_number}}</span>个
+              <span class='pull-right text-muted list-number-new'>(本月新增<span class="text-info">{{SummaryRequirement.requiement_number_inc}}</span>个)</span>
             </li>
             <li class="list-group-item">
-              提供部门：<span class="list-number-style">{{SummaryRequirement.department_number}}</span>个
-              <span class='pull-right text-muted'>(本月新增<span class="list-number-style">{{SummaryRequirement.department_number_inc}}</span>个)</span>
+              提供部门<span class="list-number text-primary">{{SummaryRequirement.department_number}}</span>个
+              <span class='pull-right text-muted list-number-new'>(本月新增<span class="text-info">{{SummaryRequirement.department_number_inc}}</span>个)</span>
             </li>
           </ul>
         </div>

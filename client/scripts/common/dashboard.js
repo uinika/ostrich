@@ -128,7 +128,7 @@ Dashboard.directive('wiservDataQuotaOverviewChart', [
   function() {
     return {
       restrict: 'AE',
-      template: "<div style='width:300;height:155px;'></div>",
+      template: "<div style='width:300;height:155px;position:relative;top:-8px'></div>",
       link: function(scope, element, attr) {
         scope.DataquotaSummary.then(function(result) {
           if (200 == result.data.head.status) {
@@ -191,7 +191,7 @@ Dashboard.directive('wiservRequirementOverviewChart', [
   function() {
     return {
       restrict: 'AE',
-      template: "<div style='width:300;height:155px;'></div>",
+      template: "<div style='width:300;height:155px;position:relative;top:-8px'></div>",
       link: function(scope, element, attr) {
         scope.DataRequirementSummary.then(function(result) {
           if (200 == result.data.head.status) {

@@ -155,13 +155,22 @@ input.ng-touched.ng-invalid {
 #dashboard .first-section .panel {
   height: 310px;
 }
-#dashboard .first-section .list-number-style {
-  font-size: 17px;
+#dashboard .first-section .list-number {
+  font-size: 15px;
   font-weight: bold;
-  padding: 0 6px;
+  padding: 0 5px;
+}
+#dashboard .first-section .list-number-new {
+  font-size: 13px;
+  padding: 0 5px;
+}
+#dashboard .first-section .list-number-new span {
+  font-size: 14px;
+  font-weight: bold;
+  margin: auto 2px;
 }
 #dashboard .first-section .bureau-filter {
-  width: 95%;
+  width: 93%;
   margin-left: 15px;
 }
 #dashboard .first-section .bureau-filter .input-group-addon {
