@@ -1107,7 +1107,7 @@ input.ng-touched.ng-invalid {
   margin-left: 15px;
 }
 #data-quota-list .table-responsive {
-  height: 45rem;
+  height: 66rem;
 }
 #data-quota-list .pager .active {
   background: #eee;
