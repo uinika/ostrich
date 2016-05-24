@@ -70,6 +70,12 @@ AdminDepartment.controller('Admin.Department.Controller.Main', ['$rootScope', '$
       $scope.department.parent_id = "0";
       var promise = Component.popModal($scope, '添加', 'add-department-modal');
       promise.opened.then(function() {
+        $scope.Modal.TypeArea = function(){
+          console.log("部门："+$scope.department.parent_id);
+          var index = _.findIndex($scope.AllDepartments, ['id': $scope.department.parent_id]);
+          console.log("部门信息："+index);
+          $scope.department1 = $scope.AllDepartments[index];
+        }
         $scope.Modal.validDepName = function (depName){
           $scope.validDepName = false;
           $scope.placeholder.dep_name = "必填";

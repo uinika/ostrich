@@ -107,7 +107,7 @@
           <span class="require-sign">&nbsp</span>:</label>
         <div class="col-sm-8">
           <select class="form-control" ng-model="department.parent_id" >
-            <option ng-repeat="dep in  AllDepartments" value="{{dep.id}}" >{{dep.dep_name}}</option>
+            <option ng-repeat="dep in  AllDepartments" value="{{dep.id}}" ng-selected="Modal.TypeArea()">{{dep.dep_name}}</option>
           </select>
         </div>
       </div>
@@ -115,7 +115,12 @@
         <label for="" class="col-sm-3 control-label">机构类型:</label>
         <div class="col-sm-8">
           <select class="form-control" ng-model="department.dep_type" required>
+            <div ng-if="department.parent_id!='0'">
+            <option value="{{department1.dep_type}}" selected>{{department1.dep_type_name}}</option>
+            </div>
+            <div ng-if="department.parent_id=='0'">
             <option ng-repeat="type in  types" value="{{type.id}}" selected>{{type.dict_name}}</option>
+            </div>
           </select>
         </div>
       </div>
@@ -123,7 +128,12 @@
         <label for="" class="col-sm-3 control-label">区域名称:</label>
         <div class="col-sm-8">
           <select class="form-control" ng-model="department.area_code" required>
+            <div ng-if="department.parent_id!='0'">
+            <option value="{{department1.area_code}}" selected>{{department1.area_code_name}}</option>
+            </div>
+            <div ng-if="department.parent_id=='0'">
             <option ng-repeat="area in  areaNames" value="{{area.id}}" selected>{{area.dict_name}}</option>
+            </div>
           </select>
         </div>
       </div>
