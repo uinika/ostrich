@@ -16,7 +16,7 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
     var initPaging = {limit:10, skip: 0};
     // Paging change event
     $scope.Paging.pageChanged = function() {
-      var httpParams = _.assign(currentDepID, {limit:10, skip: ($scope.currentPage-1) * 10});
+      var httpParams = _.assign(currentDepID, {limit:10, skip: ($scope.Paging.currentPage-1) * 10});
       getDataQuotaList(httpParams);
     };
     // Get data quota list
