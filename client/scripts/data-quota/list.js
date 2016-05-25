@@ -28,12 +28,11 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
       });
     };
     // Init data quota talbe
-    function initDataQuotaList(){
-      var httpParams = {};
-      (currentDepID==='') ? (httpParams = initPaging) : (httpParams = _.assign(httpParams, currentDepID, initPaging));
-      getDataQuotaList(httpParams);
-    };
-    initDataQuotaList();
+    (function initDataQuotaList(){
+        var httpParams = {};
+        (currentDepID==='') ? (httpParams = initPaging) : (httpParams = _.assign(httpParams, currentDepID, initPaging));
+        getDataQuotaList(httpParams);
+    })();
     // Fetch data quota list by filter
     function getDataQuotaListByFilter(params){
       var httpParams = {};
@@ -99,12 +98,13 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
       }
     };
     /* 分地区数据级别 */
+    filterParams.sys_dict_id = [];
     $scope.DataLevelFilter = function(id){
-      filterParams.sys_dict_id = id;
       if('ALL'===id){
-        delete filterParams.sys_dict_id;
+        filterParams.sys_dict_id = [];
         getDataQuotaListByFilter(filterParams);
       }else{
+        filterParams.sys_dict_id.push(id);
         getDataQuotaListByFilter(filterParams);
       }
     };

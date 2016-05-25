@@ -49,7 +49,15 @@
       text-overflow: ellipsis;
     }
   }
-  .pager .active{
-    background: #eee;
+  .pager{
+    li {
+      cursor: pointer;
+      a:ACTIVE {
+        font-weight: bolder;
+      }
+      .active {
+        background: red;
+      }
+    }
   }
 }

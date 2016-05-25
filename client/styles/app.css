@@ -1124,6 +1124,12 @@ input.ng-touched.ng-invalid {
   max-width: 165px;
   text-overflow: ellipsis;
 }
-#data-quota-list .pager .active {
-  background: #eee;
+#data-quota-list .pager li {
+  cursor: pointer;
+}
+#data-quota-list .pager li a:ACTIVE {
+  font-weight: bolder;
+}
+#data-quota-list .pager li .active {
+  background: red;
 }
