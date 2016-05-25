@@ -65,7 +65,7 @@ gulp.task('build', ['scripts','styles','images','htmls','libraries']);
 gulp.task('scripts', function() {
   gulp.src('./client/scripts/**/*.js')
     .pipe(sourcemap.init())
-    .pipe(concat('bundle.js'))
+    .pipe(concat('app.js'))
     .pipe(gulp.dest('./build/scripts'))
     .pipe(uglify())
     .pipe(rename({suffix: '.min'}))
@@ -98,6 +98,8 @@ gulp.task('images', function(){
   gulp.src(['./client/styles/images/**/*'])
     .pipe(gulp.dest('./build/styles/images'));
 })
+
+
 /**------------------ gulp clean ------------------*/
 gulp.task('clean', function() {
   del(['./build/**/*']);
