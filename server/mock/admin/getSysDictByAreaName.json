@@ -13,5 +13,14 @@
     "dict_desc": "区域",
     "dict_ord": 1,
     "active_flag": "1"
-  }]
+  },{
+    "id":"c9cf130a-1e2f-11e6-ac02-507b9d1b58bb",
+    "dict_category":"9",
+    "dict_code":"2",
+    "dict_name":"成都市",
+    "parent_code":null,
+    "dict_desc":"区域",
+    "dict_ord":2,
+    "active_flag":"1"
+    }]
 }

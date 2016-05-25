@@ -36,7 +36,6 @@ AdminDepartment.controller('Admin.Department.Controller.Main', ['$rootScope', '$
       });
     }
     getDepTotal();
-    function parentId(){
       Http.getDepartmentList().then(function(result) {
         $scope.AllDepartments = result.data.body;
       });
@@ -50,7 +49,6 @@ AdminDepartment.controller('Admin.Department.Controller.Main', ['$rootScope', '$
       }).then(function(result) {
         $scope.areaNames = result.data.body;
       });
-    }
 
     $scope.placeholder = {};
     $scope.placeholder.dep_sn = "必填";
@@ -63,18 +61,21 @@ AdminDepartment.controller('Admin.Department.Controller.Main', ['$rootScope', '$
 
     // add Department
     $scope.addDepartmentModal = function() {
-      parentId();
       $scope.Modal = {}; // Clean scope of modal
       $scope.department = {}; // Clean scope of modal
       $scope.department.dep_en_name="anquanting.png";
       $scope.department.parent_id = "0";
+      $scope.department.area_code ="c9cf130a-1e2f-11e6-ac02-507b9d1b58bb";
+      $scope.department.dep_type = "aa7772bb-10de-11e6-9b44-507b9d1b58bb";
       var promise = Component.popModal($scope, '添加', 'add-department-modal');
       promise.opened.then(function() {
         $scope.Modal.TypeArea = function(){
-          console.log("部门："+$scope.department.parent_id);
-          var index = _.findIndex($scope.AllDepartments, ['id': $scope.department.parent_id]);
-          console.log("部门信息："+index);
-          $scope.department1 = $scope.AllDepartments[index];
+          <!--parent_id is selected -->
+          if($scope.department.parent_id!="0"){
+            var index = _.findIndex($scope.AllDepartments, function(o) { return o.id == $scope.department.parent_id; } );
+            $scope.department1 = $scope.AllDepartments[index];
+          }
+          <!--parent_id is selected -->
         }
         $scope.Modal.validDepName = function (depName){
           $scope.validDepName = false;
@@ -118,14 +119,24 @@ AdminDepartment.controller('Admin.Department.Controller.Main', ['$rootScope', '$
       });
     }
     $scope.updateDepartment = function(AdminDep) {
-      parentId();
       $scope.department = AdminDep;
+      $scope.department.parent_id = "0";
+      $scope.department.area_code ="c9cf130a-1e2f-11e6-ac02-507b9d1b58bb";
+      $scope.department.dep_type = "aa7772bb-10de-11e6-9b44-507b9d1b58bb";
       $scope.department.dep_en_name="anquanting.png";
       _.remove($scope.AllDepartments, function(dep) {
         return (dep.dep_name == AdminDep.dep_name);
      });
       var promise = Component.popModal($scope, '修改', 'add-department-modal');
       promise.opened.then(function() {
+        $scope.Modal.TypeArea = function(){
+          <!--parent_id is selected -->
+          if($scope.department.parent_id!="0"){
+            var index = _.findIndex($scope.AllDepartments, function(o) { return o.id == $scope.department.parent_id; } );
+            $scope.department1 = $scope.AllDepartments[index];
+          }
+          <!--parent_id is selected -->
+        }
         $scope.Modal.validDepName = function (depName){
           $scope.validDepName = false;
           $scope.placeholder.dep_name = "必填";
