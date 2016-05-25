@@ -1,0 +1,29 @@
+<div id='data-quota-main' class="container">
+  <div class="row">
+    <div class="left col-md-2">
+      <div class="panel panel-default">
+        <div class='panel-heading'>
+          <i class='fa fa-bars'> 机构列表</i>
+        </div>
+
+        <ul class="list-group">
+          <li ui-sref="main.data-quota.list" ui-sref-opts="{reload:true}" class="list-group-item text-primary"><i class="fa fa-globe"> 查看所有指标</i></li>
+        </ul>
+
+        <div class='menu' ui-tree data-drag-enabled="false">
+          <treecontrol class="tree-classic"
+             tree-model="list"
+             options="treeOptions"
+             on-selection="showSelected(node)"
+             selected-node="node1">
+             <span ui-sref="main.data-quota.list({quota_dep_id: node.id, dep_name: node.dep_name})">{{node.dep_short_name}}</span>
+          </treecontrol>
+        </div>
+
+      </div>
+    </div>
+    <div class="right col-md-10">
+      <div ui-view></div>
+    </div>
+  </div>
+</div>

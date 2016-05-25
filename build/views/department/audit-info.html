@@ -1,0 +1,210 @@
+<div id='department-audit-info'>
+  <!-- BEGIN MAIN -->
+  <div class='requirement-detail'>
+    <div class="panel panel-default">
+      <div class="panel-heading">指标审核</div>
+      <div class="panel-body audit-wrap">
+
+        <!-- audit -->
+        <div>
+          <h4>
+            <span class='step-number'>1</span>审核</h4>
+          <div class='audit-box'>
+            <form class="form-horizontal">
+              <div class="form-group">
+                <label for="" class="col-sm-2 control-label">申请单位：</label>
+                <div class='col-sm-10 apply-dept'>{{AuditDetail.applydepname}}
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="" class="col-sm-2 control-label">审核
+                  <span class='require-sign'>*</span>：</label>
+                <div class="col-sm-10">
+                  <input type='radio' name='status' ng-model='AuditInfo.audit_status' value='1'/>&nbsp;通过
+                  <input type='radio' name='status' ng-model='AuditInfo.audit_status' value='2'/>&nbsp;不通过
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="" class="col-sm-2 control-label">审核意见：</label>
+                <div class="col-sm-10">
+                  <textarea ng-model='AuditInfo.audit_opinion' class="col-sm-12" rows='3'></textarea>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- info -->
+        <div class='audit-info'>
+          <h4>
+            <span class='step-number'>2</span>清单基本信息</h4>
+          <div class='row apply-dep-info'>
+            <label class='col-sm-2 text-right'>申请部门：</label>
+            <div class='col-sm-2 left'>{{AuditDetail.applydepname}}</div>
+
+            <label class='col-sm-2 text-right'>申请日期：</label>
+            <div class='col-sm-3 left'>{{AuditDetail.applytime | date:"yyyy-MM-dd HH:mm:ss"}}</div>
+          </div>
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" ng-class="{true: 'active', false: 'inactive'}[Tab.show.auditInfo]" ng-init="Tab.show.auditInfo = true">
+              <a ng-click='tabSwitcher("auditInfo")' aria-controls="info" role="tab" data-toggle="tab">指标详情</a>
+            </li>
+            <li ng-hide='!TabExampShow' role="presentation" ng-class="{true: 'active', false: 'inactive'}[Tab.show.auditExampData]">
+              <a ng-click='tabSwitcher("auditExampData")' aria-controls="exampleData" role="tab" data-toggle="tab">样例数据</a>
+            </li>
+            <li role="presentation" ng-class="{true: 'active', false: 'inactive'}[Tab.show.requirementInfo]">
+              <a ng-click='tabSwitcher("requirementInfo")' aria-controls="requirementInfo" role="tab" data-toggle="tab">需求</a>
+            </li>
+          </ul>
+
+          <!-- Tab panes -->
+          <div class="tab-content container-fluid">
+            <div role="tabpanel" class="tab-pane" ng-class="{true: 'active', false: 'inactive'}[Tab.show.auditInfo]">
+              <div class='row'>
+                <label class='col-sm-2 text-right'>序号:</label>
+                <div class='col-sm-10'>1</div>
+              </div>
+              <div class='row'>
+                <label class='col-sm-2 text-right'>指标名称:</label>
+                <div class='col-sm-10'>{{AuditDetail.quota_name}}</div>
+              </div>
+              <div class='row'>
+                <label class='col-sm-2 text-right'>指标别称:</label>
+                <div class='col-sm-10'>{{AuditDetail.alias}}</div>
+              </div>
+              <div class='row'>
+                <label class='col-sm-2 text-right'>计量单位:</label>
+                <div class='col-sm-10'>{{AuditDetail.meter_unit}}</div>
+              </div>
+              <div class='row'>
+                <label class='col-sm-2 text-right'>指标详细解释:</label>
+                <div class='col-sm-10'>{{AuditDetail.quota_detail}}</div>
+              </div>
+              <div class='row'>
+                <label class='col-sm-2 text-right'>计算方法:</label>
+                <div class='col-sm-10'>{{AuditDetail.calculate_method}}</div>
+              </div>
+              <div class='row'>
+                <label class='col-sm-2 text-right'>共享频率:</label>
+                <div class='col-sm-10'>{{AuditDetail.sharefrequency}}</div>
+              </div>
+              <div class='row'>
+                <label class='col-sm-2 text-right'>空间范围:</label>
+                <div class='col-sm-10'>{{AuditDetail.area_range}}</div>
+              </div>
+              <div class='row'>
+                <label class='col-sm-2 text-right'>分地区数据级别:</label>
+                <div class='col-sm-10'>{{AuditDetail.quota_name}}</div>
+              </div>
+              <div class='row'>
+                <label class='col-sm-2 text-right'>来源部门:</label>
+                <div class='col-sm-10'>{{AuditDetail.depname}}</div>
+              </div>
+              <div class='row'>
+                <label class='col-sm-2 text-right'>共享级别:</label>
+                <div class='col-sm-10'>{{AuditDetail.sharelevel}}</div>
+              </div>
+              <div class='row'>
+                <label class='col-sm-2 text-right'>数据存储类型:</label>
+                <div class='col-sm-10'>{{AuditDetail.datastoretype}}</div>
+              </div>
+              <div class='row'>
+                <label class='col-sm-2 text-right'>数据精度:</label>
+                <div class='col-sm-10'>{{AuditDetail.data_precision}}</div>
+              </div>
+              <div class='row'>
+                <label class='col-sm-2 text-right'>数据长度:</label>
+                <div class='col-sm-10'>{{AuditDetail.data_length}}</div>
+              </div>
+              <div class='row'>
+                <label class='col-sm-2 text-right'>创建时间:</label>
+                <div class='col-sm-10'>{{AuditDetail.create_time | date:"yyyy-MM-dd HH:mm:ss"}}</div>
+              </div>
+              <div class='row'>
+                <label class='col-sm-2 text-right'>数据表示格式:</label>
+                <div class='col-sm-10'>{{AuditDetail.datashowformat}}</div>
+              </div>
+              <div class='row'>
+                <label class='col-sm-2 text-right'>是否涉密:</label>
+                <div class='col-sm-10'>{{AuditDetail.secretflag}}</div>
+              </div>
+              <div class='row'>
+                <label class='col-sm-2 text-right'>联系人:</label>
+                <div class='col-sm-10'>{{AuditDetail.linkman}}</div>
+              </div>
+              <div class='row'>
+                <label class='col-sm-2 text-right'>联系电话:</label>
+                <div class='col-sm-10'>{{AuditDetail.contact_phone}}</div>
+              </div>
+
+            </div>
+            <div role="tabpanel" class="tab-pane" ng-class="{true: 'active', false: 'inactive'}[Tab.show.auditExampData]">
+              <h3 class='data-title'>{{DataQuotaExamples.file_name}}</h3>
+              <!-- Table -->
+              <table class='table table-hover table-striped '>
+                <thead>
+                  <tr>
+                    <th ng-repeat='DQTitle in DataTitle track by $index'>{{DQTitle}}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat='ExampData in DataColumn'>
+                    <td ng-repeat='CellData in ExampData track by $index'>{{CellData}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div role="tabpanel" class="tab-pane" ng-class="{true: 'active', false: 'inactive'}[Tab.show.requirementInfo]">
+              <table class='table req-detail no-border' style='width:60%;' border='0'>
+                <tbody>
+                  <tr>
+                    <td align='right'>需求发布日期：</td>
+                    <td>{{QuotaReqDetail.create_time | date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                  </tr>
+                  <tr>
+                    <td align='right'>需求名称：</td>
+                    <td>{{QuotaReqDetail.requiement_name}}</td>
+                  </tr>
+                  <tr>
+                    <td align='right'>需求说明：</td>
+                    <td>{{QuotaReqDetail.requiement_desc}}</td>
+                  </tr>
+                  <tr>
+                    <td align='right'>共享频率：</td>
+                    <td>{{QuotaReqDetail.sharefrequency}}</td>
+                  </tr>
+                  <tr>
+                    <td align='right'>空间范围：</td>
+                    <td>{{QuotaReqDetail.area_range}}</td>
+                  </tr>
+                  <tr>
+                    <td align='right'>数据级别：</td>
+                    <td>{{QuotaReqDetail.regionallevel}}</td>
+                  </tr>
+                  <tr>
+                    <td align='right'>联系人：</td>
+                    <td>{{QuotaReqDetail.linkman}}</td>
+                  </tr>
+                  <tr>
+                    <td align='right'>联系电话：</td>
+                    <td>{{QuotaReqDetail.phone}}</td>
+                  </tr>
+                  <tr>
+                    <td align='right'>来源：</td>
+                    <td>{{QuotaReqDetail.dep_name}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </div>
+        <div class='pull-right'>
+          <button type="button" class="btn btn-success" ng-click='submitAudit()'>保存</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

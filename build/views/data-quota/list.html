@@ -1,0 +1,135 @@
+<div id='data-quota-list'>
+  <div class="panel panel-default pannel-patch">
+    <div class="panel-heading">
+      <i ng-if="currentDep===''" class="fa fa-paperclip"> 全部指标</i>
+      <i ng-if="currentDep!==''" class="fa fa-paperclip"> {{currentDep}}</i>
+      <div class="input-group col-xs-3 pull-right input-patch">
+        <input ng-model='TargetDataQuotaName' type="text" class="form-control" placeholder="请输入查询指标名称...">
+        <span class="input-group-btn">
+          <button ng-click='Retrieval()' class="btn btn-default" type="button">查询</button>
+        </span>
+      </div>
+
+    </div>
+    <div class="panel-body">
+
+      <nav>
+        <ul class="pager">
+          <li>共享级别</li>
+          <li ng-click="ShareLevelFilter('ALL')"><a>全部</a></li>
+          <li ng-repeat='shareLevel in ShareLevels' ng-click='ShareLevelFilter(shareLevel.id)'><a>{{shareLevel.dict_name}}</a></li>
+        </ul>
+      </nav>
+
+      <nav>
+        <ul class="pager">
+          <li>共享频率</li>
+          <li ng-click="ShareFrequencyFilter('ALL')"><a>全部</a></li>
+          <li ng-repeat='shareFrequency in ShareFrequencys' ng-click='ShareFrequencyFilter(shareFrequency.id)'><a>{{shareFrequency.dict_name}}</a></li>
+        </ul>
+      </nav>
+
+      <nav>
+        <ul class="pager">
+          <li>分地区数据级别</li>
+          <li ng-click="DataLevelFilter('ALL')"><a>全部</a></li>
+          <li ng-repeat='dataLevel in DataLevels' ng-click='DataLevelFilter(dataLevel.id)'><a >{{dataLevel.dict_name}}</a></li>
+        </ul>
+      </nav>
+
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <i class="fa fa-table"> 指标表格</i>
+      <span class='pull-right text-info'>共{{DataQuotasTotal}}条</span>
+    </div>
+    <div class="table-responsive">
+      <table class='table table-hover table-striped table-bordered table-patch'>
+         <thead>
+           <tr>
+             <th>关注</th>
+             <th>序号</th>
+             <th>指标名称</th>
+             <th>标识</th>
+             <th>指标编号</th>
+             <th>指标别称</th>
+             <th>计量单位</th>
+             <th>指标详细解释</th>
+             <th>计算方法</th>
+             <th>共享频率</th>
+             <th>空间范围</th>
+             <th>分地区数据级别</th>
+             <th>来源部门</th>
+             <th>共享级别</th>
+             <th>数据存储类型</th>
+             <th>数据精度</th>
+             <th>数据长度</th>
+             <th>创建时间</th>
+             <th>数据表示格式</th>
+             <th>是否涉密</th>
+             <th>联系人</th>
+             <th>联系电话</th>
+           </tr>
+         </thead>
+         <tbody>
+           <tr ng-repeat='quota in DataQuotas'>
+            <td>
+              <div class="checkbox">
+                <label>
+                  <input ng-checked='quota.isfollowed' type="checkbox">
+                </label>
+              </div>
+            </td>
+            <td>{{$index+1}}</td>
+            <td>
+              <a ui-sref='main.data-quota.detail({data_quota_id:quota.id})'>
+                {{quota.quota_name}}
+              </a>
+            </td>
+            <td>
+              <button ng-if="quota.sharelevel==='全开放'" class='btn btn-default btn-xs'>
+                <i class='fa fa-eye blue'> {{quota.sharelevel}}</i>
+              </button>
+              <button ng-if="quota.sharelevel==='省政务云平台开放'" class='btn btn-default btn-xs'>
+                <i class='fa fa-desktop blue'> {{quota.sharelevel}}</i>
+              </button>
+              <button ng-if="quota.sharelevel==='授权开放'"  class='btn btn-default btn-xs'>
+                <i class='fa fa-lock blue'> {{quota.sharelevel}}</i>
+              </button>
+              <button ng-if="quota.sharelevel==='暂不开放'"  class='btn btn-default btn-xs'>
+                <i class='fa fa-warning orange'> {{quota.sharelevel}}</i>
+              </button>
+              <button ng-if="quota.showbutton==='true'" class='btn btn-default btn-xs' ng-click='DataQuotaApplyInfo(quota.id)'>
+                <i class='fa fa-warning text-warning'> 申请查看</i>
+              </button>
+            </td>
+            <td>{{quota.quota_sn}}</td>
+            <td>{{quota.alias}}</td>
+            <td>{{quota.meter_unit}}</td>
+            <td>{{quota.quota_detail}}</td>
+            <td>{{quota.calculate_method}}</td>
+            <td>{{quota.area_range}}</td>
+            <td>{{quota.area_range}}</td>
+            <td>{{quota.regionallevel}}</td>
+            <td>{{quota.depname}}</td>
+            <td>{{quota.regionallevel}}</td>
+            <td>{{quota.datastoretype}}</td>
+            <td>{{quota.data_precision}}</td>
+            <td>{{quota.data_length}}</td>
+            <td>{{quota.create_time | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+            <td>{{quota.datashowformat}}</td>
+            <td>{{quota.secretflag}}</td>
+            <td>{{quota.linkman}}</td>
+            <td>{{quota.contact_phone}}</td>
+           </tr>
+         </tbody>
+       </table>
+    </div>
+
+    <uib-pagination class='pull-right' total-items='Paging.totalItems' ng-model='Paging.currentPage' ng-change='Paging.pageChanged()' items-per-page='Paging.itemsPerPage'  next-text='下一页' previous-text='上一页'></uib-pagination>
+
+  </div>
+
+</div>
