@@ -52,7 +52,7 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
       var httpParam = { data_quota_id: data_quota_id };
       Http.getDataQuotaApplyInfo(httpParam).then(function() {
         alert('申请查看成功');
-        _.assign(httpParams, {limit:10, skip: ($scope.currentPage-1) * 10});
+        _.assign(httpParams, {limit:10, skip: ($scope.Paging.currentPage-1) * 10});
         getDataQuotaList(httpParams);
       });
     };
