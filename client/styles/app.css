@@ -1118,7 +1118,7 @@ input.ng-touched.ng-invalid {
   margin-left: 15px;
 }
 #data-quota-list .table-responsive {
-  height: 66rem;
+  height: 56rem;
 }
 #data-quota-list .table-responsive td {
   max-width: 165px;

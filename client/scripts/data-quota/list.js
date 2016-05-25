@@ -21,20 +21,20 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
     // Init talbe with pagin
     function initDataQuotaList(){
       var httpParams = {};
-      (currentDepID.dep_name==='') ? (httpParams = {limit:12, skip: 0}) : (httpParams = _.assign(currentDepID, {limit:12, skip: 0}));
+      (currentDepID.dep_name==='') ? (httpParams = {limit:10, skip: 0}) : (httpParams = _.assign(currentDepID, {limit:10, skip: 0}));
       getDataQuotaList(httpParams);
     };
     initDataQuotaList();
     // Get Data Quota List By Filter
     function getDataQuotaListByFilter(params){
       var httpParams = {};
-      (currentDepID.dep_name==='') ? (httpParams = {limit:12, skip: 0}) : (httpParams = _.assign(currentDepID, {limit:12, skip: 0}));
+      (currentDepID.dep_name==='') ? (httpParams = {limit:10, skip: 0}) : (httpParams = _.assign(currentDepID, {limit:10, skip: 0}));
       _.assign(httpParams, params);
       getDataQuotaList(httpParams);
     };
     // Paging
     $scope.pageChanged = function() {
-      var httpParams = _.assign(currentDepID, {limit:12, skip: ($scope.currentPage-1) * 12});
+      var httpParams = _.assign(currentDepID, {limit:10, skip: ($scope.currentPage-1) * 10});
       getDataQuotaList(httpParams);
     };
     // Search for Data Quota Name
@@ -48,7 +48,7 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
       var httpParam = { data_quota_id: data_quota_id };
       Http.getDataQuotaApplyInfo(httpParam).then(function() {
         alert('申请查看成功');
-        _.assign(httpParams, {limit:12, skip: ($scope.currentPage-1) * 12});
+        _.assign(httpParams, {limit:10, skip: ($scope.currentPage-1) * 10});
         getDataQuotaList(httpParams);
       });
     };

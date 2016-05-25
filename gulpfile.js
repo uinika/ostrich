@@ -48,7 +48,7 @@ gulp.task('server', ['nodemon']);
 gulp.task('express', function() {
   express.run(['./server/app.js'], {}, false);
 })
-// Whatch Server
+// Whach Server
 gulp.task('nodemon', function() {
   nodemon({
     script: './server/app.js',
@@ -56,7 +56,7 @@ gulp.task('nodemon', function() {
       'NODE_ENV': 'development'
     }
   })
-})
+});
 
 
 /**------------------ gulp build ------------------*/
