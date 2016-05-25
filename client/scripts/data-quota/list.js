@@ -77,23 +77,36 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
       $scope.DataLevels = result.data.body;
     });
     // Handle above filter
+    var filterParams = {};
+    /* 共享级别 */
     $scope.ShareLevelFilter = function(id){
-      getDataQuotaListByFilter({share_level: id});
+      filterParams.share_level = id;
+      if('ALL'===id){
+        delete filterParams.share_level;
+        getDataQuotaListByFilter(filterParams);
+      }else{
+        getDataQuotaListByFilter(filterParams);
+      }
     };
+    /* 共享频率 */
     $scope.ShareFrequencyFilter = function(id){
-      getDataQuotaListByFilter({share_frequency: id});
+      filterParams.share_frequency = id;
+      if('ALL'===id){
+        delete filterParams.share_frequency;
+        getDataQuotaListByFilter(filterParams);
+      }else{
+        getDataQuotaListByFilter(filterParams);
+      }
     };
+    /* 分地区数据级别 */
     $scope.DataLevelFilter = function(id){
-      getDataQuotaListByFilter({sys_dict_id: id});
-    };
-    $scope.ShareLevelAll = function(){
-      initDataQuotaList();
-    };
-    $scope.ShareFrequencyAll = function(){
-      initDataQuotaList();
-    };
-    $scope.DataLevelAll = function(){
-      initDataQuotaList();
+      filterParams.sys_dict_id = id;
+      if('ALL'===id){
+        delete filterParams.sys_dict_id;
+        getDataQuotaListByFilter(filterParams);
+      }else{
+        getDataQuotaListByFilter(filterParams);
+      }
     };
 
   }
