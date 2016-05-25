@@ -4,37 +4,41 @@ var DataQuotaList = angular.module('DataQuotaList', ['ui.router']);
 /** Main Controller */
 DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', 'DataQuotaList.Service.Http', '$stateParams',
   function($scope, $state, Http, StateParams) {
+    // Get the parameters form ui-router
     var currentDepID = {quota_dep_id:StateParams.quota_dep_id};
     var currentDepName = {dep_name:StateParams.dep_name};
     // Selected department name
     $scope.currentDep = currentDepName.dep_name;
     // Params for pagin
-    $scope.currentPage = 1;
-    // Common
+    $scope.Paging = {};
+    $scope.Paging.currentPage = 1;
+    $scope.Paging.itemsPerPage = 10;
+    var initPaging = {limit:10, skip: 0};
+    // Paging change event
+    $scope.Paging.pageChanged = function() {
+      var httpParams = _.assign(currentDepID, {limit:10, skip: ($scope.currentPage-1) * 10});
+      getDataQuotaList(httpParams);
+    };
+    // Get data quota list
     function getDataQuotaList(_httpParams){
       Http.getDataQuota(_httpParams).then(function(result) {
         $scope.DataQuotas = result.data.body[0].results;
         $scope.DataQuotasTotal = result.data.body[0].count;
-        $scope.totalItems = result.data.body[0].count;
+        $scope.Paging.totalItems = result.data.body[0].count;
       });
     };
-    // Init talbe with pagin
+    // Init data quota talbe
     function initDataQuotaList(){
       var httpParams = {};
-      (currentDepID.dep_name==='') ? (httpParams = {limit:10, skip: 0}) : (httpParams = _.assign(currentDepID, {limit:10, skip: 0}));
+      (currentDepID==='') ? (httpParams = initPaging) : (httpParams = _.assign(currentDepID, initPaging));
       getDataQuotaList(httpParams);
     };
     initDataQuotaList();
-    // Get Data Quota List By Filter
+    // Fetch data quota list by filter
     function getDataQuotaListByFilter(params){
       var httpParams = {};
-      (currentDepID.dep_name==='') ? (httpParams = {limit:10, skip: 0}) : (httpParams = _.assign(currentDepID, {limit:10, skip: 0}));
+      (currentDepID.dep_name==='') ? (httpParams = initPaging) : (httpParams = _.assign(currentDepID, initPaging));
       _.assign(httpParams, params);
-      getDataQuotaList(httpParams);
-    };
-    // Paging
-    $scope.pageChanged = function() {
-      var httpParams = _.assign(currentDepID, {limit:10, skip: ($scope.currentPage-1) * 10});
       getDataQuotaList(httpParams);
     };
     // Search for Data Quota Name
@@ -52,9 +56,7 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
         getDataQuotaList(httpParams);
       });
     };
-    /** #Data quota apply info */
-
-    /** SysDict */
+    // Filter generator
     var SHARE_FREQUENCY = 1,
         DATA_LEVEL = 2,
         SHARE_LEVEL = 3;
@@ -73,9 +75,7 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
     }).then(function(result) {
       $scope.DataLevels = result.data.body;
     });
-    /** #SysDict */
-
-    /** Filter */
+    /** Handle above filter */
     $scope.ShareLevelFilter = function(id){
       getDataQuotaListByFilter({share_level: id});
     };
@@ -94,7 +94,6 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
     $scope.DataLevelAll = function(){
       initDataQuotaList();
     };
-    /** #Filter */
 
   }
 ]);
