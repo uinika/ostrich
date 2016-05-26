@@ -56,11 +56,11 @@
           <wiserv-requirement-overview-chart/>
           <ul class="list-group">
             <li class="list-group-item ">
-              指标总数<span class="list-number text-primary">{{SummaryRequirement.requiement_number}}</span>个
+              需求总数<span class="list-number text-primary">{{SummaryRequirement.requiement_number}}</span>个
               <span class='pull-right text-muted list-number-new'>(本月新增<span class="text-info">{{SummaryRequirement.requiement_number_inc}}</span>个)</span>
             </li>
             <li class="list-group-item">
-              提供部门<span class="list-number text-primary">{{SummaryRequirement.department_number}}</span>个
+              涉及部门<span class="list-number text-primary">{{SummaryRequirement.department_number}}</span>个
               <span class='pull-right text-muted list-number-new'>(本月新增<span class="text-info">{{SummaryRequirement.department_number_inc}}</span>个)</span>
             </li>
           </ul>
@@ -141,12 +141,12 @@
             </thead>
             <tbody>
               <tr ng-repeat='indicator in followDepIndicators'>
-                <td>{{indicator.create_time | date:'yyyy-MM-dd'}}</td>
-                <td ><a ui-sref='main.data-quota.detail({data_quota_id:indicator.id})'>{{indicator.quota_name}}</a></td>
-                <td>{{indicator.sharefrequency}}</td>
-                <td>{{indicator.area_range}}</td>
-                <td>{{indicator.regionallevel}}</td>
-                <td>{{indicator.depname}}</td>
+                <td>{{::indicator.create_time | date:'yyyy-MM-dd'}}</td>
+                <td ><a ui-sref='main.data-quota.detail({data_quota_id:indicator.id})'>{{::indicator.quota_name}}</a></td>
+                <td>{{::indicator.sharefrequency}}</td>
+                <td>{{::indicator.area_range}}</td>
+                <td>{{::indicator.regionallevel}}</td>
+                <td>{{::indicator.depname}}</td>
               </tr>
             </tbody>
           </table>
