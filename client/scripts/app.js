@@ -25,7 +25,7 @@ var app = angular.module('app', [
 app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider', '$provide',
   function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $provide) {
     /** URL Location Mode */
-    $locationProvider.html5Mode(false);
+    $locationProvider.html5Mode({enabled: false});
     /** HTTP Interceptor */
     $httpProvider.interceptors.push(['$q',
       function($q) {
