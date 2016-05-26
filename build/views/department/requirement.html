@@ -1,0 +1,212 @@
+<div id='ui-view-department-req' ui-view>
+  <div id='department-requirement'>
+    <div class='indicator-order'>
+      <div class='pull-left'>
+        <p class='font-18'>需求清单</p>
+      </div>
+      <div class='pull-right'>
+        <ul class="nav nav-pills">
+          <li role="presentation" class='indicator-total'>
+            本部门需求总数
+            <span class='num'>{{Paging.totalItems}}</span>
+          </li>
+          <li role="presentation">
+            <input type="text" class='input-filter' placeholder="请输入查询需求名称" ng-model='DeptRequirement.req_name_filter'>
+            <button type="button" class="btn btn-primary" ng-click='searchDeptReqByName()'>查询</button>
+          </li>
+          <li role="presentation">
+            <button class='btn btn-success' ng-click='publishReq()'>
+              <i class='fa fa-plus'></i>发布需求</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- indicator inventory list -->
+    <div class='indicator-list'>
+      <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">
+          <ul class="nav nav-filter">
+            需求状态
+            <li role="presentation">
+              <span>
+                <i class='fa fa-check-circle'></i>&nbsp;已确认&nbsp;</span>
+            </li>
+            <li role="presentation">
+              <span>
+                <i class='fa fa-question-circle'></i>&nbsp;未确认&nbsp;</span>
+            </li>
+            <li role="presentation">
+              <span>
+                <i class='fa fa-times-circle-o'></i>&nbsp;未通过&nbsp;</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class='panel-body' style='overflow-x:scroll' cg-busy="{promise:reqPromise,message:'加载中',backdrop:backdrop,delay:delay,minDuration:minDuration}">
+          <div class='' style='width:1600px;'>
+            <div class='row'>
+              <div class='col-lg-12'>
+                <!-- Table -->
+                <table class='table table-hover table-striped '>
+                  <thead>
+                    <tr>
+                      <!-- <th>操作</th> -->
+                      <th width='40px'>状态</th>
+                      <th width='100px'>需求日期</th>
+                      <th width='100px'>确认日期</th>
+                      <th width='80px'>需求名称</th>
+                      <th width='120px'>需求说明</th>
+                      <th width='40px'>共享频率</th>
+                      <th width='60px'>空间范围</th>
+                      <th width='80px'>数据级别</th>
+                      <th width='40px'>联系人</th>
+                      <th width='80px'>联系电话</th>
+                      <th width='80px'>对应部门</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat='DeptReq in requirementList | orderBy:"-create_time" '>
+                      <!-- <td><input type='checkbox' ng-click='deleteReq(DeptReq.id)' />删除</td> -->
+                      <td>
+                        <div ng-if='DeptReq.status == 0'>
+                          <span>
+                            <i class='fa fa-question-circle'></i>
+                          </span>
+                        </div>
+                        <div ng-if='DeptReq.status == 1'>
+                          <span>
+                            <i class='fa fa-check-circle'></i>
+                          </span>
+                        </div>
+                        <div ng-if='DeptReq.status == 2'>
+                          <span>
+                            <i class='fa fa-times-circle-o'></i>
+                          </span>
+                        </div>
+                      </td>
+                      <td title='{{DeptReq.create_time| date:"yyyy-MM-dd HH:mm:ss"}}'>{{DeptReq.create_time| date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                      <td title='{{DeptReq.response_time |
+                      date:"yyyy-MM-dd HH:mm:ss"}}'>{{DeptReq.response_time |
+                      date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                      <td title='{{DeptReq.requiement_name}}'>{{DeptReq.requiement_name}}</td>
+                      <td title='{{DeptReq.requiement_desc}}'>{{DeptReq.requiement_desc}}</td>
+                      <td title='{{DeptReq.sharefrequency}}'>{{DeptReq.sharefrequency}}</td>
+                      <td title='{{DeptReq.area_range}}'>{{DeptReq.area_range}}</td>
+                      <td title='{{DeptReq.regionallevel}}'>{{DeptReq.regionallevel}}</td>
+                      <td title='{{DeptReq.linkman}}'>{{DeptReq.linkman}}</td>
+                      <td title='{{DeptReq.phone}}'>{{DeptReq.phone}}</td>
+                      <td title='{{DeptReq.response_dep_name}}'>
+                        {{DeptReq.response_dep_name}}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class='pull-right'>
+          <uib-pagination boundary-links='true' ng-change='Paging.pageChanged()' total-items='Paging.totalItems' items-per-page='Paging.itemsPerPage' ng-model='Paging.currentPage' max-size='Paging.maxSize' class='pagination' boundary-link-numbers='true' rotate='false' first-text='首页' last-text='末页' next-text='下一页' previous-text='上一页'></uib-pagination>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add requirement modal -->
+<script type='text/ng-template' id='add-req-modal.html'>
+  <form class="form-horizontal publish-req-modal" name='reqAddForm'>
+
+    <div class='modal-header'>
+      <i class="fa fa-server"></i>
+      {{Modal.type}}需求
+      <button type='button' class='close' data-dismiss='modal' ng-click='Modal.cancel()'>&times;</button>
+    </div>
+    <div class='modal-body'>
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">
+          <span class='require-sign'>*</span>需求名称 :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" ng-model='Modal.DepRequirment.requiement_name' required>
+          <span class='help-info'>需具体说明需求具体名称</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">
+          <span class='require-sign'>*</span>需求说明 :</label>
+        <div class="col-sm-10">
+          <textarea type="text" class="form-control" ng-model='Modal.DepRequirment.requiement_desc' required></textarea>
+          <span class='help-info pull-left'>简要说明需求基本信息</span>
+          <span class='pull-right'>(最多256个汉字)</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">
+          <span class='require-sign'>*</span>共享频率:</label>
+        <div class="col-sm-10">
+          <span ng-repeat="sfItem in  shareFrequencyList">
+            <input type="radio" ng-model='Modal.DepRequirment.share_frequency' value="{{sfItem.id}}">
+            {{sfItem.dict_name}}
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">
+          <span class='require-sign'>*</span>空间范围:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" required ng-model='Modal.DepRequirment.area_range'>
+          <span class='help-info'>
+            可取得数据的地区名称，如全国，四川省，各省等。
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">分地区数据级别:</label>
+        <div class="col-sm-10">
+          <span ng-repeat="dataLevel in  dataLevelList">
+            <input type="checkbox" value="{{dataLevel.ID}}" ng-checked="dataLevelReqSelection.indexOf(dataLevel.id) > -1" ng-click="toggleDataLevelReqSelection(dataLevel)">
+            {{dataLevel.dict_name}}
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">
+          <span class='require-sign'>*</span>联系人 :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" ng-model='Modal.DepRequirment.linkman' required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">
+          <span class='require-sign'>*</span>联系电话 :</label>
+        <div class="col-sm-10">
+          <input type="text" name='contact_phone' ng-pattern='/^(\d{3,4}-)?\d{7,8}$|(1[3|4|5|7|8]\d{9})/'  class="form-control" ng-model='Modal.DepRequirment.phone' required>
+          <p class='help-block' ng-show='reqAddForm.contact_phone.$invalid && !reqAddForm.contact_phone.$pristine'>请输入正确的联系电话</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">
+          <span class='require-sign'>*</span>需求对应部门:</label>
+        <div class="col-sm-10">
+          <div style='display:inline-block' isteven-multi-select input-model="deptList" output-model="reqParent.outputDeptList" button-label="dep_name" item-label="dep_name" tick-property="ticked" selection-mode="single" max-height="250px"></div>
+          <p class='help-block' ng-show='error'>请选择需求对应部门</p>
+          <!-- <select class="form-control" ng-model='Modal.DepRequirment.response_dep_id'>
+            <option ng-repeat="dep in  deptList" value='{{dep.ID}}'>{{dep.DEP_NAME}}</option>
+          </select> -->
+        </div>
+      </div>
+
+    </div>
+    <div class='modal-footer'>
+      <button class='btn btn-default' type='button' ng-click='Modal.cancel()'>取消</button>
+      <button class='btn btn-success' ng-disabled="reqAddForm.$invalid" type='submit' ng-click='Modal.confirm(reqAddForm.$valid)'>保存</button>
+    </div>
+  </div>
+</form>
+</script>

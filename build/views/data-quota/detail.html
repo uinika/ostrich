@@ -1,0 +1,56 @@
+<div id='data-quota-list'>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <i class="fa fa-paperclip"> 指标详情</i>
+    </div>
+    <div class="panel-body">
+      <uib-tabset class='quota-detail' active="active">
+        <uib-tab index="0" heading="指标详情">
+          <ul class="list-group">
+            <li class="list-group-item">指标编号：{{DataQuotaDetail.quota_sn}}</li>
+            <li class="list-group-item">指标名称:{{DataQuotaDetail.quota_name}}</li>
+            <li class="list-group-item">指标别称:{{DataQuotaDetail.alias}}</li>
+            <li class="list-group-item">计量单位：{{DataQuotaDetail.meter_unit}}</li>
+            <li class="list-group-item">指标详细解释：{{DataQuotaDetail.quota_detail}}</li>
+            <li class="list-group-item">计算方法：{{DataQuotaDetail.calculate_method}}</li>
+            <li class="list-group-item">共享频率：{{DataQuotaDetail.sharefrequency}}</li>
+            <li class="list-group-item">空间范围：{{DataQuotaDetail.area_range}}</li>
+            <li class="list-group-item">分地区数据级别：{{DataQuotaDetail.regionallevel}}</li>
+            <li class="list-group-item">来源部门：{{DataQuotaDetail.depname}}</li>
+            <li class="list-group-item">共享级别：{{DataQuotaDetail.sharelevel}}</li>
+            <li class="list-group-item">数据存储类型：{{DataQuotaDetail.datastoretype}}</li>
+            <li class="list-group-item">数据精度：{{DataQuotaDetail.data_precision}}</li>
+            <li class="list-group-item">数据长度：{{DataQuotaDetail.data_length}}</li>
+            <li class="list-group-item">创建时间：{{DataQuotaDetail.create_time}}</li>
+            <li class="list-group-item">数据表示格式：{{DataQuotaDetail.datashowformat}}</li>
+            <li class="list-group-item">是否涉密：{{DataQuotaDetail.secretflag}}</li>
+            <li class="list-group-item">联系人：{{DataQuotaDetail.linkman}}</li>
+            <li class="list-group-item">联系电话：{{DataQuotaDetail.contact_phone}}</li>
+          </ul>
+        </uib-tab>
+        <uib-tab class='quota-example' index="1" heading="样例数据">
+
+          <div class="table-responsive">
+              <table class='table table-hover table-striped table-bordered'>
+                <caption>{{DataQuotaExample.file_name}}</caption>
+                 <thead>
+                   <tr>
+                     <th ng-repeat='title in DataQuotaExample.file_content.title track by $index'>{{title}}</th>
+                   </tr>
+                 </thead>
+                 <tbody>
+                   <tr ng-repeat='columns in DataQuotaExample.file_content.column track by $index'>
+                     <td ng-repeat='column in columns track by $index'>
+                       {{column}}
+                     </td>
+                   </tr>
+                 </tbody>
+               </table>
+            </div>
+        </uib-tab>
+
+      </uib-tabset>
+
+    </div>
+  </div>
+</div>

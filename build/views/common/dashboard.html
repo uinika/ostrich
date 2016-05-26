@@ -1,0 +1,158 @@
+<div id='dashboard' class='container'>
+  <section class='first-section row'>
+    <div class='left col-md-4'>
+      <div class='panel panel-default pannel-patch'>
+        <div class='panel-heading'>
+          <i class='fa fa-home'> 部门列表</i>
+        </div>
+        <div class='panel-body'>
+          <!-- Will be removed -->
+          <div class='bureau-filter input-group input-group-sm'>
+            <span class='input-group-addon'>
+              <span class='glyphicon glyphicon-search'></span>
+            </span>
+            <input ng-model="query" type='text' placeholder='请输入部门中文名或拼音......' class='form-control'>
+          </div>
+          <div class='bureau-list'>
+            <div ng-repeat='bureau in Bureaus | filter:query' class='bureau-item col-md-3'>
+              <a ui-sref='main.data-quota.list({quota_dep_id: bureau.id})' class='thumbnail'>
+                <img ng-src='styles/images/bureau/{{::bureau.dep_en_name}}' title='{{::bureau.dep_name}}'>
+              </a>
+              <div class="caption">
+                {{bureau.dep_short_name}}
+              </div>
+            </div>
+          </div>
+          <!-- Will be removed -->
+        </div>
+      </div>
+    </div>
+    <div class='right col-md-4'>
+      <div class='panel panel-default pannel-patch'>
+        <div class='panel-heading'>
+          <i class='fa fa-server'> 指标总览</i>
+        </div>
+        <div class='quota_number panel-body'>
+          <wiserv-data-quota-overview-chart/>
+          <ul class="list-group ">
+            <li class="list-group-item">
+              指标总数<span class="list-number text-primary">{{SummaryDataQuota.data_quota_number}}</span>个
+              <span class='pull-right text-muted list-number-new'>(本月新增<span class="text-info">{{SummaryDataQuota.data_quota_number_inc}}</span>个)</span>
+            </li>
+            <li class="list-group-item">
+              提供部门<span class="list-number text-primary">{{SummaryDataQuota.department_number}}</span>个
+              <span class='pull-right text-muted list-number-new'>(本月新增<span class="text-info">{{SummaryDataQuota.department_number_inc}}</span>个)</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class='right col-md-4'>
+      <div class='panel panel-default pannel-patch'>
+        <div class='panel-heading'>
+          <i class='fa fa-share-alt'> 需求总览</i>
+        </div>
+        <div class='panel-body'>
+          <wiserv-requirement-overview-chart/>
+          <ul class="list-group">
+            <li class="list-group-item ">
+              需求总数<span class="list-number text-primary">{{SummaryRequirement.requiement_number}}</span>个
+              <span class='pull-right text-muted list-number-new'>(本月新增<span class="text-info">{{SummaryRequirement.requiement_number_inc}}</span>个)</span>
+            </li>
+            <li class="list-group-item">
+              涉及部门<span class="list-number text-primary">{{SummaryRequirement.department_number}}</span>个
+              <span class='pull-right text-muted list-number-new'>(本月新增<span class="text-info">{{SummaryRequirement.department_number_inc}}</span>个)</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class='second-section row'>
+    <div class='left col-md-6'>
+      <div class='panel panel-default pannel-patch'>
+        <div class='panel-heading'>
+          <i class='fa fa-cart-arrow-down'> 最新指标</i>
+          <a ui-sref='main.data-quota.list' class="pull-right text-primary">更多</a>
+        </div>
+        <table class='table table-hover table-condensed table-striped'>
+          <thead>
+            <tr>
+              <th>发布日期</th>
+              <th>指标名称</th>
+              <th>提供部门</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat='indicator in NewIndicators'>
+              <td>{{indicator.create_time | date:'yyyy-MM-dd'}}</td>
+              <td><a ui-sref='main.data-quota.detail({data_quota_id:indicator.id})'>{{indicator.quota_name}}</a></td>
+              <td>{{indicator.dep_short_name}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class='right col-md-6'>
+      <div class='panel panel-default pannel-patch'>
+        <div class='panel-heading'>
+          <i class='fa fa-pencil-square-o'> 最新需求</i>
+          <a ui-sref='main.department.requirement' class="pull-right text-primary">更多</a>
+        </div>
+        <table class='table table-hover table-condensed table-striped'>
+          <thead>
+            <tr>
+              <th>发布日期</th>
+              <th>需求内容</th>
+              <th>需求单位</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat='requirement in Requirements'>
+              <td>{{requirement.create_time | date:'yyyy-MM-dd'}}</td>
+              <td><a ui-sref='main.department.requirement.detail({ID:requirement.id})'>{{requirement.requiement_name}}</a></td>
+              <td>{{requirement.dep_short_name}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class='third-section row'>
+    <div class='panel panel-default'>
+      <div class='panel-heading'>
+        <i class='fa fa-bar-chart'> 关注部门指标</i>
+        <a ui-sref='main.data-quota.list(departmentID)' class="pull-right text-primary">更多</a>
+      </div>
+      <uib-tabset type='pills' active="activeForm">
+        <uib-tab classes='btn-xs' ng-repeat="followDep in followDeps" ng-click='select(followDep.follow_dep_id)' index="$index + 1" heading="{{followDep.follow_dep_name}}">
+          <table class='table table-hover table-condensed table-striped table-bordered'>
+            <thead>
+              <tr>
+                <th>发布日期</th>
+                <th>指标名称</th>
+                <th>共享频率</th>
+                <th>空间范围</th>
+                <th>数据级别</th>
+                <th>提供部门</th>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat='indicator in followDepIndicators'>
+                <td>{{::indicator.create_time | date:'yyyy-MM-dd'}}</td>
+                <td ><a ui-sref='main.data-quota.detail({data_quota_id:indicator.id})'>{{::indicator.quota_name}}</a></td>
+                <td>{{::indicator.sharefrequency}}</td>
+                <td>{{::indicator.area_range}}</td>
+                <td>{{::indicator.regionallevel}}</td>
+                <td>{{::indicator.depname}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </uib-tab>
+    </uib-tabset>
+    </div>
+  </section>
+
+</div>
