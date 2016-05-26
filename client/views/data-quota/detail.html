@@ -4,8 +4,7 @@
       <i class="fa fa-paperclip"> 指标详情</i>
     </div>
     <div class="panel-body">
-      <h4 style='text-align:center'>{{DataQuotaExample.file_name}}</h4>
-      <uib-tabset active="active">
+      <uib-tabset class='quota-detail' active="active">
         <uib-tab index="0" heading="指标详情">
           <ul class="list-group">
             <li class="list-group-item">指标编号：{{DataQuotaDetail.quota_sn}}</li>
@@ -29,9 +28,11 @@
             <li class="list-group-item">联系电话：{{DataQuotaDetail.contact_phone}}</li>
           </ul>
         </uib-tab>
-        <uib-tab index="1" heading="样例数据">
+        <uib-tab class='quota-example' index="1" heading="样例数据">
+
           <div class="table-responsive">
               <table class='table table-hover table-striped table-bordered'>
+                <caption>{{DataQuotaExample.file_name}}</caption>
                  <thead>
                    <tr>
                      <th ng-repeat='title in DataQuotaExample.file_content.title track by $index'>{{title}}</th>

@@ -1133,3 +1133,12 @@ input.ng-touched.ng-invalid {
 #data-quota-list .pager li .active {
   background: red;
 }
+#data-quota-list .quota-detail {
+  font-size: 13px;
+}
+#data-quota-list .quota-detail .list-group {
+  margin-top: 6px;
+}
+#data-quota-list .quota-example .table-responsive {
+  margin-top: 25px;
+}
