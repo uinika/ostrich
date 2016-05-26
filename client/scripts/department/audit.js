@@ -44,6 +44,7 @@ Audit.controller('Department.Audit.Controller.Main', ['$scope', '$q', 'Departmen
 Audit.controller('Department.Audit.Controller.info', ['$scope', '$state', '$q', 'Department.Audit.Service.Http', '$stateParams',
   function( $scope, $state, $q, Http, $stateParams) {
     $scope.TabExampShow = true;
+    $scope.TabRequireShow = true;
     $scope.Tab = {};
     $scope.Tab.show = {};
     $scope.Tab.show.auditInfo = true;
@@ -70,7 +71,14 @@ Audit.controller('Department.Audit.Controller.info', ['$scope', '$state', '$q', 
         Http.getQuotaRequirement({
           dataquotaid: $stateParams.DATAQUOTAID
         }).then(function(reqRes) {
-          $scope.QuotaReqDetail = reqRes.data.body[0];
+
+          if(reqRes.data.body.length == 0) {
+            $scope.TabRequireShow = false;
+          }
+          else {
+            $scope.QuotaReqDetail = reqRes.data.body[0];
+          }
+
         })
 
       })

@@ -179,9 +179,10 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
     $scope.DataQuota.data_show_format_add = '';
     $scope.DataQuota.data_store_type_add = '';
     $scope.DataQuota.calculate_method = '';
+    $scope.DataQuota.file_name = '';
     $scope.DataQuota.linkman = '';
     $scope.DataQuota.contact_phone = '';
-    $scope.DataQuota.file_name = '';
+    $scope.DataQuota.secret_flag = '';
 
 
     Http.getDepartmentList().then(function(result) {

@@ -53,7 +53,7 @@
             <li ng-hide='!TabExampShow' role="presentation" ng-class="{true: 'active', false: 'inactive'}[Tab.show.auditExampData]">
               <a ng-click='tabSwitcher("auditExampData")' aria-controls="exampleData" role="tab" data-toggle="tab">样例数据</a>
             </li>
-            <li role="presentation" ng-class="{true: 'active', false: 'inactive'}[Tab.show.requirementInfo]">
+            <li role="presentation" ng-hide='!TabRequireShow' ng-class="{true: 'active', false: 'inactive'}[Tab.show.requirementInfo]">
               <a ng-click='tabSwitcher("requirementInfo")' aria-controls="requirementInfo" role="tab" data-toggle="tab">需求</a>
             </li>
           </ul>
