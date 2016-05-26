@@ -61,8 +61,7 @@
     <div class="modal-body">
       <div class="form-group has-feedback">
         <label for="" class="col-sm-3 control-label">登录名
-          :
-        </label>
+        <span class="require-sign">*</span>:</label>
         <div class="col-sm-8">
           <input type="text" class="form-control" name="name" placeholder={{placeholder.name}} ng-model="sysUser.username" required ng-blur="Modal.validUser(sysUser.username)">
           <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="(!validUser)&&(userAddForm.name.$valid)"></span>
@@ -71,7 +70,7 @@
       </div>
       <div class="form-group has-feedback" ng-show="Modal.type=='添加'">
         <label for="" class="col-sm-3 control-label">密码
-          :</label>
+        <span class="require-sign">*</span>:</label>
         <div class="col-sm-8">
           <input type="password" class="form-control"  ng-copy="false" name="password" placeholder={{placeholder.password}} ng-model="sysUser.password" required>
           <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="(userAddForm.password.$valid)"></span>
@@ -80,7 +79,7 @@
       </div>
       <div class="form-group has-feedback" ng-show="Modal.type=='添加'">
         <label for="" class="col-sm-3 control-label">确认密码
-          :</label>
+        <span class="require-sign">*</span>:</label>
         <div class="col-sm-8">
           <input type="password" class="form-control"  ng-paste="false" name="password1" placeholder={{placeholder.password1}} ng-model="sysUser.password1"  required ng-blur="Modal.validPword()">
           <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="(userAddForm.password1.$valid)&&(!validPword)"></span>
@@ -88,7 +87,8 @@
         </div>
       </div>
       <div class="form-group ">
-        <label for="" class="col-sm-3 control-label">部门名称:</label>
+        <label for="" class="col-sm-3 control-label">部门名称
+        <span class="require-sign">*</span>:</label>
         <div class="col-sm-8">
           <select class="form-control" name="depId" ng-model="sysUser.dep_id" required >
             <option ng-repeat="dep in  deptList" value="{{dep.id}}" selected>{{dep.dep_name}}</option>
@@ -96,7 +96,8 @@
         </div>
       </div>
       <div class="form-group has-feedback">
-        <label for="" class="col-sm-3 control-label">姓名:</label>
+        <label for="" class="col-sm-3 control-label">姓名
+        <span class="require-sign">*</span>:</label>
         <div class="col-sm-8">
           <input type="text" class="form-control" name="personName" placeholder={{placeholder.personName}} ng-model="sysUser.person_name" required>
           <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="(userAddForm.personName.$valid)"></span>
@@ -104,7 +105,8 @@
         </div>
       </div>
       <div class="form-group has-feedback">
-        <label for="" class="col-sm-3 control-label">联系电话:</label>
+        <label for="" class="col-sm-3 control-label">联系电话
+        <span class="require-sign">*</span>:</label>
         <div class="col-sm-8">
           <input type="text" class="form-control" name="phone"placeholder={{placeholder.phone}} ng-model="sysUser.phone" required  ng-blur="Modal.validPhone()">
           <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="(userAddForm.phone.$valid)&&(!validPhone)"></span>
@@ -112,7 +114,8 @@
         </div>
       </div>
       <div class="form-group has-feedback">
-        <label for="" class="col-sm-3 control-label">邮箱:</label>
+        <label for="" class="col-sm-3 control-label">邮箱
+        <span class="require-sign">*</span>:</label>
         <div class="col-sm-8">
           <input type="email" class="form-control" name="email" placeholder={{placeholder.email}} ng-model="sysUser.email" required ng-blur="Modal.validEmail(userAddForm.email.$error.email)">
           <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="(userAddForm.email.$valid)&&(!validEmail)"></span>
@@ -138,7 +141,8 @@
     </div>
     <div class="modal-body">
       <div class="form-group has-feedback">
-        <label for="" class="col-sm-3 control-label">原密码:</label>
+        <label for="" class="col-sm-3 control-label">原密码
+        <span class="require-sign">*</span>:</label>
         <div class="col-sm-8">
           <input type="password" class="form-control"  ng-copy="false" name="password_1" placeholder={{placeholder.password_1}} ng-model="Modal.password_pre" required ng-blur="Modal.validPword1()">
           <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="(passwordForm.password_1.$valid) && (!password_1)"></span>
@@ -146,7 +150,8 @@
         </div>
       </div>
       <div class="form-group has-feedback">
-        <label for="" class="col-sm-3 control-label">新密码:</label>
+        <label for="" class="col-sm-3 control-label">新密码
+        <span class="require-sign">*</span>:</label>
         <div class="col-sm-8">
           <input type="password" class="form-control"  ng-copy="false" name="password_2" placeholder={{placeholder.password_2}} ng-model="Modal.p2" required>
           <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="(passwordForm.password_2.$valid)"></span>
@@ -155,7 +160,8 @@
         </div>
       </div>
       <div class="form-group has-feedback">
-        <label for="" class="col-sm-3 control-label">确认密码:</label>
+        <label for="" class="col-sm-3 control-label">确认密码
+        <span class="require-sign">*</span>:</label>
         <div class="col-sm-8">
           <input type="password" class="form-control"  ng-paste="false" name="password_3" placeholder={{placeholder.password_3}} ng-model="Modal.password" required ng-blur="Modal.validPword()">
           <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="(passwordForm.password_3.$valid) && (!password_3)"></span>

@@ -68,7 +68,7 @@
     <div class="modal-body">
       <div class="form-group has-feedback">
         <label for="" class="col-sm-3 control-label">部门编号
-          :</label>
+        <span class="require-sign">*</span>:</label>
         <div class="col-sm-8">
           <input type="text" class="form-control" name="dep_sn" placeholder={{placeholder.dep_sn}} ng-model="department.dep_sn" required>
           <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="(departmentAddForm.dep_sn.$valid)"></span>
@@ -77,7 +77,7 @@
       </div>
       <div class="form-group has-feedback">
         <label for="" class="col-sm-3 control-label">排序号
-          :</label>
+        <span class="require-sign">*</span>:</label>
         <div class="col-sm-8">
           <input type="number" class="form-control" name="order_by" placeholder={{placeholder.order_by}} ng-model="department.order_by " required>
           <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="(departmentAddForm.order_by.$valid)"></span>
@@ -86,7 +86,7 @@
       </div>
       <div class="form-group has-feedback">
         <label for="" class="col-sm-3 control-label">部门全称
-          :</label>
+        <span class="require-sign">*</span>:</label>
         <div class="col-sm-8">
           <input type="text" class="form-control" name="dep_name" placeholder={{placeholder.dep_name}} ng-model="department.dep_name" required ng-blur="Modal.validDepName(department.dep_name)">
           <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="(!validDepName) && (departmentAddForm.dep_name.$valid)"></span>
@@ -95,7 +95,7 @@
       </div>
       <div class="form-group has-feedback">
         <label for="" class="col-sm-3 control-label">部门短名称
-          :</label>
+        <span class="require-sign">*</span>:</label>
         <div class="col-sm-8">
           <input type="text" class="form-control" name="dep_short_name" placeholder={{placeholder.dep_short_name}} ng-model="department.dep_short_name" required >
           <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="(departmentAddForm.dep_short_name.$valid)"></span>
@@ -104,7 +104,7 @@
       </div>
       <div class="form-group has-feedback">
         <label for="" class="col-sm-3 control-label">上级部门
-          <span class="require-sign">&nbsp</span>:</label>
+        <span class="require-sign">&nbsp</span>:</label>:</label>
         <div class="col-sm-8">
           <select class="form-control" ng-model="department.parent_id" ng-change="Modal.TypeArea()">
             <option ng-if="department.parent_id!='0'" ng-repeat="dep in  AllDepartments" value="{{dep.id}}">{{dep.dep_name}}</option>
@@ -113,7 +113,8 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="" class="col-sm-3 control-label">机构类型:</label>
+        <label for="" class="col-sm-3 control-label">机构类型
+        <span class="require-sign">*</span>:</label>
         <div class="col-sm-8">
           <select class="form-control" ng-model="department.dep_type">
             <option ng-if="department.parent_id!='0'" value="{{department1.dep_type}}" selected>{{department1.dep_type_name}}</option>
@@ -122,7 +123,8 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="" class="col-sm-3 control-label">区域名称:</label>
+        <label for="" class="col-sm-3 control-label">区域名称
+        <span class="require-sign">*</span>:</label>
         <div class="col-sm-8">
           <select class="form-control" ng-model="department.area_code">
             <option ng-if="department.parent_id!='0'" value="{{department1.area_code}}" selected>{{department1.area_code_name}}</option>
@@ -131,7 +133,8 @@
         </div>
       </div>
       <div class="form-group has-feedback">
-        <label for="" class="col-sm-3 control-label">联系人:</label>
+        <label for="" class="col-sm-3 control-label">联系人
+        <span class="require-sign">*</span>:</label>
         <div class="col-sm-8">
           <input type="text" class="form-control" name="contacts" placeholder={{placeholder.contacts}} ng-model="department.contacts" required>
           <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="(departmentAddForm.contacts.$valid)"></span>
@@ -139,7 +142,8 @@
         </div>
       </div>
       <div class="form-group has-feedback">
-        <label for="" class="col-sm-3 control-label">联系电话:</label>
+        <label for="" class="col-sm-3 control-label">联系电话
+        <span class="require-sign">*</span>:</label>
         <div class="col-sm-8">
           <input type="num" class="form-control" name="contact_phone" placeholder={{placeholder.contact_phone}} ng-model="department.contact_phone" required  ng-blur="Modal.validPhone()">
           <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="(departmentAddForm.contact_phone.$valid)&&(!validPhone)"></span>
