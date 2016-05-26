@@ -156,46 +156,20 @@
               </table>
             </div>
             <div role="tabpanel" class="tab-pane" ng-class="{true: 'active', false: 'inactive'}[Tab.show.requirementInfo]">
-              <table class='table req-detail no-border' style='width:60%;' border='0'>
-                <tbody>
-                  <tr>
-                    <td align='right'>需求发布日期：</td>
-                    <td>{{QuotaReqDetail.create_time | date:"yyyy-MM-dd HH:mm:ss"}}</td>
-                  </tr>
-                  <tr>
-                    <td align='right'>需求名称：</td>
-                    <td>{{QuotaReqDetail.requiement_name}}</td>
-                  </tr>
-                  <tr>
-                    <td align='right'>需求说明：</td>
-                    <td>{{QuotaReqDetail.requiement_desc}}</td>
-                  </tr>
-                  <tr>
-                    <td align='right'>共享频率：</td>
-                    <td>{{QuotaReqDetail.sharefrequency}}</td>
-                  </tr>
-                  <tr>
-                    <td align='right'>空间范围：</td>
-                    <td>{{QuotaReqDetail.area_range}}</td>
-                  </tr>
-                  <tr>
-                    <td align='right'>数据级别：</td>
-                    <td>{{QuotaReqDetail.regionallevel}}</td>
-                  </tr>
-                  <tr>
-                    <td align='right'>联系人：</td>
-                    <td>{{QuotaReqDetail.linkman}}</td>
-                  </tr>
-                  <tr>
-                    <td align='right'>联系电话：</td>
-                    <td>{{QuotaReqDetail.phone}}</td>
-                  </tr>
-                  <tr>
-                    <td align='right'>来源：</td>
-                    <td>{{QuotaReqDetail.dep_name}}</td>
-                  </tr>
-                </tbody>
-              </table>
+              <ul class='relate-req'>
+                <li ng-repeat='QuotaReqDetail in QuotaReqDetailList'>
+                  <div class='col-sm-4'><label>发布日期：</label>{{QuotaReqDetail.create_time | date:"yyyy-MM-dd HH:mm:ss"}}</div>
+                  <div class='col-sm-8'><label>需求名称：</label>{{QuotaReqDetail.requiement_name}}</div>
+                  <div class='col-sm-4'><label>共享频率：</label>{{QuotaReqDetail.sharefrequency}}</div>
+                  <div class='col-sm-4'><label>空间范围：</label>{{QuotaReqDetail.area_range}}</div>
+                  <div class='col-sm-4'><label>数据级别：</label>{{QuotaReqDetail.regionallevel}}</div>
+                  <div class='col-sm-4'><label>联系电话：</label>{{QuotaReqDetail.phone}}</div>
+                  <div class='col-sm-4'><label>联系人：</label>{{QuotaReqDetail.linkman}}</div>
+                  <div class='col-sm-4'><label>来源：</label>{{QuotaReqDetail.dep_name}}</div>
+                  <div class='col-sm-12'><label>需求说明：</label>{{QuotaReqDetail.requiement_desc}}</div>
+                </li>
+              </ul>
+
             </div>
 
           </div>

@@ -1023,6 +1023,16 @@ input.ng-touched.ng-invalid {
   padding: 20px 15px 10px;
   border: 1px solid #DDD;
 }
+#department-audit-info .audit-wrap .tab-content .relate-req {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+#department-audit-info .audit-wrap .tab-content .relate-req li {
+  padding: 10px 0;
+  border-bottom: 1px solid #CCC;
+  overflow: hidden;
+}
 #department-audit-info .audit-wrap .tab-content .data-title {
   text-align: center;
 }

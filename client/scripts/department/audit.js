@@ -76,7 +76,7 @@ Audit.controller('Department.Audit.Controller.info', ['$scope', '$state', '$q', 
             $scope.TabRequireShow = false;
           }
           else {
-            $scope.QuotaReqDetail = reqRes.data.body[0];
+            $scope.QuotaReqDetailList = reqRes.data.body;
           }
 
         })
