@@ -173,8 +173,8 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
 var Config = angular.module('Config', []);
 
 Config.constant('API', {
-  // path: 'http://localhost:8080/drrp/api' //发布
-  path: 'http://172.16.1.78:8080/api' //测试
+  path: 'http://localhost:8080/drrp/api' //发布
+  // path: 'http://172.16.1.78:8080/api' //测试
 });
 
 'use strict';
@@ -1634,7 +1634,7 @@ Audit.controller('Department.Audit.Controller.info', ['$scope', '$state', '$q', 
             $scope.TabRequireShow = false;
           }
           else {
-            $scope.QuotaReqDetail = reqRes.data.body[0];
+            $scope.QuotaReqDetailList = reqRes.data.body;
           }
 
         })
