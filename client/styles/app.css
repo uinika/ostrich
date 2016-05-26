@@ -272,6 +272,11 @@ input.ng-touched.ng-invalid {
   font-size: inherit;
   margin: 0;
 }
+#department-main .department-main .panel-list .panel-follow-depart .panel-body {
+  padding: 15px 0;
+  height: 260px;
+  overflow: auto;
+}
 #department-main .department-main .focus-bureau-list {
   height: 200px;
 }
