@@ -99,18 +99,15 @@ Department.controller('Department.Controller.Main', ['$cookies', '$scope', '$q',
       });
     }
 
-    //select close callback
-    $scope.closeFn = function() {
-      toFollowDep();
-    }
-
     // 已关注部门列表
     Http.getFollowDepList().then(function(result) {
       $scope.parentObj.outputAllDeptList = result.data.body;
       $scope.followDeptList = _.uniq($scope.parentObj.outputAllDeptList);
       //console.log($scope.parentObj.outputAllDeptList);
       Http.getDepartmentFollowList().then(function(result) {
-        $scope.parentObj.deptAllList = result.data.body;
+        $scope.parentObj.deptAllList = _.remove(result.data.body, function(item) {
+          return item.dep_id != DEP_ID;
+        });
         $scope.parentObj.outputDeptList = [];
         console.log($scope.parentObj.deptAllList);
         console.log($scope.parentObj.outputAllDeptList);
