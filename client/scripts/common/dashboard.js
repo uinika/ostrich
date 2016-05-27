@@ -168,7 +168,7 @@ Dashboard.directive('wiservDataQuotaOverviewChart', [
               }, {
                 name: '指标总数',
                 type: 'pie',
-                radius: ['70%', '90%'],
+                radius: ['70%', '85%'],
                 data: [{
                   value: summary.data_quota_number,
                   name: '指标总数'
@@ -231,7 +231,7 @@ Dashboard.directive('wiservRequirementOverviewChart', [
               }, {
                 name: '需求总数',
                 type: 'pie',
-                radius: ['70%', '90%'],
+                radius: ['70%', '85%'],
                 data: [{
                   value: summary.requiement_number,
                   name: '需求总数'
