@@ -29,26 +29,24 @@
           </ul>
         </uib-tab>
         <uib-tab class='quota-example' index="1" heading="样例数据">
-
-          <div class="table-responsive">
-              <table class='table table-hover table-striped table-bordered'>
-                <caption>{{DataQuotaExample.file_name}}</caption>
-                 <thead>
-                   <tr>
-                     <th ng-repeat='title in DataQuotaExample.file_content.title track by $index'>{{title}}</th>
-                   </tr>
-                 </thead>
-                 <tbody>
-                   <tr ng-repeat='columns in DataQuotaExample.file_content.column track by $index'>
-                     <td ng-repeat='column in columns track by $index'>
-                       {{column}}
-                     </td>
-                   </tr>
-                 </tbody>
-               </table>
-            </div>
+        <div class="table-responsive">
+          <table class='table table-hover table-striped table-bordered'>
+            <caption>{{DataQuotaExample.file_name}}</caption>
+             <thead>
+               <tr>
+                 <th ng-repeat='title in DataQuotaExample.file_content.title track by $index'>{{title}}</th>
+               </tr>
+             </thead>
+             <tbody>
+               <tr ng-repeat='columns in DataQuotaExample.file_content.column track by $index'>
+                 <td ng-repeat='column in columns track by $index'>
+                   {{column}}
+                 </td>
+               </tr>
+             </tbody>
+           </table>
+          </div>
         </uib-tab>
-
       </uib-tabset>
 
     </div>
