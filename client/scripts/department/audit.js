@@ -48,6 +48,8 @@ Audit.controller('Department.Audit.Controller.info', ['$scope', '$state', '$q', 
     $scope.Tab = {};
     $scope.Tab.show = {};
     $scope.Tab.show.auditInfo = true;
+    $scope.AuditInfo = {};
+    $scope.AuditInfo.audit_opinion = '';
 
     // get audit detail by id
     Http.getQuotaDetail({
@@ -111,6 +113,11 @@ Audit.controller('Department.Audit.Controller.info', ['$scope', '$state', '$q', 
 
 
     $scope.submitAudit = function() {
+      console.log($scope.AuditInfo.audit_status);
+      if(!$scope.AuditInfo.audit_status) {
+        $scope.auditError = true;
+        return;
+      }
       $scope.AuditInfo.ID = $stateParams.AUDITID;
       Http.updateAuditDetail($scope.AuditInfo).then(function(result) {
         if (200 == result.data.head.status) {
