@@ -1071,6 +1071,9 @@ input.ng-touched.ng-invalid {
 #data-quota-main .left {
   padding-left: 0;
 }
+#data-quota-main .left .panel {
+  cursor: pointer;
+}
 #data-quota-main .left .menu {
   margin: 10px 0;
   padding: 0;
@@ -1085,6 +1088,16 @@ input.ng-touched.ng-invalid {
 #data-quota-main .left .list-group .list-group-item:HOVER {
   background: #FBFBFB;
   color: #337AC8;
+}
+#data-quota-main .left [type=tabs] {
+  margin-left: 2px;
+}
+#data-quota-main .left [type=tabs] a {
+  margin-right: 0;
+  padding: 5px 14px;
+}
+#data-quota-main .left [type=tabs] .menu {
+  margin-top: 20px;
 }
 #data-quota-main .right {
   padding-right: 0;
