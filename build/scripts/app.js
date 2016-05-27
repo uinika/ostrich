@@ -174,7 +174,6 @@ var Config = angular.module('Config', []);
 
 Config.constant('API', {
   path: 'http://localhost:8080/drrp/api' //发布
-  // path: 'http://172.16.1.78:8080/api' //测试
 });
 
 'use strict';
@@ -1098,9 +1097,9 @@ Dashboard.directive('wiservDataQuotaOverviewChart', [
                 formatter: "{a} <br/>{b}: {c} ({d}%)"
               },
               series: [{
-                name: '清单提供部门',
+                name: '指标提供部门',
                 type: 'pie',
-                selectedMode: 'single',
+                // selectedMode: 'single',
                 radius: [0, '60%'],
                 label: {
                   normal: {
@@ -1117,19 +1116,19 @@ Dashboard.directive('wiservDataQuotaOverviewChart', [
                 },
                 data: [{
                   value: summary.department_number,
-                  name: '清单提供部门'
+                  name: '指标提供部门'
                 }, {
                   value: summary.department_number_inc,
                   name: '本月新增',
                   selected: true
                 }]
               }, {
-                name: '清单总数',
+                name: '指标总数',
                 type: 'pie',
-                radius: ['70%', '90%'],
+                radius: ['70%', '85%'],
                 data: [{
                   value: summary.data_quota_number,
-                  name: '清单总数'
+                  name: '指标总数'
                 }, {
                   value: summary.data_quota_number_inc,
                   name: '本月新增',
@@ -1163,7 +1162,7 @@ Dashboard.directive('wiservRequirementOverviewChart', [
               series: [{
                 name: '需求涉及部门',
                 type: 'pie',
-                selectedMode: 'single',
+                // selectedMode: 'single',
                 radius: [0, '60%'],
                 label: {
                   normal: {
@@ -1189,7 +1188,7 @@ Dashboard.directive('wiservRequirementOverviewChart', [
               }, {
                 name: '需求总数',
                 type: 'pie',
-                radius: ['70%', '90%'],
+                radius: ['70%', '85%'],
                 data: [{
                   value: summary.requiement_number,
                   name: '需求总数'
@@ -1224,7 +1223,7 @@ Dashboard.directive('wiservStatisticChart', [
               trigger: 'axis'
             },
             legend: {
-              data: ['清单', '需求']
+              data: ['指标', '需求']
             },
             xAxis: [{
               type: 'category',
@@ -1242,7 +1241,7 @@ Dashboard.directive('wiservStatisticChart', [
               }
             }],
             series: [{
-              name: '清单',
+              name: '指标',
               type: 'bar',
               data: INVENTORY.INVENTORY
             }, {
@@ -1516,10 +1515,11 @@ var DataQuota = angular.module('DataQuota', ['ui.router']);
 /** Main Controller */
 DataQuota.controller('DataQuota.Controller.Main', ['$scope', '$state', 'DataQuota.Service.Http',
   function($scope, $state, Http) {
+    window.scrollTo(0,0);
     // Menu configration
     $scope.treeOptions = {
       nodeChildren: "nodes",
-      dirSelectable: true,
+      dirSelectable: false,
       injectClasses: {
         ul: "a1",
         li: "a2",
@@ -1921,7 +1921,6 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
     $scope.DataQuota.file_name = '';
     $scope.DataQuota.linkman = '';
     $scope.DataQuota.contact_phone = '';
-    $scope.DataQuota.secret_flag = '';
 
 
     Http.getDepartmentList().then(function(result) {
@@ -2243,11 +2242,24 @@ DInventory.directive('fileModel', ['$parse', function($parse) {
     link: function(scope, element, attrs) {
       var model = $parse(attrs.fileModel);
       var modelSetter = model.assign;
-
+      scope.parentIvntObj = {};
       element.bind('change', function() {
-        scope.$apply(function() {
-          modelSetter(scope, element[0].files[0]);
-        });
+        var rgx=/(xls|xlsx)/i;
+        var fileSuffix = element[0].files[0].name;
+        var ext=fileSuffix.substring(fileSuffix.lastIndexOf(".")+1);
+        if(!rgx.test(ext)) {
+          scope.$apply(function() {
+              scope.parentIvntObj.fileNameError = true;
+          })
+
+        }
+        else {
+          scope.parentIvntObj.fileNameError = false;
+          scope.$apply(function() {
+            modelSetter(scope, element[0].files[0]);
+          });
+        }
+
       });
     }
   };
