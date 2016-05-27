@@ -25,7 +25,7 @@ var app = angular.module('app', [
 app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider', '$provide',
   function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $provide) {
     /** URL Location Mode */
-    $locationProvider.html5Mode({enabled: true});
+    $locationProvider.html5Mode({enabled: false});
     /** HTTP Interceptor */
     $httpProvider.interceptors.push(['$q',
       function($q) {
@@ -214,19 +214,19 @@ AdminDepartment.controller('Admin.Department.Controller.Main', ['$rootScope', '$
       });
     }
     getDepTotal();
-      Http.getDepartmentList().then(function(result) {
-        $scope.AllDepartments = result.data.body;
-      });
-      Http.getSysDict({
-        dict_category:"7"
-      }).then(function(result) {
-        $scope.types = result.data.body;
-      });
-      Http.getSysDict({
-        dict_category:"9"
-      }).then(function(result) {
-        $scope.areaNames = result.data.body;
-      });
+    Http.getDepartmentList().then(function(result) {
+      $scope.AllDepartments = result.data.body;
+    });
+    Http.getSysDict({
+      dict_category:"7"
+    }).then(function(result) {
+      $scope.types = result.data.body;
+    });
+    Http.getSysDict({
+      dict_category:"9"
+    }).then(function(result) {
+      $scope.areaNames = result.data.body;
+    });
 
     $scope.placeholder = {};
     $scope.placeholder.dep_sn = "必填";
@@ -517,9 +517,8 @@ var Admin = angular.module('Admin', ['ui.router','ngCookies']);
 /** DepartmentReq Controller */
 Admin.controller('Admin.Controller.Main', ['$cookies', '$scope', '$stateParams',
   function($cookies, $scope, $stateParams) {
-       var LoginUser = JSON.parse($cookies.get('User'));
-       $scope.depName = LoginUser.dep_name;
-       if($scope.depName == null){
+       var User = JSON.parse($cookies.get('User'));
+       if(User.id === "e147f177-1e83-11e6-ac02-507b9d1b58bb"){
          $scope.titleName ="用户/部门管理";
        }else{
          $scope.titleName = "用户管理";
@@ -534,9 +533,8 @@ var AdminUser = angular.module('Admin.User', ['ui.router','ngCookies']);
 AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', '$stateParams','AdminUser.Service.Http', 'AdminUser.Service.Component','$uibModal','$state',
   function($cookies, $scope, $q, $stateParams, Http, Component, $uibModal, $state) {
     var LoginUser = JSON.parse($cookies.get('User'));
-    var dep_id = LoginUser.dep_id;
-    var dep_name= LoginUser.dep_name;
-
+    var dep_id = ((LoginUser.id==='e147f177-1e83-11e6-ac02-507b9d1b58bb') ? null : LoginUser.dep_id);
+    var dep_name= ((LoginUser.id==='e147f177-1e83-11e6-ac02-507b9d1b58bb') ? null : LoginUser.dep_name);
     $scope.Paging = {};
     $scope.Paging.maxSize = 5;
     $scope.Paging.itemsPerPage = 10;
@@ -544,7 +542,7 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
     var _httpParams = {};
     _httpParams.limit =10;
     _httpParams.skip = 0;
-    _httpParams.dep_id = dep_id;
+    _httpParams.dep_id = ((LoginUser.id==='e147f177-1e83-11e6-ac02-507b9d1b58bb') ? null : dep_id);
     $scope.Paging.pageChanged = function() {
       _httpParams.skip = ($scope.Paging.currentPage - 1)*_httpParams.limit;
       getUserList(_httpParams);
@@ -560,13 +558,14 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
     }
     function getUserTotal(){
       Http.getUserTotal({
-        "dep_id":dep_id
+        "dep_id" : dep_id
       }).then(function(result) {
-        if (dep_id) {
-          $scope.UserTotal = result.data.body[0].number;
+        console.log(LoginUser.id);
+        if (LoginUser.id==='e147f177-1e83-11e6-ac02-507b9d1b58bb') {
+          var tatol =  result.data.body[0].number - 1 ;
+          $scope.UserTotal = tatol;
         }else {
-          $scope.UserTotal = result.data.body[0].number - 1;
-
+          $scope.UserTotal = result.data.body[0].number;
         }
         $scope.Paging.totalItems = $scope.UserTotal;
       });
@@ -1447,7 +1446,8 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
     // Handle above filter
     var filterParams = {};
     /* 共享级别 */
-    $scope.ShareLevelFilter = function(id){
+    $scope.ShareLevelFilter = function(id, index){
+      console.log(index);
       filterParams.share_level = id;
       if('ALL'===id){
         delete filterParams.share_level;
@@ -1457,7 +1457,8 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
       }
     };
     /* 共享频率 */
-    $scope.ShareFrequencyFilter = function(id){
+    $scope.ShareFrequencyFilter = function(id, index){
+      console.log(index);
       filterParams.share_frequency = id;
       if('ALL'===id){
         delete filterParams.share_frequency;
@@ -1468,7 +1469,8 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
     };
     /* 分地区数据级别 */
     filterParams.sys_dict_id = [];
-    $scope.DataLevelFilter = function(id){
+    $scope.DataLevelFilter = function(id, index){
+      console.log(index);
       if('ALL'===id){
         filterParams.sys_dict_id = [];
         getDataQuotaListByFilter(filterParams);
@@ -1606,6 +1608,8 @@ Audit.controller('Department.Audit.Controller.info', ['$scope', '$state', '$q', 
     $scope.Tab = {};
     $scope.Tab.show = {};
     $scope.Tab.show.auditInfo = true;
+    $scope.AuditInfo = {};
+    $scope.AuditInfo.audit_opinion = '';
 
     // get audit detail by id
     Http.getQuotaDetail({
@@ -1669,6 +1673,11 @@ Audit.controller('Department.Audit.Controller.info', ['$scope', '$state', '$q', 
 
 
     $scope.submitAudit = function() {
+      console.log($scope.AuditInfo.audit_status);
+      if(!$scope.AuditInfo.audit_status) {
+        $scope.auditError = true;
+        return;
+      }
       $scope.AuditInfo.ID = $stateParams.AUDITID;
       Http.updateAuditDetail($scope.AuditInfo).then(function(result) {
         if (200 == result.data.head.status) {

@@ -12,8 +12,8 @@
 
     </div>
     <div class="panel-body">
-<!-- 
-      <nav>
+
+      <!-- <nav>
         <ul class="pager">
           <li class="text-muted">信息资源格式</li>
           <li ng-click=""><a>全部</a></li>
@@ -25,7 +25,7 @@
         <ul class="pager">
           <li class="text-muted">共享级别</li>
           <li ng-click="ShareLevelFilter('ALL')"><a>全部</a></li>
-          <li ng-repeat='shareLevel in ShareLevels' ng-click='ShareLevelFilter(shareLevel.id)'><a>{{shareLevel.dict_name}}</a></li>
+          <li ng-repeat='shareLevel in ShareLevels' ng-click='ShareLevelFilter(shareLevel.id,  $index)'><a>{{shareLevel.dict_name}}</a></li>
         </ul>
       </nav>
 
@@ -41,7 +41,7 @@
         <ul class="pager">
           <li class="text-muted">共享频率</li>
           <li ng-click="ShareFrequencyFilter('ALL')"><a>全部</a></li>
-          <li ng-repeat='shareFrequency in ShareFrequencys' ng-click='ShareFrequencyFilter(shareFrequency.id)'><a>{{shareFrequency.dict_name}}</a></li>
+          <li ng-repeat='shareFrequency in ShareFrequencys' ng-click='ShareFrequencyFilter(shareFrequency.id, $index)'><a>{{shareFrequency.dict_name}}</a></li>
         </ul>
       </nav>
 
@@ -49,7 +49,7 @@
         <ul class="pager">
           <li class="text-muted">分地区数据级别</li>
           <li ng-click="DataLevelFilter('ALL')"><a>全部</a></li>
-          <li ng-repeat='dataLevel in DataLevels' ng-click='DataLevelFilter(dataLevel.id)'><a >{{dataLevel.dict_name}}</a></li>
+          <li ng-repeat='dataLevel in DataLevels' ng-click='DataLevelFilter(dataLevel.id, $index)'><a >{{dataLevel.dict_name}}</a></li>
         </ul>
       </nav>
 
