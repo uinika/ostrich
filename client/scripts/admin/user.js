@@ -5,9 +5,8 @@ var AdminUser = angular.module('Admin.User', ['ui.router','ngCookies']);
 AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', '$stateParams','AdminUser.Service.Http', 'AdminUser.Service.Component','$uibModal','$state',
   function($cookies, $scope, $q, $stateParams, Http, Component, $uibModal, $state) {
     var LoginUser = JSON.parse($cookies.get('User'));
-    var dep_id = LoginUser.dep_id;
-    var dep_name= LoginUser.dep_name;
-
+    var dep_id = ((LoginUser.id==='e147f177-1e83-11e6-ac02-507b9d1b58bb') ? null : LoginUser.dep_id);
+    var dep_name= ((LoginUser.id==='e147f177-1e83-11e6-ac02-507b9d1b58bb') ? null : LoginUser.dep_name);
     $scope.Paging = {};
     $scope.Paging.maxSize = 5;
     $scope.Paging.itemsPerPage = 10;
@@ -15,7 +14,7 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
     var _httpParams = {};
     _httpParams.limit =10;
     _httpParams.skip = 0;
-    _httpParams.dep_id = dep_id;
+    _httpParams.dep_id = ((LoginUser.id==='e147f177-1e83-11e6-ac02-507b9d1b58bb') ? null : dep_id);
     $scope.Paging.pageChanged = function() {
       _httpParams.skip = ($scope.Paging.currentPage - 1)*_httpParams.limit;
       getUserList(_httpParams);
@@ -31,13 +30,14 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
     }
     function getUserTotal(){
       Http.getUserTotal({
-        "dep_id":dep_id
+        "dep_id" : dep_id
       }).then(function(result) {
-        if (dep_id) {
-          $scope.UserTotal = result.data.body[0].number;
+        console.log(LoginUser.id);
+        if (LoginUser.id==='e147f177-1e83-11e6-ac02-507b9d1b58bb') {
+          var tatol =  result.data.body[0].number - 1 ;
+          $scope.UserTotal = tatol;
         }else {
-          $scope.UserTotal = result.data.body[0].number - 1;
-
+          $scope.UserTotal = result.data.body[0].number;
         }
         $scope.Paging.totalItems = $scope.UserTotal;
       });

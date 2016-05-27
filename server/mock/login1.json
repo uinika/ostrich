@@ -6,8 +6,13 @@
     "total": 0
   },
   "body": [{
-    "dep_id": null ,
-    "dep_name": null,
-    "username": "admin"
+    "id":"e147f177-1e83-11e6-ac02-507b9d1b58bb",
+    "username":"admin",
+    "password":"21232f297a57a5a743894a0e4a801fc3",
+    "dep_id":"9",
+    "person_name":null,
+    "phone":null,
+    "email":null,
+    "dep_name":"省政府办公厅"
     }]
 }

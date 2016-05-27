@@ -36,19 +36,19 @@ AdminDepartment.controller('Admin.Department.Controller.Main', ['$rootScope', '$
       });
     }
     getDepTotal();
-      Http.getDepartmentList().then(function(result) {
-        $scope.AllDepartments = result.data.body;
-      });
-      Http.getSysDict({
-        dict_category:"7"
-      }).then(function(result) {
-        $scope.types = result.data.body;
-      });
-      Http.getSysDict({
-        dict_category:"9"
-      }).then(function(result) {
-        $scope.areaNames = result.data.body;
-      });
+    Http.getDepartmentList().then(function(result) {
+      $scope.AllDepartments = result.data.body;
+    });
+    Http.getSysDict({
+      dict_category:"7"
+    }).then(function(result) {
+      $scope.types = result.data.body;
+    });
+    Http.getSysDict({
+      dict_category:"9"
+    }).then(function(result) {
+      $scope.areaNames = result.data.body;
+    });
 
     $scope.placeholder = {};
     $scope.placeholder.dep_sn = "必填";

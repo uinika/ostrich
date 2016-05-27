@@ -6,8 +6,13 @@
     "total": 0
   },
   "body": [{
-    "dep_id": 5 ,
-    "dep_name": "省统计局",
-    "username": "test"
+    "id":"e156e311-1e83-11e6-ac02-507b9d1b58bb",
+    "username":"gat",
+    "password":"c4ca4238a0b923820dcc509a6f75849b",
+    "dep_id":"10",
+    "person_name":null,
+    "phone":null,
+    "email":null,
+    "dep_name":"公安厅"
     }]
 }
