@@ -1071,8 +1071,14 @@ input.ng-touched.ng-invalid {
 #data-quota-main .left {
   padding-left: 0;
 }
-#data-quota-main .left .panel {
+#data-quota-main .left .panel-heading {
   cursor: pointer;
+}
+#data-quota-main .left .panel-heading:HOVER {
+  font-weight: bolder;
+}
+#data-quota-main .left .panel-heading:ACTIVE {
+  color: #337AB9;
 }
 #data-quota-main .left .menu {
   margin: 10px 0;
