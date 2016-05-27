@@ -140,9 +140,9 @@ Dashboard.directive('wiservDataQuotaOverviewChart', [
                 formatter: "{a} <br/>{b}: {c} ({d}%)"
               },
               series: [{
-                name: '清单提供部门',
+                name: '指标提供部门',
                 type: 'pie',
-                selectedMode: 'single',
+                // selectedMode: 'single',
                 radius: [0, '60%'],
                 label: {
                   normal: {
@@ -159,19 +159,19 @@ Dashboard.directive('wiservDataQuotaOverviewChart', [
                 },
                 data: [{
                   value: summary.department_number,
-                  name: '清单提供部门'
+                  name: '指标提供部门'
                 }, {
                   value: summary.department_number_inc,
                   name: '本月新增',
                   selected: true
                 }]
               }, {
-                name: '清单总数',
+                name: '指标总数',
                 type: 'pie',
                 radius: ['70%', '90%'],
                 data: [{
                   value: summary.data_quota_number,
-                  name: '清单总数'
+                  name: '指标总数'
                 }, {
                   value: summary.data_quota_number_inc,
                   name: '本月新增',
@@ -205,7 +205,7 @@ Dashboard.directive('wiservRequirementOverviewChart', [
               series: [{
                 name: '需求涉及部门',
                 type: 'pie',
-                selectedMode: 'single',
+                // selectedMode: 'single',
                 radius: [0, '60%'],
                 label: {
                   normal: {
@@ -266,7 +266,7 @@ Dashboard.directive('wiservStatisticChart', [
               trigger: 'axis'
             },
             legend: {
-              data: ['清单', '需求']
+              data: ['指标', '需求']
             },
             xAxis: [{
               type: 'category',
@@ -284,7 +284,7 @@ Dashboard.directive('wiservStatisticChart', [
               }
             }],
             series: [{
-              name: '清单',
+              name: '指标',
               type: 'bar',
               data: INVENTORY.INVENTORY
             }, {
