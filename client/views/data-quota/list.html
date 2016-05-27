@@ -12,6 +12,14 @@
 
     </div>
     <div class="panel-body">
+<!-- 
+      <nav>
+        <ul class="pager">
+          <li class="text-muted">信息资源格式</li>
+          <li ng-click=""><a>全部</a></li>
+          <li ng-repeat='' ng-click=''><a></a></li>
+        </ul>
+      </nav> -->
 
       <nav>
         <ul class="pager">
@@ -20,6 +28,14 @@
           <li ng-repeat='shareLevel in ShareLevels' ng-click='ShareLevelFilter(shareLevel.id)'><a>{{shareLevel.dict_name}}</a></li>
         </ul>
       </nav>
+
+      <!-- <nav>
+        <ul class="pager">
+          <li class="text-muted">面向社会开放</li>
+          <li ng-click=""><a>全部</a></li>
+          <li ng-repeat='' ng-click=''><a></a></li>
+        </ul>
+      </nav> -->
 
       <nav>
         <ul class="pager">
@@ -37,6 +53,14 @@
         </ul>
       </nav>
 
+      <!-- <nav>
+        <ul class="pager">
+          <li class="text-muted">是否涉密</li>
+          <li ng-click=""><a>全部</a></li>
+          <li ng-repeat='' ng-click=''><a></a></li>
+        </ul>
+      </nav> -->
+
     </div>
   </div>
 
@@ -50,13 +74,13 @@
          <thead>
            <tr>
              <th>关注</th>
-             <th>序号</th>
-             <th>指标名称</th>
              <th>标识</th>
+             <th>序号</th>
              <th>指标编号</th>
-             <th>指标别称</th>
+             <th>信息资源名称</th>
+             <th>信息资源别称</th>
              <th>计量单位</th>
-             <th>指标详细解释</th>
+             <th>信息资源摘要</th>
              <th>计算方法</th>
              <th>共享频率</th>
              <th>空间范围</th>
@@ -67,7 +91,7 @@
              <th>数据精度</th>
              <th>数据长度</th>
              <th>创建时间</th>
-             <th>数据表示格式</th>
+             <th>信息资源格式</th>
              <th>是否涉密</th>
              <th>联系人</th>
              <th>联系电话</th>
@@ -81,12 +105,6 @@
                   <input ng-checked='quota.isfollowed' type="checkbox">
                 </label>
               </div>
-            </td>
-            <td>{{$index+1}}</td>
-            <td>
-              <a ui-sref='main.data-quota.detail({data_quota_id:quota.id})'>
-                {{quota.quota_name}}
-              </a>
             </td>
             <td>
               <button ng-if="quota.sharelevel==='全开放'" class='btn btn-default btn-xs'>
@@ -105,24 +123,30 @@
                 <i class='fa fa-warning text-warning'> 申请查看</i>
               </button>
             </td>
+            <td>{{$index+1}}</td>
             <td>{{quota.quota_sn}}</td>
-            <td>{{quota.alias}}</td>
-            <td>{{quota.meter_unit}}</td>
-            <td>{{quota.quota_detail}}</td>
-            <td>{{quota.calculate_method}}</td>
-            <td>{{quota.area_range}}</td>
-            <td>{{quota.area_range}}</td>
-            <td>{{quota.regionallevel}}</td>
-            <td>{{quota.depname}}</td>
-            <td>{{quota.regionallevel}}</td>
-            <td>{{quota.datastoretype}}</td>
-            <td>{{quota.data_precision}}</td>
-            <td>{{quota.data_length}}</td>
-            <td>{{quota.create_time | date:'yyyy-MM-dd HH:mm:ss'}}</td>
-            <td>{{quota.datashowformat}}</td>
-            <td>{{quota.secretflag}}</td>
-            <td>{{quota.linkman}}</td>
-            <td>{{quota.contact_phone}}</td>
+            <td title='{{quota.quota_name}}'>
+              <a ui-sref='main.data-quota.detail({data_quota_id:quota.id})'>
+                {{quota.quota_name}}
+              </a>
+            </td>
+            <td title='{{quota.alias}}'>{{quota.alias}}</td>
+            <td title='{{quota.meter_unit}}'>{{quota.meter_unit}}</td>
+            <td title='{{quota.quota_detail}}'>{{quota.quota_detail}}</td>
+            <td title='{{quota.calculate_method}}'>{{quota.calculate_method}}</td>
+            <td title='{{quota.sharefrequency}}'>{{quota.sharefrequency}}</td>
+            <td title='{{quota.area_range}}'>{{quota.area_range}}</td>
+            <td title='{{quota.regionallevel}}'>{{quota.regionallevel}}</td>
+            <td title='{{quota.depname}}'>{{quota.depname}}</td>
+            <td title='{{quota.sharelevel}}'>{{quota.sharelevel}}</td>
+            <td title='{{quota.datastoretype}}'>{{quota.datastoretype}}</td>
+            <td title='{{quota.data_precision}}'>{{quota.data_precision}}</td>
+            <td title='{{quota.data_length}}'>{{quota.data_length}}</td>
+            <td title='{{quota.create_time}}'>{{quota.create_time | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+            <td title='{{quota.datashowformat}}'>{{quota.datashowformat}}</td>
+            <td title='{{quota.secretflag}}'>{{quota.secretflag}}</td>
+            <td title='{{quota.linkman}}'>{{quota.linkman}}</td>
+            <td title='{{quota.contact_phone}}'>{{quota.contact_phone}}</td>
            </tr>
          </tbody>
        </table>
