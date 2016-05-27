@@ -182,7 +182,6 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
     $scope.DataQuota.file_name = '';
     $scope.DataQuota.linkman = '';
     $scope.DataQuota.contact_phone = '';
-    $scope.DataQuota.secret_flag = '';
 
 
     Http.getDepartmentList().then(function(result) {
