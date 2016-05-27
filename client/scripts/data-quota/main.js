@@ -4,6 +4,7 @@ var DataQuota = angular.module('DataQuota', ['ui.router']);
 /** Main Controller */
 DataQuota.controller('DataQuota.Controller.Main', ['$scope', '$state', 'DataQuota.Service.Http',
   function($scope, $state, Http) {
+    window.scrollTo(0,0);
     // Menu configration
     $scope.treeOptions = {
       nodeChildren: "nodes",
