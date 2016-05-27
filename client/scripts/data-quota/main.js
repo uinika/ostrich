@@ -7,7 +7,7 @@ DataQuota.controller('DataQuota.Controller.Main', ['$scope', '$state', 'DataQuot
     // Menu configration
     $scope.treeOptions = {
       nodeChildren: "nodes",
-      dirSelectable: true,
+      dirSelectable: false,
       injectClasses: {
         ul: "a1",
         li: "a2",
