@@ -78,7 +78,8 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
     // Handle above filter
     var filterParams = {};
     /* 共享级别 */
-    $scope.ShareLevelFilter = function(id){
+    $scope.ShareLevelFilter = function(id, index){
+      console.log(index);
       filterParams.share_level = id;
       if('ALL'===id){
         delete filterParams.share_level;
@@ -88,7 +89,8 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
       }
     };
     /* 共享频率 */
-    $scope.ShareFrequencyFilter = function(id){
+    $scope.ShareFrequencyFilter = function(id, index){
+      console.log(index);
       filterParams.share_frequency = id;
       if('ALL'===id){
         delete filterParams.share_frequency;
@@ -99,7 +101,8 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
     };
     /* 分地区数据级别 */
     filterParams.sys_dict_id = [];
-    $scope.DataLevelFilter = function(id){
+    $scope.DataLevelFilter = function(id, index){
+      console.log(index);
       if('ALL'===id){
         filterParams.sys_dict_id = [];
         getDataQuotaListByFilter(filterParams);
