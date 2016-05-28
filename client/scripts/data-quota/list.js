@@ -29,6 +29,9 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
     };
     // Init data quota talbe
     (function initDataQuotaList(){
+        /* Init selected status for filter */
+        $scope.ShareLevelActiveAll = $scope.ShareFrequencyActiveAll = $scope.DataLevelActiveAll = 'active';
+        /* Init ajax parameters*/
         var httpParams = {};
         (currentDepID==='') ? (httpParams = initPaging) : (httpParams = _.assign(httpParams, currentDepID, initPaging));
         getDataQuotaList(httpParams);
@@ -80,10 +83,12 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
     /* 共享级别 */
     $scope.ShareLevelFilter = function(id, index){
       $scope.ShareLevelActive = [];
-      $scope.ShareLevelActive[index]='active';
+      $scope.ShareLevelActiveAll = '';
+      $scope.ShareLevelActive[index] = 'active';
       filterParams.share_level = id;
       if('ALL'===id){
         delete filterParams.share_level;
+        $scope.ShareLevelActiveAll = 'active';
         getDataQuotaListByFilter(filterParams);
       }else{
         getDataQuotaListByFilter(filterParams);
@@ -92,10 +97,12 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
     /* 共享频率 */
     $scope.ShareFrequencyFilter = function(id, index){
       $scope.ShareFrequencyActive = [];
-      $scope.ShareFrequencyActive[index]='active';
+      $scope.ShareFrequencyActiveAll = '';
+      $scope.ShareFrequencyActive[index] = 'active';
       filterParams.share_frequency = id;
       if('ALL'===id){
         delete filterParams.share_frequency;
+        $scope.ShareFrequencyActiveAll = 'active';
         getDataQuotaListByFilter(filterParams);
       }else{
         getDataQuotaListByFilter(filterParams);
@@ -103,20 +110,20 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
     };
     /* 分地区数据级别 */
     filterParams.sys_dict_id = [];
-    var DataLevelActive = $scope.DataLevelActive = [];
+    $scope.DataLevelActive = [];
     $scope.DataLevelFilter = function(id, index){
-      (DataLevelActive[index]==='active')?(DataLevelActive[index]=''):(DataLevelActive[index]='active');
       if('ALL'===id){
         filterParams.sys_dict_id = [];
+        $scope.DataLevelActiveAll = 'active';
+        $scope.DataLevelActive=[];
         getDataQuotaListByFilter(filterParams);
       }else{
+        $scope.DataLevelActiveAll = '';
+        ($scope.DataLevelActive[index]==='active')?($scope.DataLevelActive[index]=''):($scope.DataLevelActive[index]='active');
         filterParams.sys_dict_id.push(id);
         getDataQuotaListByFilter(filterParams);
-      }
-      console.log(index);
-      console.log($scope.DataLevelActive);
+      };
     };
-
   }
 ]);
 

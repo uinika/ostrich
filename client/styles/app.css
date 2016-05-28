@@ -1075,9 +1075,10 @@ input.ng-touched.ng-invalid {
   cursor: pointer;
 }
 #data-quota-main .left .panel-heading:HOVER {
-  font-weight: bolder;
+  color: #337AB9;
 }
 #data-quota-main .left .panel-heading:ACTIVE {
+  font-weight: bolder;
   color: #337AB9;
 }
 #data-quota-main .left .menu {
@@ -1162,10 +1163,11 @@ input.ng-touched.ng-invalid {
   cursor: pointer;
 }
 #data-quota-list .pager li a:ACTIVE {
-  font-weight: bolder;
+  font-weight: bold;
 }
 #data-quota-list .pager li .active {
-  background: red;
+  background: #E9E9E9;
+  font-weight: bolder;
 }
 #data-quota-list .quota-detail {
   font-size: 13px;
