@@ -79,7 +79,8 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
     var filterParams = {};
     /* 共享级别 */
     $scope.ShareLevelFilter = function(id, index){
-      console.log(index);
+      $scope.ShareLevelActive = [];
+      $scope.ShareLevelActive[index]='active';
       filterParams.share_level = id;
       if('ALL'===id){
         delete filterParams.share_level;
@@ -90,7 +91,8 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
     };
     /* 共享频率 */
     $scope.ShareFrequencyFilter = function(id, index){
-      console.log(index);
+      $scope.ShareFrequencyActive = [];
+      $scope.ShareFrequencyActive[index]='active';
       filterParams.share_frequency = id;
       if('ALL'===id){
         delete filterParams.share_frequency;
