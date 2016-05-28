@@ -103,8 +103,9 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
     };
     /* 分地区数据级别 */
     filterParams.sys_dict_id = [];
+    var DataLevelActive = $scope.DataLevelActive = [];
     $scope.DataLevelFilter = function(id, index){
-      console.log(index);
+      (DataLevelActive[index]==='active')?(DataLevelActive[index]=''):(DataLevelActive[index]='active');
       if('ALL'===id){
         filterParams.sys_dict_id = [];
         getDataQuotaListByFilter(filterParams);
@@ -112,6 +113,8 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
         filterParams.sys_dict_id.push(id);
         getDataQuotaListByFilter(filterParams);
       }
+      console.log(index);
+      console.log($scope.DataLevelActive);
     };
 
   }
