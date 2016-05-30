@@ -18,6 +18,7 @@ Login.controller('Login.Controller.Main', ['$rootScope', '$cookies', '$scope', '
           var loginUser = result.data.body[0];
           $rootScope.User = loginUser;
           $cookies.put('User', JSON.stringify(loginUser));
+          sessionStorage.token = result.data.head.token;
           if (200 == result.data.head.status) {
             $state.go("main.dashboard");
           } else {
