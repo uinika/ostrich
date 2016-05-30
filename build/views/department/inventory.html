@@ -9,16 +9,16 @@
       <div class='pull-right'>
         <ul class="nav nav-pills">
           <li role="presentation " class='indicator-total'>
-            指标总数
+            资源总数
             <span class='num'>{{Paging.totalItems}}</span>
           </li>
           <li role="presentation">
-            <input type="text" class='input-filter' placeholder="请输入查询指标名称" ng-model='DepartDataQuota.quota_name_filter'>
+            <input type="text" class='input-filter' placeholder="请输入查询信息资源名称" ng-model='DepartDataQuota.quota_name_filter'>
             <button type="button" class="btn btn-primary" ng-click='searchDeptDataQuotaByName()'>查询</button>
           </li>
           <li role="presentation">
             <button class='btn btn-success' ui-sref='main.department.inventory.publish'>
-              <i class='fa fa-plus'></i>新增指标</button>
+              <i class='fa fa-plus'></i>新增资源</button>
           </li>
           <!-- <li role="presentation">
             <a class='btn btn-primary'>导入指标</a>
@@ -30,7 +30,24 @@
       <div class='indicator-filter'>
         <nav class='pull-left'>
           <ul class="pager">
-            共享级别
+            <li class='filter-label'>信息资源格式</li>
+            <li role="presentation">
+              <a class="active" href="javascript:;" ng-click=''>全部</a>
+            </li>
+            <li role="presentation">
+              <a ng-class="" href="javascript:;" ng-click=''>电子文件</a>
+              <a ng-class="" href="javascript:;" ng-click=''>电子表格</a>
+              <a ng-class="" href="javascript:;" ng-click=''>数据库类</a>
+              <a ng-class="" href="javascript:;" ng-click=''>图形图像类</a>
+              <a ng-class="" href="javascript:;" ng-click=''>流媒体类</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class='indicator-filter'>
+        <nav class='pull-left'>
+          <ul class="pager">
+            <li class='filter-label'>共享级别</li>
             <li role="presentation">
               <a ng-class="{true: 'active', false: 'inactive'}[shareLvMainSelection.length == 0]" href="javascript:;" ng-click='getShareLevelAll()'>全部</a>
             </li>
@@ -44,7 +61,21 @@
       <div class='indicator-filter'>
         <nav class='pull-left'>
           <ul class="pager">
-            共享频率
+            <li class='filter-label'>面向社会开放</li>
+            <li role="presentation">
+              <a class="active" href="javascript:;" ng-click=''>全部</a>
+            </li>
+            <li role="presentation">
+              <a ng-class="" href="javascript:;" ng-click=''>开放</a>
+              <a ng-class="" href="javascript:;" ng-click=''>不开放</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class='indicator-filter'>
+        <nav class='pull-left'>
+          <ul class="pager">
+            <li class='filter-label'>共享频率</li>
             <li role="presentation">
               <a href="javascript:;" ng-class="{true: 'active', false: 'inactive'}[shareFreqSelection.length == 0]" href="javascript:;" ng-click='getShareFreqAll()'>全部</a>
             </li>
@@ -58,13 +89,27 @@
       <div class='indicator-filter'>
         <nav class='pull-left'>
           <ul class="pager">
-            分地区数据级别
+            <li class='filter-label'>分地区数据级别</li>
             <li role="presentation">
               <a href="javascript:;" ng-class="{true: 'active', false: 'inactive'}[areaMainSelection.length == 0]" href="javascript:;" ng-click='getSpatialAll()'>全部</a>
             </li>
             <li role="presentation" ng-repeat='dataLevel in dataLevelList'>
               <a ng-class="{true: 'active', false: 'inactive'}[areaMainSelection.indexOf(dataLevel.id) > -1]" ng-checked="areaMainSelection.indexOf(dataLevel.id) > -1" ng-click='getDataQuotaListByAP(dataLevel)' href="javascript:;">{{dataLevel.dict_name}}
               </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class='indicator-filter'>
+        <nav class='pull-left'>
+          <ul class="pager">
+            <li class='filter-label'>是否涉密</li>
+            <li role="presentation">
+              <a class="active" href="javascript:;" ng-click=''>全部</a>
+            </li>
+            <li role="presentation">
+              <a ng-class="" href="javascript:;" ng-click=''>不涉密</a>
+              <a ng-class="" href="javascript:;" ng-click=''>涉密</a>
             </li>
           </ul>
         </nav>
@@ -96,36 +141,52 @@
           </ul>
         </div>
 
-        <div class='panel-body scroll' cg-busy="{promise:promise,message:'加载中',backdrop:backdrop,delay:delay,minDuration:minDuration}">
+        <div class='scroll' cg-busy="{promise:promise,message:'加载中',backdrop:backdrop,delay:delay,minDuration:minDuration}">
           <div class='container'>
             <div class='row'>
               <div class='col-lg-12' >
                 <!-- Table -->
-                <table class='table table-hover table-striped '>
+                <table class='table table-hover table-striped table-bordered text-center'>
                   <thead>
                     <tr>
-                      <th width='60px'>操作</th>
-                      <th width='40px'>标识</th>
-                      <th width='40px'>序号</th>
-                      <th width='60px'>指标编号</th>
-                      <th width='60px'>指标名称</th>
-                      <th width='60px'>指标别称</th>
-                      <th width='60px'>计量单位</th>
-                      <th width='100px'>指标详细解释</th>
-                      <th width='60px'>计算方法</th>
-                      <th width='60px'>共享频率</th>
-                      <th width='60px'>空间范围</th>
-                      <th width='100px'>分地区数据级别</th>
-                      <th width='60px'>来源部门</th>
-                      <th width='60px'>共享级别</th>
-                      <th width='100px'>数据存储类型</th>
-                      <th width='60px'>数据精度</th>
-                      <th width='60px'>数据长度</th>
-                      <th width='60px'>创建时间</th>
-                      <th width='100px'>数据表示格式</th>
-                      <th width='60px'>是否涉密</th>
-                      <th width='60px'>联系人</th>
-                      <th width='60px'>联系电话</th>
+                      <th width='60px' rowspan='2'>操作</th>
+                      <th width='40px' rowspan='2'>标识</th>
+                      <th width='40px' rowspan='2'>序号</th>
+                      <th width='90px' rowspan='2'>信息资源名称</th>
+                      <th width='90px' rowspan='2'>信息资源别称</th>
+                      <th width='100px' rowspan='2'>信息资源摘要</th>
+                      <th width='60px' rowspan='2'>信息资源分类</th>
+                      <th width='60px' rowspan='2'>信息资源目录代码</th>
+                      <th width='60px' rowspan='2'>关联及类目名称</th>
+                      <th width='60px' rowspan='2'>空间范围</th>
+                      <th width='100px' rowspan='2'>分地区数据级别</th>
+                      <th width='60px' rowspan='2'>信息资源格式</th>
+                      <th width='300px' colspan='4'>信息项信息</th>
+                      <th width='60px'></th>
+                      <th width='60px'></th>
+                      <th width='60px' rowspan='2'>计量单位</th>
+                      <th width='60px' rowspan='2'>计算方法</th>
+                      <th width='60px' rowspan='2'>共享级别</th>
+                      <th width='200px' colspan='2'>共享类型与共享条件</th>
+                      <th width='80px' rowspan='2'>共享方式</th>
+                      <th width='210px' colspan='2'>开放数据与开放条件</th>
+                      <th width='80px' rowspan='2'>信息资源提供方</th>
+                      <th width='80px' rowspan='2'>资源提供方代码</th>
+                      <th width='60px' rowspan='2'>联系人</th>
+                      <th width='100px' rowspan='2'>联系电话</th>
+                      <th width='120px' rowspan='2'>创建时间</th>
+                    </tr>
+                    <tr>
+                      <th>信息项名称</th>
+                      <th>数据类型</th>
+                      <th>数据精度</th>
+                      <th>数据长度</th>
+                      <th>更新周期</th>
+                      <th>是否涉密</th>
+                      <th>共享类型</th>
+                      <th>共享条件</th>
+                      <th>是否面向社会开放</th>
+                      <th>开放条件</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -154,27 +215,41 @@
                         </div>
                       </td>
                       <td>{{$index+1}}</td>
-                      <td title='{{DepDataQuota.quota_sn}}'>{{DepDataQuota.quota_sn}}</td>
                       <td title='{{DepDataQuota.quota_name}}'>
-                        <a ui-sref='main.department.inventory.detail({ID:DepDataQuota.id})'><pre>{{DepDataQuota.quota_name}}</pre></a>
+                        <a ui-sref='main.department.inventory.detail({ID:DepDataQuota.id})'>
+                          <pre>{{DepDataQuota.quota_name}}</pre>
+                        </a>
                       </td>
                       <td title='{{DepDataQuota.alias}}'>{{DepDataQuota.alias}}</td>
-                      <td title={{DepDataQuota.meter_unit}}''>{{DepDataQuota.meter_unit}}</td>
                       <td title='{{DepDataQuota.quota_detail}}'>{{DepDataQuota.quota_detail}}</td>
-                      <td title='{{DepDataQuota.calculate_method}}'>{{DepDataQuota.calculate_method}}</td>
-                      <td title='{{DepDataQuota.sharefrequency}}'>{{DepDataQuota.sharefrequency}}</td>
+                      <td title=''></td>
+                      <td title=''></td>
+                      <td title=''></td>
                       <td title='{{DepDataQuota.area_range}}'>{{DepDataQuota.area_range}}</td>
                       <td title='{{DepDataQuota.regionallevel}}'>{{DepDataQuota.regionallevel}}</td>
-                      <td title='{{DepDataQuota.depname}}'>{{DepDataQuota.depname}}</td>
-                      <td title='{{DepDataQuota.sharelevel}}'>{{DepDataQuota.sharelevel}}</td>
+                      <td title=''></td>
+                      <td title=''></td>
                       <td title='{{DepDataQuota.datastoretype}}'>{{DepDataQuota.datastoretype}}</td>
                       <td title='{{DepDataQuota.data_precision}}'>{{DepDataQuota.data_precision}}</td>
                       <td title='{{DepDataQuota.data_length}}'>{{DepDataQuota.data_length}}</td>
-                      <td title='{{DepDataQuota.create_time | date:"yyyy-MM-dd HH:mm:ss" }}'>{{DepDataQuota.create_time | date:"yyyy-MM-dd HH:mm:ss" }}</td>
-                      <td title='{{DepDataQuota.datashowformat}}'>{{DepDataQuota.datashowformat}}</td>
+
+                      <td title='{{DepDataQuota.sharefrequency}}'>{{DepDataQuota.sharefrequency}}</td>
                       <td title='{{DepDataQuota.secretflag}}'>{{DepDataQuota.secretflag}}</td>
+                      <td title='{{DepDataQuota.meter_unit}}'>{{DepDataQuota.meter_unit}}</td>
+                      <td title='{{DepDataQuota.calculate_method}}'>{{DepDataQuota.calculate_method}}</td>
+                      <td title='DepDataQuota.sharelevel'>
+                        {{DepDataQuota.sharelevel}}
+                      </td>
+                      <td title=''></td>
+                      <td title=''></td>
+                      <td title=''></td>
+                      <td title=''></td>
+                      <td title=''></td>
+                      <td title=''></td>
+                      <td title=''></td>
                       <td title={{DepDataQuota.linkman}}>{{DepDataQuota.linkman}}</td>
                       <td title='{{DepDataQuota.contact_phone}}'>{{DepDataQuota.contact_phone}}</td>
+                      <td title='{{DepDataQuota.create_time | date:"yyyy-MM-dd HH:mm:ss" }}'>{{DepDataQuota.create_time | date:"yyyy-MM-dd HH:mm:ss" }}</td>
                     </tr>
                   </tbody>
                 </table>

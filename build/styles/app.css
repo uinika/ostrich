@@ -331,6 +331,11 @@ input.ng-touched.ng-invalid {
   color: #d9534f;
   height: 38px;
 }
+#department-main .indicator-list table.text-center tr td,
+#department-main .indicator-list table.text-center tr th {
+  text-align: center;
+  vertical-align: middle;
+}
 #department-inventory {
   margin-left: 170px;
   overflow: hidden;
@@ -384,6 +389,12 @@ input.ng-touched.ng-invalid {
 #department-inventory .filter .indicator-filter ul.pager {
   margin: 0 0 15px;
 }
+#department-inventory .filter .indicator-filter ul.pager .filter-label {
+  width: 110px;
+  text-align: right;
+  display: inline-block;
+  padding-right: 12px;
+}
 #department-inventory .filter .indicator-filter ul > li > a.active {
   background: #DDD;
   background: #ECECEC;
@@ -398,10 +409,10 @@ input.ng-touched.ng-invalid {
 }
 #department-inventory .indicator-list .scroll {
   overflow-x: scroll;
-  height: 490px;
+  height: 512px;
 }
 #department-inventory .indicator-list .scroll div.container {
-  width: 2000px !important;
+  width: 3000px !important;
 }
 #department-inventory .indicator-list ul.nav-filter {
   list-style: none;
@@ -1075,9 +1086,10 @@ input.ng-touched.ng-invalid {
   cursor: pointer;
 }
 #data-quota-main .left .panel-heading:HOVER {
-  font-weight: bolder;
+  color: #337AB9;
 }
 #data-quota-main .left .panel-heading:ACTIVE {
+  font-weight: bolder;
   color: #337AB9;
 }
 #data-quota-main .left .menu {
@@ -1162,10 +1174,11 @@ input.ng-touched.ng-invalid {
   cursor: pointer;
 }
 #data-quota-list .pager li a:ACTIVE {
-  font-weight: bolder;
+  font-weight: bold;
 }
 #data-quota-list .pager li .active {
-  background: red;
+  background: #E9E9E9;
+  font-weight: bolder;
 }
 #data-quota-list .quota-detail {
   font-size: 13px;

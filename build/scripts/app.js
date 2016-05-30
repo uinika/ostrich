@@ -22,10 +22,8 @@ var app = angular.module('app', [
   'DepartmentShare'
 ]);
 
-app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider', '$provide',
-  function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $provide) {
-    /** URL Location Mode */
-    $locationProvider.html5Mode({enabled: false});
+app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', '$provide',
+  function($stateProvider, $urlRouterProvider, $httpProvider, $provide) {
     /** HTTP Interceptor */
     $httpProvider.interceptors.push(['$q',
       function($q) {
@@ -35,9 +33,17 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
             return config;
           },
           'requestError': function(rejection) {
-            return response;
+            return rejection;
           },
           'response': function(response) {
+            $q.when(response, function(result){
+              if( response.data && typeof response.data==='object'){
+                if(result.data.head.status===300){
+                  sessionStorage.message = '登陆超时，请重新登陆！';
+                  window.location.href='/';
+                };
+              };
+            });
             return response;
           },
           'responseError': function(rejection) {
@@ -168,12 +174,25 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
   }
 ]);
 
+app.run(['$rootScope', function($rootScope){
+  $rootScope.$on('$stateChangeStart',
+    function(event, toState, toParams, fromState, fromParams){
+      if(toState.name!=='login'){
+        if(!sessionStorage.token){
+          window.location.href='/';
+        };
+      };
+    });
+}]);
+
 'use strict';
 /* Application Configration */
 var Config = angular.module('Config', []);
 
 Config.constant('API', {
   path: 'http://localhost:8080/drrp/api' //发布
+  // path: 'http://172.16.1.78:8080/api' //测试
+  // path: 'http://localhost:5001/api' //本机
 });
 
 'use strict';
@@ -1263,8 +1282,18 @@ var Login = angular.module('Login', ['ui.router', 'ngCookies']);
 /** Main Controller */
 Login.controller('Login.Controller.Main', ['$rootScope', '$cookies', '$scope', '$state', 'Login.Service.Http',
   function($rootScope, $cookies, $scope, $state, Http) {
+    // Decide login or session delay
+    if(sessionStorage.message){
+      $scope.alerts = [
+        {type: 'danger', msg: sessionStorage.message}
+      ];
+      $scope.closeAlert = function(index) {
+        $scope.alerts.splice(index, 1);
+      };
+      sessionStorage.removeItem('message');
+    }
+    // Login validation
     $scope.Login = {};
-
     $scope.Login.submit = function(valid) {
       $scope.loginSubmitted = false;
       if (valid) {
@@ -1277,28 +1306,27 @@ Login.controller('Login.Controller.Main', ['$rootScope', '$cookies', '$scope', '
           var loginUser = result.data.body[0];
           $rootScope.User = loginUser;
           $cookies.put('User', JSON.stringify(loginUser));
+          var sessionToken = result.data.head.token;
+          if(sessionToken){
+            sessionStorage.token = sessionToken;
+          }
           if (200 == result.data.head.status) {
             $state.go("main.dashboard");
           } else {
-            //$state.go("login");
             $scope.loginError = true;
           }
         });
       } else {
         $scope.loginSubmitted = true;
       }
-
     }
   }
-
-])
-
+]);
 
 /* HTTP Factory */
 Login.factory('Login.Service.Http', ['$http', 'API',
   function($http, API) {
     var path = API.path;
-
     function login(params) {
       return $http.get(
         path + '/login', {
@@ -1397,6 +1425,9 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
     };
     // Init data quota talbe
     (function initDataQuotaList(){
+        /* Init selected status for filter */
+        $scope.ShareLevelActiveAll = $scope.ShareFrequencyActiveAll = $scope.DataLevelActiveAll = 'active';
+        /* Init ajax parameters*/
         var httpParams = {};
         (currentDepID==='') ? (httpParams = initPaging) : (httpParams = _.assign(httpParams, currentDepID, initPaging));
         getDataQuotaList(httpParams);
@@ -1447,10 +1478,13 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
     var filterParams = {};
     /* 共享级别 */
     $scope.ShareLevelFilter = function(id, index){
-      console.log(index);
+      $scope.ShareLevelActive = [];
+      $scope.ShareLevelActiveAll = '';
+      $scope.ShareLevelActive[index] = 'active';
       filterParams.share_level = id;
       if('ALL'===id){
         delete filterParams.share_level;
+        $scope.ShareLevelActiveAll = 'active';
         getDataQuotaListByFilter(filterParams);
       }else{
         getDataQuotaListByFilter(filterParams);
@@ -1458,10 +1492,13 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
     };
     /* 共享频率 */
     $scope.ShareFrequencyFilter = function(id, index){
-      console.log(index);
+      $scope.ShareFrequencyActive = [];
+      $scope.ShareFrequencyActiveAll = '';
+      $scope.ShareFrequencyActive[index] = 'active';
       filterParams.share_frequency = id;
       if('ALL'===id){
         delete filterParams.share_frequency;
+        $scope.ShareFrequencyActiveAll = 'active';
         getDataQuotaListByFilter(filterParams);
       }else{
         getDataQuotaListByFilter(filterParams);
@@ -1469,17 +1506,20 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
     };
     /* 分地区数据级别 */
     filterParams.sys_dict_id = [];
+    $scope.DataLevelActive = [];
     $scope.DataLevelFilter = function(id, index){
-      console.log(index);
       if('ALL'===id){
         filterParams.sys_dict_id = [];
+        $scope.DataLevelActiveAll = 'active';
+        $scope.DataLevelActive=[];
         getDataQuotaListByFilter(filterParams);
       }else{
+        $scope.DataLevelActiveAll = '';
+        ($scope.DataLevelActive[index]==='active')?($scope.DataLevelActive[index]=''):($scope.DataLevelActive[index]='active');
         filterParams.sys_dict_id.push(id);
         getDataQuotaListByFilter(filterParams);
-      }
+      };
     };
-
   }
 ]);
 

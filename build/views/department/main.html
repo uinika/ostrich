@@ -11,11 +11,11 @@
             </li>
             <li class="list-group-item sub-item">
               <a ui-sref='main.department.inventory' ui-sref-opts="{reload: true}">
-                <i class='fa fa-list-alt'></i>&nbsp;部门指标</a>
+                <i class='fa fa-list-alt'></i>&nbsp;部门资源</a>
             </li>
             <li class="list-group-item sub-item">
               <a ui-sref='main.department.share' ui-sref-opts="{reload: true}">
-                <i class='fa fa-share-square-o'></i>&nbsp;共享指标</a>
+                <i class='fa fa-share-square-o'></i>&nbsp;共享资源</a>
             </li>
             <li class="list-group-item sub-item has-sub">
               需求清单
@@ -32,7 +32,7 @@
             </li>
             <li class="list-group-item sub-item">
               <a ui-sref='main.department.audit' ui-sref-opts="{reload: true}">
-                <i class='fa fa-edit'></i>&nbsp;指标审核</a>
+                <i class='fa fa-edit'></i>&nbsp;数据审核</a>
             </li>
           </ul>
         </div>
@@ -51,7 +51,7 @@
                     </div>
                     <div class='col-xs-9 text-right'>
                       <div class='font-22'>{{Count.data_quota_number}}</div>
-                      <div>部门指标</div>
+                      <div>部门资源</div>
                     </div>
                   </div>
                 </div>
@@ -71,7 +71,7 @@
                     </div>
                     <div class='col-xs-9 text-right'>
                       <div class='font-22'>{{Count.data_apply_number}}</div>
-                      <div>共享指标</div>
+                      <div>共享资源</div>
                     </div>
                   </div>
                 </div>
@@ -111,7 +111,7 @@
                     </div>
                     <div class='col-xs-9 text-right'>
                       <div class='font-22'>{{Count.data_apply_wait_number}}</div>
-                      <div>待审核指标</div>
+                      <div>待审核资源</div>
                     </div>
                   </div>
                 </div>
@@ -124,7 +124,7 @@
             <div class='col-sm-6 left'>
               <div class="panel panel-default">
                 <div class="panel-heading">
-                  <div class='pull-left'>待审核指标（{{auditTotal}}）</div>
+                  <div class='pull-left'>待审核资源（{{auditTotal}}）</div>
                   <div class='pull-right'>
                     <a ng-click='auditMore()'>更多...</a>
                   </div>
@@ -135,8 +135,8 @@
                     <thead>
                       <tr>
                         <th>申请日期</th>
-                        <th>指标名称</th>
-                        <th>申请单位</th>
+                        <th>资源名称</th>
+                        <th>提供部门</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -171,7 +171,7 @@
                         <th>响应日期</th>
                         <th>需求发布日期</th>
                         <th>需求名称</th>
-                        <th>响应单位</th>
+                        <th>提供部门</th>
                       </tr>
                     </thead>
                     <tbody>
