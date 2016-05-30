@@ -4,8 +4,18 @@ var Login = angular.module('Login', ['ui.router', 'ngCookies']);
 /** Main Controller */
 Login.controller('Login.Controller.Main', ['$rootScope', '$cookies', '$scope', '$state', 'Login.Service.Http',
   function($rootScope, $cookies, $scope, $state, Http) {
+    // Decide login or session delay
+    if(sessionStorage.message){
+      $scope.alerts = [
+        {type: 'danger', msg: sessionStorage.message}
+      ];
+      $scope.closeAlert = function(index) {
+        $scope.alerts.splice(index, 1);
+      };
+      sessionStorage.removeItem('message');
+    }
+    // Login validation
     $scope.Login = {};
-
     $scope.Login.submit = function(valid) {
       $scope.loginSubmitted = false;
       if (valid) {
@@ -25,7 +35,6 @@ Login.controller('Login.Controller.Main', ['$rootScope', '$cookies', '$scope', '
           if (200 == result.data.head.status) {
             $state.go("main.dashboard");
           } else {
-            //$state.go("login");
             $scope.loginError = true;
           }
         });
