@@ -13,8 +13,8 @@
             <span class='num'>{{Paging.totalItems}}</span>
           </li>
           <li role="presentation">
-            <input type="text" class='input-filter' placeholder="请输入查询信息资源名称" ng-model='DepartDataQuota.quota_name_filter'>
-            <button type="button" class="btn btn-primary" ng-click='searchDeptDataQuotaByName()'>查询</button>
+            <input type="text" class='input-filter' placeholder="请输入查询信息资源名称" ng-model='DepartDataQuota.resource_name_filter'>
+            <button type="button" class="btn btn-primary" ng-click='searchDeptInfoResourceByName()'>查询</button>
           </li>
           <li role="presentation">
             <button class='btn btn-success' ui-sref='main.department.inventory.publish'>
@@ -32,14 +32,11 @@
           <ul class="pager">
             <li class='filter-label'>信息资源格式</li>
             <li role="presentation">
-              <a class="active" href="javascript:;" ng-click=''>全部</a>
+              <a ng-class="{true: 'active', false: 'inactive'}[resFormatMainSelection.length == 0]" href="javascript:;" ng-click='getResFormatAll()'>全部</a>
             </li>
-            <li role="presentation">
-              <a ng-class="" href="javascript:;" ng-click=''>电子文件</a>
-              <a ng-class="" href="javascript:;" ng-click=''>电子表格</a>
-              <a ng-class="" href="javascript:;" ng-click=''>数据库类</a>
-              <a ng-class="" href="javascript:;" ng-click=''>图形图像类</a>
-              <a ng-class="" href="javascript:;" ng-click=''>流媒体类</a>
+            <li role="presentation" ng-repeat='resourceFormat in resourceFormatList'>
+              <a ng-class="{true: 'active', false: 'inactive'}[resFormatMainSelection.indexOf(resourceFormat.id) > -1]" href="javascript:;" ng-click='getInfoResourceByResFormat(resourceFormat)'>{{resourceFormat.dict_name}}
+              </a>
             </li>
           </ul>
         </nav>
@@ -52,7 +49,7 @@
               <a ng-class="{true: 'active', false: 'inactive'}[shareLvMainSelection.length == 0]" href="javascript:;" ng-click='getShareLevelAll()'>全部</a>
             </li>
             <li role="presentation" ng-repeat='shareLevel in shareLevelList'>
-              <a ng-class="{true: 'active', false: 'inactive'}[shareLvMainSelection.indexOf(shareLevel.id) > -1]" href="javascript:;" ng-click='getDataQuotaListBySl(shareLevel)'>{{shareLevel.dict_name}}
+              <a ng-class="{true: 'active', false: 'inactive'}[shareLvMainSelection.indexOf(shareLevel.id) > -1]" href="javascript:;" ng-click='getInfoResourceListBySl(shareLevel)'>{{shareLevel.dict_name}}
               </a>
             </li>
           </ul>
@@ -63,11 +60,11 @@
           <ul class="pager">
             <li class='filter-label'>面向社会开放</li>
             <li role="presentation">
-              <a class="active" href="javascript:;" ng-click=''>全部</a>
+              <a ng-class="{true: 'active', false: 'inactive'}[socialOpenMainSelection.length == 0]" href="javascript:;" ng-click='getSocialOpenAll()'>全部</a>
             </li>
-            <li role="presentation">
-              <a ng-class="" href="javascript:;" ng-click=''>开放</a>
-              <a ng-class="" href="javascript:;" ng-click=''>不开放</a>
+            <li role="presentation" ng-repeat='socialOpen in socialOpenList'>
+              <a ng-class="{true: 'active', false: 'inactive'}[socialOpenMainSelection.indexOf(socialOpen.id) > -1]" href="javascript:;" ng-click='getInfoResourceListBySO(socialOpen)'>{{socialOpen.dict_name}}
+              </a>
             </li>
           </ul>
         </nav>
@@ -75,12 +72,12 @@
       <div class='indicator-filter'>
         <nav class='pull-left'>
           <ul class="pager">
-            <li class='filter-label'>共享频率</li>
+            <li class='filter-label'>更新周期</li>
             <li role="presentation">
               <a href="javascript:;" ng-class="{true: 'active', false: 'inactive'}[shareFreqSelection.length == 0]" href="javascript:;" ng-click='getShareFreqAll()'>全部</a>
             </li>
             <li role="presentation" ng-repeat='shareFreq in shareFrequencyList'>
-              <a ng-class="{true: 'active', false: 'inactive'}[shareFreqSelection.indexOf(shareFreq.id) > -1]" ng-checked="shareFreqSelection.indexOf(shareFreq.id) > -1" ng-click='getDataQuotaListBySF(shareFreq)' href="javascript:;">{{shareFreq.dict_name}}
+              <a ng-class="{true: 'active', false: 'inactive'}[shareFreqSelection.indexOf(shareFreq.id) > -1]" ng-checked="shareFreqSelection.indexOf(shareFreq.id) > -1" ng-click='getInfoResourceListBySF(shareFreq)' href="javascript:;">{{shareFreq.dict_name}}
               </a>
             </li>
           </ul>
@@ -94,7 +91,7 @@
               <a href="javascript:;" ng-class="{true: 'active', false: 'inactive'}[areaMainSelection.length == 0]" href="javascript:;" ng-click='getSpatialAll()'>全部</a>
             </li>
             <li role="presentation" ng-repeat='dataLevel in dataLevelList'>
-              <a ng-class="{true: 'active', false: 'inactive'}[areaMainSelection.indexOf(dataLevel.id) > -1]" ng-checked="areaMainSelection.indexOf(dataLevel.id) > -1" ng-click='getDataQuotaListByAP(dataLevel)' href="javascript:;">{{dataLevel.dict_name}}
+              <a ng-class="{true: 'active', false: 'inactive'}[areaMainSelection.indexOf(dataLevel.id) > -1]" ng-checked="areaMainSelection.indexOf(dataLevel.id) > -1" ng-click='getInfoResourceListByAP(dataLevel)' href="javascript:;">{{dataLevel.dict_name}}
               </a>
             </li>
           </ul>
@@ -105,11 +102,11 @@
           <ul class="pager">
             <li class='filter-label'>是否涉密</li>
             <li role="presentation">
-              <a class="active" href="javascript:;" ng-click=''>全部</a>
+              <a href="javascript:;" ng-class="{true: 'active', false: 'inactive'}[secretFlagMainSelection.length == 0]" href="javascript:;" ng-click='getSecretFlagAll()'>全部</a>
             </li>
-            <li role="presentation">
-              <a ng-class="" href="javascript:;" ng-click=''>不涉密</a>
-              <a ng-class="" href="javascript:;" ng-click=''>涉密</a>
+            <li role="presentation" ng-repeat='secretFlag in secretFlagList'>
+              <a ng-class="{true: 'active', false: 'inactive'}[secretFlagMainSelection.indexOf(secretFlag.id) > -1]" ng-checked="secretFlagMainSelection.indexOf(secretFlag.id) > -1" ng-click='getInfoResourceListBySecFlag(dataLevel)' href="javascript:;">{{secretFlag.dict_name}}
+              </a>
             </li>
           </ul>
         </nav>

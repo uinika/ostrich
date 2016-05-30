@@ -9,6 +9,9 @@ Department.controller('Department.Controller.Main', ['$cookies', '$scope', '$q',
     var SHARE_FREQUENCY = 1;
     var DATA_LEVEL = 2;
     var SHARE_LEVEL = 3;
+    var SECRET_FLAG = 5;
+    var RESOURCE_FORMAT = 11;
+    var SOCIAL_OPEN_FLAG = 14;
     var _httpParams = {};
     _httpParams.limit = 10;
     _httpParams.skip = 0;
@@ -60,7 +63,11 @@ Department.controller('Department.Controller.Main', ['$cookies', '$scope', '$q',
       })
     }
 
-
+    Http.getSystemDictByCatagory({
+      'dict_category': SECRET_FLAG
+    }).then(function(result) {
+      $scope.secretFlagList = result.data.body;
+    });
 
     // Get system dict
     Http.getSystemDictByCatagory({
@@ -76,9 +83,21 @@ Department.controller('Department.Controller.Main', ['$cookies', '$scope', '$q',
     });
 
     Http.getSystemDictByCatagory({
+      'dict_category': RESOURCE_FORMAT
+    }).then(function(result) {
+      $scope.resourceFormatList = result.data.body;
+    });
+
+    Http.getSystemDictByCatagory({
       'dict_category': DATA_LEVEL
     }).then(function(result) {
       $scope.dataLevelList = result.data.body;
+    });
+
+    Http.getSystemDictByCatagory({
+      'dict_category': SOCIAL_OPEN_FLAG
+    }).then(function(result) {
+      $scope.socialOpenList = result.data.body;
     });
 
     Http.getDepDataQuotaTotal().then(function(result) {
