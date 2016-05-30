@@ -37,9 +37,11 @@ app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', '$provide',
           },
           'response': function(response) {
             $q.when(response, function(result){
-              if(result.data.head.status===300){
-                sessionStorage.message = '登陆超时，请重新登陆！';
-                window.location.href='/';
+              if( response.data && typeof response.data==='object'){
+                if(result.data.head.status===300){
+                  sessionStorage.message = '登陆超时，请重新登陆！';
+                  window.location.href='/';
+                };
               };
             });
             return response;
