@@ -22,10 +22,8 @@ var app = angular.module('app', [
   'DepartmentShare'
 ]);
 
-app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider', '$provide',
-  function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $provide) {
-    /** URL Location Mode */
-    $locationProvider.html5Mode({enabled: false});
+app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', '$provide',
+  function($stateProvider, $urlRouterProvider, $httpProvider, $provide) {
     /** HTTP Interceptor */
     $httpProvider.interceptors.push(['$q',
       function($q) {
@@ -35,9 +33,15 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
             return config;
           },
           'requestError': function(rejection) {
-            return response;
+            return rejection;
           },
           'response': function(response) {
+            $q.when(response, function(result){
+              if(result.data.head.status===300){
+                sessionStorage.message = '登陆超时，请重新登陆！';
+                window.location.href='/';
+              };
+            });
             return response;
           },
           'responseError': function(rejection) {
