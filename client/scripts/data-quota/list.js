@@ -60,9 +60,27 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
       });
     };
     // Filter generator
-    var SHARE_FREQUENCY = 1,
-        DATA_LEVEL = 2,
-        SHARE_LEVEL = 3;
+    var SHARE_FREQUENCY = 1, //更新周期
+        DATA_LEVEL = 2, //分地区数据级别
+        SHARE_LEVEL = 3; //共享级别
+        RESOURCE_FORMAT = 11 ; //信息资源格式
+        OPEN_SOCIETY = 14 ; //面向社会开放
+        IS_SECRET = 5; //是否涉密
+    Http.getSystemDictByCatagory({
+      'dict_category': RESOURCE_FORMAT
+    }).then(function(result) {
+      $scope.resourceFormats = result.data.body;
+    });
+    Http.getSystemDictByCatagory({
+      'dict_category': OPEN_SOCIETY
+    }).then(function(result) {
+      $scope.openToSocietys = result.data.body;
+    });
+    Http.getSystemDictByCatagory({
+      'dict_category': IS_SECRET
+    }).then(function(result) {
+      $scope.isScrets = result.data.body;
+    });
     Http.getSystemDictByCatagory({
       'dict_category': SHARE_LEVEL
     }).then(function(result) {
@@ -80,6 +98,50 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
     });
     // Handle above filter
     var filterParams = {};
+
+    /*信息资源格式*/
+    $scope.resourceFormatFilter = function(id, index){
+      $scope.resourceFormatActive = [];
+      $scope.resourceFormatActiveAll = '';
+      $scope.resourceFormatActive[index] = 'active';
+      filterParams.resource_Format = id;
+      if('ALL'===id){
+        delete filterParams.resource_Format;
+        $scope.resourceFormatActiveAll = 'active';
+        getDataQuotaListByFilter(filterParams);
+      }else{
+        getDataQuotaListByFilter(filterParams);
+      }
+    };
+
+    /*面向社会开放*/
+    $scope.openToSocietyFilter = function(id, index){
+      $scope.openToSocietyActive = [];
+      $scope.openToSocietyActiveAll = '';
+      $scope.openToSocietyActive[index] = 'active';
+      filterParams.open_Society = id;
+      if('ALL'===id){
+        delete filterParams.open_Society;
+        $scope.openToSocietyActiveAll = 'active';
+        getDataQuotaListByFilter(filterParams);
+      }else{
+        getDataQuotaListByFilter(filterParams);
+      }
+    };
+    /*是否涉密*/
+    $scope.isScretFilter = function(id, index){
+      $scope.isScretActive = [];
+      $scope.isScretActiveAll = '';
+      $scope.isScretActive[index] = 'active';
+      filterParams.secretflag = id;
+      if('ALL'===id){
+        delete filterParams.secretflag;
+        $scope.isScretActiveAll = 'active';
+        getDataQuotaListByFilter(filterParams);
+      }else{
+        getDataQuotaListByFilter(filterParams);
+      }
+    };
     /* 共享级别 */
     $scope.ShareLevelFilter = function(id, index){
       $scope.ShareLevelActive = [];

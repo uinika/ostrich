@@ -12,6 +12,18 @@
 
     </div>
     <div class="panel-body">
+      <!-- 信息资源格式 -->
+      <nav>
+        <ul class="pager">
+          <li class="text-muted">信息资源格式</li>
+          <li ng-click="resourceFormatFilter('All')">
+            <a ng-class='resourceFormatActiveAll'>全部</a>
+          </li>
+          <li ng-repeat='resourceFormat in resourceFormats' ng-click='resourceFormatFilter(resourceFormat.id,  $index)'>
+            <a ng-class='resourceFormatActiveAll[$index]'>{{resourceFormat.dict_name}}</a>
+          </li>
+        </ul>
+      </nav>
       <!-- 共享级别 -->
       <nav>
         <ul class="pager">
@@ -21,6 +33,18 @@
           </li>
           <li ng-repeat='shareLevel in ShareLevels' ng-click='ShareLevelFilter(shareLevel.id, $index)'>
             <a ng-class='ShareLevelActive[$index]'>{{shareLevel.dict_name}}</a>
+          </li>
+        </ul>
+      </nav>
+      <!-- 面向社会开放 -->
+      <nav>
+        <ul class="pager">
+          <li class="text-muted">面向社会开放</li>
+          <li ng-click="openToSocietyFilter('All')">
+            <a ng-class='openToSocietyActiveAll'>全部</a>
+          </li>
+          <li ng-repeat='openToSociety in openToSocietys' ng-click='openToSocietyFilter(openToSociety.id,  $index)'>
+            <a ng-class='openToSocietyActive[index]'>{{openToSociety.dict_name}}</a>
           </li>
         </ul>
       </nav>
@@ -49,6 +73,18 @@
           </li>
         </ul>
       </nav>
+      <!-- 是否涉密 -->
+      <nav>
+        <ul class="pager">
+          <li class="text-muted">是否涉密</li>
+          <li ng-click="isScretFilter('All')">
+            <a ng-class='isScretActiveAll' >全部</a>
+          </li>
+          <li ng-repeat='isScret in isScrets' ng-click='isScretFilter(isScret.id, $index)'>
+            <a ng-class='isScretActive[index]'>{{isScret.dict_name}}</a>
+          </li>
+        </ul>
+      </nav>
     </div>
   </div>
 
@@ -61,28 +97,65 @@
       <table class='table table-hover table-striped table-bordered table-patch'>
          <thead>
            <tr>
-             <th>关注</th>
-             <th>标识</th>
-             <th>序号</th>
-             <th>指标编号</th>
-             <th>信息资源名称</th>
-             <th>信息资源别称</th>
-             <th>计量单位</th>
-             <th>信息资源摘要</th>
-             <th>计算方法</th>
-             <th>共享频率</th>
-             <th>空间范围</th>
-             <th>分地区数据级别</th>
-             <th>来源部门</th>
-             <th>共享级别</th>
-             <th>数据存储类型</th>
-             <th>数据精度</th>
-             <th>数据长度</th>
-             <th>创建时间</th>
-             <th>信息资源格式</th>
-             <th>是否涉密</th>
-             <th>联系人</th>
-             <th>联系电话</th>
+             <th width='30px' rowspan="2">关注</th>
+             <th width='30px' rowspan="2">标识</th>
+             <th width='30px' rowspan="2">序号</th>
+             <!-- <th>指标编号</th> -->
+             <th width='30px' rowspan="2">信息资源名称</th>
+             <th width='30px' rowspan="2">信息资源别称</th>
+             <th width='30px' rowspan="2">信息资源摘要</th>
+             <th width='30px' rowspan="2">信息资源分类</th>
+             <th width='30px' rowspan="2">信息资源格式</th>
+             <td rowspan="2" colspan="4">
+               <table class="table table-condensed ">
+                 <tr>
+                   <th width='120px' colspan="4"  align="center">信息项信息</th>
+                 </tr>
+                 <tr>
+                   <th width='30px'>信息项名称</th>
+                   <th width='30px'>数据类型</th>
+                   <th width='30px'>数据精度</th>
+                   <th width='30px'>数据长度</th>
+                 </tr>
+               </table>
+            </td>
+             <th width='30px' rowspan="2">更新周期</th>
+             <th width='30px' rowspan="2">是否涉密</th>
+             <th width='30px' rowspan="2">计量单位</th>
+             <th width='30px' rowspan="2">计算方法</th>
+             <th width='30px' rowspan="2">共享级别</th>
+             <th  rowspan="2" colspan="2">
+               <table calss="table  table-condensed table-patch ">
+                 <tr>
+                   <th width='60px'colspan="2"  align="center">共享类型与共享条件</th>
+                 </tr>
+                 <tr>
+                   <th width='30px'>共享类型</th>
+                   <th width='30px'>共享条件</th>
+                 </tr>
+               </table>
+             </th>
+             <th width='30px' rowspan="2"  align="center">共享方式</th>
+             <th  rowspan="2" colspan="2">
+               <table calss="table table-condensed table-patch">
+                 <tr>
+                   <th width='60px' colspan="2">开放数据与开放条件</th>
+                 </tr>
+                 <tr>
+                   <th width='30px'>是否面向社会开放</th>
+                   <th width='30px'>开放条件</th>
+                 </tr>
+               </table>
+             </th>
+             <th width='30px' rowspan="2">信息资源提供方</th>
+             <th width='30px' rowspan="2">资源提供方代码</th>
+             <th width='30px' rowspan="2">信息资源目录代码</th>
+             <th width='30px' rowspan="2">关联及类目名称</th>
+             <th width='30px' rowspan="2">空间范围</th>
+             <th width='30px' rowspan="2">分地区数据级别</th>
+             <th width='30px' rowspan="2">联系人</th>
+             <th width='30px' rowspan="2">联系电话</th>
+             <th width='30px' rowspan="2">创建时间</th>
            </tr>
          </thead>
          <tbody>
@@ -112,29 +185,48 @@
               </button>
             </td>
             <td>{{$index+1}}</td>
-            <td>{{quota.quota_sn}}</td>
+            <!-- <td>{{quota.quota_sn}}</td> -->
             <td title='{{quota.quota_name}}'>
               <a ui-sref='main.data-quota.detail({data_quota_id:quota.id})'>
                 {{quota.quota_name}}
               </a>
             </td>
             <td title='{{quota.alias}}'>{{quota.alias}}</td>
-            <td title='{{quota.meter_unit}}'>{{quota.meter_unit}}</td>
             <td title='{{quota.quota_detail}}'>{{quota.quota_detail}}</td>
-            <td title='{{quota.calculate_method}}'>{{quota.calculate_method}}</td>
+            <td title='信息资源分类'>信息资源分类</td>
+            <td title='{{quota.datashowformat}}'>{{quota.datashowformat}}</td>
+
+            <td ng-if="quota.quota.alias ==='数据库类'" title='信息项名称'>信息项名称</td>
+            <td ng-if="quota.quota.alias ==='数据库类'" title='{{quota.datastoretype}}'>{{quota.datastoretype}}</td>
+            <td ng-if="quota.quota.alias ==='数据库类'" title='{{quota.data_precision}}'>{{quota.data_precision}}</td>
+            <td ng-if="quota.quota.alias ==='数据库类'" title='{{quota.data_length}}'>{{quota.data_length}}</td>
+
+            <td ng-if="quota.quota.alias !='数据库类'" ></td>
+            <td ng-if="quota.quota.alias !='数据库类'" ></td>
+            <td ng-if="quota.quota.alias !='数据库类'" ></td>
+            <td ng-if="quota.quota.alias !='数据库类'" ></td>
+
             <td title='{{quota.sharefrequency}}'>{{quota.sharefrequency}}</td>
+            <td title='{{quota.secretflag}}'>{{quota.secretflag}}</td>
+            <td title='{{quota.meter_unit}}'>{{quota.meter_unit}}</td>
+            <td title='{{quota.calculate_method}}'>{{quota.calculate_method}}</td>
+            <td title='{{quota.sharelevel}}'>{{quota.sharelevel}}</td>
+            <td title="共享类型">共享类型</td>
+            <td title="共享条件">共享条件</td>
+            <td title="共享方式">共享方式</td>
+            <td title="是否面向社会开放">是否面向社会开放</td>
+            <td title="开放条件">开放条件</th>
+            <td title='{{quota.depname}}'>{{quota.depname}}</td>
+            <td title='资源提供方代码'>资源提供方代码</td>
+
+            <td title='信息资源目录代码'>信息资源目录代码</td>
+            <td title='关联及类目名称'>关联及类目名称</td>
             <td title='{{quota.area_range}}'>{{quota.area_range}}</td>
             <td title='{{quota.regionallevel}}'>{{quota.regionallevel}}</td>
-            <td title='{{quota.depname}}'>{{quota.depname}}</td>
-            <td title='{{quota.sharelevel}}'>{{quota.sharelevel}}</td>
-            <td title='{{quota.datastoretype}}'>{{quota.datastoretype}}</td>
-            <td title='{{quota.data_precision}}'>{{quota.data_precision}}</td>
-            <td title='{{quota.data_length}}'>{{quota.data_length}}</td>
-            <td title='{{quota.create_time}}'>{{quota.create_time | date:'yyyy-MM-dd HH:mm:ss'}}</td>
-            <td title='{{quota.datashowformat}}'>{{quota.datashowformat}}</td>
-            <td title='{{quota.secretflag}}'>{{quota.secretflag}}</td>
+
             <td title='{{quota.linkman}}'>{{quota.linkman}}</td>
             <td title='{{quota.contact_phone}}'>{{quota.contact_phone}}</td>
+            <td title='{{quota.create_time}}'>{{quota.create_time | date:'yyyy-MM-dd HH:mm:ss'}}</td>
            </tr>
          </tbody>
        </table>
