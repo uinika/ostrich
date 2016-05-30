@@ -18,7 +18,10 @@ Login.controller('Login.Controller.Main', ['$rootScope', '$cookies', '$scope', '
           var loginUser = result.data.body[0];
           $rootScope.User = loginUser;
           $cookies.put('User', JSON.stringify(loginUser));
-          sessionStorage.token = result.data.head.token;
+          var sessionToken = result.data.head.token;
+          if(sessionToken){
+            sessionStorage.token = sessionToken;
+          }
           if (200 == result.data.head.status) {
             $state.go("main.dashboard");
           } else {
@@ -29,18 +32,14 @@ Login.controller('Login.Controller.Main', ['$rootScope', '$cookies', '$scope', '
       } else {
         $scope.loginSubmitted = true;
       }
-
     }
   }
-
-])
-
+]);
 
 /* HTTP Factory */
 Login.factory('Login.Service.Http', ['$http', 'API',
   function($http, API) {
     var path = API.path;
-
     function login(params) {
       return $http.get(
         path + '/login', {

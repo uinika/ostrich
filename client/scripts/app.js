@@ -171,7 +171,6 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
 app.run(['$rootScope', function($rootScope){
   $rootScope.$on('$stateChangeStart',
     function(event, toState, toParams, fromState, fromParams){
-      console.log();
       if(toState.name!=='login'){
         if(!sessionStorage.token){
           window.location.href='/';
