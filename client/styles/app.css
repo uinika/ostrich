@@ -1099,6 +1099,7 @@ input.ng-touched.ng-invalid {
   text-overflow: ellipsis;
   font-size: 12px;
   vertical-align: middle;
+  text-align: center;
 }
 #data-quota-list .pannel-patch {
   margin-bottom: 10px;
