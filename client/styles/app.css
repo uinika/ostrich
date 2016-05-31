@@ -1070,13 +1070,24 @@ input.ng-touched.ng-invalid {
   top: -7px;
   right: -12px;
 }
-#data-quota-list .pager {
-  text-align: left;
-  margin: 8px;
-  font-size: 13px;
+#data-quota-list .filter {
+  border-bottom: 0 solid #DDD;
+  padding: 15px 0;
+  margin-bottom: 10px;
 }
-#data-quota-list .pager li {
-  margin-left: 6px;
+#data-quota-list .filter .indicator-filter {
+  margin: 0;
+  font-size: 13px;
+  overflow: hidden;
+}
+#data-quota-list .filter .indicator-filter ul.pager {
+  margin: 0 0 15px;
+}
+#data-quota-list .filter .indicator-filter ul.pager .filter-label {
+  width: 110px;
+  text-align: right;
+  display: inline-block;
+  padding-right: 12px;
 }
 #data-quota-list .table-patch td,
 #data-quota-list .table-patch th {
