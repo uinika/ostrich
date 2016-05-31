@@ -343,11 +343,14 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
 
     // submit add
     $scope.addInfoResource = function(isValid) {
-      $scope.submitted = false;
+      $scope.submitted = true;
       var InfoResourceAddObj = {};
       var InfoResource_RelationConfig = [];
       var InfoResourceApplyInfo = [];
       var InfoItem_RelationConfig = [];
+      if($scope.shareFreqSelection.length == 0 && !$scope.resItemAddBtn) {
+        isValid = false;
+      }
 
       if (isValid) {
         InfoResourceAddObj.InfoResource = $scope.InfoResource;
@@ -376,6 +379,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
         _($scope.ResourceItemList).forEach(function(item,index) {
           console.log(index);
           item.item_ord = index;
+          item.InfoResourceId = $scope.InfoResource.resource_name;
           console.log($scope.ResourceItemList);
         })
 
@@ -397,8 +401,9 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
               alert('保存失败');
             }
           })
-      } else {
-        $scope.submitted = true;
+      }
+      else {
+        return;
       }
     }
 
@@ -462,6 +467,10 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
       if (RESOURCE_FORMAT_DATA == $scope.InfoResource.resource_format) {
         $scope.resItemAddBtn = true;
         $scope.resFormatOtherShow = false;
+        $scope.shareFreqSelection = [];
+        $scope.InfoResource.secret_flag = '';
+        $scope.InfoResource.meter_unit = "";
+        $scope.InfoResource.calculate_method = '';
       }
       else if(RESOURCE_FORMAT_OTHER == $scope.InfoResource.resource_format) {
         $scope.resFormatOtherShow = true;
