@@ -30,7 +30,7 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
     // Init data quota talbe
     (function initDataQuotaList(){
         /* Init selected status for filter */
-        $scope.resourceFormatActiveAll = $scope.ShareLevelActiveAll =$scope.openToSocietyActiveAll = $scope.ShareFrequencyActiveAll = $scope.DataLevelActiveAll = $scope.isScretActiveAll= 'active';
+        $scope.resourceFormatActiveAll = $scope.ShareLevelActiveAll = $scope.openToSocietyActiveAll = $scope.ShareFrequencyActiveAll = $scope.DataLevelActiveAll = $scope.isScretActiveAll= 'active';
         /* Init ajax parameters*/
         var httpParams = {};
         (currentDepID==='') ? (httpParams = initPaging) : (httpParams = _.assign(httpParams, currentDepID, initPaging));
@@ -157,16 +157,18 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
       }
     };
     /* 更新周期（共享频率） */
+    filterParams.sys_dict_id = [];
+    $scope.ShareFrequencyActive = [];
     $scope.ShareFrequencyFilter = function(id, index){
-      $scope.ShareFrequencyActive = [];
-      $scope.ShareFrequencyActiveAll = '';
-      $scope.ShareFrequencyActive[index] = 'active';
-      filterParams.update_period = id;
       if('ALL'===id){
-        delete filterParams.update_period;
+        filterParams.sys_dict_id = [];
         $scope.ShareFrequencyActiveAll = 'active';
+        $scope.ShareFrequencyActive = [];
         getDataQuotaListByFilter(filterParams);
       }else{
+        $scope.ShareFrequencyActiveAll = '';
+        ($scope.ShareFrequencyActive[index]==='active')?($scope.ShareFrequencyActive[index]=''):($scope.ShareFrequencyActive[index]='active');
+        filterParams.sys_dict_id.push(id);
         getDataQuotaListByFilter(filterParams);
       }
     };

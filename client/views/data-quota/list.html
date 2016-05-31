@@ -21,8 +21,8 @@
             <li ng-click="resourceFormatFilter('All')">
               <a ng-class='resourceFormatActiveAll'>全部</a>
             </li>
-            <li ng-repeat='resourceFormat in resourceFormats' ng-click='resourceFormatFilter(resourceFormat.id,  $index)'>
-              <a ng-class='resourceFormatActiveAll[$index]'>{{resourceFormat.dict_name}}</a>
+            <li ng-repeat='resourceFormat in resourceFormats' ng-click='resourceFormatFilter(resourceFormat.id, $index)'>
+              <a ng-class='resourceFormatActive[$index]'>{{resourceFormat.dict_name}}</a>
             </li>
           </ul>
       </nav>
@@ -50,12 +50,12 @@
               <a ng-class='openToSocietyActiveAll'>全部</a>
             </li>
             <li ng-repeat='openToSociety in openToSocietys' ng-click='openToSocietyFilter(openToSociety.id,  $index)'>
-              <a ng-class='openToSocietyActive[index]'>{{openToSociety.dict_name}}</a>
+              <a ng-class='openToSocietyActive[$index]'>{{openToSociety.dict_name}}</a>
             </li>
           </ul>
       </nav>
       </div>
-      <!-- 共享频率 -->
+      <!-- 更新周期 -->
       <div class='indicator-filter'>
         <nav class='pull-left'>
           <ul class="pager">
@@ -93,7 +93,7 @@
               <a ng-class='isScretActiveAll' >全部</a>
            </li>
            <li ng-repeat='isScret in isScrets' ng-click='isScretFilter(isScret.id, $index)'>
-              <a ng-class='isScretActive[index]'>{{isScret.dict_name}}</a>
+              <a ng-class='isScretActive[$index]'>{{isScret.dict_name}}</a>
            </li>
         </ul>
        </nav>
