@@ -22,12 +22,12 @@
       <div class='indicator-filter'>
         <nav class='pull-left'>
           <ul class="pager">
-            共享级别
+            <li class='filter-label'>信息资源格式</li>
             <li role="presentation">
-              <a ng-class="{true: 'active', false: 'inactive'}[shareLvShareSelection.length == 0]" href="javascript:;" ng-click='getShareLevelAllForShare()'>全部</a>
+              <a ng-class="{true: 'active', false: 'inactive'}[resFormatMainSelection.length == 0]" href="javascript:;" ng-click='getResFormatAll()'>全部</a>
             </li>
-            <li role="presentation" ng-repeat='shareLevel in shareLevelList'>
-              <a ng-class="{true: 'active', false: 'inactive'}[shareLvShareSelection.indexOf(shareLevel.id) > -1]" href="javascript:;" ng-click='getShareDataQuotaListBySl(shareLevel)'>{{shareLevel.dict_name}}
+            <li role="presentation" ng-repeat='resourceFormat in resourceFormatList'>
+              <a ng-class="{true: 'active', false: 'inactive'}[resFormatMainSelection.indexOf(resourceFormat.id) > -1]" href="javascript:;" ng-click='getInfoResourceByResFormat(resourceFormat)'>{{resourceFormat.dict_name}}
               </a>
             </li>
           </ul>
@@ -36,12 +36,68 @@
       <div class='indicator-filter'>
         <nav class='pull-left'>
           <ul class="pager">
-            分地区数据级别
+            <li class='filter-label'>共享级别</li>
             <li role="presentation">
-              <a href="javascript:;" ng-class="{true: 'active', false: 'inactive'}[dataLevelShareSelection.length == 0]" href="javascript:;" ng-click='getDataLevelAllForShare()'>全部</a>
+              <a ng-class="{true: 'active', false: 'inactive'}[shareLvMainSelection.length == 0]" href="javascript:;" ng-click='getShareLevelAll()'>全部</a>
             </li>
-            <li role="presentation" ng-repeat='DataLevel in dataLevelList'>
-              <a ng-class="{true: 'active', false: 'inactive'}[dataLevelShareSelection.indexOf(DataLevel.id) > -1]" ng-checked="dataLevelShareSelection.indexOf(DataLevel.id) > -1" ng-click='getShareDataQuotaListByAP(DataLevel)' href="javascript:;">{{DataLevel.dict_name}}
+            <li role="presentation" ng-repeat='shareLevel in shareLevelList'>
+              <a ng-class="{true: 'active', false: 'inactive'}[shareLvMainSelection.indexOf(shareLevel.id) > -1]" href="javascript:;" ng-click='getInfoResourceListBySl(shareLevel)'>{{shareLevel.dict_name}}
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class='indicator-filter'>
+        <nav class='pull-left'>
+          <ul class="pager">
+            <li class='filter-label'>面向社会开放</li>
+            <li role="presentation">
+              <a ng-class="{true: 'active', false: 'inactive'}[socialOpenMainSelection.length == 0]" href="javascript:;" ng-click='getSocialOpenAll()'>全部</a>
+            </li>
+            <li role="presentation" ng-repeat='socialOpen in socialOpenList'>
+              <a ng-class="{true: 'active', false: 'inactive'}[socialOpenMainSelection.indexOf(socialOpen.id) > -1]" href="javascript:;" ng-click='getInfoResourceListBySO(socialOpen)'>{{socialOpen.dict_name}}
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class='indicator-filter'>
+        <nav class='pull-left'>
+          <ul class="pager">
+            <li class='filter-label'>更新周期</li>
+            <li role="presentation">
+              <a href="javascript:;" ng-class="{true: 'active', false: 'inactive'}[shareFreqSelection.length == 0]" href="javascript:;" ng-click='getShareFreqAll()'>全部</a>
+            </li>
+            <li role="presentation" ng-repeat='shareFreq in shareFrequencyList'>
+              <a ng-class="{true: 'active', false: 'inactive'}[shareFreqSelection.indexOf(shareFreq.id) > -1]" ng-checked="shareFreqSelection.indexOf(shareFreq.id) > -1" ng-click='getInfoResourceListBySF(shareFreq)' href="javascript:;">{{shareFreq.dict_name}}
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class='indicator-filter'>
+        <nav class='pull-left'>
+          <ul class="pager">
+            <li class='filter-label'>分地区数据级别</li>
+            <li role="presentation">
+              <a href="javascript:;" ng-class="{true: 'active', false: 'inactive'}[areaMainSelection.length == 0]" href="javascript:;" ng-click='getSpatialAll()'>全部</a>
+            </li>
+            <li role="presentation" ng-repeat='dataLevel in dataLevelList'>
+              <a ng-class="{true: 'active', false: 'inactive'}[areaMainSelection.indexOf(dataLevel.id) > -1]" ng-checked="areaMainSelection.indexOf(dataLevel.id) > -1" ng-click='getInfoResourceListByAP(dataLevel)' href="javascript:;">{{dataLevel.dict_name}}
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class='indicator-filter'>
+        <nav class='pull-left'>
+          <ul class="pager">
+            <li class='filter-label'>是否涉密</li>
+            <li role="presentation">
+              <a href="javascript:;" ng-class="{true: 'active', false: 'inactive'}[secretFlagMainSelection.length == 0]" href="javascript:;" ng-click='getSecretFlagAll()'>全部</a>
+            </li>
+            <li role="presentation" ng-repeat='secretFlag in secretFlagList'>
+              <a ng-class="{true: 'active', false: 'inactive'}[secretFlagMainSelection.indexOf(secretFlag.id) > -1]" ng-checked="secretFlagMainSelection.indexOf(secretFlag.id) > -1" ng-click='getInfoResourceListBySecFlag(dataLevel)' href="javascript:;">{{secretFlag.dict_name}}
               </a>
             </li>
           </ul>
