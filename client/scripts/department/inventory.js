@@ -236,21 +236,27 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
     var SHARE_METHOD = 13;
     var ITEM_TYPE = 15;
     var LEVEL_AUTH = '250375bd-02f0-11e6-a52a-5cf9dd40ad7e';
-    var RESOURCE_FORMAT = '250375bd-02f0-11e6-a52a-5cf9dd40ad7e';
-    var RESOURCE_FORMAT_OTHER = '';
-    var SHARE_METHOD_OTHER = '';
+    var RESOURCE_FORMAT_DATA = 'aaee8194-2614-11e6-a9e9-507b9d1b58bb';
+    var RESOURCE_FORMAT_OTHER = 'ab11fdd4-2614-11e6-a9e9-507b9d1b58bb';
+    var SHARE_METHOD_OTHER = 'd8d61ff3-2616-11e6-a9e9-507b9d1b58bb';
 
     var LoginUser = JSON.parse($cookies.get('User'));
     var DEP_ID = LoginUser.dep_id;
     $scope.DEP_NAME = LoginUser.dep_name;
     $scope.InfoResource = {};
+    $scope.InfoResource.alias = '';
+    $scope.InfoResource.rel_category = '';
+    $scope.InfoResource.secret_flag = '';
+    $scope.InfoResource.meter_unit = "";
     $scope.InfoResource.calculate_method = '';
     $scope.InfoResource.resource_format_other = '';
     $scope.InfoResource.share_method_other = '';
+    $scope.InfoResource.social_open_limit = '';
     $scope.InfoResource.linkman = '';
     $scope.InfoResource.contact_phone = '';
     // item list
     $scope.ResourceItemList = [];
+    $scope.ResourceItemListShow = [];
     $scope.ResourceItemConfigList = [];
 
 
@@ -352,14 +358,23 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
     $scope.addResourceItem = function() {
       $scope.Modal = {};
       $scope.ResourceItem = {};
+      $scope.shareFreqItemSelection = [];
+      $scope.shareFreqItemObjSelection = [];
       Component.popModal($scope, 'Department.Inventory.Controller.publish', '', 'item-add-modal').result.then(function(res) {
+        console.log($scope.shareFreqItemSelection);
+        console.log($scope.shareFreqItemObjSelection);
         $scope.ResourceItemList.push($scope.ResourceItem);
-        _($scope.shareFreqItemSelection).forEach(function(value) {
+        var shareFreqDictName = [];
+        _($scope.shareFreqItemObjSelection).forEach(function(item) {
+          console.log(item);
           var sys_dict = {};
           sys_dict.InfoItemId = $scope.ResourceItem.item_name;
-          sys_dict.sys_dict_id = value;
+          sys_dict.sys_dict_id = item.id;
           $scope.ResourceItemConfigList.push(sys_dict);
+          shareFreqDictName.push(item.dict_name);
         });
+        $scope.ResourceItem.shareFreqDictName = shareFreqDictName;
+        $scope.ResourceItemListShow.push($scope.ResourceItem);
       })
     }
 
@@ -377,6 +392,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
       }
     }
 
+    $scope.shareMethodOtherShow = false;
     $scope.showHideShareMethodOther = function() {
       if(SHARE_METHOD_OTHER == $scope.InfoResource.share_method) {
         $scope.shareMethodOtherShow = true;
@@ -388,16 +404,20 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
 
     //show or hide resource item add button
     $scope.resItemAddBtn = false;
+    $scope.resFormatOtherShow = false;
     $scope.showHideResAddBtn = function() {
       $scope.resFormatOtherShow = false;
-      if (RESOURCE_FORMAT == $scope.InfoResource.share_level) {
+      if (RESOURCE_FORMAT_DATA == $scope.InfoResource.resource_format) {
         $scope.resItemAddBtn = true;
+        $scope.resFormatOtherShow = false;
       }
-      else if(RESOURCE_FORMAT_OTHER == $scope.InfoResource.share_level) {
+      else if(RESOURCE_FORMAT_OTHER == $scope.InfoResource.resource_format) {
         $scope.resFormatOtherShow = true;
+        $scope.resItemAddBtn = false;
       }
       else {
         $scope.resItemAddBtn = false;
+        $scope.resFormatOtherShow = false;
       }
     }
 
@@ -429,18 +449,24 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
       }
     };
 
-    $scope.shareFreqItemSelection = [];
+
+
     $scope.toggleShareFreqItemSelection = function(item) {
+      //var shareFreqItemSelectionIds = _.map($scope.shareFreqItemSelection, 'id');
       var idx = $scope.shareFreqItemSelection.indexOf(item.id);
+      console.log(idx);
       // is currently selected
       if (idx > -1) {
         $scope.shareFreqItemSelection.splice(idx, 1);
+        $scope.shareFreqItemObjSelection.splice(idx,1);
       }
 
       // is newly selected
       else {
         $scope.shareFreqItemSelection.push(item.id);
+        $scope.shareFreqItemObjSelection.push(item);
       }
+      console.log($scope.shareFreqItemObjSelection);
     };
 
 
