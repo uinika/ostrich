@@ -213,25 +213,25 @@ input.ng-touched.ng-invalid {
 #dashboard .third-section .nav-pills li {
   margin-top: 5px;
 }
-.department-main .font-22 {
+#department-summary .font-22 {
   font-size: 22px;
 }
-.department-main .font-20 {
+#department-summary .font-20 {
   font-size: 20px;
 }
-.department-main .panel-list .panel {
+#department-summary .panel-list .panel {
   height: 287px;
   overflow: hidden;
 }
-.department-main .panel-list .panel table {
+#department-summary .panel-list .panel table {
   table-layout: fixed;
 }
-.department-main .panel-list .panel table tr td {
+#department-summary .panel-list .panel table tr td {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-.department-main .panel-list .panel table tr td pre {
+#department-summary .panel-list .panel table tr td pre {
   overflow: hidden;
   border: none;
   border-radius: 0;
@@ -243,62 +243,62 @@ input.ng-touched.ng-invalid {
   font-size: inherit;
   margin: 0;
 }
-.department-main .panel-list .panel-follow-depart .panel-body {
+#department-summary .panel-list .panel-follow-depart .panel-body {
   padding: 15px 0;
   height: 260px;
   overflow: auto;
 }
-.department-main .focus-bureau-list {
+#department-summary .focus-bureau-list {
   height: 200px;
 }
-.department-main .focus-bureau-list .add-focus-option {
+#department-summary .focus-bureau-list .add-focus-option {
   padding-bottom: 15px;
 }
-.department-main .focus-bureau-list .add-focus-option .dep-select {
+#department-summary .focus-bureau-list .add-focus-option .dep-select {
   display: inline;
 }
-.department-main .focus-bureau-list .bureau-item .caption {
+#department-summary .focus-bureau-list .bureau-item .caption {
   height: 16px;
   font-size: 12px;
   text-align: center;
 }
-.department-main .panel-heading {
+#department-summary .panel-heading {
   overflow: hidden;
 }
-.department-main .panel-footer {
+#department-summary .panel-footer {
   font-size: 12px;
 }
-.department-main .panel-green {
+#department-summary .panel-green {
   border-color: #5cb85c;
 }
-.department-main .panel-green .panel-heading {
+#department-summary .panel-green .panel-heading {
   border-color: #5cb85c;
   color: #fff;
   background-color: #5cb85c;
 }
-.department-main .panel-green .panel-footer {
+#department-summary .panel-green .panel-footer {
   color: #5cb85c;
 }
-.department-main .panel-yellow {
+#department-summary .panel-yellow {
   border-color: #f0ad4e;
 }
-.department-main .panel-yellow .panel-heading {
+#department-summary .panel-yellow .panel-heading {
   border-color: #f0ad4e;
   color: #fff;
   background-color: #f0ad4e;
 }
-.department-main .panel-yellow .panel-footer {
+#department-summary .panel-yellow .panel-footer {
   color: #f0ad4e;
 }
-.department-main .panel-red {
+#department-summary .panel-red {
   border-color: #d9534f;
 }
-.department-main .panel-red .panel-heading {
+#department-summary .panel-red .panel-heading {
   border-color: #d9534f;
   color: #fff;
   background-color: #d9534f;
 }
-.department-main .panel-red .panel-footer {
+#department-summary .panel-red .panel-footer {
   color: #d9534f;
   height: 38px;
 }
