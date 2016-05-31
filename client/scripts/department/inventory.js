@@ -277,7 +277,8 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
     var SHARE_TYPE = 12;
     var SHARE_METHOD = 13;
     var ITEM_TYPE = 15;
-    var LEVEL_AUTH = '250375bd-02f0-11e6-a52a-5cf9dd40ad7e';
+    var LEVEL_AUTH = '250375bd-02f0-11e6-a52a-5cf9dd40ad7e'; // 授权开放
+    var LEVEL_ALL_OPEN = '2501e32c-02f0-11e6-a52a-5cf9dd40ad7e';// 全开放
     var RESOURCE_FORMAT_DATA = 'aaee8194-2614-11e6-a9e9-507b9d1b58bb';
     var RESOURCE_FORMAT_OTHER = 'ab11fdd4-2614-11e6-a9e9-507b9d1b58bb';
     var SHARE_METHOD_OTHER = 'd8d61ff3-2616-11e6-a9e9-507b9d1b58bb';
@@ -404,6 +405,8 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
     $scope.addResourceItem = function() {
       $scope.Modal = {};
       $scope.ResourceItem = {};
+      $scope.ResourceItem.meter_unit = '';
+      $scope.ResourceItem.calculate_method = '';
       $scope.shareFreqItemSelection = [];
       $scope.shareFreqItemObjSelection = [];
       Component.popModal($scope, 'Department.Inventory.Controller.publish', '', 'item-add-modal').result.then(function(res) {
@@ -425,14 +428,20 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
     // show or hide department
     $scope.depShow = false;
     $scope.showHideDeps = function(ev) {
-      if (LEVEL_AUTH == $scope.InfoResource.share_level) {
-        $scope.depShow = true;
-        $scope.socialOpenFlag = false;
-      } else {
-        $scope.depShow = false;
+      if(LEVEL_ALL_OPEN != $scope.InfoResource.share_level) {
+        if (LEVEL_AUTH == $scope.InfoResource.share_level) {
+          $scope.depShow = true;
+          $scope.socialOpenFlag = false;
+        } else {
+          $scope.depShow = false;
+          $scope.socialOpenFlag = true;
+        }
         $scope.InfoResource.social_open_flag = 0;
-        $scope.socialOpenFlag = true;
       }
+      else {
+        $scope.InfoResource.social_open_flag = 1;
+      }
+
     }
 
     $scope.shareMethodOtherShow = false;
