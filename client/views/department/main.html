@@ -1,21 +1,21 @@
 <div id='department-main' class="container">
   <div class="row">
     <div class="left col-md-2">
-      <div class="panel panel-default">
-        <div class='panel-heading' ui-sref='main.department' ui-sref-opts="{reload: true}">
-          <i class="fa fa-refresh">&nbsp;刷新列表</i>
+      <div class="panel panel-default panel-patch">
+        <div class='panel-heading' ui-sref='main.department.summary' ui-sref-opts="{reload: true}">
+          <i class="fa fa-refresh"> 刷新列表</i>
         </div>
         <div class="list-group">
-          <a class="list-group-item" ui-sref='main.department.inventory' ui-sref-opts="{reload: true}">
-            <i class='fa fa-list-alt'></i>&nbsp;部门资源</a>
-          <a class="list-group-item" ui-sref='main.department.share' ui-sref-opts="{reload: true}">
-            <i class='fa fa-share-square-o'></i>&nbsp;共享资源</a>
-          <a class="list-group-item" ui-sref='main.department.requirement' ui-sref-opts="{reload: true}">
-            <i class='fa fa-commenting-o'></i>&nbsp;需求发布</a>
-          <a class="list-group-item" ui-sref='main.department.requirementConfirm' ui-sref-opts="{reload: true}">
-            <i class='fa fa-check-square-o'></i>&nbsp;需求确认</a>
-          <a class="list-group-item" ui-sref='main.department.audit' ui-sref-opts="{reload: true}">
-            <i class='fa fa-edit'></i>&nbsp;数据审核</a>
+          <a class="list-group-item" ui-sref-active="active" ui-sref='main.department.inventory' ui-sref-opts="{reload: true}">
+            <i class='fa fa-list-alt'> 部门资源</i></a>
+          <a class="list-group-item" ui-sref-active="active" ui-sref='main.department.share' ui-sref-opts="{reload: true}">
+            <i class='fa fa-share-square-o'> 共享资源</i></a>
+          <a class="list-group-item" ui-sref-active="active" ui-sref='main.department.audit' ui-sref-opts="{reload: true}">
+            <i class='fa fa-edit'> 数据审核</i></a>
+          <a class="list-group-item" ui-sref-active="active" ui-sref='main.department.requirement' ui-sref-opts="{reload: true}">
+            <i class='fa fa-commenting-o'> 需求发布</i></a>
+          <a class="list-group-item" ui-sref-active="active" ui-sref='main.department.requirementConfirm' ui-sref-opts="{reload: true}">
+            <i class='fa fa-check-square-o'> 需求确认</i></a>
         </div>
       </div>
     </div>

@@ -213,6 +213,12 @@ input.ng-touched.ng-invalid {
 #dashboard .third-section .nav-pills li {
   margin-top: 5px;
 }
+#department-main .left {
+  padding-left: 0;
+}
+#department-main .right {
+  padding-right: 0;
+}
 #department-summary .font-22 {
   font-size: 22px;
 }
@@ -244,7 +250,6 @@ input.ng-touched.ng-invalid {
   margin: 0;
 }
 #department-summary .panel-list .panel-follow-depart .panel-body {
-  padding: 15px 0;
   height: 260px;
   overflow: auto;
 }
