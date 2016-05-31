@@ -213,54 +213,25 @@ input.ng-touched.ng-invalid {
 #dashboard .third-section .nav-pills li {
   margin-top: 5px;
 }
-#department-main a {
-  cursor: pointer;
-}
-#department-main .left {
-  padding: 0;
-}
-#department-main .right {
-  padding-left: 11px;
-  padding-right: 0;
-}
-#department-main .sidebar {
-  position: absolute;
-  width: 140px;
-}
-#department-main .sidebar li.sub-item {
-  padding-left: 22px;
-}
-#department-main .sidebar li.has-sub ul.sub-head {
-  margin-bottom: 0;
-  box-shadow: none;
-}
-#department-main .sidebar li.has-sub ul.sub-head .sub-third-item {
-  padding: 13px 0 5px 10px;
-  border: none;
-}
-#department-main .department-main {
-  margin-left: 170px;
-  margin-bottom: 80px;
-}
-#department-main .department-main .font-22 {
+.department-main .font-22 {
   font-size: 22px;
 }
-#department-main .department-main .font-20 {
+.department-main .font-20 {
   font-size: 20px;
 }
-#department-main .department-main .panel-list .panel {
+.department-main .panel-list .panel {
   height: 287px;
   overflow: hidden;
 }
-#department-main .department-main .panel-list .panel table {
+.department-main .panel-list .panel table {
   table-layout: fixed;
 }
-#department-main .department-main .panel-list .panel table tr td {
+.department-main .panel-list .panel table tr td {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-#department-main .department-main .panel-list .panel table tr td pre {
+.department-main .panel-list .panel table tr td pre {
   overflow: hidden;
   border: none;
   border-radius: 0;
@@ -272,74 +243,72 @@ input.ng-touched.ng-invalid {
   font-size: inherit;
   margin: 0;
 }
-#department-main .department-main .panel-list .panel-follow-depart .panel-body {
+.department-main .panel-list .panel-follow-depart .panel-body {
   padding: 15px 0;
   height: 260px;
   overflow: auto;
 }
-#department-main .department-main .focus-bureau-list {
+.department-main .focus-bureau-list {
   height: 200px;
 }
-#department-main .department-main .focus-bureau-list .add-focus-option {
+.department-main .focus-bureau-list .add-focus-option {
   padding-bottom: 15px;
 }
-#department-main .department-main .focus-bureau-list .add-focus-option .dep-select {
+.department-main .focus-bureau-list .add-focus-option .dep-select {
   display: inline;
 }
-#department-main .department-main .focus-bureau-list .bureau-item .caption {
+.department-main .focus-bureau-list .bureau-item .caption {
   height: 16px;
   font-size: 12px;
   text-align: center;
 }
-#department-main .department-main .panel-heading {
+.department-main .panel-heading {
   overflow: hidden;
 }
-#department-main .department-main .panel-footer {
+.department-main .panel-footer {
   font-size: 12px;
 }
-#department-main .department-main .panel-green {
+.department-main .panel-green {
   border-color: #5cb85c;
 }
-#department-main .department-main .panel-green .panel-heading {
+.department-main .panel-green .panel-heading {
   border-color: #5cb85c;
   color: #fff;
   background-color: #5cb85c;
 }
-#department-main .department-main .panel-green .panel-footer {
+.department-main .panel-green .panel-footer {
   color: #5cb85c;
 }
-#department-main .department-main .panel-yellow {
+.department-main .panel-yellow {
   border-color: #f0ad4e;
 }
-#department-main .department-main .panel-yellow .panel-heading {
+.department-main .panel-yellow .panel-heading {
   border-color: #f0ad4e;
   color: #fff;
   background-color: #f0ad4e;
 }
-#department-main .department-main .panel-yellow .panel-footer {
+.department-main .panel-yellow .panel-footer {
   color: #f0ad4e;
 }
-#department-main .department-main .panel-red {
+.department-main .panel-red {
   border-color: #d9534f;
 }
-#department-main .department-main .panel-red .panel-heading {
+.department-main .panel-red .panel-heading {
   border-color: #d9534f;
   color: #fff;
   background-color: #d9534f;
 }
-#department-main .department-main .panel-red .panel-footer {
+.department-main .panel-red .panel-footer {
   color: #d9534f;
   height: 38px;
 }
-#department-main .indicator-list table.text-center tr td,
-#department-main .indicator-list table.text-center tr th {
+.indicator-list table.text-center tr td,
+.indicator-list table.text-center tr th {
   text-align: center;
   vertical-align: middle;
 }
 #department-inventory {
-  margin-left: 170px;
-  overflow: hidden;
-  margin-bottom: 80px;
+  margin-bottom: 50px;
 }
 #department-inventory .indicator-order {
   overflow: hidden;
@@ -474,9 +443,7 @@ input.ng-touched.ng-invalid {
   color: #f0ad4e;
 }
 #inventory-publish {
-  margin-left: 170px;
-  overflow: hidden;
-  margin-bottom: 80px;
+  margin-bottom: 50px;
 }
 #inventory-publish .navbar .nav-pills li a {
   background-color: #fff !important;
@@ -518,9 +485,7 @@ input.ng-touched.ng-invalid {
   color: #777;
 }
 #department-inventory-detail {
-  margin-left: 170px;
-  overflow: hidden;
-  margin-bottom: 80px;
+  margin-bottom: 50px;
 }
 #department-inventory-detail .nav-tabs {
   bottom: 0;
@@ -552,18 +517,14 @@ input.ng-touched.ng-invalid {
   text-align: right;
 }
 #department-inventory-upload {
-  margin-left: 170px;
-  overflow: hidden;
-  margin-bottom: 80px;
+  margin-bottom: 50px;
 }
 #department-inventory-upload .popover {
   max-width: 700px;
   width: 700px;
 }
 #department-share {
-  margin-left: 170px;
-  overflow: hidden;
-  margin-bottom: 80px;
+  margin-bottom: 50px;
 }
 #department-share .indicator-order {
   overflow: hidden;
@@ -675,9 +636,7 @@ input.ng-touched.ng-invalid {
   color: #f0ad4e;
 }
 #department-share-detail {
-  margin-left: 170px;
-  overflow: hidden;
-  margin-bottom: 80px;
+  margin-bottom: 50px;
 }
 #department-share-detail .nav-tabs {
   bottom: 0 ;
@@ -697,9 +656,7 @@ input.ng-touched.ng-invalid {
   text-align: right;
 }
 #department-requirement {
-  margin-left: 170px;
-  overflow: hidden;
-  margin-bottom: 80px;
+  margin-bottom: 50px;
 }
 #department-requirement .indicator-order {
   overflow: hidden;
@@ -788,9 +745,7 @@ input.ng-touched.ng-invalid {
   color: #777;
 }
 #department-requirement-confirm {
-  margin-left: 170px;
-  overflow: hidden;
-  margin-bottom: 80px;
+  margin-bottom: 50px;
 }
 #department-requirement-confirm .indicator-order {
   overflow: hidden;
@@ -882,9 +837,7 @@ input.ng-touched.ng-invalid {
   border: none;
 }
 #department-requirement-detail {
-  margin-left: 170px;
-  overflow: hidden;
-  margin-bottom: 80px;
+  margin-bottom: 50px;
 }
 #department-requirement-detail .dl-horizontal dt,
 #department-requirement-detail .dl-horizontal dd {
@@ -900,14 +853,10 @@ input.ng-touched.ng-invalid {
   margin-top: 16px;
 }
 #department-requirement-publish {
-  margin-left: 170px;
-  overflow: hidden;
-  margin-bottom: 80px;
+  margin-bottom: 50px;
 }
 #department-audit {
-  margin-left: 170px;
-  overflow: hidden;
-  margin-bottom: 80px;
+  margin-bottom: 50px;
 }
 #department-audit .indicator-order {
   overflow: hidden;
@@ -992,9 +941,7 @@ input.ng-touched.ng-invalid {
   color: #d9534f;
 }
 #department-audit-info {
-  margin-left: 170px;
-  overflow: hidden;
-  margin-bottom: 80px;
+  margin-bottom: 50px;
 }
 #department-audit-info .nav-tabs {
   bottom: -1px;
@@ -1053,9 +1000,6 @@ input.ng-touched.ng-invalid {
 }
 #department-audit-info .audit-wrap .audit-box .apply-dept {
   padding: 7px 13px;
-}
-#department-user {
-  margin-left: 170px;
 }
 #department-user .user-wrap {
   overflow: hidden;

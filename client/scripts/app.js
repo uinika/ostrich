@@ -102,9 +102,13 @@ app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', '$provide',
       })
       .state('main.department', {
         url: '/department',
+        templateUrl: 'views/department/main.html'
+      })
+      .state('main.department.summary', {
+        url: '/summary',
         cache:'false',
         reload: true,
-        templateUrl: 'views/department/main.html',
+        templateUrl: 'views/department/summary.html',
         controller: 'Department.Controller.Main'
       })
       .state('main.department.inventory', {
