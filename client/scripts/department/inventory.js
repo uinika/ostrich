@@ -4,6 +4,13 @@ var DInventory = angular.module('Department.Inventory', ['ui.router', 'ngCookies
 /** Inventory Controller */
 DInventory.controller('Department.Inventory.Controller.Main', ['$cookies', '$scope', '$q', 'Department.Inventory.Service.Http',
   function($cookies, $scope, $q, Http) {
+    var SHARE_FREQUENCY = 1;
+    var DATA_LEVEL = 2;
+    var SHARE_LEVEL = 3;
+    var SECRET_FLAG = 5;
+    var RESOURCE_FORMAT = 11;
+    var SOCIAL_OPEN_FLAG = 14;
+
     var LoginUser = JSON.parse($cookies.get('User'));
     var DEP_NAME = LoginUser.dep_id;
     $scope.DepartInfoResource = {};
@@ -16,6 +23,43 @@ DInventory.controller('Department.Inventory.Controller.Main', ['$cookies', '$sco
     _httpParams.limit = 10;
     _httpParams.skip = 0;
 
+    Http.getSystemDictByCatagory({
+      'dict_category': SECRET_FLAG
+    }).then(function(result) {
+      $scope.secretFlagList = result.data.body;
+    });
+
+    // Get system dict
+    Http.getSystemDictByCatagory({
+      'dict_category': SHARE_FREQUENCY
+    }).then(function(result) {
+      $scope.shareFrequencyList = result.data.body;
+    });
+
+    Http.getSystemDictByCatagory({
+      'dict_category': SHARE_LEVEL
+    }).then(function(result) {
+      $scope.shareLevelList = result.data.body;
+    });
+
+    Http.getSystemDictByCatagory({
+      'dict_category': RESOURCE_FORMAT
+    }).then(function(result) {
+      $scope.resourceFormatList = result.data.body;
+    });
+
+    Http.getSystemDictByCatagory({
+      'dict_category': DATA_LEVEL
+    }).then(function(result) {
+      $scope.dataLevelList = result.data.body;
+    });
+
+    Http.getSystemDictByCatagory({
+      'dict_category': SOCIAL_OPEN_FLAG
+    }).then(function(result) {
+      $scope.socialOpenList = result.data.body;
+    });
+
     $scope.Paging.pageChanged = function() {
       _httpParams.skip = ($scope.Paging.currentPage - 1) * _httpParams.limit;
       getDeptInfoResourceList(_httpParams);
@@ -25,9 +69,7 @@ DInventory.controller('Department.Inventory.Controller.Main', ['$cookies', '$sco
       _httpParams.dep_name = DEP_NAME;
       $scope.promise = Http.getDepartQuotaList(_httpParams).then(function(result) {
         console.log(result);
-        var temp = _.replace('  Hi', ' ', '0');
-        console.log(temp);
-        $scope.depQuotaList = result.data.body[0].results;
+        $scope.infoResourceList = result.data.body[0].results;
         $scope.Paging.totalItems = result.data.body[0].count;
       });
     }
@@ -312,7 +354,6 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
           var sys_dict = {};
           sys_dict.InfoResourceId = $scope.InfoResource.resource_name;
           sys_dict.sys_dict_id = value;
-          sys_dict.obj_type = 1;
           InfoResource_RelationConfig.push(sys_dict);
         });
 
@@ -331,6 +372,11 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
           share_dep.apply_dep = value;
           InfoResourceApplyInfo.push(share_dep);
         });
+        _($scope.ResourceItemList).forEach(function(item,index) {
+          console.log(index);
+          item.item_ord = index;
+          console.log($scope.ResourceItemList);
+        })
 
         InfoResourceAddObj.InfoResource_RelationConfig = InfoResource_RelationConfig;
         InfoResourceAddObj.InfoResourceApplyInfo = InfoResourceApplyInfo;
@@ -361,12 +407,9 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
       $scope.shareFreqItemSelection = [];
       $scope.shareFreqItemObjSelection = [];
       Component.popModal($scope, 'Department.Inventory.Controller.publish', '', 'item-add-modal').result.then(function(res) {
-        console.log($scope.shareFreqItemSelection);
-        console.log($scope.shareFreqItemObjSelection);
         $scope.ResourceItemList.push($scope.ResourceItem);
         var shareFreqDictName = [];
         _($scope.shareFreqItemObjSelection).forEach(function(item) {
-          console.log(item);
           var sys_dict = {};
           sys_dict.InfoItemId = $scope.ResourceItem.item_name;
           sys_dict.sys_dict_id = item.id;

@@ -179,7 +179,7 @@
             <div class="col-sm-10">
               <textarea class="form-control" name='share_limit' required ng-maxlength="256" rows='3' placeholder='有条件共享类可注明共享条件和共享范围；不予共享类注明相关的法律、行政法规和党中央、国务院政策依据。' ng-model='InfoResource.share_limit'></textarea>
               <p ng-show="InfoResourceForm.share_limit.$invalid.maxlength" class="help-block">输入的内容太长。</p>
-              <p ng-show="InfoResourceForm.quota_detail.$error.required && submitted" class="help-block">请输入指标详细解释</p>
+              <p ng-show="InfoResourceForm.share_limit.$error.required && submitted" class="help-block">请输入指标详细解释</p>
               <span class='pull-right'>(最多256个汉字)</span>
             </div>
           </div>
@@ -228,7 +228,7 @@
             <label for="" class="col-sm-2 control-label">
               <span class='require-sign'>*</span>资源提供方代码:</label>
             <div class="col-sm-10">
-              <input type="text" required name='data_length' class="form-control"  ng-model='InfoResource.data_length'>
+              <input type="text" required name='resource_provider_code' class="form-control"  ng-model='InfoResource.resource_provider_code'>
             </div>
           </div>
 

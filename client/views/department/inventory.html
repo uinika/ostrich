@@ -187,66 +187,66 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr ng-repeat='DepDataQuota in depQuotaList | orderBy:"create_time":true'>
-                      <td><input type='checkbox' ng-checked='DepDataQuota.delete_flag == "true"' ng-click='deleteQuota($event,DepDataQuota.id)'/>删除</td>
+                    <tr ng-repeat='InfoResource in infoResourceList | orderBy:"create_time":true'>
+                      <td><input type='checkbox' ng-checked='InfoResource.delete_flag == "true"' ng-click='deleteQuota($event,InfoResource.id)'/>删除</td>
                       <td>
-                        <div ng-if='DepDataQuota.sharelevel =="全开放" '>
+                        <div ng-if='InfoResource.sharelevel =="全开放" '>
                           <span>
                             <i class='fa fa-eye'></i>
                           </span>
                         </div>
-                        <div ng-if='DepDataQuota.sharelevel =="省政务云平台开放" '>
+                        <div ng-if='InfoResource.sharelevel =="省政务云平台开放" '>
                           <span>
                             <i class='fa fa-desktop'></i>
                           </span>
                         </div>
-                        <div ng-if='DepDataQuota.sharelevel =="授权开放" '>
+                        <div ng-if='InfoResource.sharelevel =="授权开放" '>
                           <span>
                             <i class='fa fa-lock'></i>
                           </span>
                         </div>
-                        <div ng-if='DepDataQuota.sharelevel =="暂不开放" '>
+                        <div ng-if='InfoResource.sharelevel =="暂不开放" '>
                           <span>
                             <i class='fa fa-warning'></i>
                           </span>
                         </div>
                       </td>
                       <td>{{$index+1}}</td>
-                      <td title='{{DepDataQuota.quota_name}}'>
-                        <a ui-sref='main.department.inventory.detail({ID:DepDataQuota.id})'>
-                          <pre>{{DepDataQuota.quota_name}}</pre>
+                      <td title='{{InfoResource.resource_name}}'>
+                        <a ui-sref='main.department.inventory.detail({ID:InfoResource.id})'>
+                          <pre>{{InfoResource.resource_name}}</pre>
                         </a>
                       </td>
-                      <td title='{{DepDataQuota.alias}}'>{{DepDataQuota.alias}}</td>
-                      <td title='{{DepDataQuota.quota_detail}}'>{{DepDataQuota.quota_detail}}</td>
+                      <td title='{{InfoResource.alias}}'>{{InfoResource.alias}}</td>
+                      <td title='{{InfoResource.quota_detail}}'>{{InfoResource.quota_detail}}</td>
+                      <td title='{{InfoResource.summary}}'>{{InfoResource.summary}}</td>
+                      <td title='{{InfoResource.category}}'>{{InfoResource.category}}</td>
                       <td title=''></td>
-                      <td title=''></td>
-                      <td title=''></td>
-                      <td title='{{DepDataQuota.area_range}}'>{{DepDataQuota.area_range}}</td>
-                      <td title='{{DepDataQuota.regionallevel}}'>{{DepDataQuota.regionallevel}}</td>
-                      <td title=''></td>
-                      <td title=''></td>
-                      <td title='{{DepDataQuota.datastoretype}}'>{{DepDataQuota.datastoretype}}</td>
-                      <td title='{{DepDataQuota.data_precision}}'>{{DepDataQuota.data_precision}}</td>
-                      <td title='{{DepDataQuota.data_length}}'>{{DepDataQuota.data_length}}</td>
+                      <td title='{{InfoResource.rel_category}}'>{{InfoResource.rel_category}}</td>
+                      <td title='{{InfoResource.area_range}}'>{{InfoResource.area_range}}</td>
+                      <td title='{{InfoResource.reginalLevel}}'>{{InfoResource.reginalLevel}}</td>
+                      <td title='{{InfoResource.resource_format}}'>{{InfoResource.resource_format}}</td>
+                      <td title='{{InfoResource.datastoretype}}'>{{InfoResource.datastoretype}}</td>
+                      <td title='{{InfoResource.data_precision}}'>{{InfoResource.data_precision}}</td>
+                      <td title='{{InfoResource.data_length}}'>{{InfoResource.data_length}}</td>
 
-                      <td title='{{DepDataQuota.sharefrequency}}'>{{DepDataQuota.sharefrequency}}</td>
-                      <td title='{{DepDataQuota.secretflag}}'>{{DepDataQuota.secretflag}}</td>
-                      <td title='{{DepDataQuota.meter_unit}}'>{{DepDataQuota.meter_unit}}</td>
-                      <td title='{{DepDataQuota.calculate_method}}'>{{DepDataQuota.calculate_method}}</td>
-                      <td title='DepDataQuota.sharelevel'>
-                        {{DepDataQuota.sharelevel}}
+                      <td title='{{InfoResource.sharefrequency}}'>{{InfoResource.sharefrequency}}</td>
+                      <td title='{{InfoResource.secretflag}}'>{{InfoResource.secretflag}}</td>
+                      <td title='{{InfoResource.meter_unit}}'>{{InfoResource.meter_unit}}</td>
+                      <td title='{{InfoResource.calculate_method}}'>{{InfoResource.calculate_method}}</td>
+                      <td title='InfoResource.sharelevel'>
+                        {{InfoResource.sharelevel}}
                       </td>
-                      <td title=''></td>
-                      <td title=''></td>
-                      <td title=''></td>
-                      <td title=''></td>
-                      <td title=''></td>
-                      <td title=''></td>
-                      <td title=''></td>
-                      <td title={{DepDataQuota.linkman}}>{{DepDataQuota.linkman}}</td>
-                      <td title='{{DepDataQuota.contact_phone}}'>{{DepDataQuota.contact_phone}}</td>
-                      <td title='{{DepDataQuota.create_time | date:"yyyy-MM-dd HH:mm:ss" }}'>{{DepDataQuota.create_time | date:"yyyy-MM-dd HH:mm:ss" }}</td>
+                      <td title='{{InfoResource.share_type}}'>{{InfoResource.share_type}}</td>
+                      <td title='{{InfoResource.share_limit}}'>{{InfoResource.share_limit}}</td>
+                      <td title='{{InfoResource.share_method}}'>{{InfoResource.share_method}}</td>
+                      <td title='{{InfoResource.social_open_flag}}'>{{InfoResource.social_open_flag}}</td>
+                      <td title='{{InfoResource.social_open_limit}}'>{{InfoResource.social_open_limit}}</td>
+                      <td title='{{InfoResource.resource_provider}}'>{{InfoResource.resource_provider}}</td>
+                      <td title='{{InfoResource.resource_provider_code}}'>{{InfoResource.resource_provider_code}}</td>
+                      <td title={{InfoResource.linkman}}>{{InfoResource.linkman}}</td>
+                      <td title='{{InfoResource.contact_phone}}'>{{InfoResource.contact_phone}}</td>
+                      <td title='{{InfoResource.create_time | date:"yyyy-MM-dd HH:mm:ss" }}'>{{InfoResource.create_time | date:"yyyy-MM-dd HH:mm:ss" }}</td>
                     </tr>
                   </tbody>
                 </table>
