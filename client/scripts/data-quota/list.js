@@ -46,7 +46,7 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
     // Search for Data Quota Name
     $scope.Retrieval = function(){
       var httpParams = {};
-      var searchTarget = {quotaname: $scope.TargetDataQuotaName};
+      var searchTarget = {resource_name: $scope.TargetDataQuotaName};
       (currentDepID==='') ? (_.assign(httpParams, initPaging, searchTarget)) : (_.assign(httpParams, currentDepID, initPaging, searchTarget));
       getDataQuotaList(httpParams);
     };
@@ -64,20 +64,20 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
         DATA_LEVEL = 2, //分地区数据级别
         SHARE_LEVEL = 3, //共享级别
         RESOURCE_FORMAT = 11, //信息资源格式
-        OPEN_SOCIETY = 14, //面向社会开放
-        IS_SECRET = 5  //是否涉密
+        SOCIAL_OPEN_FLAG  = 14, //面向社会开放
+        SECRET_FLAG = 5  //是否涉密
     Http.getSystemDictByCatagory({
       'dict_category': RESOURCE_FORMAT
     }).then(function(result) {
       $scope.resourceFormats = result.data.body;
     });
     Http.getSystemDictByCatagory({
-      'dict_category': OPEN_SOCIETY
+      'dict_category': SOCIAL_OPEN_FLAG
     }).then(function(result) {
       $scope.openToSocietys = result.data.body;
     });
     Http.getSystemDictByCatagory({
-      'dict_category': IS_SECRET
+      'dict_category': SECRET_FLAG
     }).then(function(result) {
       $scope.isScrets = result.data.body;
     });
@@ -104,9 +104,9 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
       $scope.resourceFormatActive = [];
       $scope.resourceFormatActiveAll = '';
       $scope.resourceFormatActive[index] = 'active';
-      filterParams.resource_Format = id;
+      filterParams.re_format = id;
       if('ALL'===id){
-        delete filterParams.resource_Format;
+        delete filterParams.re_format;
         $scope.resourceFormatActiveAll = 'active';
         getDataQuotaListByFilter(filterParams);
       }else{
@@ -119,9 +119,9 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
       $scope.openToSocietyActive = [];
       $scope.openToSocietyActiveAll = '';
       $scope.openToSocietyActive[index] = 'active';
-      filterParams.open_Society = id;
+      filterParams.social_open_flag = id;
       if('ALL'===id){
-        delete filterParams.open_Society;
+        delete filterParams.social_open_flag;
         $scope.openToSocietyActiveAll = 'active';
         getDataQuotaListByFilter(filterParams);
       }else{
@@ -133,9 +133,9 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
       $scope.isScretActive = [];
       $scope.isScretActiveAll = '';
       $scope.isScretActive[index] = 'active';
-      filterParams.secretflag = id;
+      filterParams.issecret = id;
       if('ALL'===id){
-        delete filterParams.secretflag;
+        delete filterParams.issecret;
         $scope.isScretActiveAll = 'active';
         getDataQuotaListByFilter(filterParams);
       }else{
@@ -156,14 +156,14 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
         getDataQuotaListByFilter(filterParams);
       }
     };
-    /* 共享频率 */
+    /* 更新周期（共享频率） */
     $scope.ShareFrequencyFilter = function(id, index){
       $scope.ShareFrequencyActive = [];
       $scope.ShareFrequencyActiveAll = '';
       $scope.ShareFrequencyActive[index] = 'active';
-      filterParams.share_frequency = id;
+      filterParams.update_period = id;
       if('ALL'===id){
-        delete filterParams.share_frequency;
+        delete filterParams.update_period;
         $scope.ShareFrequencyActiveAll = 'active';
         getDataQuotaListByFilter(filterParams);
       }else{

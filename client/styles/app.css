@@ -1078,7 +1078,6 @@ input.ng-touched.ng-invalid {
 #data-quota-list .filter {
   border-bottom: 0 solid #DDD;
   padding: 15px 0;
-  margin-bottom: 10px;
 }
 #data-quota-list .filter .indicator-filter {
   margin: 0;
@@ -1094,6 +1093,12 @@ input.ng-touched.ng-invalid {
   display: inline-block;
   padding-right: 12px;
 }
+#data-quota-list .filter .indicator-filter ul.pager.issecret {
+  margin-bottom: 0;
+}
+#data-quota-list .col-lg-12 {
+  padding-left: inherit;
+}
 #data-quota-list .table-patch td,
 #data-quota-list .table-patch th {
   max-width: 200px;
@@ -1102,7 +1107,7 @@ input.ng-touched.ng-invalid {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-size: 12px;
+  font-size: 13px;
   vertical-align: middle;
   text-align: center;
 }
