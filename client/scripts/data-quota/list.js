@@ -30,7 +30,7 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
     // Init data quota talbe
     (function initDataQuotaList(){
         /* Init selected status for filter */
-        $scope.ShareLevelActiveAll = $scope.ShareFrequencyActiveAll = $scope.DataLevelActiveAll = 'active';
+        $scope.resourceFormatActiveAll = $scope.ShareLevelActiveAll =$scope.openToSocietyActiveAll = $scope.ShareFrequencyActiveAll = $scope.DataLevelActiveAll = $scope.isScretActiveAll= 'active';
         /* Init ajax parameters*/
         var httpParams = {};
         (currentDepID==='') ? (httpParams = initPaging) : (httpParams = _.assign(httpParams, currentDepID, initPaging));
@@ -62,10 +62,10 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
     // Filter generator
     var SHARE_FREQUENCY = 1, //更新周期
         DATA_LEVEL = 2, //分地区数据级别
-        SHARE_LEVEL = 3; //共享级别
-        RESOURCE_FORMAT = 11 ; //信息资源格式
-        OPEN_SOCIETY = 14 ; //面向社会开放
-        IS_SECRET = 5; //是否涉密
+        SHARE_LEVEL = 3, //共享级别
+        RESOURCE_FORMAT = 11, //信息资源格式
+        OPEN_SOCIETY = 14, //面向社会开放
+        IS_SECRET = 5  //是否涉密
     Http.getSystemDictByCatagory({
       'dict_category': RESOURCE_FORMAT
     }).then(function(result) {
