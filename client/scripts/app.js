@@ -122,7 +122,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', '$provide',
         templateUrl: 'views/department/inventory-publish.html',
         controller: 'Department.Inventory.Controller.publish'
       })
-      .state('main.department.inventory.detail', {
+      .state('main.department.detail', {
         url: '/detail?ID',
         cache:'false',
         templateUrl: 'views/department/inventory-detail.html',
