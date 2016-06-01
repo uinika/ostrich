@@ -140,7 +140,7 @@ Dashboard.directive('wiservDataQuotaOverviewChart', [
                 formatter: "{a} <br/>{b}: {c} ({d}%)"
               },
               series: [{
-                name: '指标提供部门',
+                name: '资源提供部门',
                 type: 'pie',
                 // selectedMode: 'single',
                 radius: [0, '60%'],
@@ -159,19 +159,19 @@ Dashboard.directive('wiservDataQuotaOverviewChart', [
                 },
                 data: [{
                   value: summary.department_number,
-                  name: '指标提供部门'
+                  name: '资源提供部门'
                 }, {
                   value: summary.department_number_inc,
                   name: '本月新增',
                   selected: true
                 }]
               }, {
-                name: '指标总数',
+                name: '资源总数',
                 type: 'pie',
                 radius: ['70%', '85%'],
                 data: [{
                   value: summary.data_quota_number,
-                  name: '指标总数'
+                  name: '资源总数'
                 }, {
                   value: summary.data_quota_number_inc,
                   name: '本月新增',
@@ -266,7 +266,7 @@ Dashboard.directive('wiservStatisticChart', [
               trigger: 'axis'
             },
             legend: {
-              data: ['指标', '需求']
+              data: ['资源', '需求']
             },
             xAxis: [{
               type: 'category',
@@ -284,7 +284,7 @@ Dashboard.directive('wiservStatisticChart', [
               }
             }],
             series: [{
-              name: '指标',
+              name: '资源',
               type: 'bar',
               data: INVENTORY.INVENTORY
             }, {

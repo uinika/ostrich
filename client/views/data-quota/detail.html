@@ -8,33 +8,33 @@
       <uib-tabset class='quota-detail' active="active">
         <uib-tab index="0" heading="指标详情">
           <ul class="list-group">
-            <li class="list-group-item">信息资源名称：{{quota.resource_name}}</li>
-            <li class="list-group-item">信息资源别称：{{quota.alias}}</li>
-            <li class="list-group-item">信息资源摘要: {{quota.summary}}</li>
-            <li class="list-group-item">信息资源分类: {{quota.category_name}}</li>
-            <li class="list-group-item">信息资源格式: {{quota.resource_format_name}}</li>
-            <li ng-hide="quota.resource_format_name ==='数据库类'"class="list-group-item">更新周期: {{quota.update_period}}</li>
-            <li ng-hide="quota.resource_format_name ==='数据库类'"class="list-group-item">是否涉密: {{quota.secret_flag_name}}</li>
-            <li ng-hide="quota.resource_format_name ==='数据库类'"class="list-group-item">计量单位: {{quota.meter_unit}}</li>
-            <li ng-hide="quota.resource_format_name ==='数据库类'"class="list-group-item">计算方法: {{quota.calculate_method}}</li>
-            <li class="list-group-item">共享级别: {{quota.share_level_name}}</li>
-            <li class="list-group-item">共享类型: {{quota.share_type_name}}</li>
-            <li class="list-group-item">共享条件: {{quota.share_limit}}</li>
-            <li class="list-group-item">共享方式: {{quota.share_method_name}}</li>
-            <li class="list-group-item">是否面向社会开放: {{quota.secret_flag_name}}</li>
-            <li class="list-group-item">开放条件: {{quota.social_open_flag_name}}</li>
-            <li class="list-group-item">信息资源提供方: {{quota.resource_provider}}</li>
-            <li class="list-group-item">资源提供方代码: {{quota.resource_provider_code}}</li>
-            <li class="list-group-item">信息资源目录代码: {{quota.resource_sn}}</li>
+            <li class="list-group-item">信息资源名称：{{DataQuotaDetail.resource_name}}</li>
+            <li class="list-group-item">信息资源别称：{{DataQuotaDetail.alias}}</li>
+            <li class="list-group-item">信息资源摘要: {{DataQuotaDetail.summary}}</li>
+            <li class="list-group-item">信息资源分类: {{DataQuotaDetail.category_name}}</li>
+            <li class="list-group-item">信息资源格式: {{DataQuotaDetail.resource_format_name}}</li>
+            <li ng-hide="DataQuotaDetail.resource_format_name ==='数据库类'"class="list-group-item">更新周期: {{DataQuotaDetail.update_period}}</li>
+            <li ng-hide="DataQuotaDetail.resource_format_name ==='数据库类'"class="list-group-item">是否涉密: {{DataQuotaDetail.secret_flag_name}}</li>
+            <li ng-hide="DataQuotaDetail.resource_format_name ==='数据库类'"class="list-group-item">计量单位: {{DataQuotaDetail.meter_unit}}</li>
+            <li ng-hide="DataQuotaDetail.resource_format_name ==='数据库类'"class="list-group-item">计算方法: {{DataQuotaDetail.calculate_method}}</li>
+            <li class="list-group-item">共享级别: {{DataQuotaDetail.share_level_name}}</li>
+            <li class="list-group-item">共享类型: {{DataQuotaDetail.share_type_name}}</li>
+            <li class="list-group-item">共享条件: {{DataQuotaDetail.share_limit}}</li>
+            <li class="list-group-item">共享方式: {{DataQuotaDetail.share_method_name}}</li>
+            <li class="list-group-item">是否面向社会开放: {{DataQuotaDetail.secret_flag_name}}</li>
+            <li class="list-group-item">开放条件: {{DataQuotaDetail.social_open_flag_name}}</li>
+            <li class="list-group-item">信息资源提供方: {{DataQuotaDetail.resource_provider}}</li>
+            <li class="list-group-item">资源提供方代码: {{DataQuotaDetail.resource_provider_code}}</li>
+            <li class="list-group-item">信息资源目录代码: {{DataQuotaDetail.resource_sn}}</li>
             <li class="list-group-item">关联及类目名称: {{rel_category_name}}</li>
-            <li class="list-group-item">空间范围: {{quota.area_range}}</li>
-            <li class="list-group-item">分地区数据级别: {{quota.area_level}}</li>
-            <li class="list-group-item">联系人: {{quota.linkman}}</li>
-            <li class="list-group-item">联系电话: {{quota.contact_phone}}</li>
-            <li class="list-group-item">创建时间: {{quota.create_time}}</li>
+            <li class="list-group-item">空间范围: {{DataQuotaDetail.area_range}}</li>
+            <li class="list-group-item">分地区数据级别: {{DataQuotaDetail.area_level}}</li>
+            <li class="list-group-item">联系人: {{DataQuotaDetail.linkman}}</li>
+            <li class="list-group-item">联系电话: {{DataQuotaDetail.contact_phone}}</li>
+            <li class="list-group-item">创建时间: {{DataQuotaDetail.create_time}}</li>
           </ul>
         </uib-tab>
-        <uib-tab class='quota-example' index="1" heading="样例数据">
+        <uib-tab ng-show="DataQuotaDetail.resource_format_name ==='数据库类'" class='quota-example' index="1" heading="样例数据">
         <div class="table-responsive">
           <table class='table table-hover table-striped table-bordered'>
             <caption>{{DataQuotaExample.file_name}}</caption>
@@ -51,11 +51,16 @@
                </tr>
              </thead>
              <tbody>
-               <!-- <tr ng-repeat='columns in DataQuotaExample.file_content.column track by $index'>
-                 <td ng-repeat='column in columns track by $index'>
-                   {{column}}
-                 </td>
-               </tr> -->
+               <tr ng-repeat='columns in DataQuotaExample.file_content.column track by $index'>
+                 <td>{{columns.resource_name}}</td>
+                 <td>{{columns.datastoretype}}</td>
+                 <td>{{columns.data_precision}}</td>
+                 <td>{{columns.data_length}}</td>
+                 <td>{{columns.update_period}}</td>
+                 <td>{{columns.secret_flag_name}}</td>
+                 <td>{{columns.meter_unit}}</td>
+                 <td>{{columns.calculate_method}}</td>
+               </tr>
              </tbody>
            </table>
           </div>

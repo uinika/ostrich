@@ -86,7 +86,7 @@
           <tbody>
             <tr ng-repeat='indicator in NewIndicators'>
               <td>{{indicator.create_time | date:'yyyy-MM-dd'}}</td>
-              <td><a ui-sref='main.data-quota.detail({data_quota_id:indicator.id})'>{{indicator.quota_name}}</a></td>
+              <td><a ui-sref='main.data-quota.detail({data_quota_id:indicator.id})'>{{indicator.resource_name}}</a></td>
               <td>{{indicator.dep_short_name}}</td>
             </tr>
           </tbody>
@@ -132,7 +132,7 @@
               <tr>
                 <th>创建日期</th>
                 <th>信息资源名称</th>
-                <th>共享频率</th>
+                <th>更新周期</th>
                 <th>空间范围</th>
                 <th>信息资源格式</th>
                 <th>信息资源提供方</th>
@@ -142,11 +142,11 @@
             <tbody>
               <tr ng-repeat='indicator in followDepIndicators'>
                 <td>{{::indicator.create_time | date:'yyyy-MM-dd'}}</td>
-                <td ><a ui-sref='main.data-quota.detail({data_quota_id:indicator.id})'>{{::indicator.quota_name}}</a></td>
-                <td>{{::indicator.sharefrequency}}</td>
+                <td ><a ui-sref='main.data-quota.detail({data_quota_id:indicator.id})'>{{::indicator.resource_name}}</a></td>
+                <td>{{::indicator.update_period}}</td>
                 <td>{{::indicator.area_range}}</td>
-                <td>{{::indicator.regionallevel}}</td>
-                <td>{{::indicator.depname}}</td>
+                <td>{{::indicator.resource_format_name}}</td>
+                <td>{{::indicator.resource_provider}}</td>
               </tr>
             </tbody>
           </table>
