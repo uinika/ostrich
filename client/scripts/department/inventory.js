@@ -271,8 +271,8 @@ DInventory.controller('Department.Inventory.Controller.detail', ['$scope', '$q',
   }
 ])
 
-DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$scope', '$state', '$q', '$uibModal', 'Department.Inventory.Service.Component', 'Department.Inventory.Service.Http',
-  function($cookies, $scope, $state, $q, $uibModal, Component, Http) {
+DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$scope', '$stateParams', '$state', '$q', '$uibModal', 'Department.Inventory.Service.Component', 'Department.Inventory.Service.Http',
+  function($cookies, $scope, $stateParams,$state, $q, $uibModal, Component, Http) {
     var RESOURCE_CATEGORY = 10;
     var SHARE_TYPE = 12;
     var SHARE_METHOD = 13;
@@ -410,6 +410,94 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
       }
     }
 
+
+    // submit update
+    console.log($stateParams.item);
+    $scope.resItemUpdateBtn = false;
+    if($stateParams.item) { // 选择修改
+      $scope.InfoResource = $stateParams.item;
+      // 选中数据库类
+      if(RESOURCE_FORMAT_DATA == $scope.InfoResource.resource_format) {
+        $scope.resItemUpdateBtn = true;
+      }
+    }
+
+
+    $scope.updateInfoResource = function(isValid) {
+      $scope.submitted = true;
+      var InfoResourceAddObj = {};
+      var InfoResource_RelationConfig = [];
+      var InfoResourceApplyInfo = [];
+      var InfoItem_RelationConfig = [];
+      if($scope.shareFreqSelection.length == 0 && !$scope.resItemUpdateBtn) {// 未选择更新周期
+        isValid = false;
+      }
+      if($scope.resItemAddBtn && ($scope.ResourceItemList.length == 0)) { // 未添加信息项
+        isValid = false;
+      }
+
+      if (isValid) {
+        InfoResourceAddObj.InfoResource = $scope.InfoResource;
+        _($scope.dataLevelSelection).forEach(function(value) {
+          var sys_dict = {};
+          sys_dict.InfoResourceId = $scope.InfoResource.id;
+          sys_dict.sys_dict_id = value;
+          InfoResource_RelationConfig.push(sys_dict);
+        });
+
+        _($scope.shareFreqSelection).forEach(function(value) {
+          var sys_dict = {};
+          sys_dict.InfoResourceId = $scope.InfoResource.id;
+          sys_dict.sys_dict_id = value;
+          sys_dict.obj_type = 1;
+          InfoResource_RelationConfig.push(sys_dict);
+        });
+
+        var shareDeps = _.map($scope.outputDeptList, 'id');
+        _(shareDeps).forEach(function(value) {
+          var share_dep = {};
+          share_dep.InfoResourceId = $scope.InfoResource.id;
+          share_dep.apply_dep = value;
+          InfoResourceApplyInfo.push(share_dep);
+        });
+        _($scope.ResourceItemList).forEach(function(item,index) {
+          console.log(index);
+          item.item_ord = index;
+          item.InfoResourceId = $scope.InfoResource.id;
+          console.log($scope.ResourceItemList);
+        })
+
+        InfoResourceAddObj.InfoResource_RelationConfig = InfoResource_RelationConfig;
+        InfoResourceAddObj.InfoResourceApplyInfo = InfoResourceApplyInfo;
+        InfoResourceAddObj.InfoItem_RelationConfig = $scope.ResourceItemConfigList;
+        InfoResourceAddObj.InfoItem = $scope.ResourceItemList;
+
+        console.log(InfoResourceAddObj);
+        Http.updateInfoResource(InfoResourceAddObj).then(function(result) {
+            console.log(result.data);
+            if (200 == result.data.head.status) {
+              $scope.Modal = {};
+              $state.go("main.department.inventory", {}, {
+                reload: true
+              });
+
+            } else {
+              alert('保存失败');
+            }
+          })
+      }
+      else {
+        return;
+      }
+    }
+
+    $scope.editItems = function() {
+      Http.getItemList({}).then(function(result) {
+        $scope.ResourceItemListShow = result.data.body;
+      })
+      $scope.ResItemListShow = true;
+    }
+
     $scope.addResourceItem = function() {
       $scope.Modal = {};
       $scope.itemAdded = false;
@@ -470,7 +558,13 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
     $scope.showHideResAddBtn = function() {
       $scope.resFormatOtherShow = false;
       if (RESOURCE_FORMAT_DATA == $scope.InfoResource.resource_format) {
-        $scope.resItemAddBtn = true;
+        if($stateParams.item) { // 修改
+          $scope.resItemUpdateBtn = true;
+        }
+        else { // 新增
+          $scope.resItemAddBtn = true;
+        }
+
         $scope.resFormatOtherShow = false;
         $scope.shareFreqSelection = [];
         $scope.InfoResource.secret_flag = '';
@@ -480,10 +574,12 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
       else if(RESOURCE_FORMAT_OTHER == $scope.InfoResource.resource_format) {
         $scope.resFormatOtherShow = true;
         $scope.resItemAddBtn = false;
+        $scope.resItemUpdateBtn = false;
       }
       else {
         $scope.resItemAddBtn = false;
         $scope.resFormatOtherShow = false;
+        $scope.resItemUpdateBtn = false;
       }
     }
 
@@ -613,6 +709,14 @@ DInventory.factory('Department.Inventory.Service.Http', ['$http', '$q', 'API',
       )
     };
 
+    function updateInfoResource(data) {
+      return $http.put(
+        path + '/info_resource', {
+          data: data
+        }
+      )
+    }
+
     function getSystemDictByCatagory(params) {
       return $http.get(
         path + '/sys_dict', {
@@ -657,7 +761,8 @@ DInventory.factory('Department.Inventory.Service.Http', ['$http', '$q', 'API',
       getSystemDictByCatagory: getSystemDictByCatagory,
       uploadFile: uploadFile,
       getQuotaExamples: getQuotaExamples,
-      deleteInfoResource: deleteInfoResource
+      deleteInfoResource: deleteInfoResource,
+      updateInfoResource: updateInfoResource
     }
   }
 ]);

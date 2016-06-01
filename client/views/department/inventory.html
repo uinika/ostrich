@@ -146,7 +146,7 @@
                 <table class='table table-hover table-striped table-bordered text-center'>
                   <thead>
                     <tr>
-                      <th width='60px' rowspan='2'>操作</th>
+                      <th width='100px' rowspan='2'>操作</th>
                       <th width='40px' rowspan='2'>标识</th>
                       <th width='40px' rowspan='2'>序号</th>
                       <th width='90px' rowspan='2'>信息资源名称</th>
@@ -188,7 +188,10 @@
                   </thead>
                   <tbody>
                     <tr ng-repeat='InfoResource in infoResourceList | orderBy:"create_time":true'>
-                      <td><input type='checkbox' ng-checked='InfoResource.delete_flag == "true"' ng-click='deleteQuota($event,InfoResource.id)'/>删除</td>
+                      <td>
+                      <a ng-click='deleteQuota($event,InfoResource.id)' >删除</a>
+                      <a ui-sref='main.department.inventory.update({item:InfoResource})'>修改</a>
+                    </td>
                       <td>
                         <div ng-if='InfoResource.share_level_name =="全省开放" '>
                           <span>
