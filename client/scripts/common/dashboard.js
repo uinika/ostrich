@@ -91,7 +91,7 @@ Dashboard.factory('Dashboard.Service.Http', ['$http', 'API',
     };
     function getDataquotaSummary(){
       return $http.get(
-        path + '/data_quota/summary'
+        path + '/data_resource/summary'
       )
     };
     function getDataRequirementSummary(){
@@ -143,7 +143,7 @@ Dashboard.directive('wiservDataQuotaOverviewChart', [
                 name: '资源提供部门',
                 type: 'pie',
                 // selectedMode: 'single',
-                radius: [0, '60%'],
+                radius: [0, '40%'],
                 label: {
                   normal: {
                     position: 'inner',
@@ -158,22 +158,22 @@ Dashboard.directive('wiservDataQuotaOverviewChart', [
                   }
                 },
                 data: [{
-                  value: summary.department_number,
+                  value: summary.dep_resource,
                   name: '资源提供部门'
                 }, {
-                  value: summary.department_number_inc,
+                  value: summary.month_increment_dpet_resource,
                   name: '本月新增',
                   selected: true
                 }]
               }, {
                 name: '资源总数',
                 type: 'pie',
-                radius: ['70%', '85%'],
+                radius: ['60%', '75%'],
                 data: [{
-                  value: summary.data_quota_number,
+                  value: summary.total_resource,
                   name: '资源总数'
                 }, {
-                  value: summary.data_quota_number_inc,
+                  value: summary.month_increment_resource,
                   name: '本月新增',
                   selected: true
                 }]
