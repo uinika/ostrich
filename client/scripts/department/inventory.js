@@ -66,8 +66,8 @@ DInventory.controller('Department.Inventory.Controller.Main', ['$cookies', '$sco
     }
 
     function getDeptInfoResourceList(_httpParams) {
-      _httpParams.dep_name = DEP_NAME;
-      $scope.promise = Http.getDepartQuotaList(_httpParams).then(function(result) {
+      //_httpParams.dep_name = DEP_NAME;
+      $scope.promise = Http.getDepartInfoResList(_httpParams).then(function(result) {
         console.log(result);
         $scope.infoResourceList = result.data.body[0].results;
         $scope.Paging.totalItems = result.data.body[0].count;
@@ -81,7 +81,7 @@ DInventory.controller('Department.Inventory.Controller.Main', ['$cookies', '$sco
     // resource format all
     $scope.getResFormatAll = function() {
       $scope.resFormatMainSelection = [];
-      _httpParams.resource_format = null;
+      _httpParams.re_format = null;
       _httpParams.limit = 10;
       _httpParams.skip = 0;
       getDeptInfoResourceList(_httpParams);
@@ -108,7 +108,7 @@ DInventory.controller('Department.Inventory.Controller.Main', ['$cookies', '$sco
     // share frequency all
     $scope.getShareFreqAll = function() {
       $scope.shareFreqSelection = [];
-      _httpParams.share_frequency = null;
+      _httpParams.update_period = null;
       _httpParams.limit = 10;
       _httpParams.skip = 0;
       getDeptInfoResourceList(_httpParams);
@@ -117,7 +117,7 @@ DInventory.controller('Department.Inventory.Controller.Main', ['$cookies', '$sco
     // secret flag all
     $scope.getSecretFlagAll = function() {
       $scope.secretFlagMainSelection = [];
-      _httpParams.secret_flag = null;
+      _httpParams.issecret = null;
       _httpParams.limit = 10;
       _httpParams.skip = 0;
       getDeptInfoResourceList(_httpParams);
@@ -132,7 +132,7 @@ DInventory.controller('Department.Inventory.Controller.Main', ['$cookies', '$sco
       } else {
         $scope.resFormatMainSelection = item.id;
       }
-      _httpParams.resource_format = $scope.resFormatMainSelection;
+      _httpParams.re_format = $scope.resFormatMainSelection;
       _httpParams.limit = 10;
       _httpParams.skip = 0;
       getDeptInfoResourceList(_httpParams);
@@ -147,7 +147,7 @@ DInventory.controller('Department.Inventory.Controller.Main', ['$cookies', '$sco
       } else {
         $scope.shareFreqSelection = item.id;
       }
-      _httpParams.share_frequency = $scope.shareFreqSelection;
+      _httpParams.update_period = $scope.shareFreqSelection;
       _httpParams.limit = 10;
       _httpParams.skip = 0;
       getDeptInfoResourceList(_httpParams);
@@ -171,11 +171,11 @@ DInventory.controller('Department.Inventory.Controller.Main', ['$cookies', '$sco
     // filter by social open flag
     $scope.socialOpenMainSelection = [];
     $scope.getInfoResourceListBySO = function(item) {
-      var idx = $scope.socialOpenMainSelection.indexOf(item.id);
+      var idx = $scope.socialOpenMainSelection.indexOf(item.dict_code);
       if (idx > -1) {
         $scope.socialOpenMainSelection = [];
       } else {
-        $scope.socialOpenMainSelection = item.id;
+        $scope.socialOpenMainSelection = item.dict_code;
       }
       _httpParams.social_open_flag = $scope.socialOpenMainSelection;
       _httpParams.limit = 10;
@@ -192,7 +192,7 @@ DInventory.controller('Department.Inventory.Controller.Main', ['$cookies', '$sco
       } else {
         $scope.secretFlagMainSelection = item.id;
       }
-      _httpParams.secret_flag = $scope.secretFlagMainSelection;
+      _httpParams.issecret = $scope.secretFlagMainSelection;
       _httpParams.limit = 10;
       _httpParams.skip = 0;
       getDeptInfoResourceList(_httpParams);
@@ -202,7 +202,7 @@ DInventory.controller('Department.Inventory.Controller.Main', ['$cookies', '$sco
     // get spatial all
     $scope.getSpatialAll = function() {
       $scope.areaMainSelection = [];
-      _httpParams.sys_dict_id = null;
+      _httpParams.area_level = null;
       _httpParams.limit = 10;
       _httpParams.skip = 0;
       getDeptInfoResourceList(_httpParams);
@@ -221,7 +221,7 @@ DInventory.controller('Department.Inventory.Controller.Main', ['$cookies', '$sco
         $scope.areaMainSelection.push(item.id);
       }
 
-      _httpParams.sys_dict_id = $scope.areaMainSelection;
+      _httpParams.area_level = $scope.areaMainSelection;
       _httpParams.limit = 10;
       _httpParams.skip = 0;
       getDeptInfoResourceList(_httpParams);
@@ -348,7 +348,10 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
       var InfoResource_RelationConfig = [];
       var InfoResourceApplyInfo = [];
       var InfoItem_RelationConfig = [];
-      if($scope.shareFreqSelection.length == 0 && !$scope.resItemAddBtn) {
+      if($scope.shareFreqSelection.length == 0 && !$scope.resItemAddBtn) {// 未选择更新周期
+        isValid = false;
+      }
+      if($scope.resItemAddBtn && ($scope.ResourceItemList.length == 0)) { // 未添加信息项
         isValid = false;
       }
 
@@ -409,12 +412,14 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
 
     $scope.addResourceItem = function() {
       $scope.Modal = {};
+      $scope.itemAdded = false;
       $scope.ResourceItem = {};
       $scope.ResourceItem.meter_unit = '';
       $scope.ResourceItem.calculate_method = '';
       $scope.shareFreqItemSelection = [];
       $scope.shareFreqItemObjSelection = [];
       Component.popModal($scope, 'Department.Inventory.Controller.publish', '', 'item-add-modal').result.then(function(res) {
+        $scope.itemAdded = false;
         $scope.ResourceItemList.push($scope.ResourceItem);
         var shareFreqDictName = [];
         _($scope.shareFreqItemObjSelection).forEach(function(item) {
@@ -584,9 +589,9 @@ DInventory.factory('Department.Inventory.Service.Http', ['$http', '$q', 'API',
       )
     }
 
-    function getDepartQuotaList(params) {
+    function getDepartInfoResList(params) {
       return $http.get(
-        path + '/data_quota', {
+        path + '/info_resource_list', {
           params: params
         }
       )
@@ -647,7 +652,7 @@ DInventory.factory('Department.Inventory.Service.Http', ['$http', '$q', 'API',
     return {
       saveInfoResource: saveInfoResource,
       getDepartmentList: getDepartmentList,
-      getDepartQuotaList: getDepartQuotaList,
+      getDepartInfoResList: getDepartInfoResList,
       getQuotaDetail: getQuotaDetail,
       getSystemDictByCatagory: getSystemDictByCatagory,
       uploadFile: uploadFile,

@@ -4,7 +4,7 @@ var DepartmentShare = angular.module('DepartmentShare', ['ui.router']);
 /** InventoryDetail Controller */
 DepartmentShare.controller('DepartmentShare.Controller.Main', [ '$scope', 'DepartmentShare.Service.Http',
   function( $scope, Http) {
-    $scope.DepartmentShare = {};
+    $scope.DepartInfoResource = {};
 
     $scope.Paging = {};
     $scope.Paging.maxSize = 5;
@@ -20,7 +20,7 @@ DepartmentShare.controller('DepartmentShare.Controller.Main', [ '$scope', 'Depar
     }
 
     function getDepartmentShareList(_httpParams) {
-      $scope.sharePromise = Http.shareDataQuotaList(_httpParams).then(function(result) {
+      $scope.sharePromise = Http.shareInfoResourceList(_httpParams).then(function(result) {
         $scope.depShareList = result.data.body[0].results;
         $scope.Paging.totalItems = result.data.body[0].count;
       });
@@ -29,96 +29,162 @@ DepartmentShare.controller('DepartmentShare.Controller.Main', [ '$scope', 'Depar
     //init
     getDepartmentShareList(_httpParams);
 
+    // resource format all
+    $scope.getResFormatAll = function() {
+      $scope.resFormatMainSelection = [];
+      _httpParams.re_format = null;
+      _httpParams.limit = 10;
+      _httpParams.skip = 0;
+      getDepartmentShareList(_httpParams);
+    }
+
     // share level all
-    $scope.getShareLevelAllForShare = function() {
-      $scope.shareLvShareSelection = [];
+    $scope.getShareLevelAll = function() {
+      $scope.shareLvMainSelection = [];
       _httpParams.share_level = null;
       _httpParams.limit = 10;
       _httpParams.skip = 0;
       getDepartmentShareList(_httpParams);
     }
 
-    // filter by share level
-    $scope.shareLvShareSelection = [];
-    $scope.getShareDataQuotaListBySl = function(item) {
-      var idx = $scope.shareLvShareSelection.indexOf(item.id);
-      if (idx > -1) {
-        $scope.shareLvShareSelection = [];
-      } else {
-        $scope.shareLvShareSelection = item.id;
-      }
-      _httpParams.share_level = $scope.shareLvShareSelection;
+    // social open all
+    $scope.getSocialOpenAll = function() {
+      $scope.socialOpenMainSelection = [];
+      _httpParams.social_open_flag = null;
       _httpParams.limit = 10;
       _httpParams.skip = 0;
       getDepartmentShareList(_httpParams);
     }
 
-    // get data level all
-    $scope.getDataLevelAllForShare = function() {
-      $scope.dataLevelShareSelection = [];
-      _httpParams.sys_dict_id = null;
+    // share frequency all
+    $scope.getShareFreqAll = function() {
+      $scope.shareFreqSelection = [];
+      _httpParams.update_period = null;
+      _httpParams.limit = 10;
+      _httpParams.skip = 0;
+      getDepartmentShareList(_httpParams);
+    }
+
+    // secret flag all
+    $scope.getSecretFlagAll = function() {
+      $scope.secretFlagMainSelection = [];
+      _httpParams.issecret = null;
+      _httpParams.limit = 10;
+      _httpParams.skip = 0;
+      getDepartmentShareList(_httpParams);
+    }
+
+    // filter by resource format
+    $scope.resFormatMainSelection = [];
+    $scope.getInfoResourceByResFormat = function(item) {
+      var idx = $scope.shareFreqSelection.indexOf(item.id);
+      if (idx > -1) {
+        $scope.resFormatMainSelection = [];
+      } else {
+        $scope.resFormatMainSelection = item.id;
+      }
+      _httpParams.re_format = $scope.resFormatMainSelection;
+      _httpParams.limit = 10;
+      _httpParams.skip = 0;
+      getDepartmentShareList(_httpParams);
+    }
+
+    // filter by share frequency
+    $scope.shareFreqSelection = [];
+    $scope.getInfoResourceListBySF = function(item) {
+      var idx = $scope.shareFreqSelection.indexOf(item.id);
+      if (idx > -1) {
+        $scope.shareFreqSelection = [];
+      } else {
+        $scope.shareFreqSelection = item.id;
+      }
+      _httpParams.update_period = $scope.shareFreqSelection;
+      _httpParams.limit = 10;
+      _httpParams.skip = 0;
+      getDepartmentShareList(_httpParams);
+    }
+
+    // filter by share level
+    $scope.shareLvMainSelection = [];
+    $scope.getInfoResourceListBySl = function(item) {
+      var idx = $scope.shareLvMainSelection.indexOf(item.id);
+      if (idx > -1) {
+        $scope.shareLvMainSelection = [];
+      } else {
+        $scope.shareLvMainSelection = item.id;
+      }
+      _httpParams.share_level = $scope.shareLvMainSelection;
+      _httpParams.limit = 10;
+      _httpParams.skip = 0;
+      getDepartmentShareList(_httpParams);
+    }
+
+    // filter by social open flag
+    $scope.socialOpenMainSelection = [];
+    $scope.getInfoResourceListBySO = function(item) {
+      var idx = $scope.socialOpenMainSelection.indexOf(item.dict_code);
+      if (idx > -1) {
+        $scope.socialOpenMainSelection = [];
+      } else {
+        $scope.socialOpenMainSelection = item.dict_code;
+      }
+      _httpParams.social_open_flag = $scope.socialOpenMainSelection;
+      _httpParams.limit = 10;
+      _httpParams.skip = 0;
+      getDepartmentShareList(_httpParams);
+    }
+
+    // filter by secret flag
+    $scope.secretFlagMainSelection = [];
+    $scope.getInfoResourceListBySecFlag = function(item) {
+      var idx = $scope.secretFlagMainSelection.indexOf(item.id);
+      if (idx > -1) {
+        $scope.secretFlagMainSelection = [];
+      } else {
+        $scope.secretFlagMainSelection = item.id;
+      }
+      _httpParams.issecret = $scope.secretFlagMainSelection;
+      _httpParams.limit = 10;
+      _httpParams.skip = 0;
+      getDepartmentShareList(_httpParams);
+    }
+
+
+    // get spatial all
+    $scope.getSpatialAll = function() {
+      $scope.areaMainSelection = [];
+      _httpParams.area_level = null;
       _httpParams.limit = 10;
       _httpParams.skip = 0;
       getDepartmentShareList(_httpParams);
     }
 
     // filter by partial
-    $scope.dataLevelShareSelection = [];
-    $scope.getShareDataQuotaListByAP = function(item) {
-      var idx = $scope.dataLevelShareSelection.indexOf(item.id);
+    $scope.areaMainSelection = [];
+    $scope.getInfoResourceListByAP = function(item) {
+      var idx = $scope.areaMainSelection.indexOf(item.id);
       // is currently selected
       if (idx > -1) {
-        $scope.dataLevelShareSelection.splice(idx, 1);
+        $scope.areaMainSelection.splice(idx, 1);
       }
       // is newly selected
       else {
-        $scope.dataLevelShareSelection.push(item.id);
+        $scope.areaMainSelection.push(item.id);
       }
 
-      _httpParams.sys_dict_id = $scope.dataLevelShareSelection;
+      _httpParams.area_level = $scope.areaMainSelection;
       _httpParams.limit = 10;
       _httpParams.skip = 0;
       getDepartmentShareList(_httpParams);
     }
 
     // search by name
-    $scope.searchShareDataQuotaByName = function() {
-      _httpParams.quota_name = $scope.DepartmentShare.quota_name_filter;
+    $scope.searchDeptInfoResourceByName = function() {
+      _httpParams.resource_name = $scope.DepartInfoResource.resource_name_filter;
       _httpParams.limit = 10;
       _httpParams.skip = 0;
       getDepartmentShareList(_httpParams);
     }
-
-    // follow department
-    $scope.followChange = function(event,depId) {
-      var value = event.target.checked;
-      console.log(value);
-      if(value) {// follow
-        Http.followDepartment({
-          follow_dep_id: depId
-        }).then(function(result) {
-          if (200 == result.data.head.status) {
-
-          }
-          else {
-
-          }
-        })
-      }
-      else{// cancel follow
-        Http.cancelFollowDepartment({
-          follow_dep_id: depId
-        }).then(function(result) {
-          if (200 == result.data.head.status) {
-
-          }
-          else {
-
-          }
-        })
-      }
-    };
-
 
     var SHARE_FREQUENCY = 1;
     var DATA_LEVEL = 2;
@@ -126,6 +192,13 @@ DepartmentShare.controller('DepartmentShare.Controller.Main', [ '$scope', 'Depar
     var SECRET_FLAG = 5;
     var RESOURCE_FORMAT = 11;
     var SOCIAL_OPEN_FLAG = 14;
+    // Get system dict
+    Http.getSystemDictByCatagory({
+      'dict_category': SECRET_FLAG
+    }).then(function(result) {
+      $scope.secretFlagList = result.data.body;
+    });
+
     // Get system dict
     Http.getSystemDictByCatagory({
       'dict_category': SHARE_FREQUENCY
@@ -179,9 +252,9 @@ DepartmentShare.factory('DepartmentShare.Service.Http', ['$http', 'API',
   function($http, API) {
     var path = API.path;
 
-    function shareDataQuotaList(params) {
+    function shareInfoResourceList(params) {
       return $http.get(
-        path + '/sharedata_quotalist', {
+        path + '/share_list', {
           params: params
         }
       )
@@ -216,7 +289,7 @@ DepartmentShare.factory('DepartmentShare.Service.Http', ['$http', 'API',
     };
     return {
       getSystemDictByCatagory: getSystemDictByCatagory,
-      shareDataQuotaList: shareDataQuotaList,
+      shareInfoResourceList: shareInfoResourceList,
       getQuotaDetail: getQuotaDetail,
       followDepartment: followDepartment,
       cancelFollowDepartment: cancelFollowDepartment
