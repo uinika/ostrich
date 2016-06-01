@@ -76,7 +76,7 @@ Dashboard.factory('Dashboard.Service.Http', ['$http', 'API',
     var path = API.path;
     function getDataQuotaNew(params) {
       return $http.get(
-        path + '/data_quota/new', {params: params}
+        path + '/data_resource/new', {params: params}
       )
     };
     function getDataRequirementNew(params) {

@@ -8,25 +8,30 @@
       <uib-tabset class='quota-detail' active="active">
         <uib-tab index="0" heading="指标详情">
           <ul class="list-group">
-            <li class="list-group-item">指标编号：{{DataQuotaDetail.quota_sn}}</li>
-            <li class="list-group-item">指标名称:{{DataQuotaDetail.quota_name}}</li>
-            <li class="list-group-item">指标别称:{{DataQuotaDetail.alias}}</li>
-            <li class="list-group-item">计量单位：{{DataQuotaDetail.meter_unit}}</li>
-            <li class="list-group-item">指标详细解释：{{DataQuotaDetail.quota_detail}}</li>
-            <li class="list-group-item">计算方法：{{DataQuotaDetail.calculate_method}}</li>
-            <li class="list-group-item">共享频率：{{DataQuotaDetail.sharefrequency}}</li>
-            <li class="list-group-item">空间范围：{{DataQuotaDetail.area_range}}</li>
-            <li class="list-group-item">分地区数据级别：{{DataQuotaDetail.regionallevel}}</li>
-            <li class="list-group-item">来源部门：{{DataQuotaDetail.depname}}</li>
-            <li class="list-group-item">共享级别：{{DataQuotaDetail.sharelevel}}</li>
-            <li class="list-group-item">数据存储类型：{{DataQuotaDetail.datastoretype}}</li>
-            <li class="list-group-item">数据精度：{{DataQuotaDetail.data_precision}}</li>
-            <li class="list-group-item">数据长度：{{DataQuotaDetail.data_length}}</li>
-            <li class="list-group-item">创建时间：{{DataQuotaDetail.create_time}}</li>
-            <li class="list-group-item">数据表示格式：{{DataQuotaDetail.datashowformat}}</li>
-            <li class="list-group-item">是否涉密：{{DataQuotaDetail.secretflag}}</li>
-            <li class="list-group-item">联系人：{{DataQuotaDetail.linkman}}</li>
-            <li class="list-group-item">联系电话：{{DataQuotaDetail.contact_phone}}</li>
+            <li class="list-group-item">信息资源名称：{{quota.resource_name}}</li>
+            <li class="list-group-item">信息资源别称：{{quota.alias}}</li>
+            <li class="list-group-item">信息资源摘要: {{quota.summary}}</li>
+            <li class="list-group-item">信息资源分类: {{quota.category_name}}</li>
+            <li class="list-group-item">信息资源格式: {{quota.resource_format_name}}</li>
+            <li ng-hide="quota.resource_format_name ==='数据库类'"class="list-group-item">更新周期: {{quota.update_period}}</li>
+            <li ng-hide="quota.resource_format_name ==='数据库类'"class="list-group-item">是否涉密: {{quota.secret_flag_name}}</li>
+            <li ng-hide="quota.resource_format_name ==='数据库类'"class="list-group-item">计量单位: {{quota.meter_unit}}</li>
+            <li ng-hide="quota.resource_format_name ==='数据库类'"class="list-group-item">计算方法: {{quota.calculate_method}}</li>
+            <li class="list-group-item">共享级别: {{quota.share_level_name}}</li>
+            <li class="list-group-item">共享类型: {{quota.share_type_name}}</li>
+            <li class="list-group-item">共享条件: {{quota.share_limit}}</li>
+            <li class="list-group-item">共享方式: {{quota.share_method_name}}</li>
+            <li class="list-group-item">是否面向社会开放: {{quota.secret_flag_name}}</li>
+            <li class="list-group-item">开放条件: {{quota.social_open_flag_name}}</li>
+            <li class="list-group-item">信息资源提供方: {{quota.resource_provider}}</li>
+            <li class="list-group-item">资源提供方代码: {{quota.resource_provider_code}}</li>
+            <li class="list-group-item">信息资源目录代码: {{quota.resource_sn}}</li>
+            <li class="list-group-item">关联及类目名称: {{rel_category_name}}</li>
+            <li class="list-group-item">空间范围: {{quota.area_range}}</li>
+            <li class="list-group-item">分地区数据级别: {{quota.area_level}}</li>
+            <li class="list-group-item">联系人: {{quota.linkman}}</li>
+            <li class="list-group-item">联系电话: {{quota.contact_phone}}</li>
+            <li class="list-group-item">创建时间: {{quota.create_time}}</li>
           </ul>
         </uib-tab>
         <uib-tab class='quota-example' index="1" heading="样例数据">
@@ -35,15 +40,22 @@
             <caption>{{DataQuotaExample.file_name}}</caption>
              <thead>
                <tr>
-                 <th ng-repeat='title in DataQuotaExample.file_content.title track by $index'>{{title}}</th>
+                 <th>信息项名称</th>
+                 <th>数据类型</th>
+                 <th>数据精度</th>
+                 <th>数据长度</th>
+                 <th>更新周期</th>
+                 <th>是否涉密</th>
+                 <th>计量单位</th>
+                 <th>计算方法</th>
                </tr>
              </thead>
              <tbody>
-               <tr ng-repeat='columns in DataQuotaExample.file_content.column track by $index'>
+               <!-- <tr ng-repeat='columns in DataQuotaExample.file_content.column track by $index'>
                  <td ng-repeat='column in columns track by $index'>
                    {{column}}
                  </td>
-               </tr>
+               </tr> -->
              </tbody>
            </table>
           </div>

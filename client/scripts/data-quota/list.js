@@ -5,7 +5,7 @@ var DataQuotaList = angular.module('DataQuotaList', ['ui.router']);
 DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', 'DataQuotaList.Service.Http', '$stateParams',
   function($scope, $state, Http, StateParams) {
     // Get the parameters form ui-router
-    var currentDepID = {quota_dep_id:StateParams.quota_dep_id};
+    var currentDepID = {resource_dep_id:StateParams.resource_dep_id};
     var currentDepName = {dep_name:StateParams.dep_name};
     // Selected department name
     $scope.currentDep = currentDepName.dep_name;
@@ -203,7 +203,7 @@ DataQuotaList.factory('DataQuotaList.Service.Http', ['$http', 'API',
     };
     function getDataQuota(params){
       return $http.get(
-        path + '/data_quota/sys_dict', { params: params }
+        path + '/resource/sys_dict', { params: params }
       )
     };
     function getDataQuotaApplyInfo(data){

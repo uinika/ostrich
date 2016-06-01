@@ -1,0 +1,26 @@
+{
+  "head": {
+    "status":200,
+    "total":2,
+    "token":"DF98A7304591E5E5A5FE0ECFD9D684D8"
+  },
+  "body": [{
+    "id":"45d713fe-2617-11e6-a9e9-507b9d1b58bb",
+    "dict_category":"14",
+    "dict_code":"1",
+    "dict_name":"是",
+    "parent_code":"0",
+    "dict_desc":"是否面向社会开放",
+    "dict_ord":1,
+    "active_flag":"1"
+  },{
+    "id":"45e83aa1-2617-11e6-a9e9-507b9d1b58bb",
+    "dict_category":"14",
+    "dict_code":"0",
+    "dict_name":"否",
+    "parent_code":"0",
+    "dict_desc":"是否面向社会开放",
+    "dict_ord":2,
+    "active_flag":"1"
+  }]
+}

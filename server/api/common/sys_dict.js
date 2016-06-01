@@ -27,6 +27,12 @@ Router.route('/sys_dict')
     if(6 == category) {
        datas = JsonLoader.sync(Config.path + 'common/getDataShowFormat.json');
     }
+    if(11== category) {
+       datas = JsonLoader.sync(Config.path + 'common/getResourceFormat.json');
+    }
+    if(14 == category) {
+       datas = JsonLoader.sync(Config.path + 'common/getOpenToSociety.json');
+    }
     response.json(datas);
   });
 
