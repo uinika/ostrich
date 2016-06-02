@@ -177,10 +177,11 @@
                     <div ng-if='quota.share_level_name =="授权开放" '>
                       <span>
                         <i class='fa fa-lock blue'>
+                        </i>
                           <a ng-if="quota.showbutton==='true'" class='btn btn-default btn-xs' ng-click='DataQuotaApplyInfo(quota.id)'>
                             <i class='fa fa-warning text-warning'> 申请查看</i>
                           </a>
-                        </i>
+                          <span ng-if="quota.showbutton==='false'" class='help-info'>已申请查看</span>
                       </span>
                     </div>
                     <div ng-if='quota.share_level_name =="暂不开放" '>

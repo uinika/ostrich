@@ -143,9 +143,9 @@
               <tr ng-repeat='indicator in followDepIndicators'>
                 <td>{{::indicator.create_time | date:'yyyy-MM-dd'}}</td>
                 <td ><a ui-sref='main.data-quota.detail({resource_id:indicator.id})'>{{::indicator.resource_name}}</a></td>
-                <td>{{::indicator.update_period}}</td>
+                <td>{{::indicator.updatecycle}}</td>
                 <td>{{::indicator.area_range}}</td>
-                <td>{{::indicator.resource_format_name}}</td>
+                <td>{{::indicator.resource_format}}</td>
                 <td>{{::indicator.resource_provider}}</td>
               </tr>
             </tbody>

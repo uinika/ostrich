@@ -1178,7 +1178,7 @@ input.ng-touched.ng-invalid {
   margin-top: 6px;
 }
 #data-quota-list .quota-example .table-responsive {
-  margin-top: 25px;
+  margin-top: 0;
 }
 #admin-user .table-patch td,
 #admin-user .table-patch th {

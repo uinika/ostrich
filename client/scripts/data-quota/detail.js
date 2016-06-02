@@ -14,7 +14,7 @@ DataQuotaDetail.controller('DataQuotaDetail.Controller.Main', ['$scope', '$state
     Http.getDataQuotaExampleByDepID(
       {resource_id: $stateParams.resource_id}
     ).then(function(result) {
-      $scope.DataQuotaExample = result.data.body[0];
+      $scope.DataQuotaExample = result.data.body;
     });
 
   }
