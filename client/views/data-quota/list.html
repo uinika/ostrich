@@ -18,7 +18,7 @@
         <nav class='pull-left'>
           <ul class="pager">
             <li class="text-muted filter-label">信息资源格式</li>
-            <li ng-click="resourceFormatFilter('All')">
+            <li ng-click="resourceFormatFilter('ALL')">
               <a ng-class='resourceFormatActiveAll'>全部</a>
             </li>
             <li ng-repeat='resourceFormat in resourceFormats' ng-click='resourceFormatFilter(resourceFormat.id, $index)'>
@@ -46,10 +46,10 @@
         <nav class='pull-left'>
           <ul class="pager">
             <li class="text-muted filter-label">面向社会开放</li>
-            <li ng-click="openToSocietyFilter('All')">
+            <li ng-click="openToSocietyFilter('ALL')">
               <a ng-class='openToSocietyActiveAll'>全部</a>
             </li>
-            <li ng-repeat='openToSociety in openToSocietys' ng-click='openToSocietyFilter(openToSociety.id,  $index)'>
+            <li ng-repeat='openToSociety in openToSocietys' ng-click='openToSocietyFilter(openToSociety.dict_code,  $index)'>
               <a ng-class='openToSocietyActive[$index]'>{{openToSociety.dict_name}}</a>
             </li>
           </ul>
@@ -89,7 +89,7 @@
        <nav class='pull-left'>
          <ul class="pager issecret">
            <li class="text-muted filter-label ">是否涉密</li>
-           <li ng-click="isScretFilter('All')">
+           <li ng-click="isScretFilter('ALL')">
               <a ng-class='isScretActiveAll' >全部</a>
            </li>
            <li ng-repeat='isScret in isScrets' ng-click='isScretFilter(isScret.id, $index)'>
@@ -190,26 +190,30 @@
                   <td title='{{quota.summary}}'>{{quota.summary}}</td>
                   <td title='{{quota.category_name}}'>{{quota.category_name}}</td>
                   <td title='{{quota.resource_format_name}}'>{{quota.resource_format_name}}</td>
-                  <td ng-if="quota.resource_format_name ==='数据库类'" title='{{quota.resource_name}}'>{{quota.resource_name}}</td>
-                  <td ng-if="quota.resource_format_name ==='数据库类'" title='{{quota.datastoretype}}'>{{quota.datastoretype}}</td>
+                  <td ng-if="quota.resource_format_name ==='数据库类'" title='{{quota.item_name}}'>{{quota.item_name}}</td>
+                  <td ng-if="quota.resource_format_name ==='数据库类'" title='{{quota.datastoretype}}'>{{quota.item_type_name}}</td>
                   <td ng-if="quota.resource_format_name ==='数据库类'" title='{{quota.data_precision}}'>{{quota.data_precision}}</td>
                   <td ng-if="quota.resource_format_name ==='数据库类'" title='{{quota.data_length}}'>{{quota.data_length}}</td>
+                  <td ng-if="quota.resource_format_name ==='数据库类'" title='{{quota.update_period}}'>{{quota.update_period}}</td>
+                  <td ng-if="quota.resource_format_name ==='数据库类'" title='{{quota.secret_flag_name}}'>{{quota.secret_flag_name}}</td>
+                  <td ng-if="quota.resource_format_name ==='数据库类'" title='{{quota.item_meter_unit}}'>{{quota.item_meter_unit}}</td>
+                  <td ng-if="quota.resource_format_name ==='数据库类'" title='{{quota.item_calculate_method}}'>{{quota.item_calculate_method}}</td>
 
                   <td ng-if="quota.resource_format_name !='数据库类'" ></td>
                   <td ng-if="quota.resource_format_name !='数据库类'" ></td>
                   <td ng-if="quota.resource_format_name !='数据库类'" ></td>
                   <td ng-if="quota.resource_format_name !='数据库类'" ></td>
+                  <td ng-if="quota.resource_format_name !='数据库类'" title='{{quota.update_period}}'>{{quota.update_period}}</td>
+                  <td ng-if="quota.resource_format_name !='数据库类'" title='{{quota.secret_flag_name}}'>{{quota.secret_flag_name}}</td>
+                  <td ng-if="quota.resource_format_name !='数据库类'" title='{{quota.meter_unit}}'>{{quota.meter_unit}}</td>
+                  <td ng-if="quota.resource_format_name !='数据库类'" title='{{quota.calculate_method}}'>{{quota.calculate_method}}</td>
 
-                  <td title='{{quota.update_period}}'>{{quota.update_period}}</td>
-                  <td title='{{quota.secret_flag_name}}'>{{quota.secret_flag_name}}</td>
-                  <td title='{{quota.meter_unit}}'>{{quota.meter_unit}}</td>
-                  <td title='{{quota.calculate_method}}'>{{quota.calculate_method}}</td>
                   <td title='{{quota.share_level_name}}'>{{quota.share_level_name}}</td>
                   <td title="{{quota.share_type_name}}">{{quota.share_type_name}}</td>
                   <td title="{{quota.share_limit}}">{{quota.share_limit}}</td>
                   <td title="{{quota.share_method_name}}">{{quota.share_method_name}}</td>
-                  <td title="{{quota.secret_flag_name}}">{{quota.secret_flag_name}}</td>
                   <td title="{{quota.social_open_flag_name}}">{{quota.social_open_flag_name}}</td>
+                  <td title="{{quota.social_open_limit}}">{{quota.social_open_limit}}</td>
                   <td title='{{quota.resource_provider}}'>{{quota.resource_provider}}</td>
                   <td title='{{quota.resource_provider_code}}'>{{quota.resource_provider_code}}</td>
 

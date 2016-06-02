@@ -113,6 +113,20 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
         getDataQuotaListByFilter(filterParams);
       }
     };
+    /* 共享级别 */
+    $scope.ShareLevelFilter = function(id, index){
+      $scope.ShareLevelActive = [];
+      $scope.ShareLevelActiveAll = '';
+      $scope.ShareLevelActive[index] = 'active';
+      filterParams.share_level = id;
+      if('ALL'===id){
+        delete filterParams.share_level;
+        $scope.ShareLevelActiveAll = 'active';
+        getDataQuotaListByFilter(filterParams);
+      }else{
+        getDataQuotaListByFilter(filterParams);
+      }
+    };
 
     /*面向社会开放*/
     $scope.openToSocietyFilter = function(id, index){
@@ -128,6 +142,39 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
         getDataQuotaListByFilter(filterParams);
       }
     };
+    /* 更新周期（共享频率） */
+    filterParams.update_period = [];
+    $scope.ShareFrequencyActive = [];
+    $scope.ShareFrequencyFilter = function(id, index){
+      if('ALL'===id){
+        filterParams.update_period = [];
+        $scope.ShareFrequencyActiveAll = 'active';
+        $scope.ShareFrequencyActive = [];
+        getDataQuotaListByFilter(filterParams);
+      }else{
+        $scope.ShareFrequencyActiveAll = '';
+        ($scope.ShareFrequencyActive[index]==='active')?($scope.ShareFrequencyActive[index]=''):($scope.ShareFrequencyActive[index]='active');
+        filterParams.update_period.push(id);
+        getDataQuotaListByFilter(filterParams);
+      }
+    };
+
+    /* 分地区数据级别 */
+    filterParams.area_level = [];
+    $scope.DataLevelActive = [];
+    $scope.DataLevelFilter = function(id, index){
+      if('ALL'===id){
+        filterParams.area_level = [];
+        $scope.DataLevelActiveAll = 'active';
+        $scope.DataLevelActive=[];
+        getDataQuotaListByFilter(filterParams);
+      }else{
+        $scope.DataLevelActiveAll = '';
+        ($scope.DataLevelActive[index]==='active')?($scope.DataLevelActive[index]=''):($scope.DataLevelActive[index]='active');
+        filterParams.area_level.push(id);
+        getDataQuotaListByFilter(filterParams);
+      };
+    };
     /*是否涉密*/
     $scope.isScretFilter = function(id, index){
       $scope.isScretActive = [];
@@ -142,52 +189,7 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
         getDataQuotaListByFilter(filterParams);
       }
     };
-    /* 共享级别 */
-    $scope.ShareLevelFilter = function(id, index){
-      $scope.ShareLevelActive = [];
-      $scope.ShareLevelActiveAll = '';
-      $scope.ShareLevelActive[index] = 'active';
-      filterParams.share_level = id;
-      if('ALL'===id){
-        delete filterParams.share_level;
-        $scope.ShareLevelActiveAll = 'active';
-        getDataQuotaListByFilter(filterParams);
-      }else{
-        getDataQuotaListByFilter(filterParams);
-      }
-    };
-    /* 更新周期（共享频率） */
-    filterParams.sys_dict_id = [];
-    $scope.ShareFrequencyActive = [];
-    $scope.ShareFrequencyFilter = function(id, index){
-      if('ALL'===id){
-        filterParams.sys_dict_id = [];
-        $scope.ShareFrequencyActiveAll = 'active';
-        $scope.ShareFrequencyActive = [];
-        getDataQuotaListByFilter(filterParams);
-      }else{
-        $scope.ShareFrequencyActiveAll = '';
-        ($scope.ShareFrequencyActive[index]==='active')?($scope.ShareFrequencyActive[index]=''):($scope.ShareFrequencyActive[index]='active');
-        filterParams.sys_dict_id.push(id);
-        getDataQuotaListByFilter(filterParams);
-      }
-    };
-    /* 分地区数据级别 */
-    filterParams.sys_dict_id = [];
-    $scope.DataLevelActive = [];
-    $scope.DataLevelFilter = function(id, index){
-      if('ALL'===id){
-        filterParams.sys_dict_id = [];
-        $scope.DataLevelActiveAll = 'active';
-        $scope.DataLevelActive=[];
-        getDataQuotaListByFilter(filterParams);
-      }else{
-        $scope.DataLevelActiveAll = '';
-        ($scope.DataLevelActive[index]==='active')?($scope.DataLevelActive[index]=''):($scope.DataLevelActive[index]='active');
-        filterParams.sys_dict_id.push(id);
-        getDataQuotaListByFilter(filterParams);
-      };
-    };
+
   }
 ]);
 
