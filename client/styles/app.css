@@ -420,6 +420,15 @@ input.ng-touched.ng-invalid {
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+#department-inventory .indicator-list table tr td a {
+  cursor: pointer;
+}
+#department-inventory .indicator-list table tr td a.delete {
+  color: #d9534f;
+}
+#department-inventory .indicator-list table tr td a.edit {
+  color: #5cb85c;
+}
 #department-inventory .indicator-list table tr td pre {
   overflow: hidden;
   border: none;
@@ -736,6 +745,15 @@ input.ng-touched.ng-invalid {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+#department-requirement .indicator-list table tr td a {
+  cursor: pointer;
+}
+#department-requirement .indicator-list table tr td a.delete {
+  color: #d9534f;
+}
+#department-requirement .indicator-list table tr td a.edit {
+  color: #5cb85c;
 }
 #department-requirement .indicator-list table tr span {
   padding: 0 15px;
@@ -1161,4 +1179,28 @@ input.ng-touched.ng-invalid {
 }
 #data-quota-list .quota-example .table-responsive {
   margin-top: 25px;
+}
+#admin-user .table-patch td,
+#admin-user .table-patch th {
+  max-width: 200px;
+  word-break: keep-all;
+  word-wrap: normal;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 14px;
+  vertical-align: middle;
+  text-align: center;
+}
+#admin-department .table-patch td,
+#admin-department .table-patch th {
+  max-width: 200px;
+  word-break: keep-all;
+  word-wrap: normal;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 14px;
+  vertical-align: middle;
+  text-align: center;
 }

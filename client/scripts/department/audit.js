@@ -4,7 +4,7 @@ var Audit = angular.module('Department.Audit', ['ui.router']);
 /** Main Controller */
 Audit.controller('Department.Audit.Controller.Main', ['$scope', '$q', 'Department.Audit.Service.Http',
   function($scope, $q, Http) {
-    $scope.DeptAudit = {};
+    $scope.InfoResource = {};
 
     $scope.Paging = {};
     $scope.Paging.maxSize = 5;
@@ -29,8 +29,8 @@ Audit.controller('Department.Audit.Controller.Main', ['$scope', '$q', 'Departmen
       });
     }
 
-    $scope.searchDeptAuditByName = function() {
-      _httpParams.quota_name = $scope.DeptAudit.quota_name_filter;
+    $scope.searchInfoResourceByName = function() {
+      _httpParams.quota_name = $scope.InfoResource.resource_name_filter;
       _httpParams.limit = 10;
       _httpParams.skip = 0;
       getAuditList();
@@ -43,11 +43,8 @@ Audit.controller('Department.Audit.Controller.Main', ['$scope', '$q', 'Departmen
 
 Audit.controller('Department.Audit.Controller.info', ['$scope', '$state', '$q', 'Department.Audit.Service.Http', '$stateParams',
   function( $scope, $state, $q, Http, $stateParams) {
-    $scope.TabExampShow = true;
+    $scope.TabItemShow = true;
     $scope.TabRequireShow = true;
-    $scope.Tab = {};
-    $scope.Tab.show = {};
-    $scope.Tab.show.auditInfo = true;
     $scope.AuditInfo = {};
     $scope.AuditInfo.audit_opinion = '';
 
@@ -59,57 +56,7 @@ Audit.controller('Department.Audit.Controller.info', ['$scope', '$state', '$q', 
       $scope.AuditDetail.applydepname = $stateParams.APPLYDEPNAME;
       $scope.AuditDetail.applytime = $stateParams.APPLYTIME;
       console.log($scope.AuditDetail);
-      Http.getQuotaExamples({
-        dataquotaid: $stateParams.DATAQUOTAID
-      }).then(function(res) {
-        $scope.DataQuotaExamples = res.data.body[0];
-        if (res.data.head.total == 0) {
-          $scope.TabExampShow = false;
-        }
-        else{
-          $scope.DataTitle = $scope.DataQuotaExamples.file_content.title;
-          $scope.DataColumn = $scope.DataQuotaExamples.file_content.column;
-        }
-        Http.getQuotaRequirement({
-          dataquotaid: $stateParams.DATAQUOTAID
-        }).then(function(reqRes) {
-
-          if(reqRes.data.body.length == 0) {
-            $scope.TabRequireShow = false;
-          }
-          else {
-            $scope.QuotaReqDetailList = reqRes.data.body;
-          }
-
-        })
-
-      })
     })
-
-
-    $scope.tabSwitcher = function(num) {
-      switch (num) {
-        case 'auditInfo':
-          $scope.Tab.show = {};
-          $scope.Tab.show.auditInfo = true;
-          break;
-        case 'auditExampData':
-          $scope.Tab.show = {};
-          $scope.Tab.show.auditExampData = true;
-          break;
-        case 'requirementInfo':
-          $scope.Tab.show = {};
-          $scope.Tab.show.requirementInfo = true;
-          break;
-        default:
-        case 2:
-          $scope.Tab = {};
-          $scope.Tab.auditInfo.show = true;
-          break;
-
-      }
-    }
-
 
 
     $scope.submitAudit = function() {
@@ -162,13 +109,6 @@ Audit.factory('Department.Audit.Service.Http', ['$http', '$q', 'API',
       )
     }
 
-    function getQuotaExamples(params) {
-      return $http.get(
-        path + '/examples_detail', {
-          params: params
-        }
-      )
-    }
     function getQuotaRequirement(params) {
       return $http.get(
         path + '/requiement_detail', {
@@ -180,7 +120,6 @@ Audit.factory('Department.Audit.Service.Http', ['$http', '$q', 'API',
       getAuditList: getAuditList,
       getQuotaDetail: getQuotaDetail,
       updateAuditDetail: updateAuditDetail,
-      getQuotaExamples: getQuotaExamples,
       getQuotaRequirement: getQuotaRequirement
     }
   }

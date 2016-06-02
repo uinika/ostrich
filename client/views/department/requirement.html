@@ -45,7 +45,7 @@
         </div>
 
         <div class='panel-body' style='overflow-x:scroll' cg-busy="{promise:reqPromise,message:'加载中',backdrop:backdrop,delay:delay,minDuration:minDuration}">
-          <div class='' style='width:1200px;'>
+          <div class='' style='width:1400px;'>
             <div class='row'>
               <div class='col-lg-12'>
                 <!-- Table -->
@@ -53,16 +53,16 @@
                   <thead>
                     <tr>
                       <!-- <th>操作</th> -->
-                      <th width='80px'>操作</th>
+                      <th width='70px'>操作</th>
                       <th width='40px'>状态</th>
                       <th width='100px'>需求日期</th>
                       <th width='100px'>确认日期</th>
-                      <th width='80px'>需求名称</th>
+                      <th width='100px'>需求名称</th>
                       <th width='100px'>需求说明</th>
-                      <th width='40px'>共享频率</th>
+                      <th width='80px'>共享频率</th>
                       <th width='60px'>空间范围</th>
                       <th width='80px'>数据级别</th>
-                      <th width='40px'>联系人</th>
+                      <th width='60px'>联系人</th>
                       <th width='80px'>联系电话</th>
                       <th width='80px'>对应部门</th>
                     </tr>
@@ -71,8 +71,8 @@
                     <tr ng-repeat='DeptReq in requirementList | orderBy:"-create_time" '>
                       <td>
                         <div ng-if='DeptReq.status == 0'>
-                          <a ng-click='deleteReq(DeptReq.id)' >删除</a>
-                        <a ui-sref='main.department.Requirement.update({item:DeptReq})'>修改</a>
+                          <a class='delete' ng-click='deleteReq(DeptReq.id)' ><i class='fa fa-trash'></i>&nbsp;删除</a>
+                        <a class='edit' ng-click='updateReq(DeptReq)'><i class='fa fa-pencil'></i>&nbsp;修改</a>
                         </div>
                         </td>
                       <td>

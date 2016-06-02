@@ -189,8 +189,8 @@
                   <tbody>
                     <tr ng-repeat='InfoResource in infoResourceList | orderBy:"create_time":true'>
                       <td>
-                      <a ng-click='deleteQuota($event,InfoResource.id)' >删除</a>
-                      <a ui-sref='main.department.inventory.update({item:InfoResource})'>修改</a>
+                      <a class='delete' ng-click='deleteQuota($event,InfoResource.id)' ><i class='fa fa-trash'></i>&nbsp;删除</a>
+                      <a class='edit' ui-sref='main.department.inventory.update({item:InfoResource})'><i class='fa fa-pencil'></i>&nbsp;修改</a>
                     </td>
                       <td>
                         <div ng-if='InfoResource.share_level_name =="全省开放" '>

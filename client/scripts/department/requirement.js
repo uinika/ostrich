@@ -90,6 +90,7 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$cookies', 
       var _httpPublishParams = {};
       var dataRelationConfig = [];
       $scope.reqParent = {};
+      $scope.reqParent.outputDeptList = [];
 
       $scope.shareFreqSelection = [];
       $scope.dataLevelReqSelection = [];
@@ -154,6 +155,78 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$cookies', 
         })
       }
     }
+
+    // update requirement
+    $scope.updateReq = function(item) {
+      $scope.Modal = {};
+      $scope.Modal.DepRequirment = item;
+
+      var _httpPublishParams = {};
+      var dataRelationConfig = [];
+
+      $scope.reqParent = {};
+      $scope.reqParent.outputDeptList = [];
+
+      $scope.shareFreqSelection = [];
+      $scope.dataLevelReqSelection = [];
+
+      _($scope.deptList).forEach(function(outItem) {
+        if(item.response_dep_id == outItem.id) {
+          outItem.ticked = true;
+          $scope.reqParent.outputDeptList.push(outItem);
+        }
+      })
+
+      // 获取需求对应的共享频率数据
+      // Http.getReqShareFreq({
+      //
+      // }).then(function(res) {
+      //   $scope.shareFreqSelection = res.data.body;
+      // })
+      //
+      // // 获取需求对应的分地区数据级别
+      // Http.getReqAreaLevel({
+      //
+      // }).then(function(res) {
+      //   $scope.dataLevelReqSelection = res.data.body;
+      // })
+
+
+
+      Component.popModal($scope, '修改', 'add-req-modal').result.then(function() {
+        _($scope.dataLevelReqSelection).forEach(function(value) {
+          var req_sys_dict = {};
+          req_sys_dict.datarequiementId = $scope.Modal.DepRequirment.requiement_name;
+          req_sys_dict.sys_dict_id = value;
+          req_sys_dict.obj_type = 2;
+          dataRelationConfig.push(req_sys_dict);
+        });
+
+        _($scope.shareFreqSelection).forEach(function(value) {
+          var req_sys_dict = {};
+          req_sys_dict.datarequiementId = $scope.Modal.DepRequirment.requiement_name;
+          req_sys_dict.sys_dict_id = value;
+          req_sys_dict.obj_type = 2;
+          dataRelationConfig.push(req_sys_dict);
+        });
+
+        var res_dep_id = _.map($scope.reqParent.outputDeptList, 'id');
+        $scope.Modal.DepRequirment.response_dep_id = res_dep_id[0];
+        
+        _httpPublishParams.dataRequiement = $scope.Modal.DepRequirment;
+        _httpPublishParams.dataRelationConfig = dataRelationConfig;
+
+        Http.updateRequirementInfo(_httpPublishParams).then(function(result) {
+          if (200 == result.data.head.status) {
+            alert('修改成功');
+            getDeptRequirementList();
+          } else {
+            alert('修改失败');
+          }
+        })
+      });
+    }
+
   }
 ])
 
@@ -287,9 +360,19 @@ DepartmentReq.factory('Department.Requirement.Service.Http', ['$http', 'API',
       )
     }
 
+    // 需求确认修改状态
     function updateRequirement(data) {
       return $http.put(
         path + '/data_requiement_ok', {
+          data: data
+        }
+      )
+    }
+
+    // 修改需求信息
+    function updateRequirementInfo(data) {
+      return $http.put(
+        path + '/data_requiement', {
           data: data
         }
       )
@@ -348,17 +431,36 @@ DepartmentReq.factory('Department.Requirement.Service.Http', ['$http', 'API',
         }
       )
     };
+
+    function getReqShareFreq(params) {
+      return $http.get(
+        path + '/sys_dict', {
+          params: params
+        }
+      )
+    }
+
+    function getReqAreaLevel(params) {
+      return $http.get(
+        path + '/sys_dict', {
+          params: params
+        }
+      )
+    }
     return {
       getDepartmentRequirementList: getDepartmentRequirementList,
       publishRequirement: publishRequirement,
       getReqDetail: getReqDetail,
       getResponseList: getResponseList,
       updateRequirement: updateRequirement,
+      updateRequirementInfo: updateRequirementInfo,
       saveReqResponse: saveReqResponse,
       getDeptInfoResourceList: getDeptInfoResourceList,
       getDepartmentList: getDepartmentList,
       deleteRequirement: deleteRequirement,
-      getSystemDictByCatagory: getSystemDictByCatagory
+      getSystemDictByCatagory: getSystemDictByCatagory,
+      getReqShareFreq: getReqShareFreq,
+      getReqAreaLevel: getReqAreaLevel
     }
   }
 ]);
