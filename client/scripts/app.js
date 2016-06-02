@@ -91,12 +91,12 @@ app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', '$provide',
         controller: 'DataQuota.Controller.Main'
       })
       .state('main.data-quota.list', {
-        url: '/list/:quota_dep_id/:dep_name',
+        url: '/list/:resource_dep_id/:dep_name',
         templateUrl: 'views/data-quota/list.html',
         controller: 'DataQuotaList.Controller.Main'
       })
       .state('main.data-quota.detail', {
-        url: '/detail/:data_quota_id',
+        url: '/detail/:resource_id',
         templateUrl: 'views/data-quota/detail.html',
         controller: 'DataQuotaDetail.Controller.Main'
       })

@@ -12,7 +12,7 @@ DataQuotaDetail.controller('DataQuotaDetail.Controller.Main', ['$scope', '$state
     });
     // Data Quota Example
     Http.getDataQuotaExampleByDepID(
-      {dataquotaid: $stateParams.data_quota_id}
+      {resource_id: $stateParams.resource_id}
     ).then(function(result) {
       $scope.DataQuotaExample = result.data.body[0];
     });
@@ -27,12 +27,12 @@ DataQuotaDetail.factory('DataQuotaDetail.Service.Http', ['$http', 'API',
     var path = API.path;
     function getDataQuotaDetailByDepID(params){
       return $http.get(
-        path + '/data_quota_detail', { params: params }
+        path + '/info_resource_detail', { params: params }
       )
     };
     function getDataQuotaExampleByDepID(params){
       return $http.get(
-        path + '/examples_detail', { params: params }
+        path + '/info_item_detail', { params: params }
       )
     };
     return {

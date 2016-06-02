@@ -15,7 +15,7 @@
           </div>
           <div class='bureau-list'>
             <div ng-repeat='bureau in Bureaus | filter:query' class='bureau-item col-md-3'>
-              <a ui-sref='main.data-quota.list({quota_dep_id: bureau.id})' class='thumbnail'>
+              <a ui-sref='main.data-quota.list({resource_dep_id: bureau.id})' class='thumbnail'>
                 <img ng-src='styles/images/bureau/{{::bureau.dep_en_name}}' title='{{::bureau.dep_name}}'>
               </a>
               <div class="caption">
@@ -86,7 +86,7 @@
           <tbody>
             <tr ng-repeat='indicator in NewIndicators'>
               <td>{{indicator.create_time | date:'yyyy-MM-dd'}}</td>
-              <td><a ui-sref='main.data-quota.detail({data_quota_id:indicator.id})'>{{indicator.resource_name}}</a></td>
+              <td><a ui-sref='main.data-quota.detail({resource_id:indicator.id})'>{{indicator.resource_name}}</a></td>
               <td>{{indicator.dep_short_name}}</td>
             </tr>
           </tbody>
@@ -142,7 +142,7 @@
             <tbody>
               <tr ng-repeat='indicator in followDepIndicators'>
                 <td>{{::indicator.create_time | date:'yyyy-MM-dd'}}</td>
-                <td ><a ui-sref='main.data-quota.detail({data_quota_id:indicator.id})'>{{::indicator.resource_name}}</a></td>
+                <td ><a ui-sref='main.data-quota.detail({resource_id:indicator.id})'>{{::indicator.resource_name}}</a></td>
                 <td>{{::indicator.update_period}}</td>
                 <td>{{::indicator.area_range}}</td>
                 <td>{{::indicator.resource_format_name}}</td>

@@ -5,7 +5,7 @@ var DataQuotaList = angular.module('DataQuotaList', ['ui.router']);
 DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', 'DataQuotaList.Service.Http', '$stateParams',
   function($scope, $state, Http, StateParams) {
     // Get the parameters form ui-router
-    var currentDepID = {resource_dep_id:StateParams.quota_dep_id};
+    var currentDepID = {resource_dep_id:StateParams.resource_dep_id};
     var currentDepName = {dep_name:StateParams.dep_name};
     // Selected department name
     $scope.currentDep = currentDepName.dep_name;
