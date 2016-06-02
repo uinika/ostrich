@@ -235,18 +235,24 @@ DInventory.controller('Department.Inventory.Controller.Main', ['$cookies', '$sco
       getDeptInfoResourceList(_httpParams);
     }
 
-    // delete data quota
-    $scope.deleteQuota = function(event, quotaId) {
-      var deleteFlag = event.target.checked;
-      Http.deleteDataQuota({
-        id: quotaId,
-        delete_flag: deleteFlag ? 'true' : 'false'
-      }).then(function(result) {
-        if (200 == result.data.head.status) {
-
-        }
-      })
+    // delete info resource
+    $scope.deleteInfoResource = function(resourceId) {
+      var deleteConfirm = confirm('确定删除本条信息资源？删除后将不可恢复。');
+      if(deleteConfirm) {
+        Http.deleteInfoResource({
+          id: resourceId
+        }).then(function(result) {
+          if (200 == result.data.head.status) {
+            alert('删除成功！');
+          }
+          else {
+            alert('删除失败');
+          }
+        })
+      }
     }
+
+
   }
 ])
 
@@ -274,6 +280,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
     var RESOURCE_FORMAT_DATA = 'aaee8194-2614-11e6-a9e9-507b9d1b58bb';
     var RESOURCE_FORMAT_OTHER = 'ab11fdd4-2614-11e6-a9e9-507b9d1b58bb';
     var SHARE_METHOD_OTHER = 'd8d61ff3-2616-11e6-a9e9-507b9d1b58bb';
+    var SECRET_YES = '250a53a3-02f0-11e6-a52a-5cf9dd40ad7e'; //涉密
 
     var LoginUser = JSON.parse($cookies.get('User'));
     var DEP_ID = LoginUser.dep_id;
@@ -407,6 +414,39 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
     $scope.resItemUpdateBtn = false;
     if ($stateParams.item) { // 选择修改
       $scope.InfoResource = $stateParams.item;
+
+      // 获取资源分地区数据级别
+      Http.getResourceAreaLevel({
+        resource_id: $scope.InfoResource.id
+      }).then(function(res) {
+        $scope.dataLevelSelection = res.data.body[0].id;
+      })
+
+      // 获取资源更新周期
+      Http.getResourceUpdatePeriod({
+        resource_id: $scope.InfoResource.id
+      }).then(function(res) {
+        $scope.shareFreqSelection = res.data.body[0].id;
+      })
+
+      // 获取指定开放部门列表
+      Http.getResourceShareDeps({
+        resource_id: $scope.InfoResource.id
+      }).then(function(res) {
+        var authDepts = res.data.body[0].id;
+        if(authDepts.length > 0) {
+          $scope.depShow = true;
+        }
+        _($scope.deptList).forEach(function(allItem) {
+          _(authDepts).forEach(function(authItem) {
+            if(allItem.id == authItem) {
+              allItem.ticked = true;
+              $scope.outputDeptList.push(allItem);
+            }
+          })
+        });
+      })
+
       // 选中数据库类
       if (RESOURCE_FORMAT_DATA == $scope.InfoResource.resource_format) {
         $scope.resItemUpdateBtn = true;
@@ -420,6 +460,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
       var InfoResource_RelationConfig = [];
       var InfoResourceApplyInfo = [];
       var InfoItem_RelationConfig = [];
+
       if ($scope.shareFreqSelection.length == 0 && !$scope.resItemUpdateBtn) { // 未选择更新周期
         isValid = false;
       }
@@ -467,6 +508,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
         Http.updateInfoResource(InfoResourceAddObj).then(function(result) {
           console.log(result.data);
           if (200 == result.data.head.status) {
+            alert('保存成功！');
             $scope.Modal = {};
             $state.go("main.department.inventory", {}, {
               reload: true
@@ -475,14 +517,19 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
           } else {
             alert('保存失败');
           }
+          // 清空多选项
+          $scope.dataLevelSelection = [];
+          $scope.shareFreqSelection = [];
         })
       } else {
         return;
       }
     }
 
-    $scope.editItems = function() {
-      Http.getItemList({}).then(function(result) {
+    $scope.editItems = function(id) {
+      Http.getInfoItemList({
+        resource_id: id
+      }).then(function(result) {
         $scope.ResourceItemListShow = result.data.body;
       })
       $scope.ResItemListShow = true;
@@ -496,7 +543,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
       $scope.ResourceItem.calculate_method = '';
       $scope.shareFreqItemSelection = [];
       $scope.shareFreqItemObjSelection = [];
-      Component.popModal($scope, 'Department.Inventory.Controller.publish', '', 'item-add-modal').result.then(function(res) {
+      Component.popModal($scope, 'Department.Inventory.Controller.publish', '新增', 'item-add-modal').result.then(function(res) {
         $scope.itemAdded = false;
         $scope.ResourceItemList.push($scope.ResourceItem);
         var shareFreqDictName = [];
@@ -512,6 +559,57 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
       })
     }
 
+    // update resource item
+    $scope.updateItem = function(item) {
+      $scope.Modal = {};
+      $scope.itemAdded = false;
+      $scope.ResourceItem = item;
+      $scope.shareFreqItemSelection = _.map(item.ids, 'id');;
+      $scope.shareFreqItemObjSelection = item.ids;
+
+      Component.popModal($scope, 'Department.Inventory.Controller.publish', '修改', 'item-add-modal').result.then(function(res) {
+        $scope.itemAdded = false;
+        var shareFreqDictName = [];
+        _($scope.shareFreqItemObjSelection).forEach(function(item) {
+          var sys_dict = {};
+          sys_dict.InfoItemId = $scope.ResourceItem.item_name;
+          sys_dict.sys_dict_id = item.id;
+          $scope.ResourceItemConfigList.push(sys_dict);
+          shareFreqDictName.push(item.dict_name);
+        });
+        if(SECRET_YES == $scope.ResourceItem.secret_flag) {// 涉密
+          $scope.ResourceItem.secret_flag_name = '涉密';
+        }
+        else {
+          $scope.ResourceItem.secret_flag_name = '不涉密';
+        }
+        $scope.ResourceItem.updatecycle = shareFreqDictName;
+        $scope.ResourceItemList.push($scope.ResourceItem);
+      })
+    }
+
+    // delete info item
+    $scope.deleteItem = function(id)  {
+      var deleteFlag = confirm('确定删除本条信息项？删除后将不可恢复。');
+      if(deleteFlag) {
+        Http.deleteInfoItem({
+          id: id
+        }).then(function(result) {
+            if (200 == result.data.head.status) {
+              alert('删除成功！');
+              Http.getInfoItemList({
+                resource_id: id
+              }).then(function(result) {
+                $scope.ResourceItemListShow = result.data.body;
+              })
+              $scope.ResItemListShow = true;
+            }
+            else {
+              alert('删除失败！');
+            }
+        })
+      }
+    }
 
     // show or hide department
     $scope.depShow = false;
@@ -665,9 +763,9 @@ DInventory.factory('Department.Inventory.Service.Http', ['$http', '$q', 'API',
       )
     }
 
-    function getItemList(params) {
+    function getInfoItemList(params) {
       return $http.get(
-        path + '/sys_dict', {
+        path + '/info_item_detail', {
           params: params
         }
       )
@@ -688,6 +786,37 @@ DInventory.factory('Department.Inventory.Service.Http', ['$http', '$q', 'API',
         }
       )
     }
+
+    function getResourceAreaLevel(params) {
+      return $http.get(
+        path + '/resource_area_level', {
+          params: params
+        }
+      )
+    }
+    function getResourceUpdatePeriod(params) {
+      return $http.get(
+        path + '/resource_update_period', {
+          params: params
+        }
+      )
+    }
+
+    function getResourceShareDeps(params) {
+      return $http.get(
+        path + '/resource_share_dep', {
+          params: params
+        }
+      )
+    }
+
+    function updateInfoItem(params) {
+      return $http.put(
+        path + '/info_item', {
+          data: params
+        }
+      )
+    }
     return {
       saveInfoResource: saveInfoResource,
       getDepartmentList: getDepartmentList,
@@ -696,7 +825,11 @@ DInventory.factory('Department.Inventory.Service.Http', ['$http', '$q', 'API',
       getSystemDictByCatagory: getSystemDictByCatagory,
       deleteInfoResource: deleteInfoResource,
       updateInfoResource: updateInfoResource,
-      getItemList: getItemList
+      getInfoItemList: getInfoItemList,
+      getResourceAreaLevel: getResourceAreaLevel,
+      getResourceUpdatePeriod: getResourceUpdatePeriod,
+      getResourceShareDeps: getResourceShareDeps,
+      updateInfoItem: updateInfoItem
     }
   }
 ]);
@@ -719,7 +852,7 @@ DInventory.service('Department.Inventory.Service.Component', ['$uibModal', '$sta
     };
     // prompt Modal
     function popModal(scope, controller, type, templateUrl) {
-      //scope.Modal.type = type;
+      scope.Modal.type = type;
       var modalInstance = $uibModal.open({
         animation: true,
         backdrop: 'static',

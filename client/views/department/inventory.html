@@ -189,7 +189,7 @@
                   <tbody>
                     <tr ng-repeat='InfoResource in infoResourceList | orderBy:"create_time":true'>
                       <td>
-                      <a class='delete' ng-click='deleteQuota($event,InfoResource.id)' ><i class='fa fa-trash'></i>&nbsp;删除</a>
+                      <a class='delete' ng-click='deleteInfoResource(InfoResource.id)' ><i class='fa fa-trash'></i>&nbsp;删除</a>
                       <a class='edit' ui-sref='main.department.inventory.update({item:InfoResource})'><i class='fa fa-pencil'></i>&nbsp;修改</a>
                     </td>
                       <td>

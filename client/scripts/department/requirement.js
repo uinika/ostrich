@@ -178,25 +178,23 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$cookies', 
       })
 
       // 获取需求对应的共享频率数据
-      // Http.getReqShareFreq({
-      //
-      // }).then(function(res) {
-      //   $scope.shareFreqSelection = res.data.body;
-      // })
-      //
-      // // 获取需求对应的分地区数据级别
-      // Http.getReqAreaLevel({
-      //
-      // }).then(function(res) {
-      //   $scope.dataLevelReqSelection = res.data.body;
-      // })
+      Http.getReqUpdatePeriod({
+        requiement_id: item.id
+      }).then(function(res) {
+        $scope.shareFreqSelection = res.data.body;
+      })
 
-
+      // 获取需求对应的分地区数据级别
+      Http.getReqAreaLevel({
+        requiement_id: item.id
+      }).then(function(res) {
+        $scope.dataLevelReqSelection = res.data.body;
+      })
 
       Component.popModal($scope, '修改', 'add-req-modal').result.then(function() {
         _($scope.dataLevelReqSelection).forEach(function(value) {
           var req_sys_dict = {};
-          req_sys_dict.datarequiementId = $scope.Modal.DepRequirment.requiement_name;
+          req_sys_dict.datarequiementId = $scope.Modal.DepRequirment.id;
           req_sys_dict.sys_dict_id = value;
           req_sys_dict.obj_type = 2;
           dataRelationConfig.push(req_sys_dict);
@@ -204,7 +202,7 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$cookies', 
 
         _($scope.shareFreqSelection).forEach(function(value) {
           var req_sys_dict = {};
-          req_sys_dict.datarequiementId = $scope.Modal.DepRequirment.requiement_name;
+          req_sys_dict.datarequiementId = $scope.Modal.DepRequirment.id;
           req_sys_dict.sys_dict_id = value;
           req_sys_dict.obj_type = 2;
           dataRelationConfig.push(req_sys_dict);
@@ -212,7 +210,7 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$cookies', 
 
         var res_dep_id = _.map($scope.reqParent.outputDeptList, 'id');
         $scope.Modal.DepRequirment.response_dep_id = res_dep_id[0];
-        
+
         _httpPublishParams.dataRequiement = $scope.Modal.DepRequirment;
         _httpPublishParams.dataRelationConfig = dataRelationConfig;
 
@@ -432,9 +430,9 @@ DepartmentReq.factory('Department.Requirement.Service.Http', ['$http', 'API',
       )
     };
 
-    function getReqShareFreq(params) {
+    function getReqUpdatePeriod(params) {
       return $http.get(
-        path + '/sys_dict', {
+        path + '/requiement_update_period', {
           params: params
         }
       )
@@ -442,7 +440,7 @@ DepartmentReq.factory('Department.Requirement.Service.Http', ['$http', 'API',
 
     function getReqAreaLevel(params) {
       return $http.get(
-        path + '/sys_dict', {
+        path + '/requiement_area_level', {
           params: params
         }
       )
@@ -459,7 +457,7 @@ DepartmentReq.factory('Department.Requirement.Service.Http', ['$http', 'API',
       getDepartmentList: getDepartmentList,
       deleteRequirement: deleteRequirement,
       getSystemDictByCatagory: getSystemDictByCatagory,
-      getReqShareFreq: getReqShareFreq,
+      getReqUpdatePeriod: getReqUpdatePeriod,
       getReqAreaLevel: getReqAreaLevel
     }
   }

@@ -128,8 +128,7 @@ Department.controller('Department.Controller.Main', ['$cookies', '$scope', '$q',
           return item.dep_id != DEP_ID;
         });
         $scope.parentObj.outputDeptList = [];
-        console.log($scope.parentObj.deptAllList);
-        console.log($scope.parentObj.outputAllDeptList);
+
         _($scope.parentObj.deptAllList).forEach(function(allItem) {
           allItem.icon = '<img  src=styles/images/bureau/'+ allItem.dep_en_name +' />'
           _($scope.parentObj.outputAllDeptList).forEach(function(outItem) {
@@ -139,7 +138,7 @@ Department.controller('Department.Controller.Main', ['$cookies', '$scope', '$q',
             }
           })
         });
-        console.log($scope.parentObj.outputDeptList);
+
          $scope.$broadcast('someEvent', $scope.parentObj.outputDeptList);
         // $scope.parentObj.deptAllList = _.pullAllWith($scope.parentObj.deptAllList, $scope.parentObj.outputAllDeptList,function(arrItem,othItem) {
         //   return arrItem.dep_id == othItem.dep_id || DEP_ID == arrItem.dep_id;

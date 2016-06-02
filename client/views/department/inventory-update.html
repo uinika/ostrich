@@ -97,7 +97,7 @@
               </select>
               <span  ng-class="{true: 'ng-show', false: 'ng-hide'}[resFormatOtherShow]"><input type='text' class='custom-form-control' placeholder='请输入其他信息资源格式' ng-model='InfoResource.resource_format_other' /></span>
               <span ng-class="{true: 'ng-show', false: 'ng-hide'}[resItemAddBtn]"><a class='btn btn-default' ng-click='ResItemListShow = true'><i class='fa fa-plus'></i>&nbsp;信息项</a></span>
-              <span ng-class="{true: 'ng-show', false: 'ng-hide'}[resItemUpdateBtn]"><a class='btn btn-default' ng-click='editItems()'><i class='fa fa-pencil'></i>&nbsp;信息项</a></span>
+              <span ng-class="{true: 'ng-show', false: 'ng-hide'}[resItemUpdateBtn]"><a class='btn btn-default' ng-click='editItems(InfoResource.id)'><i class='fa fa-pencil'></i>&nbsp;信息项</a></span>
               <span class='help-block' ng-show='submitted && resItemAddBtn && (ResourceItemList.length == 0)'>您还未添加任何信息项。</span>
             </div>
           </div>
@@ -298,14 +298,15 @@
             <tr ng-repeat='rescoureItem in ResourceItemListShow | orderBy:"-create_time" '>
               <!-- <td><input type='checkbox' ng-click='deleteReq(rescoureItem.id)' />删除</td> -->
               <td>{{$index+1}}</td>
-              <td></td>
+              <td><a class='delete' ng-click='deleteItem(rescoureItem.id)' ><i class='fa fa-trash'></i>&nbsp;删除</a>
+              <a class='edit' ng-click='updateItem(rescoureItem)'><i class='fa fa-pencil'></i>&nbsp;修改</a></td>
               <td title='{{rescoureItem.item_name}}'>{{rescoureItem.item_name}}</td>
               <td title='{{rescoureItem.item_type}}'>{{rescoureItem.item_type}}</td>
               <td title='{{rescoureItem.data_precision}}'>{{rescoureItem.data_precision}}</td>
               <td title='{{rescoureItem.data_length}}'>{{rescoureItem.data_length}}</td>
               <td title='{{rescoureItem.meter_unit}}'>{{rescoureItem.meter_unit}}</td>
               <td title='{{rescoureItem.calculate_method}}'>{{rescoureItem.calculate_method}}</td>
-              <td title='{{rescoureItem.shareFreqDictName}}'>{{rescoureItem.shareFreqDictName}}</td>
+              <td title='{{rescoureItem.shareFreqDictName}}'>{{rescoureItem.updatecycle}}</td>
               <td title='{{rescoureItem.secret_flag}}'>{{rescoureItem.secret_flag}}</td>
             </tr>
           </tbody>
@@ -327,7 +328,7 @@
     <div class='modal-header'>
       <h4>
         <i class="fa fa-plus"></i>
-        新增数据项
+        {{Modal.type}}数据项
         <button type='button' class='close' data-dismiss='modal' ng-click='Modal.cancel()'>&times;</button>
       </h4>
 

@@ -49,8 +49,8 @@ Audit.controller('Department.Audit.Controller.info', ['$scope', '$state', '$q', 
     $scope.AuditInfo.audit_opinion = '';
 
     // get audit detail by id
-    Http.getQuotaDetail({
-      data_quota_id: $stateParams.DATAQUOTAID
+    Http.getInfoResourceDetail({
+      resource_id: $stateParams.RESOURCEID
     }).then(function(result) {
       $scope.AuditDetail = result.data.body[0];
       $scope.AuditDetail.applydepname = $stateParams.APPLYDEPNAME;
@@ -87,13 +87,13 @@ Audit.factory('Department.Audit.Service.Http', ['$http', '$q', 'API',
 
     function getAuditList(params) {
       return $http.get(
-        path + '/opendata_quotalist', {
+        path + '/openinfo_resourcelist', {
           params: params
         }
       )
     }
 
-    function getQuotaDetail(params) {
+    function getInfoResourceDetail(params) {
       return $http.get(
         path + '/data_quota_detail', {
           params: params
@@ -103,7 +103,7 @@ Audit.factory('Department.Audit.Service.Http', ['$http', '$q', 'API',
 
     function updateAuditDetail(data) {
       return $http.put(
-        path + '/data_quota_apply_info', {
+        path + '/openinfo_resourceok', {
           data: data
         }
       )
@@ -118,7 +118,7 @@ Audit.factory('Department.Audit.Service.Http', ['$http', '$q', 'API',
     }
     return {
       getAuditList: getAuditList,
-      getQuotaDetail: getQuotaDetail,
+      getInfoResourceDetail: getInfoResourceDetail,
       updateAuditDetail: updateAuditDetail,
       getQuotaRequirement: getQuotaRequirement
     }
