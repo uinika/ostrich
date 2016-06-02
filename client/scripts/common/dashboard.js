@@ -54,7 +54,7 @@ Dashboard.controller('Dashboard.Controller.Main', ['$scope', 'Dashboard.Service.
     Http.getUserDep().then(function(result) {
         if (200 === result.data.head.status && result.data.body.length !== 0) {
           $scope.followDeps = result.data.body;
-          return result.data.body[0].follow_dep_id;
+          return result.data.body[0].id;
         }
       }).then(function(followDepId){
         Http.getDataQuota({
@@ -101,7 +101,7 @@ Dashboard.factory('Dashboard.Service.Http', ['$http', 'API',
     };
     function getUserDep(params){
       return $http.get(
-        path + '/user_dep',{params: params}
+        path + '/department',{params: params}
       )
     };
     function getDataQuota(params){
@@ -206,7 +206,7 @@ Dashboard.directive('wiservRequirementOverviewChart', [
                 name: '需求涉及部门',
                 type: 'pie',
                 // selectedMode: 'single',
-                radius: [0, '60%'],
+                radius: [0, '40%'],
                 label: {
                   normal: {
                     position: 'inner',
@@ -231,7 +231,7 @@ Dashboard.directive('wiservRequirementOverviewChart', [
               }, {
                 name: '需求总数',
                 type: 'pie',
-                radius: ['70%', '85%'],
+                radius: ['60%', '75%'],
                 data: [{
                   value: summary.requiement_number,
                   name: '需求总数'

@@ -126,7 +126,7 @@
         <a ui-sref='main.data-quota.list(departmentID)' class="pull-right text-primary">更多</a>
       </div>
       <uib-tabset type='pills' active="activeForm">
-        <uib-tab classes='btn-xs' ng-repeat="followDep in followDeps" ng-click='select(followDep.follow_dep_id)' index="$index + 1" heading="{{followDep.follow_dep_name}}">
+        <uib-tab classes='btn-xs' ng-repeat="followDep in followDeps" ng-click='select(followDep.id)' index="$index + 1" heading="{{followDep.dep_name}}">
           <table class='table table-hover table-condensed table-striped table-bordered'>
             <thead>
               <tr>
