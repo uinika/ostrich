@@ -45,7 +45,7 @@
         </div>
 
         <div class='panel-body' style='overflow-x:scroll' cg-busy="{promise:reqPromise,message:'加载中',backdrop:backdrop,delay:delay,minDuration:minDuration}">
-          <div class='' style='width:1600px;'>
+          <div class='' style='width:1200px;'>
             <div class='row'>
               <div class='col-lg-12'>
                 <!-- Table -->
@@ -53,11 +53,12 @@
                   <thead>
                     <tr>
                       <!-- <th>操作</th> -->
+                      <th width='80px'>操作</th>
                       <th width='40px'>状态</th>
                       <th width='100px'>需求日期</th>
                       <th width='100px'>确认日期</th>
                       <th width='80px'>需求名称</th>
-                      <th width='120px'>需求说明</th>
+                      <th width='100px'>需求说明</th>
                       <th width='40px'>共享频率</th>
                       <th width='60px'>空间范围</th>
                       <th width='80px'>数据级别</th>
@@ -68,7 +69,12 @@
                   </thead>
                   <tbody>
                     <tr ng-repeat='DeptReq in requirementList | orderBy:"-create_time" '>
-                      <!-- <td><input type='checkbox' ng-click='deleteReq(DeptReq.id)' />删除</td> -->
+                      <td>
+                        <div ng-if='DeptReq.status == 0'>
+                          <a ng-click='deleteReq(DeptReq.id)' >删除</a>
+                        <a ui-sref='main.department.Requirement.update({item:DeptReq})'>修改</a>
+                        </div>
+                        </td>
                       <td>
                         <div ng-if='DeptReq.status == 0'>
                           <span>
@@ -149,7 +155,7 @@
           <span class='require-sign'>*</span>共享频率:</label>
         <div class="col-sm-10">
           <span ng-repeat="sfItem in  shareFrequencyList">
-            <input type="radio" ng-model='Modal.DepRequirment.share_frequency' value="{{sfItem.id}}">
+            <input type="checkbox" value="{{sfItem.id}}" ng-checked="shareFreqSelection.indexOf(sfItem.id) > -1" ng-click="toggleShareFreqSelection(sfItem)">
             {{sfItem.dict_name}}
           </span>
         </div>

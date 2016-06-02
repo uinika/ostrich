@@ -6,6 +6,8 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$cookies', 
   function($cookies, $scope, $stateParams, Component, Http) {
     var LoginUser = JSON.parse($cookies.get('User'));
     var DEP_ID = LoginUser.dep_id;
+    var SHARE_FREQUENCY = 1;
+    var DATA_LEVEL = 2;
     $scope.DeptRequirement = {};
 
     $scope.Paging = {};
@@ -24,6 +26,25 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$cookies', 
     // init
     getDeptRequirementList();
 
+    Http.getDepartmentList().then(function(result) {
+      $scope.deptList = result.data.body;
+      var evens = _.remove($scope.deptList, function(item) {
+        return item.id == DEP_ID;
+      });
+    });
+
+    Http.getSystemDictByCatagory({
+      'dict_category': SHARE_FREQUENCY
+    }).then(function(result) {
+      $scope.shareFrequencyList = result.data.body;
+    });
+
+    Http.getSystemDictByCatagory({
+      'dict_category': DATA_LEVEL
+    }).then(function(result) {
+      $scope.dataLevelList = result.data.body;
+    });
+
     function getDeptRequirementList() {
       _httpParams.dep_id = DEP_ID;
       $scope.reqPromise = Http.getDepartmentRequirementList(_httpParams).then(function(result) {
@@ -32,7 +53,7 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$cookies', 
       })
     }
 
-    $scope.dataLevelReqSelection = [];
+
     $scope.toggleDataLevelReqSelection = function(item) {
       var idx = $scope.dataLevelReqSelection.indexOf(item.id);
       // is currently selected
@@ -46,19 +67,32 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$cookies', 
       }
     };
 
-    Http.getDepartmentList().then(function(result) {
-      $scope.deptList = result.data.body;
-      var evens = _.remove($scope.deptList, function(item) {
-        return item.id == DEP_ID;
-      });
-    });
+
+    $scope.toggleShareFreqSelection = function(item) {
+      var idx = $scope.shareFreqSelection.indexOf(item.id);
+      // is currently selected
+      if (idx > -1) {
+        $scope.shareFreqSelection.splice(idx, 1);
+      }
+
+      // is newly selected
+      else {
+        $scope.shareFreqSelection.push(item.id);
+      }
+    };
+
+
 
     $scope.publishReq = function() {
       $scope.Modal = {};
       $scope.Modal.DepRequirment = {};
+
       var _httpPublishParams = {};
       var dataRelationConfig = [];
       $scope.reqParent = {};
+
+      $scope.shareFreqSelection = [];
+      $scope.dataLevelReqSelection = [];
 
       Component.popModal($scope, '发布', 'add-req-modal').result.then(function() {
         _($scope.dataLevelReqSelection).forEach(function(value) {
@@ -68,6 +102,15 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$cookies', 
           req_sys_dict.obj_type = 2;
           dataRelationConfig.push(req_sys_dict);
         });
+
+        _($scope.shareFreqSelection).forEach(function(value) {
+          var req_sys_dict = {};
+          req_sys_dict.datarequiementId = $scope.Modal.DepRequirment.requiement_name;
+          req_sys_dict.sys_dict_id = value;
+          req_sys_dict.obj_type = 2;
+          dataRelationConfig.push(req_sys_dict);
+        });
+
         var res_dep_id = _.map($scope.reqParent.outputDeptList, 'id');
 
         console.log(res_dep_id);
@@ -95,15 +138,21 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$cookies', 
 
 
     // delete requirement
-    $scope.deleteReqFlag = false;
     $scope.deleteReq = function(id) {
-      $scope.deleteReqFlag = !$scope.deleteReqFlag;
-      Http.deleteRequirement({
-        id: id,
-        delete_flag: $scope.deleteReqFlag
-      }).then(function(result) {
-
-      })
+      var deleteFlag = confirm('确定删除本条需求？删除后将不可恢复。');
+      if(deleteFlag) {
+        Http.deleteRequirement({
+          requiement_id: id
+        }).then(function(result) {
+            if (200 == result.data.head.status) {
+              alert('删除成功！');
+              getDeptRequirementList();
+            }
+            else {
+              alert('删除失败！');
+            }
+        })
+      }
     }
   }
 ])
@@ -150,11 +199,9 @@ DepartmentReq.controller('Department.Requirement.Controller.confirm', ['$cookies
       getDeptRequirementConfirmList();
     }
 
-    Http.getDepartQuotaList({
-      dep_name: DEP_ID
-    }).then(function(result) {
+    Http.getDeptInfoResourceList().then(function(result) {
       console.log(result);
-      $scope.depQuotaReqList = result.data.body[0].results;
+      $scope.depInfoResourceList = result.data.body[0].results;
 
       //  $scope.Paging.totalItems = data.head.total;
     });
@@ -163,19 +210,19 @@ DepartmentReq.controller('Department.Requirement.Controller.confirm', ['$cookies
       // get requirement detail
       $scope.Modal.ReqDetail = item;
       $scope.Modal.ReqResponse = {};
-      console.log($scope.depQuotaReqList.length);
-      if($scope.depQuotaReqList.length == 0) {
-        $scope.Modal.ReqResponse.data_quota_id = '';
-        $scope.errorMsg = '本部门还未添加任何指标';
+      console.log($scope.depInfoResourceList.length);
+      if($scope.depInfoResourceList.length == 0) {
+        $scope.Modal.ReqResponse.resource_id = '';
+        $scope.errorMsg = '本部门还未发布任何信息资源';
         $scope.dataQuotaIdNull = true;
       }
       else{
-        $scope.Modal.ReqResponse.data_quota_id = $scope.depQuotaReqList[0].id;
+        $scope.Modal.ReqResponse.resource_id = $scope.depInfoResourceList[0].id;
       }
 
       Component.popModalConfirm($scope, '', 'confirm-req-modal').result.then(function() {
         console.log($scope.Modal.ReqResponse);
-        $scope.Modal.ReqResponse.id = item.id;
+        $scope.Modal.ReqResponse.requiement_id = item.id;
 
         Http.updateRequirement($scope.Modal.ReqResponse).then(function(result) {
           if (200 == result.data.head.status) {
@@ -183,7 +230,7 @@ DepartmentReq.controller('Department.Requirement.Controller.confirm', ['$cookies
               // 保存需求响应
               Http.saveReqResponse({
                 requiement_id: item.id,
-                data_quota_id: $scope.Modal.ReqResponse.data_quota_id
+                resource_id: $scope.Modal.ReqResponse.resource_id
               }).then(function(saveResult) {
                 if (200 == saveResult.data.head.status) {
                   alert('保存成功！');
@@ -242,7 +289,7 @@ DepartmentReq.factory('Department.Requirement.Service.Http', ['$http', 'API',
 
     function updateRequirement(data) {
       return $http.put(
-        path + '/data_requiement', {
+        path + '/data_requiement_ok', {
           data: data
         }
       )
@@ -256,9 +303,9 @@ DepartmentReq.factory('Department.Requirement.Service.Http', ['$http', 'API',
       )
     }
 
-    function getDepartQuotaList(params) {
+    function getDeptInfoResourceList(params) {
       return $http.get(
-        path + '/data_quota', {
+        path + '/info_resource_list', {
           params: params
         }
       )
@@ -287,12 +334,20 @@ DepartmentReq.factory('Department.Requirement.Service.Http', ['$http', 'API',
     }
 
     function deleteRequirement(id) {
-      return $http.put(
-        path + '/data_requiement_delete', {
-          data: data
+      return $http.delete(
+        path + '/data_requiement', {
+          data: id
         }
       )
     }
+
+    function getSystemDictByCatagory(params) {
+      return $http.get(
+        path + '/sys_dict', {
+          params: params
+        }
+      )
+    };
     return {
       getDepartmentRequirementList: getDepartmentRequirementList,
       publishRequirement: publishRequirement,
@@ -300,9 +355,10 @@ DepartmentReq.factory('Department.Requirement.Service.Http', ['$http', 'API',
       getResponseList: getResponseList,
       updateRequirement: updateRequirement,
       saveReqResponse: saveReqResponse,
-      getDepartQuotaList: getDepartQuotaList,
+      getDeptInfoResourceList: getDeptInfoResourceList,
       getDepartmentList: getDepartmentList,
-      deleteRequirement: deleteRequirement
+      deleteRequirement: deleteRequirement,
+      getSystemDictByCatagory: getSystemDictByCatagory
     }
   }
 ]);

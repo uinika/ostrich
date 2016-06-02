@@ -136,12 +136,6 @@ app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', '$provide',
         templateUrl: 'views/department/inventory-detail.html',
         controller: 'Department.Inventory.Controller.detail'
       })
-      .state('main.department.inventory.upload', {
-        url: '/upload?ID',
-        cache:'false',
-        templateUrl: 'views/department/inventory-upload.html',
-        controller: 'Department.Inventory.Controller.upload'
-      })
       .state('main.department.share', {
         url: '/share',
         templateUrl: 'views/department/share.html',

@@ -117,8 +117,8 @@
         <label for="" class="col-sm-2 control-label">指标：</label>
         <div class='col-sm-8 apply-dept'>
 
-          <select class='form-control' ng-model='Modal.ReqResponse.data_quota_id'>
-            <option ng-repeat ='depQuota in depQuotaReqList'  value={{depQuota.id}}>{{depQuota.quota_name}}</option>
+          <select class='form-control' ng-model='Modal.ReqResponse.resource_id'>
+            <option ng-repeat ='depInfoResource in depInfoResourceList'  value={{depInfoResource.id}}>{{depInfoResource.resource_name}}</option>
           </select>
           <p class='help-block'>{{errorMsg}}</p>
           <span class='help-info'>根据需求选择对应的指标信息</span>
