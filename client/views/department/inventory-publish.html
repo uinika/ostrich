@@ -97,7 +97,7 @@
               </select>
               <span  ng-class="{true: 'ng-show', false: 'ng-hide'}[resFormatOtherShow]"><input type='text' class='custom-form-control' placeholder='请输入其他信息资源格式' ng-model='InfoResource.resource_format_other' /></span>
               <span ng-class="{true: 'ng-show', false: 'ng-hide'}[resItemAddBtn]"><a class='btn btn-default' ng-click='ResItemListShow = true'><i class='fa fa-plus'></i>&nbsp;信息项</a></span>
-              
+
               <span class='help-block' ng-show='submitted && resItemAddBtn && (ResourceItemList.length == 0)'>您还未添加任何信息项。</span>
             </div>
           </div>
@@ -300,13 +300,13 @@
               <td>{{$index+1}}</td>
               <td></td>
               <td title='{{rescoureItem.item_name}}'>{{rescoureItem.item_name}}</td>
-              <td title='{{rescoureItem.item_type}}'>{{rescoureItem.item_type}}</td>
+              <td title='{{rescoureItem.item_type}}'>{{rescoureItem.item_type_name}}</td>
               <td title='{{rescoureItem.data_precision}}'>{{rescoureItem.data_precision}}</td>
               <td title='{{rescoureItem.data_length}}'>{{rescoureItem.data_length}}</td>
               <td title='{{rescoureItem.meter_unit}}'>{{rescoureItem.meter_unit}}</td>
               <td title='{{rescoureItem.calculate_method}}'>{{rescoureItem.calculate_method}}</td>
-              <td title='{{rescoureItem.shareFreqDictName}}'>{{rescoureItem.shareFreqDictName}}</td>
-              <td title='{{rescoureItem.secret_flag}}'>{{rescoureItem.secret_flag}}</td>
+              <td title='{{rescoureItem.shareFreqDictName}}'>{{rescoureItem.update_period_name}}</td>
+              <td title='{{rescoureItem.secret_flag}}'>{{rescoureItem.secret_flag_name}}</td>
             </tr>
           </tbody>
         </table>
@@ -345,8 +345,7 @@
         <div class="form-group">
           <label for="" class="col-sm-2 control-label"><span class='require-sign'>*</span>数据类型:</label>
           <div class="col-sm-10">
-            <select ng-model='ResourceItem.item_type' class='custom-form-control' required>
-              <option ng-repeat="itemType in  itemTypeList" value='{{itemType.id}}'>{{itemType.dict_name}}</option>
+            <select ng-model='data.item_type' required ng-options="o as o.dict_name for o in  itemTypeList track by o.id" class='custom-form-control' >
             </select>
           </div>
         </div>
@@ -404,20 +403,14 @@
               <input type="checkbox" value="{{sfItem.id}}" name='share_frequency' ng-checked="shareFreqItemSelection.indexOf(sfItem.id) > -1" ng-click="toggleShareFreqItemSelection(sfItem)">
               {{sfItem.dict_name}}
             </span>
-            <p ng-show="(shareFreqItemSelection.length == 0) && itemAdded" class="help-block">请选择更新周期</p>
+            <p ng-show="shareFreqEmpty" class="help-block">请选择更新周期</p>
           </div>
         </div>
 
         <div class="form-group">
           <label for="" class="col-sm-2 control-label"><span class='require-sign'>*</span>是否涉密:</label>
           <div class="col-sm-10">
-            <!-- <span ng-repeat="qsflag in  secretFlagList">
-              <input type="checkbox" value="{{dataLevel.id}}" ng-checked="dataLevelSelection.indexOf(dataLevel.id) > -1" ng-click="toggleDataLevelSelection(dataLevel)">
-              {{dataLevel.dict_name}}
-            </span> -->
-
-            <select ng-model='ResourceItem.secret_flag' class='custom-form-control' required>
-              <option ng-repeat="qsflag in  secretFlagList" value='{{qsflag.id}}'>{{qsflag.dict_name}}</option>
+            <select ng-model='data.secret_flag' required ng-options="qsflag as qsflag.dict_name for qsflag in  secretFlagList track by qsflag.id" class='custom-form-control' >
             </select>
           </div>
         </div>

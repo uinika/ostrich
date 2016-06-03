@@ -301,13 +301,13 @@
               <td><a class='delete' ng-click='deleteItem(rescoureItem.id)' ><i class='fa fa-trash'></i>&nbsp;删除</a>
               <a class='edit' ng-click='updateItem(rescoureItem)'><i class='fa fa-pencil'></i>&nbsp;修改</a></td>
               <td title='{{rescoureItem.item_name}}'>{{rescoureItem.item_name}}</td>
-              <td title='{{rescoureItem.item_type}}'>{{rescoureItem.item_type}}</td>
+              <td title='{{rescoureItem.item_type}}'>{{rescoureItem.item_type_name}}</td>
               <td title='{{rescoureItem.data_precision}}'>{{rescoureItem.data_precision}}</td>
               <td title='{{rescoureItem.data_length}}'>{{rescoureItem.data_length}}</td>
               <td title='{{rescoureItem.meter_unit}}'>{{rescoureItem.meter_unit}}</td>
               <td title='{{rescoureItem.calculate_method}}'>{{rescoureItem.calculate_method}}</td>
-              <td title='{{rescoureItem.shareFreqDictName}}'>{{rescoureItem.updatecycle}}</td>
-              <td title='{{rescoureItem.secret_flag}}'>{{rescoureItem.secret_flag}}</td>
+              <td title='{{rescoureItem.shareFreqDictName}}'>{{rescoureItem.update_period_name}}</td>
+              <td title='{{rescoureItem.secret_flag}}'>{{rescoureItem.secret_flag_name}}</td>
             </tr>
           </tbody>
         </table>
@@ -346,8 +346,7 @@
         <div class="form-group">
           <label for="" class="col-sm-2 control-label"><span class='require-sign'>*</span>数据类型:</label>
           <div class="col-sm-10">
-            <select ng-model='ResourceItem.item_type' class='custom-form-control' required>
-              <option ng-repeat="itemType in  itemTypeList" value='{{itemType.id}}'>{{itemType.dict_name}}</option>
+            <select ng-model='updateData.itype' ng-options="o as o.dict_name for o in  itemTypeList track by o.id" class='custom-form-control' >
             </select>
           </div>
         </div>
@@ -405,7 +404,7 @@
               <input type="checkbox" value="{{sfItem.id}}" name='share_frequency' ng-checked="shareFreqItemSelection.indexOf(sfItem.id) > -1" ng-click="toggleShareFreqItemSelection(sfItem)">
               {{sfItem.dict_name}}
             </span>
-            <p ng-show="(shareFreqItemSelection.length == 0) && itemAdded" class="help-block">请选择更新周期</p>
+            <p ng-show="shareFreqEmpty" class="help-block">请选择更新周期</p>
           </div>
         </div>
 
@@ -417,8 +416,7 @@
               {{dataLevel.dict_name}}
             </span> -->
 
-            <select ng-model='ResourceItem.secret_flag' class='custom-form-control' required>
-              <option ng-repeat="qsflag in  secretFlagList" value='{{qsflag.id}}'>{{qsflag.dict_name}}</option>
+            <select ng-model='updateData.secret_flag' required ng-options="qsflag as qsflag.dict_name for qsflag in  secretFlagList track by qsflag.id" class='custom-form-control' >
             </select>
           </div>
         </div>

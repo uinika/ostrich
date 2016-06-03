@@ -131,7 +131,10 @@ app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', '$provide',
         controller: 'Department.Inventory.Controller.publish'
       })
       .state('main.department.detail', {
-        url: '/detail?ID',
+        url: '/detail/{item:json}',
+        params:{
+          item:null
+        },
         cache:'false',
         templateUrl: 'views/department/inventory-detail.html',
         controller: 'Department.Inventory.Controller.detail'

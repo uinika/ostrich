@@ -7,7 +7,7 @@
         <li role="presentation" ng-class="{true: 'active', false: 'inactive'}[!InfoItem.show]">
           <a ng-click='InfoItem.show = false' aria-controls="info" role="tab" data-toggle="tab">信息资源</a>
         </li>
-        <li role="presentation" ng-class="{true: 'active', false: 'inactive'}[InfoItem.show]">
+        <li role="presentation" ng-class="{true: 'active', false: 'inactive'}[InfoItem.show]" ng-show='InfoItemShow'>
           <a ng-click='InfoItem.show = true' aria-controls="exampleData" role="tab" data-toggle="tab">信息项</a>
         </li>
       </ul>
@@ -118,28 +118,29 @@
           <table class='table table-hover table-striped '>
             <thead>
               <tr>
-                <th>序号</th>
-                <th>信息项名称</th>
-                <th>数据类型</th>
-                <th>数据精度</th>
-                <th>数据长度</th>
-                <th>计量单位</th>
-                <th>计算方法</th>
-                <th>更新周期</th>
-                <th>是否涉密</th>
+                <th width='40px'>序号</th>
+                <th width='80px'>信息项名称</th>
+                <th width='100px'>数据类型</th>
+                <th width='80px'>数据精度</th>
+                <th width='80px'>数据长度</th>
+                <th width='80px'>计量单位</th>
+                <th width='80px'>计算方法</th>
+                <th width='80px'>更新周期</th>
+                <th width='80px'>是否涉密</th>
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat='item in InfoItems'>
+              <tr ng-repeat='rescoureItem in InfoItems | orderBy:"-create_time" '>
+                <!-- <td><input type='checkbox' ng-click='deleteReq(rescoureItem.id)' />删除</td> -->
                 <td>{{$index+1}}</td>
-                <td title=''></td>
-                <td title=''></td>
-                <td title=''></td>
-                <td title=''></td>
-                <td title=''></td>
-                <td title=''></td>
-                <td title=''></td>
-                <td title=''></td>
+                <td title='{{rescoureItem.item_name}}'>{{rescoureItem.item_name}}</td>
+                <td title='{{rescoureItem.item_type}}'>{{rescoureItem.item_type_name}}</td>
+                <td title='{{rescoureItem.data_precision}}'>{{rescoureItem.data_precision}}</td>
+                <td title='{{rescoureItem.data_length}}'>{{rescoureItem.data_length}}</td>
+                <td title='{{rescoureItem.meter_unit}}'>{{rescoureItem.meter_unit}}</td>
+                <td title='{{rescoureItem.calculate_method}}'>{{rescoureItem.calculate_method}}</td>
+                <td title='{{rescoureItem.update_period_name}}'>{{rescoureItem.update_period_name}}</td>
+                <td title='{{rescoureItem.secret_flag}}'>{{rescoureItem.secret_flag_name}}</td>
               </tr>
             </tbody>
           </table>
