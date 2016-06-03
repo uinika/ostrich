@@ -3,19 +3,19 @@ const Router = require('express').Router(),
   JsonLoader = require('load-json-file'),
   Config = require('../../config');
 
-Router.route('/data_quota/new')
+Router.route('/data_resource/new')
   .get(function(request, response) {
     let head = {}, body = {};
     let datas = JsonLoader.sync(Config.path + 'common/dashboard/getDataQuotaNew.json');
     response.json(datas);
 });
-Router.route('/data_quota/Summary')
+Router.route('/data_resource/Summary')
   .get(function(request, response) {
       let head = {}, body = {};
       let datas = JsonLoader.sync(Config.path + 'common/dashboard/getDataquotaSummary.json');
       response.json(datas);
     });
-Router.route('/data_quota_dashboard')
+Router.route('/data_quota')
   .get(function(request, response) {
     let head = {}, body = {};
     console.log('test');
@@ -34,7 +34,7 @@ Router.route('/data_requiement/summary')
     let datas = JsonLoader.sync(Config.path + 'common/dashboard/getDataRequirementSummary.json');
     response.json(datas);
 });
-Router.route('/user_dep')
+Router.route('/department')
   .get(function(request, response) {
     let head = {}, body = {};
     let datas = JsonLoader.sync(Config.path + 'common/dashboard/getUserDep.json');
