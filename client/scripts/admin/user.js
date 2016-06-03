@@ -194,26 +194,29 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
         })
       });
     }
-
     $scope.deleteUser = function(user) {
-      var flag = confirm("确定要删除吗？");
-      if (flag) {
-        Http.deleteUser(user).then(function(result) {
-          _httpParams.limit = 10;
-          _httpParams.skip = 0;
-          $scope.Paging.currentPage = 0 ;
-          if (200 == result.data.head.status) {
-            alert('删除成功');
-            getUserTotal();
-            getUserList(_httpParams);
-          }
-          else{
-            alert('删除失败！');
-          }
-          $state.go("main.admin.user", {}, {
-            reload: true
-          });
-        })
+      if(user.id!=LoginUser.id){
+        var flag = confirm("确定要删除吗？");
+        if (flag) {
+          Http.deleteUser(user).then(function(result) {
+            _httpParams.limit = 10;
+            _httpParams.skip = 0;
+            $scope.Paging.currentPage = 0 ;
+            if (200 == result.data.head.status) {
+              alert('删除成功');
+              getUserTotal();
+              getUserList(_httpParams);
+            }
+            else{
+              alert('删除失败！');
+            }
+            $state.go("main.admin.user", {}, {
+              reload: true
+            });
+          })
+        }
+      }else{
+        alert("当前登录用户不能删除！");
       }
     }
 
