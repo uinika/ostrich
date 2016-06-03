@@ -177,14 +177,9 @@
                     <div ng-if='quota.share_level_name =="授权开放" '>
                       <span>
                         <i class='fa fa-lock blue'>
-                          <a ng-if="quota.showbutton==='false'" class='btn btn-default btn-xs' ng-click='DataQuotaApplyInfo(quota.id)'>
-                             申请查看
-                          </a>
-                          <a ng-if="quota.showbutton==='true'" title='您已申请查看，授权中...'>
-                            <i class='fa fa-ban text-warning'> </i>
-                          </a>
                         </i>
-                          <!-- <span ng-if="quota.showbutton==='false'" class='help-info'>已申请查看</span> -->
+                          <a ng-if="quota.showbutton==='true'" class='btn btn-default btn-xs' ng-click='DataQuotaApplyInfo(quota.id)'>申请查看</a>
+                          <a ng-if="quota.showbutton==='false'" title='您已申请，请在共享资源中查看'><i class='fa fa-ban text-warning'></i></a>
                       </span>
                     </div>
                     <div ng-if='quota.share_level_name =="暂不开放" '>
