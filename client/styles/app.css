@@ -1177,6 +1177,12 @@ input.ng-touched.ng-invalid {
 #data-quota-list .quota-detail .list-group {
   margin-top: 6px;
 }
+#data-quota-list .table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 20px;
+  margin-top: -9px;
+}
 #data-quota-list .quota-example .table-responsive {
   margin-top: 0;
 }
