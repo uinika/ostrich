@@ -30,7 +30,7 @@ Audit.controller('Department.Audit.Controller.Main', ['$scope', '$q', 'Departmen
     }
 
     $scope.searchInfoResourceByName = function() {
-      _httpParams.quota_name = $scope.InfoResource.resource_name_filter;
+      _httpParams.resource_name = $scope.InfoResource.resource_name_filter;
       _httpParams.limit = 10;
       _httpParams.skip = 0;
       getAuditList();
@@ -47,15 +47,19 @@ Audit.controller('Department.Audit.Controller.info', ['$scope', '$state', '$q', 
     $scope.TabRequireShow = true;
     $scope.AuditInfo = {};
     $scope.AuditInfo.audit_opinion = '';
-
+    console.log($stateParams.item);
     // get audit detail by id
-    Http.getInfoResourceDetail({
-      resource_id: $stateParams.RESOURCEID
+    $scope.InfoResourceDetail = $stateParams.item;
+    $scope.InfoItemShow = false;
+    Http.getInfoItemList({
+      resource_id: $scope.InfoResourceDetail.id
     }).then(function(result) {
-      $scope.AuditDetail = result.data.body[0];
-      $scope.AuditDetail.applydepname = $stateParams.APPLYDEPNAME;
-      $scope.AuditDetail.applytime = $stateParams.APPLYTIME;
-      console.log($scope.AuditDetail);
+      if (result.data.body.length == 0) {
+        $scope.InfoItemShow = false;
+      } else {
+        $scope.InfoItemShow = true;
+        $scope.InfoItems = result.data.body;
+      }
     })
 
 
@@ -65,7 +69,7 @@ Audit.controller('Department.Audit.Controller.info', ['$scope', '$state', '$q', 
         $scope.auditError = true;
         return;
       }
-      $scope.AuditInfo.ID = $stateParams.AUDITID;
+      $scope.AuditInfo.audit_id = $stateParams.item.audit_id;
       Http.updateAuditDetail($scope.AuditInfo).then(function(result) {
         if (200 == result.data.head.status) {
           alert('审核成功');
@@ -116,11 +120,19 @@ Audit.factory('Department.Audit.Service.Http', ['$http', '$q', 'API',
         }
       )
     }
+    function getInfoItemList(params) {
+      return $http.get(
+        path + '/item_detail', {
+          params: params
+        }
+      )
+    }
     return {
       getAuditList: getAuditList,
       getInfoResourceDetail: getInfoResourceDetail,
       updateAuditDetail: updateAuditDetail,
-      getQuotaRequirement: getQuotaRequirement
+      getQuotaRequirement: getQuotaRequirement,
+      getInfoItemList: getInfoItemList
     }
   }
 ]);

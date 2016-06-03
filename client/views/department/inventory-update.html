@@ -10,9 +10,10 @@
             <label for="" class="col-sm-2 control-label">
               <span class='require-sign'>*</span>信息资源名称:</label>
             <div class="col-sm-10">
-              <input type="text" ng-trim="false" name='resource_name' required class="form-control" ng-model='InfoResource.resource_name'>
-              <p ng-show="InfoResourceForm.resource_name.$error.required && submitted" class="help-block">请输入信息资源名称</p>
+              <input type="text" ng-trim="false" ng-keyup='checkResName()' name='resource_name' required class="form-control" ng-model='InfoResource.resource_name'>
               <span class='help-info'>描述政务信息资源内容的标题</span>
+              <p ng-show="InfoResourceForm.resource_name.$error.required && submitted" class="help-block">请输入信息资源名称</p>
+              <p ng-show='resNameExist' class='help-block'>信息资源名称已存在！</p>
             </div>
           </div>
           <div class="form-group">
@@ -222,7 +223,7 @@
             <label for="" class="col-sm-2 control-label">
               <span class='require-sign'>*</span>信息资源提供方:</label>
             <div class="col-sm-10">
-              <input type="text" required name='resource_provider' class="form-control"  ng-model='InfoResource.resource_provider'>
+              <input type="text" required name='resource_provider' readonly class="form-control"  ng-model='InfoResource.resource_provider'>
             </div>
           </div>
 
@@ -230,7 +231,7 @@
             <label for="" class="col-sm-2 control-label">
               <span class='require-sign'>*</span>资源提供方代码:</label>
             <div class="col-sm-10">
-              <input type="text" required name='resource_provider_code' class="form-control"  ng-model='InfoResource.resource_provider_code'>
+              <input type="text" required name='resource_provider_code' readonly class="form-control"  ng-model='InfoResource.resource_provider_code'>
             </div>
           </div>
 
@@ -276,7 +277,7 @@
   <div class="panel panel-default" ng-show='ResItemListShow'>
     <div class="panel-heading">信息项信息</div>
     <div class="panel-body">
-      <div><button class='btn btn-success' ng-click='addResourceItem()'>新增</button></div>
+      <div><button class='btn btn-success' ng-click='addResourceItem(1)'>新增</button></div>
       <div style='overflow-x:scroll;height:490px;'>
       <div class='container'>
         <table class='table table-hover table-striped '>
@@ -298,7 +299,7 @@
             <tr ng-repeat='rescoureItem in ResourceItemListShow | orderBy:"-create_time" '>
               <!-- <td><input type='checkbox' ng-click='deleteReq(rescoureItem.id)' />删除</td> -->
               <td>{{$index+1}}</td>
-              <td><a class='delete' ng-click='deleteItem(rescoureItem.id)' ><i class='fa fa-trash'></i>&nbsp;删除</a>
+              <td><a class='delete' ng-click='deleteItem($index)' ><i class='fa fa-trash'></i>&nbsp;删除</a>
               <a class='edit' ng-click='updateItem(rescoureItem)'><i class='fa fa-pencil'></i>&nbsp;修改</a></td>
               <td title='{{rescoureItem.item_name}}'>{{rescoureItem.item_name}}</td>
               <td title='{{rescoureItem.item_type}}'>{{rescoureItem.item_type_name}}</td>
@@ -338,15 +339,16 @@
           <label for="" class="col-sm-2 control-label">
             <span class='require-sign'>*</span>信息项名称:</label>
           <div class="col-sm-10">
-            <input type="text" name='item_name' class="form-control" required ng-model='ResourceItem.item_name'>
+            <input type="text" name='item_name' class="form-control" required ng-model='ResourceItem.item_name' ng-keyup='checkItemName()'>
             <p ng-show="addItemForm.item_name.$error.required && itemAdded" class="help-block">请输入信息项名称</p>
+            <p ng-show="parent.itemNameExist" class="help-block">信息项名称已存在！</p>
           </div>
         </div>
 
         <div class="form-group">
           <label for="" class="col-sm-2 control-label"><span class='require-sign'>*</span>数据类型:</label>
           <div class="col-sm-10">
-            <select ng-model='updateData.itype' ng-options="o as o.dict_name for o in  itemTypeList track by o.id" class='custom-form-control' >
+            <select ng-model='data.item_type' ng-options="o as o.dict_name for o in  itemTypeList track by o.id" class='custom-form-control' >
             </select>
           </div>
         </div>
@@ -416,7 +418,7 @@
               {{dataLevel.dict_name}}
             </span> -->
 
-            <select ng-model='updateData.secret_flag' required ng-options="qsflag as qsflag.dict_name for qsflag in  secretFlagList track by qsflag.id" class='custom-form-control' >
+            <select ng-model='data.secret_flag' required ng-options="qsflag as qsflag.dict_name for qsflag in  secretFlagList track by qsflag.id" class='custom-form-control' >
             </select>
           </div>
         </div>

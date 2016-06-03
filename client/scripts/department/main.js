@@ -188,7 +188,7 @@ Department.factory('Department.Service.Http', ['$http', '$q', 'API',
 
     function getAuditList(params) {
       return $http.get(
-        path + '/opendata_quotalist', {
+        path + '/openinfo_resourcelist', {
           params: params
         }
       )

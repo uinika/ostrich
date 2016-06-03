@@ -641,6 +641,18 @@ input.ng-touched.ng-invalid {
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+#department-share .indicator-list table tr td pre {
+  overflow: hidden;
+  border: none;
+  border-radius: 0;
+  word-break: initial;
+  word-wrap: initial;
+  color: inherit;
+  background: none;
+  padding: 0;
+  font-size: inherit;
+  margin: 0;
+}
 #department-share .indicator-list table tr span i {
   font-size: 18px;
 }
@@ -955,6 +967,18 @@ input.ng-touched.ng-invalid {
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+#department-audit .indicator-list table tr td pre {
+  overflow: hidden;
+  border: none;
+  border-radius: 0;
+  word-break: initial;
+  word-wrap: initial;
+  color: inherit;
+  background: none;
+  padding: 0;
+  font-size: inherit;
+  margin: 0;
+}
 #department-audit .indicator-list table tr span {
   padding: 0 15px;
 }
@@ -982,6 +1006,18 @@ input.ng-touched.ng-invalid {
 #department-audit-info .audit-wrap .audit-info {
   margin-top: 28px;
   margin-bottom: 20px;
+}
+#department-audit-info .audit-wrap .audit-info pre {
+  overflow: hidden;
+  border: none;
+  border-radius: 0;
+  word-break: initial;
+  word-wrap: initial;
+  color: inherit;
+  background: none;
+  padding: 0;
+  font-size: inherit;
+  margin: 0;
 }
 #department-audit-info .audit-wrap .audit-info .apply-dep-info {
   padding: 15px 0;

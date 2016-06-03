@@ -329,8 +329,9 @@ DepartmentReq.controller('Department.Requirement.Controller.confirm', ['$cookies
 /** DepartmentReq Controller */
 DepartmentReq.controller('Department.Requirement.Controller.detail', [ '$scope', '$stateParams', 'Department.Requirement.Service.Http', 'Department.Requirement.Service.Component',
     function( $scope, $stateParams, Http, Component) {
+      console.log($stateParams.ID);
       Http.getReqDetail({
-        data_requiement_id: $stateParams.ID
+        requiement_id: $stateParams.ID
       }).then(function(result) {
         console.log(result.data.body[0]);
         $scope.ReqDetail = result.data.body[0];

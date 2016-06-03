@@ -28,6 +28,7 @@ Login.controller('Login.Controller.Main', ['$rootScope', '$cookies', '$scope', '
           var loginUser = result.data.body[0];
           $rootScope.User = loginUser;
           $cookies.put('User', JSON.stringify(loginUser));
+          console.log(JSON.stringify(loginUser));
           var sessionToken = result.data.head.token;
           if(sessionToken){
             sessionStorage.token = sessionToken;
