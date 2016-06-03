@@ -62,10 +62,12 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
     $scope.placeholder.organization_code = "必填";
     $scope.placeholder.phone = "必填";
     $scope.placeholder.email = "必填";
+    $scope.placeholder.remark = "";
     // add user
     $scope.addUserModal = function() {
       $scope.Modal = {}; // Clean scope of modal
       $scope.sysUser = {}; // Clean scope of modal
+      $scope.sysUser.remark = "";
       var prom = Component.popModal($scope, '添加', 'add-user-modal');
       prom.opened.then(function() {
         $scope.Modal.validUser = function (user){
@@ -137,6 +139,7 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
       $scope.sysUser = user;
       $scope.sysUser.password1 =0;
       $scope.sysUser.password = 0;
+      $scope.sysUser.remark = ((user.remark) ?user.remark : "");
       var prom = Component.popModal($scope, '修改', 'add-user-modal');
       prom.opened.then(function() {
         $scope.Modal.validUser = function (user){

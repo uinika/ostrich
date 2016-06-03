@@ -43,7 +43,7 @@ Dashboard.controller('Dashboard.Controller.Main', ['$scope', 'Dashboard.Service.
     <!-- DataQuota for Concerned Departments -->
     // Handle Selected Department
     $scope.select = function(param){
-      $scope.departmentID = {quota_dep_id: param};
+      $scope.departmentID = {resource_dep_id: param};
       Http.getDataQuota({
         skip: 0, limit: 5,  dep_name: param
       }).then(function(result){
