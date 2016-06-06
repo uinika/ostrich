@@ -584,6 +584,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
     }
 
     $scope.addResourceItem = function(type) {
+      $scope.shareFreqEmpty = false;
       $scope.Modal = {};
       $scope.itemAdded = false;
       $scope.ResourceItem = {};
@@ -639,6 +640,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
       $scope.ResourceItem = InfoItem;
       $scope.shareFreqItemSelection = [];
       $scope.shareFreqItemObjSelection = [];
+      $scope.shareFreqEmpty = false;
 
       $scope.data = {};
 
