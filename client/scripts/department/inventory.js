@@ -708,10 +708,12 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
     }
 
     // delete info item
-    $scope.deleteItem = function(id,index) {
+    $scope.deleteItem = function(index) {
       var deleteFlag = confirm('确定删除本条信息项？');
+      console.log(index);
       if (deleteFlag && index > -1) {
         $scope.ResourceItemList.splice(index,1);
+        $scope.ResourceItemListShow.splice(index,1);
         // Http.deleteInfoItem({
         //   id: id
         // }).then(function(result) {
