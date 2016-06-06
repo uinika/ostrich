@@ -177,6 +177,26 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
              }
           });
         }
+        $scope.Modal.organization = function(){
+          $scope.placeholder.organization = "必填";
+          $scope.placeholder.organization_code = "必填";
+          $scope.organization = false;
+          var organization = $scope.sysUser.organization ;
+          if(organization){
+            Http.getUserOrganizationCode({
+              "organization":organization
+            }).then(function (result){
+              if(200 == result.data.head.status){
+                $scope.sysUser.organization_code = result.data.body[0].organization_code ;
+              }else{
+                $scope.placeholder.organization = "机构名称不对";
+                $scope.organization = true;
+                $scope.sysUser.organization = "";
+                $scope.placeholder.organization_code = "没有相对应的机构编码";
+              }
+            });
+          }
+        }
         $scope.Modal.validPhone = function (){
           $scope.placeholder.phone = "必填";
           $scope.validPhone = false ;
