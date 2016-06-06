@@ -1,110 +1,146 @@
 <div id='department-inventory-detail'>
   <div class="panel panel-default">
-    <div class="panel-heading">共享指标详情</div>
+    <div class="panel-heading">信息资源详情</div>
     <div class="panel-body">
       <!-- Nav tabs -->
       <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation" ng-class="{true: 'active', false: 'inactive'}[!exampData.show]">
-          <a ng-click='exampData.show = false' aria-controls="info" role="tab" data-toggle="tab">指标详情</a>
+        <li role="presentation" ng-class="{true: 'active', false: 'inactive'}[!InfoItem.show]">
+          <a ng-click='InfoItem.show = false' aria-controls="info" role="tab" data-toggle="tab">信息资源</a>
         </li>
-        <li role="presentation" ng-class="{true: 'active', false: 'inactive'}[exampData.show]">
-          <a ng-click='exampData.show = true' aria-controls="exampleData" role="tab" data-toggle="tab">样例数据</a>
+        <li role="presentation" ng-class="{true: 'active', false: 'inactive'}[InfoItem.show]" ng-show='InfoItemShow'>
+          <a ng-click='InfoItem.show = true' aria-controls="exampleData" role="tab" data-toggle="tab">信息项</a>
         </li>
       </ul>
 
       <!-- Tab panes -->
       <div class="tab-content container-fluid">
-        <div role="tabpanel" class="tab-pane" ng-class="{true: 'active', false: 'inactive'}[!exampData.show]" id="invntDetail">
+        <div role="tabpanel" class="tab-pane" ng-class="{true: 'active', false: 'inactive'}[!InfoItem.show]" id="invntDetail">
           <div class='row'>
-            <label class='col-sm-2 text-right'>指标编号:</label>
-            <div class='col-sm-10'>{{DataQuotaDetail.quota_sn}}</div>
+            <label class='col-sm-2 text-right'>信息资源名称:</label>
+            <div class='col-sm-10'><pre>{{InfoResourceDetail.resource_name}}</pre></div>
           </div>
           <div class='row'>
-            <label class='col-sm-2 text-right'>指标名称:</label>
-            <div class='col-sm-10'><pre>{{DataQuotaDetail.quota_name}}</pre></div>
+            <label class='col-sm-2 text-right'>信息资源别称:</label>
+            <div class='col-sm-10'>{{InfoResourceDetail.alias}}</div>
           </div>
           <div class='row'>
-            <label class='col-sm-2 text-right'>指标别称:</label>
-            <div class='col-sm-10'>{{DataQuotaDetail.alias}}</div>
+            <label class='col-sm-2 text-right'>信息资源摘要:</label>
+            <div class='col-sm-10'>{{InfoResourceDetail.summary}}</div>
           </div>
           <div class='row'>
-            <label class='col-sm-2 text-right'>计量单位:</label>
-            <div class='col-sm-10'>{{DataQuotaDetail.meter_unit}}</div>
+            <label class='col-sm-2 text-right'>信息资源分类:</label>
+            <div class='col-sm-10'>{{InfoResourceDetail.category_name}}</div>
           </div>
           <div class='row'>
-            <label class='col-sm-2 text-right'>指标详细解释:</label>
-            <div class='col-sm-10'>{{DataQuotaDetail.quota_detail}}</div>
+            <label class='col-sm-2 text-right'>信息资源目录代码:</label>
+            <div class='col-sm-10'>{{InfoResourceDetail.resource_sn}}</div>
           </div>
           <div class='row'>
-            <label class='col-sm-2 text-right'>计算方法:</label>
-            <div class='col-sm-10'>{{DataQuotaDetail.calculate_method}}</div>
-          </div>
-          <div class='row'>
-            <label class='col-sm-2 text-right'>共享频率:</label>
-            <div class='col-sm-10'>{{DataQuotaDetail.sharefrequency}}</div>
+            <label class='col-sm-2 text-right'>关联及类目名称:</label>
+            <div class='col-sm-10'>{{InfoResourceDetail.rel_category_name}}</div>
           </div>
           <div class='row'>
             <label class='col-sm-2 text-right'>空间范围:</label>
-            <div class='col-sm-10'>{{DataQuotaDetail.area_range}}</div>
+            <div class='col-sm-10'>{{InfoResourceDetail.area_range}}</div>
           </div>
           <div class='row'>
             <label class='col-sm-2 text-right'>分地区数据级别:</label>
-            <div class='col-sm-10'>{{DataQuotaDetail.regionallevel}}</div>
+            <div class='col-sm-10'>{{InfoResourceDetail.area_level}}</div>
           </div>
           <div class='row'>
-            <label class='col-sm-2 text-right'>来源部门:</label>
-            <div class='col-sm-10'>{{DataQuotaDetail.depname}}</div>
+            <label class='col-sm-2 text-right'>信息资源格式:</label>
+            <div class='col-sm-10'>{{InfoResourceDetail.resource_format_name}}</div>
           </div>
           <div class='row'>
-            <label class='col-sm-2 text-right'>共享级别:</label>
-            <div class='col-sm-10'>{{DataQuotaDetail.sharelevel}}</div>
-          </div>
-          <div class='row'>
-            <label class='col-sm-2 text-right'>数据存储类型:</label>
-            <div class='col-sm-10'>{{DataQuotaDetail.datastoretype}}</div>
-          </div>
-          <div class='row'>
-            <label class='col-sm-2 text-right'>数据精度:</label>
-            <div class='col-sm-10'>{{DataQuotaDetail.data_precision}}</div>
-          </div>
-          <div class='row'>
-            <label class='col-sm-2 text-right'>数据长度:</label>
-            <div class='col-sm-10'>{{DataQuotaDetail.data_length}}</div>
-          </div>
-          <div class='row'>
-            <label class='col-sm-2 text-right'>创建时间:</label>
-            <div class='col-sm-10'>{{DataQuotaDetail.create_time| date:"yyyy-MM-dd HH:mm:ss"}}</div>
-          </div>
-          <div class='row'>
-            <label class='col-sm-2 text-right'>数据表示格式:</label>
-            <div class='col-sm-10'>{{DataQuotaDetail.datashowformat}}</div>
+            <label class='col-sm-2 text-right'>更细周期:</label>
+            <div class='col-sm-10'>{{InfoResourceDetail.update_period}}</div>
           </div>
           <div class='row'>
             <label class='col-sm-2 text-right'>是否涉密:</label>
-            <div class='col-sm-10'>{{DataQuotaDetail.secretflag}}</div>
+            <div class='col-sm-10'>{{InfoResourceDetail.secret_flag_name}}</div>
+          </div>
+          <div class='row'>
+            <label class='col-sm-2 text-right'>计量单位:</label>
+            <div class='col-sm-10'>{{InfoResourceDetail.meter_unit}}</div>
+          </div>
+          <div class='row'>
+            <label class='col-sm-2 text-right'>计算方法:</label>
+            <div class='col-sm-10'>{{InfoResourceDetail.calculate_method}}</div>
+          </div>
+          <div class='row'>
+            <label class='col-sm-2 text-right'>共享级别:</label>
+            <div class='col-sm-10'>{{InfoResourceDetail.share_level_name}}</div>
+          </div>
+          <div class='row'>
+            <label class='col-sm-2 text-right'>共享类型:</label>
+            <div class='col-sm-10'>{{InfoResourceDetail.share_type_name}}</div>
+          </div>
+          <div class='row'>
+            <label class='col-sm-2 text-right'>共享条件:</label>
+            <div class='col-sm-10'>{{InfoResourceDetail.share_limit}}</div>
+          </div>
+          <div class='row'>
+            <label class='col-sm-2 text-right'>共享方式:</label>
+            <div class='col-sm-10'>{{InfoResourceDetail.share_method_name}}</div>
+          </div>
+          <div class='row'>
+            <label class='col-sm-2 text-right'>是否面向社会开放:</label>
+            <div class='col-sm-10'>{{InfoResourceDetail.social_open_flag_name}}</div>
+          </div>
+          <div class='row'>
+            <label class='col-sm-2 text-right'>开放条件:</label>
+            <div class='col-sm-10'>{{InfoResourceDetail.social_open_limit}}</div>
+          </div>
+          <div class='row'>
+            <label class='col-sm-2 text-right'>信息资源提供方:</label>
+            <div class='col-sm-10'>{{InfoResourceDetail.resource_provider}}</div>
+          </div>
+          <div class='row'>
+            <label class='col-sm-2 text-right'>资源提供方代码:</label>
+            <div class='col-sm-10'>{{InfoResourceDetail.resource_provider_code}}</div>
           </div>
           <div class='row'>
             <label class='col-sm-2 text-right'>联系人:</label>
-            <div class='col-sm-10'>{{DataQuotaDetail.linkman}}</div>
+            <div class='col-sm-10'>{{InfoResourceDetail.linkman}}</div>
           </div>
           <div class='row'>
             <label class='col-sm-2 text-right'>联系电话:</label>
-            <div class='col-sm-10'>{{DataQuotaDetail.contact_phone}}</div>
+            <div class='col-sm-10'>{{InfoResourceDetail.contact_phone}}</div>
+          </div>
+          <div class='row'>
+            <label class='col-sm-2 text-right'>创建时间:</label>
+            <div class='col-sm-10'>{{InfoResourceDetail.create_time| date:"yyyy-MM-dd HH:mm:ss"}}</div>
           </div>
 
         </div>
-        <div role="tabpanel" class="tab-pane" ng-class="{true: 'active', false: 'inactive'}[exampData.show]" id="exampleData">
-          <h3 class='data-title'>{{DataQuotaExamples.file_name}}</h3>
+        <div role="tabpanel" class="tab-pane" ng-class="{true: 'active', false: 'inactive'}[InfoItem.show]" id="exampleData">
           <!-- Table -->
           <table class='table table-hover table-striped '>
             <thead>
               <tr>
-                <th ng-repeat='DQTitle in DataTitle track by $index'>{{DQTitle}}</th>
+                <th width='40px'>序号</th>
+                <th width='80px'>信息项名称</th>
+                <th width='100px'>数据类型</th>
+                <th width='80px'>数据精度</th>
+                <th width='80px'>数据长度</th>
+                <th width='80px'>计量单位</th>
+                <th width='80px'>计算方法</th>
+                <th width='80px'>更新周期</th>
+                <th width='80px'>是否涉密</th>
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat='ExampData in DataColumn'>
-                <td ng-repeat='CellData in ExampData track by $index'>{{CellData}}</td>
+              <tr ng-repeat='rescoureItem in InfoItems | orderBy:"-create_time" '>
+                <!-- <td><input type='checkbox' ng-click='deleteReq(rescoureItem.id)' />删除</td> -->
+                <td>{{$index+1}}</td>
+                <td title='{{rescoureItem.item_name}}'>{{rescoureItem.item_name}}</td>
+                <td title='{{rescoureItem.item_type}}'>{{rescoureItem.item_type_name}}</td>
+                <td title='{{rescoureItem.data_precision}}'>{{rescoureItem.data_precision}}</td>
+                <td title='{{rescoureItem.data_length}}'>{{rescoureItem.data_length}}</td>
+                <td title='{{rescoureItem.meter_unit}}'>{{rescoureItem.meter_unit}}</td>
+                <td title='{{rescoureItem.calculate_method}}'>{{rescoureItem.calculate_method}}</td>
+                <td title='{{rescoureItem.update_period_name}}'>{{rescoureItem.update_period_name}}</td>
+                <td title='{{rescoureItem.secret_flag}}'>{{rescoureItem.secret_flag_name}}</td>
               </tr>
             </tbody>
           </table>

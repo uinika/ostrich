@@ -45,7 +45,7 @@
         </div>
 
         <div class='panel-body' style='overflow-x:scroll' cg-busy="{promise:reqPromise,message:'加载中',backdrop:backdrop,delay:delay,minDuration:minDuration}">
-          <div class='' style='width:1600px;'>
+          <div class='' style='width:1400px;'>
             <div class='row'>
               <div class='col-lg-12'>
                 <!-- Table -->
@@ -53,22 +53,28 @@
                   <thead>
                     <tr>
                       <!-- <th>操作</th> -->
+                      <th width='70px'>操作</th>
                       <th width='40px'>状态</th>
                       <th width='100px'>需求日期</th>
                       <th width='100px'>确认日期</th>
-                      <th width='80px'>需求名称</th>
-                      <th width='120px'>需求说明</th>
-                      <th width='40px'>共享频率</th>
+                      <th width='100px'>需求名称</th>
+                      <th width='100px'>需求说明</th>
+                      <th width='80px'>共享频率</th>
                       <th width='60px'>空间范围</th>
                       <th width='80px'>数据级别</th>
-                      <th width='40px'>联系人</th>
+                      <th width='60px'>联系人</th>
                       <th width='80px'>联系电话</th>
                       <th width='80px'>对应部门</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr ng-repeat='DeptReq in requirementList | orderBy:"-create_time" '>
-                      <!-- <td><input type='checkbox' ng-click='deleteReq(DeptReq.id)' />删除</td> -->
+                      <td>
+                        <div ng-if='DeptReq.status == 0'>
+                          <a class='delete' ng-click='deleteReq(DeptReq.id)' ><i class='fa fa-trash'></i>&nbsp;删除</a>
+                        <a class='edit' ng-click='updateReq(DeptReq)'><i class='fa fa-pencil'></i>&nbsp;修改</a>
+                        </div>
+                        </td>
                       <td>
                         <div ng-if='DeptReq.status == 0'>
                           <span>
@@ -90,7 +96,9 @@
                       <td title='{{DeptReq.response_time |
                       date:"yyyy-MM-dd HH:mm:ss"}}'>{{DeptReq.response_time |
                       date:"yyyy-MM-dd HH:mm:ss"}}</td>
-                      <td title='{{DeptReq.requiement_name}}'>{{DeptReq.requiement_name}}</td>
+                      <td title='{{DeptReq.requiement_name}}'>
+                        <a ui-sref='main.department.requirement.detail({ID:DeptReq.id})'>{{DeptReq.requiement_name}}
+                        </a></td>
                       <td title='{{DeptReq.requiement_desc}}'>{{DeptReq.requiement_desc}}</td>
                       <td title='{{DeptReq.sharefrequency}}'>{{DeptReq.sharefrequency}}</td>
                       <td title='{{DeptReq.area_range}}'>{{DeptReq.area_range}}</td>
@@ -149,7 +157,7 @@
           <span class='require-sign'>*</span>共享频率:</label>
         <div class="col-sm-10">
           <span ng-repeat="sfItem in  shareFrequencyList">
-            <input type="radio" ng-model='Modal.DepRequirment.share_frequency' value="{{sfItem.id}}">
+            <input type="checkbox" value="{{sfItem.id}}" ng-checked="shareFreqSelection.indexOf(sfItem.id) > -1" ng-click="toggleShareFreqSelection(sfItem)">
             {{sfItem.dict_name}}
           </span>
         </div>

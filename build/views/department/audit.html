@@ -12,8 +12,8 @@
             指标审核总数<span class='num'>{{Paging.totalItems}}</span>
           </li>
           <li role="presentation">
-              <input type="text" class='input-filter' placeholder="请输入查询指标名称" ng-model='DeptAudit.quota_name_filter'>
-              <button type="button" class="btn btn-primary" ng-click='searchDeptAuditByName()'>查询</button>
+              <input type="text" class='input-filter' placeholder="请输入查询指标名称" ng-model='InfoResource.resource_name_filter'>
+              <button type="button" class="btn btn-primary" ng-click='searchInfoResourceByName()'>查询</button>
           </li>
         </ul>
       </div>
@@ -46,75 +46,122 @@
             <div class='row'>
               <div class='col-lg-12'>
               <!-- Table -->
-              <table class='table table-hover table-striped '>
+              <table class='table table-hover table-striped table-bordered text-center'>
                 <thead>
                   <tr>
-                    <th width='70px'>审核状态</th>
-                    <th width='120px'>申请日期</th>
-                    <th width='60px'>指标编号</th>
-                    <th width='60px'>指标名称</th>
-                    <th width='60px'>指标别称</th>
-                    <th width='60px'>计量单位</th>
-                    <th width='100px'>指标详细解释</th>
-                    <th width='60px'>计算方法</th>
-                    <th width='60px'>共享频率</th>
-                    <th width='60px'>空间范围</th>
-                    <th width='100px'>分地区数据级别</th>
-                    <th width='60px'>来源部门</th>
-                    <th width='60px'>共享级别</th>
-                    <th width='100px'>数据存储类型</th>
-                    <th width='60px'>数据精度</th>
-                    <th width='120px'>数据长度</th>
-                    <th width='100px'>创建时间</th>
-                    <th width='100px'>数据表示格式</th>
-                    <th width='60px'>是否涉密</th>
-                    <th width='60px'>联系人</th>
-                    <th width='80px'>联系电话</th>
-                    <th width='120px'>审核日期</th>
+                    <th width='100px' rowspan='2'>操作</th>
+                    <th width='40px' rowspan='2'>标识</th>
+                    <th width='40px' rowspan='2'>序号</th>
+                    <th width='100px' rowspan='2'>申请日期</th>
+                    <th width='90px' rowspan='2'>申请部门</th>
+                    <th width='90px' rowspan='2'>信息资源名称</th>
+                    <th width='90px' rowspan='2'>信息资源别称</th>
+                    <th width='100px' rowspan='2'>信息资源摘要</th>
+                    <th width='60px' rowspan='2'>信息资源分类</th>
+                    <th width='60px' rowspan='2'>信息资源格式</th>
+                    <th width='300px' colspan='4'>信息项信息</th>
+                    <th width='60px'></th>
+                    <th width='60px'></th>
+                    <th width='60px' rowspan='2'>信息资源目录代码</th>
+                    <th width='60px' rowspan='2'>关联及类目名称</th>
+                    <th width='60px' rowspan='2'>空间范围</th>
+                    <th width='100px' rowspan='2'>分地区数据级别</th>
+                    <th width='60px' rowspan='2'>计量单位</th>
+                    <th width='60px' rowspan='2'>计算方法</th>
+                    <th width='60px' rowspan='2'>共享级别</th>
+                    <th width='200px' colspan='2'>共享类型与共享条件</th>
+                    <th width='80px' rowspan='2'>共享方式</th>
+                    <th width='210px' colspan='2'>开放数据与开放条件</th>
+                    <th width='80px' rowspan='2'>信息资源提供方</th>
+                    <th width='80px' rowspan='2'>资源提供方代码</th>
+                    <th width='60px' rowspan='2'>联系人</th>
+                    <th width='100px' rowspan='2'>联系电话</th>
+                    <th width='120px' rowspan='2'>创建时间</th>
+                  </tr>
+                  <tr>
+                    <th>信息项名称</th>
+                    <th>数据类型</th>
+                    <th>数据精度</th>
+                    <th>数据长度</th>
+                    <th>更新周期</th>
+                    <th>是否涉密</th>
+                    <th>共享类型</th>
+                    <th>共享条件</th>
+                    <th>是否面向社会开放</th>
+                    <th>开放条件</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr ng-repeat='DeptAudit in auditList'>
-                    <td><div ng-if='DeptAudit.audit_status == 0'><span>
-                      <i class='fa fa-question-circle'></i></span><a ui-sref='main.department.audit.info({AUDITID:DeptAudit.applyid,DATAQUOTAID:DeptAudit.data_quota_id,APPLYDEPNAME:DeptAudit.applydepname,APPLYTIME:DeptAudit.apply_time})'>审核</a></div>
-                      <div ng-if='DeptAudit.audit_status == 1'><span>
-                        <i class='fa fa-check-circle'></i></span></div>
-                        <div ng-if='DeptAudit.audit_status == 2'><span>
-                          <i class='fa fa-times-circle-o'></i></span></div></td>
-                    <td title='{{DeptAudit.apply_time | date:"yyyy-MM-dd hh:mm:ss"}}'>{{DeptAudit.apply_time | date:"yyyy-MM-dd hh:mm:ss"}}</td>
-                    <td title='{{DeptAudit.quota_sn}}'>{{DeptAudit.quota_sn}}</td>
-                    <td title='{{DeptAudit.quota_name}}'><a ui-sref='main.department.inventory.detail({ID:DeptAudit.data_quota_id})'>{{DeptAudit.quota_name}}</a></td>
-                    <td title='{{DeptAudit.alias}}'>{{DeptAudit.alias}}</td>
-                    <td title='{{DeptAudit.meter_unit}}'>{{DeptAudit.meter_unit}}</td>
-                    <td title='{{DeptAudit.quota_detail}}'>{{DeptAudit.quota_detail}}</td>
-                    <td title='{{DeptAudit.calculate_method}}'>{{DeptAudit.calculate_method}}</td>
-                    <td title='{{DeptAudit.sharefrequency}}'>
-                      {{DeptAudit.sharefrequency}}
+                  <tr ng-repeat='InfoResource in auditList | orderBy:"create_time":true'>
+                    <td>
+                      <div ng-if='InfoResource.audit_status == 0'><span>
+                                            <i class='fa fa-question-circle'></i></span><a ui-sref='main.department.audit.info({item:InfoResource})'>审核</a></div>
+                                            <div ng-if='InfoResource.audit_status == 1'><span>
+                                              <i class='fa fa-check-circle'></i></span></div>
+                                              <div ng-if='InfoResource.audit_status == 2'><span>
+                                                <i class='fa fa-times-circle-o'></i></span></div>
+                  </td>
+                    <td>
+                      <div ng-if='InfoResource.share_level_name =="全省开放" '>
+                        <span>
+                          <i class='fa fa-eye'></i>
+                        </span>
+                      </div>
+                      <div ng-if='InfoResource.share_level_name =="省政务云平台开放" '>
+                        <span>
+                          <i class='fa fa-desktop'></i>
+                        </span>
+                      </div>
+                      <div ng-if='InfoResource.share_level_name =="授权开放" '>
+                        <span>
+                          <i class='fa fa-lock'></i>
+                        </span>
+                      </div>
+                      <div ng-if='InfoResource.share_level_name =="暂不开放" '>
+                        <span>
+                          <i class='fa fa-warning'></i>
+                        </span>
+                      </div>
                     </td>
-                    <td title='{{DeptAudit.area_range}}'>
-                      {{DeptAudit.area_range}}
+                    <td>{{$index+1}}</td>
+                    <td title='InfoResource.apply_time'>{{InfoResource.apply_time}}</td>
+                    <td title='InfoResource.apply_dep_name'>{{InfoResource.apply_dep_name}}</td>
+                    <td title='{{InfoResource.resource_name}}'>
+                      <a ui-sref='main.department.detail({item:InfoResource})'>
+                        <pre>{{InfoResource.resource_name}}</pre>
+                      </a>
                     </td>
-                    <td title='{{DeptAudit.regionallevel}}'>{{DeptAudit.regionallevel}}</td>
-                    <td title='{{DeptAudit.depname}}'>{{DeptAudit.depname}}
+                    <td title='{{InfoResource.alias}}'>{{InfoResource.alias}}</td>
+                    <td title='{{InfoResource.summary}}'>{{InfoResource.summary}}</td>
+                    <td title='{{InfoResource.category_name}}'>{{InfoResource.category_name}}</td>
+
+                    <td title='{{InfoResource.resource_format_name}}'>{{InfoResource.resource_format_name}}</td>
+                    <td title='{{InfoResource.item_name}}'>{{InfoResource.item_name}}</td>
+                    <td title='{{InfoResource.item_type_name}}'>{{InfoResource.item_type_name}}</td>
+                    <td title='{{InfoResource.data_precision}}'>{{InfoResource.data_precision}}</td>
+                    <td title='{{InfoResource.data_length}}'>{{InfoResource.data_length}}</td>
+
+                    <td title='{{InfoResource.update_period}}'>{{InfoResource.update_period}}</td>
+                    <td title='{{InfoResource.secret_flag_name}}'>{{InfoResource.secret_flag_name}}</td>
+                    <td title='{{InfoResource.resource_sn}}'>{{InfoResource.resource_sn}}</td>
+                    <td title='{{InfoResource.rel_category_name}}'>{{InfoResource.rel_category_name}}</td>
+                    <td title='{{InfoResource.area_range}}'>{{InfoResource.area_range}}</td>
+                    <td title='{{InfoResource.area_level}}'>{{InfoResource.area_level}}</td>
+                    <td title='{{InfoResource.meter_unit}}'>{{InfoResource.meter_unit}}</td>
+                    <td title='{{InfoResource.calculate_method}}'>{{InfoResource.calculate_method}}</td>
+                    <td title='InfoResource.share_level_name'>
+                      {{InfoResource.share_level_name}}
                     </td>
-                    <td title='{{DeptAudit.sharelevel}}'>
-                      {{DeptAudit.sharelevel}}
-                    </td>
-                    <td title='{{DeptAudit.datastoretype}}'>
-                      {{DeptAudit.datastoretype}}
-                    </td>
-                    <td title='{{DeptAudit.data_precision}}'>{{DeptAudit.data_precision}}</td>
-                    <td title='{{DeptAudit.data_length}}'>{{DeptAudit.data_length}}</td>
-                    <td title='{{DeptAudit.create_time | date:'yyyy-MM-dd HH:mm:ss'}}'>{{DeptAudit.create_time | date:'yyyy-MM-dd HH:mm:ss'}}</td>
-                    <td title='{{DeptAudit.datashowformat}}'>
-                      {{DeptAudit.datashowformat}}
-                    </td>
-                    <td title='{{DeptAudit.secretflag}}'>
-                      {{DeptAudit.secretflag}}
-                    </td>
-                    <td title='{{DeptAudit.linkman}}'>{{DeptAudit.linkman}}</td>
-                    <td title='{{DeptAudit.contact_phone}}'>{{DeptAudit.contact_phone}}</td>
-                    <td title='{{DeptAudit.audite_time | date:"yyyy-MM-dd hh:mm:ss"}}'>{{DeptAudit.audite_time | date:"yyyy-MM-dd hh:mm:ss"}}</td>
+                    <td title='{{InfoResource.share_type_name}}'>{{InfoResource.share_type_name}}</td>
+                    <td title='{{InfoResource.share_limit}}'>{{InfoResource.share_limit}}</td>
+                    <td title='{{InfoResource.share_method_name}}'>{{InfoResource.share_method_name}}</td>
+                    <td title='{{InfoResource.social_open_flag_name}}'>{{InfoResource.social_open_flag_name}}</td>
+                    <td title='{{InfoResource.social_open_limit}}'>{{InfoResource.social_open_limit}}</td>
+                    <td title='{{InfoResource.resource_provider}}'>{{InfoResource.resource_provider}}</td>
+                    <td title='{{InfoResource.resource_provider_code}}'>{{InfoResource.resource_provider_code}}</td>
+                    <td title={{InfoResource.linkman}}>{{InfoResource.linkman}}</td>
+                    <td title='{{InfoResource.contact_phone}}'>{{InfoResource.contact_phone}}</td>
+                    <td title='{{InfoResource.create_time | date:"yyyy-MM-dd HH:mm:ss" }}'>{{InfoResource.create_time | date:"yyyy-MM-dd HH:mm:ss" }}</td>
                   </tr>
                 </tbody>
               </table>
