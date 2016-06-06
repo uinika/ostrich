@@ -187,10 +187,12 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr ng-repeat='InfoResource in infoResourceList | orderBy:"create_time":true'>
+                    <tr ng-repeat='InfoResource in infoResourceList | orderBy:"create_time":true' ng-class="{true: 'has-item', false: 'text-default'}[infoResourceList[$index].id === infoResourceList[$index-1].id]">
                       <td>
-                      <a class='delete' ng-click='deleteInfoResource(InfoResource.id)' ><i class='fa fa-trash'></i>&nbsp;删除</a>
-                      <a class='edit' ui-sref='main.department.inventory.update({item:InfoResource})'><i class='fa fa-pencil'></i>&nbsp;修改</a>
+                      <div ng-show='infoResourceList[$index].id != infoResourceList[$index-1].id'>
+                        <a class='delete' ng-click='deleteInfoResource(InfoResource.id)' ><i class='fa fa-trash'></i>&nbsp;删除</a>
+                        <a class='edit' ui-sref='main.department.inventory.update({item:InfoResource})'><i class='fa fa-pencil'></i>&nbsp;修改</a>
+                      </div>
                     </td>
                       <td>
                         <div ng-if='InfoResource.share_level_name =="全省开放" '>
