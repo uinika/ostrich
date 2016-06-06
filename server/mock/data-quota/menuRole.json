@@ -1,0 +1,37 @@
+{
+    "head": {
+        "status": 200,
+        "total": 4,
+        "token": "B4E40C258F9A3042EBE9DE068C8C3FDD"
+    },
+    "body": [
+        {
+            "dict_code": "1",
+            "dep_short_name": "党政类",
+            "parent_id": null,
+            "parent_name": null,
+            "nodes": []
+        },
+        {
+            "dict_code": "2",
+            "dep_short_name": "税务类",
+            "parent_id": null,
+            "parent_name": null,
+            "nodes": []
+        },
+        {
+            "dict_code": "3",
+            "dep_short_name": "经济类",
+            "parent_id": null,
+            "parent_name": null,
+            "nodes": []
+        },
+        {
+            "dict_code": "4",
+            "dep_short_name": "监察类",
+            "parent_id": null,
+            "parent_name": null,
+            "nodes": []
+        }
+    ]
+}

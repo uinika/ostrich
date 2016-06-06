@@ -20,12 +20,24 @@ DataQuota.controller('DataQuota.Controller.Main', ['$scope', '$state', 'DataQuot
         labelSelected: "a8"
       }
     }
-    // Menu Generator
+    // TypeMenu Generator
     Http.menu().then(function(result) {
       if (200 === result.data.head.status) {
         $scope.list = result.data.body;
       }
-    })
+    });
+    // OcupationMenu Generator
+    Http.menuRole().then(function(result) {
+      if (200 === result.data.head.status) {
+        $scope.OcupationList = result.data.body;
+      }
+    });
+    // AreaMenu Generator
+    Http.menuArea().then(function(result) {
+      if (200 === result.data.head.status) {
+        $scope.areaList = result.data.body;
+      }
+    });
   }
 ]);
 
@@ -39,8 +51,20 @@ DataQuota.factory('DataQuota.Service.Http', ['$http', 'API',
         path + '/menu', { params: params }
       )
     };
+    function menuRole(params) {
+      return $http.get(
+        path + '/menu_role', { params: params }
+      )
+    };
+    function menuArea(params) {
+      return $http.get(
+        path + '/menu_area', { params: params }
+      )
+    };
     return {
-      menu: menu
+      menu: menu,
+      menuRole: menuRole,
+      menuArea: menuArea
     }
   }
 ]);

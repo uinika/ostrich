@@ -1172,10 +1172,11 @@ input.ng-touched.ng-invalid {
   padding-left: inherit;
 }
 #data-quota-list .table-patch {
-  height: 500px;
+  table-layout: automatic;
 }
 #data-quota-list .table-patch td,
 #data-quota-list .table-patch th {
+  height: 40px;
   max-width: 200px;
   word-break: keep-all;
   word-wrap: normal;

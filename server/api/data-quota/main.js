@@ -9,6 +9,19 @@ Router.route('/menu')
     let datas = JsonLoader.sync(Config.path + 'data-quota/menu.json');
     response.json(datas);
   });
+Router.route('/menu_role')
+  .get(function(request, response) {
+    let head = {}, body = {};
+    let datas = JsonLoader.sync(Config.path + 'data-quota/menuRole.json');
+    response.json(datas);
+  });
+Router.route('/menu_area')
+  .get(function(request, response) {
+    let head = {}, body = {};
+    let datas = JsonLoader.sync(Config.path + 'data-quota/menuArea.json');
+    response.json(datas);
+  });
+
 Router.route('/resource/sys_dict')
   .get(function(request, response) {
     let head = {}, body = {};
