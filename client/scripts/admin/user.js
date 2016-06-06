@@ -58,7 +58,7 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
     $scope.placeholder.password1 = "必填";
     $scope.placeholder.personName = "必填";
     $scope.placeholder.organization = "必填";
-    $scope.placeholder.organization_code = "必填";
+    $scope.placeholder.organization_code = "必填，根据机构名称自动生成";
     $scope.placeholder.phone = "必填";
     $scope.placeholder.email = "必填";
     $scope.placeholder.remark = "";
