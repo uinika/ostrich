@@ -181,14 +181,14 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$cookies', 
       Http.getReqUpdatePeriod({
         requiement_id: item.id
       }).then(function(res) {
-        $scope.shareFreqSelection = res.data.body;
+        $scope.shareFreqSelection = res.data.body[0].id;
       })
 
       // 获取需求对应的分地区数据级别
       Http.getReqAreaLevel({
         requiement_id: item.id
       }).then(function(res) {
-        $scope.dataLevelReqSelection = res.data.body;
+        $scope.dataLevelReqSelection = res.data.body[0].id;
       })
 
       Component.popModal($scope, '修改', 'add-req-modal').result.then(function() {

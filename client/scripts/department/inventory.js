@@ -276,7 +276,7 @@ DInventory.controller('Department.Inventory.Controller.detail', ['$scope', '$q',
           _(item.config).forEach(function(config) {
             shareFreqDictName.push(config.dict_name);
           })
-          item.update_period_name = shareFreqDictName;
+          item.update_period_name = shareFreqDictName.toString();
         })
       }
 
@@ -595,7 +595,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
             shareFreqDictName.push(config.dict_name);
             $scope.ResourceItemConfigList.push(itemConfig);
           })
-          item.update_period_name = shareFreqDictName;
+          item.update_period_name = shareFreqDictName.toString();
         })
         console.log($scope.ResourceItemConfigList);
       })
@@ -644,7 +644,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
           shareFreqDictName.push(item.dict_name);
         });
         $scope.ResourceItem.config = $scope.ResourceItem.shareFreqItemObjSelection;
-        $scope.ResourceItem.update_period_name = shareFreqDictName;
+        $scope.ResourceItem.update_period_name = shareFreqDictName.toString();
         $scope.ResourceItemList.push($scope.ResourceItem);
 
         console.log($scope.ResourceItemList);
@@ -718,7 +718,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
           $scope.ResourceItemConfigList.push(sys_dict);
           shareFreqDictName.push(item.dict_name);
         });
-        $scope.ResourceItem.update_period_name = shareFreqDictName;
+        $scope.ResourceItem.update_period_name = shareFreqDictName.toString();
         console.log($scope.ResourceItemList);
       })
     }
