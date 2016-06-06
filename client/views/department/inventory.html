@@ -191,7 +191,7 @@
                       <td>
                       <div ng-show='infoResourceList[$index].id != infoResourceList[$index-1].id'>
                         <a class='delete' ng-click='deleteInfoResource(InfoResource.id)' ><i class='fa fa-trash'></i>&nbsp;删除</a>
-                        <a class='edit' ui-sref='main.department.inventory.update({item:InfoResource})'><i class='fa fa-pencil'></i>&nbsp;修改</a>
+                        <a class='edit' ui-sref='main.department.inventory.update({item:InfoResource.id})'><i class='fa fa-pencil'></i>&nbsp;修改</a>
                       </div>
                     </td>
                       <td>
@@ -218,7 +218,7 @@
                       </td>
                       <td>{{$index+1}}</td>
                       <td title='{{InfoResource.resource_name}}'>
-                        <a ui-sref='main.department.detail({item:InfoResource})'>
+                        <a ui-sref='main.department.detail({item:InfoResource.id})'>
                           <pre>{{InfoResource.resource_name}}</pre>
                         </a>
                       </td>
@@ -238,8 +238,8 @@
                       <td title='{{InfoResource.rel_category_name}}'>{{InfoResource.rel_category_name}}</td>
                       <td title='{{InfoResource.area_range}}'>{{InfoResource.area_range}}</td>
                       <td title='{{InfoResource.area_level}}'>{{InfoResource.area_level}}</td>
-                      <td title='{{InfoResource.meter_unit}}'>{{InfoResource.meter_unit}}</td>
-                      <td title='{{InfoResource.calculate_method}}'>{{InfoResource.calculate_method}}</td>
+                      <td title='{{InfoResource.meter_unit_code}}'>{{InfoResource.meter_unit_code}}</td>
+                      <td title='{{InfoResource.calculate_method_code}}'>{{InfoResource.calculate_method_code}}</td>
                       <td title='{{InfoResource.share_level_name}}'>
                         {{InfoResource.share_level_name}}
                       </td>

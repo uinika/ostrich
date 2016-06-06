@@ -260,28 +260,34 @@ DInventory.controller('Department.Inventory.Controller.Main', ['$cookies', '$sco
 DInventory.controller('Department.Inventory.Controller.detail', ['$scope', '$q', 'Department.Inventory.Service.Http', '$stateParams', '$state',
   function($scope, $q, Http, $stateParams, $state) {
     console.log($stateParams.item);
-    $scope.InfoResourceDetail = $stateParams.item;
     $scope.InfoItemShow = false;
-    Http.getInfoItemList({
-      resource_id: $scope.InfoResourceDetail.id
-    }).then(function(result) {
-      if (result.data.body.length == 0) {
-        $scope.InfoItemShow = false;
-      } else {
-        $scope.InfoItemShow = true;
-        $scope.InfoItems = result.data.body;
+    Http.getDepartInfoResList({
+      resource_id : $stateParams.item
+    }).then(function(ResourceRes) {
+      $scope.InfoResourceDetail = ResourceRes.data.body[0].results[0];
+      Http.getInfoItemList({
+        resource_id: $scope.InfoResourceDetail.id
+      }).then(function(result) {
+        if (result.data.body.length == 0) {
+          $scope.InfoItemShow = false;
+        } else {
+          $scope.InfoItemShow = true;
+          $scope.InfoItems = result.data.body;
 
-        _($scope.InfoItems).forEach(function(item) {
-          var shareFreqDictName = [];
-          _(item.config).forEach(function(config) {
-            shareFreqDictName.push(config.dict_name);
+          _($scope.InfoItems).forEach(function(item) {
+            var shareFreqDictName = [];
+            _(item.config).forEach(function(config) {
+              shareFreqDictName.push(config.dict_name);
+            })
+            item.update_period_name = shareFreqDictName.toString();
           })
-          item.update_period_name = shareFreqDictName.toString();
-        })
-      }
+        }
 
 
+      })
     })
+
+
   }
 ])
 
@@ -466,60 +472,71 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
     console.log($stateParams.item);
     $scope.resItemUpdateBtn = false;
     if ($stateParams.item) { // 选择修改
-      $scope.InfoResource = $stateParams.item;
-      $scope.ResourceItemConfigList = [];
-      // 获取资源分地区数据级别
-      Http.getResourceAreaLevel({
-        resource_id: $scope.InfoResource.id
-      }).then(function(res) {
-        $scope.dataLevelSelection = res.data.body[0].id;
-      })
+      // 根据id查询信息资源详情
+      Http.getDepartInfoResList({
+        resource_id : $stateParams.item
+      }).then(function(ResourceRes) {
+        $scope.InfoResource = ResourceRes.data.body[0].results[0];
 
-      // 获取资源更新周期
-      Http.getResourceUpdatePeriod({
-        resource_id: $scope.InfoResource.id
-      }).then(function(res) {
-        $scope.shareFreqSelection = res.data.body[0].id;
-      })
-
-      // 获取指定开放部门列表
-      Http.getResourceShareDeps({
-        resource_id: $scope.InfoResource.id
-      }).then(function(res) {
-        var authDepts = res.data.body[0].id;
-        if (authDepts.length > 0) {
-          $scope.depShow = true;
+        if (RESOURCE_FORMAT_DATA == $scope.InfoResource.resource_format) {
+          $scope.resItemUpdateBtn = true;
         }
-        _($scope.deptList).forEach(function(allItem) {
-          _(authDepts).forEach(function(authItem) {
-            if (allItem.id == authItem) {
-              allItem.ticked = true;
-              $scope.outputDeptList.push(allItem);
-            }
-          })
-        });
-      })
 
-
-      // 获取所有信息项
-      Http.getInfoItemList({
-        resource_id: $scope.InfoResource.id
-      }).then(function(result) {
-        $scope.ResourceItemList = result.data.body;
-        // 拼接信息资源所有信息项的多选项
-        _($scope.ResourceItemList).forEach(function(item) {
-          var shareFreqDictName = [];
-          _(item.config).forEach(function(config) {
-            var itemConfig = {};
-            itemConfig.InfoItemId = item.item_name;
-            itemConfig.sys_dict_id = config.id;
-            shareFreqDictName.push(config.dict_name);
-            $scope.ResourceItemConfigList.push(itemConfig);
-          })
-          item.update_period_name = shareFreqDictName.toString();
+        $scope.ResourceItemConfigList = [];
+        // 获取资源分地区数据级别
+        Http.getResourceAreaLevel({
+          resource_id: $scope.InfoResource.id
+        }).then(function(res) {
+          $scope.dataLevelSelection = res.data.body[0].id;
         })
-        console.log($scope.ResourceItemConfigList);
+
+        // 获取资源更新周期
+        Http.getResourceUpdatePeriod({
+          resource_id: $scope.InfoResource.id
+        }).then(function(res) {
+          $scope.shareFreqSelection = res.data.body[0].id;
+        })
+
+        // 获取指定开放部门列表
+        Http.getResourceShareDeps({
+          resource_id: $scope.InfoResource.id
+        }).then(function(res) {
+          var authDepts = res.data.body[0].id;
+          if (authDepts.length > 0) {
+            $scope.depShow = true;
+          }
+          _($scope.deptList).forEach(function(allItem) {
+            _(authDepts).forEach(function(authItem) {
+              if (allItem.id == authItem) {
+                allItem.ticked = true;
+                $scope.outputDeptList.push(allItem);
+              }
+            })
+          });
+        })
+
+
+        // 获取所有信息项
+        Http.getInfoItemList({
+          resource_id: $scope.InfoResource.id
+        }).then(function(result) {
+          $scope.ResourceItemList = result.data.body;
+          // 拼接信息资源所有信息项的多选项
+          _($scope.ResourceItemList).forEach(function(item) {
+            var shareFreqDictName = [];
+            _(item.config).forEach(function(config) {
+              var itemConfig = {};
+              itemConfig.InfoItemId = item.item_name;
+              itemConfig.sys_dict_id = config.id;
+              shareFreqDictName.push(config.dict_name);
+              $scope.ResourceItemConfigList.push(itemConfig);
+            })
+            item.update_period_name = shareFreqDictName.toString();
+          })
+          console.log($scope.ResourceItemConfigList);
+        })
       })
+
 
       // 选中数据库类
       if (RESOURCE_FORMAT_DATA == $scope.InfoResource.resource_format) {

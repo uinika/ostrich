@@ -123,18 +123,12 @@ app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', '$provide',
         controller: 'Department.Inventory.Controller.publish'
       })
       .state('main.department.inventory.update', {
-        url: '/update/{item:json}',
-        params:{
-          item:null
-        },
+        url: '/update/:item',
         templateUrl: 'views/department/inventory-update.html',
         controller: 'Department.Inventory.Controller.publish'
       })
       .state('main.department.detail', {
-        url: '/detail/{item:json}',
-        params:{
-          item:null
-        },
+        url: '/detail/:item',
         cache:'false',
         templateUrl: 'views/department/inventory-detail.html',
         controller: 'Department.Inventory.Controller.detail'
