@@ -270,6 +270,14 @@ DInventory.controller('Department.Inventory.Controller.detail', ['$scope', '$q',
       } else {
         $scope.InfoItemShow = true;
         $scope.InfoItems = result.data.body;
+
+        _($scope.InfoItems).forEach(function(item) {
+          var shareFreqDictName = [];
+          _(item.config).forEach(function(config) {
+            shareFreqDictName.push(config.dict_name);
+          })
+          item.update_period_name = shareFreqDictName;
+        })
       }
 
 
@@ -579,10 +587,10 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
         $scope.ResourceItemList = result.data.body;
         // 拼接信息资源所有信息项的多选项
         _($scope.ResourceItemList).forEach(function(item) {
-          var itemConfig = {};
-          itemConfig.InfoItemId = item.item_name;
           var shareFreqDictName = [];
           _(item.config).forEach(function(config) {
+            var itemConfig = {};
+            itemConfig.InfoItemId = item.item_name;
             itemConfig.sys_dict_id = config.id;
             shareFreqDictName.push(config.dict_name);
             $scope.ResourceItemConfigList.push(itemConfig);
