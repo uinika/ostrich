@@ -39,7 +39,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', '$provide',
             $q.when(response, function(result){
               if( response.data && typeof response.data==='object'){
                 if(result.data.head.status===300){
-                  sessionStorage.message = '登陆超时，请重新登陆！';
+                  sessionStorage.message = '登录超时，请重新登陆！';
                   window.location.href='/build';
                 };
               };
