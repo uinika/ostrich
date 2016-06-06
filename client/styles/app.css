@@ -415,6 +415,9 @@ input.ng-touched.ng-invalid {
 #department-inventory .indicator-list table {
   table-layout: fixed;
 }
+#department-inventory .indicator-list table tr.has-item {
+  background: #FFF;
+}
 #department-inventory .indicator-list table tr td {
   overflow: hidden;
   white-space: nowrap;
