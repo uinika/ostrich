@@ -219,6 +219,14 @@ input.ng-touched.ng-invalid {
 #department-main .right {
   padding-right: 0;
 }
+#department-main table {
+  table-layout: fixed;
+}
+#department-main table tr td {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 #department-summary .font-22 {
   font-size: 22px;
 }
