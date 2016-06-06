@@ -32,7 +32,6 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
       Http.getUserTotal({
         "dep_id" : dep_id
       }).then(function(result) {
-        console.log(LoginUser.id);
         if (LoginUser.id==='e147f177-1e83-11e6-ac02-507b9d1b58bb') {
           var tatol =  result.data.body[0].number - 1 ;
           $scope.UserTotal = tatol;
@@ -85,6 +84,26 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
                }
              }
           });
+        }
+        $scope.Modal.organization = function(){
+          $scope.placeholder.organization = "必填";
+          $scope.placeholder.organization_code = "必填";
+          $scope.organization = false;
+          var organization = $scope.sysUser.organization ;
+          if(organization){
+            Http.getUserOrganizationCode({
+              "organization":organization
+            }).then(function (result){
+              if(200 == result.data.head.status){
+                $scope.sysUser.organization_code = result.data.body[0].organization_code ;
+              }else{
+                $scope.placeholder.organization = "机构名称不对";
+                $scope.organization = true;
+                $scope.sysUser.organization = "";
+                $scope.placeholder.organization_code = "没有相对应的机构编码";
+              }
+            });
+          }
         }
         $scope.Modal.validPword = function (){
           $scope.placeholder.password1 ="必填";
@@ -312,6 +331,13 @@ AdminUser.factory('AdminUser.Service.Http', ['$http', 'API',
   function($http, API) {
     var path = API.path;
 
+    function getUserOrganizationCode(params) {
+      return $http.get(
+        path + '/sys_user/organization_code',{
+           params: params
+        }
+      )
+    };
     function getUserList(params) {
       return $http.get(
         path + '/sys_user',{
@@ -375,6 +401,7 @@ AdminUser.factory('AdminUser.Service.Http', ['$http', 'API',
       )
     }
     return {
+      getUserOrganizationCode: getUserOrganizationCode,
       getUserList: getUserList,
       saveUser: saveUser,
       getDepartmentList: getDepartmentList,

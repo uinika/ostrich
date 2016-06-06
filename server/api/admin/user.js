@@ -16,6 +16,12 @@ Router.route('/sys_user')
     }
     response.json(datas);
 });
+Router.route('/sys_user/organization_code')
+  .get(function(request, response) {
+    let head = {}, body = {};
+    let datas = JsonLoader.sync(Config.path + 'admin/getOrganizationCode.json');
+    response.json(datas);
+});
 Router.route('/sys_user')
   .post(function(request, response) {
     let head = {}, body = {};
