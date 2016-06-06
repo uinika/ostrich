@@ -202,9 +202,7 @@ app.run(['$rootScope', function($rootScope){
 var Config = angular.module('Config', []);
 
 Config.constant('API', {
-  // path: 'http://localhost:8080/drrp/api' //发布
-   path: 'http://172.16.1.78:8080/api' //测试
-  //path: 'http://192.168.9.43:8080/api' //老版测试
+  path: 'http://localhost:8080/drrp/api' //发布
 });
 
 'use strict';
@@ -2151,7 +2149,7 @@ DInventory.controller('Department.Inventory.Controller.detail', ['$scope', '$q',
           _(item.config).forEach(function(config) {
             shareFreqDictName.push(config.dict_name);
           })
-          item.update_period_name = shareFreqDictName;
+          item.update_period_name = shareFreqDictName.toString();
         })
       }
 
@@ -2470,7 +2468,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
             shareFreqDictName.push(config.dict_name);
             $scope.ResourceItemConfigList.push(itemConfig);
           })
-          item.update_period_name = shareFreqDictName;
+          item.update_period_name = shareFreqDictName.toString();
         })
         console.log($scope.ResourceItemConfigList);
       })
@@ -2519,7 +2517,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
           shareFreqDictName.push(item.dict_name);
         });
         $scope.ResourceItem.config = $scope.ResourceItem.shareFreqItemObjSelection;
-        $scope.ResourceItem.update_period_name = shareFreqDictName;
+        $scope.ResourceItem.update_period_name = shareFreqDictName.toString();
         $scope.ResourceItemList.push($scope.ResourceItem);
 
         console.log($scope.ResourceItemList);
@@ -2593,7 +2591,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
           $scope.ResourceItemConfigList.push(sys_dict);
           shareFreqDictName.push(item.dict_name);
         });
-        $scope.ResourceItem.update_period_name = shareFreqDictName;
+        $scope.ResourceItem.update_period_name = shareFreqDictName.toString();
         console.log($scope.ResourceItemList);
       })
     }
@@ -3347,14 +3345,14 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$cookies', 
       Http.getReqUpdatePeriod({
         requiement_id: item.id
       }).then(function(res) {
-        $scope.shareFreqSelection = res.data.body;
+        $scope.shareFreqSelection = res.data.body[0].id;
       })
 
       // 获取需求对应的分地区数据级别
       Http.getReqAreaLevel({
         requiement_id: item.id
       }).then(function(res) {
-        $scope.dataLevelReqSelection = res.data.body;
+        $scope.dataLevelReqSelection = res.data.body[0].id;
       })
 
       Component.popModal($scope, '修改', 'add-req-modal').result.then(function() {
