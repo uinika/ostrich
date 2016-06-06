@@ -145,7 +145,7 @@ Dashboard.directive('wiservDataQuotaOverviewChart', [
                 name: '资源提供部门',
                 type: 'pie',
                 // selectedMode: 'single',
-                radius: [0, '40%'],
+                radius: [0, '60%'],
                 label: {
                   normal: {
                     position: 'inner',
@@ -156,12 +156,12 @@ Dashboard.directive('wiservDataQuotaOverviewChart', [
                 },
                 labelLine: {
                   normal: {
-                    show: false
+                    show: true
                   }
                 },
                 data: [{
                   value: summary.dep_resource,
-                  name: '资源提供部门'
+                  name: '提供部门'
                 }, {
                   value: summary.month_increment_dpet_resource,
                   name: '本月新增',
@@ -170,7 +170,7 @@ Dashboard.directive('wiservDataQuotaOverviewChart', [
               }, {
                 name: '资源总数',
                 type: 'pie',
-                radius: ['60%', '75%'],
+                radius: ['70%', '80%'],
                 data: [{
                   value: summary.total_resource,
                   name: '资源总数'
@@ -205,10 +205,10 @@ Dashboard.directive('wiservRequirementOverviewChart', [
                 formatter: "{a} <br/>{b}: {c} ({d}%)"
               },
               series: [{
-                name: '需求涉及部门',
+                name: '涉及部门',
                 type: 'pie',
                 // selectedMode: 'single',
-                radius: [0, '40%'],
+                radius: [0, '60%'],
                 label: {
                   normal: {
                     position: 'inner',
@@ -224,7 +224,7 @@ Dashboard.directive('wiservRequirementOverviewChart', [
                 },
                 data: [{
                   value: summary.department_number,
-                  name: '需求涉及部门'
+                  name: '涉及部门'
                 }, {
                   value: summary.department_number_inc,
                   name: '本月新增',
@@ -233,7 +233,7 @@ Dashboard.directive('wiservRequirementOverviewChart', [
               }, {
                 name: '需求总数',
                 type: 'pie',
-                radius: ['60%', '75%'],
+                radius: ['70%', '80%'],
                 data: [{
                   value: summary.requiement_number,
                   name: '需求总数'
