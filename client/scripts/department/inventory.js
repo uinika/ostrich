@@ -764,16 +764,18 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
     $scope.depShow = false;
     $scope.showHideDeps = function(ev) {
       if (LEVEL_ALL_OPEN != $scope.InfoResource.share_level) {
-        if (LEVEL_AUTH == $scope.InfoResource.share_level) {
+        if (LEVEL_AUTH == $scope.InfoResource.share_level) {// 授权开放
           $scope.depShow = true;
           $scope.socialOpenFlag = false;
         } else {
           $scope.depShow = false;
           $scope.socialOpenFlag = true;
+          $scope.outputDeptList = [];
         }
         $scope.InfoResource.social_open_flag = 0;
       } else {
         $scope.InfoResource.social_open_flag = 1;
+        $scope.outputDeptList = [];
       }
 
     }
