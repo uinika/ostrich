@@ -44,7 +44,6 @@ Department.controller('Department.Controller.Main', ['$cookies', '$scope', '$q',
     getAuditList();
 
     function getAuditList() {
-      _httpParams.audit_status = 0;
       $scope.mainAuditPromise = Http.getAuditList(_httpParams).then(function(result) {
         $scope.toAuditList = result.data.body[0].results;
         $scope.auditTotal = result.data.body[0].count;
@@ -188,7 +187,7 @@ Department.factory('Department.Service.Http', ['$http', '$q', 'API',
 
     function getAuditList(params) {
       return $http.get(
-        path + '/openinfo_resourcelist', {
+        path + '/depresource/wait_audit', {
           params: params
         }
       )
