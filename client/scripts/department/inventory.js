@@ -446,13 +446,14 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
         Http.saveInfoResource(InfoResourceAddObj).then(function(result) {
           console.log(result.data);
           if (200 == result.data.head.status) {
+            alert('保存成功！');
             $scope.Modal = {};
             $state.go("main.department.inventory", {}, {
               reload: true
             });
 
           } else {
-            alert('保存失败');
+            alert('保存失败！');
           }
         })
       } else {
@@ -466,7 +467,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
     $scope.resItemUpdateBtn = false;
     if ($stateParams.item) { // 选择修改
       $scope.InfoResource = $stateParams.item;
-
+      $scope.ResourceItemConfigList = [];
       // 获取资源分地区数据级别
       Http.getResourceAreaLevel({
         resource_id: $scope.InfoResource.id
@@ -499,6 +500,27 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
         });
       })
 
+
+      // 获取所有信息项
+      Http.getInfoItemList({
+        resource_id: $scope.InfoResource.id
+      }).then(function(result) {
+        $scope.ResourceItemList = result.data.body;
+        // 拼接信息资源所有信息项的多选项
+        _($scope.ResourceItemList).forEach(function(item) {
+          var shareFreqDictName = [];
+          _(item.config).forEach(function(config) {
+            var itemConfig = {};
+            itemConfig.InfoItemId = item.item_name;
+            itemConfig.sys_dict_id = config.id;
+            shareFreqDictName.push(config.dict_name);
+            $scope.ResourceItemConfigList.push(itemConfig);
+          })
+          item.update_period_name = shareFreqDictName.toString();
+        })
+        console.log($scope.ResourceItemConfigList);
+      })
+
       // 选中数据库类
       if (RESOURCE_FORMAT_DATA == $scope.InfoResource.resource_format) {
         $scope.resItemUpdateBtn = true;
@@ -512,13 +534,15 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
       var InfoResource_RelationConfig = [];
       var InfoResourceApplyInfo = [];
       var InfoItem_RelationConfig = [];
+
+
       if($scope.resNameExist) {
         isValid = false;
       }
       if ($scope.shareFreqSelection.length == 0 && !$scope.resItemUpdateBtn) { // 未选择更新周期
         isValid = false;
       }
-      if ($scope.resItemAddBtn && ($scope.ResourceItemList.length == 0)) { // 未添加信息项
+      if ($scope.resItemAddBtn && ($scope.ResourceItemList.length == 0) || $scope.resItemUpdateBtn && ($scope.ResourceItemList.length == 0)) { // 未添加信息项
         isValid = false;
       }
 
@@ -581,6 +605,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
     }
 
     $scope.editItems = function(id) {
+      $scope.ResourceItemConfigList = [];
       Http.getInfoItemList({
         resource_id: id
       }).then(function(result) {
@@ -718,6 +743,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
           $scope.ResourceItemConfigList.push(sys_dict);
           shareFreqDictName.push(item.dict_name);
         });
+        $scope.ResourceItem.config = $scope.ResourceItem.shareFreqItemObjSelection;
         $scope.ResourceItem.update_period_name = shareFreqDictName.toString();
         console.log($scope.ResourceItemList);
       })

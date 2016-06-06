@@ -99,7 +99,7 @@
               <span  ng-class="{true: 'ng-show', false: 'ng-hide'}[resFormatOtherShow]"><input type='text' class='custom-form-control' placeholder='请输入其他信息资源格式' ng-model='InfoResource.resource_format_other' /></span>
               <span ng-class="{true: 'ng-show', false: 'ng-hide'}[resItemAddBtn]"><a class='btn btn-default' ng-click='ResItemListShow = true'><i class='fa fa-plus'></i>&nbsp;信息项</a></span>
               <span ng-class="{true: 'ng-show', false: 'ng-hide'}[resItemUpdateBtn]"><a class='btn btn-default' ng-click='editItems(InfoResource.id)'><i class='fa fa-pencil'></i>&nbsp;信息项</a></span>
-              <span class='help-block' ng-show='submitted && resItemAddBtn && (ResourceItemList.length == 0)'>您还未添加任何信息项。</span>
+              <span class='help-block' ng-show='submitted && (resItemAddBtn || resItemUpdateBtn) && (ResourceItemList.length == 0)'>您还未添加任何信息项。</span>
             </div>
           </div>
 
