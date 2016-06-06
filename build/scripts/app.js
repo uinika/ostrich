@@ -40,7 +40,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', '$provide',
               if( response.data && typeof response.data==='object'){
                 if(result.data.head.status===300){
                   sessionStorage.message = '登陆超时，请重新登陆！';
-                  window.location.href='/';
+                  window.location.href='/build';
                 };
               };
             });
@@ -191,7 +191,7 @@ app.run(['$rootScope', function($rootScope){
     function(event, toState, toParams, fromState, fromParams){
       if(toState.name!=='login'){
         if(!sessionStorage.token){
-          window.location.href='/';
+          window.location.href='/build';
         };
       };
     });
@@ -202,7 +202,9 @@ app.run(['$rootScope', function($rootScope){
 var Config = angular.module('Config', []);
 
 Config.constant('API', {
-  path: 'http://localhost:8080/drrp/api'
+  // path: 'http://localhost:8080/drrp/api' //发布
+   path: 'http://172.16.1.78:8080/api' //测试
+  //path: 'http://192.168.9.43:8080/api' //老版测试
 });
 
 'use strict';
@@ -2143,6 +2145,14 @@ DInventory.controller('Department.Inventory.Controller.detail', ['$scope', '$q',
       } else {
         $scope.InfoItemShow = true;
         $scope.InfoItems = result.data.body;
+
+        _($scope.InfoItems).forEach(function(item) {
+          var shareFreqDictName = [];
+          _(item.config).forEach(function(config) {
+            shareFreqDictName.push(config.dict_name);
+          })
+          item.update_period_name = shareFreqDictName;
+        })
       }
 
 
@@ -2452,10 +2462,10 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
         $scope.ResourceItemList = result.data.body;
         // 拼接信息资源所有信息项的多选项
         _($scope.ResourceItemList).forEach(function(item) {
-          var itemConfig = {};
-          itemConfig.InfoItemId = item.item_name;
           var shareFreqDictName = [];
           _(item.config).forEach(function(config) {
+            var itemConfig = {};
+            itemConfig.InfoItemId = item.item_name;
             itemConfig.sys_dict_id = config.id;
             shareFreqDictName.push(config.dict_name);
             $scope.ResourceItemConfigList.push(itemConfig);

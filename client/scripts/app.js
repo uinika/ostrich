@@ -40,7 +40,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', '$provide',
               if( response.data && typeof response.data==='object'){
                 if(result.data.head.status===300){
                   sessionStorage.message = '登陆超时，请重新登陆！';
-                  window.location.href='/';
+                  window.location.href='/build';
                 };
               };
             });
@@ -191,7 +191,7 @@ app.run(['$rootScope', function($rootScope){
     function(event, toState, toParams, fromState, fromParams){
       if(toState.name!=='login'){
         if(!sessionStorage.token){
-          window.location.href='/';
+          window.location.href='/build';
         };
       };
     });
