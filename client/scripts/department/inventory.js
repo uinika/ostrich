@@ -341,10 +341,17 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
       }
 
     }
-    $scope.parent = {};
-    $scope.parent.itemNameExist = false;
+
     $scope.checkItemName = function() {
       if($scope.ResourceItem.item_name && $scope.ResourceItem.item_name != '') {
+        console.log($scope.ResourceItemList);
+        _($scope.ResourceItemList).forEach(function(item) {
+          if($scope.ResourceItem.item_name == item.item_name) {
+            $scope.parent.itemNameExist = true;
+            $scope.itemError = true;
+            return;
+          }
+        })
         Http.checkItemName({
           item_name: $scope.ResourceItem.item_name
         }).then(function(res) {
@@ -354,6 +361,8 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
           else{
             $scope.parent.itemNameExist = false;
           }
+          $scope.itemError = $scope.parent.itemNameExist;
+          console.log($scope.itemError);
         })
       }
 
@@ -661,6 +670,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
       $scope.ResourceItem.calculate_method = '';
       $scope.ResourceItem.shareFreqItemSelection = [];
       $scope.ResourceItem.shareFreqItemObjSelection = [];
+      $scope.parent = {};
       $scope.parent.itemNameExist = false;
 
       $scope.data = {};
@@ -710,6 +720,8 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
       $scope.ResourceItem.shareFreqItemSelection = _.map(InfoItem.config,'id');
       $scope.ResourceItem.shareFreqItemObjSelection = InfoItem.config;
       $scope.shareFreqEmpty = false;
+      $scope.parent = {};
+      $scope.parent.itemNameExist = false;
 
       $scope.data = {};
 
@@ -1066,8 +1078,11 @@ DInventory.service('Department.Inventory.Service.Component', ['$uibModal', '$sta
       });
       scope.Modal.confirm = function() {
         console.log(scope.parent.itemNameExist);
-        if (scope.ResourceItem.shareFreqItemSelection.length == 0 || scope.parent.itemNameExist) {
+        if (scope.ResourceItem.shareFreqItemSelection.length == 0) {
           scope.shareFreqEmpty = true;
+          return;
+        }
+        if(scope.parent.itemNameExist) {
           return;
         }
         modalInstance.close(scope.Modal);
