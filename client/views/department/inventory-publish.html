@@ -12,7 +12,7 @@
             <div class="col-sm-10">
               <input type="text" ng-trim="false" name='resource_name' ng-keyup='checkResName()' required class="form-control" ng-model='InfoResource.resource_name'>
               <span class='help-info'>描述政务信息资源内容的标题</span>
-              <p ng-show="InfoResourceForm.resource_name.$error.required && submitted"  class="help-block">请输入信息资源名称</p>
+              <p ng-show="InfoResourceForm.resource_name.$error.required && submitted" class="help-block">请输入信息资源名称</p>
               <p ng-show='resNameExist' class='help-block'>信息资源名称已存在！</p>
             </div>
           </div>
@@ -20,8 +20,8 @@
             <label for="" class="col-sm-2 control-label">
               信息资源别称:</label>
             <div class="col-sm-10">
-              <input type="text"  name='alias' class="form-control" ng-model='InfoResource.alias'>
-              <p ng-show="InfoResourceForm.alias.$error.required && submitted"  class="help-block">请输入信息资源别称</p>
+              <input type="text" name='alias' class="form-control" ng-model='InfoResource.alias'>
+              <p ng-show="InfoResourceForm.alias.$error.required && submitted" class="help-block">请输入信息资源别称</p>
               <span class='help-info'>提供部门的内部名称或英文名称及简称等</span>
             </div>
           </div>
@@ -32,7 +32,7 @@
             <div class="col-sm-10">
               <textarea class="form-control" name='summary' required ng-maxlength="256" rows='3' ng-model='InfoResource.summary'></textarea>
               <p ng-show="InfoResourceForm.summary.$error.maxlength" class="help-block">您输入的内容太长。</p>
-                <p ng-show="InfoResourceForm.summary.$error.required && submitted" class="help-block">请输入指标详细解释</p>
+              <p ng-show="InfoResourceForm.summary.$error.required && submitted" class="help-block">请输入指标详细解释</p>
               <span class='pull-right'>(最多256个汉字)</span>
             </div>
           </div>
@@ -60,7 +60,7 @@
             <label for="" class="col-sm-2 control-label">
               关联及类目名称:</label>
             <div class="col-sm-10">
-              <select ng-model='InfoResource.rel_category'  name='rel_category' class='form-control' style='display: inline-block !important;width: auto;'>
+              <select ng-model='InfoResource.rel_category' name='rel_category' class='form-control' style='display: inline-block !important;width: auto;'>
                 <option ng-repeat="resourceCategory in  resourceCategoryRelList" value='{{resourceCategory.id}}'>{{resourceCategory.dict_name}}</option>
               </select>
               <span class='help-info'>政务资源信息关联类别</span>
@@ -97,8 +97,11 @@
               <select ng-model='InfoResource.resource_format' required name='resource_format' class='form-control' style='display: inline-block !important;width: auto;' ng-change='showHideResAddBtn()'>
                 <option ng-repeat='resourceFormat in resourceFormatList' value='{{resourceFormat.id}}'>{{resourceFormat.dict_name}}</option>
               </select>
-              <span  ng-class="{true: 'ng-show', false: 'ng-hide'}[resFormatOtherShow]"><input type='text' class='custom-form-control' placeholder='请输入其他信息资源格式' ng-model='InfoResource.resource_format_other' /></span>
-              <span ng-class="{true: 'ng-show', false: 'ng-hide'}[resItemAddBtn]"><a class='btn btn-default' ng-click='ResItemListShow = true'><i class='fa fa-plus'></i>&nbsp;信息项</a></span>
+              <span ng-class="{true: 'ng-show', false: 'ng-hide'}[resFormatOtherShow]"><input type='text' class='custom-form-control' placeholder='请输入其他信息资源格式' ng-model='InfoResource.resource_format_other'/></span>
+              <span ng-class="{true: 'ng-show', false: 'ng-hide'}[resItemAddBtn]">
+                <a class='btn btn-default' ng-click='ResItemListShow = true'>
+                  <i class='fa fa-plus'></i>&nbsp;信息项</a>
+              </span>
 
               <span class='help-block' ng-show='submitted && resItemAddBtn && (ResourceItemList.length == 0)'>您还未添加任何信息项。</span>
             </div>
@@ -116,25 +119,26 @@
             </div>
           </div>
 
-          <div class="form-group"  ng-class="{true: 'ng-show', false: 'ng-hide'}[!resItemAddBtn]">
-            <label for="" class="col-sm-2 control-label"><span class='require-sign'>*</span>是否涉密:</label>
+          <div class="form-group" ng-class="{true: 'ng-show', false: 'ng-hide'}[!resItemAddBtn]">
+            <label for="" class="col-sm-2 control-label">
+              <span class='require-sign'>*</span>是否涉密:</label>
             <div class="col-sm-10">
               <!-- <span ng-repeat="qsflag in  secretFlagList">
                 <input type="checkbox" value="{{dataLevel.id}}" ng-checked="dataLevelSelection.indexOf(dataLevel.id) > -1" ng-click="toggleDataLevelSelection(dataLevel)">
                 {{dataLevel.dict_name}}
               </span> -->
 
-              <select ng-model='InfoResource.secret_flag' class='custom-form-control' >
+              <select ng-model='InfoResource.secret_flag' class='custom-form-control'>
                 <option ng-repeat="qsflag in  secretFlagList" value='{{qsflag.id}}'>{{qsflag.dict_name}}</option>
               </select>
             </div>
           </div>
 
-          <div class="form-group"  ng-class="{true: 'ng-show', false: 'ng-hide'}[!resItemAddBtn]">
+          <div class="form-group" ng-class="{true: 'ng-show', false: 'ng-hide'}[!resItemAddBtn]">
             <label for="" class="col-sm-2 control-label">
               计量单位:</label>
             <div class="col-sm-10">
-              <input type="text" name='meter_unit' class="form-control"  ng-model='InfoResource.meter_unit'>
+              <input type="text" name='meter_unit' class="form-control" ng-model='InfoResource.meter_unit'>
               <p ng-show="InfoResourceForm.meter_unit.$error.required && submitted" class="help-block">请输入计量单位</p>
               <span class='help-info'>
                 反映资源信息具体数值的实际度量单位，可对应多个
@@ -142,11 +146,11 @@
             </div>
           </div>
 
-          <div class="form-group"  ng-class="{true: 'ng-show', false: 'ng-hide'}[!resItemAddBtn]">
+          <div class="form-group" ng-class="{true: 'ng-show', false: 'ng-hide'}[!resItemAddBtn]">
             <label for="" class="col-sm-2 control-label">
               计算方法:</label>
             <div class="col-sm-10">
-              <textarea class="form-control" name='calculate_method'  ng-maxlength="256" rows='3' ng-model='InfoResource.calculate_method'></textarea>
+              <textarea class="form-control" name='calculate_method' ng-maxlength="256" rows='3' ng-model='InfoResource.calculate_method'></textarea>
               <p ng-show="InfoResourceForm.calculate_method.$error.maxlength" class="help-block">您输入的内容太长。</p>
               <p ng-show="InfoResourceForm.calculate_method.$error.required && submitted" class="help-block">请输入指标详细解释</p>
               <span class='pull-left help-info'>资源信息统计指标具体数值需要采用的算法</span>
@@ -171,7 +175,7 @@
             <label for="" class="col-sm-2 control-label">
               <span class='require-sign'>*</span>共享类型:</label>
             <div class="col-sm-10">
-              <select required  ng-model='InfoResource.share_type' class='custom-form-control'>
+              <select required ng-model='InfoResource.share_type' class='custom-form-control'>
                 <option ng-repeat="shareType in  shareTypeList" value='{{shareType.dict_code}}'>{{shareType.dict_name}}</option>
               </select>
             </div>
@@ -196,13 +200,14 @@
                 <option ng-repeat="shareMethod in  shareMethodList" value='{{shareMethod.id}}'>{{shareMethod.dict_name}}</option>
               </select>
               <span ng-class="{true: 'ng-show', false: 'ng-hide'}[shareMethodOtherShow]">
-                <input type='text' name='share_method_other' class='custom-form-control' ng-model='InfoResource.share_method_other' placeholder='请输入其他类信息' />
+                <input type='text' name='share_method_other' class='custom-form-control' ng-model='InfoResource.share_method_other' placeholder='请输入其他类信息'/>
               </span>
             </div>
           </div>
 
           <div class="form-group">
-            <label for="" class="col-sm-2 control-label" style='padding-left:0'><span class='require-sign'>*</span>是否面向社会开放:</label>
+            <label for="" class="col-sm-2 control-label" style='padding-left:0'>
+              <span class='require-sign'>*</span>是否面向社会开放:</label>
             <div class="col-sm-10">
               <select ng-model='InfoResource.social_open_flag' readonly='{{socialOpenFlag}}' class='custom-form-control' required>
                 <option ng-selected="socialOpen.dict_code == InfoResource.social_open_flag" ng-repeat="socialOpen in  socialOpenList" value='{{socialOpen.dict_code}}'>{{socialOpen.dict_name}}</option>
@@ -214,7 +219,7 @@
             <label for="" class="col-sm-2 control-label">
               开放条件:</label>
             <div class="col-sm-10">
-              <textarea class="form-control" placeholder='描述对数据开放利用的约束条件' name='social_open_limit'  ng-maxlength="256" rows='3' placeholder='有条件共享类可注明共享条件和共享范围；不予共享类注明相关的法律、行政法规和党中央、国务院政策依据。' ng-model='InfoResource.social_open_limit'></textarea>
+              <textarea class="form-control" placeholder='描述对数据开放利用的约束条件' name='social_open_limit' ng-maxlength="256" rows='3' placeholder='有条件共享类可注明共享条件和共享范围；不予共享类注明相关的法律、行政法规和党中央、国务院政策依据。' ng-model='InfoResource.social_open_limit'></textarea>
               <p ng-show="InfoResourceForm.social_open_limit.$error.maxlength" class="help-block">您输入的内容太长。</p>
               <span class='pull-right'>(最多256个汉字)</span>
             </div>
@@ -224,7 +229,7 @@
             <label for="" class="col-sm-2 control-label">
               <span class='require-sign'>*</span>信息资源提供方:</label>
             <div class="col-sm-10">
-              <input type="text"  name='resource_provider' class="form-control"  ng-model='InfoResource.resource_provider' readonly ng-value='ORG_NAME'>
+              <input type="text" name='resource_provider' class="form-control" ng-model='InfoResource.resource_provider' readonly ng-value='ORG_NAME'>
             </div>
           </div>
 
@@ -232,10 +237,9 @@
             <label for="" class="col-sm-2 control-label">
               <span class='require-sign'>*</span>资源提供方代码:</label>
             <div class="col-sm-10">
-              <input type="text"  name='resource_provider_code' readonly ng-value='ORG_CODE' class="form-control"  ng-model='InfoResource.resource_provider_code'>
+              <input type="text" name='resource_provider_code' readonly ng-value='ORG_CODE' class="form-control" ng-model='InfoResource.resource_provider_code'>
             </div>
           </div>
-
 
           <div class="form-group">
             <label for="" class="col-sm-2 control-label">联系人:</label>
@@ -273,51 +277,59 @@
 
   </div>
 
-
   <!--panel resource item-->
   <div class="panel panel-default" ng-show='ResItemListShow'>
     <div class="panel-heading">信息项信息</div>
     <div class="panel-body">
-      <div><button class='btn btn-success' ng-click='addResourceItem(2)'>新增</button></div>
-      <div style='overflow-x:scroll;height:490px;'>
-      <div class='container'>
-        <table class='table table-hover table-striped '>
-          <thead>
-            <tr>
-              <th width='40px'>序号</th>
-              <th width='80px'>操作</th>
-              <th width='80px'>信息项名称</th>
-              <th width='100px'>数据类型</th>
-              <th width='80px'>数据精度</th>
-              <th width='80px'>数据长度</th>
-              <th width='80px'>计量单位</th>
-              <th width='80px'>计算方法</th>
-              <th width='80px'>更新周期</th>
-              <th width='80px'>是否涉密</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat='rescoureItem in ResourceItemList | orderBy:"-create_time" '>
-              <!-- <td><input type='checkbox' ng-click='deleteReq(rescoureItem.id)' />删除</td> -->
-              <td>{{$index+1}}</td>
-              <td><a class='delete' ng-click='deleteItem($index)' ><i class='fa fa-trash'></i>&nbsp;删除</a>
-              <a class='edit' ng-click='updateItem(rescoureItem)'><i class='fa fa-pencil'></i>&nbsp;修改</a></td>
-              <td title='{{rescoureItem.item_name}}'>{{rescoureItem.item_name}}</td>
-              <td title='{{rescoureItem.item_type}}'>{{rescoureItem.item_type_name}}</td>
-              <td title='{{rescoureItem.data_precision}}'>{{rescoureItem.data_precision}}</td>
-              <td title='{{rescoureItem.data_length}}'>{{rescoureItem.data_length}}</td>
-              <td title='{{rescoureItem.meter_unit}}'>{{rescoureItem.meter_unit}}</td>
-              <td title='{{rescoureItem.calculate_method}}'>{{rescoureItem.calculate_method}}</td>
-              <td title='{{rescoureItem.shareFreqDictName}}'>{{rescoureItem.update_period_name}}</td>
-              <td title='{{rescoureItem.secret_flag}}'>{{rescoureItem.secret_flag_name}}</td>
-            </tr>
-          </tbody>
-        </table>
+      <div>
+        <button class='btn btn-success' ng-click='addResourceItem(2)'>新增</button>
       </div>
-    </div>
+      <div style='overflow-x:scroll;height:490px;'>
+        <div class='container'>
+          <table class='table table-hover table-striped '>
+            <thead>
+              <tr>
+                <th width='40px'>序号</th>
+                <th width='80px'>操作</th>
+                <th width='80px'>信息项名称</th>
+                <th width='100px'>数据类型</th>
+                <th width='80px'>数据精度</th>
+                <th width='80px'>数据长度</th>
+                <th width='80px'>计量单位</th>
+                <th width='80px'>计算方法</th>
+                <th width='80px'>更新周期</th>
+                <th width='80px'>是否涉密</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat='rescoureItem in ResourceItemList | orderBy:"-create_time" '>
+                <!-- <td><input type='checkbox' ng-click='deleteReq(rescoureItem.id)' />删除</td> -->
+                <td>{{$index+1}}</td>
+                <td>
+                  <a class='delete' ng-click='deleteItem($index)'>
+                    <i class='fa fa-trash'></i>&nbsp;删除</a>
+                  <a class='edit' ng-click='updateItem(rescoureItem)'>
+                    <i class='fa fa-pencil'></i>&nbsp;修改</a>
+                </td>
+                <td title='{{rescoureItem.item_name}}'>{{rescoureItem.item_name}}</td>
+                <td title='{{rescoureItem.item_type}}'>{{rescoureItem.item_type_name}}</td>
+                <td title='{{rescoureItem.data_precision}}'>{{rescoureItem.data_precision}}</td>
+                <td title='{{rescoureItem.data_length}}'>{{rescoureItem.data_length}}</td>
+                <td title='{{rescoureItem.meter_unit}}'>{{rescoureItem.meter_unit}}</td>
+                <td title='{{rescoureItem.calculate_method}}'>{{rescoureItem.calculate_method}}</td>
+                <td title='{{rescoureItem.shareFreqDictName}}'>{{rescoureItem.update_period_name}}</td>
+                <td title='{{rescoureItem.secret_flag}}'>{{rescoureItem.secret_flag_name}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
       <div class="pull-right">
         <div class="btn btn-group">
-          <button class="btn btn-success "  type='submit' ng-click='ResItemListShow = false'>保存</button>
+          <button class="btn btn-default " type='button' ng-click='ResItemListShow = false'>取消</button>
+        </div>
+        <div class="btn btn-group">
+          <button class="btn btn-success " type='submit' ng-click='ResItemListShow = false'>保存</button>
         </div>
       </div>
     </div>
@@ -326,7 +338,7 @@
 </div>
 
 <script type='text/ng-template' id='item-add-modal.html'>
-  <form class="form-horizontal"  class="form-horizontal" novalidate name='addItemForm'>
+  <form class="form-horizontal" class="form-horizontal" novalidate name='addItemForm'>
     <div class='modal-header'>
       <h4>
         <i class="fa fa-plus"></i>
@@ -336,88 +348,88 @@
 
     </div>
     <div class='modal-body'>
-        <div class="form-group">
-          <label for="" class="col-sm-2 control-label">
-            <span class='require-sign'>*</span>信息项名称:</label>
-          <div class="col-sm-10">
-            <input type="text" name='item_name' class="form-control" required ng-model='ResourceItem.item_name' ng-keyup='checkItemName()' >
-            <p ng-show="addItemForm.item_name.$error.required && itemAdded" class="help-block">请输入信息项名称</p>
-            <p ng-show="parent.itemNameExist" class="help-block">信息项名称已存在！</p>
-          </div>
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">
+          <span class='require-sign'>*</span>信息项名称:</label>
+        <div class="col-sm-10">
+          <input type="text" name='item_name' class="form-control" required ng-model='ResourceItem.item_name' ng-keyup='checkItemName()'>
+          <p ng-show="addItemForm.item_name.$error.required && itemAdded" class="help-block">请输入信息项名称</p>
+          <p ng-show="parent.itemNameExist" class="help-block">信息项名称已存在！</p>
         </div>
+      </div>
 
-        <div class="form-group">
-          <label for="" class="col-sm-2 control-label"><span class='require-sign'>*</span>数据类型:</label>
-          <div class="col-sm-10">
-            <select ng-model='data.item_type' required ng-options="o as o.dict_name for o in  itemTypeList track by o.id" class='custom-form-control' >
-            </select>
-          </div>
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">
+          <span class='require-sign'>*</span>数据类型:</label>
+        <div class="col-sm-10">
+          <select ng-model='data.item_type' required ng-options="o as o.dict_name for o in  itemTypeList track by o.id" class='custom-form-control'></select>
         </div>
+      </div>
 
-        <div class="form-group">
-          <label for="" class="col-sm-2 control-label">
-            <span class='require-sign'>*</span>数据精度:</label>
-          <div class="col-sm-10">
-            <input type="text" name='data_precision' class="form-control" required ng-model='ResourceItem.data_precision'>
-            <p ng-show="addItemForm.data_precision.$error.required  && itemAdded" class="help-block">请输入数据精度</p>
-            <span class='help-info'>
-              数值型指标数据定义的数据存储的小数位数。如：小数点后取2位
-            </span>
-          </div>
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">
+          <span class='require-sign'>*</span>数据精度:</label>
+        <div class="col-sm-10">
+          <input type="text" name='data_precision' class="form-control" required ng-model='ResourceItem.data_precision'>
+          <p ng-show="addItemForm.data_precision.$error.required  && itemAdded" class="help-block">请输入数据精度</p>
+          <span class='help-info'>
+            数值型指标数据定义的数据存储的小数位数。如：小数点后取2位
+          </span>
         </div>
+      </div>
 
-        <div class="form-group">
-          <label for="" class="col-sm-2 control-label">
-            <span class='require-sign'>*</span>数据长度:</label>
-          <div class="col-sm-10">
-            <input type="text" name='data_length' class="form-control" required ng-model='ResourceItem.data_length'>
-            <p ng-show="addItemForm.data_length.$error.required && itemAdded" class="help-block">请输入数据长度</p>
-            <span class='help-info'>
-              指标数据的最大长度。如：小于9位
-            </span>
-          </div>
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">
+          <span class='require-sign'>*</span>数据长度:</label>
+        <div class="col-sm-10">
+          <input type="text" name='data_length' class="form-control" required ng-model='ResourceItem.data_length'>
+          <p ng-show="addItemForm.data_length.$error.required && itemAdded" class="help-block">请输入数据长度</p>
+          <span class='help-info'>
+            指标数据的最大长度。如：小于9位
+          </span>
         </div>
+      </div>
 
-        <div class="form-group">
-          <label for="" class="col-sm-2 control-label">
-            计量单位:</label>
-          <div class="col-sm-10">
-            <input type="text" name='meter_unit' class="form-control"  ng-model='ResourceItem.meter_unit'>
-            <span class='help-info'>反映资源信息具体数值的实际度量单位，可对应多个
-            </span>
-          </div>
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">
+          计量单位:</label>
+        <div class="col-sm-10">
+          <input type="text" name='meter_unit' class="form-control" ng-model='ResourceItem.meter_unit'>
+          <span class='help-info'>反映资源信息具体数值的实际度量单位，可对应多个
+          </span>
         </div>
+      </div>
 
-        <div class="form-group">
-          <label for="" class="col-sm-2 control-label">
-            计算方法:</label>
-          <div class="col-sm-10">
-            <textarea class="form-control" name='calculate_method'  ng-maxlength="256" rows='3' ng-model='ResourceItem.calculate_method'></textarea>
-            <p ng-show="addItemForm.calculate_method.$error.maxlength" class="help-block">您输入的内容太长。</p>
-            <span class='pull-left'>资源信息统计指标具体数值需要采用的算法</span>
-            <span class='pull-right'>(最多256个汉字)</span>
-          </div>
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">
+          计算方法:</label>
+        <div class="col-sm-10">
+          <textarea class="form-control" name='calculate_method' ng-maxlength="256" rows='3' ng-model='ResourceItem.calculate_method'></textarea>
+          <p ng-show="addItemForm.calculate_method.$error.maxlength" class="help-block">您输入的内容太长。</p>
+          <span class='pull-left'>资源信息统计指标具体数值需要采用的算法</span>
+          <span class='pull-right'>(最多256个汉字)</span>
         </div>
+      </div>
 
-        <div class="form-group">
-          <label for="" class="col-sm-2 control-label">
-            <span class='require-sign'>*</span>更新周期:</label>
-          <div class="col-sm-10">
-            <span ng-repeat="sfItem in  shareFrequencyList">
-              <input type="checkbox" value="{{sfItem.id}}" name='share_frequency' ng-checked="ResourceItem.shareFreqItemSelection.indexOf(sfItem.id) > -1" ng-click="toggleShareFreqItemSelection(sfItem)">
-              {{sfItem.dict_name}}
-            </span>
-            <p ng-show="shareFreqEmpty" class="help-block">请选择更新周期</p>
-          </div>
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">
+          <span class='require-sign'>*</span>更新周期:</label>
+        <div class="col-sm-10">
+          <span ng-repeat="sfItem in  shareFrequencyList">
+            <input type="checkbox" value="{{sfItem.id}}" name='share_frequency' ng-checked="ResourceItem.shareFreqItemSelection.indexOf(sfItem.id) > -1" ng-click="toggleShareFreqItemSelection(sfItem)">
+            {{sfItem.dict_name}}
+          </span>
+          <p ng-show="shareFreqEmpty" class="help-block">请选择更新周期</p>
         </div>
+      </div>
 
-        <div class="form-group">
-          <label for="" class="col-sm-2 control-label"><span class='require-sign'>*</span>是否涉密:</label>
-          <div class="col-sm-10">
-            <select ng-model='data.secret_flag' required ng-options="qsflag as qsflag.dict_name for qsflag in  secretFlagList track by qsflag.id" class='custom-form-control' >
-            </select>
-          </div>
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">
+          <span class='require-sign'>*</span>是否涉密:</label>
+        <div class="col-sm-10">
+          <select ng-model='data.secret_flag' required ng-options="qsflag as qsflag.dict_name for qsflag in  secretFlagList track by qsflag.id" class='custom-form-control'></select>
         </div>
+      </div>
 
     </div>
     <div class='modal-footer'>

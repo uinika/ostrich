@@ -237,12 +237,33 @@ DepartmentShare.controller('DepartmentShare.Controller.Main', [ '$scope', 'Depar
 // Department share detail controller
 DepartmentShare.controller('DepartmentShare.Controller.detail', [ '$scope', 'DepartmentShare.Service.Http', '$stateParams',
   function( $scope, Http, $stateParams) {
-    // get department share detail
-    Http.getQuotaDetail({
-      data_quota_id: $stateParams.ID
-    }).then(function(result) {
-      $scope.DataQuotaDetail = result.data.body[0];
+    $scope.InfoItemShow = false;
+    Http.shareInfoResourceList({
+      resource_id : $stateParams.item
+    }).then(function(ResourceRes) {
+      $scope.InfoResourceDetail = ResourceRes.data.body[0].results[0];
+      Http.getInfoItemList({
+        resource_id: $scope.InfoResourceDetail.id
+      }).then(function(result) {
+        if (result.data.body.length == 0) {
+          $scope.InfoItemShow = false;
+        } else {
+          $scope.InfoItemShow = true;
+          $scope.InfoItems = result.data.body;
+
+          _($scope.InfoItems).forEach(function(item) {
+            var shareFreqDictName = [];
+            _(item.config).forEach(function(config) {
+              shareFreqDictName.push(config.dict_name);
+            })
+            item.update_period_name = shareFreqDictName.toString();
+          })
+        }
+
+
+      })
     })
+
 
   }
 ])
@@ -287,12 +308,21 @@ DepartmentShare.factory('DepartmentShare.Service.Http', ['$http', 'API',
         }
       )
     };
+
+    function getInfoItemList(params) {
+      return $http.get(
+        path + '/allitem_detail', {
+          params: params
+        }
+      )
+    }
     return {
       getSystemDictByCatagory: getSystemDictByCatagory,
       shareInfoResourceList: shareInfoResourceList,
       getQuotaDetail: getQuotaDetail,
       followDepartment: followDepartment,
-      cancelFollowDepartment: cancelFollowDepartment
+      cancelFollowDepartment: cancelFollowDepartment,
+      getInfoItemList: getInfoItemList
     }
   }
 ]);

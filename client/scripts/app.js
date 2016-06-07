@@ -139,7 +139,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', '$provide',
         controller: 'DepartmentShare.Controller.Main'
       })
       .state('main.department.share.detail', {
-        url: '/detail?ID',
+        url: '/detail/:item',
         templateUrl: 'views/department/share-detail.html',
         controller: 'DepartmentShare.Controller.detail'
       })
