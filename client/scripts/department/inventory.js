@@ -453,7 +453,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
         InfoResourceAddObj.InfoItem = $scope.ResourceItemList;
 
         console.log(InfoResourceAddObj);
-        Http.saveInfoResource(InfoResourceAddObj).then(function(result) {
+        $scope.savePromise = Http.saveInfoResource(InfoResourceAddObj).then(function(result) {
           console.log(result.data);
           if (200 == result.data.head.status) {
             alert('保存成功！');
@@ -607,7 +607,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
         InfoResourceAddObj.InfoItem = $scope.ResourceItemList;
 
         console.log(InfoResourceAddObj);
-        Http.updateInfoResource(InfoResourceAddObj).then(function(result) {
+        $scope.updatePromise = Http.updateInfoResource(InfoResourceAddObj).then(function(result) {
           console.log(result.data);
           if (200 == result.data.head.status) {
             alert('保存成功！');

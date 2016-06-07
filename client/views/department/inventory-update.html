@@ -1,7 +1,7 @@
 <div id='inventory-update'>
   <div class="panel panel-default" ng-show='!ResItemListShow'>
     <div class="panel-heading">修改资源信息</div>
-    <div class="panel-body">
+    <div class="panel-body" cg-busy="{promise:updatePromise,message:'正在提交',backdrop:backdrop,delay:delay,minDuration:minDuration}">
 
       <!--Step 1-->
       <div id='indicator-profile'>
