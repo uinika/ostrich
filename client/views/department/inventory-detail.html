@@ -51,20 +51,20 @@
             <label class='col-sm-2 text-right'>信息资源格式:</label>
             <div class='col-sm-10'>{{InfoResourceDetail.resource_format_name}}</div>
           </div>
-          <div class='row'>
-            <label class='col-sm-2 text-right'>更细周期:</label>
+          <div class='row' ng-show='!InfoItemShow'>
+            <label class='col-sm-2 text-right' >更新周期:</label>
             <div class='col-sm-10'>{{InfoResourceDetail.update_period}}</div>
           </div>
-          <div class='row'>
-            <label class='col-sm-2 text-right'>是否涉密:</label>
+          <div class='row' ng-show='!InfoItemShow'>
+            <label class='col-sm-2 text-right' >是否涉密:</label>
             <div class='col-sm-10'>{{InfoResourceDetail.secret_flag_name}}</div>
           </div>
-          <div class='row'>
-            <label class='col-sm-2 text-right'>计量单位:</label>
+          <div class='row' ng-show='!InfoItemShow'>
+            <label class='col-sm-2 text-right' >计量单位:</label>
             <div class='col-sm-10'>{{InfoResourceDetail.meter_unit}}</div>
           </div>
-          <div class='row'>
-            <label class='col-sm-2 text-right'>计算方法:</label>
+          <div class='row' ng-show='!InfoItemShow'>
+            <label class='col-sm-2 text-right' >计算方法:</label>
             <div class='col-sm-10'>{{InfoResourceDetail.calculate_method}}</div>
           </div>
           <div class='row'>
