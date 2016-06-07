@@ -135,12 +135,20 @@ Audit.factory('Department.Audit.Service.Http', ['$http', '$q', 'API',
         }
       )
     }
+    function getDepartInfoResList(params) {
+      return $http.get(
+        path + '/info_resource_list', {
+          params: params
+        }
+      )
+    }
     return {
       getAuditList: getAuditList,
       getInfoResourceDetail: getInfoResourceDetail,
       updateAuditDetail: updateAuditDetail,
       getQuotaRequirement: getQuotaRequirement,
-      getInfoItemList: getInfoItemList
+      getInfoItemList: getInfoItemList,
+      getDepartInfoResList: getDepartInfoResList
     }
   }
 ]);

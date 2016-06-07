@@ -787,7 +787,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
     // show or hide department
     $scope.depShow = false;
     $scope.showHideDeps = function(ev) {
-      if (LEVEL_ALL_OPEN != $scope.InfoResource.share_level) {
+      if (LEVEL_ALL_OPEN != $scope.InfoResource.share_level) {// 不为全开放
         if (LEVEL_AUTH == $scope.InfoResource.share_level) {// 授权开放
           $scope.depShow = true;
           $scope.socialOpenFlag = false;

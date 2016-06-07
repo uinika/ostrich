@@ -49,10 +49,10 @@
               <table class='table table-hover table-striped table-bordered text-center'>
                 <thead>
                   <tr>
-                    <th width='100px' rowspan='2'>操作</th>
-                    <th width='40px' rowspan='2'>标识</th>
-                    <th width='40px' rowspan='2'>序号</th>
-                    <th width='100px' rowspan='2'>申请日期</th>
+                    <th width='80px' rowspan='2'>操作</th>
+                    <th width='60px' rowspan='2'>标识</th>
+                    <th width='60px' rowspan='2'>序号</th>
+                    <th width='160px' rowspan='2'>申请日期</th>
                     <th width='90px' rowspan='2'>申请部门</th>
                     <th width='90px' rowspan='2'>信息资源名称</th>
                     <th width='90px' rowspan='2'>信息资源别称</th>
@@ -76,7 +76,7 @@
                     <th width='80px' rowspan='2'>资源提供方代码</th>
                     <th width='60px' rowspan='2'>联系人</th>
                     <th width='100px' rowspan='2'>联系电话</th>
-                    <th width='120px' rowspan='2'>创建时间</th>
+                    <th width='160px' rowspan='2'>创建时间</th>
                   </tr>
                   <tr>
                     <th>信息项名称</th>
@@ -124,10 +124,10 @@
                       </div>
                     </td>
                     <td>{{$index+1}}</td>
-                    <td title='InfoResource.apply_time'>{{InfoResource.apply_time}}</td>
-                    <td title='InfoResource.apply_dep_name'>{{InfoResource.apply_dep_name}}</td>
+                    <td title='{{InfoResource.apply_time |date:"yyyy-MM-dd HH:mm:ss"}}'>{{InfoResource.apply_time |date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                    <td title='{{InfoResource.apply_dep_name}}'>{{InfoResource.apply_dep_name}}</td>
                     <td title='{{InfoResource.resource_name}}'>
-                      <a ui-sref='main.department.detail({item:InfoResource})'>
+                      <a ui-sref='main.department.detail({item:InfoResource.id})'>
                         <pre>{{InfoResource.resource_name}}</pre>
                       </a>
                     </td>
@@ -149,7 +149,7 @@
                     <td title='{{InfoResource.area_level}}'>{{InfoResource.area_level}}</td>
                     <td title='{{InfoResource.meter_unit}}'>{{InfoResource.meter_unit}}</td>
                     <td title='{{InfoResource.calculate_method}}'>{{InfoResource.calculate_method}}</td>
-                    <td title='InfoResource.share_level_name'>
+                    <td title='{{InfoResource.share_level_name}}'>
                       {{InfoResource.share_level_name}}
                     </td>
                     <td title='{{InfoResource.share_type_name}}'>{{InfoResource.share_type_name}}</td>
