@@ -2269,31 +2269,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
 
     }
 
-    $scope.checkItemName = function() {
-      if($scope.ResourceItem.item_name && $scope.ResourceItem.item_name != '') {
-        console.log($scope.ResourceItemList);
-        _($scope.ResourceItemList).forEach(function(item) {
-          if($scope.ResourceItem.item_name == item.item_name) {
-            $scope.parent.itemNameExist = true;
-            $scope.itemError = true;
-            return;
-          }
-        })
-        Http.checkItemName({
-          item_name: $scope.ResourceItem.item_name
-        }).then(function(res) {
-          if(res.data.body[0].isexists == 'true') {
-            $scope.parent.itemNameExist = true;
-          }
-          else{
-            $scope.parent.itemNameExist = false;
-          }
-          $scope.itemError = $scope.parent.itemNameExist;
-          console.log($scope.itemError);
-        })
-      }
 
-    }
 
     Http.getDepartmentList().then(function(result) {
       $scope.deptList = result.data.body;
@@ -2614,6 +2590,33 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
         $scope.ResourceItem.secret_flag_name = n.dict_name;
       })
 
+      $scope.checkItemName = function() {
+        if($scope.ResourceItem.item_name && $scope.ResourceItem.item_name != '') {
+          console.log($scope.ResourceItem);
+          console.log($scope.ResourceItemList);
+          $scope.parent.itemNameExist = false;
+          _($scope.ResourceItemList).forEach(function(item) {
+            if(($scope.ResourceItem.item_name == item.item_name) &&  $scope.ResourceItem !== item) {
+              $scope.parent.itemNameExist = true;
+            }
+          })
+          if(!$scope.parent.itemNameExist) {
+            Http.checkItemName({
+              item_name: $scope.ResourceItem.item_name
+            }).then(function(res) {
+              if(res.data.body[0].isexists == 'true') {
+                $scope.parent.itemNameExist = true;
+              }
+              else{
+                $scope.parent.itemNameExist = false;
+              }
+            })
+          }
+
+        }
+
+      }
+
       Component.popModal($scope, 'Department.Inventory.Controller.publish', '新增', 'item-add-modal').result.then(function(res) {
         console.log($scope.ResourceItem);
         $scope.itemAdded = false;
@@ -2691,6 +2694,33 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
         $scope.ResourceItem.secret_flag = n.id;
         $scope.ResourceItem.secret_flag_name = n.dict_name;
       })
+
+      $scope.checkItemName = function() {
+        if($scope.ResourceItem.item_name && $scope.ResourceItem.item_name != '') {
+          console.log($scope.ResourceItem);
+          console.log($scope.ResourceItemList);
+          $scope.parent.itemNameExist = false;
+          _($scope.ResourceItemList).forEach(function(item) {
+            if(($scope.ResourceItem.item_name == item.item_name) &&  $scope.ResourceItem !== item) {
+              $scope.parent.itemNameExist = true;
+            }
+          })
+          if(!$scope.parent.itemNameExist) {
+            Http.checkItemName({
+              item_name: $scope.ResourceItem.item_name
+            }).then(function(res) {
+              if(res.data.body[0].isexists == 'true') {
+                $scope.parent.itemNameExist = true;
+              }
+              else{
+                $scope.parent.itemNameExist = false;
+              }
+            })
+          }
+
+        }
+
+      }
 
       Component.popModal($scope, 'Department.Inventory.Controller.publish', '修改', 'item-add-modal').result.then(function(res) {
         $scope.itemUpdated = false;
