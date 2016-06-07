@@ -129,10 +129,12 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
     };
 
     /*面向社会开放*/
+
     $scope.openToSocietyFilter = function(id, index){
       $scope.openToSocietyActive = [];
       $scope.openToSocietyActiveAll = '';
       $scope.openToSocietyActive[index] = 'active';
+      var idx = filterParams.social_open_flag.indexOf(item.id);
       filterParams.social_open_flag = id;
       if('ALL'===id){
         delete filterParams.social_open_flag;
@@ -146,6 +148,7 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
     filterParams.update_period = [];
     $scope.ShareFrequencyActive = [];
     $scope.ShareFrequencyFilter = function(id, index){
+      $scope.ShareFrequencyActiveAll = 'active';
       if('ALL'===id){
         filterParams.update_period = [];
         $scope.ShareFrequencyActiveAll = 'active';
@@ -156,7 +159,12 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
         var idx = filterParams.update_period.indexOf(id);
         ($scope.ShareFrequencyActive[index]==='active')?($scope.ShareFrequencyActive[index]=''):($scope.ShareFrequencyActive[index]='active');
         if(idx > -1){
-          filterParams.update_period.splice(idx, 1);
+          if(filterParams.update_period.length ===1){
+            $scope.ShareFrequencyActiveAll = 'active';
+            filterParams.update_period = [];
+          }else{
+            filterParams.update_period.splice(idx, 1);
+          }
         }else{
           filterParams.update_period.push(id);
         }
@@ -178,9 +186,15 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
         $scope.DataLevelActiveAll = '';
         ($scope.DataLevelActive[index]==='active')?($scope.DataLevelActive[index]=''):($scope.DataLevelActive[index]='active');
         if(idx > -1){
-          filterParams.area_level.splice(idx, 1);
+          if(filterParams.area_level.length ===1){
+            $scope.DataLevelActiveAll = 'active';
+            filterParams.area_level = [];
+          }else{
+            filterParams.area_level.splice(idx, 1);
+          }
+        }else{
+          filterParams.area_level.push(id);
         }
-        filterParams.area_level.push(id);
         getDataQuotaListByFilter(filterParams);
       };
     };

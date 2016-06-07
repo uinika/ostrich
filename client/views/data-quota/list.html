@@ -191,14 +191,13 @@
                   </td>
                   <td>{{$index+1}}</td>
                   <td title='{{quota.resource_name}}'>
-                    <a ui-sref='main.data-quota.detail({resource_id:quota.id})' ng-class="{true: 'orange', false: 'text-primary'}[DataQuotas[$index].resource_name === DataQuotas[$index-1].resource_name]">
-                      {{quota.resource_name}}
-                    </a>
+                  <a ng-if="quota.showbutton==='false'" ui-sref='main.data-quota.detail({resource_id:quota.id})' ng-class="{true: 'orange', false: 'text-primary'}[(DataQuotas[$index].resource_name === DataQuotas[$index-1].resource_name) && (DataQuotas[$index-1].resource_format_name==='数据库类')]">{{quota.resource_name}}</a>
+                  <a ng-if="quota.showbutton==='true'"  ng-class="{true: 'orange', false: 'text-primary'}[(DataQuotas[$index].resource_name === DataQuotas[$index-1].resource_name) && (DataQuotas[$index-1].resource_format_name==='数据库类')]">{{quota.resource_name}}</a>
                   </td>
-                  <td title='{{quota.alias}}' ng-class="{true: 'orange', false: ''}[DataQuotas[$index].resource_name === DataQuotas[$index-1].resource_name]">{{quota.alias}}</td>
-                  <td title='{{quota.summary}}' ng-class="{true: 'orange', false: ''}[DataQuotas[$index].resource_name === DataQuotas[$index-1].resource_name]">{{quota.summary}}</td>
-                  <td title='{{quota.category_name}}'ng-class="{true: 'orange', false: ''}[DataQuotas[$index].resource_name === DataQuotas[$index-1].resource_name]">{{quota.category_name}}</td>
-                  <td title='{{quota.resource_format_name}}' ng-class="{true: 'orange', false: ''}[DataQuotas[$index].resource_name === DataQuotas[$index-1].resource_name]">{{quota.resource_format_name}}</td>
+                  <td title='{{quota.alias}}' ng-class="{true: 'orange', false: ''}[(DataQuotas[$index].resource_name === DataQuotas[$index-1].resource_name) && (DataQuotas[$index-1].resource_format_name==='数据库类')]">{{quota.alias}}</td>
+                  <td title='{{quota.summary}}' ng-class="{true: 'orange', false: ''}[(DataQuotas[$index].resource_name === DataQuotas[$index-1].resource_name) && (DataQuotas[$index-1].resource_format_name==='数据库类')]">{{quota.summary}}</td>
+                  <td title='{{quota.category_name}}'ng-class="{true: 'orange', false: ''}[(DataQuotas[$index].resource_name === DataQuotas[$index-1].resource_name) && (DataQuotas[$index-1].resource_format_name==='数据库类')]">{{quota.category_name}}</td>
+                  <td title='{{quota.resource_format_name}}' ng-class="{true: 'orange', false: ''}[(DataQuotas[$index].resource_name === DataQuotas[$index-1].resource_name) && (DataQuotas[$index-1].resource_format_name==='数据库类')]">{{quota.resource_format_name}}</td>
                   <td ng-if="quota.resource_format_name ==='数据库类'" title='{{quota.item_name}}'>{{quota.item_name}}</td>
                   <td ng-if="quota.resource_format_name ==='数据库类'" title='{{quota.item_type_name}}'>{{quota.item_type_name}}</td>
                   <td ng-if="quota.resource_format_name ==='数据库类'" title='{{quota.data_precision}}'>{{quota.data_precision}}</td>
