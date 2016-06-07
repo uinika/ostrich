@@ -112,7 +112,7 @@ Department.controller('Department.Controller.Main', ['$cookies', '$scope', '$q',
 
     // go to requirement list page
     $scope.reqMore = function() {
-      $state.go("main.department.requirement", {}, {
+      $state.go("main.department.requirementConfirm", {}, {
         reload: true
       });
     }
