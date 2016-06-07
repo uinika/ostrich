@@ -8,11 +8,11 @@
       <div class='pull-right'>
         <ul class="nav nav-pills">
           <li role="presentation" class='indicator-total'>
-            指标总数
+            资源总数
             <span class='num'>{{Paging.totalItems}}</span>
           </li>
           <li role="presentation">
-            <input type="text" class='input-filter' placeholder="请输入查询指标名称" ng-model='DepartInfoResource.resource_name_filter'>
+            <input type="text" class='input-filter' placeholder="请输入查询信息资源名称" ng-model='DepartInfoResource.resource_name_filter'>
             <button type="button" class="btn btn-primary" ng-click='searchDeptInfoResourceByName()'>查询</button>
           </li>
         </ul>
@@ -203,7 +203,7 @@
                       </td>
                       <td>{{$index+1}}</td>
                       <td title='{{InfoResource.resource_name}}'>
-                        <a ui-sref='main.department.inventory.detail({ID:InfoResource.id})'>
+                        <a ui-sref='main.department.detail({item:InfoResource.id})'>
                           <pre>{{InfoResource.resource_name}}</pre>
                         </a>
                       </td>
