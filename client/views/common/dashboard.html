@@ -86,7 +86,8 @@
           <tbody>
             <tr ng-repeat='indicator in NewIndicators'>
               <td>{{indicator.create_time | date:'yyyy-MM-dd'}}</td>
-              <td><a ui-sref='main.data-quota.detail({resource_id:indicator.id})'>{{indicator.resource_name}}</a></td>
+              <td><a ng-if="(quota.showbutton==='1')||(quota.showbutton==='-2')" ui-sref='main.data-quota.detail({resource_id:indicator.id})'>{{indicator.resource_name}}</a></td>
+              <td><a ng-if="(quota.showbutton !='1')&&(quota.showbutton !='-2')">{{indicator.resource_name}}</a></td>
               <td>{{indicator.dep_short_name}}</td>
             </tr>
           </tbody>
