@@ -3,16 +3,16 @@
   <div id='department-audit'>
     <div class='indicator-order'>
       <div class='pull-left'>
-        <p class='font-18'>指标审核</p>
+        <p class='font-18'>数据查看审核</p>
       </div>
       <div class='pull-right'>
         <ul class="nav nav-pills">
 
           <li role="presentation "  class='indicator-total'>
-            指标审核总数<span class='num'>{{Paging.totalItems}}</span>
+            审核总数<span class='num'>{{resourceCount}}</span>
           </li>
           <li role="presentation">
-              <input type="text" class='input-filter' placeholder="请输入查询指标名称" ng-model='InfoResource.resource_name_filter'>
+              <input type="text" class='input-filter' placeholder="请输入查询信息资源名称" ng-model='InfoResource.resource_name_filter'>
               <button type="button" class="btn btn-primary" ng-click='searchInfoResourceByName()'>查询</button>
           </li>
         </ul>
@@ -49,10 +49,10 @@
               <table class='table table-hover table-striped table-bordered text-center'>
                 <thead>
                   <tr>
-                    <th width='100px' rowspan='2'>操作</th>
-                    <th width='40px' rowspan='2'>标识</th>
-                    <th width='40px' rowspan='2'>序号</th>
-                    <th width='100px' rowspan='2'>申请日期</th>
+                    <th width='80px' rowspan='2'>操作</th>
+                    <th width='60px' rowspan='2'>标识</th>
+                    <th width='60px' rowspan='2'>序号</th>
+                    <th width='160px' rowspan='2'>申请日期</th>
                     <th width='90px' rowspan='2'>申请部门</th>
                     <th width='90px' rowspan='2'>信息资源名称</th>
                     <th width='90px' rowspan='2'>信息资源别称</th>
@@ -76,7 +76,7 @@
                     <th width='80px' rowspan='2'>资源提供方代码</th>
                     <th width='60px' rowspan='2'>联系人</th>
                     <th width='100px' rowspan='2'>联系电话</th>
-                    <th width='120px' rowspan='2'>创建时间</th>
+                    <th width='160px' rowspan='2'>创建时间</th>
                   </tr>
                   <tr>
                     <th>信息项名称</th>
@@ -95,7 +95,7 @@
                   <tr ng-repeat='InfoResource in auditList | orderBy:"create_time":true'>
                     <td>
                       <div ng-if='InfoResource.audit_status == 0'><span>
-                                            <i class='fa fa-question-circle'></i></span><a ui-sref='main.department.audit.info({item:InfoResource})'>审核</a></div>
+                                            <i class='fa fa-question-circle'></i></span><a ui-sref='main.department.audit.info({AUDITID:InfoResource.audit_id,RESOURCEID:InfoResource.id,APPLYTIME:InfoResource.apply_time,APPLYDEP:InfoResource.apply_dep_name})'>审核</a></div>
                                             <div ng-if='InfoResource.audit_status == 1'><span>
                                               <i class='fa fa-check-circle'></i></span></div>
                                               <div ng-if='InfoResource.audit_status == 2'><span>
@@ -124,10 +124,10 @@
                       </div>
                     </td>
                     <td>{{$index+1}}</td>
-                    <td title='InfoResource.apply_time'>{{InfoResource.apply_time}}</td>
-                    <td title='InfoResource.apply_dep_name'>{{InfoResource.apply_dep_name}}</td>
+                    <td title='{{InfoResource.apply_time |date:"yyyy-MM-dd HH:mm:ss"}}'>{{InfoResource.apply_time |date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                    <td title='{{InfoResource.apply_dep_name}}'>{{InfoResource.apply_dep_name}}</td>
                     <td title='{{InfoResource.resource_name}}'>
-                      <a ui-sref='main.department.detail({item:InfoResource})'>
+                      <a ui-sref='main.department.detail({item:InfoResource.id})'>
                         <pre>{{InfoResource.resource_name}}</pre>
                       </a>
                     </td>
@@ -149,7 +149,7 @@
                     <td title='{{InfoResource.area_level}}'>{{InfoResource.area_level}}</td>
                     <td title='{{InfoResource.meter_unit}}'>{{InfoResource.meter_unit}}</td>
                     <td title='{{InfoResource.calculate_method}}'>{{InfoResource.calculate_method}}</td>
-                    <td title='InfoResource.share_level_name'>
+                    <td title='{{InfoResource.share_level_name}}'>
                       {{InfoResource.share_level_name}}
                     </td>
                     <td title='{{InfoResource.share_type_name}}'>{{InfoResource.share_type_name}}</td>

@@ -219,6 +219,14 @@ input.ng-touched.ng-invalid {
 #department-main .right {
   padding-right: 0;
 }
+#department-main table {
+  table-layout: fixed;
+}
+#department-main table tr td {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 #department-summary .font-22 {
   font-size: 22px;
 }
@@ -639,6 +647,9 @@ input.ng-touched.ng-invalid {
 #department-share .indicator-list table {
   table-layout: fixed;
 }
+#department-share .indicator-list table tr.has-item {
+  background: #FFF;
+}
 #department-share .indicator-list table tr td {
   overflow: hidden;
   white-space: nowrap;
@@ -880,6 +891,8 @@ input.ng-touched.ng-invalid {
 }
 .confirm-req-modal .table > tbody > tr > td {
   border: none;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 #department-requirement-detail {
   margin-bottom: 50px;
@@ -939,7 +952,7 @@ input.ng-touched.ng-invalid {
   height: 490px;
 }
 #department-audit .indicator-list .scroll div.container {
-  width: 2800px !important;
+  width: 3200px !important;
 }
 #department-audit .indicator-list ul.nav-filter {
   list-style: none;
@@ -1164,10 +1177,11 @@ input.ng-touched.ng-invalid {
   padding-left: inherit;
 }
 #data-quota-list .table-patch {
-  height: 500px;
+  table-layout: automatic;
 }
 #data-quota-list .table-patch td,
 #data-quota-list .table-patch th {
+  height: 50px;
   max-width: 200px;
   word-break: keep-all;
   word-wrap: normal;
@@ -1227,6 +1241,9 @@ input.ng-touched.ng-invalid {
 }
 #data-quota-list .quota-example .table-responsive {
   margin-top: 0;
+}
+#admin-user .row {
+  height: 450px;
 }
 #admin-user .table-patch td,
 #admin-user .table-patch th {

@@ -1,7 +1,7 @@
 <div id='inventory-update'>
   <div class="panel panel-default" ng-show='!ResItemListShow'>
     <div class="panel-heading">修改资源信息</div>
-    <div class="panel-body">
+    <div class="panel-body" cg-busy="{promise:updatePromise,message:'正在提交',backdrop:backdrop,delay:delay,minDuration:minDuration}">
 
       <!--Step 1-->
       <div id='indicator-profile'>
@@ -31,7 +31,7 @@
               <span class='require-sign'>*</span>信息资源摘要:</label>
             <div class="col-sm-10">
               <textarea class="form-control" name='summary' required ng-maxlength="256" rows='3' ng-model='InfoResource.summary'></textarea>
-              <p ng-show="InfoResourceForm.summary.$invalid.maxlength" class="help-block">输入的内容太长。</p>
+              <p ng-show="InfoResourceForm.summary.$error.maxlength" class="help-block">您输入的内容太长。</p>
               <p ng-show="InfoResourceForm.summary.$error.required && submitted" class="help-block">请输入指标详细解释</p>
               <span class='pull-right'>(最多256个汉字)</span>
             </div>
@@ -61,9 +61,10 @@
               关联及类目名称:</label>
             <div class="col-sm-10">
               <select ng-model='InfoResource.rel_category'  name='rel_category' class='form-control' style='display: inline-block !important;width: auto;'>
-                <option ng-repeat="resourceCategory in  resourceCategoryList" value='{{resourceCategory.id}}'>{{resourceCategory.dict_name}}</option>
+                <option ng-repeat="resourceCategory in  resourceCategoryRelList" value='{{resourceCategory.id}}'>{{resourceCategory.dict_name}}</option>
               </select>
               <span class='help-info'>政务资源信息关联类别</span>
+              <p ng-show="InfoResource.rel_category == InfoResource.category" class="help-block">信息资源分类与关联及类目名称不能相同！</p>
             </div>
           </div>
 
@@ -99,7 +100,7 @@
               <span  ng-class="{true: 'ng-show', false: 'ng-hide'}[resFormatOtherShow]"><input type='text' class='custom-form-control' placeholder='请输入其他信息资源格式' ng-model='InfoResource.resource_format_other' /></span>
               <span ng-class="{true: 'ng-show', false: 'ng-hide'}[resItemAddBtn]"><a class='btn btn-default' ng-click='ResItemListShow = true'><i class='fa fa-plus'></i>&nbsp;信息项</a></span>
               <span ng-class="{true: 'ng-show', false: 'ng-hide'}[resItemUpdateBtn]"><a class='btn btn-default' ng-click='editItems(InfoResource.id)'><i class='fa fa-pencil'></i>&nbsp;信息项</a></span>
-              <span class='help-block' ng-show='submitted && resItemAddBtn && (ResourceItemList.length == 0)'>您还未添加任何信息项。</span>
+              <span class='help-block' ng-show='submitted && (resItemAddBtn || resItemUpdateBtn) && (ResourceItemList.length == 0)'>您还未添加任何信息项。</span>
             </div>
           </div>
 
@@ -146,7 +147,7 @@
               计算方法:</label>
             <div class="col-sm-10">
               <textarea class="form-control" name='calculate_method'  ng-maxlength="256" rows='3' ng-model='InfoResource.calculate_method'></textarea>
-              <p ng-show="InfoResourceForm.calculate_method.$invalid.maxlength" class="help-block">输入的内容太长。</p>
+              <p ng-show="InfoResourceForm.calculate_method.$error.maxlength" class="help-block">您输入的内容太长。</p>
               <p ng-show="InfoResourceForm.calculate_method.$error.required && submitted" class="help-block">请输入指标详细解释</p>
               <span class='pull-left help-info'>资源信息统计指标具体数值需要采用的算法</span>
               <span class='pull-right '>(最多256个汉字)</span>
@@ -181,7 +182,7 @@
               <span class='require-sign'>*</span>共享条件:</label>
             <div class="col-sm-10">
               <textarea class="form-control" name='share_limit' required ng-maxlength="256" rows='3' placeholder='有条件共享类可注明共享条件和共享范围；不予共享类注明相关的法律、行政法规和党中央、国务院政策依据。' ng-model='InfoResource.share_limit'></textarea>
-              <p ng-show="InfoResourceForm.share_limit.$invalid.maxlength" class="help-block">输入的内容太长。</p>
+              <p ng-show="InfoResourceForm.share_limit.$error.maxlength" class="help-block">您输入的内容太长。</p>
               <p ng-show="InfoResourceForm.share_limit.$error.required && submitted" class="help-block">请输入指标详细解释</p>
               <span class='pull-right'>(最多256个汉字)</span>
             </div>
@@ -201,7 +202,7 @@
           </div>
 
           <div class="form-group">
-            <label for="" class="col-sm-2 control-label"><span class='require-sign'>*</span>是否面向社会开放:</label>
+            <label for="" class="col-sm-2 control-label" style='padding-left:0'><span class='require-sign'>*</span>是否面向社会开放:</label>
             <div class="col-sm-10">
               <select ng-model='InfoResource.social_open_flag' readonly='{{socialOpenFlag}}' class='custom-form-control' required>
                 <option ng-selected="socialOpen.dict_code == InfoResource.social_open_flag" ng-repeat="socialOpen in  socialOpenList" value='{{socialOpen.dict_code}}'>{{socialOpen.dict_name}}</option>
@@ -214,7 +215,7 @@
               开放条件:</label>
             <div class="col-sm-10">
               <textarea class="form-control" placeholder='描述对数据开放利用的约束条件' name='social_open_limit'  ng-maxlength="256" rows='3' placeholder='有条件共享类可注明共享条件和共享范围；不予共享类注明相关的法律、行政法规和党中央、国务院政策依据。' ng-model='InfoResource.social_open_limit'></textarea>
-              <p ng-show="InfoResourceForm.social_open_limit.$invalid.maxlength" class="help-block">输入的内容太长。</p>
+              <p ng-show="InfoResourceForm.social_open_limit.$error.maxlength" class="help-block">您输入的内容太长。</p>
               <span class='pull-right'>(最多256个汉字)</span>
             </div>
           </div>
@@ -248,7 +249,7 @@
           <div class="form-group">
             <label for="" class="col-sm-2 control-label">联系电话:</label>
             <div class="col-sm-10">
-              <input type="text" name='contact_phone' ng-pattern='/^(\d{3,4}-)?\d{7,8}$|(1[3|4|5|7|8]\d{9})/' class="form-control" ng-model='InfoResource.contact_phone'>
+              <input type="text" name='contact_phone' ng-pattern='/^(\d{3,4}-)?\d{7,8}$|(^1[3|4|5|7|8]\d{9}$)/' class="form-control" ng-model='InfoResource.contact_phone'>
               <p ng-show="InfoResourceForm.contact_phone.$invalid" class="help-block">请输入正确的联系电话</p>
               <span class='help-info'>
                 具有指标解释权的联系部门或联系人电话。
@@ -392,7 +393,7 @@
             计算方法:</label>
           <div class="col-sm-10">
             <textarea class="form-control" name='calculate_method'  ng-maxlength="256" rows='3' ng-model='ResourceItem.calculate_method'></textarea>
-            <p ng-show="addItemForm.calculate_method.$invalid.maxlength" class="help-block">输入的内容太长。</p>
+            <p ng-show="addItemForm.calculate_method.$error.maxlength" class="help-block">您输入的内容太长。</p>
             <span class='pull-left'>资源信息统计指标具体数值需要采用的算法</span>
             <span class='pull-right'>(最多256个汉字)</span>
           </div>

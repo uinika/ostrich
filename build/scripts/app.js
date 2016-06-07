@@ -39,7 +39,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', '$provide',
             $q.when(response, function(result){
               if( response.data && typeof response.data==='object'){
                 if(result.data.head.status===300){
-                  sessionStorage.message = '登陆超时，请重新登陆！';
+                  sessionStorage.message = '登录超时，请重新登陆！';
                   window.location.href='/build';
                 };
               };
@@ -123,18 +123,12 @@ app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', '$provide',
         controller: 'Department.Inventory.Controller.publish'
       })
       .state('main.department.inventory.update', {
-        url: '/update/{item:json}',
-        params:{
-          item:null
-        },
+        url: '/update/:item',
         templateUrl: 'views/department/inventory-update.html',
         controller: 'Department.Inventory.Controller.publish'
       })
       .state('main.department.detail', {
-        url: '/detail/{item:json}',
-        params:{
-          item:null
-        },
+        url: '/detail/:item',
         cache:'false',
         templateUrl: 'views/department/inventory-detail.html',
         controller: 'Department.Inventory.Controller.detail'
@@ -145,7 +139,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', '$provide',
         controller: 'DepartmentShare.Controller.Main'
       })
       .state('main.department.share.detail', {
-        url: '/detail?ID',
+        url: '/detail/:item',
         templateUrl: 'views/department/share-detail.html',
         controller: 'DepartmentShare.Controller.detail'
       })
@@ -175,10 +169,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', '$provide',
         controller: 'Department.Audit.Controller.Main'
       })
       .state('main.department.audit.info', {
-        url: '/info/{item:json}',
-        params:{
-          item:null
-        },
+        url: '/info/:AUDITID/:RESOURCEID/:APPLYTIME/:APPLYDEP',
         templateUrl: 'views/department/audit-info.html',
         controller: 'Department.Audit.Controller.info'
       })
@@ -202,7 +193,7 @@ app.run(['$rootScope', function($rootScope){
 var Config = angular.module('Config', []);
 
 Config.constant('API', {
-  path: 'http://localhost:8080/drrp/api' //发布
+  path: 'http://localhost:8080/drrp/api'
 });
 
 'use strict';
@@ -644,20 +635,20 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
         }
         $scope.Modal.organization = function(){
           $scope.placeholder.organization = "必填";
-          $scope.placeholder.organization_code = "必填";
+          $scope.placeholder.organization_code = "必填，根据机构名称自动生成";
           $scope.organization = false;
           var organization = $scope.sysUser.organization ;
           if(organization){
             Http.getUserOrganizationCode({
               "organization":organization
             }).then(function (result){
-              if(200 == result.data.head.status){
-                $scope.sysUser.organization_code = result.data.body[0].organization_code ;
+              var organizationArray = result.data.body[0].organization_code.split(",");
+              if(organizationArray[1]==0){
+                $scope.sysUser.organization_code = organizationArray[0] ;
               }else{
-                $scope.placeholder.organization = "机构名称不对";
+                $scope.placeholder.organization = "机构名称已存在，请重新输入";
                 $scope.organization = true;
                 $scope.sysUser.organization = "";
-                $scope.placeholder.organization_code = "没有相对应的机构编码";
               }
             });
           }
@@ -790,31 +781,31 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
         })
       });
     }
-    $scope.deleteUser = function(user) {
-      if(user.id!=LoginUser.id){
-        var flag = confirm("确定要删除吗？");
-        if (flag) {
-          Http.deleteUser(user).then(function(result) {
-            _httpParams.limit = 10;
-            _httpParams.skip = 0;
-            $scope.Paging.currentPage = 0 ;
-            if (200 == result.data.head.status) {
-              alert('删除成功');
-              getUserTotal();
-              getUserList(_httpParams);
-            }
-            else{
-              alert('删除失败！');
-            }
-            $state.go("main.admin.user", {}, {
-              reload: true
-            });
-          })
-        }
-      }else{
-        alert("当前登录用户不能删除！");
-      }
-    }
+    // $scope.deleteUser = function(user) {
+    //   if(user.id!=LoginUser.id){
+    //     var flag = confirm("确定要删除吗？");
+    //     if (flag) {
+    //       Http.deleteUser(user).then(function(result) {
+    //         _httpParams.limit = 10;
+    //         _httpParams.skip = 0;
+    //         $scope.Paging.currentPage = 0 ;
+    //         if (200 == result.data.head.status) {
+    //           alert('删除成功');
+    //           getUserTotal();
+    //           getUserList(_httpParams);
+    //         }
+    //         else{
+    //           alert('删除失败！');
+    //         }
+    //         $state.go("main.admin.user", {}, {
+    //           reload: true
+    //         });
+    //       })
+    //     }
+    //   }else{
+    //     alert("当前登录用户不能删除！");
+    //   }
+    // }
 
     $scope.Password = function(user) {
       $scope.placeholder.password_1 = "必填";
@@ -1185,7 +1176,7 @@ Dashboard.directive('wiservDataQuotaOverviewChart', [
                 name: '资源提供部门',
                 type: 'pie',
                 // selectedMode: 'single',
-                radius: [0, '40%'],
+                radius: [0, '60%'],
                 label: {
                   normal: {
                     position: 'inner',
@@ -1196,12 +1187,12 @@ Dashboard.directive('wiservDataQuotaOverviewChart', [
                 },
                 labelLine: {
                   normal: {
-                    show: false
+                    show: true
                   }
                 },
                 data: [{
                   value: summary.dep_resource,
-                  name: '资源提供部门'
+                  name: '提供部门'
                 }, {
                   value: summary.month_increment_dpet_resource,
                   name: '本月新增',
@@ -1210,7 +1201,7 @@ Dashboard.directive('wiservDataQuotaOverviewChart', [
               }, {
                 name: '资源总数',
                 type: 'pie',
-                radius: ['60%', '75%'],
+                radius: ['70%', '80%'],
                 data: [{
                   value: summary.total_resource,
                   name: '资源总数'
@@ -1245,10 +1236,10 @@ Dashboard.directive('wiservRequirementOverviewChart', [
                 formatter: "{a} <br/>{b}: {c} ({d}%)"
               },
               series: [{
-                name: '需求涉及部门',
+                name: '涉及部门',
                 type: 'pie',
                 // selectedMode: 'single',
-                radius: [0, '40%'],
+                radius: [0, '60%'],
                 label: {
                   normal: {
                     position: 'inner',
@@ -1264,7 +1255,7 @@ Dashboard.directive('wiservRequirementOverviewChart', [
                 },
                 data: [{
                   value: summary.department_number,
-                  name: '需求涉及部门'
+                  name: '涉及部门'
                 }, {
                   value: summary.department_number_inc,
                   name: '本月新增',
@@ -1273,7 +1264,7 @@ Dashboard.directive('wiservRequirementOverviewChart', [
               }, {
                 name: '需求总数',
                 type: 'pie',
-                radius: ['60%', '75%'],
+                radius: ['70%', '80%'],
                 data: [{
                   value: summary.requiement_number,
                   name: '需求总数'
@@ -1487,8 +1478,8 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
     function getDataQuotaList(_httpParams){
       Http.getDataQuota(_httpParams).then(function(result) {
         $scope.DataQuotas = result.data.body[0].results;
-        $scope.DataQuotasTotal = result.data.body[0].count;
-        $scope.Paging.totalItems = result.data.body[0].count;
+        $scope.DataQuotasTotal = result.data.body[0].count[0].resource_count;
+        $scope.Paging.totalItems = result.data.body[0].count[0].item_count;
       });
     };
     // Init data quota talbe
@@ -1517,7 +1508,7 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
     // Data quota apply info
     $scope.DataQuotaApplyInfo = function(data_quota_id) {
       Http.getDataQuotaApplyInfo({info_resource_id: data_quota_id}).then(function() {
-        alert('申请查看成功');
+        // alert('申请中，等待审核');
         var httpParams = {};
         _.assign(httpParams, {limit:10, skip: ($scope.Paging.currentPage-1) * 10});
         getDataQuotaList(httpParams);
@@ -1593,10 +1584,12 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
     };
 
     /*面向社会开放*/
+
     $scope.openToSocietyFilter = function(id, index){
       $scope.openToSocietyActive = [];
       $scope.openToSocietyActiveAll = '';
       $scope.openToSocietyActive[index] = 'active';
+      var idx = filterParams.social_open_flag.indexOf(item.id);
       filterParams.social_open_flag = id;
       if('ALL'===id){
         delete filterParams.social_open_flag;
@@ -1617,8 +1610,18 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
         getDataQuotaListByFilter(filterParams);
       }else{
         $scope.ShareFrequencyActiveAll = '';
+        var idx = filterParams.update_period.indexOf(id);
         ($scope.ShareFrequencyActive[index]==='active')?($scope.ShareFrequencyActive[index]=''):($scope.ShareFrequencyActive[index]='active');
-        filterParams.update_period.push(id);
+        if(idx > -1){
+          if(filterParams.update_period.length ===1){
+            $scope.ShareFrequencyActiveAll = 'active';
+            filterParams.update_period = [];
+          }else{
+            filterParams.update_period.splice(idx, 1);
+          }
+        }else{
+          filterParams.update_period.push(id);
+        }
         getDataQuotaListByFilter(filterParams);
       }
     };
@@ -1633,9 +1636,19 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
         $scope.DataLevelActive=[];
         getDataQuotaListByFilter(filterParams);
       }else{
+        var idx = filterParams.area_level.indexOf(id);
         $scope.DataLevelActiveAll = '';
         ($scope.DataLevelActive[index]==='active')?($scope.DataLevelActive[index]=''):($scope.DataLevelActive[index]='active');
-        filterParams.area_level.push(id);
+        if(idx > -1){
+          if(filterParams.area_level.length ===1){
+            $scope.DataLevelActiveAll = 'active';
+            filterParams.area_level = [];
+          }else{
+            filterParams.area_level.splice(idx, 1);
+          }
+        }else{
+          filterParams.area_level.push(id);
+        }
         getDataQuotaListByFilter(filterParams);
       };
     };
@@ -1707,12 +1720,24 @@ DataQuota.controller('DataQuota.Controller.Main', ['$scope', '$state', 'DataQuot
         labelSelected: "a8"
       }
     }
-    // Menu Generator
+    // TypeMenu Generator
     Http.menu().then(function(result) {
       if (200 === result.data.head.status) {
         $scope.list = result.data.body;
       }
-    })
+    });
+    // OcupationMenu Generator
+    Http.menuRole().then(function(result) {
+      if (200 === result.data.head.status) {
+        $scope.OcupationList = result.data.body;
+      }
+    });
+    // AreaMenu Generator
+    Http.menuArea().then(function(result) {
+      if (200 === result.data.head.status) {
+        $scope.areaList = result.data.body;
+      }
+    });
   }
 ]);
 
@@ -1726,8 +1751,20 @@ DataQuota.factory('DataQuota.Service.Http', ['$http', 'API',
         path + '/menu', { params: params }
       )
     };
+    function menuRole(params) {
+      return $http.get(
+        path + '/menu_role', { params: params }
+      )
+    };
+    function menuArea(params) {
+      return $http.get(
+        path + '/menu_area', { params: params }
+      )
+    };
     return {
-      menu: menu
+      menu: menu,
+      menuRole: menuRole,
+      menuArea: menuArea
     }
   }
 ]);
@@ -1759,7 +1796,8 @@ Audit.controller('Department.Audit.Controller.Main', ['$scope', '$q', 'Departmen
     function getAuditList() {
       $scope.auditPromise = Http.getAuditList(_httpParams).then(function(result) {
         $scope.auditList = result.data.body[0].results;
-        $scope.Paging.totalItems = result.data.body[0].count;
+        $scope.resourceCount = result.data.body[0].count[0].resource_count;
+        $scope.Paging.totalItems = result.data.body[0].count[0].item_count;
       });
     }
 
@@ -1781,12 +1819,20 @@ Audit.controller('Department.Audit.Controller.info', ['$scope', '$state', '$q', 
     $scope.TabRequireShow = true;
     $scope.AuditInfo = {};
     $scope.AuditInfo.audit_opinion = '';
-    console.log($stateParams.item);
-    // get audit detail by id
-    $scope.InfoResourceDetail = $stateParams.item;
+
+    // 根据id查询信息资源详情
+    Http.getDepartInfoResList({
+      resource_id : $stateParams.RESOURCEID
+    }).then(function(ResourceRes) {
+      $scope.InfoResourceDetail = ResourceRes.data.body[0].results[0];
+      $scope.InfoResourceDetail.apply_dep_name = $stateParams.APPLYDEP;
+      $scope.InfoResourceDetail.apply_time = $stateParams.APPLYTIME;
+    })
+
+
     $scope.InfoItemShow = false;
     Http.getInfoItemList({
-      resource_id: $scope.InfoResourceDetail.id
+      resource_id: $stateParams.RESOURCEID
     }).then(function(result) {
       if (result.data.body.length == 0) {
         $scope.InfoItemShow = false;
@@ -1803,7 +1849,7 @@ Audit.controller('Department.Audit.Controller.info', ['$scope', '$state', '$q', 
         $scope.auditError = true;
         return;
       }
-      $scope.AuditInfo.audit_id = $stateParams.item.audit_id;
+      $scope.AuditInfo.audit_id = $stateParams.AUDITID;
       Http.updateAuditDetail($scope.AuditInfo).then(function(result) {
         if (200 == result.data.head.status) {
           alert('审核成功');
@@ -1861,12 +1907,20 @@ Audit.factory('Department.Audit.Service.Http', ['$http', '$q', 'API',
         }
       )
     }
+    function getDepartInfoResList(params) {
+      return $http.get(
+        path + '/info_resource_list', {
+          params: params
+        }
+      )
+    }
     return {
       getAuditList: getAuditList,
       getInfoResourceDetail: getInfoResourceDetail,
       updateAuditDetail: updateAuditDetail,
       getQuotaRequirement: getQuotaRequirement,
-      getInfoItemList: getInfoItemList
+      getInfoItemList: getInfoItemList,
+      getDepartInfoResList: getDepartInfoResList
     }
   }
 ]);
@@ -1943,7 +1997,8 @@ DInventory.controller('Department.Inventory.Controller.Main', ['$cookies', '$sco
       $scope.promise = Http.getDepartInfoResList(_httpParams).then(function(result) {
         console.log(result);
         $scope.infoResourceList = result.data.body[0].results;
-        $scope.Paging.totalItems = result.data.body[0].count;
+        $scope.resourceCount = result.data.body[0].count[0].resource_count;
+        $scope.Paging.totalItems = result.data.body[0].count[0].item_count;
       });
     }
 
@@ -2016,9 +2071,9 @@ DInventory.controller('Department.Inventory.Controller.Main', ['$cookies', '$sco
     $scope.getInfoResourceListBySF = function(item) {
       var idx = $scope.shareFreqSelection.indexOf(item.id);
       if (idx > -1) {
-        $scope.shareFreqSelection = [];
+        $scope.shareFreqSelection.splice(idx, 1);
       } else {
-        $scope.shareFreqSelection = item.id;
+        $scope.shareFreqSelection.push(item.id);
       }
       _httpParams.update_period = $scope.shareFreqSelection;
       _httpParams.limit = 10;
@@ -2133,28 +2188,34 @@ DInventory.controller('Department.Inventory.Controller.Main', ['$cookies', '$sco
 DInventory.controller('Department.Inventory.Controller.detail', ['$scope', '$q', 'Department.Inventory.Service.Http', '$stateParams', '$state',
   function($scope, $q, Http, $stateParams, $state) {
     console.log($stateParams.item);
-    $scope.InfoResourceDetail = $stateParams.item;
     $scope.InfoItemShow = false;
-    Http.getInfoItemList({
-      resource_id: $scope.InfoResourceDetail.id
-    }).then(function(result) {
-      if (result.data.body.length == 0) {
-        $scope.InfoItemShow = false;
-      } else {
-        $scope.InfoItemShow = true;
-        $scope.InfoItems = result.data.body;
+    Http.getDepartInfoResList({
+      resource_id : $stateParams.item
+    }).then(function(ResourceRes) {
+      $scope.InfoResourceDetail = ResourceRes.data.body[0].results[0];
+      Http.getInfoItemList({
+        resource_id: $scope.InfoResourceDetail.id
+      }).then(function(result) {
+        if (result.data.body.length == 0) {
+          $scope.InfoItemShow = false;
+        } else {
+          $scope.InfoItemShow = true;
+          $scope.InfoItems = result.data.body;
 
-        _($scope.InfoItems).forEach(function(item) {
-          var shareFreqDictName = [];
-          _(item.config).forEach(function(config) {
-            shareFreqDictName.push(config.dict_name);
+          _($scope.InfoItems).forEach(function(item) {
+            var shareFreqDictName = [];
+            _(item.config).forEach(function(config) {
+              shareFreqDictName.push(config.dict_name);
+            })
+            item.update_period_name = shareFreqDictName.toString();
           })
-          item.update_period_name = shareFreqDictName.toString();
-        })
-      }
+        }
 
 
+      })
     })
+
+
   }
 ])
 
@@ -2207,10 +2268,17 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
       }
 
     }
-    $scope.parent = {};
-    $scope.parent.itemNameExist = false;
+
     $scope.checkItemName = function() {
       if($scope.ResourceItem.item_name && $scope.ResourceItem.item_name != '') {
+        console.log($scope.ResourceItemList);
+        _($scope.ResourceItemList).forEach(function(item) {
+          if($scope.ResourceItem.item_name == item.item_name) {
+            $scope.parent.itemNameExist = true;
+            $scope.itemError = true;
+            return;
+          }
+        })
         Http.checkItemName({
           item_name: $scope.ResourceItem.item_name
         }).then(function(res) {
@@ -2220,6 +2288,8 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
           else{
             $scope.parent.itemNameExist = false;
           }
+          $scope.itemError = $scope.parent.itemNameExist;
+          console.log($scope.itemError);
         })
       }
 
@@ -2236,6 +2306,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
       'dict_category': RESOURCE_CATEGORY
     }).then(function(result) {
       $scope.resourceCategoryList = result.data.body;
+      $scope.resourceCategoryRelList = result.data.body;
     });
 
     Http.getSystemDictByCatagory({
@@ -2278,6 +2349,9 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
       if ($scope.resItemAddBtn && ($scope.ResourceItemList.length == 0)) { // 未添加信息项
         isValid = false;
       }
+      if($scope.InfoResource.category == $scope.InfoResource.rel_category) {// 信息资源分类和关联及类目名称相同
+        isValid = false;
+      }
 
       if (isValid) {
         InfoResourceAddObj.InfoResource = $scope.InfoResource;
@@ -2316,16 +2390,17 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
         InfoResourceAddObj.InfoItem = $scope.ResourceItemList;
 
         console.log(InfoResourceAddObj);
-        Http.saveInfoResource(InfoResourceAddObj).then(function(result) {
+        $scope.savePromise = Http.saveInfoResource(InfoResourceAddObj).then(function(result) {
           console.log(result.data);
           if (200 == result.data.head.status) {
+            alert('保存成功！');
             $scope.Modal = {};
             $state.go("main.department.inventory", {}, {
               reload: true
             });
 
           } else {
-            alert('保存失败');
+            alert('保存失败！');
           }
         })
       } else {
@@ -2338,39 +2413,71 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
     console.log($stateParams.item);
     $scope.resItemUpdateBtn = false;
     if ($stateParams.item) { // 选择修改
-      $scope.InfoResource = $stateParams.item;
+      // 根据id查询信息资源详情
+      Http.getDepartInfoResList({
+        resource_id : $stateParams.item
+      }).then(function(ResourceRes) {
+        $scope.InfoResource = ResourceRes.data.body[0].results[0];
 
-      // 获取资源分地区数据级别
-      Http.getResourceAreaLevel({
-        resource_id: $scope.InfoResource.id
-      }).then(function(res) {
-        $scope.dataLevelSelection = res.data.body[0].id;
-      })
-
-      // 获取资源更新周期
-      Http.getResourceUpdatePeriod({
-        resource_id: $scope.InfoResource.id
-      }).then(function(res) {
-        $scope.shareFreqSelection = res.data.body[0].id;
-      })
-
-      // 获取指定开放部门列表
-      Http.getResourceShareDeps({
-        resource_id: $scope.InfoResource.id
-      }).then(function(res) {
-        var authDepts = res.data.body[0].id;
-        if (authDepts.length > 0) {
-          $scope.depShow = true;
+        if (RESOURCE_FORMAT_DATA == $scope.InfoResource.resource_format) {
+          $scope.resItemUpdateBtn = true;
         }
-        _($scope.deptList).forEach(function(allItem) {
-          _(authDepts).forEach(function(authItem) {
-            if (allItem.id == authItem) {
-              allItem.ticked = true;
-              $scope.outputDeptList.push(allItem);
-            }
+
+        $scope.ResourceItemConfigList = [];
+        // 获取资源分地区数据级别
+        Http.getResourceAreaLevel({
+          resource_id: $scope.InfoResource.id
+        }).then(function(res) {
+          $scope.dataLevelSelection = res.data.body[0].id;
+        })
+
+        // 获取资源更新周期
+        Http.getResourceUpdatePeriod({
+          resource_id: $scope.InfoResource.id
+        }).then(function(res) {
+          $scope.shareFreqSelection = res.data.body[0].id;
+        })
+
+        // 获取指定开放部门列表
+        Http.getResourceShareDeps({
+          resource_id: $scope.InfoResource.id
+        }).then(function(res) {
+          var authDepts = res.data.body[0].id;
+          if (authDepts.length > 0) {
+            $scope.depShow = true;
+          }
+          _($scope.deptList).forEach(function(allItem) {
+            _(authDepts).forEach(function(authItem) {
+              if (allItem.id == authItem) {
+                allItem.ticked = true;
+                $scope.outputDeptList.push(allItem);
+              }
+            })
+          });
+        })
+
+
+        // 获取所有信息项
+        Http.getInfoItemList({
+          resource_id: $scope.InfoResource.id
+        }).then(function(result) {
+          $scope.ResourceItemList = result.data.body;
+          // 拼接信息资源所有信息项的多选项
+          _($scope.ResourceItemList).forEach(function(item) {
+            var shareFreqDictName = [];
+            _(item.config).forEach(function(config) {
+              var itemConfig = {};
+              itemConfig.InfoItemId = item.item_name;
+              itemConfig.sys_dict_id = config.id;
+              shareFreqDictName.push(config.dict_name);
+              $scope.ResourceItemConfigList.push(itemConfig);
+            })
+            item.update_period_name = shareFreqDictName.toString();
           })
-        });
+          console.log($scope.ResourceItemConfigList);
+        })
       })
+
 
       // 选中数据库类
       if (RESOURCE_FORMAT_DATA == $scope.InfoResource.resource_format) {
@@ -2385,13 +2492,18 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
       var InfoResource_RelationConfig = [];
       var InfoResourceApplyInfo = [];
       var InfoItem_RelationConfig = [];
+
+
       if($scope.resNameExist) {
         isValid = false;
       }
       if ($scope.shareFreqSelection.length == 0 && !$scope.resItemUpdateBtn) { // 未选择更新周期
         isValid = false;
       }
-      if ($scope.resItemAddBtn && ($scope.ResourceItemList.length == 0)) { // 未添加信息项
+      if ($scope.resItemAddBtn && ($scope.ResourceItemList.length == 0) || $scope.resItemUpdateBtn && ($scope.ResourceItemList.length == 0)) { // 未添加信息项
+        isValid = false;
+      }
+      if($scope.InfoResource.category == $scope.InfoResource.rel_category) {// 信息资源分类和关联及类目名称相同
         isValid = false;
       }
 
@@ -2432,7 +2544,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
         InfoResourceAddObj.InfoItem = $scope.ResourceItemList;
 
         console.log(InfoResourceAddObj);
-        Http.updateInfoResource(InfoResourceAddObj).then(function(result) {
+        $scope.updatePromise = Http.updateInfoResource(InfoResourceAddObj).then(function(result) {
           console.log(result.data);
           if (200 == result.data.head.status) {
             alert('保存成功！');
@@ -2454,6 +2566,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
     }
 
     $scope.editItems = function(id) {
+      $scope.ResourceItemConfigList = [];
       Http.getInfoItemList({
         resource_id: id
       }).then(function(result) {
@@ -2484,6 +2597,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
       $scope.ResourceItem.calculate_method = '';
       $scope.ResourceItem.shareFreqItemSelection = [];
       $scope.ResourceItem.shareFreqItemObjSelection = [];
+      $scope.parent = {};
       $scope.parent.itemNameExist = false;
 
       $scope.data = {};
@@ -2533,6 +2647,8 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
       $scope.ResourceItem.shareFreqItemSelection = _.map(InfoItem.config,'id');
       $scope.ResourceItem.shareFreqItemObjSelection = InfoItem.config;
       $scope.shareFreqEmpty = false;
+      $scope.parent = {};
+      $scope.parent.itemNameExist = false;
 
       $scope.data = {};
 
@@ -2591,6 +2707,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
           $scope.ResourceItemConfigList.push(sys_dict);
           shareFreqDictName.push(item.dict_name);
         });
+        $scope.ResourceItem.config = $scope.ResourceItem.shareFreqItemObjSelection;
         $scope.ResourceItem.update_period_name = shareFreqDictName.toString();
         console.log($scope.ResourceItemList);
       })
@@ -2610,17 +2727,19 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
     // show or hide department
     $scope.depShow = false;
     $scope.showHideDeps = function(ev) {
-      if (LEVEL_ALL_OPEN != $scope.InfoResource.share_level) {
-        if (LEVEL_AUTH == $scope.InfoResource.share_level) {
+      if (LEVEL_ALL_OPEN != $scope.InfoResource.share_level) {// 不为全开放
+        if (LEVEL_AUTH == $scope.InfoResource.share_level) {// 授权开放
           $scope.depShow = true;
           $scope.socialOpenFlag = false;
         } else {
           $scope.depShow = false;
           $scope.socialOpenFlag = true;
+          $scope.outputDeptList = [];
         }
         $scope.InfoResource.social_open_flag = 0;
       } else {
         $scope.InfoResource.social_open_flag = 1;
+        $scope.outputDeptList = [];
       }
 
     }
@@ -2886,8 +3005,11 @@ DInventory.service('Department.Inventory.Service.Component', ['$uibModal', '$sta
       });
       scope.Modal.confirm = function() {
         console.log(scope.parent.itemNameExist);
-        if (scope.ResourceItem.shareFreqItemSelection.length == 0 || scope.parent.itemNameExist) {
+        if (scope.ResourceItem.shareFreqItemSelection.length == 0) {
           scope.shareFreqEmpty = true;
+          return;
+        }
+        if(scope.parent.itemNameExist) {
           return;
         }
         modalInstance.close(scope.Modal);
@@ -3048,7 +3170,7 @@ Department.controller('Department.Controller.Main', ['$cookies', '$scope', '$q',
 
     // go to requirement list page
     $scope.reqMore = function() {
-      $state.go("main.department.requirement", {}, {
+      $state.go("main.department.requirementConfirm", {}, {
         reload: true
       });
     }
@@ -3259,6 +3381,8 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$cookies', 
       $scope.shareFreqSelection = [];
       $scope.dataLevelReqSelection = [];
 
+      $scope.error = false;
+
       Component.popModal($scope, '发布', 'add-req-modal').result.then(function() {
         _($scope.dataLevelReqSelection).forEach(function(value) {
           var req_sys_dict = {};
@@ -3355,6 +3479,7 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$cookies', 
         $scope.dataLevelReqSelection = res.data.body[0].id;
       })
 
+      $scope.error = false;
       Component.popModal($scope, '修改', 'add-req-modal').result.then(function() {
         _($scope.dataLevelReqSelection).forEach(function(value) {
           var req_sys_dict = {};
@@ -3724,7 +3849,8 @@ DepartmentShare.controller('DepartmentShare.Controller.Main', [ '$scope', 'Depar
     function getDepartmentShareList(_httpParams) {
       $scope.sharePromise = Http.shareInfoResourceList(_httpParams).then(function(result) {
         $scope.depShareList = result.data.body[0].results;
-        $scope.Paging.totalItems = result.data.body[0].count;
+        $scope.resourceCount = result.data.body[0].count[0].resource_count;
+        $scope.Paging.totalItems = result.data.body[0].count[0].item_count;
       });
     }
 
@@ -3796,9 +3922,9 @@ DepartmentShare.controller('DepartmentShare.Controller.Main', [ '$scope', 'Depar
     $scope.getInfoResourceListBySF = function(item) {
       var idx = $scope.shareFreqSelection.indexOf(item.id);
       if (idx > -1) {
-        $scope.shareFreqSelection = [];
+        $scope.shareFreqSelection.splice(idx, 1);
       } else {
-        $scope.shareFreqSelection = item.id;
+        $scope.shareFreqSelection.push(item.id);
       }
       _httpParams.update_period = $scope.shareFreqSelection;
       _httpParams.limit = 10;
@@ -3939,12 +4065,33 @@ DepartmentShare.controller('DepartmentShare.Controller.Main', [ '$scope', 'Depar
 // Department share detail controller
 DepartmentShare.controller('DepartmentShare.Controller.detail', [ '$scope', 'DepartmentShare.Service.Http', '$stateParams',
   function( $scope, Http, $stateParams) {
-    // get department share detail
-    Http.getQuotaDetail({
-      data_quota_id: $stateParams.ID
-    }).then(function(result) {
-      $scope.DataQuotaDetail = result.data.body[0];
+    $scope.InfoItemShow = false;
+    Http.shareInfoResourceList({
+      resource_id : $stateParams.item
+    }).then(function(ResourceRes) {
+      $scope.InfoResourceDetail = ResourceRes.data.body[0].results[0];
+      Http.getInfoItemList({
+        resource_id: $scope.InfoResourceDetail.id
+      }).then(function(result) {
+        if (result.data.body.length == 0) {
+          $scope.InfoItemShow = false;
+        } else {
+          $scope.InfoItemShow = true;
+          $scope.InfoItems = result.data.body;
+
+          _($scope.InfoItems).forEach(function(item) {
+            var shareFreqDictName = [];
+            _(item.config).forEach(function(config) {
+              shareFreqDictName.push(config.dict_name);
+            })
+            item.update_period_name = shareFreqDictName.toString();
+          })
+        }
+
+
+      })
     })
+
 
   }
 ])
@@ -3989,12 +4136,21 @@ DepartmentShare.factory('DepartmentShare.Service.Http', ['$http', 'API',
         }
       )
     };
+
+    function getInfoItemList(params) {
+      return $http.get(
+        path + '/allitem_detail', {
+          params: params
+        }
+      )
+    }
     return {
       getSystemDictByCatagory: getSystemDictByCatagory,
       shareInfoResourceList: shareInfoResourceList,
       getQuotaDetail: getQuotaDetail,
       followDepartment: followDepartment,
-      cancelFollowDepartment: cancelFollowDepartment
+      cancelFollowDepartment: cancelFollowDepartment,
+      getInfoItemList: getInfoItemList
     }
   }
 ]);
