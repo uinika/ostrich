@@ -164,7 +164,7 @@
                     </div>
                   </td>
                   <td title="{{quota.share_level_name}}">
-                    <div ng-if='quota.share_level_name =="全省开放"'>
+                    <div ng-if='quota.share_level_name =="全开放"'>
                       <span>
                         <i class='fa fa-eye'></i>
                       </span>
@@ -178,8 +178,10 @@
                       <span>
                         <i class='fa fa-lock blue'>
                         </i>
-                          <a ng-if="quota.showbutton==='true'" class='btn btn-default btn-xs' ng-click='DataQuotaApplyInfo(quota.id)'>申请查看</a>
-                          <a ng-if="quota.showbutton==='false'" title='申请中，等待审核'><i class='fa fa-ban text-warning'></i></a>
+                          <a ng-if="quota.showbutton==='-1'" class='btn btn-default btn-xs' ng-click='DataQuotaApplyInfo(quota.id)'>申请查看</a>
+                          <a ng-if="quota.showbutton==='0'" title='申请中，等待审核'><i class='fa fa-clock-o text-info'></i></a>
+                          <a ng-if="quota.showbutton==='1'" title='申请已通过'><i class='fa fa-check-square-o text-success'></i></a>
+                          <a ng-if="quota.showbutton==='2'" title='申请未通过'><i class='fa fa-ban text-warning'></i></a>
                       </span>
                     </div>
                     <div ng-if='quota.share_level_name =="暂不开放" '>
@@ -191,8 +193,8 @@
                   </td>
                   <td>{{$index+1}}</td>
                   <td title='{{quota.resource_name}}'>
-                  <a ng-if="quota.showbutton==='false'" ui-sref='main.data-quota.detail({resource_id:quota.id})' ng-class="{true: 'orange', false: 'text-primary'}[(DataQuotas[$index].resource_name === DataQuotas[$index-1].resource_name) && (DataQuotas[$index-1].resource_format_name==='数据库类')]">{{quota.resource_name}}</a>
-                  <a ng-if="quota.showbutton==='true'"  ng-class="{true: 'orange', false: 'text-primary'}[(DataQuotas[$index].resource_name === DataQuotas[$index-1].resource_name) && (DataQuotas[$index-1].resource_format_name==='数据库类')]">{{quota.resource_name}}</a>
+                  <a ng-if="(quota.showbutton==='1')||(quota.showbutton==='-2')" ui-sref='main.data-quota.detail({resource_id:quota.id})' ng-class="{true: 'orange', false: 'text-primary'}[(DataQuotas[$index].resource_name === DataQuotas[$index-1].resource_name) && (DataQuotas[$index-1].resource_format_name==='数据库类')]">{{quota.resource_name}}</a>
+                  <a ng-if="(quota.showbutton !='1')&&(quota.showbutton !='-2')"  ng-class="{true: 'orange', false: 'text-primary'}[(DataQuotas[$index].resource_name === DataQuotas[$index-1].resource_name) && (DataQuotas[$index-1].resource_format_name==='数据库类')]">{{quota.resource_name}}</a>
                   </td>
                   <td title='{{quota.alias}}' ng-class="{true: 'orange', false: ''}[(DataQuotas[$index].resource_name === DataQuotas[$index-1].resource_name) && (DataQuotas[$index-1].resource_format_name==='数据库类')]">{{quota.alias}}</td>
                   <td title='{{quota.summary}}' ng-class="{true: 'orange', false: ''}[(DataQuotas[$index].resource_name === DataQuotas[$index-1].resource_name) && (DataQuotas[$index-1].resource_format_name==='数据库类')]">{{quota.summary}}</td>
@@ -226,7 +228,7 @@
                   <td title='{{quota.resource_provider_code}}'>{{quota.resource_provider_code}}</td>
 
                   <td title='{{quota.resource_sn}}'>{{quota.resource_sn}}</td>
-                  <td title='{{rel_category_name}}'>{{rel_category_name}}</td>
+                  <td title='{{rel_category_name}}'>{{quota.rel_category_name}}</td>
                   <td title='{{quota.area_range}}'>{{quota.area_range}}</td>
                   <td title='{{quota.area_level}}'>{{quota.area_level}}</td>
 

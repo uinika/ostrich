@@ -94,8 +94,9 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
             Http.getUserOrganizationCode({
               "organization":organization
             }).then(function (result){
-              if(result.data.body[0].flag==0){
-                $scope.sysUser.organization_code = result.data.body[0].organization_code ;
+              var organizationArray = result.data.body[0].organization_code.split(",");
+              if(organizationArray[1]==0){
+                $scope.sysUser.organization_code = organizationArray[0] ;
               }else{
                 $scope.placeholder.organization = "机构名称已存在，请重新输入";
                 $scope.organization = true;

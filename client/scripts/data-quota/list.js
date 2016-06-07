@@ -23,8 +23,8 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
     function getDataQuotaList(_httpParams){
       Http.getDataQuota(_httpParams).then(function(result) {
         $scope.DataQuotas = result.data.body[0].results;
-        $scope.DataQuotasTotal = result.data.body[0].count;
-        $scope.Paging.totalItems = result.data.body[0].count;
+        $scope.DataQuotasTotal = result.data.body[0].count[0].resource_count;
+        $scope.Paging.totalItems = result.data.body[0].count[0].item_count;
       });
     };
     // Init data quota talbe
@@ -53,7 +53,7 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
     // Data quota apply info
     $scope.DataQuotaApplyInfo = function(data_quota_id) {
       Http.getDataQuotaApplyInfo({info_resource_id: data_quota_id}).then(function() {
-        alert('申请中，等待审核');
+        // alert('申请中，等待审核');
         var httpParams = {};
         _.assign(httpParams, {limit:10, skip: ($scope.Paging.currentPage-1) * 10});
         getDataQuotaList(httpParams);
