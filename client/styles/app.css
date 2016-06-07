@@ -647,6 +647,9 @@ input.ng-touched.ng-invalid {
 #department-share .indicator-list table {
   table-layout: fixed;
 }
+#department-share .indicator-list table tr.has-item {
+  background: #FFF;
+}
 #department-share .indicator-list table tr td {
   overflow: hidden;
   white-space: nowrap;

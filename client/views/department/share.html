@@ -178,7 +178,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr ng-repeat='InfoResource in depShareList | orderBy:"create_time":true'>
+                    <tr ng-repeat='InfoResource in depShareList | orderBy:"create_time":true' ng-class="{true: 'has-item', false: 'text-default'}[depShareList[$index].id === depShareList[$index-1].id]">
                       <td>
                         <div ng-if='InfoResource.share_level_name =="全省开放" '>
                           <span>
