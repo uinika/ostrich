@@ -3,16 +3,16 @@
   <div id='department-audit'>
     <div class='indicator-order'>
       <div class='pull-left'>
-        <p class='font-18'>指标审核</p>
+        <p class='font-18'>数据查看审核</p>
       </div>
       <div class='pull-right'>
         <ul class="nav nav-pills">
 
           <li role="presentation "  class='indicator-total'>
-            指标审核总数<span class='num'>{{Paging.totalItems}}</span>
+            审核总数<span class='num'>{{Paging.totalItems}}</span>
           </li>
           <li role="presentation">
-              <input type="text" class='input-filter' placeholder="请输入查询指标名称" ng-model='InfoResource.resource_name_filter'>
+              <input type="text" class='input-filter' placeholder="请输入查询信息资源名称" ng-model='InfoResource.resource_name_filter'>
               <button type="button" class="btn btn-primary" ng-click='searchInfoResourceByName()'>查询</button>
           </li>
         </ul>
