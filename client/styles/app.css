@@ -391,7 +391,7 @@ input.ng-touched.ng-invalid {
 }
 #department-inventory .indicator-list .scroll {
   overflow-x: scroll;
-  height: 512px;
+  height: 530px;
 }
 #department-inventory .indicator-list .scroll div.container {
   width: 3000px !important;
@@ -615,7 +615,7 @@ input.ng-touched.ng-invalid {
 }
 #department-share .indicator-list .scroll {
   overflow-x: scroll;
-  height: 490px;
+  height: 530px;
 }
 #department-share .indicator-list .scroll div.container {
   width: 2000px !important;
@@ -949,7 +949,7 @@ input.ng-touched.ng-invalid {
 }
 #department-audit .indicator-list .scroll {
   overflow-x: scroll;
-  height: 490px;
+  height: 530px;
 }
 #department-audit .indicator-list .scroll div.container {
   width: 3200px !important;
