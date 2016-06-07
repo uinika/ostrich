@@ -25,7 +25,8 @@ Audit.controller('Department.Audit.Controller.Main', ['$scope', '$q', 'Departmen
     function getAuditList() {
       $scope.auditPromise = Http.getAuditList(_httpParams).then(function(result) {
         $scope.auditList = result.data.body[0].results;
-        $scope.Paging.totalItems = result.data.body[0].count;
+        $scope.resourceCount = result.data.body[0].count[0].resource_count;
+        $scope.Paging.totalItems = result.data.body[0].count[0].item_count;
       });
     }
 

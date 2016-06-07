@@ -70,7 +70,8 @@ DInventory.controller('Department.Inventory.Controller.Main', ['$cookies', '$sco
       $scope.promise = Http.getDepartInfoResList(_httpParams).then(function(result) {
         console.log(result);
         $scope.infoResourceList = result.data.body[0].results;
-        $scope.Paging.totalItems = result.data.body[0].count;
+        $scope.resourceCount = result.data.body[0].count[0].resource_count;
+        $scope.Paging.totalItems = result.data.body[0].count[0].item_count;
       });
     }
 
@@ -143,9 +144,9 @@ DInventory.controller('Department.Inventory.Controller.Main', ['$cookies', '$sco
     $scope.getInfoResourceListBySF = function(item) {
       var idx = $scope.shareFreqSelection.indexOf(item.id);
       if (idx > -1) {
-        $scope.shareFreqSelection = [];
+        $scope.shareFreqSelection.splice(idx, 1);
       } else {
-        $scope.shareFreqSelection = item.id;
+        $scope.shareFreqSelection.push(item.id);
       }
       _httpParams.update_period = $scope.shareFreqSelection;
       _httpParams.limit = 10;
