@@ -166,7 +166,7 @@
                 <option ng-repeat="shareLevel in  shareLevelList" value='{{shareLevel.id}}'>{{shareLevel.dict_name}}</option>
               </select>
               <span ng-class="{true: 'ng-show', false: 'ng-hide'}[depShow]">指定部门名称：
-                <div style='display:inline-block' isteven-multi-select input-model="deptList" output-model="outputDeptList" button-label="dep_name" item-label="dep_name" tick-property="ticked"></div>
+                <div style='display:inline-block' isteven-multi-select input-model="deptList" output-model="outputDeptList" helper-elements="all none filter" button-label="dep_name" item-label="dep_name" tick-property="ticked"></div>
               </span>
             </div>
           </div>

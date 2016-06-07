@@ -95,6 +95,8 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$cookies', 
       $scope.shareFreqSelection = [];
       $scope.dataLevelReqSelection = [];
 
+      $scope.error = false;
+
       Component.popModal($scope, '发布', 'add-req-modal').result.then(function() {
         _($scope.dataLevelReqSelection).forEach(function(value) {
           var req_sys_dict = {};
@@ -191,6 +193,7 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$cookies', 
         $scope.dataLevelReqSelection = res.data.body[0].id;
       })
 
+      $scope.error = false;
       Component.popModal($scope, '修改', 'add-req-modal').result.then(function() {
         _($scope.dataLevelReqSelection).forEach(function(value) {
           var req_sys_dict = {};
