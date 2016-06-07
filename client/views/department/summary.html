@@ -101,7 +101,7 @@
               <tr ng-repeat='invtItem in toAuditList'>
                 <td title='{{invtItem.apply_time |date:"yyyy-MM-dd HH:mm:ss"}}'>{{invtItem.apply_time |date:"yyyy-MM-dd HH:mm:ss"}}</td>
                 <td title='{{invtItem.resource_name}}'>
-                  <a ui-sref='main.department.inventory.detail({ID:invtItem.data_quota_id})'>
+                  <a ui-sref='main.department.audit.info({AUDITID:invtItem.audit_id,RESOURCEID:invtItem.resource_id,APPLYTIME:invtItem.apply_time,APPLYDEP:invtItem.dep_name})'>
                     <pre>{{invtItem.resource_name}}</pre>
                   </a>
                 </td>
