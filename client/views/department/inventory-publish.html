@@ -31,8 +31,8 @@
               <span class='require-sign'>*</span>信息资源摘要:</label>
             <div class="col-sm-10">
               <textarea class="form-control" name='summary' required ng-maxlength="256" rows='3' ng-model='InfoResource.summary'></textarea>
-              <p ng-show="InfoResourceForm.summary.$invalid.maxlength" class="help-block">输入的内容太长。</p>
-              <p ng-show="InfoResourceForm.summary.$error.required && submitted" class="help-block">请输入指标详细解释</p>
+              <p ng-show="InfoResourceForm.summary.$error.maxlength" class="help-block">您输入的内容太长。</p>
+                <p ng-show="InfoResourceForm.summary.$error.required && submitted" class="help-block">请输入指标详细解释</p>
               <span class='pull-right'>(最多256个汉字)</span>
             </div>
           </div>
@@ -147,7 +147,7 @@
               计算方法:</label>
             <div class="col-sm-10">
               <textarea class="form-control" name='calculate_method'  ng-maxlength="256" rows='3' ng-model='InfoResource.calculate_method'></textarea>
-              <p ng-show="InfoResourceForm.calculate_method.$invalid.maxlength" class="help-block">输入的内容太长。</p>
+              <p ng-show="InfoResourceForm.calculate_method.$error.maxlength" class="help-block">您输入的内容太长。</p>
               <p ng-show="InfoResourceForm.calculate_method.$error.required && submitted" class="help-block">请输入指标详细解释</p>
               <span class='pull-left help-info'>资源信息统计指标具体数值需要采用的算法</span>
               <span class='pull-right '>(最多256个汉字)</span>
@@ -182,7 +182,7 @@
               <span class='require-sign'>*</span>共享条件:</label>
             <div class="col-sm-10">
               <textarea class="form-control" name='share_limit' required ng-maxlength="256" rows='3' placeholder='有条件共享类可注明共享条件和共享范围；不予共享类注明相关的法律、行政法规和党中央、国务院政策依据。' ng-model='InfoResource.share_limit'></textarea>
-              <p ng-show="InfoResourceForm.share_limit.$invalid.maxlength" class="help-block">输入的内容太长。</p>
+              <p ng-show="InfoResourceForm.share_limit.$error.maxlength" class="help-block">您输入的内容太长。</p>
               <p ng-show="InfoResourceForm.share_limit.$error.required && submitted" class="help-block">请输入指标详细解释</p>
               <span class='pull-right'>(最多256个汉字)</span>
             </div>
@@ -215,7 +215,7 @@
               开放条件:</label>
             <div class="col-sm-10">
               <textarea class="form-control" placeholder='描述对数据开放利用的约束条件' name='social_open_limit'  ng-maxlength="256" rows='3' placeholder='有条件共享类可注明共享条件和共享范围；不予共享类注明相关的法律、行政法规和党中央、国务院政策依据。' ng-model='InfoResource.social_open_limit'></textarea>
-              <p ng-show="InfoResourceForm.social_open_limit.$invalid.maxlength" class="help-block">输入的内容太长。</p>
+              <p ng-show="InfoResourceForm.social_open_limit.$error.maxlength" class="help-block">您输入的内容太长。</p>
               <span class='pull-right'>(最多256个汉字)</span>
             </div>
           </div>
@@ -393,7 +393,7 @@
             计算方法:</label>
           <div class="col-sm-10">
             <textarea class="form-control" name='calculate_method'  ng-maxlength="256" rows='3' ng-model='ResourceItem.calculate_method'></textarea>
-            <p ng-show="addItemForm.calculate_method.$invalid.maxlength" class="help-block">输入的内容太长。</p>
+            <p ng-show="addItemForm.calculate_method.$error.maxlength" class="help-block">您输入的内容太长。</p>
             <span class='pull-left'>资源信息统计指标具体数值需要采用的算法</span>
             <span class='pull-right'>(最多256个汉字)</span>
           </div>
