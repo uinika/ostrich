@@ -891,6 +891,8 @@ input.ng-touched.ng-invalid {
 }
 .confirm-req-modal .table > tbody > tr > td {
   border: none;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 #department-requirement-detail {
   margin-bottom: 50px;
