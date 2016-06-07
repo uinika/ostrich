@@ -153,8 +153,13 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
         getDataQuotaListByFilter(filterParams);
       }else{
         $scope.ShareFrequencyActiveAll = '';
+        var idx = filterParams.update_period.indexOf(id);
         ($scope.ShareFrequencyActive[index]==='active')?($scope.ShareFrequencyActive[index]=''):($scope.ShareFrequencyActive[index]='active');
-        filterParams.update_period.push(id);
+        if(idx > -1){
+          filterParams.update_period.splice(idx, 1);
+        }else{
+          filterParams.update_period.push(id);
+        }
         getDataQuotaListByFilter(filterParams);
       }
     };
@@ -169,8 +174,12 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
         $scope.DataLevelActive=[];
         getDataQuotaListByFilter(filterParams);
       }else{
+        var idx = filterParams.area_level.indexOf(id);
         $scope.DataLevelActiveAll = '';
         ($scope.DataLevelActive[index]==='active')?($scope.DataLevelActive[index]=''):($scope.DataLevelActive[index]='active');
+        if(idx > -1){
+          filterParams.area_level.splice(idx, 1);
+        }
         filterParams.area_level.push(id);
         getDataQuotaListByFilter(filterParams);
       };
