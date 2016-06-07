@@ -53,7 +53,7 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
     // Data quota apply info
     $scope.DataQuotaApplyInfo = function(data_quota_id) {
       Http.getDataQuotaApplyInfo({info_resource_id: data_quota_id}).then(function() {
-        alert('申请查看成功');
+        alert('申请中，等待审核');
         var httpParams = {};
         _.assign(httpParams, {limit:10, skip: ($scope.Paging.currentPage-1) * 10});
         getDataQuotaList(httpParams);
@@ -148,7 +148,6 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
     filterParams.update_period = [];
     $scope.ShareFrequencyActive = [];
     $scope.ShareFrequencyFilter = function(id, index){
-      $scope.ShareFrequencyActiveAll = 'active';
       if('ALL'===id){
         filterParams.update_period = [];
         $scope.ShareFrequencyActiveAll = 'active';

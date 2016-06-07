@@ -1,12 +1,12 @@
 <div id='data-quota-list'>
   <div class="panel panel-default">
     <div class="panel-heading">
-      <i class="fa fa-paperclip"> 指标详情</i>
+      <i class="fa fa-paperclip"> 信息资源详情</i>
       <a class="pull-right btn btn-xs" type="button" onclick="history.go(-1)">返回</a>
     </div>
     <div class="panel-body">
       <uib-tabset class='quota-detail' active="active">
-        <uib-tab index="0" heading="指标详情">
+        <uib-tab index="0" heading="信息资源">
           <ul class="list-group">
             <li class="list-group-item"><b>信息资源名称:</b> {{DataQuotaDetail.resource_name}}</li>
             <li class="list-group-item"><b>信息资源别称:</b> {{DataQuotaDetail.alias}}</li>
@@ -26,7 +26,7 @@
             <li class="list-group-item"><b>信息资源提供方:</b> {{DataQuotaDetail.resource_provider}}</li>
             <li class="list-group-item"><b>资源提供方代码:</b> {{DataQuotaDetail.resource_provider_code}}</li>
             <li class="list-group-item"><b>信息资源目录代码:</b> {{DataQuotaDetail.resource_sn}}</li>
-            <li class="list-group-item"><b>关联及类目名称:</b> {{rel_category}}</li>
+            <li class="list-group-item"><b>关联及类目名称:</b> {{DataQuotaDetail.rel_category}}</li>
             <li class="list-group-item"><b>空间范围:</b> {{DataQuotaDetail.area_range}}</li>
             <li class="list-group-item"><b>分地区数据级别:</b> {{DataQuotaDetail.regionallevel}}</li>
             <li class="list-group-item"><b>联系人:</b> {{DataQuotaDetail.linkman}}</li>

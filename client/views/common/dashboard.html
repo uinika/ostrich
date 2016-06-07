@@ -15,7 +15,7 @@
           </div>
           <div class='bureau-list'>
             <div ng-repeat='bureau in Bureaus | filter:query' class='bureau-item col-md-3'>
-              <a ui-sref='main.data-quota.list({resource_dep_id: bureau.id})' class='thumbnail'>
+              <a ui-sref='main.data-quota.list({resource_dep_id: bureau.id, dep_name: bureau.dep_name})' class='thumbnail'>
                 <img ng-src='styles/images/bureau/{{::bureau.dep_en_name}}' title='{{::bureau.dep_name}}'>
               </a>
               <div class="caption">

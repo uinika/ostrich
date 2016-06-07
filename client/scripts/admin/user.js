@@ -87,20 +87,19 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
         }
         $scope.Modal.organization = function(){
           $scope.placeholder.organization = "必填";
-          $scope.placeholder.organization_code = "必填";
+          $scope.placeholder.organization_code = "必填，根据机构名称自动生成";
           $scope.organization = false;
           var organization = $scope.sysUser.organization ;
           if(organization){
             Http.getUserOrganizationCode({
               "organization":organization
             }).then(function (result){
-              if(200 == result.data.head.status){
+              if(result.data.body[0].flag==0){
                 $scope.sysUser.organization_code = result.data.body[0].organization_code ;
               }else{
-                $scope.placeholder.organization = "机构名称不对";
+                $scope.placeholder.organization = "机构名称已存在，请重新输入";
                 $scope.organization = true;
                 $scope.sysUser.organization = "";
-                $scope.placeholder.organization_code = "没有相对应的机构编码";
               }
             });
           }
@@ -233,31 +232,31 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
         })
       });
     }
-    $scope.deleteUser = function(user) {
-      if(user.id!=LoginUser.id){
-        var flag = confirm("确定要删除吗？");
-        if (flag) {
-          Http.deleteUser(user).then(function(result) {
-            _httpParams.limit = 10;
-            _httpParams.skip = 0;
-            $scope.Paging.currentPage = 0 ;
-            if (200 == result.data.head.status) {
-              alert('删除成功');
-              getUserTotal();
-              getUserList(_httpParams);
-            }
-            else{
-              alert('删除失败！');
-            }
-            $state.go("main.admin.user", {}, {
-              reload: true
-            });
-          })
-        }
-      }else{
-        alert("当前登录用户不能删除！");
-      }
-    }
+    // $scope.deleteUser = function(user) {
+    //   if(user.id!=LoginUser.id){
+    //     var flag = confirm("确定要删除吗？");
+    //     if (flag) {
+    //       Http.deleteUser(user).then(function(result) {
+    //         _httpParams.limit = 10;
+    //         _httpParams.skip = 0;
+    //         $scope.Paging.currentPage = 0 ;
+    //         if (200 == result.data.head.status) {
+    //           alert('删除成功');
+    //           getUserTotal();
+    //           getUserList(_httpParams);
+    //         }
+    //         else{
+    //           alert('删除失败！');
+    //         }
+    //         $state.go("main.admin.user", {}, {
+    //           reload: true
+    //         });
+    //       })
+    //     }
+    //   }else{
+    //     alert("当前登录用户不能删除！");
+    //   }
+    // }
 
     $scope.Password = function(user) {
       $scope.placeholder.password_1 = "必填";

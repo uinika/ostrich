@@ -1237,6 +1237,9 @@ input.ng-touched.ng-invalid {
 #data-quota-list .quota-example .table-responsive {
   margin-top: 0;
 }
+#admin-user .row {
+  height: 450px;
+}
 #admin-user .table-patch td,
 #admin-user .table-patch th {
   max-width: 200px;
