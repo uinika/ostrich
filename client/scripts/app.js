@@ -169,10 +169,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', '$provide',
         controller: 'Department.Audit.Controller.Main'
       })
       .state('main.department.audit.info', {
-        url: '/info/{item:json}',
-        params:{
-          item:null
-        },
+        url: '/info/:AUDITID/:RESOURCEID/:APPLYTIME/:APPLYDEP',
         templateUrl: 'views/department/audit-info.html',
         controller: 'Department.Audit.Controller.info'
       })

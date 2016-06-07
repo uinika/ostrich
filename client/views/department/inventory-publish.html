@@ -61,9 +61,10 @@
               关联及类目名称:</label>
             <div class="col-sm-10">
               <select ng-model='InfoResource.rel_category'  name='rel_category' class='form-control' style='display: inline-block !important;width: auto;'>
-                <option ng-repeat="resourceCategory in  resourceCategoryList" value='{{resourceCategory.id}}'>{{resourceCategory.dict_name}}</option>
+                <option ng-repeat="resourceCategory in  resourceCategoryRelList" value='{{resourceCategory.id}}'>{{resourceCategory.dict_name}}</option>
               </select>
               <span class='help-info'>政务资源信息关联类别</span>
+              <p ng-show="InfoResource.rel_category == InfoResource.category" class="help-block">信息资源分类与关联及类目名称不能相同！</p>
             </div>
           </div>
 

@@ -369,6 +369,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
       'dict_category': RESOURCE_CATEGORY
     }).then(function(result) {
       $scope.resourceCategoryList = result.data.body;
+      $scope.resourceCategoryRelList = result.data.body;
     });
 
     Http.getSystemDictByCatagory({
@@ -409,6 +410,9 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
         isValid = false;
       }
       if ($scope.resItemAddBtn && ($scope.ResourceItemList.length == 0)) { // 未添加信息项
+        isValid = false;
+      }
+      if($scope.InfoResource.category == $scope.InfoResource.rel_category) {// 信息资源分类和关联及类目名称相同
         isValid = false;
       }
 
@@ -560,6 +564,9 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
         isValid = false;
       }
       if ($scope.resItemAddBtn && ($scope.ResourceItemList.length == 0) || $scope.resItemUpdateBtn && ($scope.ResourceItemList.length == 0)) { // 未添加信息项
+        isValid = false;
+      }
+      if($scope.InfoResource.category == $scope.InfoResource.rel_category) {// 信息资源分类和关联及类目名称相同
         isValid = false;
       }
 

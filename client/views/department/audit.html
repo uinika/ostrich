@@ -95,7 +95,7 @@
                   <tr ng-repeat='InfoResource in auditList | orderBy:"create_time":true'>
                     <td>
                       <div ng-if='InfoResource.audit_status == 0'><span>
-                                            <i class='fa fa-question-circle'></i></span><a ui-sref='main.department.audit.info({item:InfoResource})'>审核</a></div>
+                                            <i class='fa fa-question-circle'></i></span><a ui-sref='main.department.audit.info({AUDITID:InfoResource.audit_id,RESOURCEID:InfoResource.id,APPLYTIME:InfoResource.apply_time,APPLYDEP:InfoResource.apply_dep_name})'>审核</a></div>
                                             <div ng-if='InfoResource.audit_status == 1'><span>
                                               <i class='fa fa-check-circle'></i></span></div>
                                               <div ng-if='InfoResource.audit_status == 2'><span>

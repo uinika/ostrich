@@ -47,12 +47,20 @@ Audit.controller('Department.Audit.Controller.info', ['$scope', '$state', '$q', 
     $scope.TabRequireShow = true;
     $scope.AuditInfo = {};
     $scope.AuditInfo.audit_opinion = '';
-    console.log($stateParams.item);
-    // get audit detail by id
-    $scope.InfoResourceDetail = $stateParams.item;
+
+    // 根据id查询信息资源详情
+    Http.getDepartInfoResList({
+      resource_id : $stateParams.RESOURCEID
+    }).then(function(ResourceRes) {
+      $scope.InfoResourceDetail = ResourceRes.data.body[0].results[0];
+      $scope.InfoResourceDetail.apply_dep_name = $stateParams.APPLYDEP;
+      $scope.InfoResourceDetail.apply_time = $stateParams.APPLYTIME;
+    })
+
+
     $scope.InfoItemShow = false;
     Http.getInfoItemList({
-      resource_id: $scope.InfoResourceDetail.id
+      resource_id: $stateParams.RESOURCEID
     }).then(function(result) {
       if (result.data.body.length == 0) {
         $scope.InfoItemShow = false;
@@ -69,7 +77,7 @@ Audit.controller('Department.Audit.Controller.info', ['$scope', '$state', '$q', 
         $scope.auditError = true;
         return;
       }
-      $scope.AuditInfo.audit_id = $stateParams.item.audit_id;
+      $scope.AuditInfo.audit_id = $stateParams.AUDITID;
       Http.updateAuditDetail($scope.AuditInfo).then(function(result) {
         if (200 == result.data.head.status) {
           alert('审核成功');
