@@ -160,6 +160,7 @@
             <input type="checkbox" value="{{sfItem.id}}" ng-checked="shareFreqSelection.indexOf(sfItem.id) > -1" ng-click="toggleShareFreqSelection(sfItem)">
             {{sfItem.dict_name}}
           </span>
+          <p class='help-block' ng-show='shareFreqSelection.length == 0 && submitted'>请选择共享频率</p>
         </div>
       </div>
 
