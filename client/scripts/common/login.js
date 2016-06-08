@@ -5,6 +5,9 @@ var Login = angular.module('Login', ['ui.router', 'ngCookies']);
 Login.controller('Login.Controller.Main', ['$rootScope', '$cookies', '$scope', '$state', 'Login.Service.Http',
   function($rootScope, $cookies, $scope, $state, Http) {
     // Decide login or session delay
+    if(sessionStorage.token){
+      sessionStorage.removeItem('token');
+    }
     if(sessionStorage.message){
       $scope.alerts = [
         {type: 'danger', msg: sessionStorage.message}
