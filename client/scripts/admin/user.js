@@ -182,9 +182,11 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
           $scope.placeholder.organization_code = "必填，根据机构名称自动生成";
           $scope.organization = false;
           var organization = $scope.sysUser.organization ;
+          var dep_id = $scope.sysUser.dep_id ;
           if(organization){
             Http.getUserOrganizationIsEqual({
-              "organization":organization
+              "organization":organization,
+              "dep_id":dep_id
             }).then(function (result){
               if("false" == result.data.body[0].isexists){
                 $scope.placeholder.organization = "机构名称已存在，请重新输入";
