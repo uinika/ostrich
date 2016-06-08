@@ -152,6 +152,16 @@ input.ng-touched.ng-invalid {
   padding-right: 0;
   padding-left: 11px;
 }
+#dashboard .table-patch td,
+#dashboard .table-patch th {
+  max-width: 100px;
+  word-break: keep-all;
+  word-wrap: normal;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+}
 #dashboard .first-section .panel {
   height: 310px;
 }
