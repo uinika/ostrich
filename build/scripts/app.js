@@ -39,7 +39,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', '$provide',
             $q.when(response, function(result){
               if( response.data && typeof response.data==='object'){
                 if(result.data.head.status===300){
-                  sessionStorage.message = '登录超时，请重新登陆！';
+                  sessionStorage.message = '登录超时，请重新登录！';
                   window.location.href='/build';
                 };
               };
@@ -727,20 +727,21 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
         }
         $scope.Modal.organization = function(){
           $scope.placeholder.organization = "必填";
-          $scope.placeholder.organization_code = "必填";
+          $scope.placeholder.organization_code = "必填，根据机构名称自动生成";
           $scope.organization = false;
           var organization = $scope.sysUser.organization ;
+          var dep_id = $scope.sysUser.dep_id ;
           if(organization){
-            Http.getUserOrganizationCode({
-              "organization":organization
+            Http.getUserOrganizationIsEqual({
+              "organization":organization,
+              "dep_id":dep_id
             }).then(function (result){
-              if(200 == result.data.head.status){
-                $scope.sysUser.organization_code = result.data.body[0].organization_code ;
-              }else{
-                $scope.placeholder.organization = "机构名称不对";
+              if("false" == result.data.body[0].isexists){
+                $scope.placeholder.organization = "机构名称已存在，请重新输入";
                 $scope.organization = true;
-                $scope.sysUser.organization = "";
-                $scope.placeholder.organization_code = "没有相对应的机构编码";
+                $scope.sysUser.organization =""  ;
+              }else{
+                $scope.organization = false;
               }
             });
           }
@@ -906,6 +907,13 @@ AdminUser.factory('AdminUser.Service.Http', ['$http', 'API',
         }
       )
     };
+    function getUserOrganizationIsEqual(params) {
+      return $http.get(
+        path + '/sys_user/organization',{
+           params: params
+        }
+      )
+    };
     function getUserList(params) {
       return $http.get(
         path + '/sys_user',{
@@ -936,8 +944,6 @@ AdminUser.factory('AdminUser.Service.Http', ['$http', 'API',
         }
       )
     };
-
-
 
     function updateUser(data) {
       return $http.put(
@@ -970,6 +976,7 @@ AdminUser.factory('AdminUser.Service.Http', ['$http', 'API',
     }
     return {
       getUserOrganizationCode: getUserOrganizationCode,
+      getUserOrganizationIsEqual: getUserOrganizationIsEqual,
       getUserList: getUserList,
       saveUser: saveUser,
       getDepartmentList: getDepartmentList,
@@ -1083,7 +1090,7 @@ Dashboard.controller('Dashboard.Controller.Main', ['$scope', 'Dashboard.Service.
     }
     // Generoted Department
     Http.getUserDep().then(function(result) {
-        if (200 === result.data.head.status && result.data.body.length !== 0) {
+        if (200 === result.data.head.status && result.data.body.length >= 1) {
           $scope.followDeps = result.data.body;
           return result.data.body[0].id;
         }else{
@@ -1341,6 +1348,9 @@ var Login = angular.module('Login', ['ui.router', 'ngCookies']);
 Login.controller('Login.Controller.Main', ['$rootScope', '$cookies', '$scope', '$state', 'Login.Service.Http',
   function($rootScope, $cookies, $scope, $state, Http) {
     // Decide login or session delay
+    if(sessionStorage.token){
+      sessionStorage.removeItem('token');
+    }
     if(sessionStorage.message){
       $scope.alerts = [
         {type: 'danger', msg: sessionStorage.message}

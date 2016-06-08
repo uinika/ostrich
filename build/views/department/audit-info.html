@@ -95,19 +95,19 @@
                 <label class='col-sm-3 text-right'>信息资源格式:</label>
                 <div class='col-sm-9'>{{InfoResourceDetail.resource_format_name}}</div>
               </div>
-              <div class='row'>
+              <div class='row' ng-show='!InfoItemShow'>
                 <label class='col-sm-3 text-right'>更细周期:</label>
                 <div class='col-sm-9'>{{InfoResourceDetail.update_period}}</div>
               </div>
-              <div class='row'>
+              <div class='row' ng-show='!InfoItemShow'>
                 <label class='col-sm-3 text-right'>是否涉密:</label>
                 <div class='col-sm-9'>{{InfoResourceDetail.secret_flag_name}}</div>
               </div>
-              <div class='row'>
+              <div class='row' ng-show='!InfoItemShow'>
                 <label class='col-sm-3 text-right'>计量单位:</label>
                 <div class='col-sm-9'>{{InfoResourceDetail.meter_unit}}</div>
               </div>
-              <div class='row'>
+              <div class='row' ng-show='!InfoItemShow'>
                 <label class='col-sm-3 text-right'>计算方法:</label>
                 <div class='col-sm-9'>{{InfoResourceDetail.calculate_method}}</div>
               </div>
@@ -178,7 +178,7 @@
                     <!-- <td><input type='checkbox' ng-click='deleteReq(rescoureItem.id)' />删除</td> -->
                     <td>{{$index+1}}</td>
                     <td title='{{rescoureItem.item_name}}'>{{rescoureItem.item_name}}</td>
-                    <td title='{{rescoureItem.item_type}}'>{{rescoureItem.item_type_name}}</td>
+                    <td title='{{rescoureItem.item_type_name}}'>{{rescoureItem.item_type_name}}</td>
                     <td title='{{rescoureItem.data_precision}}'>{{rescoureItem.data_precision}}</td>
                     <td title='{{rescoureItem.data_length}}'>{{rescoureItem.data_length}}</td>
                     <td title='{{rescoureItem.meter_unit}}'>{{rescoureItem.meter_unit}}</td>
@@ -193,7 +193,7 @@
         </div>
         <div class='pull-right'>
           <div class="btn btn-group">
-          <button type="button" class="btn btn-default" ui-sref='main.department.audit'>返回</button>
+          <button type="button" class="btn btn-default" onclick='history.go(-1)'>返回</button>
         </div>
           <div class="btn btn-group">
           <button type="button" class="btn btn-success" ng-click='submitAudit()'>保存</button>
