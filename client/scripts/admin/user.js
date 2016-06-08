@@ -179,20 +179,19 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
         }
         $scope.Modal.organization = function(){
           $scope.placeholder.organization = "必填";
-          $scope.placeholder.organization_code = "必填";
+          $scope.placeholder.organization_code = "必填，根据机构名称自动生成";
           $scope.organization = false;
           var organization = $scope.sysUser.organization ;
           if(organization){
-            Http.getUserOrganizationCode({
+            Http.getUserOrganizationIsEqual({
               "organization":organization
             }).then(function (result){
-              if(200 == result.data.head.status){
-                $scope.sysUser.organization_code = result.data.body[0].organization_code ;
-              }else{
-                $scope.placeholder.organization = "机构名称不对";
+              if("false" == result.data.body[0].isexists){
+                $scope.placeholder.organization = "机构名称已存在，请重新输入";
                 $scope.organization = true;
-                $scope.sysUser.organization = "";
-                $scope.placeholder.organization_code = "没有相对应的机构编码";
+                $scope.sysUser.organization =""  ;
+              }else{
+                $scope.organization = false;
               }
             });
           }
@@ -358,6 +357,13 @@ AdminUser.factory('AdminUser.Service.Http', ['$http', 'API',
         }
       )
     };
+    function getUserOrganizationIsEqual(params) {
+      return $http.get(
+        path + '/sys_user/organization',{
+           params: params
+        }
+      )
+    };
     function getUserList(params) {
       return $http.get(
         path + '/sys_user',{
@@ -388,8 +394,6 @@ AdminUser.factory('AdminUser.Service.Http', ['$http', 'API',
         }
       )
     };
-
-
 
     function updateUser(data) {
       return $http.put(
@@ -422,6 +426,7 @@ AdminUser.factory('AdminUser.Service.Http', ['$http', 'API',
     }
     return {
       getUserOrganizationCode: getUserOrganizationCode,
+      getUserOrganizationIsEqual: getUserOrganizationIsEqual,
       getUserList: getUserList,
       saveUser: saveUser,
       getDepartmentList: getDepartmentList,
