@@ -403,8 +403,20 @@ input.ng-touched.ng-invalid {
   overflow-x: scroll;
   height: 530px;
 }
-#department-inventory .indicator-list .scroll div.container {
-  width: 3200px !important;
+#department-inventory .indicator-list .scroll table {
+  table-layout: auto;
+}
+#department-inventory .indicator-list .scroll table tr th {
+  height: 50px;
+  max-width: 200px;
+  word-break: keep-all;
+  word-wrap: normal;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 13px;
+  vertical-align: middle;
+  text-align: center;
 }
 #department-inventory .indicator-list ul.nav-filter {
   list-style: none;
@@ -430,9 +442,6 @@ input.ng-touched.ng-invalid {
 #department-inventory .indicator-list ul.nav-filter li span i.fa-warning {
   color: #f0ad4e;
 }
-#department-inventory .indicator-list table {
-  table-layout: fixed;
-}
 #department-inventory .indicator-list table tr.has-item {
   background: #FFF;
 }
@@ -440,6 +449,7 @@ input.ng-touched.ng-invalid {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  max-width: 165px;
 }
 #department-inventory .indicator-list table tr td a {
   cursor: pointer;
@@ -627,8 +637,20 @@ input.ng-touched.ng-invalid {
   overflow-x: scroll;
   height: 530px;
 }
-#department-share .indicator-list .scroll div.container {
-  width: 2000px !important;
+#department-share .indicator-list .scroll table {
+  table-layout: auto;
+}
+#department-share .indicator-list .scroll table tr th {
+  height: 50px;
+  max-width: 200px;
+  word-break: keep-all;
+  word-wrap: normal;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 13px;
+  vertical-align: middle;
+  text-align: center;
 }
 #department-share .indicator-list ul.nav-filter {
   list-style: none;
@@ -655,7 +677,7 @@ input.ng-touched.ng-invalid {
   color: #f0ad4e;
 }
 #department-share .indicator-list table {
-  table-layout: fixed;
+  table-layout: auto;
 }
 #department-share .indicator-list table tr.has-item {
   background: #FFF;
@@ -664,6 +686,7 @@ input.ng-touched.ng-invalid {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  max-width: 165px;
 }
 #department-share .indicator-list table tr td pre {
   overflow: hidden;
@@ -961,8 +984,20 @@ input.ng-touched.ng-invalid {
   overflow-x: scroll;
   height: 530px;
 }
-#department-audit .indicator-list .scroll div.container {
-  width: 3200px !important;
+#department-audit .indicator-list .scroll table {
+  table-layout: auto;
+}
+#department-audit .indicator-list .scroll table tr th {
+  height: 50px;
+  max-width: 200px;
+  word-break: keep-all;
+  word-wrap: normal;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 13px;
+  vertical-align: middle;
+  text-align: center;
 }
 #department-audit .indicator-list ul.nav-filter {
   list-style: none;
@@ -992,6 +1027,7 @@ input.ng-touched.ng-invalid {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  max-width: 165px;
 }
 #department-audit .indicator-list table tr td pre {
   overflow: hidden;

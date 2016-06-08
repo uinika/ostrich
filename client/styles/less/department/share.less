@@ -66,8 +66,20 @@
     .scroll {
       overflow-x: scroll;
       height: 530px;
-      div.container {
-        width: 2000px !important;
+      table {
+        table-layout:auto;
+        tr th {
+          height: 50px;
+          max-width: 200px;
+          word-break: keep-all;
+          word-wrap: normal;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          font-size: 13px;
+          vertical-align: middle;
+          text-align: center;
+        }
       }
     }
     ul.nav-filter {
@@ -95,7 +107,7 @@
       }
     }
     table {
-      table-layout: fixed;
+      table-layout: auto;
       tr.has-item{
         background:#FFF;
       }
@@ -104,6 +116,7 @@
           overflow: hidden;
           white-space: nowrap;
           text-overflow: ellipsis;
+          max-width:165px;
           pre {
             overflow: hidden;
             border: none;
