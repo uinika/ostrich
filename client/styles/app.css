@@ -1285,6 +1285,17 @@ input.ng-touched.ng-invalid {
   margin-bottom: 20px;
   margin-top: -9px;
 }
+#data-quota-list .table-patch td,
+#data-quota-list .table-patch th {
+  word-break: keep-all;
+  word-wrap: normal;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 13px;
+  vertical-align: middle;
+  text-align: center;
+}
 #data-quota-list .quota-example .table-responsive {
   margin-top: 0;
 }
