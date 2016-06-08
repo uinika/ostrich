@@ -70,7 +70,9 @@
                           <i class='fa fa-times-circle-o'></i></span></div></td>
                     <td title='{{DeptReq.create_time| date:"yyyy-MM-dd HH:mm:ss"}}'>{{DeptReq.create_time| date:"yyyy-MM-dd HH:mm:ss"}}</td>
                     <td title='{{DeptReq.response_time |date:"yyyy-MM-dd HH:mm:ss"}}'>{{DeptReq.response_time |date:"yyyy-MM-dd HH:mm:ss"}}</td>
-                    <td title='{{DeptReq.requiement_name}}'>{{DeptReq.requiement_name}}</td>
+                    <td title='{{DeptReq.requiement_name}}'>
+                      <a ui-sref='main.department.requirement.detail({ID:DeptReq.id})'>{{DeptReq.requiement_name}}</a>
+                      </td>
                     <td title='{{DeptReq.requiement_desc}}'>{{DeptReq.requiement_desc}}</td>
                     <td title='{{DeptReq.sharefrequency}}'>{{DeptReq.sharefrequency}}</td>
                     <td title='{{DeptReq.area_range}}'>{{DeptReq.area_range}}</td>
@@ -106,10 +108,10 @@
     </div>
     <div class='modal-body'>
       <div class="form-group">
-        <label for="" class="col-sm-2 control-label">状态:</label>
+        <label for="" class="col-sm-2 control-label"><span class='require-sign'>*</span>状态:</label>
         <div class="col-sm-10">
-          <input type='radio' ng-click='dataQuotaShow = true' ng-model='Modal.ReqResponse.status' value='1' />通过&nbsp;
-          <input type='radio' ng-click='dataQuotaShow = false' ng-model='Modal.ReqResponse.status' value='2' />不通过
+          <input type='radio' name='status' ng-click='dataQuotaShow = true' required ng-model='Modal.ReqResponse.status' value='1' />通过&nbsp;
+          <input type='radio' name='status' ng-click='dataQuotaShow = false' required ng-model='Modal.ReqResponse.status' value='2' />不通过
         </div>
       </div>
 
@@ -130,9 +132,9 @@
         </div> -->
       </div>
       <div class="form-group">
-        <label for="" class="col-sm-2 control-label">说明:</label>
+        <label for="" class="col-sm-2 control-label"><span class='require-sign'>*</span>说明:</label>
         <div class="col-sm-10">
-          <textarea class="form-control" ng-model='Modal.ReqResponse.response_content'></textarea>
+          <textarea class="form-control" required name='response_content' ng-model='Modal.ReqResponse.response_content'></textarea>
           <span class='help-info pull-left'>简要说明需求基本信息</span>
           <span class='pull-right'>(最多256个汉字)</span>
         </div>
@@ -141,7 +143,7 @@
     <div class='modal-footer'>
 
       <button class='btn btn-default' type='button' ng-click='Modal.cancel()'>取消</button>
-      <button class='btn btn-success' ng-disabled="reqConfirmForm.$invalid || (dataQuotaIdNull && dataQuotaShow)" type='submit' ng-click='Modal.confirm(reqConfirmForm.$valid)'>保存</button>
+      <button class='btn btn-success' ng-disabled="reqConfirmForm.$invalid || (dataQuotaIdNull && dataQuotaShow) || !reqConfirmForm.status || !reqConfirmForm.response_content" type='submit' ng-click='Modal.confirm(reqConfirmForm.$valid)'>保存</button>
     </div>
     <div class="panel panel-default">
       <div class="panel-heading">需求信息</div>

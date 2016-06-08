@@ -3412,6 +3412,7 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$cookies', 
       $scope.dataLevelReqSelection = [];
 
       $scope.error = false;
+      $scope.submitted = false;
 
       Component.popModal($scope, '发布', 'add-req-modal').result.then(function() {
         _($scope.dataLevelReqSelection).forEach(function(value) {
@@ -3834,10 +3835,14 @@ DepartmentReq.service('Department.Requirement.Service.Component', ['$uibModal',
       });
       scope.Modal.confirm = function(isValid) {
         console.log(scope);
-        if (isValid && scope.reqParent.outputDeptList.length > 0) {
-          modalInstance.close(scope.Modal);
-        } else {
+        scope.submitted = true;
+        if(scope.reqParent.outputDeptList.length == 0) {
           scope.error = true;
+        }
+        else if(scope.shareFreqSelection.length == 0) {
+        }
+        else {
+          modalInstance.close(scope.Modal);
         }
 
       };

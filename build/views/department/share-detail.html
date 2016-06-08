@@ -1,6 +1,8 @@
 <div id='department-inventory-detail'>
   <div class="panel panel-default">
-    <div class="panel-heading">信息资源详情</div>
+    <div class="panel-heading">信息资源详情
+      <a class='btn btn-xs pull-right' onclick='history.go(-1)'>返回</a>
+    </div>
     <div class="panel-body">
       <!-- Nav tabs -->
       <ul class="nav nav-tabs" role="tablist">
@@ -10,7 +12,6 @@
         <li role="presentation" ng-class="{true: 'active', false: 'inactive'}[InfoItem.show]" ng-show='InfoItemShow'>
           <a ng-click='InfoItem.show = true' aria-controls="exampleData" role="tab" data-toggle="tab">信息项</a>
         </li>
-        <li class='pull-right'><button class='btn btn-default' ui-sref='main.department.share'>返回</button></li>
       </ul>
 
       <!-- Tab panes -->
@@ -135,13 +136,13 @@
                 <!-- <td><input type='checkbox' ng-click='deleteReq(rescoureItem.id)' />删除</td> -->
                 <td>{{$index+1}}</td>
                 <td title='{{rescoureItem.item_name}}'>{{rescoureItem.item_name}}</td>
-                <td title='{{rescoureItem.item_type}}'>{{rescoureItem.item_type_name}}</td>
+                <td title='{{rescoureItem.item_type_name}}'>{{rescoureItem.item_type_name}}</td>
                 <td title='{{rescoureItem.data_precision}}'>{{rescoureItem.data_precision}}</td>
                 <td title='{{rescoureItem.data_length}}'>{{rescoureItem.data_length}}</td>
                 <td title='{{rescoureItem.meter_unit}}'>{{rescoureItem.meter_unit}}</td>
                 <td title='{{rescoureItem.calculate_method}}'>{{rescoureItem.calculate_method}}</td>
                 <td title='{{rescoureItem.update_period_name}}'>{{rescoureItem.update_period_name}}</td>
-                <td title='{{rescoureItem.secret_flag}}'>{{rescoureItem.secret_flag_name}}</td>
+                <td title='{{rescoureItem.secret_flag_name}}'>{{rescoureItem.secret_flag_name}}</td>
               </tr>
             </tbody>
           </table>
