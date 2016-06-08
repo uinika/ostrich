@@ -117,7 +117,7 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
         $scope.Modal.validPhone = function (){
           $scope.placeholder.phone = "必填";
           $scope.validPhone = false ;
-          var reg =/^((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)/;
+          var reg =/^(\d{3,4}-)?\d{7,8}$|(^1[3|4|5|7|8]\d{9}$)/;
           if(!reg.test($scope.sysUser.phone)&&($scope.sysUser.phone!=null)){
             $scope.validPhone = true ;
             $scope.placeholder.phone = "电话格式不对";
@@ -201,7 +201,7 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
         $scope.Modal.validPhone = function (){
           $scope.placeholder.phone = "必填";
           $scope.validPhone = false ;
-          var reg =/^((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)/;
+          var reg =/^(\d{3,4}-)?\d{7,8}$|(^1[3|4|5|7|8]\d{9}$)/;
           if(!reg.test($scope.sysUser.phone)&&$scope.sysUser.phone!=null){
             $scope.validPhone = true ;
             $scope.placeholder.phone = "电话格式不对";
