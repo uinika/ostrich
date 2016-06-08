@@ -85,10 +85,12 @@
           </thead>
           <tbody>
             <tr ng-repeat='indicator in NewIndicators'>
-              <td>{{indicator.create_time | date:'yyyy-MM-dd'}}</td>
-              <td ng-if=(indicator.showbutton==='1')||(indicator.showbutton==='-2')><a ui-sref='main.data-quota.detail({resource_id:indicator.id})'>{{indicator.resource_name}}</a></td>
-              <td ng-if="(indicator.showbutton !='1')&&(indicator.showbutton !='-2')"><a>{{indicator.resource_name}}</a></td>
-              <td>{{indicator.dep_short_name}}</td>
+              <td title="{{indicator.create_time | date:'yyyy-MM-dd'}}">{{indicator.create_time | date:'yyyy-MM-dd'}}</td>
+              <td title="{{indicator.resource_name}}" >
+                <a ng-if=(indicator.showbutton==='1')||(indicator.showbutton==='-2') ui-sref='main.data-quota.detail({resource_id:indicator.id})'>{{indicator.resource_name}}</a>
+                <a ng-if="(indicator.showbutton !='1')&&(indicator.showbutton !='-2')">{{indicator.resource_name}}</a>
+              </td>
+              <td title="{{indicator.dep_short_name}}">{{indicator.dep_short_name}}</td>
             </tr>
           </tbody>
         </table>
@@ -110,9 +112,9 @@
           </thead>
           <tbody>
             <tr ng-repeat='requirement in Requirements'>
-              <td>{{requirement.create_time | date:'yyyy-MM-dd'}}</td>
-              <td><a ui-sref='main.department.requirement.detail({ID:requirement.id})'>{{requirement.requiement_name}}</a></td>
-              <td>{{requirement.dep_short_name}}</td>
+              <td title="{{requirement.create_time | date:'yyyy-MM-dd'}}">{{requirement.create_time | date:'yyyy-MM-dd'}}</td>
+              <td title="{{requirement.requiement_name}}"><a ui-sref='main.department.requirement.detail({ID:requirement.id})'>{{requirement.requiement_name}}</a></td>
+              <td title="{{requirement.dep_short_name}}">{{requirement.dep_short_name}}</td>
             </tr>
           </tbody>
         </table>
@@ -142,12 +144,12 @@
             </thead>
             <tbody>
               <tr ng-repeat='indicator in followDepIndicators'>
-                <td>{{::indicator.create_time | date:'yyyy-MM-dd'}}</td>
-                <td ><a ui-sref='main.data-quota.detail({resource_id:indicator.id})'>{{::indicator.resource_name}}</a></td>
-                <td>{{::indicator.updatecycle}}</td>
-                <td>{{::indicator.area_range}}</td>
-                <td>{{::indicator.resource_format}}</td>
-                <td>{{::indicator.resource_provider}}</td>
+                <td title="{{::indicator.create_time | date:'yyyy-MM-dd'}}">{{::indicator.create_time | date:'yyyy-MM-dd'}}</td>
+                <td title="{{::indicator.resource_name}}"><a ui-sref='main.data-quota.detail({resource_id:indicator.id})'>{{::indicator.resource_name}}</a></td>
+                <td title="{{::indicator.updatecycle}}">{{::indicator.updatecycle}}</td>
+                <td title="{{::indicator.area_range}}">{{::indicator.area_range}}</td>
+                <td title="{{::indicator.resource_format}}">{{::indicator.resource_format}}</td>
+                <td title="{{::indicator.resource_provider}}">{{::indicator.resource_provider}}</td>
               </tr>
             </tbody>
           </table>

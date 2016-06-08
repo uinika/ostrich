@@ -36,7 +36,7 @@
         </uib-tab>
         <uib-tab ng-show="DataQuotaDetail.resource_format ==='数据库类'" class='quota-example' index="1" heading="信息项">
         <div class="table-responsive">
-          <table class='table table-hover table-striped table-bordered'>
+          <table class='table table-hover table-striped table-bordered table-patch'>
              <thead>
                <caption class="caption"></caption>
                <tr>
@@ -52,14 +52,14 @@
              </thead>
              <tbody>
                <tr ng-repeat='columns in DataQuotaExample'>
-                 <td>{{columns.item_name}}</td>
-                 <td>{{columns.item_type}}</td>
-                 <td>{{columns.data_precision}}</td>
-                 <td>{{columns.data_length}}</td>
-                 <td>{{columns.updatecycle}}</td>
-                 <td>{{columns.secret_flag}}</td>
-                 <td>{{columns.meter_unit}}</td>
-                 <td>{{columns.calculate_method}}</td>
+                 <td title="{{columns.item_name}}">{{columns.item_name}}</td>
+                 <td title="{{columns.item_type}}">{{columns.item_type}}</td>
+                 <td title="{{columns.data_precision}}">{{columns.data_precision}}</td>
+                 <td title="{{columns.data_length}}">{{columns.data_length}}</td>
+                 <td title="{columns.updatecycle}}">{{columns.updatecycle}}</td>
+                 <td title="{{columns.secret_flag}}">{{columns.secret_flag}}</td>
+                 <td title="{{columns.meter_unit}}">{{columns.meter_unit}}</td>
+                 <td title="{{columns.calculate_method}}">{{columns.calculate_method}}</td>
                </tr>
              </tbody>
            </table>
