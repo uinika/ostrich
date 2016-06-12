@@ -10,9 +10,10 @@
             <label for="" class="col-sm-2 control-label">
               <span class='require-sign'>*</span>信息资源名称:</label>
             <div class="col-sm-10">
-              <input type="text" ng-trim="false" ng-keyup='checkResName()' name='resource_name' required class="form-control" ng-model='InfoResource.resource_name'>
+              <input type="text" ng-trim="false" ng-maxlength='256' ng-keyup='checkResName()' name='resource_name' required class="form-control" ng-model='InfoResource.resource_name'>
               <span class='help-info'>描述政务信息资源内容的标题</span>
               <p ng-show="InfoResourceForm.resource_name.$error.required && submitted" class="help-block">请输入信息资源名称</p>
+              <p ng-show="InfoResourceForm.resource_name.$error.maxlength" class="help-block">您输入的内容太长，最长不超过256个字符。</p>
               <p ng-show='resNameExist' class='help-block'>信息资源名称已存在！</p>
             </div>
           </div>
@@ -20,8 +21,9 @@
             <label for="" class="col-sm-2 control-label">
               信息资源别称:</label>
             <div class="col-sm-10">
-              <input type="text"  name='alias' class="form-control" ng-model='InfoResource.alias'>
+              <input type="text"  name='alias' ng-maxlength='256' class="form-control" ng-model='InfoResource.alias'>
               <p ng-show="InfoResourceForm.alias.$error.required && submitted" class="help-block">请输入信息资源别称</p>
+              <p ng-show="InfoResourceForm.alias.$error.maxlength" class="help-block">您输入的内容太长，最长不超过256个字符。</p>
               <span class='help-info'>提供部门的内部名称或英文名称及简称等</span>
             </div>
           </div>
@@ -72,8 +74,9 @@
             <label for="" class="col-sm-2 control-label">
               <span class='require-sign'>*</span>空间范围:</label>
             <div class="col-sm-10">
-              <input type="text" name='area_range' class="form-control" required ng-model='InfoResource.area_range'>
+              <input type="text" name='area_range' ng-maxlength='256' class="form-control" required ng-model='InfoResource.area_range'>
               <p ng-show="InfoResourceForm.area_range.$error.required && submitted" class="help-block">请输入空间范围</p>
+              <p ng-show="InfoResourceForm.area_range.$error.maxlength" class="help-block">您输入的内容太长，最长不超过256个字符。</p>
               <span class='help-info'>
                 可取得数据的地区名称，如全国，四川省，各省等。
               </span>
@@ -97,9 +100,10 @@
               <select ng-model='InfoResource.resource_format' required name='resource_format' class='form-control' style='display: inline-block !important;width: auto;' ng-change='showHideResAddBtn()'>
                 <option ng-repeat='resourceFormat in resourceFormatList' value='{{resourceFormat.id}}'>{{resourceFormat.dict_name}}</option>
               </select>
-              <span  ng-class="{true: 'ng-show', false: 'ng-hide'}[resFormatOtherShow]"><input type='text' class='custom-form-control' placeholder='请输入其他信息资源格式' ng-model='InfoResource.resource_format_other' /></span>
+              <span  ng-class="{true: 'ng-show', false: 'ng-hide'}[resFormatOtherShow]"><input type='text' class='custom-form-control' name='resource_format_other' ng-maxlength='256' placeholder='请输入其他信息资源格式' ng-model='InfoResource.resource_format_other' /></span>
               <span ng-class="{true: 'ng-show', false: 'ng-hide'}[resItemAddBtn]"><a class='btn btn-default' ng-click='ResItemListShow = true'><i class='fa fa-plus'></i>&nbsp;信息项</a></span>
               <span ng-class="{true: 'ng-show', false: 'ng-hide'}[resItemUpdateBtn]"><a class='btn btn-default' ng-click='editItems(InfoResource.id)'><i class='fa fa-pencil'></i>&nbsp;信息项</a></span>
+              <p ng-show="InfoResourceForm.resource_format_other.$error.maxlength" class="help-block">您输入的内容太长，最长不超过256个字符。</p>
               <span class='help-block' ng-show='submitted && (resItemAddBtn || resItemUpdateBtn) && (ResourceItemList.length == 0)'>您还未添加任何信息项。</span>
             </div>
           </div>
@@ -134,8 +138,9 @@
             <label for="" class="col-sm-2 control-label">
               计量单位:</label>
             <div class="col-sm-10">
-              <input type="text" name='meter_unit' class="form-control"  ng-model='InfoResource.meter_unit'>
+              <input type="text" name='meter_unit' ng-maxlength='256' class="form-control"  ng-model='InfoResource.meter_unit'>
               <p ng-show="InfoResourceForm.meter_unit.$error.required && submitted" class="help-block">请输入计量单位</p>
+              <p ng-show="InfoResourceForm.meter_unit.$error.maxlength" class="help-block">您输入的内容太长，最长不超过256个字符。</p>
               <span class='help-info'>
                 反映资源信息具体数值的实际度量单位，可对应多个
               </span>
@@ -196,8 +201,9 @@
                 <option ng-repeat="shareMethod in  shareMethodList" value='{{shareMethod.id}}'>{{shareMethod.dict_name}}</option>
               </select>
               <span ng-class="{true: 'ng-show', false: 'ng-hide'}[shareMethodOtherShow]">
-                <input type='text' name='share_method_other' class='custom-form-control' ng-model='InfoResource.share_method_other' placeholder='请输入其他类信息' />
+                <input type='text' ng-maxlength='256' name='share_method_other' class='custom-form-control' ng-model='InfoResource.share_method_other' placeholder='请输入其他类信息' />
               </span>
+              <p ng-show="InfoResourceForm.share_method_other.$error.maxlength" class="help-block">您输入的内容太长，最长不超过256个字符。</p>
             </div>
           </div>
 
@@ -240,10 +246,11 @@
           <div class="form-group">
             <label for="" class="col-sm-2 control-label">联系人:</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" ng-model='InfoResource.linkman'>
+              <input type="text" class="form-control" ng-maxlength='256' name='linkman' ng-model='InfoResource.linkman'>
               <span class='help-info'>
                 具有指标解释权的联系人名字。
               </span>
+              <p ng-show="InfoResourceForm.linkman.$error.maxlength" class="help-block">您输入的内容太长，最长不超过256个字符。</p>
             </div>
           </div>
           <div class="form-group">
@@ -343,9 +350,10 @@
           <label for="" class="col-sm-2 control-label">
             <span class='require-sign'>*</span>信息项名称:</label>
           <div class="col-sm-10">
-            <input type="text" name='item_name' class="form-control" required ng-model='ResourceItem.item_name' ng-keyup='checkItemName()'>
+            <input type="text" name='item_name' ng-maxlength='256' class="form-control" required ng-model='ResourceItem.item_name' ng-keyup='checkItemName()'>
             <p ng-show="addItemForm.item_name.$error.required && itemAdded" class="help-block">请输入信息项名称</p>
             <p ng-show="parent.itemNameExist" class="help-block">信息项名称已存在！</p>
+            <p ng-show="addItemForm.item_name.$error.maxlength" class="help-block">您输入的内容太长，最长不超过256个字符。</p>
           </div>
         </div>
 
@@ -361,8 +369,9 @@
           <label for="" class="col-sm-2 control-label">
             <span class='require-sign'>*</span>数据精度:</label>
           <div class="col-sm-10">
-            <input type="text" name='data_precision' class="form-control" required ng-model='ResourceItem.data_precision'>
+            <input type="text" name='data_precision' ng-maxlength='256' class="form-control" required ng-model='ResourceItem.data_precision'>
             <p ng-show="addItemForm.data_precision.$error.required  && itemAdded" class="help-block">请输入数据精度</p>
+            <p ng-show="addItemForm.data_precision.$error.maxlength" class="help-block">您输入的内容太长，最长不超过256个字符。</p>
             <span class='help-info'>
               数值型指标数据定义的数据存储的小数位数。如：小数点后取2位
             </span>
@@ -373,8 +382,9 @@
           <label for="" class="col-sm-2 control-label">
             <span class='require-sign'>*</span>数据长度:</label>
           <div class="col-sm-10">
-            <input type="text" name='data_length' class="form-control" required ng-model='ResourceItem.data_length'>
+            <input type="text" name='data_length' ng-maxlength='256' class="form-control" required ng-model='ResourceItem.data_length'>
             <p ng-show="addItemForm.data_length.$error.required && itemAdded" class="help-block">请输入数据长度</p>
+            <p ng-show="addItemForm.data_length.$error.maxlength" class="help-block">您输入的内容太长，最长不超过256个字符。</p>
             <span class='help-info'>
               指标数据的最大长度。如：小于9位
             </span>
@@ -385,9 +395,11 @@
           <label for="" class="col-sm-2 control-label">
             计量单位:</label>
           <div class="col-sm-10">
-            <input type="text" name='meter_unit' class="form-control"  ng-model='ResourceItem.meter_unit'>
+            <input type="text" name='meter_unit' ng-maxlength='256' class="form-control"  ng-model='ResourceItem.meter_unit'>
+            <p ng-show="addItemForm.meter_unit.$error.maxlength" class="help-block">您输入的内容太长，最长不超过256个字符。</p>
             <span class='help-info'>反映资源信息具体数值的实际度量单位，可对应多个
             </span>
+
           </div>
         </div>
 
