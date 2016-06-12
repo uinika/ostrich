@@ -1252,9 +1252,9 @@ input.ng-touched.ng-invalid {
   color: #F07746;
 }
 #data-quota-list .icon-list {
-  font-size: 13px;
+  font-size: 12px;
 }
-#data-quota-list .icon-list li {
+#data-quota-list .icon-list i {
   margin-left: 15px;
 }
 #data-quota-list .table-responsive {

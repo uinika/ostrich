@@ -105,6 +105,12 @@
   <div class="panel panel-default">
     <div class="panel-heading">
       <i class="fa fa-table"> 资源列表</i>
+      <span class='icon-list'>
+        <i class='fa fa-eye blue'></i> 全省开放
+        <i class='fa fa-desktop blue'></i> 政务云开放
+        <i class='fa fa-lock blue'></i> 授权开放
+        <i class='fa fa-warning orange'></i> 暂不开放
+      </span>
       <span class='pull-right text-info'>共{{DataQuotasTotal}}条</span>
     </div>
     <div class="table-responsive">
@@ -191,7 +197,7 @@
                       </span>
                     </div>
                   </td>
-                  <td>{{$index+1}}</td>
+                  <td>{{$index*Paging.currentPage+1}}</td>
                   <td title='{{quota.resource_name}}'>
                   <a ng-if="(quota.showbutton==='1')||(quota.showbutton==='-2')" ui-sref='main.data-quota.detail({resource_id:quota.id})' ng-class="{true: 'orange', false: 'text-primary'}[(DataQuotas[$index].resource_name === DataQuotas[$index-1].resource_name) && (DataQuotas[$index-1].resource_format_name==='数据库类')]">{{quota.resource_name}}</a>
                   <a ng-if="(quota.showbutton !='1')&&(quota.showbutton !='-2')"  ng-class="{true: 'orange', false: 'text-primary'}[(DataQuotas[$index].resource_name === DataQuotas[$index-1].resource_name) && (DataQuotas[$index-1].resource_format_name==='数据库类')]">{{quota.resource_name}}</a>
