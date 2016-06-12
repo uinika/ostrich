@@ -598,6 +598,9 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
           if (200 == result.data.head.status) {
             alert('保存成功！');
             $scope.Modal = {};
+            // 清空多选项
+            $scope.dataLevelSelection = [];
+            $scope.shareFreqSelection = [];
             $state.go("main.department.inventory", {}, {
               reload: true
             });
@@ -605,9 +608,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
           } else {
             alert('保存失败');
           }
-          // 清空多选项
-          $scope.dataLevelSelection = [];
-          $scope.shareFreqSelection = [];
+
         })
       } else {
         return;
