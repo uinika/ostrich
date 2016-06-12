@@ -138,7 +138,8 @@
         <label for="" class="col-sm-2 control-label">
           <span class='require-sign'>*</span>需求名称 :</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" ng-model='Modal.DepRequirment.requiement_name' required>
+          <input type="text" name='requiement_name' class="form-control" ng-model='Modal.DepRequirment.requiement_name' ng-maxlength='256' required>
+          <p ng-show="reqAddForm.requiement_name.$error.maxlength" class="help-block">您输入的内容太长，最多输入256个字符。</p>
           <span class='help-info'>需具体说明需求具体名称</span>
         </div>
       </div>
@@ -170,7 +171,8 @@
         <label for="" class="col-sm-2 control-label">
           <span class='require-sign'>*</span>空间范围:</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" required ng-model='Modal.DepRequirment.area_range'>
+          <input type="text" class="form-control" ng-maxlength='256' required name='area_range' ng-model='Modal.DepRequirment.area_range'>
+          <p ng-show="reqAddForm.area_range.$error.maxlength" class="help-block">您输入的内容太长，最多输入256个字符。</p>
           <span class='help-info'>
             可取得数据的地区名称，如全国，四川省，各省等。
           </span>
@@ -190,7 +192,8 @@
         <label for="" class="col-sm-2 control-label">
           <span class='require-sign'>*</span>联系人 :</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" ng-model='Modal.DepRequirment.linkman' required>
+          <input type="text" class="form-control" ng-maxlength='256' name='linkman' ng-model='Modal.DepRequirment.linkman' required>
+          <p ng-show="reqAddForm.linkman.$error.maxlength" class="help-block">您输入的内容太长，最多输入256个字符。</p>
         </div>
       </div>
       <div class="form-group">
