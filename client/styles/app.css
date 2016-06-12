@@ -1194,6 +1194,9 @@ input.ng-touched.ng-invalid {
   padding-right: 0;
   padding-left: 0;
 }
+#data-quota-list .table {
+  margin-bottom: 0 !important;
+}
 #data-quota-list .input-patch {
   position: relative;
   top: -7px;
@@ -1258,7 +1261,7 @@ input.ng-touched.ng-invalid {
   margin-left: 15px;
 }
 #data-quota-list .table-responsive {
-  height: 56rem;
+  height: 622px;
 }
 #data-quota-list .table-responsive td {
   max-width: 165px;
