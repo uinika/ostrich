@@ -26,15 +26,19 @@
           需求状态
           <li role="presentation" class="active">
             <span>
-              <i class='fa fa-check-circle'></i>&nbsp;已确认&nbsp;</span>
+              <a ng-click='filterByConfirmStatus()'><i class='fa fa-list-ul'></i>&nbsp;全部&nbsp;</a></span>
+          </li>
+          <li role="presentation" class="active">
+            <span>
+              <a ng-click='filterByConfirmStatus(1)'><i class='fa fa-check-circle'></i>&nbsp;已确认&nbsp;</a></span>
           </li>
           <li role="presentation">
             <span>
-              <i class='fa fa-question-circle'></i>&nbsp;未确认&nbsp;</span>
+              <a ng-click='filterByConfirmStatus(0)'><i class='fa fa-question-circle'></i>&nbsp;未确认&nbsp;</a></span>
           </li>
           <li role="presentation">
             <span>
-              <i class='fa fa-times-circle-o'></i>&nbsp;未通过&nbsp;</span>
+              <a ng-click='filterByConfirmStatus(2)'><i class='fa fa-times-circle-o'></i>&nbsp;未通过&nbsp;</a></span>
           </li>
         </ul>
       </div>
@@ -116,6 +120,16 @@
       </div>
 
       <div class="form-group" ng-show='dataQuotaShow'>
+        <label for="" class="col-sm-2 control-label">
+          <span class='require-sign'>*</span>对应资源:</label>
+        <div class="col-sm-10">
+          <div style='display:inline-block' isteven-multi-select input-model="depInfoResourceList" output-model="confirmParent.outputResource" button-label="resource_name" item-label="resource_name" tick-property="ticked" selection-mode="single" max-height="250px" helper-elements="filter"></div>
+          <p class='help-block'>{{errorMsg}}</p>
+          <span class='help-info'>根据需求选择对应的资源信息</span>
+        </div>
+      </div>
+
+      <!-- <div class="form-group" ng-show='dataQuotaShow'>
         <label for="" class="col-sm-2 control-label">对应资源:</label>
         <div class='col-sm-8 apply-dept'>
 
@@ -125,12 +139,7 @@
           <p class='help-block'>{{errorMsg}}</p>
           <span class='help-info'>根据需求选择对应的资源信息</span>
         </div>
-        <!-- <div class='col-sm-2'>
-          <button class='btn btn-default'>
-            <i class='fa fa-plus'></i>
-          </button>
-        </div> -->
-      </div>
+      </div> -->
       <div class="form-group">
         <label for="" class="col-sm-2 control-label"><span class='require-sign'>*</span>说明:</label>
         <div class="col-sm-10">

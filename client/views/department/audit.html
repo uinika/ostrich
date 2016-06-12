@@ -28,15 +28,19 @@
             审核状态
             <li role="presentation" class="active">
               <span>
-                <i class='fa fa-check-circle-o'></i>&nbsp;审核通过&nbsp;</span>
+                <a ng-click='filterByAuditStatus()'><i class='fa fa-list-ul'></i>&nbsp;全部&nbsp;</a></span>
+            </li>
+            <li role="presentation" class="active">
+              <span>
+                <a ng-click='filterByAuditStatus(1)'><i class='fa fa-check-circle-o'></i>&nbsp;审核通过&nbsp;</a></span>
             </li>
             <li role="presentation">
               <span>
-                <i class='fa fa-times-circle-o' ></i>&nbsp;审核未通过&nbsp;</span>
+                <a ng-click='filterByAuditStatus(2)'><i class='fa fa-times-circle-o' ></i>&nbsp;审核未通过&nbsp;</a></span>
             </li>
             <li role="presentation">
               <span>
-                <i class='fa fa-question-circle'></i>&nbsp;未审核&nbsp;</span>
+                <a ng-click='filterByAuditStatus(0)'><i class='fa fa-question-circle'></i>&nbsp;未审核&nbsp;</a></span>
             </li>
           </ul>
         </div>

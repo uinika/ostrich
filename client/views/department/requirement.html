@@ -31,15 +31,19 @@
             需求状态
             <li role="presentation">
               <span>
-                <i class='fa fa-check-circle'></i>&nbsp;已确认&nbsp;</span>
+                <a ng-click='filterByConfirmStatus()'><i class='fa fa-list-ul'></i>&nbsp;全部&nbsp;</span></a>
             </li>
             <li role="presentation">
               <span>
-                <i class='fa fa-question-circle'></i>&nbsp;未确认&nbsp;</span>
+                <a ng-click='filterByConfirmStatus(1)'><i class='fa fa-check-circle'></i>&nbsp;已确认&nbsp;</span></a>
             </li>
             <li role="presentation">
               <span>
-                <i class='fa fa-times-circle-o'></i>&nbsp;未通过&nbsp;</span>
+                <a ng-click='filterByConfirmStatus(0)'><i class='fa fa-question-circle'></i>&nbsp;未确认&nbsp;</a></span>
+            </li>
+            <li role="presentation">
+              <span>
+                <a ng-click='filterByConfirmStatus(2)'><i class='fa fa-times-circle-o'></i>&nbsp;未通过&nbsp;</a></span>
             </li>
           </ul>
         </div>
@@ -210,9 +214,6 @@
         <div class="col-sm-10">
           <div style='display:inline-block' isteven-multi-select input-model="deptList" output-model="reqParent.outputDeptList" button-label="dep_name" item-label="dep_name" tick-property="ticked" selection-mode="single" max-height="250px" helper-elements="filter"></div>
           <p class='help-block' ng-show='error'>请选择需求对应部门</p>
-          <!-- <select class="form-control" ng-model='Modal.DepRequirment.response_dep_id'>
-            <option ng-repeat="dep in  deptList" value='{{dep.ID}}'>{{dep.DEP_NAME}}</option>
-          </select> -->
         </div>
       </div>
 

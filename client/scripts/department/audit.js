@@ -37,7 +37,11 @@ Audit.controller('Department.Audit.Controller.Main', ['$scope', '$q', 'Departmen
       getAuditList();
     }
 
-
+    // 根据审核状态过滤
+    $scope.filterByAuditStatus = function(status) {
+      _httpParams.auditstatus = status;
+      getAuditList();
+    }
   }
 ])
 

@@ -782,6 +782,9 @@ input.ng-touched.ng-invalid {
   display: inline-block;
   margin-left: 20px;
 }
+#department-requirement .indicator-list ul.nav-filter li a {
+  cursor: pointer;
+}
 #department-requirement .indicator-list ul.nav-filter li span {
   padding: 0 15px;
 }
@@ -883,6 +886,9 @@ input.ng-touched.ng-invalid {
 #department-requirement-confirm .indicator-list ul.nav-filter li span {
   padding: 0 15px;
 }
+#department-requirement-confirm .indicator-list ul.nav-filter li span a {
+  cursor: pointer;
+}
 #department-requirement-confirm .indicator-list ul.nav-filter li span i {
   font-size: 24px;
 }
@@ -917,6 +923,9 @@ input.ng-touched.ng-invalid {
 }
 #department-requirement-confirm .indicator-list table tr span i.fa-times-circle-o {
   color: #d9534f;
+}
+#department-requirement-confirm .indicator-list table tr a {
+  cursor: pointer;
 }
 #department-requirement-confirm .publish-req-modal .help-info {
   font-size: 12px;
@@ -1008,6 +1017,9 @@ input.ng-touched.ng-invalid {
 }
 #department-audit .indicator-list ul.nav-filter li span {
   padding: 4px 15px;
+}
+#department-audit .indicator-list ul.nav-filter li span a {
+  cursor: pointer;
 }
 #department-audit .indicator-list ul.nav-filter li span i {
   font-size: 24px;

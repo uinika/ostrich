@@ -229,6 +229,14 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$cookies', 
       });
     }
 
+    // 根据确认状态过滤
+    $scope.filterByConfirmStatus = function(status) {
+      _httpParams.requiement_status = status;
+      getDeptRequirementList();
+    }
+
+
+
   }
 ])
 
@@ -276,7 +284,7 @@ DepartmentReq.controller('Department.Requirement.Controller.confirm', ['$cookies
 
     Http.getDeptInfoResourceList().then(function(result) {
       console.log(result);
-      $scope.depInfoResourceList = result.data.body[0].results;
+      $scope.depInfoResourceList = result.data.body;
 
       //  $scope.Paging.totalItems = data.head.total;
     });
@@ -285,17 +293,21 @@ DepartmentReq.controller('Department.Requirement.Controller.confirm', ['$cookies
       // get requirement detail
       $scope.Modal.ReqDetail = item;
       $scope.Modal.ReqResponse = {};
-      console.log($scope.depInfoResourceList.length);
+      $scope.confirmParent = {};
+      console.log($scope.confirmParent.outputResource);
       if($scope.depInfoResourceList.length == 0) {
         $scope.Modal.ReqResponse.resource_id = '';
         $scope.errorMsg = '本部门还未发布任何信息资源';
         $scope.dataQuotaIdNull = true;
       }
-      else{
-        $scope.Modal.ReqResponse.resource_id = $scope.depInfoResourceList[0].id;
-      }
+      // else{
+      //   $scope.Modal.ReqResponse.resource_id = _.map($scope.outputResource,'id');
+      // }
 
       Component.popModalConfirm($scope, '', 'confirm-req-modal').result.then(function() {
+        console.log($scope.confirmParent.outputResource[0]);
+        $scope.Modal.ReqResponse.resource_id = _.map($scope.confirmParent.outputResource,'id')[0];
+        console.log($scope.confirmParent.outputResource);
         console.log($scope.Modal.ReqResponse);
         $scope.Modal.ReqResponse.requiement_id = item.id;
 
@@ -325,6 +337,12 @@ DepartmentReq.controller('Department.Requirement.Controller.confirm', ['$cookies
           }
         })
       });
+    }
+
+    // 根据确认状态过滤
+    $scope.filterByConfirmStatus = function(status) {
+      _httpConfirmParams.requiement_status = status;
+      getDeptRequirementConfirmList();
     }
 
   }
@@ -391,7 +409,7 @@ DepartmentReq.factory('Department.Requirement.Service.Http', ['$http', 'API',
 
     function getDeptInfoResourceList(params) {
       return $http.get(
-        path + '/info_resource_list', {
+        path + '/dep_resource_list', {
           params: params
         }
       )
@@ -495,6 +513,10 @@ DepartmentReq.service('Department.Requirement.Service.Component', ['$uibModal',
       });
       scope.Modal.confirm = function(isValid) {
         console.log(scope);
+        if(!scope.confirmParent.outputResource[0]) {
+          scope.errorMsg = '请选择信息资源！';
+          isValid = false;
+        }
         if (isValid) {
           modalInstanceConfirm.close(scope.Modal);
         } else {
