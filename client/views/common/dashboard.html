@@ -100,6 +100,11 @@
       <div class='panel panel-default pannel-patch'>
         <div class='panel-heading'>
           <i class='fa fa-pencil-square-o'> 最新需求</i>
+          <span class='requirement-icon-list'>
+            <i class='fa fa-question-circle text-warning'></i>未审核&nbsp;
+            <i class='fa fa-check-circle-o text-success'></i>审核通过&nbsp;
+            <i class='fa fa-times-circle-o text-danger'></i>审核未通过&nbsp;
+          </span>
           <a ui-sref='main.department.requirementConfirm' class="pull-right text-primary">更多</a>
         </div>
         <table class='table table-hover table-condensed table-striped table-patch'>
@@ -108,6 +113,7 @@
               <th>创建日期</th>
               <th>需求名称</th>
               <th>提供部门</th>
+              <th>状态</th>
             </tr>
           </thead>
           <tbody>
@@ -115,6 +121,23 @@
               <td title="{{requirement.create_time | date:'yyyy-MM-dd'}}">{{requirement.create_time | date:'yyyy-MM-dd'}}</td>
               <td title="{{requirement.requiement_name}}"><a ui-sref='main.department.requirement.detail({ID:requirement.id})'>{{requirement.requiement_name}}</a></td>
               <td title="{{requirement.dep_short_name}}">{{requirement.dep_short_name}}</td>
+              <td>
+                <div ng-if='requirement.status == 0'>
+                  <span>
+                    <i ui-sref='main.department.audit.info({AUDITID:requirement.id})' class='fa fa-question-circle text-warning'> 审核</i>
+                  </span>
+                </div>
+                <div ng-if='requirement.status == 1'>
+                  <span>
+                    <i class='fa fa-check-circle text-success'></i>
+                  </span>
+                  </div>
+                <div ng-if='requirement.status == 2'>
+                  <span>
+                    <i class='fa fa-times-circle-o text-danger'></i>
+                  </span>
+                </div>
+              </td>
             </tr>
           </tbody>
         </table>

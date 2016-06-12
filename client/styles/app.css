@@ -206,6 +206,10 @@ input.ng-touched.ng-invalid {
 #dashboard .second-section .panel {
   height: 291px;
 }
+#dashboard .second-section .requirement-icon-list {
+  margin-left: 15px;
+  font-size: 12px;
+}
 #dashboard .third-section {
   margin-bottom: 40px;
 }
