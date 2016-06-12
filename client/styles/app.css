@@ -428,7 +428,7 @@ input.ng-touched.ng-invalid {
   padding: 0 15px;
 }
 #department-inventory .indicator-list ul.nav-filter li span i {
-  font-size: 24px;
+  font-size: 18px;
 }
 #department-inventory .indicator-list ul.nav-filter li span i.fa-eye {
   color: #5bc0de;
@@ -662,7 +662,7 @@ input.ng-touched.ng-invalid {
   padding: 4px 15px;
 }
 #department-share .indicator-list ul.nav-filter li span i {
-  font-size: 24px;
+  font-size: 18px;
 }
 #department-share .indicator-list ul.nav-filter li span i.fa-eye {
   color: #5bc0de;
@@ -789,7 +789,7 @@ input.ng-touched.ng-invalid {
   padding: 0 15px;
 }
 #department-requirement .indicator-list ul.nav-filter li span i {
-  font-size: 24px;
+  font-size: 18px;
 }
 #department-requirement .indicator-list ul.nav-filter li span i.fa-check-circle {
   color: #5cb85c;
@@ -890,7 +890,7 @@ input.ng-touched.ng-invalid {
   cursor: pointer;
 }
 #department-requirement-confirm .indicator-list ul.nav-filter li span i {
-  font-size: 24px;
+  font-size: 18px;
 }
 #department-requirement-confirm .indicator-list ul.nav-filter li span i.fa-check-circle {
   color: #5cb85c;
@@ -1022,7 +1022,7 @@ input.ng-touched.ng-invalid {
   cursor: pointer;
 }
 #department-audit .indicator-list ul.nav-filter li span i {
-  font-size: 24px;
+  font-size: 18px;
 }
 #department-audit .indicator-list ul.nav-filter li span i.fa-times-circle-o {
   color: #d9534f;
