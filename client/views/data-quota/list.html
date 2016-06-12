@@ -197,7 +197,7 @@
                       </span>
                     </div>
                   </td>
-                  <td>{{$index*Paging.currentPage+1}}</td>
+                  <td>{{$index+(Paging.currentPage-1)*10+1}}</td>
                   <td title='{{quota.resource_name}}'>
                   <a ng-if="(quota.showbutton==='1')||(quota.showbutton==='-2')" ui-sref='main.data-quota.detail({resource_id:quota.id})' ng-class="{true: 'orange', false: 'text-primary'}[(DataQuotas[$index].resource_name === DataQuotas[$index-1].resource_name) && (DataQuotas[$index-1].resource_format_name==='数据库类')]">{{quota.resource_name}}</a>
                   <a ng-if="(quota.showbutton !='1')&&(quota.showbutton !='-2')"  ng-class="{true: 'orange', false: 'text-primary'}[(DataQuotas[$index].resource_name === DataQuotas[$index-1].resource_name) && (DataQuotas[$index-1].resource_format_name==='数据库类')]">{{quota.resource_name}}</a>
