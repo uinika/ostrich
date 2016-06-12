@@ -81,6 +81,7 @@
               <th>创建日期</th>
               <th>信息资源名称</th>
               <th>提供部门</th>
+              <th>状态</th>
             </tr>
           </thead>
           <tbody>
@@ -88,9 +89,18 @@
               <td title="{{indicator.create_time | date:'yyyy-MM-dd'}}">{{indicator.create_time | date:'yyyy-MM-dd'}}</td>
               <td title="{{indicator.resource_name}}" >
                 <a ng-if=(indicator.showbutton==='1')||(indicator.showbutton==='-2') ui-sref='main.data-quota.detail({resource_id:indicator.id})'>{{indicator.resource_name}}</a>
-                <a ng-if="(indicator.showbutton !='1')&&(indicator.showbutton !='-2')">{{indicator.resource_name}}</a>
+                <a ng-if="(indicator.showbutton!='1')&&(indicator.showbutton!='-2')">{{indicator.resource_name}}</a>
               </td>
               <td title="{{indicator.dep_short_name}}">{{indicator.dep_short_name}}</td>
+              <td>
+                <span>
+                  <span class="text-warning" ng-if="indicator.showbutton==='-2'">不需要申请</span>
+                  <span class="text-primary" ng-if="indicator.showbutton==='-1'">需要申请</span>
+                  <span class="text-muted" ng-if="indicator.showbutton==='0'">申请中</span>
+                  <span class="text-success" ng-if="indicator.showbutton==='1'">通过</span>
+                  <span class="text-danger" ng-if="indicator.showbutton==='2'">未通过</span>
+                </span>
+              </td>
             </tr>
           </tbody>
         </table>

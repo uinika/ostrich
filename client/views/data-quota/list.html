@@ -162,13 +162,6 @@
                </thead>
                <tbody>
                  <tr ng-repeat='quota in DataQuotas'>
-                  <td ng-hide="true">
-                    <div class="checkbox">
-                      <label>
-                        <input ng-checked='quota.isfollowed' type="checkbox">
-                      </label>
-                    </div>
-                  </td>
                   <td title="{{quota.share_level_name}}">
                     <div ng-if='quota.share_level_name =="全省开放"'>
                       <span>
@@ -182,12 +175,11 @@
                     </div>
                     <div ng-if='quota.share_level_name =="授权开放" '>
                       <span>
-                        <i class='fa fa-lock blue'>
-                        </i>
-                          <a ng-if="quota.showbutton==='-1'" class='btn btn-default btn-xs' ng-click='DataQuotaApplyInfo(quota.id)'>申请查看</a>
-                          <a ng-if="quota.showbutton==='0'" title='申请中，等待审核'><i class='fa fa-clock-o text-info'></i></a>
-                          <a ng-if="quota.showbutton==='1'" title='申请已通过'><i class='fa fa-check-square-o text-success'></i></a>
-                          <a ng-if="quota.showbutton==='2'" title='申请未通过'><i class='fa fa-ban text-warning'></i></a>
+                        <i class='fa fa-lock blue'></i>
+                        <a ng-if="quota.showbutton==='-1'" class='btn btn-default btn-xs' ng-click='DataQuotaApplyInfo(quota.id)'>申请查看</a>
+                        <a ng-if="quota.showbutton==='0'" title='申请中，等待审核'><i class='fa fa-clock-o text-info'></i></a>
+                        <a ng-if="quota.showbutton==='1'" title='申请已通过'><i class='fa fa-check-square-o text-success'></i></a>
+                        <a ng-if="quota.showbutton==='2'" title='申请未通过'><i class='fa fa-ban text-warning'></i></a>
                       </span>
                     </div>
                     <div ng-if='quota.share_level_name =="暂不开放" '>
