@@ -926,6 +926,7 @@ input.ng-touched.ng-invalid {
   border: none;
   white-space: nowrap;
   text-overflow: ellipsis;
+  overflow: hidden;
 }
 #department-requirement-detail {
   margin-bottom: 50px;
