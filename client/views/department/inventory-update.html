@@ -422,7 +422,7 @@
               <input type="checkbox" value="{{sfItem.id}}" name='share_frequency' ng-checked="ResourceItem.shareFreqItemSelection.indexOf(sfItem.id) > -1" ng-click="toggleShareFreqItemSelection(sfItem)">
               {{sfItem.dict_name}}
             </span>
-            <p ng-show="shareFreqEmpty" class="help-block">请选择更新周期</p>
+            <p ng-show="shareFreqEmpty && (ResourceItem.shareFreqItemSelection.length == 0)"  class="help-block">请选择更新周期</p>
           </div>
         </div>
 
