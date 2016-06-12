@@ -1,7 +1,7 @@
 <div id='data-quota-list'>
   <div class="panel panel-default pannel-patch">
     <div class="panel-heading">
-      <i ng-if="currentDep===''" class="fa fa-paperclip"> 全部资源</i>
+      <i ng-if="currentDep===''" class="fa fa-paperclip"> 条件过滤</i>
       <i ng-if="currentDep!==''" class="fa fa-paperclip"> {{currentDep}}</i>
       <div class="input-group col-xs-3 pull-right input-patch">
         <input ng-model='TargetDataQuotaName' type="text" class="form-control" placeholder="请输入查询指标名称...">
@@ -104,7 +104,7 @@
 
   <div class="panel panel-default">
     <div class="panel-heading">
-      <i class="fa fa-table"> 资源表格</i>
+      <i class="fa fa-table"> 资源列表</i>
       <span class='pull-right text-info'>共{{DataQuotasTotal}}条</span>
     </div>
     <div class="table-responsive">
