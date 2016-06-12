@@ -405,6 +405,7 @@ input.ng-touched.ng-invalid {
 }
 #department-inventory .indicator-list .scroll {
   overflow-x: scroll;
+  overflow-y: hidden;
   height: 530px;
 }
 #department-inventory .indicator-list .scroll table {
@@ -639,6 +640,7 @@ input.ng-touched.ng-invalid {
 }
 #department-share .indicator-list .scroll {
   overflow-x: scroll;
+  overflow-y: hidden;
   height: 530px;
 }
 #department-share .indicator-list .scroll table {
@@ -774,7 +776,7 @@ input.ng-touched.ng-invalid {
   border-radius: 4px;
 }
 #department-requirement .indicator-list .panel-body {
-  height: 490px;
+  height: 460px;
 }
 #department-requirement .indicator-list div.container {
   width: 1600px !important;
@@ -875,7 +877,7 @@ input.ng-touched.ng-invalid {
   border-radius: 4px;
 }
 #department-requirement-confirm .indicator-list .panel-body {
-  height: 490px;
+  height: 460px;
 }
 #department-requirement-confirm .indicator-list div.container {
   width: 1600px !important;
@@ -996,6 +998,7 @@ input.ng-touched.ng-invalid {
 }
 #department-audit .indicator-list .scroll {
   overflow-x: scroll;
+  overflow-y: hidden;
   height: 530px;
 }
 #department-audit .indicator-list .scroll table {
