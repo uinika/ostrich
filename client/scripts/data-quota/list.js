@@ -134,7 +134,7 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
       $scope.openToSocietyActive = [];
       $scope.openToSocietyActiveAll = '';
       $scope.openToSocietyActive[index] = 'active';
-      var idx = filterParams.social_open_flag.indexOf(item.id);
+      //var idx = filterParams.social_open_flag.indexOf(item.id);
       filterParams.social_open_flag = id;
       if('ALL'===id){
         delete filterParams.social_open_flag;
