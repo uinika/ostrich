@@ -513,7 +513,7 @@ DepartmentReq.service('Department.Requirement.Service.Component', ['$uibModal',
       });
       scope.Modal.confirm = function(isValid) {
         console.log(scope);
-        if(!scope.confirmParent.outputResource[0]) {
+        if(!scope.confirmParent.outputResource[0] && scope.Modal.ReqResponse.status == 1) {
           scope.errorMsg = '请选择信息资源！';
           isValid = false;
         }

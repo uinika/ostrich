@@ -213,7 +213,7 @@
           <span class='require-sign'>*</span>需求对应部门:</label>
         <div class="col-sm-10">
           <div style='display:inline-block' isteven-multi-select input-model="deptList" output-model="reqParent.outputDeptList" button-label="dep_name" item-label="dep_name" tick-property="ticked" selection-mode="single" max-height="250px" helper-elements="filter"></div>
-          <p class='help-block' ng-show='error'>请选择需求对应部门</p>
+          <p class='help-block' ng-show='error && (reqParent.outputDeptList.length == 0)'>请选择需求对应部门</p>
         </div>
       </div>
 

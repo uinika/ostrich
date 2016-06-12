@@ -124,7 +124,7 @@
           <span class='require-sign'>*</span>对应资源:</label>
         <div class="col-sm-10">
           <div style='display:inline-block' isteven-multi-select input-model="depInfoResourceList" output-model="confirmParent.outputResource" button-label="resource_name" item-label="resource_name" tick-property="ticked" selection-mode="single" max-height="250px" helper-elements="filter"></div>
-          <p class='help-block'>{{errorMsg}}</p>
+          <p class='help-block' ng-show='confirmParent.outputResource.length == 0'>{{errorMsg}}</p>
           <span class='help-info'>根据需求选择对应的资源信息</span>
         </div>
       </div>
