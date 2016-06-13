@@ -53,10 +53,10 @@ Login.controller('Login.Controller.Main', ['$rootScope', '$cookies', '$scope', '
 Login.factory('Login.Service.Http', ['$http', 'API',
   function($http, API) {
     var path = API.path;
-    function login(params) {
-      return $http.get(
+    function login(data) {
+      return $http.post(
         path + '/login', {
-          params: params
+          data: data
         }
       )
     };
