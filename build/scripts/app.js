@@ -193,7 +193,7 @@ app.run(['$rootScope', function($rootScope){
 var Config = angular.module('Config', []);
 
 Config.constant('API', {
-  path: 'http://localhost:8080/drrp/api'
+  path: 'http://localhost:8080/drrp/api' 
 });
 
 'use strict';
@@ -292,7 +292,7 @@ AdminDepartment.controller('Admin.Department.Controller.Main', ['$rootScope', '$
         $scope.Modal.validPhone = function (){
           $scope.placeholder.contact_phone = "必填";
           $scope.validPhone = false ;
-          var reg =/^((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)/;
+          var reg =/^(\d{3,4}-)?\d{7,8}$|(^1[3|4|5|7|8]\d{9}$)/;
           if(!reg.test($scope.department.contact_phone)&&($scope.department.contact_phone!=null)){
             $scope.validPhone = true ;
             $scope.placeholder.contact_phone = "电话格式不对";
@@ -352,7 +352,7 @@ AdminDepartment.controller('Admin.Department.Controller.Main', ['$rootScope', '$
         $scope.Modal.validPhone = function (){
           $scope.placeholder.contact_phone = "必填";
           $scope.validPhone = false ;
-          var reg =/^((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)/;
+          var reg =/^(\d{3,4}-)?\d{7,8}$|(^1[3|4|5|7|8]\d{9}$)/;
           if(!reg.test($scope.department.contact_phone)&&($scope.department.contact_phone!=null)){
             $scope.validPhone = true ;
             $scope.placeholder.contact_phone = "电话格式不对";
@@ -665,7 +665,7 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
         $scope.Modal.validPhone = function (){
           $scope.placeholder.phone = "必填";
           $scope.validPhone = false ;
-          var reg =/^((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)/;
+          var reg =/^(\d{3,4}-)?\d{7,8}$|(^1[3|4|5|7|8]\d{9}$)/;
           if(!reg.test($scope.sysUser.phone)&&($scope.sysUser.phone!=null)){
             $scope.validPhone = true ;
             $scope.placeholder.phone = "电话格式不对";
@@ -749,7 +749,7 @@ AdminUser.controller('Admin.User.Controller.Main', ['$cookies', '$scope', '$q', 
         $scope.Modal.validPhone = function (){
           $scope.placeholder.phone = "必填";
           $scope.validPhone = false ;
-          var reg =/^((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)/;
+          var reg =/^(\d{3,4}-)?\d{7,8}$|(^1[3|4|5|7|8]\d{9}$)/;
           if(!reg.test($scope.sysUser.phone)&&$scope.sysUser.phone!=null){
             $scope.validPhone = true ;
             $scope.placeholder.phone = "电话格式不对";
@@ -1040,8 +1040,13 @@ AdminUser.service('AdminUser.Service.Component', ['$uibModal','$state',
 var Dashboard = angular.module('Dashboard', ['ui.router','ui.bootstrap']);
 
 /** Dashboard Controller */
-Dashboard.controller('Dashboard.Controller.Main', ['$scope', 'Dashboard.Service.Http',
-  function($scope, Http) {
+Dashboard.controller('Dashboard.Controller.Main', ['$cookies', '$scope', 'Dashboard.Service.Http', 'Dashboard.Requirement.Service.Component',
+  function($cookies,$scope, Http, Component) {
+
+    <!--user infomation-->
+    var LoginUser = JSON.parse($cookies.get('User'));
+    var DEP_ID = LoginUser.dep_id;
+
     <!-- Bureaus logo grid -->
     Http.getDepartments().then(function(result) {
       if (200 == result.data.head.status) {
@@ -1055,10 +1060,10 @@ Dashboard.controller('Dashboard.Controller.Main', ['$scope', 'Dashboard.Service.
     $scope.DataRequirementSummary = Http.getDataRequirementSummary();
     Http.getDataquotaSummary().then(function(result){
       $scope.SummaryDataQuota = result.data.body[0];
-    })
+    });
     Http.getDataRequirementSummary().then(function(result){
       $scope.SummaryRequirement = result.data.body[0];
-    })
+    });
     <!-- #ECharts -->
 
     <!-- DataQuota & Requirement Summary -->
@@ -1069,16 +1074,17 @@ Dashboard.controller('Dashboard.Controller.Main', ['$scope', 'Dashboard.Service.
         $scope.NewIndicators = result.data.body;
       }
     });
-    Http.getDataRequirementNew({
-      skip: 0, limit: 7
-    }).then(function(result) {
-      if (200 == result.data.head.status) {
-        $scope.Requirements = result.data.body;
-      }
-    });
-    <!-- #DataQuota & Requirement Summary -->
 
-    <!-- DataQuota for Concerned Departments -->
+    //init
+    getDataRequirementNew();
+    function getDataRequirementNew() {
+      Http.getDataRequirementNew({
+        skip: 0, limit: 7, response_dep_id: DEP_ID
+      }).then(function(result) {
+        $scope.Requirements = result.data.body[0].results;
+      });
+    }
+
     // Handle Selected Department
     $scope.select = function(param){
       $scope.departmentID = {resource_dep_id: param};
@@ -1088,6 +1094,63 @@ Dashboard.controller('Dashboard.Controller.Main', ['$scope', 'Dashboard.Service.
           $scope.followDepIndicators = result.data.body[0].results;
       });
     }
+
+    Http.getDeptInfoResourceList().then(function(result) {
+      console.log(result);
+      $scope.depInfoResourceList = result.data.body;
+
+      //  $scope.Paging.totalItems = data.head.total;
+    });
+
+    //confirm
+    $scope.RequirementConfirm = function(requirement) {
+      // get requirement detail
+      $scope.Modal = {};
+      $scope.Modal.Audetail = requirement;
+      $scope.Modal.ReqResponse = {};
+      $scope.confirmParent = {};
+      if($scope.depInfoResourceList.length == 0) {
+        $scope.Modal.ReqResponse.resource_id = '';
+        $scope.errorMsg = '本部门还未发布任何信息资源';
+        $scope.dataQuotaIdNull = true;
+      }
+
+      Component.popModalConfirm($scope, '', 'confirm-req-modal').result.then(function() {
+        console.log($scope.confirmParent.outputResource[0]);
+        $scope.Modal.ReqResponse.resource_id = _.map($scope.confirmParent.outputResource,'id')[0];
+        console.log($scope.confirmParent.outputResource);
+        console.log($scope.Modal.ReqResponse);
+        $scope.Modal.ReqResponse.requiement_id = requirement.id;
+
+        Http.updateRequirement($scope.Modal.ReqResponse).then(function(result) {
+          if (200 == result.data.head.status) {
+            if ($scope.Modal.ReqResponse.status == 1) {
+              // 保存需求响应
+              Http.saveReqResponse({
+                requiement_id: requirement.id,
+                resource_id: $scope.Modal.ReqResponse.resource_id
+              }).then(function(saveResult) {
+                if (200 == saveResult.data.head.status) {
+                  alert('保存成功！');
+                  getDataRequirementNew();
+                } else {
+                  alert('保存失败！');
+                  getDataRequirementNew();
+                }
+              })
+            } else {
+              alert('保存成功！');
+              getDataRequirementNew();
+            }
+
+          } else {
+            alert('保存失败');
+          }
+        })
+      });
+    }
+
+
     // Generoted Department
     Http.getUserDep().then(function(result) {
         if (200 === result.data.head.status && result.data.body.length >= 1) {
@@ -1105,7 +1168,6 @@ Dashboard.controller('Dashboard.Controller.Main', ['$scope', 'Dashboard.Service.
           $scope.followDepIndicators = result.data.body[0].results;
         });
      });
-     <!-- #DataQuota for Concerned Departments -->
 
  }
 ])
@@ -1114,6 +1176,22 @@ Dashboard.controller('Dashboard.Controller.Main', ['$scope', 'Dashboard.Service.
 Dashboard.factory('Dashboard.Service.Http', ['$http', 'API',
   function($http, API) {
     var path = API.path;
+
+    // 需求确认修改状态
+    function updateRequirement(data) {
+      return $http.put(
+        path + '/data_requiement_ok', {
+          data: data
+        }
+      )
+    }
+    function saveReqResponse(data) {
+      return $http.post(
+        path + '/data_requiement_response', {
+          data: data
+        }
+      )
+    }
     function getDataQuotaNew(params) {
       return $http.get(
         path + '/data_resource/new', {params: params}
@@ -1121,7 +1199,7 @@ Dashboard.factory('Dashboard.Service.Http', ['$http', 'API',
     };
     function getDataRequirementNew(params) {
       return $http.get(
-        path + '/data_requiement/new', {params: params}
+        path + '/data_requiement', {params: params}
       )
     };
     function getDepartments() {
@@ -1150,14 +1228,25 @@ Dashboard.factory('Dashboard.Service.Http', ['$http', 'API',
       )
     };
 
+    function getDeptInfoResourceList(params) {
+      return $http.get(
+        path + '/dep_resource_list', {
+          params: params
+        }
+      )
+    }
+
     return {
+      updateRequirement: updateRequirement,
+      saveReqResponse: saveReqResponse,
       getDataQuotaNew: getDataQuotaNew,
       getDataRequirementNew: getDataRequirementNew,
       getDepartments: getDepartments,
       getDataquotaSummary: getDataquotaSummary,
       getDataRequirementSummary: getDataRequirementSummary,
       getUserDep: getUserDep,
-      getDataQuota: getDataQuota
+      getDataQuota: getDataQuota,
+      getDeptInfoResourceList: getDeptInfoResourceList
     };
 
   }
@@ -1341,6 +1430,85 @@ Dashboard.directive('wiservStatisticChart', [
   }
 ]);
 
+/* Component */
+Dashboard.service('Dashboard.Requirement.Service.Component', ['$uibModal',
+  function($uibModal) {
+    // prompt Alert
+    function popAlert(scope, info) {
+      scope.Alerts = [{
+        type: info.type,
+        message: info.message,
+        timeout: 1200
+      }];
+      scope.CloseAlert = function(index) {
+        scope.Alerts.splice(index, 1);
+      };
+    };
+    // prompt Modal for confirm
+    function popModalConfirm(scope, type, templateUrl) {
+      scope.Modal.type = type;
+      var modalInstanceConfirm = $uibModal.open({
+        animation: true,
+        backdrop: 'static',
+        templateUrl: templateUrl + '.html',
+        scope: scope,
+        size: 'lg'
+      });
+      scope.Modal.confirm = function(isValid) {
+        console.log(scope);
+        if(!scope.confirmParent.outputResource[0] && scope.Modal.ReqResponse.status == 1) {
+          scope.errorMsg = '请选择信息资源！';
+          isValid = false;
+        }
+        if (isValid) {
+          modalInstanceConfirm.close(scope.Modal);
+        } else {
+          return;
+        }
+
+      };
+      scope.Modal.cancel = function() {
+        modalInstanceConfirm.dismiss();
+      };
+      return modalInstanceConfirm;
+    };
+    // prompt Modal
+    function popModal(scope, type, templateUrl) {
+      scope.Modal.type = type;
+      var modalInstance = $uibModal.open({
+        animation: true,
+        backdrop: 'static',
+        templateUrl: templateUrl + '.html',
+        scope: scope,
+        size: 'lg'
+      });
+      scope.Modal.confirm = function(isValid) {
+        console.log(scope);
+        scope.submitted = true;
+        if(scope.reqParent.outputDeptList.length == 0) {
+          scope.error = true;
+        }
+        else if(scope.shareFreqSelection.length == 0) {
+        }
+        else {
+          modalInstance.close(scope.Modal);
+        }
+
+      };
+      scope.Modal.cancel = function() {
+        modalInstance.dismiss();
+      };
+      return modalInstance;
+    };
+
+    return {
+      popAlert: popAlert,
+      popModal: popModal,
+      popModalConfirm: popModalConfirm
+    }
+  }
+])
+
 'use strict';
 var Login = angular.module('Login', ['ui.router', 'ngCookies']);
 
@@ -1396,10 +1564,10 @@ Login.controller('Login.Controller.Main', ['$rootScope', '$cookies', '$scope', '
 Login.factory('Login.Service.Http', ['$http', 'API',
   function($http, API) {
     var path = API.path;
-    function login(params) {
-      return $http.get(
+    function login(data) {
+      return $http.post(
         path + '/login', {
-          params: params
+          data: data
         }
       )
     };
@@ -1599,7 +1767,7 @@ DataQuotaList.controller('DataQuotaList.Controller.Main', ['$scope', '$state', '
       $scope.openToSocietyActive = [];
       $scope.openToSocietyActiveAll = '';
       $scope.openToSocietyActive[index] = 'active';
-      var idx = filterParams.social_open_flag.indexOf(item.id);
+      //var idx = filterParams.social_open_flag.indexOf(item.id);
       filterParams.social_open_flag = id;
       if('ALL'===id){
         delete filterParams.social_open_flag;
@@ -1818,7 +1986,11 @@ Audit.controller('Department.Audit.Controller.Main', ['$scope', '$q', 'Departmen
       getAuditList();
     }
 
-
+    // 根据审核状态过滤
+    $scope.filterByAuditStatus = function(status) {
+      _httpParams.auditstatus = status;
+      getAuditList();
+    }
   }
 ])
 
@@ -2535,6 +2707,9 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
           if (200 == result.data.head.status) {
             alert('保存成功！');
             $scope.Modal = {};
+            // 清空多选项
+            $scope.dataLevelSelection = [];
+            $scope.shareFreqSelection = [];
             $state.go("main.department.inventory", {}, {
               reload: true
             });
@@ -2542,9 +2717,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
           } else {
             alert('保存失败');
           }
-          // 清空多选项
-          $scope.dataLevelSelection = [];
-          $scope.shareFreqSelection = [];
+
         })
       } else {
         return;
@@ -3555,6 +3728,14 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$cookies', 
       });
     }
 
+    // 根据确认状态过滤
+    $scope.filterByConfirmStatus = function(status) {
+      _httpParams.requiement_status = status;
+      getDeptRequirementList();
+    }
+
+
+
   }
 ])
 
@@ -3602,7 +3783,7 @@ DepartmentReq.controller('Department.Requirement.Controller.confirm', ['$cookies
 
     Http.getDeptInfoResourceList().then(function(result) {
       console.log(result);
-      $scope.depInfoResourceList = result.data.body[0].results;
+      $scope.depInfoResourceList = result.data.body;
 
       //  $scope.Paging.totalItems = data.head.total;
     });
@@ -3611,17 +3792,21 @@ DepartmentReq.controller('Department.Requirement.Controller.confirm', ['$cookies
       // get requirement detail
       $scope.Modal.ReqDetail = item;
       $scope.Modal.ReqResponse = {};
-      console.log($scope.depInfoResourceList.length);
+      $scope.confirmParent = {};
+      console.log($scope.confirmParent.outputResource);
       if($scope.depInfoResourceList.length == 0) {
         $scope.Modal.ReqResponse.resource_id = '';
         $scope.errorMsg = '本部门还未发布任何信息资源';
         $scope.dataQuotaIdNull = true;
       }
-      else{
-        $scope.Modal.ReqResponse.resource_id = $scope.depInfoResourceList[0].id;
-      }
+      // else{
+      //   $scope.Modal.ReqResponse.resource_id = _.map($scope.outputResource,'id');
+      // }
 
       Component.popModalConfirm($scope, '', 'confirm-req-modal').result.then(function() {
+        console.log($scope.confirmParent.outputResource[0]);
+        $scope.Modal.ReqResponse.resource_id = _.map($scope.confirmParent.outputResource,'id')[0];
+        console.log($scope.confirmParent.outputResource);
         console.log($scope.Modal.ReqResponse);
         $scope.Modal.ReqResponse.requiement_id = item.id;
 
@@ -3651,6 +3836,12 @@ DepartmentReq.controller('Department.Requirement.Controller.confirm', ['$cookies
           }
         })
       });
+    }
+
+    // 根据确认状态过滤
+    $scope.filterByConfirmStatus = function(status) {
+      _httpConfirmParams.requiement_status = status;
+      getDeptRequirementConfirmList();
     }
 
   }
@@ -3717,7 +3908,7 @@ DepartmentReq.factory('Department.Requirement.Service.Http', ['$http', 'API',
 
     function getDeptInfoResourceList(params) {
       return $http.get(
-        path + '/info_resource_list', {
+        path + '/dep_resource_list', {
           params: params
         }
       )
@@ -3821,6 +4012,10 @@ DepartmentReq.service('Department.Requirement.Service.Component', ['$uibModal',
       });
       scope.Modal.confirm = function(isValid) {
         console.log(scope);
+        if(!scope.confirmParent.outputResource[0] && scope.Modal.ReqResponse.status == 1) {
+          scope.errorMsg = '请选择信息资源！';
+          isValid = false;
+        }
         if (isValid) {
           modalInstanceConfirm.close(scope.Modal);
         } else {

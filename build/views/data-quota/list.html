@@ -1,7 +1,7 @@
 <div id='data-quota-list'>
   <div class="panel panel-default pannel-patch">
     <div class="panel-heading">
-      <i ng-if="currentDep===''" class="fa fa-paperclip"> 全部资源</i>
+      <i ng-if="currentDep===''" class="fa fa-paperclip"> 条件过滤</i>
       <i ng-if="currentDep!==''" class="fa fa-paperclip"> {{currentDep}}</i>
       <div class="input-group col-xs-3 pull-right input-patch">
         <input ng-model='TargetDataQuotaName' type="text" class="form-control" placeholder="请输入查询指标名称...">
@@ -104,7 +104,13 @@
 
   <div class="panel panel-default">
     <div class="panel-heading">
-      <i class="fa fa-table"> 资源表格</i>
+      <i class="fa fa-table"> 资源列表</i>
+      <span class='icon-list'>
+        <i class='fa fa-eye'></i> 全省开放
+        <i class='fa fa-desktop blue'></i> 政务云开放
+        <i class='fa fa-lock blue'></i> 授权开放
+        <i class='fa fa-warning orange'></i> 暂不开放
+      </span>
       <span class='pull-right text-info'>共{{DataQuotasTotal}}条</span>
     </div>
     <div class="table-responsive">
@@ -156,13 +162,6 @@
                </thead>
                <tbody>
                  <tr ng-repeat='quota in DataQuotas'>
-                  <td ng-hide="true">
-                    <div class="checkbox">
-                      <label>
-                        <input ng-checked='quota.isfollowed' type="checkbox">
-                      </label>
-                    </div>
-                  </td>
                   <td title="{{quota.share_level_name}}">
                     <div ng-if='quota.share_level_name =="全省开放"'>
                       <span>
@@ -176,12 +175,11 @@
                     </div>
                     <div ng-if='quota.share_level_name =="授权开放" '>
                       <span>
-                        <i class='fa fa-lock blue'>
-                        </i>
-                          <a ng-if="quota.showbutton==='-1'" class='btn btn-default btn-xs' ng-click='DataQuotaApplyInfo(quota.id)'>申请查看</a>
-                          <a ng-if="quota.showbutton==='0'" title='申请中，等待审核'><i class='fa fa-clock-o text-info'></i></a>
-                          <a ng-if="quota.showbutton==='1'" title='申请已通过'><i class='fa fa-check-square-o text-success'></i></a>
-                          <a ng-if="quota.showbutton==='2'" title='申请未通过'><i class='fa fa-ban text-warning'></i></a>
+                        <i class='fa fa-lock blue'></i>
+                        <a ng-if="quota.showbutton==='-1'" class='btn btn-default btn-xs' ng-click='DataQuotaApplyInfo(quota.id)'>申请查看</a>
+                        <a ng-if="quota.showbutton==='0'" title='申请中，等待审核'><i class='fa fa-clock-o text-info'></i></a>
+                        <a ng-if="quota.showbutton==='1'" title='申请已通过'><i class='fa fa-check-square-o text-success'></i></a>
+                        <a ng-if="quota.showbutton==='2'" title='申请未通过'><i class='fa fa-ban text-warning'></i></a>
                       </span>
                     </div>
                     <div ng-if='quota.share_level_name =="暂不开放" '>
@@ -191,7 +189,7 @@
                       </span>
                     </div>
                   </td>
-                  <td>{{$index+1}}</td>
+                  <td>{{::$index+(Paging.currentPage-1)*10+1}}</td>
                   <td title='{{quota.resource_name}}'>
                   <a ng-if="(quota.showbutton==='1')||(quota.showbutton==='-2')" ui-sref='main.data-quota.detail({resource_id:quota.id})' ng-class="{true: 'orange', false: 'text-primary'}[(DataQuotas[$index].resource_name === DataQuotas[$index-1].resource_name) && (DataQuotas[$index-1].resource_format_name==='数据库类')]">{{quota.resource_name}}</a>
                   <a ng-if="(quota.showbutton !='1')&&(quota.showbutton !='-2')"  ng-class="{true: 'orange', false: 'text-primary'}[(DataQuotas[$index].resource_name === DataQuotas[$index-1].resource_name) && (DataQuotas[$index-1].resource_format_name==='数据库类')]">{{quota.resource_name}}</a>

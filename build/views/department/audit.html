@@ -28,20 +28,24 @@
             审核状态
             <li role="presentation" class="active">
               <span>
-                <i class='fa fa-check-circle-o'></i>&nbsp;审核通过&nbsp;</span>
+                <a ng-click='filterByAuditStatus()'><i class='fa fa-list-ul'></i>&nbsp;全部&nbsp;</a></span>
+            </li>
+            <li role="presentation" class="active">
+              <span>
+                <a ng-click='filterByAuditStatus(1)'><i class='fa fa-check-circle-o'></i>&nbsp;审核通过&nbsp;</a></span>
             </li>
             <li role="presentation">
               <span>
-                <i class='fa fa-times-circle-o' ></i>&nbsp;审核未通过&nbsp;</span>
+                <a ng-click='filterByAuditStatus(2)'><i class='fa fa-times-circle-o' ></i>&nbsp;审核未通过&nbsp;</a></span>
             </li>
             <li role="presentation">
               <span>
-                <i class='fa fa-question-circle'></i>&nbsp;未审核&nbsp;</span>
+                <a ng-click='filterByAuditStatus(0)'><i class='fa fa-question-circle'></i>&nbsp;未审核&nbsp;</a></span>
             </li>
           </ul>
         </div>
 
-        <div class='panel-body scroll' cg-busy="{promise:auditPromise,message:'加载中',backdrop:backdrop,delay:delay,minDuration:minDuration}">
+        <div class='scroll' cg-busy="{promise:auditPromise,message:'加载中',backdrop:backdrop,delay:delay,minDuration:minDuration}">
           <div class='container'>
             <div class='row'>
               <div class='col-lg-12'>
