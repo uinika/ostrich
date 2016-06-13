@@ -547,6 +547,7 @@ input.ng-touched.ng-invalid {
   border: 1px solid #DDD;
   border-top: none;
   padding: 20px 15px 10px;
+  font-size: 13px;
 }
 #department-inventory-detail .tab-content .data-title {
   text-align: center;
@@ -954,10 +955,11 @@ input.ng-touched.ng-invalid {
 }
 #department-requirement-detail {
   margin-bottom: 50px;
+  font-size: 13px;
 }
 #department-requirement-detail .dl-horizontal dt,
 #department-requirement-detail .dl-horizontal dd {
-  line-height: 35px;
+  line-height: 26px;
 }
 #department-requirement-detail .response-items {
   clear: right;
@@ -1095,6 +1097,7 @@ input.ng-touched.ng-invalid {
 }
 #department-audit-info .audit-wrap {
   padding: 20px 60px;
+  font-size: 13px;
 }
 #department-audit-info .audit-wrap .audit-info {
   margin-top: 28px;
