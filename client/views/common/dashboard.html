@@ -125,21 +125,22 @@
             <tr ng-repeat='requirement in Requirements'>
               <td title="{{requirement.create_time | date:'yyyy-MM-dd'}}">{{requirement.create_time | date:'yyyy-MM-dd'}}</td>
               <td title="{{requirement.requiement_name}}"><a ui-sref='main.department.requirement.detail({ID:requirement.id})'>{{requirement.requiement_name}}</a></td>
-              <td title="{{requirement.dep_short_name}}">{{requirement.dep_short_name}}</td>
+              <td title="{{requirement.dep_name}}">{{requirement.dep_name}}</td>
               <td>
                 <div ng-if='requirement.status == 0'>
                   <span>
-                    <i ui-sref='main.department.audit.info({AUDITID:requirement.id})' class='fa fa-question-circle text-warning'> 审核</i>
+                    <i class='fa fa-question-circle text-warning'></i>
+                    <a ng-click='RequirementConfirm(requirement)'>未确认</a>
                   </span>
                 </div>
                 <div ng-if='requirement.status == 1'>
                   <span>
-                    <i class='fa fa-check-circle text-success'>审核通过</i>
+                    <i class='fa fa-check-circle text-success'></i>已确认
                   </span>
                   </div>
                 <div ng-if='requirement.status == 2'>
                   <span>
-                    <i class='fa fa-times-circle-o text-danger'>审核未通过</i>
+                    <i class='fa fa-times-circle-o text-danger'></i>未通过
                   </span>
                 </div>
               </td>
@@ -188,3 +189,106 @@
   </section>
 
 </div>
+
+
+<script type='text/ng-template' id='confirm-req-modal.html'>
+  <form class="form-horizontal confirm-req-modal" name='reqConfirmForm'>
+
+    <div class='modal-header'>
+      <i class="fa fa-server"></i>
+      需求确认
+      <button type='button' class='close' data-dismiss='modal' ng-click='Modal.cancel()'>&times;</button>
+    </div>
+    <div class='modal-body'>
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label"><span class='require-sign'>*</span>状态:</label>
+        <div class="col-sm-10">
+          <input type='radio' name='status' ng-click='dataQuotaShow = true' required ng-model='Modal.ReqResponse.status' value='1' />通过&nbsp;
+          <input type='radio' name='status' ng-click='dataQuotaShow = false' required ng-model='Modal.ReqResponse.status' value='2' />不通过
+        </div>
+      </div>
+
+      <div class="form-group" ng-show='dataQuotaShow'>
+        <label for="" class="col-sm-2 control-label">
+          <span class='require-sign'>*</span>对应资源:</label>
+        <div class="col-sm-10">
+          <div style='display:inline-block' isteven-multi-select input-model="depInfoResourceList" output-model="confirmParent.outputResource" button-label="resource_name" item-label="resource_name" tick-property="ticked" selection-mode="single" max-height="250px" helper-elements="filter"></div>
+          <p class='help-block' ng-show='confirmParent.outputResource.length == 0'>{{errorMsg}}</p>
+          <span class='help-info'>根据需求选择对应的资源信息</span>
+        </div>
+      </div>
+
+      <!-- <div class="form-group" ng-show='dataQuotaShow'>
+        <label for="" class="col-sm-2 control-label">对应资源:</label>
+        <div class='col-sm-8 apply-dept'>
+
+          <select class='form-control' ng-model='Modal.ReqResponse.resource_id'>
+            <option ng-repeat ='depInfoResource in depInfoResourceList'  value={{depInfoResource.id}}>{{depInfoResource.resource_name}}</option>
+          </select>
+          <p class='help-block'>{{errorMsg}}</p>
+          <span class='help-info'>根据需求选择对应的资源信息</span>
+        </div>
+      </div> -->
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label"><span class='require-sign'>*</span>说明:</label>
+        <div class="col-sm-10">
+          <textarea class="form-control" ng-maxlength='256' required name='response_content' ng-model='Modal.ReqResponse.response_content'></textarea>
+          <p ng-show="reqConfirmForm.response_content.$error.maxlength" class="help-block">您输入的内容太长。</p>
+          <span class='help-info pull-left'>简要说明需求基本信息</span>
+          <span class='pull-right'>(最多256个汉字)</span>
+        </div>
+      </div>
+    </div>
+    <div class='modal-footer'>
+
+      <button class='btn btn-default' type='button' ng-click='Modal.cancel()'>取消</button>
+      <button class='btn btn-success' ng-disabled="reqConfirmForm.$invalid || (dataQuotaIdNull && dataQuotaShow) || !reqConfirmForm.status || !reqConfirmForm.response_content" type='submit' ng-click='Modal.confirm(reqConfirmForm.$valid)'>保存</button>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">需求信息</div>
+      <div class="panel-body">
+        <table class='table req-detail' style='width:100%;table-layout:fixed' border='0'>
+          <tbody>
+            <tr>
+              <td align='right' width='30%'>需求发布日期：</td>
+              <td title='{{Modal.Audetail.create_time | date:"yyyy-MM-dd HH:mm:ss"}}'>{{Modal.Audetail.create_time | date:"yyyy-MM-dd HH:mm:ss"}}</td>
+            </tr>
+            <tr>
+              <td align='right' width='30%'>需求名称：</td>
+              <td title='{{Modal.Audetail.requiement_name}}'>{{Modal.Audetail.requiement_name}}</td>
+            </tr>
+            <tr>
+              <td align='right' width='30%'>需求说明：</td>
+              <td title='{{Modal.Audetail.requiement_desc}}'>{{Modal.Audetail.requiement_desc}}</td>
+            </tr>
+            <tr>
+              <td align='right' width='30%'>共享频率：</td>
+              <td title='{{Modal.Audetail.sharefrequency}}'>{{Modal.Audetail.sharefrequency}}</td>
+            </tr>
+            <tr>
+              <td align='right' width='30%'>空间范围：</td>
+              <td title='{{Modal.Audetail.area_range}}'>{{Modal.Audetail.area_range}}</td>
+            </tr>
+            <tr>
+              <td align='right' width='30%'>数据级别：</td>
+              <td title='{{Modal.Audetail.regionallevel}}'>{{Modal.Audetail.regionallevel}}</td>
+            </tr>
+            <tr>
+              <td align='right' width='30%'>联系人：</td>
+              <td title='{{Modal.Audetail.linkman}}'>{{Modal.Audetail.linkman}}</td>
+            </tr>
+            <tr>
+              <td align='right' width='30%'>联系电话：</td>
+              <td title='{{Modal.Audetail.phone}}'>{{Modal.Audetail.phone}}</td>
+            </tr>
+            <tr>
+              <td align='right' width='30%'>来源：</td>
+              <td title='{{Modal.Audetail.dep_name}}'>{{Modal.Audetail.dep_name}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</form>
+</script>
