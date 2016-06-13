@@ -94,11 +94,11 @@
               <td title="{{indicator.dep_short_name}}">{{indicator.dep_short_name}}</td>
               <td>
                 <span>
-                  <span class="text-warning" ng-if="indicator.showbutton==='-2'">不需要申请</span>
-                  <span class="text-primary" ng-if="indicator.showbutton==='-1'">需要申请</span>
-                  <span class="text-muted" ng-if="indicator.showbutton==='0'">申请中</span>
-                  <span class="text-success" ng-if="indicator.showbutton==='1'">通过</span>
-                  <span class="text-danger" ng-if="indicator.showbutton==='2'">未通过</span>
+                  <span  ng-if="indicator.showbutton==='-2'">无需申请</span>
+                  <span  ng-if="indicator.showbutton==='-1'">需要申请</span>
+                  <span  ng-if="indicator.showbutton==='0'">申请中</span>
+                  <span  ng-if="indicator.showbutton==='1'">申请通过</span>
+                  <span  ng-if="indicator.showbutton==='2'">申请未通过</span>
                 </span>
               </td>
             </tr>
@@ -110,11 +110,6 @@
       <div class='panel panel-default pannel-patch'>
         <div class='panel-heading'>
           <i class='fa fa-pencil-square-o'> 最新需求</i>
-          <span class='requirement-icon-list'>
-            <i class='fa fa-question-circle text-warning'></i>未审核&nbsp;
-            <i class='fa fa-check-circle-o text-success'></i>审核通过&nbsp;
-            <i class='fa fa-times-circle-o text-danger'></i>审核未通过&nbsp;
-          </span>
           <a ui-sref='main.department.requirementConfirm' class="pull-right text-primary">更多</a>
         </div>
         <table class='table table-hover table-condensed table-striped table-patch'>
@@ -139,12 +134,12 @@
                 </div>
                 <div ng-if='requirement.status == 1'>
                   <span>
-                    <i class='fa fa-check-circle text-success'></i>
+                    <i class='fa fa-check-circle text-success'>审核通过</i>
                   </span>
                   </div>
                 <div ng-if='requirement.status == 2'>
                   <span>
-                    <i class='fa fa-times-circle-o text-danger'></i>
+                    <i class='fa fa-times-circle-o text-danger'>审核未通过</i>
                   </span>
                 </div>
               </td>
