@@ -190,8 +190,8 @@
                     <tr ng-repeat='InfoResource in infoResourceList | orderBy:"create_time":true' ng-class="{true: 'has-item', false: 'text-default'}[infoResourceList[$index].id === infoResourceList[$index-1].id]">
                       <td>
                       <div ng-show='infoResourceList[$index].id != infoResourceList[$index-1].id'>
-                        <a class='delete' ng-click='deleteInfoResource(InfoResource.id)' ><i class='fa fa-trash'></i>&nbsp;删除</a>
-                        <a class='edit' ui-sref='main.department.inventory.update({item:InfoResource.id})'><i class='fa fa-pencil'></i>&nbsp;修改</a>
+                        <a class='delete btn btn-danger btn-xs' ng-click='deleteInfoResource(InfoResource.id)' ><i class='fa fa-trash'></i>&nbsp;删除</a>
+                        <a class='edit btn btn-success btn-xs' ui-sref='main.department.inventory.update({item:InfoResource.id})'><i class='fa fa-pencil'></i>&nbsp;修改</a>
                       </div>
                     </td>
                       <td>

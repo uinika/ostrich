@@ -250,6 +250,7 @@ input.ng-touched.ng-invalid {
 #department-summary .panel-list .panel {
   height: 287px;
   overflow: hidden;
+  font-size: 13px;
 }
 #department-summary .panel-list .panel table {
   table-layout: fixed;
@@ -410,6 +411,7 @@ input.ng-touched.ng-invalid {
 }
 #department-inventory .indicator-list .scroll table {
   table-layout: auto;
+  font-size: 13px;
 }
 #department-inventory .indicator-list .scroll table tr th {
   height: 50px;
@@ -425,6 +427,7 @@ input.ng-touched.ng-invalid {
 }
 #department-inventory .indicator-list ul.nav-filter {
   list-style: none;
+  font-size: 13px;
 }
 #department-inventory .indicator-list ul.nav-filter li {
   display: inline-block;
@@ -460,10 +463,10 @@ input.ng-touched.ng-invalid {
   cursor: pointer;
 }
 #department-inventory .indicator-list table tr td a.delete {
-  color: #d9534f;
+  color: #FFF;
 }
 #department-inventory .indicator-list table tr td a.edit {
-  color: #5cb85c;
+  color: #FFF;
 }
 #department-inventory .indicator-list table tr td pre {
   overflow: hidden;
@@ -645,6 +648,7 @@ input.ng-touched.ng-invalid {
 }
 #department-share .indicator-list .scroll table {
   table-layout: auto;
+  font-size: 13px;
 }
 #department-share .indicator-list .scroll table tr th {
   height: 50px;
@@ -660,6 +664,7 @@ input.ng-touched.ng-invalid {
 }
 #department-share .indicator-list ul.nav-filter {
   list-style: none;
+  font-size: 13px;
 }
 #department-share .indicator-list ul.nav-filter li {
   display: inline-block;
@@ -783,6 +788,7 @@ input.ng-touched.ng-invalid {
 }
 #department-requirement .indicator-list ul.nav-filter {
   list-style: none;
+  font-size: 13px;
 }
 #department-requirement .indicator-list ul.nav-filter li {
   display: inline-block;
@@ -808,6 +814,7 @@ input.ng-touched.ng-invalid {
 }
 #department-requirement .indicator-list table {
   table-layout: fixed;
+  font-size: 13px;
 }
 #department-requirement .indicator-list table tr td {
   overflow: hidden;
@@ -818,10 +825,10 @@ input.ng-touched.ng-invalid {
   cursor: pointer;
 }
 #department-requirement .indicator-list table tr td a.delete {
-  color: #d9534f;
+  color: #FFF;
 }
 #department-requirement .indicator-list table tr td a.edit {
-  color: #5cb85c;
+  color: #FFF;
 }
 #department-requirement .indicator-list table tr span {
   padding: 0 15px;
@@ -884,6 +891,7 @@ input.ng-touched.ng-invalid {
 }
 #department-requirement-confirm .indicator-list ul.nav-filter {
   list-style: none;
+  font-size: 13px;
 }
 #department-requirement-confirm .indicator-list ul.nav-filter li {
   display: inline-block;
@@ -909,6 +917,7 @@ input.ng-touched.ng-invalid {
 }
 #department-requirement-confirm .indicator-list table {
   table-layout: fixed;
+  font-size: 13px;
 }
 #department-requirement-confirm .indicator-list table tr td {
   overflow: hidden;
@@ -1003,6 +1012,7 @@ input.ng-touched.ng-invalid {
 }
 #department-audit .indicator-list .scroll table {
   table-layout: auto;
+  font-size: 13px;
 }
 #department-audit .indicator-list .scroll table tr th {
   height: 50px;
@@ -1018,6 +1028,7 @@ input.ng-touched.ng-invalid {
 }
 #department-audit .indicator-list ul.nav-filter {
   list-style: none;
+  font-size: 13px;
 }
 #department-audit .indicator-list ul.nav-filter li {
   display: inline-block;
