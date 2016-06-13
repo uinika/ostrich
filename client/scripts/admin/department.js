@@ -94,7 +94,7 @@ AdminDepartment.controller('Admin.Department.Controller.Main', ['$rootScope', '$
         $scope.Modal.validPhone = function (){
           $scope.placeholder.contact_phone = "必填";
           $scope.validPhone = false ;
-          var reg =/^((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)/;
+          var reg =/^(\d{3,4}-)?\d{7,8}$|(^1[3|4|5|7|8]\d{9}$)/;
           if(!reg.test($scope.department.contact_phone)&&($scope.department.contact_phone!=null)){
             $scope.validPhone = true ;
             $scope.placeholder.contact_phone = "电话格式不对";
@@ -154,7 +154,7 @@ AdminDepartment.controller('Admin.Department.Controller.Main', ['$rootScope', '$
         $scope.Modal.validPhone = function (){
           $scope.placeholder.contact_phone = "必填";
           $scope.validPhone = false ;
-          var reg =/^((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)/;
+          var reg =/^(\d{3,4}-)?\d{7,8}$|(^1[3|4|5|7|8]\d{9}$)/;
           if(!reg.test($scope.department.contact_phone)&&($scope.department.contact_phone!=null)){
             $scope.validPhone = true ;
             $scope.placeholder.contact_phone = "电话格式不对";
