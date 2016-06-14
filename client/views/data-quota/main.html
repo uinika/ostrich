@@ -7,7 +7,7 @@
         </div>
 
         <div class='input-group input-group-sm'>
-          <input ng-model="dep_short_name" type='text' placeholder='请输入部门短名称...' class='form-control'>
+          <input ng-model="predicate" type='text' placeholder='请输入部门短名称...' class='form-control'>
           <span class='input-group-addon'>
             <span class='glyphicon glyphicon-search'></span>
           </span>
@@ -17,7 +17,9 @@
           <uib-tab index="1" heading="类型" >
             <div class='menu' ui-tree data-drag-enabled="false">
               <treecontrol class="tree-classic"
-                 tree-model="list | filter:dep_short_name"
+                 tree-model="list"
+                 filter-expression="predicate"
+                 filter-comparator="comparator"
                  options="treeOptions"
                  on-selection="showSelected(node)"
                  selected-node="node1">
@@ -28,7 +30,9 @@
           <uib-tab index="2" heading="职能" >
             <div class='menu' ui-tree data-drag-enabled="false">
               <treecontrol class="tree-classic"
-                 tree-model="OcupationList | filter:dep_short_name"
+                 tree-model="OcupationList"
+                 filter-expression="predicate"
+                 filter-comparator="comparator"
                  options="treeOptions"
                  on-selection="showSelected(node)"
                  selected-node="node1">
@@ -39,7 +43,9 @@
           <uib-tab index="3" heading="区域" >
             <div class='menu' ui-tree data-drag-enabled="false">
               <treecontrol class="tree-classic"
-                 tree-model="areaList | filter:dep_short_name"
+                 tree-model="areaList"
+                 filter-expression="predicate"
+                 filter-comparator="comparator"
                  options="treeOptions"
                  on-selection="showSelected(node)"
                  selected-node="node1">

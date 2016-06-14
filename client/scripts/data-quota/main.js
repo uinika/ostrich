@@ -13,13 +13,17 @@ DataQuota.controller('DataQuota.Controller.Main', ['$scope', '$state', 'DataQuot
         ul: "a1",
         li: "a2",
         liSelected: "a7",
-        iExpanded: "a3",
+        iExpanded: "a2",
         iCollapsed: "a4",
         iLeaf: "a5",
         label: "a6",
         labelSelected: "a8"
       }
     }
+    $scope.comparator = false;
+    $scope.showSelected = function(sel) {
+         $scope.selectedNode = sel;
+     };
     // TypeMenu Generator
     Http.menu().then(function(result) {
       if (200 === result.data.head.status) {
