@@ -38,7 +38,7 @@ gulp.task('livereload', ['less'], function() {
 });
 // Watch Client
 gulp.task('watch', function() {
-  gulp.watch(['./client/scripts/**/*.*', './client/styles/**/*.*', './client/views/**/*.html', './client/*.html'], ['livereload']);
+  gulp.watch(['./client/scripts/**/*.*', './client/styles/less/**/*.*', './client/views/**/*.html', './client/*.html'], ['livereload']);
 })
 
 
