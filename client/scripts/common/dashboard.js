@@ -43,7 +43,9 @@ Dashboard.controller('Dashboard.Controller.Main', ['$cookies', '$scope', 'Dashbo
       Http.getDataRequirementNew({
         skip: 0, limit: 7, response_dep_id: DEP_ID
       }).then(function(result) {
-        $scope.Requirements = result.data.body[0].results;
+        if(200 == result.data.head.status){
+          $scope.Requirements = result.data.body[0].results;
+        }
       });
     }
 
