@@ -270,6 +270,7 @@ input.ng-touched.ng-invalid {
   background: none;
   padding: 0;
   font-size: inherit;
+  font-family: inherit;
   margin: 0;
 }
 #department-summary .panel-list .panel-follow-depart .panel-body {
@@ -478,6 +479,7 @@ input.ng-touched.ng-invalid {
   background: none;
   padding: 0;
   font-size: inherit;
+  font-family: inherit;
   margin: 0;
 }
 #department-inventory .indicator-list table tr span i {
@@ -568,6 +570,7 @@ input.ng-touched.ng-invalid {
   background: none;
   padding: 0;
   font-size: inherit;
+  font-family: inherit;
   margin: 0;
 }
 #department-inventory-detail .tab-content #invntDetail .text-right {
@@ -713,6 +716,7 @@ input.ng-touched.ng-invalid {
   background: none;
   padding: 0;
   font-size: inherit;
+  font-family: inherit;
   margin: 0;
 }
 #department-share .indicator-list table tr span i {
@@ -1082,6 +1086,7 @@ input.ng-touched.ng-invalid {
   background: none;
   padding: 0;
   font-size: inherit;
+  font-family: inherit;
   margin: 0;
 }
 #department-audit .indicator-list table tr span {
@@ -1123,6 +1128,7 @@ input.ng-touched.ng-invalid {
   background: none;
   padding: 0;
   font-size: inherit;
+  font-family: inherit;
   margin: 0;
 }
 #department-audit-info .audit-wrap .audit-info .apply-dep-info {
