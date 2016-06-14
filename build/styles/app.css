@@ -555,6 +555,10 @@ input.ng-touched.ng-invalid {
 #department-inventory-detail .tab-content .tab-pane > .row {
   padding: 4px 0;
 }
+#department-inventory-detail .tab-content .tab-pane > .row .col-sm-10 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 #department-inventory-detail .tab-content .tab-pane > .row pre {
   overflow: hidden;
   border: none;
@@ -963,6 +967,10 @@ input.ng-touched.ng-invalid {
   margin-bottom: 50px;
   font-size: 13px;
 }
+#department-requirement-detail .dl-horizontal dd {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 #department-requirement-detail .dl-horizontal dt,
 #department-requirement-detail .dl-horizontal dd {
   line-height: 26px;
@@ -1148,6 +1156,10 @@ input.ng-touched.ng-invalid {
 #department-audit-info .audit-wrap .tab-content {
   padding: 20px 15px 10px;
   border: 1px solid #DDD;
+}
+#department-audit-info .audit-wrap .tab-content .tab-pane .row .col-sm-9 {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 #department-audit-info .audit-wrap .tab-content .relate-req {
   margin: 0;
