@@ -953,6 +953,12 @@ input.ng-touched.ng-invalid {
   text-overflow: ellipsis;
   overflow: hidden;
 }
+.confirm-req-modal .multiSelect .buttonLabel {
+  text-align: left;
+}
+.confirm-req-modal .multiSelect .checkboxLayer {
+  max-width: 96%;
+}
 #department-requirement-detail {
   margin-bottom: 50px;
   font-size: 13px;

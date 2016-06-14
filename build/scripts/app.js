@@ -193,7 +193,7 @@ app.run(['$rootScope', function($rootScope){
 var Config = angular.module('Config', []);
 
 Config.constant('API', {
-  path: 'http://localhost:8080/drrp/api' 
+  path: 'http://localhost:8080/drrp/api'
 });
 
 'use strict';
@@ -1287,10 +1287,10 @@ Dashboard.directive('wiservDataQuotaOverviewChart', [
                   }
                 },
                 data: [{
-                  value: summary.dep_resource,
+                  value: (summary) ? (summary.dep_resource): '0' ,
                   name: '提供部门'
                 }, {
-                  value: summary.month_increment_dpet_resource,
+                  value: (summary) ? (summary.month_increment_dpet_resource) : '0' ,
                   name: '本月新增',
                   selected: true
                 }]
@@ -1299,10 +1299,10 @@ Dashboard.directive('wiservDataQuotaOverviewChart', [
                 type: 'pie',
                 radius: ['70%', '80%'],
                 data: [{
-                  value: summary.total_resource,
+                  value: (summary) ? (summary.total_resource) : '0',
                   name: '资源总数'
                 }, {
-                  value: summary.month_increment_resource,
+                  value: (summary) ? (summary.month_increment_resource) : '0',
                   name: '本月新增',
                   selected: true
                 }]
@@ -1350,10 +1350,10 @@ Dashboard.directive('wiservRequirementOverviewChart', [
                   }
                 },
                 data: [{
-                  value: summary.department_number,
+                  value: (summary) ? (summary.department_number) : '0',
                   name: '涉及部门'
                 }, {
-                  value: summary.department_number_inc,
+                  value: (summary) ? (summary.department_number) : '0',
                   name: '本月新增',
                   selected: true
                 }]
@@ -1362,10 +1362,10 @@ Dashboard.directive('wiservRequirementOverviewChart', [
                 type: 'pie',
                 radius: ['70%', '80%'],
                 data: [{
-                  value: summary.requiement_number,
+                  value: (summary) ? (summary.requiement_number) : '0',
                   name: '需求总数'
                 }, {
-                  value: summary.requiement_number_inc,
+                  value: (summary) ? (summary.requiement_number_inc) : '0',
                   name: '本月新增',
                   selected: true
                 }]
@@ -1891,13 +1891,17 @@ DataQuota.controller('DataQuota.Controller.Main', ['$scope', '$state', 'DataQuot
         ul: "a1",
         li: "a2",
         liSelected: "a7",
-        iExpanded: "a3",
+        iExpanded: "a2",
         iCollapsed: "a4",
         iLeaf: "a5",
         label: "a6",
         labelSelected: "a8"
       }
     }
+    $scope.comparator = false;
+    $scope.showSelected = function(sel) {
+         $scope.selectedNode = sel;
+     };
     // TypeMenu Generator
     Http.menu().then(function(result) {
       if (200 === result.data.head.status) {
@@ -3624,10 +3628,10 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$cookies', 
         Http.publishRequirement(_httpPublishParams).then(function(result) {
           if (200 == result.data.head.status) {
             alert('发布成功');
-            getDeptRequirementList();
           } else {
             alert('发布失败');
           }
+          getDeptRequirementList();
         })
       });
     }
@@ -3720,10 +3724,10 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$cookies', 
         Http.updateRequirementInfo(_httpPublishParams).then(function(result) {
           if (200 == result.data.head.status) {
             alert('修改成功');
-            getDeptRequirementList();
           } else {
             alert('修改失败');
           }
+          getDeptRequirementList();
         })
       });
     }
