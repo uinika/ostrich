@@ -31,7 +31,7 @@
             <li class="list-group-item"><b>分地区数据级别:</b> {{DataQuotaDetail.regionallevel}}</li>
             <li class="list-group-item"><b>联系人:</b> {{DataQuotaDetail.linkman}}</li>
             <li class="list-group-item"><b>联系电话:</b> {{DataQuotaDetail.contact_phone}}</li>
-            <li class="list-group-item"><b>创建时间:</b> {{DataQuotaDetail.create_time}}</li>
+            <li class="list-group-item"><b>创建时间:</b> {{DataQuotaDetail.create_time | date:"yyyy-MM-dd HH:mm:ss"}}</li>
           </ul>
         </uib-tab>
         <uib-tab ng-show="DataQuotaDetail.resource_format ==='数据库类'" class='quota-example' index="1" heading="信息项">
