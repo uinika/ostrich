@@ -1329,6 +1329,10 @@ input.ng-touched.ng-invalid {
 #data-quota-list .quota-detail .list-group {
   margin-top: 6px;
 }
+#data-quota-list .list-patch {
+  overflow: hidden;
+  word-wrap: break-word;
+}
 #data-quota-list .table {
   width: 100%;
   max-width: 100%;
