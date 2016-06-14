@@ -249,10 +249,10 @@ Dashboard.directive('wiservDataQuotaOverviewChart', [
                   }
                 },
                 data: [{
-                  value: summary.dep_resource,
+                  value: (summary) ? (summary.dep_resource): '0' ,
                   name: '提供部门'
                 }, {
-                  value: summary.month_increment_dpet_resource,
+                  value: (summary) ? (summary.month_increment_dpet_resource) : '0' ,
                   name: '本月新增',
                   selected: true
                 }]
@@ -261,10 +261,10 @@ Dashboard.directive('wiservDataQuotaOverviewChart', [
                 type: 'pie',
                 radius: ['70%', '80%'],
                 data: [{
-                  value: summary.total_resource,
+                  value: (summary) ? (summary.total_resource) : '0',
                   name: '资源总数'
                 }, {
-                  value: summary.month_increment_resource,
+                  value: (summary) ? (summary.month_increment_resource) : '0',
                   name: '本月新增',
                   selected: true
                 }]
@@ -312,10 +312,10 @@ Dashboard.directive('wiservRequirementOverviewChart', [
                   }
                 },
                 data: [{
-                  value: summary.department_number,
+                  value: (summary) ? (summary.department_number) : '0',
                   name: '涉及部门'
                 }, {
-                  value: summary.department_number_inc,
+                  value: (summary) ? (summary.department_number) : '0',
                   name: '本月新增',
                   selected: true
                 }]
@@ -324,10 +324,10 @@ Dashboard.directive('wiservRequirementOverviewChart', [
                 type: 'pie',
                 radius: ['70%', '80%'],
                 data: [{
-                  value: summary.requiement_number,
+                  value: (summary) ? (summary.requiement_number) : '0',
                   name: '需求总数'
                 }, {
-                  value: summary.requiement_number_inc,
+                  value: (summary) ? (summary.requiement_number_inc) : '0',
                   name: '本月新增',
                   selected: true
                 }]
