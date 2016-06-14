@@ -125,10 +125,10 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$cookies', 
         Http.publishRequirement(_httpPublishParams).then(function(result) {
           if (200 == result.data.head.status) {
             alert('发布成功');
-            getDeptRequirementList();
           } else {
             alert('发布失败');
           }
+          getDeptRequirementList();
         })
       });
     }
@@ -221,10 +221,10 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$cookies', 
         Http.updateRequirementInfo(_httpPublishParams).then(function(result) {
           if (200 == result.data.head.status) {
             alert('修改成功');
-            getDeptRequirementList();
           } else {
             alert('修改失败');
           }
+          getDeptRequirementList();
         })
       });
     }

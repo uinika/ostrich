@@ -292,11 +292,11 @@
       </div>
       <div style='overflow-x:scroll;height:490px;'>
         <div class='container'>
-          <table class='table table-hover table-striped '>
+          <table class='table table-hover table-striped table-bordered'>
             <thead>
               <tr>
                 <th width='40px'>序号</th>
-                <th width='80px'>操作</th>
+                <th width='100px'>操作</th>
                 <th width='80px'>信息项名称</th>
                 <th width='100px'>数据类型</th>
                 <th width='80px'>数据精度</th>
@@ -312,9 +312,9 @@
                 <!-- <td><input type='checkbox' ng-click='deleteReq(rescoureItem.id)' />删除</td> -->
                 <td>{{$index+1}}</td>
                 <td>
-                  <a class='delete' ng-click='deleteItem($index)'>
+                  <a class='delete btn btn-danger btn-xs' ng-click='deleteItem($index)'>
                     <i class='fa fa-trash'></i>&nbsp;删除</a>
-                  <a class='edit' ng-click='updateItem(rescoureItem)'>
+                  <a class='edit btn btn-success btn-xs' ng-click='updateItem(rescoureItem)'>
                     <i class='fa fa-pencil'></i>&nbsp;修改</a>
                 </td>
                 <td title='{{rescoureItem.item_name}}'>{{rescoureItem.item_name}}</td>
