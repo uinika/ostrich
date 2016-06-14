@@ -556,15 +556,14 @@ input.ng-touched.ng-invalid {
   padding: 4px 0;
 }
 #department-inventory-detail .tab-content .tab-pane > .row .col-sm-10 {
-  overflow: hidden;
-  text-overflow: ellipsis;
+  word-wrap: break-word;
 }
 #department-inventory-detail .tab-content .tab-pane > .row pre {
   overflow: hidden;
   border: none;
   border-radius: 0;
   word-break: initial;
-  word-wrap: initial;
+  word-wrap: break-word;
   color: inherit;
   background: none;
   padding: 0;
@@ -953,9 +952,7 @@ input.ng-touched.ng-invalid {
 }
 .confirm-req-modal .table > tbody > tr > td {
   border: none;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
+  word-wrap: break-word;
 }
 .confirm-req-modal .multiSelect .buttonLabel {
   text-align: left;
@@ -968,8 +965,7 @@ input.ng-touched.ng-invalid {
   font-size: 13px;
 }
 #department-requirement-detail .dl-horizontal dd {
-  overflow: hidden;
-  text-overflow: ellipsis;
+  word-wrap: break-word;
 }
 #department-requirement-detail .dl-horizontal dt,
 #department-requirement-detail .dl-horizontal dd {
@@ -1122,7 +1118,7 @@ input.ng-touched.ng-invalid {
   border: none;
   border-radius: 0;
   word-break: initial;
-  word-wrap: initial;
+  word-wrap: break-word;
   color: inherit;
   background: none;
   padding: 0;
@@ -1158,8 +1154,7 @@ input.ng-touched.ng-invalid {
   border: 1px solid #DDD;
 }
 #department-audit-info .audit-wrap .tab-content .tab-pane .row .col-sm-9 {
-  overflow: hidden;
-  text-overflow: ellipsis;
+  word-wrap: break-word;
 }
 #department-audit-info .audit-wrap .tab-content .relate-req {
   margin: 0;
