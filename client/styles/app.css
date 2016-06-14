@@ -453,6 +453,10 @@ input.ng-touched.ng-invalid {
 }
 #department-inventory .indicator-list table tr.has-item {
   background: #FFF;
+  color: #F07746;
+}
+#department-inventory .indicator-list table tr.has-item td pre {
+  color: #F07746 !important;
 }
 #department-inventory .indicator-list table tr td {
   overflow: hidden;
@@ -699,6 +703,10 @@ input.ng-touched.ng-invalid {
 }
 #department-share .indicator-list table tr.has-item {
   background: #FFF;
+  color: #F07746;
+}
+#department-share .indicator-list table tr.has-item td pre {
+  color: #F07746 !important;
 }
 #department-share .indicator-list table tr td {
   overflow: hidden;
