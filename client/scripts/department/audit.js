@@ -7,6 +7,7 @@ Audit.controller('Department.Audit.Controller.Main', ['$scope', '$q', 'Departmen
     $scope.InfoResource = {};
 
     $scope.Paging = {};
+    $scope.Paging.currentPage = 1;
     $scope.Paging.maxSize = 5;
     $scope.Paging.itemsPerPage = 10;
 

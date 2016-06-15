@@ -11,6 +11,7 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$cookies', 
     $scope.DeptRequirement = {};
 
     $scope.Paging = {};
+    $scope.Paging.currentPage = 1;
     $scope.Paging.maxSize = 5;
     $scope.Paging.itemsPerPage = 10;
 

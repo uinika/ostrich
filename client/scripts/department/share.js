@@ -7,6 +7,7 @@ DepartmentShare.controller('DepartmentShare.Controller.Main', [ '$scope', 'Depar
     $scope.DepartInfoResource = {};
 
     $scope.Paging = {};
+    $scope.Paging.currentPage = 1;
     $scope.Paging.maxSize = 5;
     $scope.Paging.itemsPerPage = 10;
 

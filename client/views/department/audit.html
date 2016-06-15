@@ -127,7 +127,7 @@
                         </span>
                       </div>
                     </td>
-                    <td>{{$index+1}}</td>
+                    <td>{{::$index+(Paging.currentPage-1)*Paging.itemsPerPage+1}}</td>
                     <td title='{{InfoResource.apply_time |date:"yyyy-MM-dd HH:mm:ss"}}'>{{InfoResource.apply_time |date:"yyyy-MM-dd HH:mm:ss"}}</td>
                     <td title='{{InfoResource.apply_dep_name}}'>{{InfoResource.apply_dep_name}}</td>
                     <td title='{{InfoResource.resource_name}}'>
