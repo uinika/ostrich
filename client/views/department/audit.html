@@ -1,5 +1,5 @@
 <!-- UI Router -->
-<div id='ui-view-department-audit' ui-view>
+
   <div id='department-audit'>
     <div class='indicator-order'>
       <div class='pull-left'>
@@ -99,11 +99,11 @@
                   <tr ng-repeat='InfoResource in auditList | orderBy:"create_time":true'>
                     <td>
                       <div ng-if='InfoResource.audit_status == 0'><span>
-                                            <i class='fa fa-question-circle'></i></span><a ui-sref='main.department.audit.info({AUDITID:InfoResource.audit_id,RESOURCEID:InfoResource.id,APPLYTIME:InfoResource.apply_time,APPLYDEP:InfoResource.apply_dep_name})'>审核</a></div>
+                                            <i class='fa fa-question-circle'></i></span><a ui-sref='main.department.auditinfo({AUDITID:InfoResource.audit_id,RESOURCEID:InfoResource.id,APPLYTIME:InfoResource.apply_time,APPLYDEP:InfoResource.apply_dep_name})'>审核</a></div>
                                             <div ng-if='InfoResource.audit_status == 1'><span>
-                                              <i class='fa fa-check-circle'></i></span></div>
+                                              <i class='fa fa-check-circle'></i></span><a ui-sref='main.department.auditdetail({AUDITSTATUS:"通过",RESOURCEID:InfoResource.id,APPLYTIME:InfoResource.apply_time,APPLYDEP:InfoResource.apply_dep_name,OPINION:InfoResource.audit_opinion})'>详情</a></div>
                                               <div ng-if='InfoResource.audit_status == 2'><span>
-                                                <i class='fa fa-times-circle-o'></i></span></div>
+                                                <i class='fa fa-times-circle-o'></i></span><a ui-sref='main.department.auditdetail({AUDITSTATUS:"不通过",RESOURCEID:InfoResource.id,APPLYTIME:InfoResource.apply_time,APPLYDEP:InfoResource.apply_dep_name,OPINION:InfoResource.audit_opinion})'>详情</a></div>
                   </td>
                     <td>
                       <div ng-if='InfoResource.share_level_name =="全省开放" '>
@@ -181,4 +181,3 @@
     </div>
 
   </div>
-</div>

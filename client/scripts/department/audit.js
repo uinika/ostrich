@@ -98,6 +98,39 @@ Audit.controller('Department.Audit.Controller.info', ['$scope', '$state', '$q', 
   }
 ])
 
+Audit.controller('Department.Audit.Controller.detail', ['$scope', '$state', '$q', 'Department.Audit.Service.Http', '$stateParams',
+  function( $scope, $state, $q, Http, $stateParams) {
+    $scope.TabItemShow = true;
+    $scope.TabRequireShow = true;
+    $scope.AuditInfo = {};
+    $scope.AuditInfo.audit_opinion = '';
+
+    // 根据id查询信息资源详情
+    Http.getDepartInfoResList({
+      resource_id : $stateParams.RESOURCEID
+    }).then(function(ResourceRes) {
+      $scope.InfoResourceDetail = ResourceRes.data.body[0].results[0];
+      $scope.InfoResourceDetail.apply_dep_name = $stateParams.APPLYDEP;
+      $scope.InfoResourceDetail.apply_time = $stateParams.APPLYTIME;
+      $scope.InfoResourceDetail.audit_status = $stateParams.AUDITSTATUS;
+      $scope.InfoResourceDetail.audit_opinion = $stateParams.OPINION;
+    })
+
+
+    $scope.InfoItemShow = false;
+    Http.getInfoItemList({
+      resource_id: $stateParams.RESOURCEID
+    }).then(function(result) {
+      if (result.data.body.length == 0) {
+        $scope.InfoItemShow = false;
+      } else {
+        $scope.InfoItemShow = true;
+        $scope.InfoItems = result.data.body;
+      }
+    })
+  }
+])
+
 /* HTTP */
 Audit.factory('Department.Audit.Service.Http', ['$http', '$q', 'API',
   function($http, $q, API) {

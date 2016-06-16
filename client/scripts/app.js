@@ -168,10 +168,15 @@ app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', '$provide',
         templateUrl: 'views/department/audit.html',
         controller: 'Department.Audit.Controller.Main'
       })
-      .state('main.department.audit.info', {
-        url: '/info/:AUDITID/:RESOURCEID/:APPLYTIME/:APPLYDEP',
+      .state('main.department.auditinfo', {
+        url: '/auditinfo/:AUDITID/:RESOURCEID/:APPLYTIME/:APPLYDEP',
         templateUrl: 'views/department/audit-info.html',
         controller: 'Department.Audit.Controller.info'
+      })
+      .state('main.department.auditdetail', {
+        url: '/auditdetail/:AUDITSTATUS/:RESOURCEID/:APPLYTIME/:APPLYDEP/:OPINION',
+        templateUrl: 'views/department/audit-detail.html',
+        controller: 'Department.Audit.Controller.detail'
       })
 
   }
