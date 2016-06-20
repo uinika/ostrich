@@ -2,10 +2,10 @@
 -----
 
 ## Installation and deployment
-1. git clone http://192.168.13.21/zhengh/hummingbird.git
-2. cd hummingbird
+1. git clone http://192.168.13.21/zhengh/leo.git
+2. cd leo
 3. npm Install
-4. gulp
+4. gulp client / gulp server / gulp
 5. Open browser http://localhost:5002/client/
 
 -----
