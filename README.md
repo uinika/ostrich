@@ -19,6 +19,7 @@
 * [UI Bootstrap 1.3.x](https://angular-ui.github.io/bootstrap/)
 * [Lodash 1.5.x](https://lodash.com/)
 * [q 1.4.x](https://github.com/kriskowal/q)
+
 -----
 
 ## JSON Transfer Protocol
