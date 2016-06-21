@@ -587,6 +587,18 @@ input.ng-touched.ng-invalid {
   max-width: 700px;
   width: 700px;
 }
+#department-inventory-upload .help-info {
+  padding-left: 90px;
+  padding-top: 10px;
+  display: block;
+}
+#department-inventory-upload .upload-btn {
+  display: inline;
+  width: 72px;
+}
+#department-inventory-upload .help-block {
+  padding-left: 90px;
+}
 #department-share {
   margin-bottom: 50px;
 }

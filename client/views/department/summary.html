@@ -99,7 +99,7 @@
             </thead>
             <tbody>
               <tr ng-repeat='invtItem in toAuditList'>
-                <td title='{{invtItem.apply_time |date:"yyyy-MM-dd"}}'>{{invtItem.apply_time |date:"yyyy-MM-dd"}}</td>
+                <td class='text-right' title='{{invtItem.apply_time |date:"yyyy-MM-dd"}}'>{{invtItem.apply_time |date:"yyyy-MM-dd"}}</td>
                 <td title='{{invtItem.resource_name}}'>
                   <a ui-sref='main.department.audit.info({AUDITID:invtItem.audit_id,RESOURCEID:invtItem.resource_id,APPLYTIME:invtItem.apply_time,APPLYDEP:invtItem.dep_name})'>
                     <pre>{{invtItem.resource_name}}</pre>
@@ -134,8 +134,8 @@
             </thead>
             <tbody>
               <tr ng-repeat='resItem in requireToConfirmList'>
-                <td title='{{resItem.response_time |date:"yyyy-MM-dd"}}'>{{resItem.response_time |date:"yyyy-MM-dd"}}</td>
-                <td title='{{resItem.create_time| date:"yyyy-MM-dd"}}'>{{resItem.create_time| date:"yyyy-MM-dd"}}</td>
+                <td class='text-right' title='{{resItem.response_time |date:"yyyy-MM-dd"}}'>{{resItem.response_time |date:"yyyy-MM-dd"}}</td>
+                <td class='text-right' title='{{resItem.create_time| date:"yyyy-MM-dd"}}'>{{resItem.create_time| date:"yyyy-MM-dd"}}</td>
                 <td title='{{resItem.requiement_name}}'>
                   <a ui-sref='main.department.requirement.detail({ID:resItem.id})'>{{resItem.requiement_name}}</a>
                 </td>

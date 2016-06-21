@@ -264,7 +264,7 @@ DInventory.controller('Department.Inventory.Controller.detail', ['$scope', '$q',
     console.log($stateParams.item);
     $scope.InfoItemShow = false;
     Http.getDepartInfoResList({
-      resource_id : $stateParams.item
+      resource_id: $stateParams.item
     }).then(function(ResourceRes) {
       $scope.InfoResourceDetail = ResourceRes.data.body[0].results[0];
       Http.getInfoItemList({
@@ -328,14 +328,13 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
     // resource name duplicate check
     $scope.resNameExist = false;
     $scope.checkResName = function() {
-      if($scope.InfoResource.resource_name && $scope.InfoResource.resource_name != '') {
+      if ($scope.InfoResource.resource_name && $scope.InfoResource.resource_name != '') {
         Http.checkResName({
           resource_name: $scope.InfoResource.resource_name
         }).then(function(res) {
-          if(res.data.body[0].isexists == 'true') {
+          if (res.data.body[0].isexists == 'true') {
             $scope.resNameExist = true;
-          }
-          else{
+          } else {
             $scope.resNameExist = false;
           }
         })
@@ -390,7 +389,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
       var InfoResource_RelationConfig = [];
       var InfoResourceApplyInfo = [];
       var InfoItem_RelationConfig = [];
-      if($scope.resNameExist) {
+      if ($scope.resNameExist) {
         isValid = false;
       }
       if ($scope.shareFreqSelection.length == 0 && !$scope.resItemAddBtn) { // 未选择更新周期
@@ -399,7 +398,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
       if ($scope.resItemAddBtn && ($scope.ResourceItemList.length == 0)) { // 未添加信息项
         isValid = false;
       }
-      if($scope.InfoResource.category == $scope.InfoResource.rel_category) {// 信息资源分类和关联及类目名称相同
+      if ($scope.InfoResource.category == $scope.InfoResource.rel_category) { // 信息资源分类和关联及类目名称相同
         isValid = false;
       }
 
@@ -465,7 +464,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
     if ($stateParams.item) { // 选择修改
       // 根据id查询信息资源详情
       Http.getDepartInfoResList({
-        resource_id : $stateParams.item
+        resource_id: $stateParams.item
       }).then(function(ResourceRes) {
         $scope.InfoResource = ResourceRes.data.body[0].results[0];
 
@@ -544,7 +543,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
       var InfoItem_RelationConfig = [];
 
 
-      if($scope.resNameExist) {
+      if ($scope.resNameExist) {
         isValid = false;
       }
       if ($scope.shareFreqSelection.length == 0 && !$scope.resItemUpdateBtn) { // 未选择更新周期
@@ -553,7 +552,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
       if ($scope.resItemAddBtn && ($scope.ResourceItemList.length == 0) || $scope.resItemUpdateBtn && ($scope.ResourceItemList.length == 0)) { // 未添加信息项
         isValid = false;
       }
-      if($scope.InfoResource.category == $scope.InfoResource.rel_category) {// 信息资源分类和关联及类目名称相同
+      if ($scope.InfoResource.category == $scope.InfoResource.rel_category) { // 信息资源分类和关联及类目名称相同
         isValid = false;
       }
 
@@ -666,23 +665,22 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
       })
 
       $scope.checkItemName = function() {
-        if($scope.ResourceItem.item_name && $scope.ResourceItem.item_name != '') {
+        if ($scope.ResourceItem.item_name && $scope.ResourceItem.item_name != '') {
           console.log($scope.ResourceItem);
           console.log($scope.ResourceItemList);
           $scope.parent.itemNameExist = false;
           _($scope.ResourceItemList).forEach(function(item) {
-            if(($scope.ResourceItem.item_name == item.item_name) &&  $scope.ResourceItem !== item) {
+            if (($scope.ResourceItem.item_name == item.item_name) && $scope.ResourceItem !== item) {
               $scope.parent.itemNameExist = true;
             }
           })
-          if(!$scope.parent.itemNameExist) {
+          if (!$scope.parent.itemNameExist) {
             Http.checkItemName({
               item_name: $scope.ResourceItem.item_name
             }).then(function(res) {
-              if(res.data.body[0].isexists == 'true') {
+              if (res.data.body[0].isexists == 'true') {
                 $scope.parent.itemNameExist = true;
-              }
-              else{
+              } else {
                 $scope.parent.itemNameExist = false;
               }
             })
@@ -722,7 +720,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
       $scope.Modal = {};
       $scope.itemUpdated = false;
       $scope.ResourceItem = InfoItem;
-      $scope.ResourceItem.shareFreqItemSelection = _.map(InfoItem.config,'id');
+      $scope.ResourceItem.shareFreqItemSelection = _.map(InfoItem.config, 'id');
       $scope.ResourceItem.shareFreqItemObjSelection = InfoItem.config;
       $scope.shareFreqEmpty = false;
       $scope.parent = {};
@@ -771,23 +769,22 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
       })
 
       $scope.checkItemName = function() {
-        if($scope.ResourceItem.item_name && $scope.ResourceItem.item_name != '') {
+        if ($scope.ResourceItem.item_name && $scope.ResourceItem.item_name != '') {
           console.log($scope.ResourceItem);
           console.log($scope.ResourceItemList);
           $scope.parent.itemNameExist = false;
           _($scope.ResourceItemList).forEach(function(item) {
-            if(($scope.ResourceItem.item_name == item.item_name) &&  $scope.ResourceItem !== item) {
+            if (($scope.ResourceItem.item_name == item.item_name) && $scope.ResourceItem !== item) {
               $scope.parent.itemNameExist = true;
             }
           })
-          if(!$scope.parent.itemNameExist) {
+          if (!$scope.parent.itemNameExist) {
             Http.checkItemName({
               item_name: $scope.ResourceItem.item_name
             }).then(function(res) {
-              if(res.data.body[0].isexists == 'true') {
+              if (res.data.body[0].isexists == 'true') {
                 $scope.parent.itemNameExist = true;
-              }
-              else{
+              } else {
                 $scope.parent.itemNameExist = false;
               }
             })
@@ -823,7 +820,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
       var deleteFlag = confirm('确定删除本条信息项？');
       console.log(index);
       if (deleteFlag && index > -1) {
-        $scope.ResourceItemList.splice(index,1);
+        $scope.ResourceItemList.splice(index, 1);
       }
     }
 
@@ -832,8 +829,8 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
     // show or hide department
     $scope.depShow = false;
     $scope.showHideDeps = function(ev) {
-      if (LEVEL_ALL_OPEN != $scope.InfoResource.share_level) {// 不为全开放
-        if (LEVEL_AUTH == $scope.InfoResource.share_level) {// 授权开放
+      if (LEVEL_ALL_OPEN != $scope.InfoResource.share_level) { // 不为全开放
+        if (LEVEL_AUTH == $scope.InfoResource.share_level) { // 授权开放
           $scope.depShow = true;
           $scope.socialOpenFlag = false;
         } else {
@@ -937,6 +934,47 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
 
   }
 
+])
+
+// upload file
+DInventory.controller('Department.Inventory.Controller.upload', ['$scope', '$q', 'Department.Inventory.Service.Http', '$stateParams', '$state', '$sce', 'API',
+  function($scope, $q, Http, $stateParams, $state, $sce, API) {
+    $scope.uploadPromise = null;
+
+    $scope.htmlPopover = $sce.trustAsHtml("<table class='table table-hover table-striped '>" +
+      "<thead><tr><th>序号</th><th>城市</th><th>GDP(亿元)</th><th>增长</th>" +
+      "<th>地方公共财政收入(亿元)</th><th>增长</th><th>城镇登记失业率</th>" +
+      "<th>农村居民人均纯收入(元)</th><th>增长</th></tr></thead>" +
+      "<tbody><tr><td>1</td><td>成都</td><td>9000</td><td>8.54%</td><td>8000</td><td>7.51%</td>" +
+      "<td>1.39</td><td>5678</td><td>3.40%</td></tr>" +
+      "</tbody></table>");
+
+    $scope.uploadFile = function() {
+      var file = $scope.myFile;
+      console.log('file is ');
+      console.dir(file);
+      if (!file) {
+        alert('您还未选择文件');
+        return;
+      }
+      $scope.uploadPromise = Http.uploadFile(file, $stateParams.ID).then(function(result) {
+        if (200 == result.data.head.status) {
+          alert('上传成功!');
+          $state.go("main.department.inventory", {}, {
+            reload: true
+          });
+        }
+      });
+    }
+
+    $scope.downloadUrl = API.path + '/download';
+
+    $scope.toIndex = function() {
+      $state.go("main.department.inventory", {}, {
+        reload: true
+      });
+    }
+  }
 ])
 
 
@@ -1046,6 +1084,7 @@ DInventory.factory('Department.Inventory.Service.Http', ['$http', '$q', 'API',
         }
       )
     }
+
     function checkResName(params) {
       return $http.get(
         path + '/info_resource_name', {
@@ -1060,6 +1099,19 @@ DInventory.factory('Department.Inventory.Service.Http', ['$http', '$q', 'API',
           params: params
         }
       )
+    }
+
+    function uploadFile(file, id) {
+      var fd = new FormData();
+      var uploadUrl = path + '/upload/excel?data_quota_id=' + id;
+      fd.append('file', file);
+      var promise = $http.post(uploadUrl, fd, {
+        transformRequest: angular.identity,
+        headers: {
+          'Content-Type': undefined
+        }
+      });
+      return promise;
     }
     return {
       saveInfoResource: saveInfoResource,
@@ -1076,7 +1128,8 @@ DInventory.factory('Department.Inventory.Service.Http', ['$http', '$q', 'API',
       updateInfoItem: updateInfoItem,
       getItemUpdatePeriod: getItemUpdatePeriod,
       checkResName: checkResName,
-      checkItemName: checkItemName
+      checkItemName: checkItemName,
+      uploadFile: uploadFile
     }
   }
 ]);
@@ -1114,7 +1167,7 @@ DInventory.service('Department.Inventory.Service.Component', ['$uibModal', '$sta
           scope.shareFreqEmpty = true;
           return;
         }
-        if(scope.parent.itemNameExist) {
+        if (scope.parent.itemNameExist) {
           return;
         }
         modalInstance.close(scope.Modal);
@@ -1143,6 +1196,7 @@ DInventory.directive('fileModel', ['$parse', function($parse) {
       element.bind('change', function() {
         var rgx = /(xls|xlsx)/i;
         var fileSuffix = element[0].files[0].name;
+        scope.parentIvntObj.fileName = fileSuffix;
         var ext = fileSuffix.substring(fileSuffix.lastIndexOf(".") + 1);
         if (!rgx.test(ext)) {
           scope.$apply(function() {

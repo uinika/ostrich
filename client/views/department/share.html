@@ -47,20 +47,7 @@
           </ul>
         </nav>
       </div>
-      <div class='indicator-filter'>
-        <nav class='pull-left'>
-          <ul class="pager">
-            <li class='filter-label'>面向社会开放</li>
-            <li role="presentation">
-              <a ng-class="{true: 'active', false: 'inactive'}[socialOpenMainSelection.length == 0]" href="javascript:;" ng-click='getSocialOpenAll()'>全部</a>
-            </li>
-            <li role="presentation" ng-repeat='socialOpen in socialOpenList'>
-              <a ng-class="{true: 'active', false: 'inactive'}[socialOpenMainSelection.indexOf(socialOpen.dict_code) > -1]" href="javascript:;" ng-click='getInfoResourceListBySO(socialOpen)'>{{socialOpen.dict_name}}
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </div>
+
       <div class='indicator-filter'>
         <nav class='pull-left'>
           <ul class="pager">
@@ -84,6 +71,20 @@
             </li>
             <li role="presentation" ng-repeat='dataLevel in dataLevelList'>
               <a ng-class="{true: 'active', false: 'inactive'}[areaMainSelection.indexOf(dataLevel.id) > -1]" ng-checked="areaMainSelection.indexOf(dataLevel.id) > -1" ng-click='getInfoResourceListByAP(dataLevel)' href="javascript:;">{{dataLevel.dict_name}}
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class='indicator-filter'>
+        <nav class='pull-left'>
+          <ul class="pager">
+            <li class='filter-label'>面向社会开放</li>
+            <li role="presentation">
+              <a ng-class="{true: 'active', false: 'inactive'}[socialOpenMainSelection.length == 0]" href="javascript:;" ng-click='getSocialOpenAll()'>全部</a>
+            </li>
+            <li role="presentation" ng-repeat='socialOpen in socialOpenList'>
+              <a ng-class="{true: 'active', false: 'inactive'}[socialOpenMainSelection.indexOf(socialOpen.dict_code) > -1]" href="javascript:;" ng-click='getInfoResourceListBySO(socialOpen)'>{{socialOpen.dict_name}}
               </a>
             </li>
           </ul>

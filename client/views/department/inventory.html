@@ -18,7 +18,11 @@
           </li>
           <li role="presentation">
             <button class='btn btn-success' ui-sref='main.department.inventory.publish'>
-              <i class='fa fa-plus'></i>新增资源</button>
+              <i class='fa fa-plus'></i>&nbsp;新增资源</button>
+          </li>
+          <li role="presentation">
+            <button class='btn btn-success' ui-sref='main.department.inventory.upload'>
+              <i class='fa fa-file-excel-o'></i>&nbsp;导入数据</button>
           </li>
           <!-- <li role="presentation">
             <a class='btn btn-primary'>导入指标</a>
@@ -55,20 +59,7 @@
           </ul>
         </nav>
       </div>
-      <div class='indicator-filter'>
-        <nav class='pull-left'>
-          <ul class="pager">
-            <li class='filter-label'>面向社会开放</li>
-            <li role="presentation">
-              <a ng-class="{true: 'active', false: 'inactive'}[socialOpenMainSelection.length == 0]" href="javascript:;" ng-click='getSocialOpenAll()'>全部</a>
-            </li>
-            <li role="presentation" ng-repeat='socialOpen in socialOpenList'>
-              <a ng-class="{true: 'active', false: 'inactive'}[socialOpenMainSelection.indexOf(socialOpen.dict_code) > -1]" href="javascript:;" ng-click='getInfoResourceListBySO(socialOpen)'>{{socialOpen.dict_name}}
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </div>
+
       <div class='indicator-filter'>
         <nav class='pull-left'>
           <ul class="pager">
@@ -92,6 +83,20 @@
             </li>
             <li role="presentation" ng-repeat='dataLevel in dataLevelList'>
               <a ng-class="{true: 'active', false: 'inactive'}[areaMainSelection.indexOf(dataLevel.id) > -1]" ng-checked="areaMainSelection.indexOf(dataLevel.id) > -1" ng-click='getInfoResourceListByAP(dataLevel)' href="javascript:;">{{dataLevel.dict_name}}
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class='indicator-filter'>
+        <nav class='pull-left'>
+          <ul class="pager">
+            <li class='filter-label'>面向社会开放</li>
+            <li role="presentation">
+              <a ng-class="{true: 'active', false: 'inactive'}[socialOpenMainSelection.length == 0]" href="javascript:;" ng-click='getSocialOpenAll()'>全部</a>
+            </li>
+            <li role="presentation" ng-repeat='socialOpen in socialOpenList'>
+              <a ng-class="{true: 'active', false: 'inactive'}[socialOpenMainSelection.indexOf(socialOpen.dict_code) > -1]" href="javascript:;" ng-click='getInfoResourceListBySO(socialOpen)'>{{socialOpen.dict_name}}
               </a>
             </li>
           </ul>
