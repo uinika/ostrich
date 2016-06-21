@@ -27,6 +27,38 @@
           </ul>
       </nav>
       </div>
+
+      <!-- 更新周期 -->
+      <div class='indicator-filter'>
+        <nav class='pull-left'>
+          <ul class="pager">
+            <li class="text-muted filter-label">更新周期</li>
+            <li ng-click="ShareFrequencyFilter('ALL')">
+              <a ng-class='ShareFrequencyActiveAll'>全部</a>
+            </li>
+            <li ng-repeat='shareFrequency in ShareFrequencys' ng-click='ShareFrequencyFilter(shareFrequency.id, $index)'>
+              <a ng-class='ShareFrequencyActive[$index]'>{{shareFrequency.dict_name}}
+              </a>
+            </li>
+          </ul>
+      </nav>
+      </div>
+
+      <!-- 是否涉密 -->
+     <div class='indicator-filter'>
+       <nav class='pull-left'>
+         <ul class="pager issecret">
+           <li class="text-muted filter-label ">是否涉密</li>
+           <li ng-click="isScretFilter('ALL')">
+              <a ng-class='isScretActiveAll' >全部</a>
+           </li>
+           <li ng-repeat='isScret in isScrets' ng-click='isScretFilter(isScret.id, $index)'>
+              <a ng-class='isScretActive[$index]'>{{isScret.dict_name}}</a>
+           </li>
+        </ul>
+       </nav>
+     </div>
+
       <!-- 共享级别 -->
       <div class='indicator-filter'>
         <nav class='pull-left'>
@@ -55,25 +87,11 @@
           </ul>
       </nav>
       </div>
-      <!-- 更新周期 -->
-      <div class='indicator-filter'>
-        <nav class='pull-left'>
-          <ul class="pager">
-            <li class="text-muted filter-label">更新周期</li>
-            <li ng-click="ShareFrequencyFilter('ALL')">
-              <a ng-class='ShareFrequencyActiveAll'>全部</a>
-            </li>
-            <li ng-repeat='shareFrequency in ShareFrequencys' ng-click='ShareFrequencyFilter(shareFrequency.id, $index)'>
-              <a ng-class='ShareFrequencyActive[$index]'>{{shareFrequency.dict_name}}
-              </a>
-            </li>
-          </ul>
-      </nav>
-      </div>
+
       <!-- 分地区数据级别 -->
       <div class='indicator-filter'>
         <nav class='pull-left'>
-          <ul class="pager">
+          <ul class="pager dataLevelStyle">
             <li class="text-muted filter-label">分地区数据级别</li>
             <li ng-click="DataLevelFilter('ALL')">
               <a ng-class='DataLevelActiveAll'>全部</a>
@@ -84,20 +102,7 @@
         </ul>
       </nav>
       </div>
-      <!-- 是否涉密 -->
-     <div class='indicator-filter'>
-       <nav class='pull-left'>
-         <ul class="pager issecret">
-           <li class="text-muted filter-label ">是否涉密</li>
-           <li ng-click="isScretFilter('ALL')">
-              <a ng-class='isScretActiveAll' >全部</a>
-           </li>
-           <li ng-repeat='isScret in isScrets' ng-click='isScretFilter(isScret.id, $index)'>
-              <a ng-class='isScretActive[$index]'>{{isScret.dict_name}}</a>
-           </li>
-        </ul>
-       </nav>
-     </div>
+
    </div>
   </div>
  </div>
@@ -113,11 +118,12 @@
       </span>
       <span class='pull-right text-info'>共{{DataQuotasTotal}}条</span>
     </div>
+    <div class="panel-body"></div>
     <div class="table-responsive">
       <div class='container'>
         <div class='row'>
           <div class='col-lg-12' >
-            <table class='table table-hover table-striped table-bordered text-center table-patch'>
+            <table class='table table-hover table-striped table-bordered table-patch'>
                <thead>
                  <tr>
                    <th ng-hide="true" width="60px" rowspan="2">关注</th>
@@ -189,7 +195,7 @@
                       </span>
                     </div>
                   </td>
-                  <td>{{::$index+(Paging.currentPage-1)*10+1}}</td>
+                  <td text-align="right">{{::$index+(Paging.currentPage-1)*10+1}}</td>
                   <td title='{{quota.resource_name}}'>
                   <a ng-if="(quota.showbutton==='1')||(quota.showbutton==='-2')" ui-sref='main.data-quota.detail({resource_id:quota.id})' ng-class="{true: 'orange', false: 'text-primary'}[(DataQuotas[$index].resource_name === DataQuotas[$index-1].resource_name) && (DataQuotas[$index-1].resource_format_name==='数据库类')]">{{quota.resource_name}}</a>
                   <a ng-if="(quota.showbutton !='1')&&(quota.showbutton !='-2')"  ng-class="{true: 'orange', false: 'text-primary'}[(DataQuotas[$index].resource_name === DataQuotas[$index-1].resource_name) && (DataQuotas[$index-1].resource_format_name==='数据库类')]">{{quota.resource_name}}</a>
@@ -231,8 +237,8 @@
                   <td title='{{quota.area_level}}'>{{quota.area_level}}</td>
 
                   <td title='{{quota.linkman}}'>{{quota.linkman}}</td>
-                  <td title='{{quota.contact_phone}}'>{{quota.contact_phone}}</td>
-                  <td title='{{quota.create_time | date:"yyyy-MM-dd HH:mm:ss"}}'>{{quota.create_time | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                  <td title='{{quota.contact_phone}}' text-align="right">{{quota.contact_phone}}</td>
+                  <td title='{{quota.create_time | date:"yyyy-MM-dd HH:mm:ss"}}' text-align="right">{{quota.create_time | date:'yyyy-MM-dd HH:mm:ss'}}</td>
                  </tr>
                </tbody>
              </table>

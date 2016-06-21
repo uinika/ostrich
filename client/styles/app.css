@@ -1280,7 +1280,7 @@ input.ng-touched.ng-invalid {
   display: inline-block;
   padding-right: 12px;
 }
-#data-quota-list .filter .indicator-filter ul.pager.issecret {
+#data-quota-list .filter .indicator-filter ul.pager.dataLevelStyle {
   margin-bottom: 0;
 }
 #data-quota-list .col-lg-12 {
@@ -1300,7 +1300,7 @@ input.ng-touched.ng-invalid {
   text-overflow: ellipsis;
   font-size: 13px;
   vertical-align: middle;
-  text-align: center;
+  text-align: left;
 }
 #data-quota-list .pannel-patch {
   margin-bottom: 10px;
