@@ -72,8 +72,8 @@
                         <i class='fa fa-check-circle'></i></span></div>
                         <div ng-if='DeptReq.status == 2'><span>
                           <i class='fa fa-times-circle-o'></i></span></div></td>
-                    <td title='{{DeptReq.create_time| date:"yyyy-MM-dd HH:mm:ss"}}'>{{DeptReq.create_time| date:"yyyy-MM-dd HH:mm:ss"}}</td>
-                    <td title='{{DeptReq.response_time |date:"yyyy-MM-dd HH:mm:ss"}}'>{{DeptReq.response_time |date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                    <td class='text-right' title='{{DeptReq.create_time| date:"yyyy-MM-dd HH:mm:ss"}}'>{{DeptReq.create_time| date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                    <td class='text-right' title='{{DeptReq.response_time |date:"yyyy-MM-dd HH:mm:ss"}}'>{{DeptReq.response_time |date:"yyyy-MM-dd HH:mm:ss"}}</td>
                     <td title='{{DeptReq.requiement_name}}'>
                       <a ui-sref='main.department.requirement.detail({ID:DeptReq.id})'>{{DeptReq.requiement_name}}</a>
                       </td>
@@ -82,7 +82,7 @@
                     <td title='{{DeptReq.area_range}}'>{{DeptReq.area_range}}</td>
                     <td title='{{DeptReq.regionallevel}}'>{{DeptReq.regionallevel}}</td>
                     <td title='{{DeptReq.linkman}}'>{{DeptReq.linkman}}</td>
-                    <td title='{{DeptReq.phone}}'>{{DeptReq.phone}}</td>
+                    <td class='text-right' title='{{DeptReq.phone}}'>{{DeptReq.phone}}</td>
                     <td title='{{DeptReq.dep_name}}'>
                       {{DeptReq.dep_name}}
                     </td>

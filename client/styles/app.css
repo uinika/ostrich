@@ -844,6 +844,9 @@ input.ng-touched.ng-invalid {
   table-layout: fixed;
   font-size: 13px;
 }
+#department-requirement .indicator-list table tr th {
+  text-align: center;
+}
 #department-requirement .indicator-list table tr td {
   overflow: hidden;
   white-space: nowrap;
@@ -946,6 +949,9 @@ input.ng-touched.ng-invalid {
 #department-requirement-confirm .indicator-list table {
   table-layout: fixed;
   font-size: 13px;
+}
+#department-requirement-confirm .indicator-list table tr th {
+  text-align: center;
 }
 #department-requirement-confirm .indicator-list table tr td {
   overflow: hidden;
