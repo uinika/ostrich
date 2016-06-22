@@ -1231,6 +1231,7 @@ input.ng-touched.ng-invalid {
   clear: right;
 }
 #data-quota-main .left {
+  width: 3%;
   padding-left: 0;
 }
 #data-quota-main .left .panel-heading {
@@ -1269,6 +1270,7 @@ input.ng-touched.ng-invalid {
   margin-top: 20px;
 }
 #data-quota-main .right {
+  width: 97%;
   padding-right: 0;
   padding-left: 0;
 }
