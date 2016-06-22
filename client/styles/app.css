@@ -1317,8 +1317,12 @@ input.ng-touched.ng-invalid {
   overflow: hidden;
   text-overflow: ellipsis;
   font-size: 13px;
+}
+#data-quota-list .table-patch th {
   vertical-align: middle;
-  text-align: left;
+}
+#data-quota-list .table-patch td {
+  vertical-align: middle;
 }
 #data-quota-list .pannel-patch {
   margin-bottom: 10px;

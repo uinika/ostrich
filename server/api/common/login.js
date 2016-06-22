@@ -4,7 +4,7 @@ const Router = require('express').Router(),
       Config = require('../../config');
 
 Router.route('/login')
-  .get(function(request, response) {
+  .post(function(request, response) {
     let head = {}, body = {};
     let datas = {};
     var username = request.query.username;

@@ -2,8 +2,8 @@
 var DataQuota = angular.module('DataQuota', ['ui.router']);
 
 /** Main Controller */
-DataQuota.controller('DataQuota.Controller.Main', ['$scope', '$state', 'DataQuota.Service.Http',
-  function($scope, $state, Http) {
+DataQuota.controller('DataQuota.Controller.Main', ['$scope', '$state', 'DataQuota.Service.Http','panels',
+  function($scope, $state, Http, panels) {
     window.scrollTo(0,0);
     // Menu configration
     $scope.treeOptions = {
@@ -20,6 +20,16 @@ DataQuota.controller('DataQuota.Controller.Main', ['$scope', '$state', 'DataQuot
         labelSelected: "a8"
       }
     }
+    $scope.leftOpen = function () {
+				$scope.$broadcast('rightHello', {message : $scope.message});
+			};
+
+    $scope.$on('rightHello', function(event, args) {
+
+  		$scope.message = args.message;
+
+  		panels.open("test01");
+  	});
     $scope.comparator = false;
     $scope.showSelected = function(sel) {
          $scope.selectedNode = sel;
@@ -72,3 +82,17 @@ DataQuota.factory('DataQuota.Service.Http', ['$http', 'API',
     }
   }
 ]);
+
+// DataQuota.controller('leftCtrl', ['$scope', 'panels', function ($scope, panels) {
+//
+// 	$scope.$on('rightHello', function(event, args) {
+//
+// 		$scope.message = args.message;
+//
+// 		panels.open("test01");
+// 	});
+//   //close callback
+// 	$scope.testpanelClose = function () {
+// 		window.alert('Close Callback!!');
+// 	};
+// }]);
