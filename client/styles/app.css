@@ -1237,6 +1237,9 @@ input.ng-touched.ng-invalid {
 #data-quota-main .left .panel-heading {
   cursor: pointer;
 }
+#data-quota-main .left .treeButton {
+  font-size: 15px;
+}
 #data-quota-main .left .panel-heading:HOVER {
   color: #337AB9;
 }

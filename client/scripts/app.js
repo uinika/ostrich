@@ -31,7 +31,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', '$provide',
         id: 'test01',
         position: 'left',
         size: '300px',
-        templateUrl: 'views/data-quota/right.html',
+        templateUrl: 'views/data-quota/DepartmentTree.html',
         controller: 'DataQuota.Controller.Main'
     });
 

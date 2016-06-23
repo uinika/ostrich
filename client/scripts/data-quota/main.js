@@ -20,38 +20,71 @@ DataQuota.controller('DataQuota.Controller.Main', ['$scope', '$state', 'DataQuot
         labelSelected: "a8"
       }
     }
-    $scope.leftOpen = function () {
-				$scope.$broadcast('rightHello', {message : $scope.message});
+    $scope.styleListOpen = function () {
+				$scope.$broadcast('type', {message : 1});
 			};
 
-    $scope.$on('rightHello', function(event, args) {
-
-  		$scope.message = args.message;
-
+    $scope.$on('type', function(event, args) {
+  		$scope.flag = args.message;
+      // TypeMenu Generator
+      Http.menu().then(function(result) {
+        if (200 === result.data.head.status) {
+          $scope.list = result.data.body;
+        }
+      });
+      $scope.predicate = '';
   		panels.open("test01");
   	});
+    $scope.ocupationListOpen = function () {
+        $scope.$broadcast('ocupation', {message : 2});
+      };
+
+    $scope.$on('ocupation', function(event, args) {
+      $scope.flag = args.message;
+      // OcupationMenu Generator
+      Http.menuRole().then(function(result) {
+        if (200 === result.data.head.status) {
+          $scope.OcupationList = result.data.body;
+        }
+      });
+      $scope.predicate = '';
+      panels.open("test01");
+    });
+    $scope.areaListOpen = function () {
+        $scope.$broadcast('area', {message : 3});
+      };
+
+    $scope.$on('area', function(event, args) {
+      $scope.flag = args.message;
+      // AreaMenu Generator
+      Http.menuArea().then(function(result) {
+        if (200 === result.data.head.status) {
+          $scope.areaList = result.data.body;
+        }
+      });
+      $scope.predicate = '';
+      panels.open("test01");
+    });
+    $scope.themeListOpen = function () {
+        $scope.$broadcast('theme', {message : 4});
+      };
+
+    $scope.$on('theme', function(event, args) {
+      $scope.flag = args.message;
+      // AreaMenu Generator
+
+
+      $scope.predicate = '';
+      panels.open("test01");
+    });
+
+
     $scope.comparator = false;
     $scope.showSelected = function(sel) {
          $scope.selectedNode = sel;
      };
-    // TypeMenu Generator
-    Http.menu().then(function(result) {
-      if (200 === result.data.head.status) {
-        $scope.list = result.data.body;
-      }
-    });
-    // OcupationMenu Generator
-    Http.menuRole().then(function(result) {
-      if (200 === result.data.head.status) {
-        $scope.OcupationList = result.data.body;
-      }
-    });
-    // AreaMenu Generator
-    Http.menuArea().then(function(result) {
-      if (200 === result.data.head.status) {
-        $scope.areaList = result.data.body;
-      }
-    });
+
+
   }
 ]);
 
@@ -82,17 +115,3 @@ DataQuota.factory('DataQuota.Service.Http', ['$http', 'API',
     }
   }
 ]);
-
-// DataQuota.controller('leftCtrl', ['$scope', 'panels', function ($scope, panels) {
-//
-// 	$scope.$on('rightHello', function(event, args) {
-//
-// 		$scope.message = args.message;
-//
-// 		panels.open("test01");
-// 	});
-//   //close callback
-// 	$scope.testpanelClose = function () {
-// 		window.alert('Close Callback!!');
-// 	};
-// }]);
