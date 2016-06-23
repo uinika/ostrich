@@ -1,5 +1,16 @@
 'use strict';
-var DataQuota = angular.module('DataQuota', ['ui.router']);
+var DataQuota = angular.module('DataQuota', ['ui.router', 'angular.panels']);
+DataQuota.config(['panelsProvider',
+  function(panelsProvider) {
+    panelsProvider
+    .add({
+        id: 'test01',
+        position: 'right',
+        size: '300px',
+        templateUrl: 'views/data-quota/DepartmentTree.html',
+        controller: 'DataQuota.Controller.Main'
+    });
+  }])
 
 /** Main Controller */
 DataQuota.controller('DataQuota.Controller.Main', ['$scope', '$state', 'DataQuota.Service.Http','panels',
@@ -21,6 +32,7 @@ DataQuota.controller('DataQuota.Controller.Main', ['$scope', '$state', 'DataQuot
       }
     }
     $scope.styleListOpen = function () {
+        // $scope.showPage = true;
 				$scope.$broadcast('type', {message : 1});
 			};
 
@@ -32,6 +44,7 @@ DataQuota.controller('DataQuota.Controller.Main', ['$scope', '$state', 'DataQuot
           $scope.list = result.data.body;
         }
       });
+      $scope.title = '机构类型';
       $scope.predicate = '';
   		panels.open("test01");
   	});
@@ -47,6 +60,7 @@ DataQuota.controller('DataQuota.Controller.Main', ['$scope', '$state', 'DataQuot
           $scope.OcupationList = result.data.body;
         }
       });
+      $scope.title = '机构职能';
       $scope.predicate = '';
       panels.open("test01");
     });
@@ -62,6 +76,7 @@ DataQuota.controller('DataQuota.Controller.Main', ['$scope', '$state', 'DataQuot
           $scope.areaList = result.data.body;
         }
       });
+      $scope.title = '区域';
       $scope.predicate = '';
       panels.open("test01");
     });
@@ -74,6 +89,7 @@ DataQuota.controller('DataQuota.Controller.Main', ['$scope', '$state', 'DataQuot
       // AreaMenu Generator
 
 
+      $scope.title = '主题类';
       $scope.predicate = '';
       panels.open("test01");
     });

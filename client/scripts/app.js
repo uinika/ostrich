@@ -26,14 +26,14 @@ var app = angular.module('app', [
 app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', '$provide','panelsProvider',
   function($stateProvider, $urlRouterProvider, $httpProvider, $provide,panelsProvider) {
 
-    panelsProvider
-    .add({
-        id: 'test01',
-        position: 'left',
-        size: '300px',
-        templateUrl: 'views/data-quota/DepartmentTree.html',
-        controller: 'DataQuota.Controller.Main'
-    });
+    // panelsProvider
+    // .add({
+    //     id: 'test01',
+    //     position: 'left',
+    //     size: '300px',
+    //     templateUrl: 'views/data-quota/DepartmentTree.html',
+    //     controller: 'DataQuota.Controller.Main'
+    // });
 
     /** HTTP Interceptor */
     $httpProvider.interceptors.push(['$q',
