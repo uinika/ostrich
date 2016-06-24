@@ -1230,9 +1230,12 @@ input.ng-touched.ng-invalid {
 #department-user .user-list {
   clear: right;
 }
+#data-quota-main .left1 {
+  width: 35px;
+  font-size: 15px;
+}
 #data-quota-main .left {
-  width: 3%;
-  padding-left: 0;
+  padding-left: 10px;
 }
 #data-quota-main .left .panel-heading {
   cursor: pointer;
@@ -1273,7 +1276,6 @@ input.ng-touched.ng-invalid {
   margin-top: 20px;
 }
 #data-quota-main .right {
-  width: 97%;
   padding-right: 0;
   padding-left: 0;
 }

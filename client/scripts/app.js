@@ -6,7 +6,6 @@ var app = angular.module('app', [
   'ui.bootstrap',
   'treeControl',
   'isteven-multi-select',
-  'angular.panels',
   'Login',
   'Main',
   'Dashboard',
@@ -23,17 +22,8 @@ var app = angular.module('app', [
   'DepartmentShare'
 ]);
 
-app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', '$provide','panelsProvider',
-  function($stateProvider, $urlRouterProvider, $httpProvider, $provide,panelsProvider) {
-
-    // panelsProvider
-    // .add({
-    //     id: 'test01',
-    //     position: 'left',
-    //     size: '300px',
-    //     templateUrl: 'views/data-quota/DepartmentTree.html',
-    //     controller: 'DataQuota.Controller.Main'
-    // });
+app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', '$provide',
+  function($stateProvider, $urlRouterProvider, $httpProvider, $provide) {
 
     /** HTTP Interceptor */
     $httpProvider.interceptors.push(['$q',

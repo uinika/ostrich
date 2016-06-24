@@ -1,20 +1,9 @@
 'use strict';
-var DataQuota = angular.module('DataQuota', ['ui.router', 'angular.panels']);
-DataQuota.config(['panelsProvider',
-  function(panelsProvider) {
-    panelsProvider
-    .add({
-        id: 'test01',
-        position: 'right',
-        size: '300px',
-        templateUrl: 'views/data-quota/DepartmentTree.html',
-        controller: 'DataQuota.Controller.Main'
-    });
-  }])
+var DataQuota = angular.module('DataQuota', ['ui.router']);
 
 /** Main Controller */
-DataQuota.controller('DataQuota.Controller.Main', ['$scope', '$state', 'DataQuota.Service.Http','panels',
-  function($scope, $state, Http, panels) {
+DataQuota.controller('DataQuota.Controller.Main', ['$scope', '$state', 'DataQuota.Service.Http',
+  function($scope, $state, Http) {
     window.scrollTo(0,0);
     // Menu configration
     $scope.treeOptions = {
@@ -32,73 +21,42 @@ DataQuota.controller('DataQuota.Controller.Main', ['$scope', '$state', 'DataQuot
       }
     }
     $scope.styleListOpen = function () {
-        // $scope.showPage = true;
-				$scope.$broadcast('type', {message : 1});
-			};
+		};
 
-    $scope.$on('type', function(event, args) {
-  		$scope.flag = args.message;
-      // TypeMenu Generator
-      Http.menu().then(function(result) {
-        if (200 === result.data.head.status) {
-          $scope.list = result.data.body;
-        }
-      });
-      $scope.title = '机构类型';
-      $scope.predicate = '';
-  		panels.open("test01");
-  	});
+    // TypeMenu Generator
+    Http.menu().then(function(result) {
+      if (200 === result.data.head.status) {
+        $scope.list = result.data.body;
+      }
+    });
     $scope.ocupationListOpen = function () {
-        $scope.$broadcast('ocupation', {message : 2});
-      };
+    };
 
-    $scope.$on('ocupation', function(event, args) {
-      $scope.flag = args.message;
-      // OcupationMenu Generator
-      Http.menuRole().then(function(result) {
-        if (200 === result.data.head.status) {
-          $scope.OcupationList = result.data.body;
-        }
-      });
-      $scope.title = '机构职能';
-      $scope.predicate = '';
-      panels.open("test01");
+    // OcupationMenu Generator
+    Http.menuRole().then(function(result) {
+      if (200 === result.data.head.status) {
+        $scope.OcupationList = result.data.body;
+      }
     });
     $scope.areaListOpen = function () {
-        $scope.$broadcast('area', {message : 3});
-      };
+    };
 
-    $scope.$on('area', function(event, args) {
-      $scope.flag = args.message;
-      // AreaMenu Generator
-      Http.menuArea().then(function(result) {
-        if (200 === result.data.head.status) {
-          $scope.areaList = result.data.body;
-        }
-      });
-      $scope.title = '区域';
-      $scope.predicate = '';
-      panels.open("test01");
+    // AreaMenu Generator
+    Http.menuArea().then(function(result) {
+      if (200 === result.data.head.status) {
+        $scope.areaList = result.data.body;
+      }
     });
     $scope.themeListOpen = function () {
-        $scope.$broadcast('theme', {message : 4});
-      };
+    };
 
-    $scope.$on('theme', function(event, args) {
-      $scope.flag = args.message;
       // AreaMenu Generator
-
-
-      $scope.title = '主题类';
-      $scope.predicate = '';
-      panels.open("test01");
-    });
 
 
     $scope.comparator = false;
     $scope.showSelected = function(sel) {
          $scope.selectedNode = sel;
-     };
+    };
 
 
   }
@@ -128,6 +86,21 @@ DataQuota.factory('DataQuota.Service.Http', ['$http', 'API',
       menu: menu,
       menuRole: menuRole,
       menuArea: menuArea
+    }
+  }
+]);
+DataQuota.directive('wiservMainWrapper', [
+  function() {
+    return {
+      restrict: 'AE',
+      link: function(scope, element, attrs) {
+        element.find('.toggler').addEventListener('click', function() {
+        // element.find('.content').toggleClass("content-collapse");
+        // element.find('.sidebar').toggleClass("sidebar-collapse");
+        // element.find('.content>.navbar').toggleClass("nav-collapse");
+        console.log("dd");
+        });
+      }
     }
   }
 ]);
