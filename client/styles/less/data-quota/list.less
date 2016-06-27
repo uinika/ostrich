@@ -1,7 +1,4 @@
 #data-quota-list{
-  .table {
-    margin-bottom: 0 !important;
-  }
   .input-patch{
     position: relative;
     top: -7px;
@@ -30,9 +27,12 @@
   }
   .col-lg-12 {
     padding-left: inherit;
-
   }
-  table {
+  .table-responsive{
+    height: 628px;
+  }
+  .table-patch {
+    margin-bottom: 0 !important;
     table-layout:automatic;
     td, th{
       height: 50px;
@@ -42,10 +42,17 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      vertical-align: middle;
       font-size: 13px;
+    }
+    th {
+        text-align: center;
     }
     td {
         text-align: left;
+    }
+    .numberAndDateStyle {
+      text-align: right;
     }
   }
   .pannel-patch {
@@ -64,13 +71,6 @@
     font-size: 12px;
     i{
       margin-left: 15px;
-    }
-  }
-  .table-responsive{
-    height: 628px;
-    td {
-      max-width: 165px;
-      text-overflow: ellipsis;
     }
   }
   .pager{

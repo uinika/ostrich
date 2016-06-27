@@ -195,7 +195,7 @@
                       </span>
                     </div>
                   </td>
-                  <td class='text-right'>{{::$index+(Paging.currentPage-1)*10+1}}</td>
+                  <td class='numberAndDateStyle'>{{::$index+(Paging.currentPage-1)*10+1}}</td>
                   <td title='{{quota.resource_name}}'>
                   <a ng-if="(quota.showbutton==='1')||(quota.showbutton==='-2')" ui-sref='main.data-quota.detail({resource_id:quota.id})' ng-class="{true: 'orange', false: 'text-primary'}[(DataQuotas[$index].resource_name === DataQuotas[$index-1].resource_name) && (DataQuotas[$index-1].resource_format_name==='数据库类')]">{{quota.resource_name}}</a>
                   <a ng-if="(quota.showbutton !='1')&&(quota.showbutton !='-2')"  ng-class="{true: 'orange', false: 'text-primary'}[(DataQuotas[$index].resource_name === DataQuotas[$index-1].resource_name) && (DataQuotas[$index-1].resource_format_name==='数据库类')]">{{quota.resource_name}}</a>
@@ -229,16 +229,16 @@
                   <td title="{{quota.social_open_flag_name}}">{{quota.social_open_flag_name}}</td>
                   <td title="{{quota.social_open_limit}}">{{quota.social_open_limit}}</td>
                   <td title='{{quota.resource_provider}}'>{{quota.resource_provider}}</td>
-                  <td title='{{quota.resource_provider_code}}' class='text-right'>{{quota.resource_provider_code}}</td>
+                  <td title='{{quota.resource_provider_code}}'>{{quota.resource_provider_code}}</td>
 
-                  <td title='{{quota.resource_sn}}' class='text-right'>{{quota.resource_sn}}</td>
+                  <td title='{{quota.resource_sn}}'>{{quota.resource_sn}}</td>
                   <td title='{{quota.rel_category_name}}'>{{quota.rel_category_name}}</td>
                   <td title='{{quota.area_range}}'>{{quota.area_range}}</td>
                   <td title='{{quota.area_level}}'>{{quota.area_level}}</td>
 
                   <td title='{{quota.linkman}}'>{{quota.linkman}}</td>
-                  <td title='{{quota.contact_phone}}' class='text-right'>{{quota.contact_phone}}</td>
-                  <td title='{{quota.create_time | date:"yyyy-MM-dd HH:mm:ss"}}' class='text-right'>{{quota.create_time | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                  <td title='{{quota.contact_phone}}' class='numberAndDateStyle'>{{quota.contact_phone}}</td>
+                  <td title='{{quota.create_time | date:"yyyy-MM-dd HH:mm:ss"}}' class='numberAndDateStyle'>{{quota.create_time | date:'yyyy-MM-dd HH:mm:ss'}}</td>
                  </tr>
                </tbody>
              </table>

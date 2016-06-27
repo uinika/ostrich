@@ -1291,9 +1291,6 @@ input.ng-touched.ng-invalid {
   margin-left: -191px;
   width: 1117px;
 }
-#data-quota-list .table {
-  margin-bottom: 0 !important;
-}
 #data-quota-list .input-patch {
   position: relative;
   top: -7px;
@@ -1323,11 +1320,15 @@ input.ng-touched.ng-invalid {
 #data-quota-list .col-lg-12 {
   padding-left: inherit;
 }
-#data-quota-list table {
+#data-quota-list .table-responsive {
+  height: 628px;
+}
+#data-quota-list .table-patch {
+  margin-bottom: 0 !important;
   table-layout: automatic;
 }
-#data-quota-list table td,
-#data-quota-list table th {
+#data-quota-list .table-patch td,
+#data-quota-list .table-patch th {
   height: 50px;
   max-width: 200px;
   word-break: keep-all;
@@ -1335,10 +1336,17 @@ input.ng-touched.ng-invalid {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  vertical-align: middle;
   font-size: 13px;
 }
-#data-quota-list table td {
+#data-quota-list .table-patch th {
+  text-align: center;
+}
+#data-quota-list .table-patch td {
   text-align: left;
+}
+#data-quota-list .table-patch .numberAndDateStyle {
+  text-align: right;
 }
 #data-quota-list .pannel-patch {
   margin-bottom: 10px;
@@ -1358,13 +1366,6 @@ input.ng-touched.ng-invalid {
 #data-quota-list .icon-list i {
   margin-left: 15px;
 }
-#data-quota-list .table-responsive {
-  height: 628px;
-}
-#data-quota-list .table-responsive td {
-  max-width: 165px;
-  text-overflow: ellipsis;
-}
 #data-quota-list .pager li {
   cursor: pointer;
 }
@@ -1375,24 +1376,24 @@ input.ng-touched.ng-invalid {
   background: #E9E9E9;
   font-weight: bolder;
 }
-#data-quota-list .quota-detail {
+#data-quota-detail .quota-detail {
   font-size: 13px;
 }
-#data-quota-list .quota-detail .list-group {
+#data-quota-detail .quota-detail .list-group {
   margin-top: 6px;
 }
-#data-quota-list .list-patch {
+#data-quota-detail .list-patch {
   overflow: hidden;
   word-wrap: break-word;
 }
-#data-quota-list .table {
+#data-quota-detail .table {
   width: 100%;
   max-width: 100%;
   margin-bottom: 20px;
   margin-top: -9px;
 }
-#data-quota-list .table-patch td,
-#data-quota-list .table-patch th {
+#data-quota-detail .table-patch td,
+#data-quota-detail .table-patch th {
   word-break: keep-all;
   word-wrap: normal;
   white-space: nowrap;
@@ -1402,7 +1403,7 @@ input.ng-touched.ng-invalid {
   vertical-align: middle;
   text-align: center;
 }
-#data-quota-list .quota-example .table-responsive {
+#data-quota-detail .quota-example .table-responsive {
   margin-top: 0;
 }
 #admin-user .row {
