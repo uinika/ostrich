@@ -1,89 +1,63 @@
 <div id='data-quota-main' class="container">
-  <div class="row" >
-    <div class="left1 col-md-1">
-      <div class="btn-group btn-group-xs " >
-        <wiservMainWrapper/>
-        <button  class="btn btn-default treeButton toggler">机<br>构<br>类<br>型</button>
-        <a  class="btn btn-default treeButton toggler">机<br>构<br>职<br>能</a>
-        <a  class="btn btn-default treeButton toggler">区<br>域</a>
-        <a  class="btn btn-default treeButton toggler">主<br>题<br>类</a>
+  <div class="row" wiserv-main-wrapper="" >
+    <div class="left col-md-1 buttonType">
+      <div class="btn-group btn-group-md">
+        <button type="button" class="btn btn-primary active toggler" ng-click="typeListOpen()">机<br>构<br>类<br>型</button>
+        <button type="button" class="btn btn-success active toggler" ng-click="ocupationListOpen()">机<br>构<br>职<br>能</button>
+        <button type="button" class="btn btn-warning active toggler" ng-click="areaListOpen()">区<br>域</button>
+        <button type="button" class="btn btn-danger  active toggler" ng-click="themeListOpen()">主<br>题<br>类</button>
       </div>
     </div>
-    <div class="left col-md-2">
-      <div class="panel panel-default sidebar">
+    <div class="left col-md-2 sidebar1">
+      <div class="panel panel-default">
         <div class='panel-heading' ui-sref="main.data-quota.list" ui-sref-opts="{reload:true}">
-          <i class="fa fa-refresh"> 机构目录</i>
+              <i class="fa fa-refresh"> {{filterName}}</i>
         </div>
 
-        <div class='input-group input-group-sm'>
+        <div class='input-group input-group-sm searchname'>
           <input ng-model="predicate" type='text' placeholder='请输入部门短名称...' class='form-control'>
           <span class='input-group-addon'>
             <span class='glyphicon glyphicon-search'></span>
           </span>
         </div>
 
-        <uib-tabset type='tabs' active="activeForm">
-          <uib-tab index="1" heading="类型" >
-            <div class='menu' ui-tree data-drag-enabled="false">
-              <treecontrol class="tree-classic"
-                 tree-model="list"
-                 filter-expression="predicate"
-                 filter-comparator="comparator"
-                 options="treeOptions"
-                 on-selection="showSelected(node)"
-                 selected-node="node1">
-                 <span ui-sref="main.data-quota.list({resource_dep_id: node.id, dep_name: node.dep_name})">{{node.dep_short_name}}</span>
-              </treecontrol>
-            </div>
-          </uib-tab>
-          <uib-tab index="2" heading="职能" >
-            <div class='menu' ui-tree data-drag-enabled="false">
-              <treecontrol class="tree-classic"
-                 tree-model="OcupationList"
-                 filter-expression="predicate"
-                 filter-comparator="comparator"
-                 options="treeOptions"
-                 on-selection="showSelected(node)"
-                 selected-node="node1">
-                 <span ui-sref="main.data-quota.list({resource_dep_id: node.id, dep_name: node.dep_name})">{{node.dep_short_name}}</span>
-              </treecontrol>
-            </div>
-          </uib-tab>
-          <uib-tab index="3" heading="区域" >
-            <div class='menu' ui-tree data-drag-enabled="false">
-              <treecontrol class="tree-classic"
-                 tree-model="areaList"
-                 filter-expression="predicate"
-                 filter-comparator="comparator"
-                 options="treeOptions"
-                 on-selection="showSelected(node)"
-                 selected-node="node1">
-                 <span ui-sref="main.data-quota.list({resource_dep_id: node.id, dep_name: node.dep_name})">{{node.dep_short_name}}</span>
-              </treecontrol>
-            </div>
-          </uib-tab>
-        </uib-tabset>
-
+        <div ng-if="flag===1" class='menu' ui-tree data-drag-enabled="false">
+          <treecontrol class="tree-classic"
+          tree-model="list"
+          filter-expression="predicate"
+          filter-comparator="comparator"
+          options="treeOptions"
+          on-selection="showSelected(node)"
+          selected-node="node1">
+          <span ui-sref="main.data-quota.list({resource_dep_id: node.id, dep_name: node.dep_name})">{{node.dep_name}}</span>
+          </treecontrol>
+        </div>
+        <div ng-if="flag===2" class='menu' ui-tree data-drag-enabled="false">
+          <treecontrol class="tree-classic"
+          tree-model="OcupationList"
+          filter-expression="predicate"
+          filter-comparator="comparator"
+          options="treeOptions"
+          on-selection="showSelected(node)"
+          selected-node="node1">
+          <span ui-sref="main.data-quota.list({resource_dep_id: node.id, dep_name: node.dep_name})">{{node.dep_name}}</span>
+          </treecontrol>
+        </div>
+        <div ng-if="flag===3" class='menu' ui-tree data-drag-enabled="false">
+          <treecontrol class="tree-classic"
+          tree-model="areaList"
+          filter-expression="predicate"
+          filter-comparator="comparator"
+          options="treeOptions"
+          on-selection="showSelected(node)"
+          selected-node="node1">
+          <span ui-sref="main.data-quota.list({resource_dep_id: node.id, dep_name: node.dep_name})">{{node.dep_name}}</span>
+          </treecontrol>
+        </div>
       </div>
     </div>
-    <div class="right col-md-9 content">
-      <div ui-view></div>
-    </div>
+      <div class="right col-md-9 content">
+        <div ui-view></div>
+      </div>
   </div>
-  <!-- <div class="row">
-    <div class="left col-xs-1">
-      <div class="btn-group-vertica btn-group-xs ">
-        <a href="" data-ng-click="styleListOpen()" class="btn btn-default treeButton wiservMainWrapper">机<br>构<br>类<br>型</a>
-        <a href="" data-ng-click="ocupationListOpen()" class="btn btn-default treeButton">机<br>构<br>职<br>能</a>
-        <a href="" data-ng-click="areaListOpen()" class="btn btn-default treeButton">区<br>域</a>
-        <a href="" data-ng-click="themeListOpen()" class="btn btn-default treeButton">主<br>题<br>类</a>
-      </div>
-    </div>
-    <div class="center col-md-2">
-    </div>
-    <div class="right col-md-9">
-      <div ui-view></div>
-    </div>
-  </div> -->
-
 </div>

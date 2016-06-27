@@ -1230,18 +1230,20 @@ input.ng-touched.ng-invalid {
 #department-user .user-list {
   clear: right;
 }
-#data-quota-main .left1 {
-  width: 35px;
-  font-size: 15px;
+#data-quota-main .left.col-md-1.buttonType {
+  width: 45px;
 }
 #data-quota-main .left {
   padding-left: 10px;
+  padding-right: 0;
 }
 #data-quota-main .left .panel-heading {
   cursor: pointer;
 }
-#data-quota-main .left .treeButton {
+#data-quota-main .left .toggler {
   font-size: 15px;
+  border-radius: 1px;
+  box-shadow: 10px 10px 5px #888888;
 }
 #data-quota-main .left .panel-heading:HOVER {
   color: #337AB9;
@@ -1276,8 +1278,18 @@ input.ng-touched.ng-invalid {
   margin-top: 20px;
 }
 #data-quota-main .right {
+  width: 926px;
   padding-right: 0;
   padding-left: 0;
+}
+#data-quota-main .sidebar1 {
+  margin-right: 4px;
+  will-change: transform;
+}
+#data-quota-main .content-collapse {
+  position: relative;
+  margin-left: -191px;
+  width: 1117px;
 }
 #data-quota-list .table {
   margin-bottom: 0 !important;
@@ -1325,8 +1337,8 @@ input.ng-touched.ng-invalid {
   text-overflow: ellipsis;
   font-size: 13px;
 }
-#data-quota-list table th {
-  text-align: center;
+#data-quota-list table td {
+  text-align: left;
 }
 #data-quota-list .pannel-patch {
   margin-bottom: 10px;

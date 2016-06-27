@@ -20,37 +20,49 @@ DataQuota.controller('DataQuota.Controller.Main', ['$scope', '$state', 'DataQuot
         labelSelected: "a8"
       }
     }
-    $scope.styleListOpen = function () {
+    function showType(){
+      $scope.flag = 1;
+      $scope.filterName = "机构类型";
+      Http.menu().then(function(result) {
+        if (200 === result.data.head.status) {
+          $scope.list = result.data.body;
+        }
+      });
+    }
+    //init
+    showType();
+    $scope.typeListOpen = function () {
+      showType();
 		};
 
-    // TypeMenu Generator
-    Http.menu().then(function(result) {
-      if (200 === result.data.head.status) {
-        $scope.list = result.data.body;
-      }
-    });
     $scope.ocupationListOpen = function () {
+      $scope.filterName = "机构职能";
+      $scope.flag = 2;
+      // OcupationMenu Generator
+      Http.menuRole().then(function(result) {
+        if (200 === result.data.head.status) {
+          $scope.OcupationList = result.data.body;
+        }
+      });
     };
 
-    // OcupationMenu Generator
-    Http.menuRole().then(function(result) {
-      if (200 === result.data.head.status) {
-        $scope.OcupationList = result.data.body;
-      }
-    });
     $scope.areaListOpen = function () {
-    };
-
-    // AreaMenu Generator
-    Http.menuArea().then(function(result) {
-      if (200 === result.data.head.status) {
-        $scope.areaList = result.data.body;
-      }
-    });
-    $scope.themeListOpen = function () {
-    };
-
+      $scope.filterName = "区域";
+      $scope.flag = 3;
       // AreaMenu Generator
+      Http.menuArea().then(function(result) {
+        if (200 === result.data.head.status) {
+          $scope.areaList = result.data.body;
+        }
+      });
+    };
+
+    $scope.themeListOpen = function () {
+      $scope.filterName = "主题";
+      $scope.flag = 4;
+      // AreaMenu Generator
+    };
+
 
 
     $scope.comparator = false;
@@ -94,11 +106,10 @@ DataQuota.directive('wiservMainWrapper', [
     return {
       restrict: 'AE',
       link: function(scope, element, attrs) {
-        element.find('.toggler').addEventListener('click', function() {
-        // element.find('.content').toggleClass("content-collapse");
-        // element.find('.sidebar').toggleClass("sidebar-collapse");
-        // element.find('.content>.navbar').toggleClass("nav-collapse");
-        console.log("dd");
+        element.find('.toggler').on('click', function() {
+          element.find('.sidebar1').toggleClass("sidebar1-collapse");
+          element.find('.form-control').toggleClass("form-control-collapse");
+          element.find('.content').toggleClass("content-collapse");
         });
       }
     }
