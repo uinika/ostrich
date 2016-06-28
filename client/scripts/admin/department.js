@@ -7,6 +7,7 @@ AdminDepartment.controller('Admin.Department.Controller.Main', ['$rootScope', '$
     $scope.Modal = {}; // Clean scope of modal
     $scope.previousDepNames = [];
     $scope.areaNames = [];
+    $scope.themeNames = [];
     $scope.Paging = {};
     $scope.Paging.maxSize = 5;
     $scope.Paging.itemsPerPage = 10;
@@ -48,6 +49,11 @@ AdminDepartment.controller('Admin.Department.Controller.Main', ['$rootScope', '$
       dict_category:"9"
     }).then(function(result) {
       $scope.areaNames = result.data.body;
+    });
+    Http.getSysDict({
+      dict_category:"17"
+    }).then(function(result) {
+      $scope.themeNames = result.data.body;
     });
 
     $scope.placeholder = {};

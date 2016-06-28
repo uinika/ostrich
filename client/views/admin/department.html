@@ -27,6 +27,7 @@
                   <th>上级部门</th>
                   <th>机构类型</th>
                   <th>区域名称</th>
+                  <th>主题名称</th>
                   <th>联系人</th>
                   <th>联系电话</th>
                 </tr>
@@ -44,6 +45,7 @@
                   <td>{{AdminDep.parent_fullname}}</td>
                   <td>{{AdminDep.dep_type_name}}</td>
                   <td>{{AdminDep.area_code_name}}</td>
+                  <td>{{AdminDep.theme_name}}</td>
                   <td>{{AdminDep.contacts}}</td>
                   <td>{{AdminDep.contact_phone}}</td>
                 </tr>
@@ -133,6 +135,16 @@
           <select class="form-control" ng-model="department.area_code">
             <option ng-if="department.parent_id!='0'" value="{{department1.area_code}}" selected>{{department1.area_code_name}}</option>
             <option ng-if="department.parent_id=='0'" ng-repeat="area in  areaNames" value="{{area.id}}" selected>{{area.dict_name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="" class="col-sm-3 control-label">
+        <span class="require-sign">*</span>主题名称:</label>
+        <div class="col-sm-8">
+          <select class="form-control" ng-model="department.theme_code">
+            <option ng-if="department.parent_id!='0'" value="{{department1.theme_code}}" selected>{{department1.theme_code_name}}</option>
+            <option ng-if="department.parent_id=='0'" ng-repeat="theme in  themeNames" value="{{theme.id}}" selected>{{theme.dict_name}}</option>
           </select>
         </div>
       </div>

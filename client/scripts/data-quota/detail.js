@@ -17,6 +17,12 @@ DataQuotaDetail.controller('DataQuotaDetail.Controller.Main', ['$scope', '$state
       $scope.DataQuotaExample = result.data.body;
     });
 
+    //informationResource required by deps
+    $scope.DataquotaRequirementByDepTotals = Http.getDataQuotaRequirementByDepTotals(
+      {resource_id: $stateParams.resource_id}
+    );
+
+
   }
 ]);
 
@@ -35,9 +41,15 @@ DataQuotaDetail.factory('DataQuotaDetail.Service.Http', ['$http', 'API',
         path + '/info_item_detail', { params: params }
       )
     };
+    function getDataQuotaRequirementByDepTotals(params){
+      return $http.get(
+        path + '/info_item_requirementDeps', { params: params }
+      )
+    };
     return {
       getDataQuotaDetailByDepID: getDataQuotaDetailByDepID,
-      getDataQuotaExampleByDepID: getDataQuotaExampleByDepID
+      getDataQuotaExampleByDepID: getDataQuotaExampleByDepID,
+      getDataQuotaRequirementByDepTotals: getDataQuotaRequirementByDepTotals
     }
   }
 ]);
@@ -47,10 +59,11 @@ DataQuotaDetail.directive('requirementDepatmentRelationship',[
       restrict: 'AE',
       template: "<div style='width:400px;height:400px;position:relative;top:8px'></div>",
       link: function(scope, element, attr){
+
         var myChart = echarts.init((element.find('div'))[0]);
         var option1 = {
             title: {
-                text: 'Graph 简单示例'
+                text: '信息资源对应的需求部门数'
             },
             tooltip: {},
             animationDurationUpdate: 1500,
