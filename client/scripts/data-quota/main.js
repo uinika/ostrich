@@ -58,9 +58,14 @@ DataQuota.controller('DataQuota.Controller.Main', ['$scope', '$state', 'DataQuot
     };
 
     $scope.themeListOpen = function () {
-      $scope.filterName = "主题";
+      $scope.filterName = "主题类";
       $scope.flag = 4;
-      // AreaMenu Generator
+      // themeMenu Generator
+      Http.menuTheme().then(function(result) {
+        if (200 === result.data.head.status) {
+          $scope.themeList = result.data.body;
+        }
+      });
     };
 
 
@@ -94,10 +99,16 @@ DataQuota.factory('DataQuota.Service.Http', ['$http', 'API',
         path + '/menu_area', { params: params }
       )
     };
+    function menuTheme(params) {
+      return $http.get(
+        path + '/menu_theme', { params: params }
+      )
+    };
     return {
       menu: menu,
       menuRole: menuRole,
-      menuArea: menuArea
+      menuArea: menuArea,
+      menuTheme: menuTheme
     }
   }
 ]);
