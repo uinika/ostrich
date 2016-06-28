@@ -128,7 +128,7 @@ DInventory.controller('Department.Inventory.Controller.Main', ['$cookies', '$sco
     // filter by resource format
     $scope.resFormatMainSelection = [];
     $scope.getInfoResourceByResFormat = function(item) {
-      var idx = $scope.shareFreqSelection.indexOf(item.id);
+      var idx = $scope.resFormatMainSelection.indexOf(item.id);
       if (idx > -1) {
         $scope.resFormatMainSelection = [];
       } else {
@@ -322,6 +322,7 @@ DInventory.controller('Department.Inventory.Controller.publish', ['$cookies', '$
     $scope.InfoResource.linkman = '';
     $scope.InfoResource.contact_phone = '';
     $scope.InfoResource.resource_format_desc = '';
+    $scope.InfoResource.share_method_desc = '';
     // item list
     $scope.ResourceItemList = [];
     $scope.ResourceItemConfigList = [];

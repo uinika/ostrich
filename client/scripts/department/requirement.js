@@ -145,17 +145,16 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$cookies', 
     // delete requirement
     $scope.deleteReq = function(id) {
       var deleteFlag = confirm('确定删除本条需求？删除后将不可恢复。');
-      if(deleteFlag) {
+      if (deleteFlag) {
         Http.deleteRequirement({
           requiement_id: id
         }).then(function(result) {
-            if (200 == result.data.head.status) {
-              alert('删除成功！');
-              getDeptRequirementList();
-            }
-            else {
-              alert('删除失败！');
-            }
+          if (200 == result.data.head.status) {
+            alert('删除成功！');
+            getDeptRequirementList();
+          } else {
+            alert('删除失败！');
+          }
         })
       }
     }
@@ -175,7 +174,7 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$cookies', 
       $scope.dataLevelReqSelection = [];
 
       _($scope.deptList).forEach(function(outItem) {
-        if(item.response_dep_id == outItem.id) {
+        if (item.response_dep_id == outItem.id) {
           outItem.ticked = true;
           $scope.reqParent.outputDeptList.push(outItem);
         }
@@ -245,6 +244,13 @@ DepartmentReq.controller('Department.Requirement.Controller.Main', ['$cookies', 
 /** DepartmentReq Controller */
 DepartmentReq.controller('Department.Requirement.Controller.confirm', ['$cookies', '$scope', '$stateParams', 'Department.Requirement.Service.Http', 'Department.Requirement.Service.Component',
   function($cookies, $scope, $stateParams, Http, Component) {
+    var RESOURCE_FORMAT = 11;
+    $scope.closeShow = false;
+    $scope.showIndex = -1;
+
+    $scope.resParent = {};
+    $scope.resParent.dropListShow = false;
+
     $scope.Modal = {};
     $scope.DeptRequirementConfirm = {};
 
@@ -256,17 +262,37 @@ DepartmentReq.controller('Department.Requirement.Controller.confirm', ['$cookies
     $scope.Paging.maxSize = 5;
     $scope.Paging.itemsPerPage = 10;
 
+    // 模态框信息资源列表分页
+    $scope.ModalPaging = {};
+    $scope.ModalPaging.maxSize = 5;
+    $scope.ModalPaging.itemsPerPage = 10;
+
     var _httpConfirmParams = {};
     _httpConfirmParams.limit = 10;
     _httpConfirmParams.skip = 0;
+
+    var _httpModalParams = {};
+    _httpModalParams.limit = 10;
+    _httpModalParams.skip = 0;
 
     $scope.Paging.pageChanged = function() {
       _httpConfirmParams.skip = ($scope.Paging.currentPage - 1) * _httpConfirmParams.limit;
       getDeptRequirementConfirmList(_httpConfirmParams);
     }
 
+    // 模态框中信息资源分页
+    $scope.ModalPaging.pageChanged = function() {
+      _httpModalParams.skip = ($scope.ModalPaging.currentPage - 1) * _httpModalParams.limit;
+      Http.getDeptInfoResourceList(_httpModalParams).then(function(result) {
+        console.log(result);
+        $scope.depInfoResourceList = result.data.body[0].results;
+        $scope.ModalPaging.totalItems = result.data.body[0].count;
+      });
+    }
+
     // init
     getDeptRequirementConfirmList();
+    getDeptInfoResourceList();
 
     function getDeptRequirementConfirmList() {
       _httpConfirmParams.response_dep_id = DEP_ID;
@@ -276,6 +302,14 @@ DepartmentReq.controller('Department.Requirement.Controller.confirm', ['$cookies
       })
     }
 
+    function getDeptInfoResourceList() {
+      Http.getDeptInfoResourceList(_httpModalParams).then(function(result) {
+        console.log(result);
+        $scope.depInfoResourceList = result.data.body[0].results;
+        $scope.ModalPaging.totalItems = result.data.body[0].count;
+      });
+    }
+
     $scope.searchDeptReqConfirmByName = function() {
       _httpConfirmParams.requiement_name = $scope.DeptRequirementConfirm.req_name_filter;
       _httpConfirmParams.limit = 10;
@@ -283,20 +317,138 @@ DepartmentReq.controller('Department.Requirement.Controller.confirm', ['$cookies
       getDeptRequirementConfirmList();
     }
 
-    Http.getDeptInfoResourceList().then(function(result) {
-      console.log(result);
-      $scope.depInfoResourceList = result.data.body;
-
-      //  $scope.Paging.totalItems = data.head.total;
+    // 获取信息资源格式字典
+    Http.getSystemDictByCatagory({
+      'dict_category': RESOURCE_FORMAT
+    }).then(function(result) {
+      $scope.resourceFormatList = result.data.body;
     });
+
+
+    // filter by resource format
+    $scope.resFormatMainSelection = [];
+    $scope.getInfoResourceByResFormat = function(item) {
+      var idx = $scope.resFormatMainSelection.indexOf(item.id);
+      if (idx > -1) {
+        $scope.resFormatMainSelection = [];
+      } else {
+        $scope.resFormatMainSelection = item.id;
+      }
+      _httpModalParams.resource_format = $scope.resFormatMainSelection;
+      _httpModalParams.limit = 10;
+      _httpModalParams.skip = 0;
+      getDeptInfoResourceList(_httpModalParams);
+    }
+
+    // resource format all
+    $scope.getResFormatAll = function() {
+      $scope.resFormatMainSelection = [];
+      _httpModalParams.resource_format = null;
+      _httpModalParams.limit = 10;
+      _httpModalParams.skip = 0;
+      getDeptInfoResourceList(_httpModalParams);
+    }
+
+    // 点击展开
+    $scope.openItems = function(index, resourceId) {
+      $scope.collapseIndex = index;
+      $scope.closeShow = true;
+      $scope.showIndex = index;
+      $scope.InfoItems = [];
+      Http.getInfoItemList({
+        resource_id: resourceId
+      }).then(function(result) {
+        if (result.data.body.length == 0) {
+          $scope.InfoItemShow = false;
+        } else {
+          $scope.InfoItemShow = true;
+          $scope.InfoItems = result.data.body;
+
+          _($scope.InfoItems).forEach(function(item) {
+            var shareFreqDictName = [];
+            _(item.config).forEach(function(config) {
+              shareFreqDictName.push(config.dict_name);
+            })
+            item.update_period_name = shareFreqDictName.toString();
+          })
+        }
+
+
+      })
+    }
+
+    // 点击收起
+    $scope.closeItems = function(index) {
+      $scope.collapseIndex = -1;
+      $scope.closeShow = false;
+      $scope.InfoItems = [];
+    }
+
+    // 选中信息资源
+    $scope.resourceSelection = [];
+    $scope.toggleResourceSelection = function(resourceId) {
+      var idx = $scope.resourceSelection.indexOf(resourceId);
+      // is currently selected
+      if (idx > -1) {
+        $scope.resourceSelection = [];
+      }
+
+      // is newly selected
+      else {
+        $scope.resourceSelection = resourceId;
+        $scope.resource_id = resourceId;
+        $scope.resourceItemSelection = []; //清空信息项
+
+      }
+      console.log($scope.resourceItemSelection);
+    };
+
+    // 选中信息项checkbox事件
+    $scope.resourceItemSelection = [];
+    $scope.toggleResItemSelection = function(resourceId, item) {
+      if($scope.resource_id != resourceId) {
+        $scope.resourceItemSelection = [];
+        $scope.resource_id = resourceId;
+      }
+      var idx = $scope.resourceItemSelection.indexOf(item.id);
+      // is currently selected
+      if (idx > -1) {
+        $scope.resourceItemSelection.splice(idx, 1);
+      }
+
+      // is newly selected
+      else {
+        $scope.resourceItemSelection.push(item.id);
+        $scope.resourceSelection = [];// 清空信息资源选中项
+      }
+      console.log($scope.resourceItemSelection);
+    };
+
+    // 保存选中的信息资源或信息项
+    $scope.saveChooseResource = function() {
+      console.log($scope.resourceItemSelection);
+      console.log($scope.resourceSelection);
+      if($scope.resourceItemSelection.length == 0 && $scope.resourceSelection.length == 0) {
+        $scope.errorMsg = '您未选中任何资源。';
+      }
+      else{
+        $scope.resParent.dropListShow = false;
+      }
+    }
 
     $scope.toConfirm = function(item) {
       // get requirement detail
       $scope.Modal.ReqDetail = item;
+      // 初始化选项状态
       $scope.Modal.ReqResponse = {};
-      $scope.confirmParent = {};
-      console.log($scope.confirmParent.outputResource);
-      if($scope.depInfoResourceList.length == 0) {
+      $scope.resourceItemSelection = [];
+      $scope.resourceSelection = [];
+      $scope.resource_id = null;
+      $scope.closeShow = false;
+      $scope.showIndex = -1;
+      $scope.collapseIndex = -1;
+
+      if ($scope.depInfoResourceList.length == 0) {
         $scope.Modal.ReqResponse.resource_id = '';
         $scope.errorMsg = '本部门还未发布任何信息资源';
         $scope.dataQuotaIdNull = true;
@@ -306,20 +458,34 @@ DepartmentReq.controller('Department.Requirement.Controller.confirm', ['$cookies
       // }
 
       Component.popModalConfirm($scope, '', 'confirm-req-modal').result.then(function() {
-        console.log($scope.confirmParent.outputResource[0]);
-        $scope.Modal.ReqResponse.resource_id = _.map($scope.confirmParent.outputResource,'id')[0];
-        console.log($scope.confirmParent.outputResource);
+        $scope.Modal.ReqResponse.resource_id = $scope.resource_id;
+
         console.log($scope.Modal.ReqResponse);
+        console.log($scope.resourceItemSelection);
         $scope.Modal.ReqResponse.requiement_id = item.id;
 
         Http.updateRequirement($scope.Modal.ReqResponse).then(function(result) {
           if (200 == result.data.head.status) {
             if ($scope.Modal.ReqResponse.status == 1) {
+              var http_params = [];
+              if($scope.resourceItemSelection.length == 0) {
+                var obj = {};
+                obj.requiement_id = item.id;
+                obj.resource_id = $scope.Modal.ReqResponse.resource_id,
+                obj.item_id = '';
+                http_params.push(obj);
+              }
+              else{
+                _($scope.resourceItemSelection).forEach(function(value) {
+                  var obj = {};
+                  obj.requiement_id = item.id;
+                  obj.resource_id = $scope.Modal.ReqResponse.resource_id,
+                  obj.item_id = value;
+                  http_params.push(obj);
+                });
+              }
               // 保存需求响应
-              Http.saveReqResponse({
-                requiement_id: item.id,
-                resource_id: $scope.Modal.ReqResponse.resource_id
-              }).then(function(saveResult) {
+              Http.saveReqResponse(http_params).then(function(saveResult) {
                 if (200 == saveResult.data.head.status) {
                   alert('保存成功！');
                   getDeptRequirementConfirmList();
@@ -350,8 +516,8 @@ DepartmentReq.controller('Department.Requirement.Controller.confirm', ['$cookies
 ])
 
 /** DepartmentReq Controller */
-DepartmentReq.controller('Department.Requirement.Controller.detail', [ '$scope', '$stateParams', 'Department.Requirement.Service.Http', 'Department.Requirement.Service.Component',
-    function( $scope, $stateParams, Http, Component) {
+DepartmentReq.controller('Department.Requirement.Controller.detail', ['$scope', '$stateParams', 'Department.Requirement.Service.Http', 'Department.Requirement.Service.Component',
+    function($scope, $stateParams, Http, Component) {
       console.log($stateParams.ID);
       Http.getReqDetail({
         requiement_id: $stateParams.ID
@@ -469,6 +635,15 @@ DepartmentReq.factory('Department.Requirement.Service.Http', ['$http', 'API',
         }
       )
     }
+
+    function getInfoItemList(params) {
+      return $http.get(
+        path + '/allitem_detail', {
+          params: params
+        }
+      )
+    }
+
     return {
       getDepartmentRequirementList: getDepartmentRequirementList,
       publishRequirement: publishRequirement,
@@ -482,7 +657,8 @@ DepartmentReq.factory('Department.Requirement.Service.Http', ['$http', 'API',
       deleteRequirement: deleteRequirement,
       getSystemDictByCatagory: getSystemDictByCatagory,
       getReqUpdatePeriod: getReqUpdatePeriod,
-      getReqAreaLevel: getReqAreaLevel
+      getReqAreaLevel: getReqAreaLevel,
+      getInfoItemList: getInfoItemList
     }
   }
 ]);
@@ -514,7 +690,7 @@ DepartmentReq.service('Department.Requirement.Service.Component', ['$uibModal',
       });
       scope.Modal.confirm = function(isValid) {
         console.log(scope);
-        if(!scope.confirmParent.outputResource[0] && scope.Modal.ReqResponse.status == 1) {
+        if (scope.resourceSelection.length == 0 && scope.resourceItemSelection.length == 0 && scope.Modal.ReqResponse.status == 1) {
           scope.errorMsg = '请选择信息资源！';
           isValid = false;
         }
@@ -543,12 +719,9 @@ DepartmentReq.service('Department.Requirement.Service.Component', ['$uibModal',
       scope.Modal.confirm = function(isValid) {
         console.log(scope);
         scope.submitted = true;
-        if(scope.reqParent.outputDeptList.length == 0) {
+        if (scope.reqParent.outputDeptList.length == 0) {
           scope.error = true;
-        }
-        else if(scope.shareFreqSelection.length == 0) {
-        }
-        else {
+        } else if (scope.shareFreqSelection.length == 0) {} else {
           modalInstance.close(scope.Modal);
         }
 

@@ -100,8 +100,8 @@
               <select ng-model='InfoResource.resource_format' required name='resource_format' class='form-control' style='display: inline-block !important;width: auto;' ng-change='showHideResAddBtn()'>
                 <option ng-repeat='resourceFormat in resourceFormatList' value='{{resourceFormat.id}}'>{{resourceFormat.dict_name}}</option>
               </select>
-              <span>
-                <label>格式说明：</label><input ng-class="{true: 'ng-hide', false: 'ng-show'}[resFormatOtherShow || resItemAddBtn]" type='text' class='custom-form-control' name='resource_format_desc' ng-model='InfoResource.resource_format_desc' />
+              <span ng-class="{true: 'ng-hide', false: 'ng-show'}[resFormatOtherShow || resItemAddBtn || resItemUpdateBtn]">
+                <label>格式说明：</label><input  type='text' class='custom-form-control' name='resource_format_desc' ng-model='InfoResource.resource_format_desc' />
               </span>
               <span  ng-class="{true: 'ng-show', false: 'ng-hide'}[resFormatOtherShow]"><input type='text' class='custom-form-control' name='resource_format_other' ng-maxlength='256' placeholder='请输入其他信息资源格式' ng-model='InfoResource.resource_format_other' /></span>
               <span ng-class="{true: 'ng-show', false: 'ng-hide'}[resItemAddBtn]"><a class='btn btn-default' ng-click='ResItemListShow = true'><i class='fa fa-plus'></i>&nbsp;信息项</a></span>

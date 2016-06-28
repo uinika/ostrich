@@ -980,7 +980,7 @@ input.ng-touched.ng-invalid {
   font-size: 12px;
   color: #777;
 }
-.confirm-req-modal .table > tbody > tr > td {
+.confirm-req-modal .table.req-detail > tbody > tr > td {
   border: none;
   word-wrap: break-word;
 }
@@ -989,6 +989,45 @@ input.ng-touched.ng-invalid {
 }
 .confirm-req-modal .multiSelect .checkboxLayer {
   max-width: 96%;
+}
+.confirm-req-modal .infoListDropdown {
+  padding: 15px 10px;
+  border: 1px solid #DDD;
+  position: absolute;
+  width: 96%;
+  background: #fcf8e3;
+  z-index: 999;
+  box-shadow: 0 4px 14px #DDD;
+  -webkit-box-shadow: 0 4px 14px #DDD;
+  transition-property: height;
+  transition-duration: 2s;
+  -moz-transition-property: height;
+  /* Firefox 4 */
+  -moz-transition-duration: 2s;
+  /* Firefox 4 */
+  -webkit-transition-property: height;
+  /* Safari and Chrome */
+  -webkit-transition-duration: 2s;
+  /* Safari and Chrome */
+  -o-transition-property: height;
+  /* Opera */
+  -o-transition-duration: 2s;
+  /* Opera */
+}
+.confirm-req-modal .infoListDropdown .pager {
+  text-align: left;
+  margin: 0;
+  padding-bottom: 12px;
+}
+.confirm-req-modal .table-resource-list {
+  table-layout: fixed;
+}
+.confirm-req-modal .table-resource-list td .items-list {
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+.confirm-req-modal .table-resource-list td .items-list table {
+  table-layout: fixed;
 }
 #department-requirement-detail {
   margin-bottom: 50px;
