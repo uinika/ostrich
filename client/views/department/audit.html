@@ -130,7 +130,7 @@
                       </div>
                     </td>
                     <td class='text-right'>{{::$index+(Paging.currentPage-1)*Paging.itemsPerPage+1}}</td>
-                    <td title='{{InfoResource.apply_time |date:"yyyy-MM-dd HH:mm:ss"}}'>{{InfoResource.apply_time |date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                    <td class='text-right' title='{{InfoResource.apply_time |date:"yyyy-MM-dd HH:mm:ss"}}'>{{InfoResource.apply_time |date:"yyyy-MM-dd HH:mm:ss"}}</td>
                     <td title='{{InfoResource.apply_dep_name}}'>{{InfoResource.apply_dep_name}}</td>
                     <td title='{{InfoResource.resource_name}}'>
                       <a ui-sref='main.department.detail({item:InfoResource.id})'>

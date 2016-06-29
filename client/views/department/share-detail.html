@@ -142,7 +142,7 @@
             <tbody>
               <tr ng-repeat='rescoureItem in InfoItems | orderBy:"-create_time" '>
                 <!-- <td><input type='checkbox' ng-click='deleteReq(rescoureItem.id)' />删除</td> -->
-                <td>{{$index+1}}</td>
+                <td class='text-right'>{{$index+1}}</td>
                 <td title='{{rescoureItem.item_name}}'>{{rescoureItem.item_name}}</td>
                 <td title='{{rescoureItem.item_type_name}}'>{{rescoureItem.item_type_name}}</td>
                 <td title='{{rescoureItem.data_precision}}'>{{rescoureItem.data_precision}}</td>
