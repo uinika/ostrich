@@ -204,13 +204,13 @@
                           </span>
                         </div>
                       </td>
-                      <td>{{::$index+(Paging.currentPage-1)*Paging.itemsPerPage+1}}</td>
+                      <td class='text-right'>{{::$index+(Paging.currentPage-1)*Paging.itemsPerPage+1}}</td>
                       <td title='{{InfoResource.resource_name}}'>
                         <a ui-sref='main.department.share.detail({item:InfoResource.id})'>
                           <pre>{{InfoResource.resource_name}}</pre>
                         </a>
                       </td>
-                      <td class='text-right' title='{{InfoResource.alias}}'>{{InfoResource.alias}}</td>
+                      <td title='{{InfoResource.alias}}'>{{InfoResource.alias}}</td>
                       <td title='{{InfoResource.summary}}'>{{InfoResource.summary}}</td>
                       <td title='{{InfoResource.category_name}}'>{{InfoResource.category_name}}</td>
 
