@@ -1,6 +1,6 @@
 # Ostrich
 
-> This project has been deprecated!
+> This project has been deprecated !
 
 ![Alt text](logo.gif)
 
