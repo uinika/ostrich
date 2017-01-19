@@ -1,21 +1,18 @@
 {
-  "name": "autumn",
-  "version": "1.0.0",
-  "description": "A Template Project for Traditional Front-end.",
+  "name": "ostrich",
+  "version": "1.0.1",
+  "description": "A angular1.x Project",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/uinika/autumn.git"
+    "url": "https://github.com/uinika/ostrich.git"
   },
   "author": "Hank",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/uinika/autumn/issues"
   },
-  "homepage": "https://github.com/uinika/autumn#readme",
+  "homepage": "https://github.com/uinika/ostrich.git",
   "dependencies": {
     "express": "^4.13.4",
     "express-session": "^1.13.0",

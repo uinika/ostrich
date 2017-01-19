@@ -1,15 +1,15 @@
 const gulp = require("gulp"),
-  express = require('gulp-express'),
-  connect = require('gulp-connect'),
-  livereload = require("gulp-livereload"),
-  nodemon = require('gulp-nodemon'),
-  less = require('gulp-less'),
-  concat = require('gulp-concat'),
-  uglify = require('gulp-uglify'),
-  rename = require('gulp-rename'),
-  sourcemap = require('gulp-sourcemaps'),
-  csso = require('gulp-csso'),
-  del = require('del');
+      express = require('gulp-express'),
+      connect = require('gulp-connect'),
+      livereload = require("gulp-livereload"),
+      nodemon = require('gulp-nodemon'),
+      less = require('gulp-less'),
+      concat = require('gulp-concat'),
+      uglify = require('gulp-uglify'),
+      rename = require('gulp-rename'),
+      sourcemap = require('gulp-sourcemaps'),
+      csso = require('gulp-csso'),
+      del = require('del');
 
 /**------------------ gulp default ------------------*/
 gulp.task('default', ['server', 'client']);
