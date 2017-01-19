@@ -1,4 +1,4 @@
-# Leo
+# Ostrich
 
 > This project has been deprecated!
 
