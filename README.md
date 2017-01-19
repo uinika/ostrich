@@ -5,7 +5,7 @@
 ![Alt text](logo.gif)
 
 ## How to use
-1. git clone http://192.168.13.21/zhengh/leo.git
+1. git clone https://github.com/uinika/ostrich.git
 2. cd leo
 3. npm install
 4. gulp client / server
